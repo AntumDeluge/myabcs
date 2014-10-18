@@ -32,6 +32,11 @@ DATA_DESKTOP=myabcs.desktop
 OBJSUFFIX=.o
 OBJ=abc${OBJSUFFIX} main${OBJSUFFIX} gnrcabt${OBJSUFFIX}
 
+.if defined(unix) || defined(__unix__)
+  INST_ICON=${INSTALLDATA} ${ICON} ${DESTDIR}/share/pixmaps
+  RM_ICON=rm ${DESTDIR}/share/pixmaps/${ICON}
+.endif
+
 # Compilation
 CC=g++
 INCLUDE=-I${INCLDIR}
@@ -59,7 +64,7 @@ install: ${EXE} ${DATA_FILES} ${DATA_DESKTOP} ${PIX_SUBDIRS} $(SND_SUBDIRS)
 	@echo "Creating directory structure..."
 	@for subdir in ${PIX_SUBDIRS}; do mkdir -p ${DATADIR}/$${subdir}; done
 	@for subdir in ${SND_SUBDIRS}; do mkdir -p ${DATADIR}/$${subdir}; done
-	@mkdir -p ${APPSDIR}
+	@mkdir -p ${DESTDIR}/bin ${APPSDIR} ${DESTDIR}/share/pixmaps
 	@echo "Installing data..."
 	@${INSTALLDATA} ${DATA_FILES} ${DATADIR}
 	@echo "Installing pixmaps..."
@@ -70,10 +75,17 @@ install: ${EXE} ${DATA_FILES} ${DATA_DESKTOP} ${PIX_SUBDIRS} $(SND_SUBDIRS)
 	@for subdir in ${SND_SUBDIRS}; do ${INSTALLDATA} $${subdir}/*.wav ${DATADIR}/$${subdir}; done
 	@echo "Installing executable..."
 	@${INSTALL} ${EXE} ${DATADIR}
-	@echo "Installing menu file..."
+	@echo "Installing menu file & icon..."
+	@${INST_ICON}
 	@${INSTALL} ${DATA_DESKTOP} ${APPSDIR}
+	@echo "Creating symbolic link to executable..."
+	@ln -s ${DATADIR}/${EXE} ${DESTDIR}/bin/${EXE}
 uninstall:
-	@echo "No instructions yet."
+	@echo "Uninstalling..."
+	@rm ${DESTDIR}/bin/${EXE}
+	@rm -r ${DATADIR}
+	@rm ${APPSDIR}/myabcs.desktop
+	@${RM_ICON}
 clean:
 	@echo "Cleaning MyABCs"
 	@rm -rf *.o myabcs
