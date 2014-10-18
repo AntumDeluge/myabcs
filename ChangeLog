@@ -1,4 +1,0 @@
-0.4.5:
-- Added Desktop Entry file for Unix-like systems using an X11 desktop
-- Changed licensing to MIT
-- Made code non-linux specific
