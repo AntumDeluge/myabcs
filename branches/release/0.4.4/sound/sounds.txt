@@ -1,7 +1,0 @@
-Sound:		URL:												License:
-mouse			http://www.flan4u.com/downloads/Wave-files/sound-effects/mouse1.wav	???
-dolphin		http://goosie.cogsci.indiana.edu/farg/harry/bio/zoo/dolphin.wav		???
-quail			http://www.dccl.org/Sounds/quail1.wav						???
-zebra			http://www.billybear4kids.com/animal/sounds/zebra.wav				???
-vulture		http://www.audiomicro.com/vulture-bird-aviary-1-free-sound-effects-45500???
-raccoon		http://www.partnersinrhyme.com/soundfx/animals/animals_sounds/TreeAnimals_sounds/animal_raccoon3_wav.shtml
