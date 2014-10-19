@@ -3,8 +3,8 @@
 # Environment
 PROJECT=MyABCs
 V_MAJ=0
-V_MIN=4
-V_REV=5
+V_MIN=5
+V_REV=x
 VERSION=${V_MAJ}.${V_MIN}.${V_REV}
 PREFIX=/usr/local
 SDL2_TEST=sdl2-config --version
