@@ -1,6 +1,11 @@
 # Makefile for MyABCs 0.5.x. Created by Jordan Irwin.
 
 # Environment
+PROJECT=MyABCs
+V_MAJ=0
+V_MIN=4
+V_REV=5
+VERSION=${V_MAJ}.${V_MIN}.${V_REV}
 PREFIX=/usr/local
 SDL2_TEST=sdl2-config --version
 
@@ -41,7 +46,8 @@ EXE=${EXE_NAME}${EXE_SUF}
 OBJ_SUF=.o
 FILES_OBJ=main${OBJ_SUF}
 
-all: ${FILES_OBJ}
+all: tests ${FILES_OBJ}
+	@echo "Making project ${PROJECT} version ${VERSION}."
 	${CC} ${LDFLAGS} ${FILES_OBJ} -o ${EXE} ${LIBS}
 main${OBJ_SUF}: ${DIR_SRC}/main.cpp ${DIR_INCL}/main.h
 	${CC} ${CXXFLAGS} ${SDLFLAGS} ${DIR_SRC}/main.cpp
@@ -49,7 +55,7 @@ tests:
 	@echo "Testing for SDL2..."
 	@#sdl2-config --version || (echo "SDL2 not found... aborting"; exit 1)
 	@${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
-install: data/* doc/* tests all
+install: data/* doc/* all
 	@echo "No instructions yet."
 clean:
 	rm -rf *.o ${EXE}
