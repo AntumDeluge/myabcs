@@ -31,9 +31,9 @@ SDLFLAGS=`sdl2-config --cflags`
 .if defined(WIN32) || defined(__WIN32__)
 LIBS=-lmingw -lSDLmain -lSDL
 .else
-LIBS=-lSDLmain -lSDL
+LIBS=-lSDL2main -lSDL2
 .endif
-SDLLIBS=`sdl-config --libs`
+SDLLIBS=`sdl2-config --libs`
 LDFLAGS=-s ${SDLLIBS}
 
 # Files
@@ -54,7 +54,6 @@ main${OBJ_SUF}: ${DIR_SRC}/main.cpp ${DIR_INCL}/main.h
 	${CC} ${CXXFLAGS} ${SDLFLAGS} ${DIR_SRC}/main.cpp
 tests:
 	@echo "Testing for SDL2..."
-	@#sdl2-config --version || (echo "SDL2 not found... aborting"; exit 1)
 	@${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
 install: data/* doc/* all
 	@echo "No instructions yet."
