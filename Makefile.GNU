@@ -28,7 +28,7 @@ CXXFLAGS=${CFLAGS}
 SDLFLAGS=`sdl2-config --cflags`
 
 # Linking
-ifdef WIN32
+ifdef __MINGW32__
 LIBS=-lmingw -lSDLmain -lSDL
 else
 LIBS=-lSDLmain -lSDL
