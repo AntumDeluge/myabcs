@@ -1,19 +1,15 @@
 #include "main.h"
+#include "main_window.h"
 
 #include <iostream>
 using namespace std;
 
+bool quit = false;
+
 int main(int argc, char** argv) {
-    // Initialize SDL
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK);
+    loadMainWindow();
     
-    MainWindow = SDL_CreateWindow("My SDL Empty Window",
-            SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
-    
-    if (MainWindow == NULL) {
-        cerr << "Could not create window: " << SDL_GetError() << endl;
-        return 1;
-    }
+    SDL_Event event;
     
     while (!quit) {
         SDL_WaitEvent(&event);
@@ -25,7 +21,5 @@ int main(int argc, char** argv) {
         }
     }
     
-    SDL_DestroyWindow(MainWindow);
-    
-    return 0;
+    return closeMainWindow();
 }
