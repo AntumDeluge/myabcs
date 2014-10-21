@@ -43,21 +43,5 @@ EXE_SUF=.exe
 else
 EXE_SUF=
 endif
-EXE=${EXE_NAME}${EXE_SUF}
-OBJ_SUF=.o
-FILES_OBJ=main${OBJ_SUF}
 
-all: tests ${FILES_OBJ}
-	@echo "Making project ${PROJECT} version ${VERSION}."
-	${CC} ${LDFLAGS} ${FILES_OBJ} -o ${EXE} ${LIBS}
-main${OBJ_SUF}: ${DIR_SRC}/main.cpp ${DIR_INCL}/main.h
-	${CC} ${CXXFLAGS} ${SDLFLAGS} ${DIR_SRC}/main.cpp
-tests:
-	@echo "Testing for SDL2..."
-	@${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
-install: data/* doc/* all
-	@echo "No instructions yet."
-clean:
-	rm -rf *.o ${EXE}
-help:
-	@echo "Help instructions"
+include make_functions
