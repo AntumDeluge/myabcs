@@ -2,3 +2,4 @@
 - Added Desktop Entry file for Unix-like systems using an X11 desktop
 - Changed licensing to MIT
 - Made code non-linux specific
+- Replaced images: yak, noodle, pretzel, zipper
