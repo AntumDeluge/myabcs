@@ -20,7 +20,7 @@ install: data/* doc/* all
 	@echo "No instructions yet."
 	
 clean:
-	rm -rf *.o *.exe ${EXE}
+	rm -rf *.o *.exe ${EXE} *.core
 	
 help:
 	@echo "Help instructions"
