@@ -5,7 +5,7 @@ MAKE=make
 PNAME=myabcs
 VER_MAJ=0
 VER_MIN=5
-VER_REL=0
+VER_REL=x
 VERSION=${VER_MAJ}.${VER_MIN}.${VER_REL}
 
 ### Environment ###
@@ -24,14 +24,16 @@ DATADIR=data
 ### Compiling ###
 
 CC=g++
-CFLAGS=-c -O2 -Wall -Werror
+CFLAGS=-c -O2 -Wall -Werror -I${INCLUDE}
 CXXFLAGS=${CFLAGS}
+SDLFLAGS=`sdl2-config --cflags`
 OBJ_SUF=.o
 
 ### Linking ###
 
-LDFLAGS=-s
-LIBS=
+LIBS=-lSDL2main -lSDL2
+SDLLIBS=`sdl2-config --libs`
+LDFLAGS=-s ${SDLLIBS}
 
 ### Installation ###
 
