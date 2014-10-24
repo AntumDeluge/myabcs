@@ -43,12 +43,12 @@ EXE=${PNAME}${EXE_SUF}
 ### Files & headers ###
 
 MYABCS_H=include/myabcs.h
-MYABCS_C=src/myabcs.c
+MYABCS_C=src/myabcs.cpp
 MYABCS_O=myabcs.o
 MYABCS_D=${MYABCS_H}
 
 WINDOW_H=include/window.h
-WINDOW_C=src/window.c
+WINDOW_C=src/window.cpp
 WINDOW_O=window.o
 WINDOW_D=${WINDOW_H}
 
