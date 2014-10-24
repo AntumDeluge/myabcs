@@ -1,0 +1,54 @@
+MAKE=make
+
+### Project ###
+
+PNAME=myabcs
+VER_MAJ=0
+VER_MIN=5
+VER_REL=0
+VERSION=${VER_MAJ}.${VER_MIN}.${VER_REL}
+
+### Environment ###
+
+PREFIX=/usr/local
+DESTDIR=${PREFIX}
+BINDIR=${DESTDIR}/bin
+INCLDIR=${DESTDIR}/include
+LIBDIR=${DESTDIR}/lib
+
+### Base directories ###
+
+INCLUDE=include
+DATADIR=data
+
+### Compiling ###
+
+CC=g++
+CFLAGS=-c -O2 -Wall -Werror
+CXXFLAGS=${CFLAGS}
+OBJ_SUF=.o
+
+### Linking ###
+
+LDFLAGS=-s
+LIBS=
+
+### Installation ###
+
+EXE_SUF=
+EXE=${PNAME}${EXE_SUF}
+
+### Files & headers ###
+
+MYABCS_H=include/myabcs.h
+MYABCS_C=src/myabcs.c
+MYABCS_O=myabcs.o
+MYABCS_D=${MYABCS_H}
+
+WINDOW_H=include/window.h
+WINDOW_C=src/window.c
+WINDOW_O=window.o
+WINDOW_D=${WINDOW_H}
+
+OBJECTS= \
+	${MYABCS_O} ${WINDOW_O}
