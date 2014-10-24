@@ -3,6 +3,12 @@ all: tests ${OBJECTS}
 	@echo "Making project ${PNAME} version ${VERSION}."
 	${CC} ${LDFLAGS} ${OBJECTS} -o ${EXE} ${LIBS}
 	
+${MYABCS_O}: ${MYABCS_C} ${MYABCS_D}
+	${CC} ${CXXFLAGS} ${MYABCS_C}
+	
+${WINDOW_O}: ${WINDOW_C} ${WINDOW_D}
+	${CC} ${CXXFLAGS} ${WINDOW_C}
+	
 tests:
 	@echo "Testing for SDL2..."
 	@#${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
