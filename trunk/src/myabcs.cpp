@@ -1,5 +1,5 @@
-#include "main.h"
-#include "main_window.h"
+#include "myabcs.h"
+#include "window.h"
 
 #include <iostream>
 using namespace std;
