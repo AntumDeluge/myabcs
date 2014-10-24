@@ -1,0 +1,63 @@
+MAKE=make
+
+### Project ###
+
+PNAME=myabcs
+VER_MAJ=0
+VER_MIN=4
+VER_REL=5
+VERSION=${VER_MAJ}.${VER_MIN}.${VER_REL}
+
+### Environment ###
+
+PREFIX=/usr/local
+DESTDIR=${PREFIX}
+BINDIR=${DESTDIR}/bin
+INCLDIR=${DESTDIR}/include
+LIBDIR=${DESTDIR}/lib
+
+### Base directories ###
+
+INCLUDE=include
+DATADIR=data
+
+### Compiling ###
+
+CC=g++
+CFLAGS=-c -O2 -Wall -Werror -I${INCLUDE}
+WXFLAGS=`wx-config --cxxflags`
+CXXFLAGS=${CFLAGS} ${WXFLAGS}
+OBJ_SUF=.o
+
+### Linking ###
+
+LIBS=
+WXLIBS=`wx-config --libs`
+LDFLAGS=-s ${WXLIBS}
+
+### Installation ###
+
+EXE_SUF=
+EXE=${PNAME}${EXE_SUF}
+
+### Files & headers ###
+
+RES_H=include/res.h
+
+GNRCABT_H=include/gnrcabt.h
+GNRCABT_C=src/gnrcabt.cpp
+GNRCABT_O=gnrcabt.o
+GNRCABT_D=${GNRCABT_H}
+
+ABC_H=include/abc.h
+ABC_C=src/abc.cpp
+ABC_O=abc.o
+ABC_D=${ABC_H} ${RES_H} ${GNRCABT_D}
+
+MAIN_H=include/main.h
+MAIN_C=src/main.cpp
+MAIN_O=main.o
+MAIN_D=${MAIN_H} ${ABC_D}
+
+OBJECTS= \
+	${GNRCABT_O} ${ABC_O} ${MAIN_O}
