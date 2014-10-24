@@ -44,4 +44,4 @@ else
 EXE_SUF=
 endif
 
-include make_functions
+include make_directives
