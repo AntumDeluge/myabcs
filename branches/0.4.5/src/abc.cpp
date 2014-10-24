@@ -18,7 +18,8 @@ MainWindow::MainWindow(const wxString& title)
     // Get the executable's filename
     wxString argv0 = filename.GetFullName();
     // Subtract the filename from the the full pathname
-    for (int x = 0; x < argv0.Length(); x++)
+    unsigned int x;
+    for (x = 0; x < argv0.Length(); x++)
     {
         exedir->RemoveLast();
     }
@@ -241,11 +242,11 @@ MainWindow::MainWindow(const wxString& title)
 
 
     // wav sounds for letters
-    wxString temp_sounds[2][26] = {
-            A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,
+    wxString temp_sounds[2][26] = { {
+            A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,}, {
             _T("A"),_T("B"),_T("C"),_T("D"),_T("E"),_T("F"),_T("G"),_T("H"),_T("I"),
             _T("J"),_T("K"),_T("L"),_T("M"),_T("N"),_T("O"),_T("P"),_T("Q"),_T("R"),
-            _T("S"),_T("T"),_T("U"),_T("V"),_T("W"),_T("X"),_T("Y"),_T("Z")};
+            _T("S"),_T("T"),_T("U"),_T("V"),_T("W"),_T("X"),_T("Y"),_T("Z") } };
     for (int a = 0; a < 26; a += 1)
     {
         letter_sounds[0][a] = temp_sounds[0][a];
@@ -798,8 +799,7 @@ void MainWindow::ChangeLetter(wxCommandEvent& event)
 void MainWindow::PlaySound()
 {
     wxString animal = label->GetLabel();
-    wxString sounds[2][131] =
-    {
+    wxString sounds[2][131] = { {
         _T("ACCORDION"), _T("AIRPLANE"), _T("ANGELFISH"), _T("ANKLET"), _T("APPLE"),
         _T("BAGPIPES"), _T("BALLOONS"), _T("BANANAS"), _T("BICYCLE"), _T("BIRD"),
         _T("CAT"), _T("CHALKBOARD"), _T("CHERRIES"), _T("CLARINET"), _T("CLOCK"),
@@ -826,8 +826,9 @@ void MainWindow::PlaySound()
         _T("WHISTLE"), _T("X-COOKIE"), _T("X-RAY"), _T("XIPHIAS"), _T("XYLOPHONE"),
         _T("YAK"), _T("YAM"), _T("YANGQIN"), _T("YIN YANG"), _T("YO-YO"),
         _T("ZEBRA"), _T("ZIP-LINE"), _T("ZIPPER"), _T("ZUCCHINI"), _T("ZURNA"),
-        _T("XUN"),
-
+        _T("XUN") }, 
+        
+        {
         _T("sound/accordion.wav"), _T("sound/airplane.wav"), _T("sound/angelfish.wav"), _T("sound/anklet.wav"), _T("sound/apple.wav"),
         _T("sound/bagpipes.wav"), _T("sound/balloons.wav"), _T("sound/bananas.wav"), _T("sound/bicycle.wav"), _T("sound/bird.wav"),
         _T("sound/cat.wav"), _T("sound/chalkboard.wav"), _T("sound/cherries.wav"), _T("sound/clarinet.wav"), _T("sound/clock.wav"),
@@ -855,7 +856,7 @@ void MainWindow::PlaySound()
         _T("sound/yak.wav"), _T("sound/yam.wav"), _T("sound/yangqin.wav"), _T("sound/yinyang.wav"), _T("sound/yoyo.wav"),
         _T("sound/zebra.wav"), _T("sound/zipline.wav"), _T("sound/zipper.wav"), _T("sound/zucchini.wav"), _T("sound/zurna.wav"),
         _T("sound/xun.wav")
-    };
+    } };
     for (int x = 0; x < 131; x += 1)
     {
         if (sounds[0][x] == animal)
