@@ -33,7 +33,7 @@ OBJ_SUF=.o
 
 ### Linking ###
 
-LIBS=-lSDL2main -lSDL2
+LIBS=-lSDL2main -lSDL2 -lwxsvg
 WXLIBS=`wx-config --libs`
 SDLLIBS=`sdl2-config --libs`
 LDFLAGS=-s ${WXLIBS} ${SDLLIBS}
