@@ -22,5 +22,3 @@ install: data/* doc/* all
 clean:
 	rm -rf *.o *.exe ${EXE} *.core
 	
-help:
-	@echo "Help instructions"
