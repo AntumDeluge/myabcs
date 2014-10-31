@@ -1,8 +1,8 @@
-MAKE=make
 
 ### Project ###
 
 PNAME=myabcs
+PNAME_T=MyABCs
 VER_MAJ=0
 VER_MIN=4
 VER_REL=5
@@ -26,6 +26,7 @@ DATADIR=data
 CC=g++
 CFLAGS=-c -O2 -I${INCLUDE}
 WXFLAGS=`wx-config --cxxflags`
+SDLFLAGS=`sdl-config --cflags`
 CXXFLAGS=${CFLAGS} ${WXFLAGS}
 OBJ_SUF=.o
 
@@ -33,12 +34,14 @@ OBJ_SUF=.o
 
 LIBS=
 WXLIBS=`wx-config --libs`
+SDLLIBS=`sld-config --libs`
 LDFLAGS=-s ${WXLIBS}
 
 ### Installation ###
 
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
+ABCDIR=${DESTDIR}/share/myabcs
 
 ### Files & headers ###
 
@@ -61,3 +64,6 @@ MAIN_D=${MAIN_H} ${ABC_D}
 
 OBJECTS= \
 	${GNRCABT_O} ${ABC_O} ${MAIN_O}
+
+F_DATA= \
+	changelog.txt license-MIT.txt myabcs.xpm

@@ -16,8 +16,26 @@ tests:
 	@echo "Testing for wxWidgets..."
 	@#${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
 	
-install: data/* doc/* all
-	@echo "No instructions yet."
+install: changelog.txt license-MIT.txt myabcs.desktop myabcs.xpm pic sound all
+	install -vd ${DESTDIR}/share/myabcs
+	install -vd ${DESTDIR}/share/applications
+	install -vd ${DESTDIR}/share/pixmaps
+	install -vd ${BINDIR}
+	install -vm 0644 changelog.txt ${ABCDIR}
+	install -vm 0644 license-MIT.txt ${ABCDIR}
+	install -vm 0644 myabcs.xpm ${ABCDIR}/icon.xpm
+	cp -vr pic ${ABCDIR}
+	cp -vr sound ${ABCDIR}
+	install -v myabcs ${ABCDIR}
+	install -vm 0644 myabcs.xpm ${DESTDIR}/share/pixmaps
+	install -vm 0644 myabcs.desktop ${DESTDIR}/share/applications
+	ln -sf ${ABCDIR}/myabcs ${BINDIR}/myabcs
+	
+uninstall:
+	unlink ${BINDIR}/myabcs
+	rm -f ${DESTDIR}/share/applications/myabcs.desktop
+	rm -f ${DESTDIR}/share/pixmaps/myabcs.xpm
+	rm -rf ${ABCDIR}
 	
 clean:
 	rm -rf *.o *.exe ${EXE} *.core
