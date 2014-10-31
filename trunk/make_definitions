@@ -1,8 +1,8 @@
-MAKE=make
 
 ### Project ###
 
 PNAME=myabcs
+PNAME_T=MyABCs
 VER_MAJ=0
 VER_MIN=5
 VER_REL=x
@@ -18,39 +18,51 @@ LIBDIR=${DESTDIR}/lib
 
 ### Base directories ###
 
+SRC=src
 INCLUDE=include
 DATADIR=data
 
 ### Compiling ###
 
 CC=g++
-CFLAGS=-c -O2 -Wall -Werror -I${INCLUDE}
-CXXFLAGS=${CFLAGS}
+CFLAGS=-c -O2 -I${INCLUDE}
+WXFLAGS=`wx-config --cxxflags`
 SDLFLAGS=`sdl2-config --cflags`
+CXXFLAGS=${CFLAGS} ${WXFLAGS} ${SDLFLAGS}
 OBJ_SUF=.o
 
 ### Linking ###
 
 LIBS=-lSDL2main -lSDL2
+WXLIBS=`wx-config --libs`
 SDLLIBS=`sdl2-config --libs`
-LDFLAGS=-s ${SDLLIBS}
+LDFLAGS=-s ${WXLIBS} ${SDLLIBS}
 
 ### Installation ###
 
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
+ABCDIR=${DESTDIR}/share/myabcs
 
 ### Files & headers ###
 
-MYABCS_H=include/myabcs.h
-MYABCS_C=src/myabcs.cpp
-MYABCS_O=myabcs.o
-MYABCS_D=${MYABCS_H}
-
-WINDOW_H=include/window.h
-WINDOW_C=src/window.cpp
+WINDOW_H=${INCLUDE}/window.h
+WINDOW_C=${SRC}/window.cpp
 WINDOW_O=window.o
 WINDOW_D=${WINDOW_H}
 
+MYABCS_H=${INCLUDE}/myabcs.h
+MYABCS_C=${SRC}/myabcs.cpp
+MYABCS_O=myabcs.o
+MYABCS_D=${MYABCS_H} ${WINDOW_D}
+
+MAIN_H=include/main.h
+MAIN_C=src/main.cpp
+MAIN_O=main.o
+MAIN_D=${MAIN_H} ${ABC_D}
+
 OBJECTS= \
-	${MYABCS_O} ${WINDOW_O}
+	${WINDOW_O} ${MYABCS_O}
+
+F_DATA= \
+	changelog.txt license-MIT.txt myabcs.xpm
