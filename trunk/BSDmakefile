@@ -2,6 +2,8 @@
 # for BSD systems.
 # Created by Jordan Irwin
 
+.include "Makefile.BSD"
+
 help:
 	@echo
 	@echo "Makefile for BSD systems."
@@ -17,4 +19,3 @@ help:
 	@echo "		BSD GNU MinGW"
 	@echo
 	
-.include "Makefile.BSD"

@@ -2,6 +2,8 @@
 # for GNU/Linux systems.
 # Created by Jordan Irwin
 
+include Makefile.GNU
+
 help:
 	@echo
 	@echo "Makefile for GNU/Linux systems."
@@ -18,4 +20,3 @@ help:
 	@echo "		BSD GNU MinGW"
 	@echo
 	
-include Makefile.GNU
