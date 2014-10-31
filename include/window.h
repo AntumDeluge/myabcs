@@ -1,13 +1,12 @@
 #ifndef MYABCS_WINDOW
 #define MYABCS_WINDOW
 
-#include <SDL2/SDL.h>
+#include <wx/wx.h>
 
-extern SDL_Window* MainWindow;
-extern SDL_Renderer* renderer;
-
-int loadMainWindow();
-
-int closeMainWindow();
+class MainWindow : public wxFrame {
+public:
+    MainWindow(const wxString& title);
+private:
+};
 
 #endif /* MYABCS_WINDOW */

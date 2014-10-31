@@ -1,25 +1,12 @@
 #include "myabcs.h"
 #include "window.h"
 
-#include <iostream>
-using namespace std;
+IMPLEMENT_APP(MyABCs)
 
-bool quit = false;
-
-int main(int argc, char** argv) {
-    loadMainWindow();
+bool MyABCs::OnInit() {
+    MainWindow* frame = new MainWindow(_("MyABCs"));
+    frame->Show(true);
+    SetTopWindow(frame);
     
-    SDL_Event event;
-    
-    while (!quit) {
-        SDL_WaitEvent(&event);
-        
-        switch (event.type) {
-            case SDL_QUIT:
-                quit = true;
-                break;
-        }
-    }
-    
-    return closeMainWindow();
+    return true;
 }
