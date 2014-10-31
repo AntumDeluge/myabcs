@@ -4,7 +4,7 @@
 include make_definitions
 
 ifdef DEBUG
-CFLAGS=-c -Wall -g -I${DIR_INCL}
+CFLAGS=-c -O0 -g -Wall -Werror -DDEBUG -I${DIR_INCL}
 CXXFLAGS=${CFLAGS} ${WXFLAGS}
 LDFLAGS=${WXLIBS}
 endif
