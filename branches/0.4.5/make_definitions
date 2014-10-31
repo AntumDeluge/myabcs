@@ -24,7 +24,7 @@ DATADIR=data
 ### Compiling ###
 
 CC=g++
-CFLAGS=-c -O2 -Wall -Werror -I${INCLUDE}
+CFLAGS=-c -O2 -I${INCLUDE}
 WXFLAGS=`wx-config --cxxflags`
 CXXFLAGS=${CFLAGS} ${WXFLAGS}
 OBJ_SUF=.o
