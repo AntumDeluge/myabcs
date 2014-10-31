@@ -23,7 +23,7 @@ install: changelog.txt license-MIT.txt myabcs.desktop myabcs.xpm pic sound all
 	install -vd ${BINDIR}
 	install -vm 0644 changelog.txt ${ABCDIR}
 	install -vm 0644 license-MIT.txt ${ABCDIR}
-	install -vm 0644 myabcs.xpm ${ABCDIR}/icon.xpm
+	install -vm 0644 myabcs.xpm ${ABCDIR}
 	cp -vr pic ${ABCDIR}
 	cp -vr sound ${ABCDIR}
 	install -v myabcs ${ABCDIR}
