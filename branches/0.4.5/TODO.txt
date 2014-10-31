@@ -1,0 +1,3 @@
+Planned Tasks:
+- Use wxSVG for rendering vector images
+- Use sound library to replace wxSound & convert audio to OGG
