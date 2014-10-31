@@ -1,5 +1,22 @@
 #include "abc.h"
-#include <iostream>
+
+#include <stddef.h>
+#include <wx/bitmap.h>
+#include <wx/buffer.h>
+#include <wx/defs.h>
+#include <wx/dialog.h>
+#include <wx/event.h>
+#include <wx/frame.h>
+#include <wx/gdicmn.h>
+#include <wx/generic/panelg.h>
+#include <wx/intl.h>
+#include <wx/object.h>
+#include <wx/sizer.h>
+#include <wx/string.h>
+#include <wx/toplevel.h>
+#include <wx/utils.h>
+#include <wx/wxchar.h>
+
 using namespace std;
 
 const int ID_WINDOW = wxNewId();
@@ -304,7 +321,7 @@ MainWindow::MainWindow(const wxString& title)
 	// About Dialog
 	about = new GenericAbout(this, -1);
 	about->SetIcon(wxIcon(ICON1));
-	about->SetImage(*exedir + _T("icon.xpm"));
+	about->SetImage(*exedir + _T("myabcs.xpm"));
 	about->SetName(_T("MyABCs"));
 	about->SetVersion(_T("0.4.5"));
 	about->SetCopyright(_T("\u00A9 Jordan Irwin 2010"));
@@ -487,7 +504,10 @@ MainWindow::MainWindow(const wxString& title)
 	about->AddArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0"));
 
 	// Changelog
-	wxString CLText(_T("0.4.5\n\u2022 Add .desktop file for X11 desktops\u2022 Replace some images"));
+	wxString CLText(_T(
+	        "0.4.5\n\u2022 Add .desktop file for X11 desktop\n\u2022 Replace \
+some images\n\u2022 Changed licenst to MIT\n\u2022 Made code non-Linux \
+specific"));
 	about->SetChangelog(CLText);
 
 
