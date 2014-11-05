@@ -15,6 +15,8 @@ DESTDIR=${PREFIX}
 BINDIR=${DESTDIR}/bin
 INCLDIR=${DESTDIR}/include
 LIBDIR=${DESTDIR}/lib
+PIXMAPDIR=${DESTDIR}/share/pixmaps
+
 
 ### Base directories ###
 
@@ -23,7 +25,7 @@ DATADIR=data
 
 ### Compiling ###
 
-CC=clang
+CC=clang++
 CFLAGS=-c
 WXFLAGS=`wx-config --cxxflags`
 SDLFLAGS=`sdl-config --cflags`
@@ -42,6 +44,7 @@ LDFLAGS=-s ${WXLIBS}
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
 ABCDIR=${DESTDIR}/share/myabcs
+DEFINES=-DPIXMAPDIR="${PIXMAPDIR}"
 
 ### Files & headers ###
 
