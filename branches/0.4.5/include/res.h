@@ -1,6 +1,8 @@
+#ifndef MYABCS_RES_H
+#define MYABCS_RES_H
+
 #if !defined(WIN32) && !defined(WIN64)
-//#define ICON1 _T("/usr/share/pixmaps/MyABCs.xpm")
-#define ICON1 installdir + _T("myabcs.png")
+#define ICON1 _T("myabcs.png")
 #else
 #define ID_ICON1
 #define ICON1 wxICON(ID_ICON1)
@@ -80,7 +82,7 @@
 #define WEASEL _T("pic/animals/weasel.png")
 #define WHALE _T("pic/animals/whale.png")
 #define XIPHIAS _T("pic/animals/xiphias.png")
-#define YAK _T("pic/animals/yak.png") // Copyleft
+#define YAK _T("pic/animals/yak.png")
 #define ZEBRA _T("pic/animals/zebra.png")
 
 // Music
@@ -109,7 +111,6 @@
 #define VIOLIN _T("pic/music/violin.png")
 #define WHISTLE _T("pic/music/whistle.png")
 #define XUN _T("pic/music/xun.png")
-#define XYLOPHONE _T("pic/music/xylophone.png")
 #define YANGQIN _T("pic/music/yangqin.png") // ???
 #define ZURNA _T("pic/music/zurna.png")
 
@@ -139,7 +140,7 @@
 #define UNICYCLE _T("pic/toys/unicycle.png") // GNU Free Documentation License
 #define VOLLEYBALL _T("pic/toys/volleyball.png")
 #define WAGON _T("pic/toys/wagon.png")
-//#define X
+#define XYLOPHONE _T("pic/toys/xylophone.png")
 #define YOYO _T("pic/toys/yoyo.png")
 #define ZIPLINE _T("pic/toys/zipline.png")
 
@@ -193,3 +194,6 @@
 #define X _T("sound/alpha/X.wav")
 #define Y _T("sound/alpha/Y.wav")
 #define Z _T("sound/alpha/Z.wav")
+
+
+#endif /* MYABCS_RES_H */
