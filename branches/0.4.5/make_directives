@@ -4,13 +4,13 @@ all: tests ${OBJECTS}
 	${CC} ${LDFLAGS} ${OBJECTS} -o ${EXE} ${LIBS}
 	
 ${GNRCABT_O}: ${GNRCABT_C} ${GNRCABT_D}
-	${CC} ${CXXFLAGS} ${GNRCABT_C}
+	${CC} ${CXXFLAGS} -I${INCLUDE} ${GNRCABT_C}
 	
 ${ABC_O}: ${ABC_C} ${ABC_D}
-	${CC} ${CXXFLAGS} ${ABC_C}
+	${CC} ${CXXFLAGS} -I${INCLUDE} ${ABC_C}
 	
 ${MAIN_O}: ${MAIN_C} ${MAIN_D}
-	${CC} ${CXXFLAGS} ${MAIN_C}
+	${CC} ${CXXFLAGS} -I${INCLUDE} ${MAIN_C}
 	
 tests:
 	@echo "Testing for wxWidgets..."
