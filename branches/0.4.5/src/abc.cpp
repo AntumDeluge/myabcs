@@ -600,14 +600,14 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                 cankey = false;
                 // Get currently displayed letter to compare with key pressed
                 wxString getletter = letter->GetLabel();
-                if (getletter == _T("Food") or getletter == _T("Animals") or getletter == _T("Music") or getletter == _T("Toys")) {
+                if (getletter == _T("Food") or getletter == _T("Animals")
+                        or getletter == _T("Music") or getletter == _T("Toys")) {
                     // Choose a random letter to cancel "Food", "Animals" and "Music" as displayed letters
                     cur_letter = 'x';
                 } else cur_letter = *getletter.char_str();
 
                 // Set the sound to be played
                 cur_sound = wxString::Format(_T("sound/alpha/%c.wav"), key);
-                this->about->SetCopyright(cur_sound);
 
                 // For ABC mode make sure that key pressed is same as letter displayed
                 if (menu->GetToolState(ID_ABC)) {
