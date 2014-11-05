@@ -15,7 +15,6 @@ DESTDIR=${PREFIX}
 BINDIR=${DESTDIR}/bin
 INCLDIR=${DESTDIR}/include
 LIBDIR=${DESTDIR}/lib
-PIXMAPDIR=${DESTDIR}/share/pixmaps
 
 
 ### Base directories ###
@@ -43,7 +42,8 @@ LDFLAGS=-s ${WXLIBS}
 
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
-ABCDIR=${DESTDIR}/share/myabcs
+ABCDIR=${PREFIX}/share/myabcs
+PIXMAPDIR=${PREFIX}/share/pixmaps
 DEFINES= \
 	-DPIXMAPDIR="\"${PIXMAPDIR}\"" \
 	-DABCDIR="\"${ABCDIR}\""
