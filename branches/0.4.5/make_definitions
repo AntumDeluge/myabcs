@@ -44,7 +44,9 @@ LDFLAGS=-s ${WXLIBS}
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
 ABCDIR=${DESTDIR}/share/myabcs
-DEFINES=-DPIXMAPDIR="${PIXMAPDIR}"
+DEFINES= \
+	-DPIXMAPDIR="\"${PIXMAPDIR}\"" \
+	-DABCDIR="\"${ABCDIR}\""
 
 ### Files & headers ###
 
