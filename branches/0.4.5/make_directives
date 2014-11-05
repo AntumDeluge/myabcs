@@ -13,7 +13,7 @@ ${MAIN_O}: ${MAIN_C} ${MAIN_D}
 	${CC} ${CXXFLAGS} -I${INCLUDE} ${MAIN_C}
 	
 tests:
-	@echo "Testing for wxWidgets..."
+	@#echo "Testing for SDL2..."
 	@#${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
 	
 install: changelog.txt license-MIT.txt myabcs.desktop myabcs.xpm pic sound all
