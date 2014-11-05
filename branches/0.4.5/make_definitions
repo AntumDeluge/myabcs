@@ -71,4 +71,4 @@ OBJECTS= \
 	${GNRCABT_O} ${ABC_O} ${MAIN_O}
 
 F_DATA= \
-	changelog.txt license-MIT.txt myabcs.xpm
+	changelog.txt license-MIT.txt myabcs.png

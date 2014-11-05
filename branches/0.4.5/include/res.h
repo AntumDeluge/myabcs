@@ -1,10 +1,9 @@
 #if !defined(WIN32) && !defined(WIN64)
-    //#define ICON1 _T("/usr/share/pixmaps/MyABCs.xpm")
-    #define ICON1 *exedir + _T("icon.xpm")
+//#define ICON1 _T("/usr/share/pixmaps/MyABCs.xpm")
+#define ICON1 installdir + _T("myabcs.png")
 #else
-    #define ID_ICON1
-    #define ICON1 wxICON(ID_ICON1)
-
+#define ID_ICON1
+#define ICON1 wxICON(ID_ICON1)
 #endif
 
 #define RIBBON _T("pic/ribbon.png")

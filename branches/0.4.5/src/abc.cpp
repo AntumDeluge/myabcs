@@ -311,7 +311,7 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     // About Dialog
     about = new GenericAbout(this, -1);
     about->SetIcon(wxIcon(ICON1));
-    about->SetImage(installdir + _T("myabcs.xpm"));
+    about->SetImage(installdir + _T("myabcs.png"));
     about->SetName(_T("MyABCs"));
     about->SetVersion(_T("0.4.5"));
     //about->SetCopyright(_T("\u00A9 Jordan Irwin 2010"));
