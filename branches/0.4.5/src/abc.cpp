@@ -743,7 +743,7 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
 }
 
 void MainWindow::PlaySound() {
-    wxString animal = label->GetLabel();
+    wxString name = label->GetLabel();
     wxString sounds[2][131] = {
         {
             _T("ACCORDION"), _T("AIRPLANE"), _T("ANGELFISH"), _T("ANKLET"), _T("APPLE"),
@@ -910,7 +910,7 @@ void MainWindow::PlaySound() {
         }
     };
     for (int x = 0; x < 131; x += 1) {
-        if (sounds[0][x] == animal) {
+        if (sounds[0][x] == name) {
             isplaying = true;
             cur_sound = sounds[1][x];
             rc = pthread_create(&thread1, NULL, OtherThread, this);
