@@ -39,6 +39,8 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
         exedir->RemoveLast();
     }
 
+    // FIXME: Currently uses current working directory to locate data
+    //        rather than looking in the installed directory.
 #ifdef ABCDIR
     installdir = _T(ABCDIR);
     installdir.Append(_T("/"));
