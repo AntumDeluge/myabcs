@@ -24,7 +24,7 @@ DATADIR=data
 
 ### Compiling ###
 
-CC=clang++
+CC=g++
 CFLAGS=-c
 WXFLAGS=`wx-config --cxxflags`
 SDLFLAGS=`sdl-config --cflags`
