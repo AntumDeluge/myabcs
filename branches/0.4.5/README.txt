@@ -73,3 +73,16 @@ Compiling with Apple Xcode  |
 I am not familiar with Apple's Xcode environment, but I understand that it
 comes with GNU GCC & possibly Clang. The instructions above should work here as
 well.
+
+
+------------
+Other Notes |
+------------
+
+MyABCs requires being launched from its installation directory. Otherwise it
+will not be able to find resources (images, sounds, etc.). For this reason the
+"make install" command creates a Unix shell script & places it on the systems
+PATH. The script first changes to the MyABCs installation directory then
+launches the actual executable. For manual installation you will either need to
+first change to the installation directory to launch or create a similar script
+for your system.
