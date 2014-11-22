@@ -499,7 +499,7 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     // Changelog
     wxString CLText(_T(
             "0.4.5\n\u2022 Add .desktop file for X11 desktop\n\u2022 Replace \
-some images\n\u2022 Changed licenst to MIT\n\u2022 Made code non-Linux \
+some images\n\u2022 Changed license to MIT\n\u2022 Made code non-Linux \
 specific"));
     about->SetChangelog(CLText);
 
