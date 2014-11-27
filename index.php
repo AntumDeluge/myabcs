@@ -5,7 +5,8 @@ $VER_MID = '4';
 $VER_MIN = '4';
 $PROJECT = 'https://sourceforge.net/p/myabcs';
 $DOWNLOADS = ($PROJECT . "/files");
-$AUTHOR = 'AntumDeluge';
+$AUTHOR = 'Jordan Irwin (AntumDeluge)';
+$AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
 $ICON = 'data/icon.png';
 $BGIMAGE = 'data/airplane-mask.png';
 $FAVICON = 'data/favicon.png';
@@ -38,6 +39,7 @@ print("<html>
 <h5 style=\"text-align:center\">By $AUTHOR</h5>
 <h5 style=\"text-align:center\"><a href=\"$DOWNLOADS\">Download Page</a></h5>
 <h5 style=\"text-align:center\"><a href=\"$PROJECT\">Project Page</a></h5>
+<h5 style=\"text-align:center\"><a href=\"$AUTHOR_HOME/about\">About Author</a></h5>
 $NEWSFEED
 
 </body>
