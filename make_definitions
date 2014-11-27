@@ -4,8 +4,8 @@
 PNAME=myabcs
 PNAME_T=MyABCs
 VER_MAJ=0
-VER_MIN=5
-VER_REL=x
+VER_MIN=4
+VER_REL=5
 VERSION=${VER_MAJ}.${VER_MIN}.${VER_REL}
 
 ### Environment ###
@@ -16,45 +16,51 @@ BINDIR=${DESTDIR}/bin
 INCLDIR=${DESTDIR}/include
 LIBDIR=${DESTDIR}/lib
 
+
 ### Base directories ###
 
-SRC=src
 INCLUDE=include
 DATADIR=data
 
 ### Compiling ###
 
 CC=g++
-CFLAGS=-c -O2 -I${INCLUDE}
+CFLAGS=-c
 WXFLAGS=`wx-config --cxxflags`
-SDLFLAGS=`sdl2-config --cflags`
-CXXFLAGS=${CFLAGS} ${WXFLAGS} ${SDLFLAGS}
+SDLFLAGS=`sdl-config --cflags`
+CXXFLAGS=${CFLAGS} ${WXFLAGS}
 OBJ_SUF=.o
 
 ### Linking ###
 
-LIBS=-lSDL2main -lSDL2 -lwxsvg
+LIBS=
 WXLIBS=`wx-config --libs`
-SDLLIBS=`sdl2-config --libs`
-LDFLAGS=-s ${WXLIBS} ${SDLLIBS}
+SDLLIBS=`sld-config --libs`
+LDFLAGS=-s ${WXLIBS}
 
 ### Installation ###
 
 EXE_SUF=
 EXE=${PNAME}${EXE_SUF}
-ABCDIR=${DESTDIR}/share/myabcs
+ABCDIR=${PREFIX}/share/myabcs
+PIXMAPDIR=${PREFIX}/share/pixmaps
+DEFINES= \
+	-DPIXMAPDIR="\"${PIXMAPDIR}\"" \
+	-DABCDIR="\"${ABCDIR}\""
 
 ### Files & headers ###
 
-WINDOW_H=${INCLUDE}/window.h
-WINDOW_C=${SRC}/window.cpp
-WINDOW_O=window.o
-WINDOW_D=${WINDOW_H}
+RES_H=include/res.h
 
-MYABCS_H=${INCLUDE}/myabcs.h
-MYABCS_C=${SRC}/myabcs.cpp
-MYABCS_O=myabcs.o
-MYABCS_D=${MYABCS_H} ${WINDOW_D}
+GNRCABT_H=include/gnrcabt.h
+GNRCABT_C=src/gnrcabt.cpp
+GNRCABT_O=gnrcabt.o
+GNRCABT_D=${GNRCABT_H}
+
+ABC_H=include/abc.h
+ABC_C=src/abc.cpp
+ABC_O=abc.o
+ABC_D=${ABC_H} ${RES_H} ${GNRCABT_D}
 
 MAIN_H=include/main.h
 MAIN_C=src/main.cpp
@@ -62,7 +68,7 @@ MAIN_O=main.o
 MAIN_D=${MAIN_H} ${ABC_D}
 
 OBJECTS= \
-	${WINDOW_O} ${MYABCS_O}
+	${GNRCABT_O} ${ABC_O} ${MAIN_O}
 
 F_DATA= \
-	changelog.txt license-MIT.txt myabcs.xpm
+	changelog.txt license-MIT.txt myabcs.png

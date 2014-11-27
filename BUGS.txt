@@ -1,0 +1,2 @@
+Known BUGS:
+- wxSound interface not working with wxGtk
