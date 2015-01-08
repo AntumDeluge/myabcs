@@ -1,6 +1,16 @@
 [Desktop Entry]
 Name=MyABCs
-GenericName=MyABCs
+GenericName=English alphabet
+GenericName[ca]=Alfabet anglès
+GenericName[el]=Αγγλικό αλφάβητο
+GenericName[es]=Alfabeto inglés
+GenericName[fi]=Englantilaiset aakkoset
+GenericName[he]=אלף-בית אנגלי
+GenericName[it]=Alfabeto inglese
+GenericName[pl]=Angielski alfabet
+GenericName[pt]=Alfabeto Inglês
+GenericName[ru]=Английский алфавит
+GenericName[uk]=Англійська абетка
 Comment=Learn the English alphabet
 Comment[en]=Learn the English alphabet
 Comment[es]=Aprender el alfabeto Inglés
