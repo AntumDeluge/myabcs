@@ -37,6 +37,7 @@ LIBS=
 WXLIBS=`wx-config --libs`
 SDLLIBS=`sld-config --libs`
 LDFLAGS=-s ${WXLIBS}
+LINKEROPTS=,--strip-all
 
 ### Installation ###
 
@@ -45,8 +46,8 @@ EXE=${PNAME}${EXE_SUF}
 ABCDIR=${PREFIX}/share/myabcs
 PIXMAPDIR=${PREFIX}/share/pixmaps
 DEFINES= \
-	-DPIXMAPDIR="\"${PIXMAPDIR}\"" \
-	-DABCDIR="\"${ABCDIR}\""
+    -DPIXMAPDIR="\"${PIXMAPDIR}\"" \
+    -DABCDIR="\"${ABCDIR}\""
 
 ### Files & headers ###
 
@@ -68,7 +69,7 @@ MAIN_O=main.o
 MAIN_D=${MAIN_H} ${ABC_D}
 
 OBJECTS= \
-	${GNRCABT_O} ${ABC_O} ${MAIN_O}
+    ${GNRCABT_O} ${ABC_O} ${MAIN_O}
 
 F_DATA= \
-	changelog.txt license-MIT.txt myabcs.png
+    changelog.txt license-MIT.txt myabcs.png
