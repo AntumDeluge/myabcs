@@ -1,7 +1,8 @@
 
 all: tests ${OBJECTS}
 	@echo "Making project ${PNAME} version ${VERSION}."
-	${CC} -v ${LDFLAGS} ${OBJECTS} -o ${EXE} ${LIBS}
+	#strip ${OBJECTS}
+	${CC} -v -Wl${LINKEROPTS} ${LDFLAGS} ${OBJECTS} -o ${EXE} ${LIBS}
 	
 ${GNRCABT_O}: ${GNRCABT_C} ${GNRCABT_D}
 	${CC} ${CXXFLAGS} ${DEFINES} -I${INCLUDE} ${GNRCABT_C}
