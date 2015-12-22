@@ -22,6 +22,9 @@
 
 */
 
+#include <wx/image.h>
+#include <wx/sizer.h>
+
 #include "window.h"
 
 MainWindow::MainWindow(const wxString& title)
