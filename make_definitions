@@ -27,16 +27,14 @@ DATADIR=data
 CC=g++
 CFLAGS=-c -O2 -I${INCLUDE}
 WXFLAGS=`wx-config --cxxflags`
-SDLFLAGS=`sdl2-config --cflags`
-CXXFLAGS=${CFLAGS} ${WXFLAGS} ${SDLFLAGS}
+CXXFLAGS=${CFLAGS} ${WXFLAGS}
 OBJ_SUF=.o
 
 ### Linking ###
 
-LIBS=-lSDL2main -lSDL2 -lwxsvg
+LIBS=-lwxsvg
 WXLIBS=`wx-config --libs`
-SDLLIBS=`sdl2-config --libs`
-LDFLAGS=-s ${WXLIBS} ${SDLLIBS}
+LDFLAGS=-s ${WXLIBS}
 
 ### Installation ###
 
@@ -46,10 +44,20 @@ ABCDIR=${DESTDIR}/share/myabcs
 
 ### Files & headers ###
 
+IMGHAND_H=${INCLUDE}/imagehandler.h
+IMGHAND_C=${SRC}/imagehandler.cpp
+IMGHAND_O=imagehandler.o
+IMGHAND_D=${IMGHAND_H}
+
+DISPHAND_H=${INCLUDE}/displayhandler.h
+DISPHAND_C=${SRC}/displayhandler.cpp
+DISPHAND_O=displayhandler.o
+DISPHAND_D=${DISPHAND_H} ${IMGHAND_D}
+
 WINDOW_H=${INCLUDE}/window.h
 WINDOW_C=${SRC}/window.cpp
 WINDOW_O=window.o
-WINDOW_D=${WINDOW_H}
+WINDOW_D=${WINDOW_H} ${DISPHAND_D}
 
 MYABCS_H=${INCLUDE}/myabcs.h
 MYABCS_C=${SRC}/myabcs.cpp
@@ -62,7 +70,7 @@ MAIN_O=main.o
 MAIN_D=${MAIN_H} ${ABC_D}
 
 OBJECTS= \
-	${WINDOW_O} ${MYABCS_O}
+	${WINDOW_O} ${MYABCS_O} ${DISPHAND_O} ${IMGHAND_O}
 
 F_DATA= \
 	changelog.txt license-MIT.txt myabcs.xpm
