@@ -25,6 +25,7 @@
 #ifndef MYABCS_WINDOW_H
 #define MYABCS_WINDOW_H
 
+#include <wx/event.h>
 #include <wx/frame.h>
 #include <wx/panel.h>
 #include <wx/statbmp.h>
@@ -35,7 +36,7 @@
 class MainWindow : public wxFrame {
 public:
     MainWindow(const wxString& title);
-    void onSize();
+    void onSize(wxSizeEvent& event);
 private:
     DisplayHandler* display;
 };
