@@ -22,24 +22,22 @@
 
 */
 
-#ifndef MYABCS_WINDOW
-#define MYABCS_WINDOW
+#ifndef MYABCS_WINDOW_H
+#define MYABCS_WINDOW_H
 
 #include <wx/frame.h>
 #include <wx/panel.h>
 #include <wx/statbmp.h>
 #include <wx/string.h>
-#include <wxSVG/svg.h>
-#include <wxSVG/svgctrl.h>
+
+#include "displayhandler.h"
 
 class MainWindow : public wxFrame {
 public:
     MainWindow(const wxString& title);
-    void setImage(const wxString& image);
+    void onSize();
 private:
-    wxPanel* bgpanel;
-    wxSVGCtrl* svg;
-    wxStaticBitmap* imgdisplay;
+    DisplayHandler* display;
 };
 
-#endif /* MYABCS_WINDOW */
+#endif /* MYABCS_WINDOW_H */
