@@ -40,7 +40,7 @@ MainWindow::MainWindow(const wxString& title)
     Connect(wxEVT_SIZE, wxSizeEventHandler(MainWindow::onSize), 0, 0);
 }
 
-void MainWindow::onSize() {
+void MainWindow::onSize(wxSizeEvent& event) {
     display->resizeImage(GetSize());
 
     event.Skip();
