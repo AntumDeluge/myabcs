@@ -66,6 +66,6 @@ void DisplayHandler::setDisplay(const wxString name) {
     // FIXME: Need failsafe to ensure "item" is not empty string
     textctrl->SetLabel(name.Upper());
     // FIXME: SVG image and size should be set automatically
-    imagectrl->setSVG(wxT("../data/image/main/airplane.svg"), wxSize(256, 256));
+    imagectrl->setSVG(wxT("data/image/main/airplane.svg"), wxSize(256, 256));
     alphactrl->SetLabel(name.Upper().GetChar(0));
 }
