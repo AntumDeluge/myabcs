@@ -2,13 +2,19 @@
 all: tests ${OBJECTS}
 	@echo "Making project ${PNAME_T} version ${VERSION}."
 	${CC} ${LDFLAGS} ${OBJECTS} -o ${PNAME} ${LIBS}
-	
+
 ${WINDOW_O}: ${WINDOW_C} ${WINDOW_D}
 	${CC} ${CXXFLAGS} ${WINDOW_C}
-	
+
 ${MYABCS_O}: ${MYABCS_C} ${MYABCS_D}
 	${CC} ${CXXFLAGS} ${MYABCS_C}
-	
+
+${IMGHAND_O}: ${IMGHAND_C} ${IMGHAND_D}
+	${CC} ${CXXFLAGS} ${IMGHAND_C}
+
+${DISPHAND_O}: ${DISPHAND_C} ${DISPHAND_D}
+	${CC} ${CXXFLAGS} ${DISPHAND_C}
+
 tests:
 	@echo "Testing for wxWidgets..."
 	@#${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
