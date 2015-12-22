@@ -1,7 +1,7 @@
 #include "myabcs.h"
 #include "window.h"
 
-IMPLEMENT_APP(MyABCs)
+wxIMPLEMENT_APP(MyABCs);
 
 bool MyABCs::OnInit() {
     MainWindow* frame = new MainWindow(_("MyABCs"));
