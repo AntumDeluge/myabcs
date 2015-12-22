@@ -25,7 +25,7 @@
 #ifndef MYABCS_MAIN
 #define MYABCS_MAIN
 
-#include <wx/wx.h>
+#include <wx/app.h>
 
 class MyABCs : public wxApp {
 public:

@@ -25,7 +25,10 @@
 #ifndef MYABCS_WINDOW
 #define MYABCS_WINDOW
 
-#include <wx/wx.h>
+#include <wx/frame.h>
+#include <wx/panel.h>
+#include <wx/statbmp.h>
+#include <wx/string.h>
 #include <wxSVG/svg.h>
 #include <wxSVG/svgctrl.h>
 
