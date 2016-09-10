@@ -1,1 +1,4 @@
 .project
+myabcs
+*.o
+*.exe
