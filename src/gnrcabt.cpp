@@ -14,15 +14,10 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
     tabs->AddPage(p1_info, _T("About"));
     tabs->AddPage(p2_credits, _T("Credits"));
 
-    // Info
-	wxImage::AddHandler(new wxPNGHandler); // Add support for PNG images
-	wxImage::AddHandler(new wxJPEGHandler); // Add support for JPEG images
-	wxImage::AddHandler(new wxICOHandler); // Add support for Windows icons
-	wxImage::AddHandler(new wxXPMHandler); // Add support for XPM images
-
 	iconsize = new wxSize();
-	wxFont font1(18, wxDEFAULT, wxNORMAL, wxBOLD);
-	wxFont font2(9, wxDEFAULT, wxNORMAL, wxBOLD);
+	// FIXME: fonts
+	const wxFont font1(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+	const wxFont font2(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 	appicon = new wxStaticBitmap(p1_info, -1, wxNullBitmap, wxDefaultPosition, wxSize(100,100));
 	appname = new wxStaticText(p1_info, -1, wxEmptyString);
@@ -31,7 +26,8 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	appver->SetFont(font1);
 	appcopyright = new wxStaticText(p1_info, -1, wxEmptyString);
 	appcopyright->SetFont(font2);
-	appurl = new wxHyperlinkCtrl(p1_info, -1, wxEmptyString, wxEmptyString);
+	appurl = new wxHyperlinkCtrl(p1_info, -1, _T("myabcs.sourceforge.net"),
+			_T("http://myabcs.sourceforge.net/"));
 	appabout = new wxStaticText(p1_info, -1, wxEmptyString);
 
     wxBoxSizer *namesizer = new wxBoxSizer(wxHORIZONTAL);
@@ -158,9 +154,9 @@ void GenericAbout::SetImage(wxString image)
 
 void GenericAbout::SetImage(wxIcon image)
 {
-    //wxBitmap bmpicon(image);
-    //wxImage newicon(bmpicon.ConvertToImage());
-    //newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
+    wxBitmap bmpicon(image);
+    wxImage newicon(bmpicon.ConvertToImage());
+    newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
     appicon->SetBitmap(image);
 
     p1_info->Layout();
@@ -179,12 +175,6 @@ void GenericAbout::SetVersion(wxString version)
 void GenericAbout::SetCopyright(wxString copyright)
 {
     appcopyright->SetLabel(copyright);
-}
-
-void GenericAbout::SetURL(wxString url)
-{
-    appurl->SetLabel(url);
-    appurl->SetURL(url);
 }
 
 void GenericAbout::SetAbout(wxString about)
@@ -210,6 +200,7 @@ void GenericAbout::AddCredit(wxString name, const int credit_type)
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
 {
+	// FIXME: Index error
     if (tabs->GetPage(2) != p3_art)
     {
         tabs->InsertPage(2, p3_art, _T("Art"));

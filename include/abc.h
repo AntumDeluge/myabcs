@@ -68,10 +68,10 @@ class MainWindow : public wxFrame {
     bool cankey;
 
     // Help Dialog
-    wxDialog *help;
+    //wxDialog *help;
 
     // About Dialog
-    GenericAbout *about;
+    //GenericAbout *about;
 
     // Threading
     //static void *TabThread(void *arg);

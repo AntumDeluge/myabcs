@@ -28,8 +28,7 @@ MainWindow::MainWindow(const wxString& title)
 : wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
 wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     // Get the executable's directory
-    wxStandardPaths exepath;
-    exedir = new wxString(exepath.GetExecutablePath());
+    exedir = new wxString(wxStandardPaths::Get().GetExecutablePath());
     wxFileName filename(*exedir);
     // Get the executable's filename
     wxString argv0 = filename.GetFullName();
@@ -48,12 +47,13 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     installdir = exedir;
 #endif
 
-    // Add support for PNG images
+    // Add support for images
     wxImage::AddHandler(new wxPNGHandler);
+	wxImage::AddHandler(new wxJPEGHandler);
+	wxImage::AddHandler(new wxICOHandler);
+	wxImage::AddHandler(new wxXPMHandler);
 
     SetIcon(wxIcon(ICON1));
-
-    Center(); // Center the window
 
     cheer = new wxSound(CHEER);
 
@@ -112,8 +112,9 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     letter = new wxStaticText(bg, -1, _T(""), wxDefaultPosition, wxDefaultSize,
             wxALIGN_CENTRE);
     label = new wxStaticText(bg, -1, _T(""));
-    letter->SetFont(wxFont(45, wxDEFAULT, wxBOLD, wxNORMAL));
-    label->SetFont(wxFont(20, wxDEFAULT, wxNORMAL, wxNORMAL));
+    // FIXME: fonts
+    letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+    label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
     bg->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKey), NULL, this);
     bg->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
@@ -265,245 +266,6 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
         letter_sounds[1][a] = temp_sounds[1][a];
     }
 
-    // Help Dialog
-    help = new wxDialog(this, -1, _T("Help"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE);
-
-#ifdef WIN32
-    help->SetIcon(ICON1);
-#else
-    help->SetSize(wxSize(450, 250));
-#endif
-
-    help->CentreOnParent();
-
-    wxRichTextCtrl *textarea = new wxRichTextCtrl(help, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
-    wxButton *ok = new wxButton(help, wxID_OK);
-
-    wxString helptext(_T("How to use:\n\
-  Selecting a mode:\n\
-    The four icons on the left side of the toolbar represent the\n\
-    different modes.  Use the \"Tab\" key to toggle between modes,\n\
-    or click on an icon with the mouse.\n\
-\n\
-  Alphabet Mode:\n\
-    The first icon on the left is the Alphabet Mode.  Press the\n\
-    letter on the keyboard that is displayed on the screen to\n\
-    cycle through the English alphabet.  Press the \"Backspace\"\n\
-    key to move back one letter.  Finish by finding all the\n\
-    letters, A-Z.\n\
-\n\
-  Other Modes:\n\
-    In all other modes, simply press a key on the keyboard to see\n\
-    a letter with a related image and description.\n\
-\n\
-  Sounds:\n\
-    Press the spacebar to hear the name of the pictured object."));
-
-    textarea->SetValue(helptext);
-
-    wxBoxSizer *help_sizer = new wxBoxSizer(wxVERTICAL);
-    help_sizer->Add(textarea, 1, wxEXPAND);
-    help_sizer->Add(ok, 0, wxALIGN_CENTER);
-
-    help->SetAutoLayout(true);
-    help->SetSizer(help_sizer);
-    help->Layout();
-
-
-    // About Dialog
-    about = new GenericAbout(this, -1);
-    about->SetIcon(wxIcon(ICON1));
-    about->SetImage(_T("myabcs.png"));
-    about->SetName(_T("MyABCs"));
-    about->SetVersion(_T("0.4.5"));
-    //about->SetCopyright(_T("\u00A9 Jordan Irwin 2010"));
-    about->SetCopyright(installdir);
-    about->SetURL(_T("http://sourceforge.net/projects/myabcs"));
-    about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
-
-    about->AddCredit(_T("Jordan Irwin"), CREDIT_DEVELOPER);
-    about->AddCredit(_T("Jordan Irwin"), CREDIT_PACKAGER);
-
-    about->AddArtist(_T("ABC Blocks"), _T("Petri Lummemaki "), _T("Public Domain"));
-    about->AddArtist(_T("Accordion"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Accordion(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Airplane"), _T("Jarno Vasamaa"), _T("Public Domain"));
-    about->AddArtist(_T("Airplane(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Anklet"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Angelfish"), _T("Jonathon Love"), _T("Public Domain"));
-    about->AddArtist(_T("Apple"), _T("Chrisdesign"), _T("Public Domain"));
-    about->AddArtist(_T("Bagpipes"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
-    about->AddArtist(_T("Balloons"), _T("AJ"), _T("Public Domain"));
-    about->AddArtist(_T("Bananas"), _T("nicubunu"), _T("Public Domain"));
-    about->AddArtist(_T("Bird"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Bird(sound)"), _T("Jc Guan"), _T("Public Domain"));
-    about->AddArtist(_T("Bicycle"), _T("alvolk"), _T("Public Domain"));
-    about->AddArtist(_T("Cat"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Cat(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Chalkboard"), _T("J_Alves"), _T("Public Domain"));
-    about->AddArtist(_T("Cherries"), _T("Rocket000"), _T("Public Domain"));
-    about->AddArtist(_T("Clarinet"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Clarinet(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Clock"), _T("Jonathan Dietrich"), _T("Public Domain"));
-    about->AddArtist(_T("Dog"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Dog(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Doll"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Dolphin"), _T("Andrew Fitzsimon"), _T("Public Domain"));
-    about->AddArtist(_T("Dolphin(sound)"));
-    about->AddArtist(_T("Doughnut"), _T("worms_x"), _T("Public Domain"));
-    about->AddArtist(_T("Drums"), _T("TheresaKnott"), _T("Public Domain"));
-    about->AddArtist(_T("Drums(sound)"), _T("imakepitart"), _T("Public Domain"));
-    about->AddArtist(_T("Earth"), _T("Dan Gerhrads"), _T("Public Domain"));
-    about->AddArtist(_T("Easel"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Egg"), _T("dStulle"), _T("Public Domain"));
-    about->AddArtist(_T("Electric Guitar"), _T("Chrisdesign"), _T("Public Domain"));
-    about->AddArtist(_T("Electric Guitar(sound)"), _T("Mattgirling"), _T("Attribution-ShareAlike 3.0"));
-    about->AddArtist(_T("Elephant"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Elephant(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Fire"), _T("Valessio Soares de Brito"), _T("Public Domain"));
-    about->AddArtist(_T("Flute"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Flute(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Football"), _T("molumen"), _T("Public Domain"));
-    about->AddArtist(_T("Fries"), _T("Juliane Krug"), _T("Public Domain"));
-    about->AddArtist(_T("Frog"), _T("leland_mcinnes"), _T("Public Domain"));
-    about->AddArtist(_T("Frog(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Giraffe"), _T("Packard Jennings"), _T("Public Domain"));
-    about->AddArtist(_T("Glove"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Grapes"), _T("Jean-Victor Balin"), _T("Public Domain"));
-    about->AddArtist(_T("Grasshopper"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Guitar"), _T("papapishu"), _T("Public Domain"));
-    about->AddArtist(_T("Harp"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Hat"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Horn"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Horse"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Horse(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Hot Dog"), _T("Juliane Krug"), _T("Public Domain"));
-    about->AddArtist(_T("Ice Cream"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Ice Skate"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Igloo"), _T("Jose Hevia"), _T("Public Domain"));
-    about->AddArtist(_T("Iguana"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Ipu"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Jaguar"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Jaguar(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Jar"), _T("DTRave"), _T("Public Domain"));
-    about->AddArtist(_T("Jug"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Juice"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Jump Rope"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Kazoo"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Kazoo(sound)"), _T("NoiseCollector"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Ketchup"), _T("Alexandre Norman"), _T("Public Domain"));
-    about->AddArtist(_T("Keyboard"), _T("yeKcim"), _T("Public Domain"));
-    about->AddArtist(_T("Kite"), _T("schoolfreeware"), _T("Public Domain"));
-    about->AddArtist(_T("Koala"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Ladybug"), _T("lalolalo"), _T("Public Domain"));
-    about->AddArtist(_T("Lasagna"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Lion"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Lion(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Lunchbox"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Lute"), _T("papapishu"), _T("Public Domain"));
-    about->AddArtist(_T("Magnet"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Magnifying Glass"), _T("TheStructorr"), _T("Public Domain"));
-    about->AddArtist(_T("Maracas"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Maracas(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Mouse"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Mouse(sound)"));
-    about->AddArtist(_T("Mushroom"), _T("Tanguy JACQ"), _T("Public Domain"));
-    about->AddArtist(_T("Necklace"), _T("wsnaccad"), _T("Public Domain"));
-    about->AddArtist(_T("Newspaper"), _T("Aubanel Monnier"), _T("Public Domain"));
-    about->AddArtist(_T("Ney"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Newt"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Noodle"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Oboe"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Oboe(sound)"), _T("acclivity"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Olive"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Onion"), _T("Chrisdesign"), _T("Public Domain"));
-    about->AddArtist(_T("Orca"), _T("Matthew Gates"), _T("Public Domain"));
-    about->AddArtist(_T("Origami"), _T("badaman"), _T("Public Domain"));
-    about->AddArtist(_T("Owl"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Owl(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Paint"), _T("valessiobrito"), _T("Public Domain"));
-    about->AddArtist(_T("Paper Airplane"), _T("nicubunu"), _T("Public Domain"));
-    about->AddArtist(_T("Piano"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Piano(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Pretzel"), _T("Nathan Eady"), _T("Public Domain"));
-    about->AddArtist(_T("Pig"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Pig(sound)"), _T("Robinhood76"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Quail"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Quail(sound)"));
-    about->AddArtist(_T("Quarter"));
-    about->AddArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Quiche"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Raccoon"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Radishes"), _T("Francesco Rollandin"), _T("Public Domain"));
-    about->AddArtist(_T("Recorder"), _T("zeimusu"), _T("Public Domain"));
-    about->AddArtist(_T("Recorder(sound)"), _T("Cailyn"));
-    about->AddArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
-    about->AddArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Rooster(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Saxophone"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain"));
-    about->AddArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Sheep"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Sheep(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Star"), _T("Tom Webb"), _T("Public Domain"));
-    about->AddArtist(_T("Strawberry"), _T("baroquon"), _T("Public Domain"));
-    about->AddArtist(_T("Tomato"), _T("Chrisdesign"), _T("Public Domain"));
-    about->AddArtist(_T("Top"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Train"), _T("Aitor Avila"), _T("Public Domain"));
-    about->AddArtist(_T("Train(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Trumpet"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Trumpet (sound)"), _T("sorohanro"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Turtle"), _T("valessiobrito"), _T("Public Domain"));
-    about->AddArtist(_T("Udon"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
-    about->AddArtist(_T("Ukulele"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Ukulele(sound)"), _T("Henry Kailimai"), _T("Attribution-ShareAlike 3.0"));
-    about->AddArtist(_T("Umbrella"), _T("LX"), _T("Public Domain"));
-    about->AddArtist(_T("Urchin"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Unicycle"), _T("AndrewDressel/Underpants"), _T("Attribution-ShareAlike 3.0"));
-    about->AddArtist(_T("Vase"), _T("J_Alves"), _T("Public Domain"));
-    about->AddArtist(_T("Vegetables"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Violin"), _T("papapishu"), _T("Public Domain"));
-    about->AddArtist(_T("Violin(sound)"), _T("Edit Kov\u00E1cs"), _T("Attribution-ShareAlike 2.0 Germany"));
-    about->AddArtist(_T("Volleyball"), _T("Andrea Bianchini"), _T("Public Domain"));
-    about->AddArtist(_T("Vulture"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Vulture(sound)"), _T("free-sound-effects-bird"), _T("AudioMicro Standard License"));
-    about->AddArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
-    about->AddArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
-    about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
-    about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Whistle"), _T("kelan"), _T("Public Domain"));
-    about->AddArtist(_T("Whistle(sound)"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Xiphias"), wxEmptyString, _T("Public Domain"));
-    //about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
-    about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Yak"), _T("karthikeyan"), _T("Public Domain"));
-    about->AddArtist(_T("Yam"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Yangqin"), _T("koika/Jordan Irwin"), _T("Attribution-ShareAlike 3.0"));
-    about->AddArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
-    about->AddArtist(_T("Yo-Yo"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Zebra"), _T("johnny_automatic"), _T("Public Domain"));
-    about->AddArtist(_T("Zebra(sound)"));
-    about->AddArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
-    about->AddArtist(_T("Zipper(sound)"), _T("tmkappelt"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Zucchini"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
-    about->AddArtist(_T("Zurna"), _T("Jordan Irwin"), _T("Public Domain"));
-    about->AddArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0"));
-
-    // Changelog
-    wxString CLText(_T(
-            "0.4.5\n\u2022 Add .desktop file for X11 desktop\n\u2022 Replace \
-some images\n\u2022 Changed license to MIT\n\u2022 Made code non-Linux \
-specific"));
-    about->SetChangelog(CLText);
-
-
     // Layout
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->AddSpacer(5);
@@ -522,6 +284,8 @@ specific"));
 
     // Redirect focus to main panel
     Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
+
+    Center(); // Center the window on the screen
 }
 
 void MainWindow::SetMode(wxCommandEvent& event) {
@@ -976,23 +740,247 @@ void *MainWindow::OtherThread(void *arg) {
 // Help and About dialogs
 
 void MainWindow::OnHelp(wxMenuEvent& event) {
+    wxDialog *help = new wxDialog(this, -1, _T("Help"), wxDefaultPosition,
+    		wxDefaultSize, wxDEFAULT_DIALOG_STYLE);
+
+#ifdef WIN32
+    help->SetIcon(ICON1);
+#else
+    help->SetSize(wxSize(450, 250));
+#endif
+
+    wxRichTextCtrl *textarea = new wxRichTextCtrl(help, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+    wxButton *ok = new wxButton(help, wxID_OK);
+
+    wxString helptext(_T("How to use:\n\
+  Selecting a mode:\n\
+    The four icons on the left side of the toolbar represent the\n\
+    different modes.  Use the \"Tab\" key to toggle between modes,\n\
+    or click on an icon with the mouse.\n\
+\n\
+  Alphabet Mode:\n\
+    The first icon on the left is the Alphabet Mode.  Press the\n\
+    letter on the keyboard that is displayed on the screen to\n\
+    cycle through the English alphabet.  Press the \"Backspace\"\n\
+    key to move back one letter.  Finish by finding all the\n\
+    letters, A-Z.\n\
+\n\
+  Other Modes:\n\
+    In all other modes, simply press a key on the keyboard to see\n\
+    a letter with a related image and description.\n\
+\n\
+  Sounds:\n\
+    Press the spacebar to hear the name of the pictured object."));
+
+    textarea->SetValue(helptext);
+
+    wxBoxSizer *help_sizer = new wxBoxSizer(wxVERTICAL);
+    help_sizer->Add(textarea, 1, wxEXPAND);
+    help_sizer->Add(ok, 0, wxALIGN_CENTER);
+
+    help->SetAutoLayout(true);
+    help->SetSizer(help_sizer);
+    help->Layout();
     help->ShowModal();
+
+    help->CenterOnParent();
 }
 
 void MainWindow::OnAbout(wxMenuEvent& event) {
-    /*wxAboutDialogInfo info;
-    info.SetName(_("MyABCs"));
-    info.SetVersion(_("0.3"));
-    info.SetDescription(_("Software for learning the English alphabet."));
-    info.SetCopyright(_T("2010 Jordan Irwin <squalldesu@yahoo.com>"));
-    info.AddDeveloper(_T("Jordan Irwin"));
-    info.AddArtist(_T("All artwork is licensed under either the GNU Free Documentation License, Creative Commons, or is released under the Public domain."));
-    #ifdef WIN32
-    info.SetIcon(ICON1);
-    #endif
+    // About Dialog
+    GenericAbout *about = new GenericAbout(this, -1);
+    about->SetIcon(wxIcon(ICON1));
+    about->SetImage(_T("myabcs.png"));
+    about->SetName(_T("MyABCs"));
+    about->SetVersion(_T("0.4.5"));
+    about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2016"));
+    about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
 
-    wxAboutBox(info);*/
+    about->AddCredit(_T("Jordan Irwin"), CREDIT_DEVELOPER);
+    about->AddCredit(_T("Jordan Irwin"), CREDIT_PACKAGER);
+
+    // Changelog
+    wxString CLText(_T(
+            "0.4.5\n\u2022 Add .desktop file for X11 desktop\n\u2022 Replace \
+some images\n\u2022 Changed license to MIT\n\u2022 Made code non-Linux \
+specific"));
+    about->SetChangelog(CLText);
+
+    about->AddArtist(_T("ABC Blocks"), _T("Petri Lummemaki "), _T("Public Domain"));
+    about->AddArtist(_T("Accordion"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Accordion(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Airplane"), _T("Jarno Vasamaa"), _T("Public Domain"));
+    about->AddArtist(_T("Airplane(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Anklet"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Angelfish"), _T("Jonathon Love"), _T("Public Domain"));
+    about->AddArtist(_T("Apple"), _T("Chrisdesign"), _T("Public Domain"));
+    about->AddArtist(_T("Bagpipes"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
+    about->AddArtist(_T("Balloons"), _T("AJ"), _T("Public Domain"));
+    about->AddArtist(_T("Bananas"), _T("nicubunu"), _T("Public Domain"));
+    about->AddArtist(_T("Bird"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Bird(sound)"), _T("Jc Guan"), _T("Public Domain"));
+    about->AddArtist(_T("Bicycle"), _T("alvolk"), _T("Public Domain"));
+    about->AddArtist(_T("Cat"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Cat(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Chalkboard"), _T("J_Alves"), _T("Public Domain"));
+    about->AddArtist(_T("Cherries"), _T("Rocket000"), _T("Public Domain"));
+    about->AddArtist(_T("Clarinet"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Clarinet(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Clock"), _T("Jonathan Dietrich"), _T("Public Domain"));
+    about->AddArtist(_T("Dog"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Dog(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Doll"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Dolphin"), _T("Andrew Fitzsimon"), _T("Public Domain"));
+    about->AddArtist(_T("Dolphin(sound)"));
+    about->AddArtist(_T("Doughnut"), _T("worms_x"), _T("Public Domain"));
+    about->AddArtist(_T("Drums"), _T("TheresaKnott"), _T("Public Domain"));
+    about->AddArtist(_T("Drums(sound)"), _T("imakepitart"), _T("Public Domain"));
+    about->AddArtist(_T("Earth"), _T("Dan Gerhrads"), _T("Public Domain"));
+    about->AddArtist(_T("Easel"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Egg"), _T("dStulle"), _T("Public Domain"));
+    about->AddArtist(_T("Electric Guitar"), _T("Chrisdesign"), _T("Public Domain"));
+    about->AddArtist(_T("Electric Guitar(sound)"), _T("Mattgirling"), _T("Attribution-ShareAlike 3.0"));
+    about->AddArtist(_T("Elephant"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Elephant(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Fire"), _T("Valessio Soares de Brito"), _T("Public Domain"));
+    about->AddArtist(_T("Flute"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Flute(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Football"), _T("molumen"), _T("Public Domain"));
+    about->AddArtist(_T("Fries"), _T("Juliane Krug"), _T("Public Domain"));
+    about->AddArtist(_T("Frog"), _T("leland_mcinnes"), _T("Public Domain"));
+    about->AddArtist(_T("Frog(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Giraffe"), _T("Packard Jennings"), _T("Public Domain"));
+    about->AddArtist(_T("Glove"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Grapes"), _T("Jean-Victor Balin"), _T("Public Domain"));
+    about->AddArtist(_T("Grasshopper"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Guitar"), _T("papapishu"), _T("Public Domain"));
+    about->AddArtist(_T("Harp"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Hat"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Horn"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Horse"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Horse(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Hot Dog"), _T("Juliane Krug"), _T("Public Domain"));
+    about->AddArtist(_T("Ice Cream"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Ice Skate"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Igloo"), _T("Jose Hevia"), _T("Public Domain"));
+    about->AddArtist(_T("Iguana"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Ipu"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Jaguar"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Jaguar(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Jar"), _T("DTRave"), _T("Public Domain"));
+    about->AddArtist(_T("Jug"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Juice"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Jump Rope"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Kazoo"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Kazoo(sound)"), _T("NoiseCollector"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Ketchup"), _T("Alexandre Norman"), _T("Public Domain"));
+    about->AddArtist(_T("Keyboard"), _T("yeKcim"), _T("Public Domain"));
+    about->AddArtist(_T("Kite"), _T("schoolfreeware"), _T("Public Domain"));
+    about->AddArtist(_T("Koala"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Ladybug"), _T("lalolalo"), _T("Public Domain"));
+    about->AddArtist(_T("Lasagna"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Lion"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Lion(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Lunchbox"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Lute"), _T("papapishu"), _T("Public Domain"));
+    about->AddArtist(_T("Magnet"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Magnifying Glass"), _T("TheStructorr"), _T("Public Domain"));
+    about->AddArtist(_T("Maracas"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Maracas(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Mouse"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Mouse(sound)"));
+    about->AddArtist(_T("Mushroom"), _T("Tanguy JACQ"), _T("Public Domain"));
+    about->AddArtist(_T("Necklace"), _T("wsnaccad"), _T("Public Domain"));
+    about->AddArtist(_T("Newspaper"), _T("Aubanel Monnier"), _T("Public Domain"));
+    about->AddArtist(_T("Ney"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Newt"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Noodle"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Oboe"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Oboe(sound)"), _T("acclivity"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Olive"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Onion"), _T("Chrisdesign"), _T("Public Domain"));
+    about->AddArtist(_T("Orca"), _T("Matthew Gates"), _T("Public Domain"));
+    about->AddArtist(_T("Origami"), _T("badaman"), _T("Public Domain"));
+    about->AddArtist(_T("Owl"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Owl(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Paint"), _T("valessiobrito"), _T("Public Domain"));
+    about->AddArtist(_T("Paper Airplane"), _T("nicubunu"), _T("Public Domain"));
+    about->AddArtist(_T("Piano"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Piano(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Pretzel"), _T("Nathan Eady"), _T("Public Domain"));
+    about->AddArtist(_T("Pig"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Pig(sound)"), _T("Robinhood76"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Quail"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Quail(sound)"));
+    about->AddArtist(_T("Quarter"));
+    about->AddArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Quiche"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Raccoon"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Radishes"), _T("Francesco Rollandin"), _T("Public Domain"));
+    about->AddArtist(_T("Recorder"), _T("zeimusu"), _T("Public Domain"));
+    about->AddArtist(_T("Recorder(sound)"), _T("Cailyn"));
+    about->AddArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
+    about->AddArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Rooster(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Saxophone"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain"));
+    about->AddArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Sheep"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Sheep(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Star"), _T("Tom Webb"), _T("Public Domain"));
+    about->AddArtist(_T("Strawberry"), _T("baroquon"), _T("Public Domain"));
+    about->AddArtist(_T("Tomato"), _T("Chrisdesign"), _T("Public Domain"));
+    about->AddArtist(_T("Top"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Train"), _T("Aitor Avila"), _T("Public Domain"));
+    about->AddArtist(_T("Train(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Trumpet"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Trumpet (sound)"), _T("sorohanro"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Turtle"), _T("valessiobrito"), _T("Public Domain"));
+    about->AddArtist(_T("Udon"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
+    about->AddArtist(_T("Ukulele"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Ukulele(sound)"), _T("Henry Kailimai"), _T("Attribution-ShareAlike 3.0"));
+    about->AddArtist(_T("Umbrella"), _T("LX"), _T("Public Domain"));
+    about->AddArtist(_T("Urchin"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Unicycle"), _T("AndrewDressel/Underpants"), _T("Attribution-ShareAlike 3.0"));
+    about->AddArtist(_T("Vase"), _T("J_Alves"), _T("Public Domain"));
+    about->AddArtist(_T("Vegetables"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Violin"), _T("papapishu"), _T("Public Domain"));
+    about->AddArtist(_T("Violin(sound)"), _T("Edit Kov\u00E1cs"), _T("Attribution-ShareAlike 2.0 Germany"));
+    about->AddArtist(_T("Volleyball"), _T("Andrea Bianchini"), _T("Public Domain"));
+    about->AddArtist(_T("Vulture"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Vulture(sound)"), _T("free-sound-effects-bird"), _T("AudioMicro Standard License"));
+    about->AddArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
+    about->AddArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
+    about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
+    about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Whistle"), _T("kelan"), _T("Public Domain"));
+    about->AddArtist(_T("Whistle(sound)"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Xiphias"), wxEmptyString, _T("Public Domain"));
+    //about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
+    about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Yak"), _T("karthikeyan"), _T("Public Domain"));
+    about->AddArtist(_T("Yam"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Yangqin"), _T("koika/Jordan Irwin"), _T("Attribution-ShareAlike 3.0"));
+    about->AddArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
+    about->AddArtist(_T("Yo-Yo"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Zebra"), _T("johnny_automatic"), _T("Public Domain"));
+    about->AddArtist(_T("Zebra(sound)"));
+    about->AddArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
+    about->AddArtist(_T("Zipper(sound)"), _T("tmkappelt"), _T("Sampling Plus 1.0"));
+    about->AddArtist(_T("Zucchini"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
+    about->AddArtist(_T("Zurna"), _T("Jordan Irwin"), _T("Public Domain"));
+    about->AddArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0"));
+
     about->ShowModal();
+
+    // CenterOnParent is called in the constructor
 }
 
 void MainWindow::OnFrameFocus(wxFocusEvent& event) {
