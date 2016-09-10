@@ -6,70 +6,69 @@ PNAME_T=MyABCs
 VER_MAJ=0
 VER_MIN=4
 VER_REL=5
-VERSION=${VER_MAJ}.${VER_MIN}.${VER_REL}
+VERSION=$(VER_MAJ).$(VER_MIN).$(VER_REL)
 
 ### Environment ###
 
 PREFIX=/usr/local
-DESTDIR=${PREFIX}
-BINDIR=${DESTDIR}/bin
-INCLDIR=${DESTDIR}/include
-LIBDIR=${DESTDIR}/lib
+DESTDIR = $(PREFIX)
+BINDIR = $(DESTDIR)/bin
+INCLDIR = $(DESTDIR)/include
+LIBDIR = $(DESTDIR)/lib
 
 
 ### Base directories ###
 
-INCLUDE=include
-DATADIR=data
+INCLUDE = include
+DATADIR = data
 
 ### Compiling ###
 
-CC=g++
-CFLAGS=-c
-WXFLAGS=`wx-config --cxxflags`
-SDLFLAGS=`sdl-config --cflags`
-CXXFLAGS=${CFLAGS} ${WXFLAGS}
-OBJ_SUF=.o
+CC = g++
+CFLAGS = -c
+CXXFLAGS = $(CFLAGS)
+WXFLAGS = wx-config --cxxflags
+SDLFLAGS = sdl-config --cflags
+OBJ_SUF = .o
 
 ### Linking ###
 
-LIBS=
-WXLIBS=`wx-config --libs`
-SDLLIBS=`sld-config --libs`
-LDFLAGS=-s ${WXLIBS}
-LINKEROPTS=,--strip-all
+LIBS =
+WXLIBS = wx-config --libs std,richtext
+SDLLIBS = sld-config --libs
+LINKEROPTS = -Wl,--strip-all
 
 ### Installation ###
 
-EXE_SUF=
-EXE=${PNAME}${EXE_SUF}
-ABCDIR=${PREFIX}/share/myabcs
-PIXMAPDIR=${PREFIX}/share/pixmaps
+EXE_SUF =
+EXE = $(PNAME)$(EXE_SUF)
+ABCDIR = $(PREFIX)/share/myabcs
+PIXMAPDIR = $(PREFIX)/share/pixmaps
 DEFINES= \
-    -DPIXMAPDIR="\"${PIXMAPDIR}\"" \
-    -DABCDIR="\"${ABCDIR}\""
+    -DPIXMAPDIR="\"$(PIXMAPDIR)\"" \
+    -DABCDIR="\"$(ABCDIR)\""
 
 ### Files & headers ###
 
-RES_H=include/res.h
+RES_H = include/res.h
 
-GNRCABT_H=include/gnrcabt.h
-GNRCABT_C=src/gnrcabt.cpp
-GNRCABT_O=gnrcabt.o
-GNRCABT_D=${GNRCABT_H}
+GNRCABT_H = include/gnrcabt.h
+GNRCABT_C = src/gnrcabt.cpp
+GNRCABT_O = gnrcabt.o
+GNRCABT_D = $(GNRCABT_H)
 
-ABC_H=include/abc.h
-ABC_C=src/abc.cpp
-ABC_O=abc.o
-ABC_D=${ABC_H} ${RES_H} ${GNRCABT_D}
+ABC_H = include/abc.h
+ABC_C = src/abc.cpp
+ABC_O = abc.o
+ABC_D = $(ABC_H) $(RES_H) $(GNRCABT_D)
 
-MAIN_H=include/main.h
-MAIN_C=src/main.cpp
-MAIN_O=main.o
-MAIN_D=${MAIN_H} ${ABC_D}
+MAIN_H = include/main.h
+MAIN_C = src/main.cpp
+MAIN_O = main.o
+MAIN_D = $(MAIN_H) $(ABC_D)
 
-OBJECTS= \
-    ${GNRCABT_O} ${ABC_O} ${MAIN_O}
+OBJECTS = \
+    $(GNRCABT_O) $(ABC_O) $(MAIN_O)
 
-F_DATA= \
+F_DATA = \
     changelog.txt license-MIT.txt myabcs.png

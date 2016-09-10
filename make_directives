@@ -1,45 +1,50 @@
 
-all: tests ${OBJECTS}
-	@echo "Making project ${PNAME} version ${VERSION}."
-	#strip ${OBJECTS}
-	${CC} -v -Wl${LINKEROPTS} ${LDFLAGS} ${OBJECTS} -o ${EXE} ${LIBS}
-	
-${GNRCABT_O}: ${GNRCABT_C} ${GNRCABT_D}
-	${CC} ${CXXFLAGS} ${DEFINES} -I${INCLUDE} ${GNRCABT_C}
-	
-${ABC_O}: ${ABC_C} ${ABC_D}
-	${CC} ${CXXFLAGS} ${DEFINES} -I${INCLUDE} ${ABC_C}
-	
-${MAIN_O}: ${MAIN_C} ${MAIN_D}
-	${CC} ${CXXFLAGS} ${DEFINES} -I${INCLUDE} ${MAIN_C}
-	
+
+all: tests $(OBJECTS)
+	@echo "Making project $(PNAME) version $(VERSION).";
+	$(CC) $(LINKEROPTS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` $(LIBS)
+
+debug: CXXFLAGS += -O0 -g -Wall -Werror -DDEBUG
+debug: WXFLAGS += --debug=yes
+debug: WXLIBS += --debug=yes
+debug: LINKEROPTS = -v
+debug: all
+
+$(GNRCABT_O): $(GNRCABT_C) $(GNRCABT_D)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(GNRCABT_C)
+
+$(ABC_O): $(ABC_C) $(ABC_D)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(ABC_C)
+
+$(MAIN_O): $(MAIN_C) $(MAIN_D)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(MAIN_C)
+
 tests:
 	@#echo "Testing for SDL2..."
-	@#${SDL2_TEST} && (echo "Found SDL version `${SDL2_TEST}`") || (echo "SDL2 not found... aborting"; exit 1)
-	
+	#$(SDL2_TEST) && (echo "Found SDL version `$(SDL2_TEST)`") || (echo "SDL2 not found... aborting"; exit 1)
+
 install: changelog.txt license-MIT.txt myabcs.desktop myabcs.png pic sound all
-	@install -vd ${DESTDIR}/share/myabcs
-	@install -vd ${DESTDIR}/share/applications
-	@install -vd ${PIXMAPDIR}
-	@install -vd ${BINDIR}
-	@install -vm 0644 changelog.txt ${ABCDIR}
-	@install -vm 0644 license-MIT.txt ${ABCDIR}
-	@install -vm 0644 myabcs.png ${ABCDIR}
-	@cp -vr pic ${ABCDIR}
-	@cp -vr sound ${ABCDIR}
-	@install -v myabcs ${ABCDIR}
-	@install -vm 0644 myabcs.png ${PIXMAPDIR}
-	@install -vm 0644 myabcs.desktop ${DESTDIR}/share/applications
-	@#ln -sf ${ABCDIR}/myabcs ${BINDIR}/myabcs
-	@echo -e "#!/usr/bin/env bash\n\ncd \"${ABCDIR}\" && ./${PNAME}" > ${BINDIR}/${PNAME}
-	@chmod +x ${BINDIR}/${PNAME}
-	
+	@install -vd $(DESTDIR)/share/myabcs
+	@install -vd $(DESTDIR)/share/applications
+	@install -vd $(PIXMAPDIR)
+	@install -vd $(BINDIR)
+	@install -vm 0644 changelog.txt $(ABCDIR)
+	@install -vm 0644 license-MIT.txt $(ABCDIR)
+	@install -vm 0644 myabcs.png $(ABCDIR)
+	@cp -vr pic $(ABCDIR)
+	@cp -vr sound $(ABCDIR)
+	@install -v myabcs $(ABCDIR)
+	@install -vm 0644 myabcs.png $(PIXMAPDIR)
+	@install -vm 0644 myabcs.desktop $(DESTDIR)/share/applications
+	@#ln -sf $(ABCDIR)/myabcs $(BINDIR)/myabcs
+	@echo -e "#!/usr/bin/env bash\n\ncd \"$(ABCDIR)\" && ./$(PNAME)" > $(BINDIR)/$(PNAME)
+	@chmod +x $(BINDIR)/$(PNAME)
+
 uninstall:
-	unlink ${BINDIR}/myabcs
-	rm -f ${DESTDIR}/share/applications/myabcs.desktop
-	rm -f ${DESTDIR}/share/pixmaps/myabcs.png
-	rm -rf ${ABCDIR}
-	
+	unlink $(BINDIR)/myabcs
+	rm -f $(DESTDIR)/share/applications/myabcs.desktop
+	rm -f $(DESTDIR)/share/pixmaps/myabcs.png
+	rm -rf $(ABCDIR)
+
 clean:
-	rm -rf *.o *.exe ${EXE} *.core
-	
+	rm -rf *.o *.exe $(EXE) *.core
