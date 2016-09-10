@@ -47,6 +47,10 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     installdir = exedir;
 #endif
 
+    // Audio
+    oggmix = NULL;
+    PlaySound("./test.ogg");
+
     // Add support for images
     wxImage::AddHandler(new wxPNGHandler);
 	wxImage::AddHandler(new wxJPEGHandler);
@@ -288,6 +292,14 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     Center(); // Center the window on the screen
 }
 
+
+// DESTRUCTOR
+MainWindow::~MainWindow() {
+	// SDL cleanup
+	Mix_FreeMusic(oggmix);
+	Mix_CloseAudio();
+}
+
 void MainWindow::SetMode(wxCommandEvent& event) {
     int id = event.GetId();
 
@@ -349,7 +361,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
             }
         } else if (keycode == WXK_SPACE) {
             canspace = false;
-            PlaySound();
+            //PlaySound();
         } else if (keycode == WXK_RETURN or keycode == WXK_NUMPAD_ENTER) {
             if (gameend) {
                 gameend = false;
@@ -508,6 +520,7 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
     isplaying = false; // Enable pressing keys
 }
 
+/*
 void MainWindow::PlaySound() {
     wxString name = label->GetLabel();
     wxString sounds[2][131] = {
@@ -687,6 +700,23 @@ void MainWindow::PlaySound() {
             //            }
         }
     }
+}*/
+
+const int MainWindow::PlaySound(const char* sound_path) {
+	oggmix = Mix_LoadMUS(sound_path);
+
+	if (oggmix == NULL) {
+		return -1;
+	}
+
+	if (Mix_PlayMusic(oggmix, -1) == -1) {
+		return -1;
+	}
+
+	// Free up the audio buffer
+	Mix_FreeMusic(oggmix);
+
+	return 0;
 }
 
 // Threading

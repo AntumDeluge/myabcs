@@ -1,14 +1,23 @@
+// STL
+#include <fstream>
+using namespace std;
+
+// wx
 #include <wx/wx.h>
 #include <wx/sound.h>
 #include <wx/aboutdlg.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
-#include <pthread.h>
+//#include <pthread.h>
+
+// SDL
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+
+// Local
 #include "res.h"
 #include "gnrcabt.h"
-#include <fstream>
-using namespace std;
 
 const int ID_EXIT = wxNewId();
 const int ID_ABC = wxNewId();
@@ -26,6 +35,7 @@ const int ID_OTHER = wxNewId(); // Id used in other threads
 class MainWindow : public wxFrame {
   public:
     MainWindow(const wxString& title);
+    ~MainWindow();
     void SetMode(wxCommandEvent& event);
     void OnKey(wxKeyEvent& event);
     void OnTab(); //wxCommandEvent& event);
@@ -33,7 +43,7 @@ class MainWindow : public wxFrame {
     void GoABC();
     void GoOther();
     void ChangeLetter(wxCommandEvent& event);
-    void PlaySound();
+    const int PlaySound(const char *sound_path);
     void OnHelp(wxMenuEvent& event);
     void OnAbout(wxMenuEvent& event);
     void EnableAll(wxCommandEvent& event);
@@ -66,6 +76,9 @@ class MainWindow : public wxFrame {
     bool canspace; // Allow playing sounds if one is not currently played
     bool cantab; // Allow switching modes with tab button
     bool cankey;
+
+    // Audio
+    Mix_Music *oggmix;
 
     // Help Dialog
     //wxDialog *help;
