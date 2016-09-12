@@ -100,7 +100,6 @@ const std::vector<std::string> cat::animal {
 	"elephant",
 	"frog",
 	"giraffe",
-	"hippo",
 	"horse",
 	"iguana",
 	"jaguar",

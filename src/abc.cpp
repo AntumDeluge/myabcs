@@ -65,12 +65,12 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     cankey = true;
 
     // Tool Bar
-    wxBitmap ico_exit(wxImage(_T("pic/exit.png")));
-    wxBitmap ico_abc(wxImage(_T("pic/abc.png")));
-    wxBitmap ico_anim(wxImage(_T("pic/animals.png")));
-    wxBitmap ico_food(wxImage(_T("pic/food.png")));
-    wxBitmap ico_inst(wxImage(_T("pic/instrument.png")));
-    wxBitmap ico_toys(wxImage(_T("pic/toys.png")));
+    wxBitmap ico_exit(wxImage(_T(ICO_EXIT)));
+    wxBitmap ico_abc(wxImage(_T(ICO_ABC)));
+    wxBitmap ico_anim(wxImage(_T(ICO_ANIMAL)));
+    wxBitmap ico_food(wxImage(_T(ICO_FOOD)));
+    wxBitmap ico_inst(wxImage(_T(ICO_INSTR)));
+    wxBitmap ico_toys(wxImage(_T(ICO_TOY)));
 
     menu = CreateToolBar();
 
@@ -86,9 +86,9 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
             _T("Show toys for each letter"));
 
     menu->AddSeparator();
-    menu->AddTool(ID_HELP, _T("Help"), wxBitmap(wxImage(_T("pic/help.png"))), wxNullBitmap, wxITEM_NORMAL,
+    menu->AddTool(ID_HELP, _T("Help"), wxBitmap(wxImage(_T(HELP))), wxNullBitmap, wxITEM_NORMAL,
             wxEmptyString, _T("Help"));
-    menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage(_T("pic/info.png"))), wxNullBitmap, wxITEM_NORMAL,
+    menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage(_T(INFO))), wxNullBitmap, wxITEM_NORMAL,
             wxEmptyString, _T("About MyABCs"));
     menu->AddSeparator();
     menu->AddTool(wxID_EXIT, _T("Exit"), ico_exit, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _T("Quit"));
