@@ -1,7 +1,8 @@
 #include <wx/wx.h>
 
-class App : public wxApp
+class ABCApp : public wxApp
 {
   public:
+	~ABCApp();
     virtual bool OnInit();
 };
