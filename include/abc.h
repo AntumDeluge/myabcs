@@ -1,5 +1,7 @@
 // STL
 #include <fstream>
+#include <iostream>
+#include <string>
 using namespace std;
 
 // wx
@@ -32,10 +34,10 @@ const int ID_SPACE = wxNewId(); // Id used in threads for space
 const int ID_KEY = wxNewId(); // Id used in threads for keypress
 const int ID_OTHER = wxNewId(); // Id used in other threads
 
-class MainWindow : public wxFrame {
+class ABCWindow : public wxFrame {
   public:
-    MainWindow(const wxString& title);
-    ~MainWindow();
+    ABCWindow(const wxString& title);
+    ~ABCWindow();
     void SetMode(wxCommandEvent& event);
     void OnKey(wxKeyEvent& event);
     void OnTab(); //wxCommandEvent& event);
@@ -43,15 +45,17 @@ class MainWindow : public wxFrame {
     void GoABC();
     void GoOther();
     void ChangeLetter(wxCommandEvent& event);
-    const int PlaySound(const char *sound_path);
+    const int LoadSound(const std::string sound_name);
+    const int PlaySound();
+    const int StopSound();
     void OnHelp(wxMenuEvent& event);
     void OnAbout(wxMenuEvent& event);
     void EnableAll(wxCommandEvent& event);
     void SetCurSound(wxString wav);
     void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
   private:
-    wxString *exedir; // Directory where executable is located
-    wxString installdir; // Directory where files should be installed
+    wxString *basepath; // Directory where executable is located
+    wxString datadir; // Directory where files should be installed
     wxToolBar *menu;
     wxStatusBar *status;
     wxPanel *bg;
@@ -77,14 +81,14 @@ class MainWindow : public wxFrame {
     bool cantab; // Allow switching modes with tab button
     bool cankey;
 
-    // Audio
-    Mix_Music *oggmix;
-
     // Help Dialog
     //wxDialog *help;
 
     // About Dialog
     //GenericAbout *about;
+
+    // Sound
+    Mix_Chunk* oggmix;
 
     // Threading
     //static void *TabThread(void *arg);
