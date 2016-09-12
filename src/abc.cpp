@@ -22,34 +22,30 @@ using namespace std;
 const int ID_WINDOW = wxNewId();
 const int ID_BG = wxNewId();
 
-wxString MainWindow::cur_sound(wxEmptyString);
+wxString ABCWindow::cur_sound(wxEmptyString);
 
-MainWindow::MainWindow(const wxString& title)
+ABCWindow::ABCWindow(const wxString& title)
 : wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
 wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     // Get the executable's directory
-    exedir = new wxString(wxStandardPaths::Get().GetExecutablePath());
-    wxFileName filename(*exedir);
+    basepath = new wxString(wxStandardPaths::Get().GetExecutablePath());
+    wxFileName filename(*basepath);
     // Get the executable's filename
     wxString argv0 = filename.GetFullName();
     // Subtract the filename from the the full pathname
     unsigned int x;
     for (x = 0; x < argv0.Length(); x++) {
-        exedir->RemoveLast();
+        basepath->RemoveLast();
     }
 
     // FIXME: Currently uses current working directory to locate data
     //        rather than looking in the installed directory.
 #ifdef ABCDIR
-    installdir = _T(ABCDIR);
-    installdir.Append(_T("/"));
+    datadir = _T(ABCDIR);
+    datadir.Append(_T("/"));
 #else
-    installdir = exedir;
+    datadir = basepath;
 #endif
-
-    // Audio
-    oggmix = NULL;
-    PlaySound("./test.ogg");
 
     // Add support for images
     wxImage::AddHandler(new wxPNGHandler);
@@ -100,9 +96,9 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     menu->SetBackgroundColour(_T("#84aee6"));
     menu->Realize();
 
-    Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::SetMode), 0, this);
-    Connect(ID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnHelp), 0, this);
-    Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnAbout), 0, this);
+    Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(ABCWindow::SetMode), 0, this);
+    Connect(ID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(ABCWindow::OnHelp), 0, this);
+    Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(ABCWindow::OnAbout), 0, this);
 
     // Status bar
     status = new wxStatusBar(this, -1);
@@ -120,13 +116,13 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
     label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
-    bg->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKey), NULL, this);
-    bg->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
+    bg->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(ABCWindow::OnKey), NULL, this);
+    bg->Connect(wxEVT_KEY_UP, wxKeyEventHandler(ABCWindow::OnKeyUp), NULL, this);
 
     // Catch events passed by threads
-    //Connect(wxID_ANY, ID_TAB, wxCommandEventHandler(MainWindow::OnTab), 0, this);
-    Connect(wxID_ANY, ID_KEY, wxCommandEventHandler(MainWindow::ChangeLetter), 0, this);
-    Connect(wxID_ANY, ID_OTHER, wxCommandEventHandler(MainWindow::EnableAll), 0, this);
+    //Connect(wxID_ANY, ID_TAB, wxCommandEventHandler(ABCWindow::OnTab), 0, this);
+    Connect(wxID_ANY, ID_KEY, wxCommandEventHandler(ABCWindow::ChangeLetter), 0, this);
+    Connect(wxID_ANY, ID_OTHER, wxCommandEventHandler(ABCWindow::EnableAll), 0, this);
 
     // Initialize static current sound variable
     cur_sound = wxEmptyString;
@@ -287,20 +283,23 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     SetMode(start);
 
     // Redirect focus to main panel
-    Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
+    Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(ABCWindow::OnFrameFocus), 0, this);
 
     Center(); // Center the window on the screen
+
+
+    // Initialize empty sound mix
+    oggmix = NULL;
 }
 
 
 // DESTRUCTOR
-MainWindow::~MainWindow() {
-	// SDL cleanup
-	Mix_FreeMusic(oggmix);
-	Mix_CloseAudio();
+ABCWindow::~ABCWindow() {
+	// SDL_mixer cleanup
+	StopSound();
 }
 
-void MainWindow::SetMode(wxCommandEvent& event) {
+void ABCWindow::SetMode(wxCommandEvent& event) {
     int id = event.GetId();
 
     if (id == wxID_EXIT) {
@@ -343,7 +342,7 @@ void MainWindow::SetMode(wxCommandEvent& event) {
     bg->Layout();
 }
 
-void MainWindow::OnKey(wxKeyEvent& event) {
+void ABCWindow::OnKey(wxKeyEvent& event) {
     if (!isplaying && cankey && canspace) {
         // Get key that was pressed
         int keycode = event.GetKeyCode();
@@ -391,7 +390,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                 if (menu->GetToolState(ID_ABC)) {
                     if (key == cur_letter) {
                         isplaying = true;
-                        MainWindow::GoABC();
+                        ABCWindow::GoABC();
                     } else if (key == WXK_BACK) {
                         // Move back one letter
                         for (int x = 26; x > 0; x -= 1) {
@@ -405,7 +404,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                         }
                     }
                 } else {
-                    MainWindow::GoOther();
+                    ABCWindow::GoOther();
                 }
             } else {
                 if (keycode == WXK_BACK) {
@@ -424,7 +423,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
     event.Skip();
 }
 
-void MainWindow::OnTab()//wxCommandEvent& event)
+void ABCWindow::OnTab()//wxCommandEvent& event)
 {
     /* Changes game modes via the "Tab" key */
     int tools[] = {ID_ABC, ID_FOOD, ID_ANIMALS, ID_MUSIC, ID_TOYS};
@@ -445,7 +444,7 @@ void MainWindow::OnTab()//wxCommandEvent& event)
     //cantab = true;
 }
 
-void MainWindow::OnKeyUp(wxKeyEvent& event) {
+void ABCWindow::OnKeyUp(wxKeyEvent& event) {
     // Enables tabbing after the "tab" key is released to prevent cycling too quickly through modes
     int keycode = event.GetKeyCode();
     if (keycode == WXK_TAB) cantab = true;
@@ -453,12 +452,12 @@ void MainWindow::OnKeyUp(wxKeyEvent& event) {
     else cankey = true;
 }
 
-void MainWindow::GoABC() {
+void ABCWindow::GoABC() {
     // Start the thread to play a sound
     rc = pthread_create(&thread1, NULL, KeyThread, this);
 }
 
-void MainWindow::GoOther() {
+void ABCWindow::GoOther() {
     for (int a = 0; a < 26; a += 1) {
         if (letters[a] == key) {
             isplaying = true;
@@ -490,13 +489,13 @@ void MainWindow::GoOther() {
     }
 }
 
-void MainWindow::EnableAll(wxCommandEvent& event) {
+void ABCWindow::EnableAll(wxCommandEvent& event) {
     //canspace = true;
     cantab = true;
     isplaying = false;
 }
 
-void MainWindow::ChangeLetter(wxCommandEvent& event) {
+void ABCWindow::ChangeLetter(wxCommandEvent& event) {
     if (key == cur_letter) {
         if (cur_letter != 'Z') {
             for (int a = 0; a < 26; a += 1) {
@@ -521,7 +520,7 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
 }
 
 /*
-void MainWindow::PlaySound() {
+void ABCWindow::PlaySound() {
     wxString name = label->GetLabel();
     wxString sounds[2][131] = {
         {
@@ -702,26 +701,55 @@ void MainWindow::PlaySound() {
     }
 }*/
 
-const int MainWindow::PlaySound(const char* sound_path) {
-	oggmix = Mix_LoadMUS(sound_path);
+const int ABCWindow::LoadSound(const std::string sound_name) {
+	const std::string sound = sound_name + ".ogg";
 
+	std::cout << "SDL_mixer: Loading sound '" << sound << "' into mix chunk ..." << endl;
+	oggmix = Mix_LoadWAV(sound.c_str());
+
+	if (! oggmix) {
+		std::cout << "SDL_mixer ERROR: Could not load oggmix chunk" << endl;
+		return -1;
+	}
+
+	return 0;
+}
+
+const int ABCWindow::PlaySound() {
 	if (oggmix == NULL) {
+		cout << "ERROR: mix chunk contains no data" << endl;
 		return -1;
 	}
 
-	if (Mix_PlayMusic(oggmix, -1) == -1) {
+	cout << "Playing mix chunk ..." << endl;
+	if (Mix_PlayChannel(-1, oggmix, 0) == -1) {
+		cout << "ERROR: Could not play mix chunk" << endl;
 		return -1;
 	}
 
-	// Free up the audio buffer
-	Mix_FreeMusic(oggmix);
+	return 0;
+}
+
+const int ABCWindow::StopSound() {
+	std::cout << "Freeing mix chunk ..." << std::endl;
+	if (oggmix) {
+		Mix_FreeChunk(oggmix);
+		oggmix = NULL;
+	} else {
+		std::cout << "WARNING: Attemp to free mix chunk with no data" << std::endl;
+	}
+
+	if (oggmix) {
+		std::cout << "ERROR: Could not free mix chunk" << std::endl;
+		return -1;
+	}
 
 	return 0;
 }
 
 // Threading
 
-/*void *MainWindow::TabThread(void *arg)
+/*void *ABCWindow::TabThread(void *arg)
 {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj)
@@ -732,7 +760,7 @@ const int MainWindow::PlaySound(const char* sound_path) {
     pthread_exit(NULL);
 }*/
 
-void *MainWindow::SpaceThread(void *arg) {
+void *ABCWindow::SpaceThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
         wxSound sound(cur_sound);
@@ -743,7 +771,7 @@ void *MainWindow::SpaceThread(void *arg) {
     pthread_exit(NULL);
 }
 
-void *MainWindow::KeyThread(void *arg) {
+void *ABCWindow::KeyThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
         wxSound sound(cur_sound);
@@ -756,7 +784,7 @@ void *MainWindow::KeyThread(void *arg) {
 
 // Thread used for modes other than ABC, and when space is pressed, to play sound
 
-void *MainWindow::OtherThread(void *arg) {
+void *ABCWindow::OtherThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
         wxSound sound(cur_sound);
@@ -769,7 +797,7 @@ void *MainWindow::OtherThread(void *arg) {
 
 // Help and About dialogs
 
-void MainWindow::OnHelp(wxMenuEvent& event) {
+void ABCWindow::OnHelp(wxMenuEvent& event) {
     wxDialog *help = new wxDialog(this, -1, _T("Help"), wxDefaultPosition,
     		wxDefaultSize, wxDEFAULT_DIALOG_STYLE);
 
@@ -816,7 +844,7 @@ void MainWindow::OnHelp(wxMenuEvent& event) {
     help->CenterOnParent();
 }
 
-void MainWindow::OnAbout(wxMenuEvent& event) {
+void ABCWindow::OnAbout(wxMenuEvent& event) {
     // About Dialog
     GenericAbout *about = new GenericAbout(this, -1);
     about->SetIcon(wxIcon(ICON1));
@@ -1013,6 +1041,6 @@ specific"));
     // CenterOnParent is called in the constructor
 }
 
-void MainWindow::OnFrameFocus(wxFocusEvent& event) {
+void ABCWindow::OnFrameFocus(wxFocusEvent& event) {
     bg->SetFocus();
 }
