@@ -1,3 +1,6 @@
+#ifndef MYABCS_ABC_H
+#define MYABCS_ABC_H
+
 #include <wx/wx.h>
 #include <wx/sound.h>
 #include <wx/aboutdlg.h>
@@ -82,3 +85,5 @@ class MainWindow : public wxFrame {
     pthread_t thread2;
     int rc;
 };
+
+#endif /* MYABCS_ABC_H */

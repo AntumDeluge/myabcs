@@ -1,3 +1,6 @@
+#ifndef MYABCS_GNRCABT_H
+#define MYABCS_GNRCABT_H
+
 #include <wx/wx.h>
 #include <wx/notebook.h>
 #include <wx/listctrl.h>
@@ -74,3 +77,4 @@ class gaListBox : public wxListBox
     void VoidSelect(wxMouseEvent& event);
 };
 
+#endif /* MYABCS_GNRCABT_H */
