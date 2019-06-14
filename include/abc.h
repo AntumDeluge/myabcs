@@ -3,8 +3,6 @@
 
 #include <wx/wx.h>
 #include <wx/sound.h>
-#include <wx/aboutdlg.h>
-#include <wx/richtext/richtextctrl.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <pthread.h>
