@@ -93,7 +93,7 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     bg = new wxPanel(this, ID_BG, wxDefaultPosition, wxDefaultSize, 0 | wxWANTS_CHARS);
     bg->SetFocus();
 
-    image = new wxStaticBitmap(bg, -1, wxNullBitmap);
+    image = new ImageDisplay(bg, -1, wxNullBitmap);
     letter = new wxStaticText(bg, -1, _T(""), wxDefaultPosition, wxDefaultSize,
             wxALIGN_CENTRE);
     label = new wxStaticText(bg, -1, _T(""));
@@ -284,28 +284,28 @@ void MainWindow::SetMode(wxCommandEvent& event) {
 
         if (id == ID_ABC) {
             SetTitle(_T("Find the letter on the keyboard"));
-            image->SetBitmap(wxBitmap(wxImage(images[0])));
+            image->SetImageG(images[0]);
             letter->SetLabel(letters[0]);
             label->SetLabel(labels[0]);
         } else {
             if (id == ID_ANIMALS) {
                 SetTitle(_T("Press a Key to See an Animal"));
-                image->SetBitmap(wxBitmap(wxImage(TURTLE)));
+                image->SetImageG(TURTLE);
                 letter->SetLabel(_T("Animals"));
                 label->SetLabel(_T(""));
             } else if (id == ID_MUSIC) {
                 SetTitle(_T("Press a Key to See an Instrument"));
-                image->SetBitmap(wxBitmap(wxImage(GUITAR)));
+                image->SetImageG(GUITAR);
                 letter->SetLabel(_T("Music"));
                 label->SetLabel(_T(""));
             } else if (id == ID_FOOD) {
                 SetTitle(_T("Press a Key to See a Food"));
-                image->SetBitmap(wxBitmap(wxImage(HOT_DOG)));
+                image->SetImageG(HOT_DOG);
                 letter->SetLabel(_T("Food"));
                 label->SetLabel(_T(""));
             } else if (id == ID_TOYS) {
                 SetTitle(_T("Press a Key to See a Toy"));
-                image->SetBitmap(wxBitmap(wxImage(WAGON)));
+                image->SetImageG(WAGON);
                 letter->SetLabel(_T("Toys"));
                 label->SetLabel(_T(""));
             }
@@ -339,7 +339,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
             if (gameend) {
                 gameend = false;
                 cheer->Stop();
-                image->SetBitmap(wxBitmap(wxImage(images[0])));
+                image->SetImageG(images[0]);
                 letter->SetLabel(letters[0]);
                 label->SetLabel(labels[0]);
 
@@ -369,7 +369,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                         // Move back one letter
                         for (int x = 26; x > 0; x -= 1) {
                             if (cur_letter == letters[x]) {
-                                image->SetBitmap(wxBitmap(wxImage(images[x - 1])));
+                            	image->SetImageG(images[x-1]);
                                 letter->SetLabel(letters[x - 1]);
                                 label->SetLabel(labels[x - 1]);
                                 bg->Refresh();
@@ -385,7 +385,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                     // Go back to letter "Z"
                     gameend = false;
                     cheer->Stop();
-                    image->SetBitmap(wxBitmap(wxImage(images[25])));
+                    image->SetImageG(images[25]);
                     letter->SetLabel(letters[25]);
                     label->SetLabel(labels[25]);
                     bg->Refresh();
@@ -439,19 +439,19 @@ void MainWindow::GoOther() {
             // Don't refresh images if current letter is pressed
             if (key != cur_letter) {
                 if (menu->GetToolState(ID_FOOD)) {
-                    image->SetBitmap(wxBitmap(wxImage(foods[0][a])));
+                	image->SetImageG(foods[0][a]);
                     letter->SetLabel(letters[a]);
                     label->SetLabel(foods[1][a]);
                 } else if (menu->GetToolState(ID_ANIMALS)) {
-                    image->SetBitmap(wxBitmap(wxImage(animals[0][a])));
+                	image->SetImageG(animals[0][a]);
                     letter->SetLabel(letters[a]);
                     label->SetLabel(animals[1][a]);
                 } else if (menu->GetToolState(ID_MUSIC)) {
-                    image->SetBitmap(wxBitmap(wxImage(musics[0][a])));
+                	image->SetImageG(musics[0][a]);
                     letter->SetLabel(letters[a]);
                     label->SetLabel(musics[1][a]);
                 } else if (menu->GetToolState(ID_TOYS)) {
-                    image->SetBitmap(wxBitmap(wxImage(toys[0][a])));
+                	image->SetImageG(toys[0][a]);
                     letter->SetLabel(letters[a]);
                     label->SetLabel(toys[1][a]);
                 }
@@ -474,14 +474,14 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
         if (cur_letter != 'Z') {
             for (int a = 0; a < 26; a += 1) {
                 if (letters[a] == key) {
-                    image->SetBitmap(wxBitmap(wxImage(images[a + 1])));
+                	image->SetImageG(images[a+1]);
                     letter->SetLabel(letters[a + 1]);
                     label->SetLabel(labels[a + 1]);
                 }
             }
         } else if (cur_letter == 'Z') {
             gameend = true;
-            image->SetBitmap(wxBitmap(wxImage(RIBBON)));
+            image->SetImageG(RIBBON);
             letter->SetLabel(_T("CONGRATS!"));
             label->SetLabel(_T("Press \"ENTER\" to Play Again"));
             cheer->Play();

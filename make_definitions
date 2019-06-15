@@ -33,7 +33,7 @@ OBJ_SUF = .o
 
 ### Linking ###
 
-LIBS =
+LIBS = -lwxsvg
 WXLIBS = wx-config --libs std,richtext
 SDLLIBS = sld-config --libs
 LINKEROPTS = -Wl,--strip-all
@@ -57,10 +57,15 @@ GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
 GNRCABT_D = $(GNRCABT_H)
 
+IMGDISPLAY_H = include/imgdisplay.h
+IMGDISPLAY_C = src/imgdisplay.cpp
+IMGDISPLAY_O = imgdisplay.o
+IMGDISPLAY_D = $(IMGDISPLAY_H)
+
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(RES_H) $(GNRCABT_D)
+ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
@@ -68,7 +73,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(ABC_D)
 
 OBJECTS = \
-    $(GNRCABT_O) $(ABC_O) $(MAIN_O)
+    $(GNRCABT_O) $(IMGDISPLAY_O) $(ABC_O) $(MAIN_O)
 
 F_DATA = \
     changelog.txt license-MIT.txt myabcs.png

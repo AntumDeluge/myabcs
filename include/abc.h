@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include "res.h"
 #include "gnrcabt.h"
+#include "imgdisplay.h"
 #include <fstream>
 using namespace std;
 
@@ -50,7 +51,7 @@ class MainWindow : public wxFrame {
     char cur_letter;
     static wxString cur_sound;
     wxString letter_sounds[2][26]; // wav sound for each letter
-    wxStaticBitmap *image;
+    ImageDisplay *image;
     wxString images[26];
     wxStaticText *letter;
     wxString letters[26];
