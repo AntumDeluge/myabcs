@@ -1,7 +1,7 @@
 #include "main.h"
 #include "abc.h"
 
-IMPLEMENT_APP(App)
+wxIMPLEMENT_APP(App);
 
 bool App::OnInit()
 {
