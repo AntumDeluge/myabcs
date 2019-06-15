@@ -778,7 +778,7 @@ void MainWindow::OnAbout(wxMenuEvent& event) {
     about->SetImage(_T("myabcs.png"));
     about->SetName(_T("MyABCs"));
     about->SetVersion(_T("0.4.5"));
-    about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2016"));
+    about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
     about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
 
     about->AddCredit(_T("Jordan Irwin"), CREDIT_DEVELOPER);
