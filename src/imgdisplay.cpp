@@ -10,7 +10,10 @@ wxStaticBitmap(parent, id, label) {
 
 void ImageDisplay::SetImageG(wxString filename) {
 	wxImage image;
-	wxString svg_filename = filename.SubString(0, filename.Len()-4).Append(_T("svg"));
+	wxString svg_filename = filename;
+	if (!svg_filename.EndsWith(_T(".svg"))) {
+		svg_filename = svg_filename.SubString(0, svg_filename.Len()-4).Append(_T("svg"));
+	}
 
 	// use SVG image if found
 	if (wxFileExists(svg_filename)) {
