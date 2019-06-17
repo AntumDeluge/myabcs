@@ -1,3 +1,4 @@
+#include <wx/filefn.h>
 #include <wxSVG/SVGDocument.h>
 
 #include "imgdisplay.h"
@@ -9,11 +10,13 @@ wxStaticBitmap(parent, id, label) {
 
 void ImageDisplay::SetImageG(wxString filename) {
 	wxImage image;
+	wxString svg_filename = filename.SubString(0, filename.Len()-4).Append(_T("svg"));
 
-	if (filename.EndsWith(_T(".svg"))) {
+	// use SVG image if found
+	if (wxFileExists(svg_filename)) {
 		// load SVG data
 		wxSVGDocument* svg = new wxSVGDocument();
-		svg->Load(filename);
+		svg->Load(svg_filename);
 		image = svg->Render(290, 290, NULL, true, true, NULL);
 	} else {
 		image = wxImage(filename);
