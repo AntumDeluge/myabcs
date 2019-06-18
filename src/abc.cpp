@@ -898,7 +898,7 @@ specific"));
     about->AddArtist(_T("Pig(sound)"), _T("Robinhood76"), _T("Sampling Plus 1.0"));
     about->AddArtist(_T("Quail"), _T("ArtFavor"), _T("Public Domain"));
     about->AddArtist(_T("Quail(sound)"));
-    about->AddArtist(_T("Quarter"));
+    about->AddArtist(_T("Quarter"), _T("hosted by wpclipart.com"), _T("Public Domain"));
     about->AddArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain"));
     about->AddArtist(_T("Quiche"), wxEmptyString, _T("Public Domain"));
     about->AddArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain"));

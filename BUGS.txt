@@ -19,7 +19,6 @@ Known BUGS:
     - udon
     - vegetables
   - misc/
-    - quarter
     - x_ray
   - music/
     - yangqin
