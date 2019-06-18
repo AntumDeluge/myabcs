@@ -1,4 +1,5 @@
 #include <wx/filefn.h>
+#include <wx/log.h>
 #include <wxSVG/SVGDocument.h>
 
 #include "imgdisplay.h"
@@ -20,9 +21,18 @@ void ImageDisplay::SetImageG(wxString filename) {
 		// load SVG data
 		wxSVGDocument* svg = new wxSVGDocument();
 		svg->Load(svg_filename);
+
+		// FIXME: can't check if image displayed properly
+		//wxLogGeneric(wxLOG_Info, wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
+
 		image = svg->Render(290, 290, NULL, true, true, NULL);
 	} else {
-		image = wxImage(filename);
+		if (!wxFileExists(filename)) {
+			wxLogGeneric(wxLOG_Info, wxString("ERROR: Could not load image: ").Append(filename));
+			return;
+		} else {
+			image = wxImage(filename);
+		}
 	}
 
 	wxStaticBitmap::SetBitmap(wxBitmap(image));

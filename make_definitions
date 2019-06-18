@@ -51,6 +51,7 @@ DEFINES= \
 ### Files & headers ###
 
 RES_H = include/res.h
+LOG_H = include/log.h
 
 GNRCABT_H = include/gnrcabt.h
 GNRCABT_C = src/gnrcabt.cpp
@@ -60,7 +61,7 @@ GNRCABT_D = $(GNRCABT_H)
 IMGDISPLAY_H = include/imgdisplay.h
 IMGDISPLAY_C = src/imgdisplay.cpp
 IMGDISPLAY_O = imgdisplay.o
-IMGDISPLAY_D = $(IMGDISPLAY_H)
+IMGDISPLAY_D = $(IMGDISPLAY_H) $(LOG_H)
 
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
@@ -70,7 +71,7 @@ ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H)
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
 MAIN_O = main.o
-MAIN_D = $(MAIN_H) $(ABC_D)
+MAIN_D = $(MAIN_H) $(LOG_H) $(ABC_D)
 
 OBJECTS = \
     $(GNRCABT_O) $(IMGDISPLAY_O) $(ABC_O) $(MAIN_O)
