@@ -17,6 +17,7 @@ Non-priority:
 - Use sound library to replace wxSound & convert audio to OGG
 - Use wxThread class instead of pthreads
 - Fix app icons on Windows
+- Fix/Add UI manifest on Windows
 - Vectorize quarter image
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
