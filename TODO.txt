@@ -1,4 +1,23 @@
-Planned Tasks:
+Priority:
+- Replace PNG images with SVG
+- Resize SVG images
+- Edit wheels white BG in bicycle SVG
+- Change radishes SVG (image is of beets)
+- Change strawberry SVG
+- Fix semi-transparent shading in SVG:
+  - electric guitar
+  - necklace
+  - tomato
+- Report wxSVG render bug when objects grouped multiple times
+- Report wxSVG object order rendering bug (cat.svg)
+- Add option to show/hide debug log
+- Add debugging symbols
+
+Non-priority:
 - Use sound library to replace wxSound & convert audio to OGG
 - Use wxThread class instead of pthreads
-- Replace PNG images with SVG
+- Fix app icons on Windows
+- Vectorize quarter image
+- PNG & SVG hats are different colors
+- PNG & SVG jars are different colors
+- cache images at startup
