@@ -2,7 +2,6 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -10,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="128.00002"
-   height="128.00002"
-   viewBox="0 0 33.866671 33.866669"
+   width="128.00031"
+   height="128.00031"
+   viewBox="0 0 33.866747 33.866746"
    version="1.1"
    id="svg838"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="star-fixed.svg">
+   sodipodi:docname="star.svg">
   <defs
      id="defs832" />
   <sodipodi:namedview
@@ -26,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="2.2288504"
-     inkscape:cy="48.628843"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="157.94708"
+     inkscape:cy="78.924578"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -91,22 +90,22 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(211.94568,1.1476165)">
+     transform="translate(213.50703,3.125111)">
     <g
-       id="g1411"
-       transform="matrix(0.39367553,0,0,0.39367553,-117.93396,9.5712695)">
-      <polygon
-         transform="matrix(0.26458333,0,0,0.26458333,-236.82543,-27.227784)"
+       id="g821"
+       transform="matrix(0.95370466,-0.30061013,0.30061013,0.95370466,-13.772611,-58.718297)">
+      <path
+         id="polygon4"
+         d="M 2.808,264.179 54.337,163.873 0.92,64.559 112.241,82.57 190.187,1.078 l 17.271,111.438 101.589,48.948 -100.646,50.862 -15.16,111.744 -79.473,-80.004 z"
          style="fill:#fede58;stroke:#000000"
-         i:knockout="Off"
-         points="193.241,324.07 113.768,244.066 2.808,264.179 54.337,163.873 0.92,64.559 112.241,82.57 190.187,1.078 207.458,112.516 309.047,161.464 208.401,212.326 "
-         id="polygon4" />
-      <polygon
-         transform="matrix(0.26458333,0,0,0.26458333,-236.82543,-27.227784)"
+         transform="matrix(0.10415998,0,0,0.10415998,-211.16634,-1.1476428)"
+         inkscape:connector-curvature="0" />
+      <path
+         id="polygon6"
+         d="m 32.206,243.998 40.087,-78.034 -41.556,-77.261 86.601,14.012 60.639,-63.397 13.436,86.693 79.031,38.08 -78.298,39.567 -11.794,86.931 -61.826,-62.239 z"
          style="fill:#ffff3e;stroke:#000000"
-         i:knockout="Off"
-         points="180.352,290.589 118.526,228.35 32.206,243.998 72.293,165.964 30.737,88.703 117.338,102.715 177.977,39.318 191.413,126.011 270.444,164.091 192.146,203.658 "
-         id="polygon6" />
+         transform="matrix(0.10415998,0,0,0.10415998,-211.16634,-1.1476428)"
+         inkscape:connector-curvature="0" />
     </g>
   </g>
 </svg>
