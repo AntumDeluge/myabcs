@@ -949,7 +949,7 @@ specific"));
     //about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
     about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
     about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0"));
-    about->AddArtist(_T("Yak"), _T("karthikeyan"), _T("Public Domain"));
+    about->AddArtist(_T("Yak"), _T("Jordan Irwin"), _T("Public Domain"));
     about->AddArtist(_T("Yam"), _T("johnny_automatic"), _T("Public Domain"));
     about->AddArtist(_T("Yangqin"), _T("koika/Jordan Irwin"), _T("Attribution-ShareAlike 3.0"));
     about->AddArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
