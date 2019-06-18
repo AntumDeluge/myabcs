@@ -35,7 +35,7 @@ OBJ_SUF = .o
 
 LIBS = -lwxsvg
 WXLIBS = wx-config --libs std,richtext
-SDLLIBS = sld-config --libs
+SDLLIBS = sdl-config --libs
 LINKEROPTS = -Wl,--strip-all
 
 ### Installation ###
