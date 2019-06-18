@@ -29,7 +29,9 @@ void ImageDisplay::SetImageG(wxString filename) {
 	} else {
 		if (!wxFileExists(filename)) {
 			wxLogGeneric(wxLOG_Info, wxString("ERROR: Could not load image: ").Append(filename));
-			return;
+
+			// load failsafe image
+			image = wxImage("pic/failsafe.png");
 		} else {
 			image = wxImage(filename);
 		}
