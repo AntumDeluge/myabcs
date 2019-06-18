@@ -1,2 +1,30 @@
 Known BUGS:
-- wxSound interface not working with wxGtk
+- SVG render errors:
+  - apple (shading artifacts?)
+  - cat (missing eye)
+  - clock ("shine" out of place)
+  - earth (colors missing)
+  - magnifying glass (transparency)
+  - onion (strange shading artifacts)
+  - pig (horizontal line)
+- Missing SVG
+  - ribbon
+  - animals/
+    - iquana
+    - owl
+    - rooster
+    - yak
+  - food/
+    - quiche
+    - udon
+    - vegetables
+  - misc/
+    - quarter
+    - x_ray
+  - music/
+    - yangqin
+Linux (wxGTK):
+  - wxSound interface not working with wxGtk (should be fixed with update to wx3.0)
+- Windows:
+  - Pressing letter doesn't always work first time after regaining focus
+  - Process does not end when closed from taskbar while log window is open
