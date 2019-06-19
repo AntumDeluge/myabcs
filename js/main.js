@@ -25,14 +25,19 @@ setAppInfo = function() {
 addMenuItem = function(id, url, text) {
 	var menuCell, menuText;
 
-	menuCell = document.getElementById(id);
+	var tableMenu = document.getElementsByClassName('menu')[0].querySelector('tr');
+
+	menuCell = document.createElement('td');
 	menuCell.setAttribute('class', 'menucell');
+	menuCell.setAttribute('id', id);
 	menuText = document.createElement('h5');
 	menuCell.appendChild(menuText);
 	menuLink = document.createElement('a');
 	menuLink.setAttribute('href', url);
 	menuLink.innerHTML = text;
 	menuText.appendChild(menuLink);
+
+	tableMenu.appendChild(menuCell);
 }
 
 setNewsFeed = function() {
