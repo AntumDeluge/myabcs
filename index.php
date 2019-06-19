@@ -21,7 +21,7 @@ $NEWSFEED = '<table align="center">
         - <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>
         - <a href="https://sourceforge.net/p/wxsvg">wxSvg</a> will be used for rendering images.<br>
         - Will be ported to <a href="http://wxwidgets.org/">wxWidgets 3.x</a>.<br>
-        - More universal build method.
+        - <a href="https://cmake.org/">CMake</a> will be used for building.
       </h5>
     </td>
   </tr>
