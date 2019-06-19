@@ -38,9 +38,13 @@ print("<html>
 <div style=\"text-align:center\"><img border=\"0\" src=\"$ICON\" /></div>
 <h2 style=\"text-align:center\">$NAME $VER_MAJ.$VER_MID.$VER_MIN</h2>
 <h5 style=\"text-align:center\">By $AUTHOR</h5>
-<h5 style=\"text-align:center\"><a href=\"$DOWNLOADS\">Download Page</a></h5>
-<h5 style=\"text-align:center\"><a href=\"$PROJECT\">Project Page</a></h5>
-<h5 style=\"text-align:center\"><a href=\"$AUTHOR_HOME/about\">About Author</a></h5>
+<table style=\"margin-left:auto; margin-right:auto;\" cellpadding=\"10\">
+  <tr>
+    <td><h5 style=\"text-align:center\"><a href=\"$PROJECT\">Project Page</a></h5></td>
+    <td><h5 style=\"text-align:center\"><a href=\"$DOWNLOADS\">Download Page</a></h5></td>
+    <td><h5 style=\"text-align:center\"><a href=\"$AUTHOR_HOME/about\">About Author</a></h5></td>
+  </tr>
+</table>
 $NEWSFEED
 
 </body>
