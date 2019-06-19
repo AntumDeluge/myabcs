@@ -12,6 +12,7 @@ Priority:
 - Report wxSVG object order rendering bug (cat.svg)
 - Add option to show/hide debug log
 - Add debugging symbols
+- Disable log window if not debug build
 
 Non-priority:
 - Use sound library to replace wxSound & convert audio to OGG
