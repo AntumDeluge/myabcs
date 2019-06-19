@@ -111,7 +111,7 @@
 #define VIOLIN _T("pic/music/violin.png")
 #define WHISTLE _T("pic/music/whistle.png")
 #define XUN _T("pic/music/xun.png")
-#define YANGQIN _T("pic/music/yangqin.png") // ???
+#define YANGQIN _T("pic/music/yangqin.png") // CC BY-SA
 #define ZURNA _T("pic/music/zurna.png")
 
 // Toys
