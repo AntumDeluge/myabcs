@@ -68,7 +68,7 @@
 #define MOUSE _T("pic/animals/mouse.png")
 #define NEWT _T("pic/animals/newt.png")
 #define NIGHTINGALE _T("pic/animals/nightingale.png")
-#define ORCA _T("pic/animals/orga.png")
+#define ORCA _T("pic/animals/orca.png") // UNUSED
 #define OWL _T("pic/animals/owl.png")
 #define PIG _T("pic/animals/pig.png")
 #define QUAIL _T("pic/animals/quail.png")
