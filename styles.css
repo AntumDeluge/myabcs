@@ -22,3 +22,8 @@ td.menucell {
 h2.appinfo {
 	text-align: center;
 }
+
+h5.author {
+	text-align: center;
+	font-size: 12pt;
+}
