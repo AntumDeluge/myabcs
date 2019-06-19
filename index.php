@@ -19,6 +19,7 @@ $NEWSFEED = '<table align="center">
         Upcoming Changes:<br>
         - Changing to a <a href="https://opensource.org/licenses/MIT">MIT license</a>.<br>
         - <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>
+        - <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">Scalable Vector Graphics (SVG)</a> images will be used as default over <a href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>.<br>
         - <a href="https://sourceforge.net/p/wxsvg">wxSvg</a> will be used for rendering images.<br>
         - Will be updated for compatibility with <a href="http://wxwidgets.org/">wxWidgets</a> 3.x (support for 2.x will be dropped).<br>
         - <a href="https://cmake.org/">CMake</a> will be used for building.
