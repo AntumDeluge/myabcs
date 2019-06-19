@@ -26,6 +26,7 @@ addMenuItem = function(id, url, text) {
 	var menuCell, menuText;
 
 	menuCell = document.getElementById(id);
+	menuCell.setAttribute('class', 'menucell');
 	menuText = document.createElement('h5');
 	menuCell.appendChild(menuText);
 	menuLink = document.createElement('a');
