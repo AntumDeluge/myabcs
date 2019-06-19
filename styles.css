@@ -17,10 +17,12 @@ table.newsfeed {
 td.menucell {
 	padding: 10px;
 	text-align: center;
+	font-size: 14pt;
 }
 
 h2.appinfo {
 	text-align: center;
+	font-size: 30pt;
 }
 
 h5.author {

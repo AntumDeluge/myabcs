@@ -40,6 +40,7 @@ setNewsFeed = function() {
 	var textArea = newsTable.querySelector('td');
 
 	var changesHeader = document.createElement('h5');
+	changesHeader.setAttribute('style', 'font-size:12pt;');
 	changesHeader.innerHTML = 'Upcoming Changes:<br>'.concat(changesList);
 
 	textArea.appendChild(changesHeader);
