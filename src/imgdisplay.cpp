@@ -20,7 +20,7 @@ void ImageDisplay::SetImageG(wxString filename) {
 	if (wxFileExists(svg_filename)) {
 		// load SVG data
 		wxSVGDocument* svg = new wxSVGDocument();
-		svg->Load(svg_filename);
+		bool loaded = svg->Load(svg_filename);
 
 		// FIXME: can't check if image displayed properly
 		//logMessage(wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
