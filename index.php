@@ -17,7 +17,7 @@ $NEWSFEED = '<table align="center">
     <td>
       <h5>
         Upcoming Changes:<br>
-        - Changing to a BSD-style license.<br>
+        - Changing to a <a href="https://opensource.org/licenses/MIT">MIT license</a>.<br>
         - <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>
         - <a href="https://sourceforge.net/p/wxsvg">wxSvg</a> will be used for rendering images.<br>
         - Will be ported to <a href="http://wxwidgets.org/">wxWidgets 3.x</a>.<br>
