@@ -5,9 +5,9 @@ var VER_MIN = '4';
 var VER_REL = '4';
 var FAVICON = 'data/favicon.png';
 var BGIMAGE = 'data/airplane-mask.png';
-var PROJECT = 'https://sourceforge.net/p/myabcs';
-var DOWNLOADS = PROJECT.concat("/files");
-var GITHUB = 'https://github.com/AntumDeluge/myabcs';
+var PROJ_SF = 'https://sourceforge.net/p/myabcs';
+var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
+var DOWNLOADS = PROJ_SF.concat("/files");
 var AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
 var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/changelog.txt';
 
@@ -66,9 +66,9 @@ window.onload = function() {
 
 	setAppInfo();
 
-	addMenuItem('menu.project', PROJECT, 'Project Page');
+	addMenuItem('menu.project', PROJ_SF, 'SourceForge Project');
+	addMenuItem('menu.github', PROJ_GH, 'GitHub Project');
 	addMenuItem('menu.download', DOWNLOADS, 'Download Page');
-	addMenuItem('menu.github', GITHUB, 'GitHub Page');
 	addMenuItem('menu.author', AUTHOR_HOME.concat('/about'), 'About Author');
 	addMenuItem('menu.changes', CHANGELOG, 'ChangeLog');
 
