@@ -1,1 +1,1 @@
-- Switch from PHP to HTML.
+- Use GitHub API to display current version.
