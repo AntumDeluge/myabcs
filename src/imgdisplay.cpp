@@ -33,6 +33,9 @@ void ImageDisplay::SetImageG(wxString filename) {
 			// load failsafe image
 			image = wxImage("pic/failsafe.png");
 		} else {
+			// DEBUG:
+			logMessage(wxString("WARNING: Using PNG image: ").Append(filename));
+
 			image = wxImage(filename);
 		}
 	}
