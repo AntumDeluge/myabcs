@@ -10,6 +10,7 @@ $AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
 $ICON = 'data/icon.png';
 $BGIMAGE = 'data/airplane-mask.png';
 $FAVICON = 'data/favicon.png';
+$GITHUB = 'https://github.com/AntumDeluge/myabcs';
 $NEWSFEED = '<table align="center">
   <tr>
     <td>
@@ -42,6 +43,7 @@ print("<html>
   <tr>
     <td><h5 style=\"text-align:center\"><a href=\"$PROJECT\">Project Page</a></h5></td>
     <td><h5 style=\"text-align:center\"><a href=\"$DOWNLOADS\">Download Page</a></h5></td>
+    <td><h5 style=\"text-align:center\"><a href=\"$GITHUB\">GitHub Page</a></h5></td>
     <td><h5 style=\"text-align:center\"><a href=\"$AUTHOR_HOME/about\">About Author</a></h5></td>
   </tr>
 </table>
