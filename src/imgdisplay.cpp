@@ -11,17 +11,24 @@ wxStaticBitmap(parent, id, label) {
 
 void ImageDisplay::SetImageG(wxString filename) {
 	wxImage image;
-	wxString svg_filename = filename;
+	wxString png_filename, svg_filename;
+
+	png_filename = filename;
+	if (!png_filename.EndsWith(_T(".png"))) {
+		png_filename = png_filename.Append(".png");
+	}
+
+	svg_filename = png_filename;
 	if (!svg_filename.EndsWith(_T(".svg"))) {
 		svg_filename = svg_filename.SubString(0, svg_filename.Len()-4).Append(_T("svg"));
 	}
 
 	// use PNG image by default
-	if (wxFileExists(filename)) {
+	if (wxFileExists(png_filename)) {
 		// DEBUG:
-		logMessage(wxString("WARNING: Using PNG image: ").Append(filename));
+		logMessage(wxString("WARNING: Using PNG image: ").Append(png_filename));
 
-		image = wxImage(filename);
+		image = wxImage(png_filename);
 	} else if (wxFileExists(svg_filename)) {
 		// load SVG data
 		wxSVGDocument* svg = new wxSVGDocument();
