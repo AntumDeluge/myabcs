@@ -20,7 +20,7 @@ $NEWSFEED = '<table align="center">
         - Changing to a <a href="https://opensource.org/licenses/MIT">MIT license</a>.<br>
         - <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>
         - <a href="https://sourceforge.net/p/wxsvg">wxSvg</a> will be used for rendering images.<br>
-        - Will be ported to <a href="http://wxwidgets.org/">wxWidgets 3.x</a>.<br>
+        - Will be updated for compatibility with <a href="http://wxwidgets.org/">wxWidgets</a> 3.x (support for 2.x will be dropped).<br>
         - <a href="https://cmake.org/">CMake</a> will be used for building.
       </h5>
     </td>
