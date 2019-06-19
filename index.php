@@ -7,6 +7,7 @@ $PROJECT = 'https://sourceforge.net/p/myabcs';
 $DOWNLOADS = ($PROJECT . "/files");
 $AUTHOR = 'Jordan Irwin (AntumDeluge)';
 $AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
+$CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/changelog.txt';
 $ICON = 'data/icon.png';
 $BGIMAGE = 'data/airplane-mask.png';
 $FAVICON = 'data/favicon.png';
@@ -45,6 +46,7 @@ print("<html>
     <td><h5 style=\"text-align:center\"><a href=\"$DOWNLOADS\">Download Page</a></h5></td>
     <td><h5 style=\"text-align:center\"><a href=\"$GITHUB\">GitHub Page</a></h5></td>
     <td><h5 style=\"text-align:center\"><a href=\"$AUTHOR_HOME/about\">About Author</a></h5></td>
+    <td><h5 style=\"text-align:center\"><a href=\"$CHANGELOG\">ChangeLog</a></h5></td>
   </tr>
 </table>
 $NEWSFEED
