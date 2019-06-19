@@ -1,5 +1,4 @@
 Priority:
-- Replace PNG images with SVG
 - Resize SVG images
 - Edit wheels white BG in bicycle SVG
 - Change radishes SVG (image is of beets)
