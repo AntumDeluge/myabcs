@@ -5,6 +5,7 @@ Priority:
 - Change strawberry SVG
 - Fix semi-transparent shading in SVG:
   - electric guitar
+  - magnifying glass
   - necklace
   - tomato
 - Report wxSVG render bug when objects grouped multiple times
@@ -12,6 +13,9 @@ Priority:
 - Add option to show/hide debug log
 - Add debugging symbols
 - Disable log window if not debug build
+- Find saxophone SVG
+- Replace xylophone instrument with xun
+- Remove shading from watch SVG
 
 Non-priority:
 - Use sound library to replace wxSound & convert audio to OGG
