@@ -1,8 +1,8 @@
 #include <wx/filefn.h>
-#include <wx/log.h>
 #include <wxSVG/SVGDocument.h>
 
 #include "imgdisplay.h"
+#include "log.h"
 
 
 ImageDisplay::ImageDisplay(wxWindow* parent, wxWindowID id, wxBitmap& label) :
@@ -23,12 +23,12 @@ void ImageDisplay::SetImageG(wxString filename) {
 		svg->Load(svg_filename);
 
 		// FIXME: can't check if image displayed properly
-		//wxLogGeneric(wxLOG_Info, wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
+		//logMessage(wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
 
 		image = svg->Render(290, 290, NULL, true, true, NULL);
 	} else {
 		if (!wxFileExists(filename)) {
-			wxLogGeneric(wxLOG_Info, wxString("ERROR: Could not load image: ").Append(filename));
+			logMessage(wxString("ERROR: Could not load image: ").Append(filename));
 
 			// load failsafe image
 			image = wxImage("pic/failsafe.png");

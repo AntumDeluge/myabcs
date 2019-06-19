@@ -3,27 +3,11 @@
 
 #include <wx/log.h>
 
-// instantiated in main wxApp
-static wxLogWindow* abclog;
 
-static void initLog(wxWindow* parent) {
-	abclog = new wxLogWindow(parent, _T("MyABC's Debug Log"), false);
-	wxLog::SetActiveTarget(abclog);
-}
+extern void initLog(wxWindow* parent);
 
-static wxLogWindow* getLog() {
-	return abclog;
-}
+extern void logMessage(const wxLogLevel level, const wxString msg);
 
-static void logMessage(const wxLogLevel level, const wxString msg) {
-	if (abclog->IsEnabled()) {
-		abclog->Show();
-		wxLogGeneric(level, msg);
-	}
-}
-
-static void logMessage(const wxString msg) {
-	logMessage(wxLOG_Info, msg);
-}
+extern void logMessage(const wxString msg);
 
 #endif /* MYABCS_LOG_H */
