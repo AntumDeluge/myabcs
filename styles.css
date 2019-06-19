@@ -3,7 +3,12 @@ table.menu {
 	margin-right: auto;
 }
 
-img.screenshot {
+img.icon {
+	max-width: 128px;
+	height: auto;
+}
+
+img.center {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
