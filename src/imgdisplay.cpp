@@ -16,8 +16,13 @@ void ImageDisplay::SetImageG(wxString filename) {
 		svg_filename = svg_filename.SubString(0, svg_filename.Len()-4).Append(_T("svg"));
 	}
 
-	// use SVG image if found
-	if (wxFileExists(svg_filename)) {
+	// use PNG image by default
+	if (wxFileExists(filename)) {
+		// DEBUG:
+		logMessage(wxString("WARNING: Using PNG image: ").Append(filename));
+
+		image = wxImage(filename);
+	} else if (wxFileExists(svg_filename)) {
 		// load SVG data
 		wxSVGDocument* svg = new wxSVGDocument();
 		bool loaded = svg->Load(svg_filename);
@@ -27,17 +32,10 @@ void ImageDisplay::SetImageG(wxString filename) {
 
 		image = svg->Render(290, 290, NULL, true, true, NULL);
 	} else {
-		if (!wxFileExists(filename)) {
-			logMessage(wxString("ERROR: Could not load image: ").Append(filename));
+		logMessage(wxString("ERROR: Could not load image: ").Append(filename));
 
-			// load failsafe image
-			image = wxImage("pic/failsafe.png");
-		} else {
-			// DEBUG:
-			logMessage(wxString("WARNING: Using PNG image: ").Append(filename));
-
-			image = wxImage(filename);
-		}
+		// load failsafe image
+		image = wxImage("pic/failsafe.png");
 	}
 
 	wxStaticBitmap::SetBitmap(wxBitmap(image));
