@@ -75,14 +75,14 @@ void SoundPlayer::play() {
 		return;
 	}
 
-	// wait for sound to stop playing
-	while (Mix_Playing(channel) != 0);
-
 	logMessage(wxString("Playing sound ..."));
+
+	// wait for sound to stop playing
+	while (isPlaying());
 }
 
 void SoundPlayer::stop() {
-	if (Mix_Playing(channel) == 0) {
+	if (!isPlaying()) {
 		logMessage(wxLOG_Warning, _T("Sound is already stopped"));
 		return;
 	}
@@ -94,6 +94,10 @@ void SoundPlayer::stop() {
 
 bool SoundPlayer::isReady() {
 	return chunk != NULL;
+}
+
+bool SoundPlayer::isPlaying() {
+	return Mix_Playing(channel) != 0;
 }
 
 

@@ -25,6 +25,7 @@ public:
 	void play();
 	void stop();
 	bool isReady();
+	bool isPlaying();
 private:
 	//SoundFile* soundFile;
 };
