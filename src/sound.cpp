@@ -7,6 +7,7 @@
 
 static Mix_Chunk* chunk = NULL;
 static int channel;
+static wxString loadedSound;
 
 
 LegacySound::LegacySound(const wxString filename) {
@@ -36,7 +37,9 @@ void LegacySound::Stop() {
 }
 
 
-SoundPlayer::SoundPlayer() {}
+SoundPlayer::SoundPlayer() {
+	loadedSound = wxEmptyString;
+}
 
 SoundPlayer::~SoundPlayer() {
 	unload();
@@ -61,7 +64,15 @@ void SoundPlayer::init() {
 	logMessage(_T("Opened audio mixer"));
 }
 
-void SoundPlayer::load(const std::string filename) {
+void SoundPlayer::load(const wxString filename) {
+	if (filename.IsEmpty()) {
+		logError(_T("Cannot load sound from empty filename"));
+		return;
+	} else if (isLoaded(filename)) {
+		logMessage(wxString("Not re-loading sound: ").Append(filename));
+		return;
+	}
+
 	// ensure chunk is NULL every time this method is called
 	unload();
 
@@ -78,16 +89,19 @@ void SoundPlayer::load(const std::string filename) {
 		return;
 	}
 
+	loadedSound = filename;
+
 	logMessage(wxString("Loaded sound file: ").Append(filename));
 }
 
-void SoundPlayer::load(const wxString filename) {
-	return load(std::string(filename.mb_str()));
+void SoundPlayer::load(const std::string filename) {
+	return load(wxString(filename));
 }
 
 void SoundPlayer::unload() {
 	Mix_FreeChunk(chunk);
 	chunk = NULL;
+	loadedSound.Empty();
 }
 
 void SoundPlayer::play() {
@@ -117,6 +131,15 @@ void SoundPlayer::stop() {
 	Mix_HaltChannel(channel);
 
 	logMessage(_T("Stopped playing sound"));
+}
+
+bool SoundPlayer::isLoaded(const wxString filename) {
+	// don't allow comparison of empty strings
+	if (!loadedSound) {
+		return false;
+	}
+
+	return filename.IsSameAs(loadedSound) && isReady();
 }
 
 bool SoundPlayer::isReady() {

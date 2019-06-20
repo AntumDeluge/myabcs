@@ -32,11 +32,12 @@ public:
 	SoundPlayer();
 	~SoundPlayer();
 	void init();
-	void load(const std::string filename);
 	void load(const wxString filename);
+	void load(const std::string filename);
 	void unload();
 	void play();
 	void stop();
+	bool isLoaded(const wxString filename);
 	bool isReady();
 	bool isPlaying();
 private:
