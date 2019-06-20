@@ -15,18 +15,6 @@ private:
 };
 
 
-class LegacySound {
-public:
-	LegacySound(const wxString filename);
-	bool Play(unsigned flags=wxSOUND_ASYNC);
-	bool Play(const wxString filename, unsigned flags=wxSOUND_ASYNC);
-	//static bool IsPlaying();
-	void Stop();
-private:
-	wxString sound;
-};
-
-
 class SoundPlayer {
 public:
 	SoundPlayer();
@@ -36,6 +24,8 @@ public:
 	void load(const std::string filename);
 	void unload();
 	void play();
+	void play(const wxString filename);
+	void play(const std::string filename);
 	void stop();
 	bool isLoaded(const wxString filename);
 	bool isReady();

@@ -10,32 +10,6 @@ static int channel;
 static wxString loadedSound;
 
 
-LegacySound::LegacySound(const wxString filename) {
-	sound = filename;
-}
-
-bool LegacySound::Play(unsigned flags=wxSOUND_ASYNC) {
-	logMessage(_T('Playing sound with legacy method wxSound'));
-
-	return wxSound::Play(sound, flags);
-}
-
-bool LegacySound::Play(const wxString filename, unsigned flags=wxSOUND_ASYNC) {
-	logMessage(_T('Playing sound with legacy method wxSound'));
-
-	return wxSound::Play(filename, flags);
-}
-
-/*
-bool LegacySound::IsPlaying() {
-	return wxSound::IsPlaying();
-}
-*/
-
-void LegacySound::Stop() {
-	return wxSound::Stop();
-}
-
 
 SoundPlayer::SoundPlayer() {
 	loadedSound = wxEmptyString;
@@ -122,9 +96,19 @@ void SoundPlayer::play() {
 	while (isPlaying());
 }
 
+void SoundPlayer::play(const wxString filename) {
+	load(filename);
+	play();
+}
+
+void SoundPlayer::play(const std::string filename) {
+	load(filename);
+	play();
+}
+
 void SoundPlayer::stop() {
 	if (!isPlaying()) {
-		logMessage(wxLOG_Warning, _T("Sound is already stopped"));
+		logMessage(_T("Sound is already stopped"));
 		return;
 	}
 

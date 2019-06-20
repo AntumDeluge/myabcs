@@ -1,4 +1,5 @@
 #include "abc.h"
+#include "sound.h"
 
 #include <stddef.h>
 
@@ -39,8 +40,6 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 	wxImage::AddHandler(new wxXPMHandler);
 
     SetIcon(wxIcon(ICON1));
-
-    cheer = new LegacySound(CHEER);
 
     // Set these two variables to show that play is ready
     gameend = false;
@@ -280,7 +279,7 @@ void MainWindow::SetMode(wxCommandEvent& event) {
         Close(true);
     } else {
         gameend = false;
-        cheer->Stop();
+        soundPlayer->stop();
 
         if (id == ID_ABC) {
             SetTitle(_T("Find the letter on the keyboard"));
@@ -338,7 +337,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
         } else if (keycode == WXK_RETURN or keycode == WXK_NUMPAD_ENTER) {
             if (gameend) {
                 gameend = false;
-                cheer->Stop();
+                soundPlayer->stop();
                 image->SetImageG(images[0]);
                 letter->SetLabel(letters[0]);
                 label->SetLabel(labels[0]);
@@ -384,7 +383,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
                 if (keycode == WXK_BACK) {
                     // Go back to letter "Z"
                     gameend = false;
-                    cheer->Stop();
+                    soundPlayer->stop();
                     image->SetImageG(images[25]);
                     letter->SetLabel(letters[25]);
                     label->SetLabel(labels[25]);
@@ -484,7 +483,8 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
             image->SetImageG(RIBBON);
             letter->SetLabel(_T("CONGRATS!"));
             label->SetLabel(_T("Press \"ENTER\" to Play Again"));
-            cheer->Play();
+            cur_sound = CHEER;
+            rc = pthread_create(&thread1, NULL, OtherThread, this);
         }
     }
 

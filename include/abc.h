@@ -7,7 +7,6 @@
 #include <wx/filename.h>
 #include <pthread.h>
 #include "res.h"
-#include "sound.h"
 #include "gnrcabt.h"
 #include "imgdisplay.h"
 #include <fstream>
@@ -63,7 +62,6 @@ class MainWindow : public wxFrame {
     wxString musics[2][26];
     wxString toys[2][26];
     //    wxButton *play; // Button to play sounds
-    LegacySound *cheer;
     bool gameend;
     bool isplaying; // Is sound currently playing
     bool canspace; // Allow playing sounds if one is not currently played
