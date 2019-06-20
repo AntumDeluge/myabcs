@@ -4,6 +4,17 @@
 #include <wx/log.h>
 
 
+/** Log window class
+ *
+ */
+class LogWindow: public wxLogWindow {
+public:
+	LogWindow(wxWindow* parent, wxString title, bool show=true);
+	void Show(const bool show);
+	void Show() { return Show(true); }
+};
+
+
 extern void initLog(wxWindow* parent);
 
 extern void logMessage(const wxLogLevel level, const wxString msg);
