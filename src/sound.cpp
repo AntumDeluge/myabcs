@@ -9,6 +9,8 @@ static Mix_Chunk* chunk = NULL;
 static int channel;
 static wxString loadedSound;
 
+// check for sound intializations
+bool initialized = false;
 
 
 SoundPlayer::SoundPlayer() {
@@ -138,4 +140,9 @@ bool SoundPlayer::isPlaying() {
 void initializeSounds() {
 	soundPlayer = new SoundPlayer();
 	soundPlayer->init();
+	initialized = true;
+}
+
+bool soundIsInitialized() {
+	return initialized;
 }

@@ -279,7 +279,9 @@ void MainWindow::SetMode(wxCommandEvent& event) {
         Close(true);
     } else {
         gameend = false;
-        soundPlayer->stop();
+        if (soundIsInitialized()) {
+        	soundPlayer->stop();
+        }
 
         if (id == ID_ABC) {
             SetTitle(_T("Find the letter on the keyboard"));

@@ -38,4 +38,6 @@ static SoundPlayer* soundPlayer;
 
 extern void initializeSounds();
 
+extern bool soundIsInitialized();
+
 #endif /* MYABCS_SOUND_H */
