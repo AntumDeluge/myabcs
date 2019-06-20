@@ -1,3 +1,7 @@
+# directories
+build/
+
+# files
 .project
 myabcs
 *.o
