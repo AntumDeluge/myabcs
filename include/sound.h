@@ -20,6 +20,7 @@ public:
 	~SoundPlayer();
 	void init();
 	void load(const std::string filename);
+	void load(const wxString filename);
 	void unload();
 	void play();
 	void stop();

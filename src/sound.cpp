@@ -54,6 +54,10 @@ void SoundPlayer::load(const std::string filename) {
 	logMessage(wxString("Loaded sound file: ").Append(filename));
 }
 
+void SoundPlayer::load(const wxString filename) {
+	return load(std::string(filename.mb_str()));
+}
+
 void SoundPlayer::unload() {
 	Mix_FreeChunk(chunk);
 	chunk = NULL;
