@@ -1,0 +1,35 @@
+#ifndef MYABCS_SOUND_H
+#define MYABCS_SOUND_H
+
+#include <SDL2/SDL_mixer.h>
+#include <string>
+
+
+class SoundFile {
+public:
+	SoundFile(const std::string filename) { file = filename; }
+	std::string toString() { return file; }
+private:
+	std::string file;
+};
+
+
+class SoundPlayer {
+public:
+	SoundPlayer();
+	~SoundPlayer();
+	void init();
+	void load(const std::string filename);
+	void unload();
+	void play();
+	void stop();
+	bool isReady();
+private:
+	//SoundFile* soundFile;
+};
+
+static SoundPlayer* soundPlayer;
+
+extern void initializeSounds();
+
+#endif /* MYABCS_SOUND_H */

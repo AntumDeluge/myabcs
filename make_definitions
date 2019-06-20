@@ -27,15 +27,15 @@ DATADIR = data
 CC = g++
 CFLAGS = -c
 CXXFLAGS = $(CFLAGS)
-WXFLAGS = wx-config --cxxflags
-SDLFLAGS = sdl-config --cflags
+WXFLAGS = `wx-config --cxxflags`
+SDLFLAGS = `sdl2-config --cflags`
 OBJ_SUF = .o
 
 ### Linking ###
 
-LIBS = -lwxsvg
-WXLIBS = wx-config --libs std,richtext
-SDLLIBS = sdl-config --libs
+LIBS = -lpthread
+WXLIBS = `wx-config --libs std,richtext` -lwxsvg
+SDLLIBS = `sdl2-config --libs` -lSDL2_mixer
 LINKEROPTS = -Wl,--strip-all
 
 ### Installation ###
@@ -65,7 +65,12 @@ GNRCABT_D = $(GNRCABT_H)
 IMGDISPLAY_H = include/imgdisplay.h
 IMGDISPLAY_C = src/imgdisplay.cpp
 IMGDISPLAY_O = imgdisplay.o
-IMGDISPLAY_D = $(IMGDISPLAY_H) $(LOG_D)
+IMGDISPLAY_D = $(IMGDISPLAY_H) $(LOG_H)
+
+SOUND_H = include/sound.h
+SOUND_C = src/sound.cpp
+SOUND_O = sound.o
+SOUND_D = $(SOUND_H) $(LOG_H)
 
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
@@ -75,10 +80,10 @@ ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H)
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
 MAIN_O = main.o
-MAIN_D = $(MAIN_H) $(LOG_D) $(ABC_D)
+MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
 
 OBJECTS = \
-    $(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(ABC_O) $(MAIN_O)
+    $(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
 
 F_DATA = \
     changelog.txt license-MIT.txt myabcs.png

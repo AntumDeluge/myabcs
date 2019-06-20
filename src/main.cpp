@@ -1,6 +1,7 @@
 #include "main.h"
 #include "abc.h"
 #include "log.h"
+#include "sound.h"
 
 
 bool App::OnInit()
@@ -11,6 +12,9 @@ bool App::OnInit()
 
     // FIXME: logging is not initialized for MainWindow constructor
     initLog(frame);
+
+    // initialize SDL audio
+    initializeSounds();
 
     return true;
 }

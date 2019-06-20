@@ -10,4 +10,6 @@ extern void logMessage(const wxLogLevel level, const wxString msg);
 
 extern void logMessage(const wxString msg);
 
+extern void logError(const wxString msg);
+
 #endif /* MYABCS_LOG_H */

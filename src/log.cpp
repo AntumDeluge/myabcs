@@ -19,3 +19,7 @@ void logMessage(const wxLogLevel level, const wxString msg) {
 void logMessage(const wxString msg) {
 	logMessage(wxLOG_Info, msg);
 }
+
+void logError(const wxString msg) {
+	logMessage(wxLOG_Error, msg);
+}
