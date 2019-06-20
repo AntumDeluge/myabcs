@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "log.h"
 
 
@@ -13,6 +15,7 @@ void logMessage(const wxLogLevel level, const wxString msg) {
 	if (abclog->IsEnabled()) {
 		abclog->Show();
 		wxLogGeneric(level, msg);
+		std::cout << msg << std::endl;
 	}
 }
 

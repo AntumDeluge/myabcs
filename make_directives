@@ -2,31 +2,31 @@
 
 all: $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION).";
-	$(CC) $(LINKEROPTS) $(OBJECTS) -o $(EXE) $(WXLIBS) $(SDLLIBS) $(LIBS)
+	$(CC) $(LINKEROPTS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
 
-debug: CXXFLAGS += -O0 -g -Wall -Werror -DDEBUG
+debug: CXXFLAGS += -O0 -g -Wall -DDEBUG
 debug: WXFLAGS += --debug=yes
-debug: WXLIBS += --debug=yes
+debug: WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console|'
 debug: LINKEROPTS = -v
 debug: all
 
 $(LOG_O): $(LOG_C) $(LOG_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINES) -I$(INCLUDE) $(LOG_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(LOG_C)
 
 $(IMGDISPLAY_O): $(IMGDISPLAY_C) $(IMGDISPLAY_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINES) -I$(INCLUDE) $(IMGDISPLAY_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(IMGDISPLAY_C)
 
 $(GNRCABT_O): $(GNRCABT_C) $(GNRCABT_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINES) -I$(INCLUDE) $(GNRCABT_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(GNRCABT_C)
 
 $(SOUND_O): $(SOUND_C) $(SOUND_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(SDLFLAGS) $(DEFINES) -I$(INCLUDE) $(SOUND_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` $(DEFINES) -I$(INCLUDE) $(SOUND_C)
 
 $(ABC_O): $(ABC_C) $(ABC_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINES) -I$(INCLUDE) $(ABC_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(ABC_C)
 
 $(MAIN_O): $(MAIN_C) $(MAIN_D)
-	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINES) -I$(INCLUDE) $(MAIN_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(MAIN_C)
 
 install: changelog.txt license-MIT.txt myabcs.desktop myabcs.png pic sound all
 	@install -vd $(DESTDIR)/share/myabcs
