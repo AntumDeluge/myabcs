@@ -217,7 +217,7 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
         VOLLEYBALL, WAGON, XYLOPHONE, YOYO, ZIPLINE
     };
     wxString toys_name[26] = {
-        _("ANKLET"), _T("BALLOONS"), _T("CHALKBOARD"), _T("DOLL"), _T("EASEL"),
+        _T("ANKLET"), _T("BALLOONS"), _T("CHALKBOARD"), _T("DOLL"), _T("EASEL"),
         _T("FOOTBALL"), _T("GLOVE"), _T("HORN"), _T("ICE SKATE"), _T("JUMP ROPE"),
         _T("KITE"), _T("LUNCHBOX"), _T("MAGNET"), _T("NECKLACE"), _T("ORIGAMI"), _T("PAINT"),
         _T("QUILT"), _T("ROCKING HORSE"), _T("SEESAW"), _T("TOP"), _T("UNICYCLE"),
