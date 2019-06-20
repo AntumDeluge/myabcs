@@ -75,7 +75,7 @@ SOUND_D = $(SOUND_H) $(LOG_H)
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H)
+ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H) $(SOUND_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp

@@ -7,6 +7,7 @@
 #include <wx/filename.h>
 #include <pthread.h>
 #include "res.h"
+#include "sound.h"
 #include "gnrcabt.h"
 #include "imgdisplay.h"
 #include <fstream>

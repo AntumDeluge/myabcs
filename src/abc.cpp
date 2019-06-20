@@ -690,8 +690,8 @@ void MainWindow::PlaySound() {
 void *MainWindow::SpaceThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
-        wxSound sound(cur_sound);
-        sound.Play(wxSOUND_SYNC);
+    	soundPlayer->load(cur_sound);
+    	soundPlayer->play();
         wxCommandEvent SpaceEvent(ID_SPACE, wxID_ANY);
         wxPostEvent(obj, SpaceEvent); // Pass event
     }
@@ -701,8 +701,8 @@ void *MainWindow::SpaceThread(void *arg) {
 void *MainWindow::KeyThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
-        wxSound sound(cur_sound);
-        sound.Play(wxSOUND_SYNC);
+    	soundPlayer->load(cur_sound);
+    	soundPlayer->play();
         wxCommandEvent KeyEvent(ID_KEY, wxID_ANY);
         wxPostEvent(obj, KeyEvent);
     }
@@ -714,8 +714,8 @@ void *MainWindow::KeyThread(void *arg) {
 void *MainWindow::OtherThread(void *arg) {
     wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
     if (obj) {
-        wxSound sound(cur_sound);
-        sound.Play(wxSOUND_SYNC);
+    	soundPlayer->load(cur_sound);
+    	soundPlayer->play();
         wxCommandEvent OtherEvent(ID_OTHER, wxID_ANY);
         wxPostEvent(obj, OtherEvent);
     }
