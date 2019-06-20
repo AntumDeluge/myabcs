@@ -63,7 +63,7 @@ class MainWindow : public wxFrame {
     wxString musics[2][26];
     wxString toys[2][26];
     //    wxButton *play; // Button to play sounds
-    wxSound *cheer;
+    LegacySound *cheer;
     bool gameend;
     bool isplaying; // Is sound currently playing
     bool canspace; // Allow playing sounds if one is not currently played

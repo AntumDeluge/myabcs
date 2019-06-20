@@ -40,7 +40,7 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 
     SetIcon(wxIcon(ICON1));
 
-    cheer = new wxSound(CHEER);
+    cheer = new LegacySound(CHEER);
 
     // Set these two variables to show that play is ready
     gameend = false;

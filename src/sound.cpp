@@ -9,6 +9,33 @@ static Mix_Chunk* chunk = NULL;
 static int channel;
 
 
+LegacySound::LegacySound(const wxString filename) {
+	sound = filename;
+}
+
+bool LegacySound::Play(unsigned flags=wxSOUND_ASYNC) {
+	logMessage(_T('Playing sound with legacy method wxSound'));
+
+	return wxSound::Play(sound, flags);
+}
+
+bool LegacySound::Play(const wxString filename, unsigned flags=wxSOUND_ASYNC) {
+	logMessage(_T('Playing sound with legacy method wxSound'));
+
+	return wxSound::Play(filename, flags);
+}
+
+/*
+bool LegacySound::IsPlaying() {
+	return wxSound::IsPlaying();
+}
+*/
+
+void LegacySound::Stop() {
+	return wxSound::Stop();
+}
+
+
 SoundPlayer::SoundPlayer() {}
 
 SoundPlayer::~SoundPlayer() {

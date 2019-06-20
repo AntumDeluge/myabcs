@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_mixer.h>
 #include <string>
+#include <wx/sound.h>
 
 
 class SoundFile {
@@ -11,6 +12,18 @@ public:
 	std::string toString() { return file; }
 private:
 	std::string file;
+};
+
+
+class LegacySound {
+public:
+	LegacySound(const wxString filename);
+	bool Play(unsigned flags=wxSOUND_ASYNC);
+	bool Play(const wxString filename, unsigned flags=wxSOUND_ASYNC);
+	//static bool IsPlaying();
+	void Stop();
+private:
+	wxString sound;
 };
 
 
