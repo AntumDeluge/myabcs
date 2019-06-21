@@ -17,6 +17,7 @@ Priority:
 - Replace xylophone instrument with xun
 - Remove shading from watch SVG
 - Embed failsafe image into app
+- Check for errors when trying to play non-existent sound file
 
 Non-priority:
 - Convert audio to OGG
