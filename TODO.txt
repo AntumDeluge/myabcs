@@ -16,13 +16,18 @@ Priority:
 - Find saxophone SVG
 - Replace xylophone instrument with xun
 - Remove shading from watch SVG
+- Embed failsafe image into app
 
 Non-priority:
-- Use sound library to replace wxSound & convert audio to OGG
+- Convert audio to OGG
 - Use wxThread class instead of pthreads
 - Fix app icons on Windows
 - Fix/Add UI manifest on Windows
-- Vectorize quarter image
+- Improve loading time of SVG images (ex. quarter.svg loads slow)
+  - Possible options:
+    - Try to optimize SVG documents
+    - Cache images at time of setting game mode
+    - Export slow-loading SVGs to PNG
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - cache images at startup
