@@ -5,7 +5,8 @@ MyABCs 0.4.5
 ------------------------------------
 Dependencies                        |
 ------------------------------------
-wxWidgets 2.8   (http://wxwidgets.org)
+wxWidgets 3.x   (https://wxwidgets.org/)
+SDL2            (https://libsdl.org/)
 PThreads        (http://sourceforge.net/projects/mingw)
 
 
