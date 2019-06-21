@@ -105,7 +105,7 @@
 #define PIANO _T("pic/music/piano")
 #define QUENA _T("pic/music/quena")
 #define RECORDER _T("pic/music/recorder")
-#define SAX _T("pic/music/sax")
+#define SAX _T("pic/music/saxophone")
 #define TRUMPET _T("pic/music/trumpet")
 #define UKULELE _T("pic/music/ukulele")
 #define VIOLIN _T("pic/music/violin")
