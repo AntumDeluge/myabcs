@@ -32,3 +32,4 @@ Non-priority:
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - cache images at startup
+- Update README
