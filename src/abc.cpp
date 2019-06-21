@@ -619,7 +619,7 @@ void MainWindow::PlaySound() {
             _T("sound/recorder.wav"),
             _T("sound/rocking_horse.wav"),
             _T("sound/rooster.wav"),
-            _T("sound/sax.wav"),
+            _T("sound/saxophone.wav"),
             _T("sound/sheep.wav"),
             _T("sound/seesaw.wav"),
             _T("sound/star.wav"),
