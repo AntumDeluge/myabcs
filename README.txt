@@ -24,23 +24,23 @@ Navigate to the source folder from the command line/terminal
     ‣ For Windows (executable will have icon)
       Execute:
         make -f Makefile-Windows
-    
+
 
 == GNU G++/MinGW ==
 
     ‣ For GNU/Linux or Windows:
-    
+
         g++ src/main.cpp src/abc.cpp src/gnrcabt.cpp `wx-config --cxxflags \
             --libs` -o MyABCs -lpthread
-    
+
     ‣ For Windows: (executable will have icon)
-    
+
 	    windres resources.rc -o resources.o
 	    g++ src/main.cpp src/abc.cpp src/gnrcabt.cpp resources.o `wx-config \
             --cxxflags --libs` -o MyABCs -lpthread
-    
+
 == Clang ==
-    
+
     Clang's syntax is compatible with GCC. Use the instructions above but
     replace "g++" with "clang++".
 
