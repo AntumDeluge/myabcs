@@ -1,8 +1,10 @@
 #include <wx/filefn.h>
+#include <wx/mstream.h>
 #include <wxSVG/SVGDocument.h>
 
 #include "imgdisplay.h"
 #include "log.h"
+#include "res/failsafe.png.h"
 
 
 ImageDisplay::ImageDisplay(wxWindow* parent, wxWindowID id, wxBitmap& label) :
@@ -41,8 +43,9 @@ void ImageDisplay::SetImageG(wxString filename) {
 	} else {
 		logMessage(wxString("ERROR: Could not load image: ").Append(filename));
 
-		// load failsafe image
-		image = wxImage("pic/failsafe.png");
+		// load embedded failsafe image data
+		wxMemoryInputStream is(failsafe_png, sizeof(failsafe_png)); // convert PNG char data into input stream
+		image = wxImage(is, wxBITMAP_TYPE_PNG);
 	}
 
 	wxStaticBitmap::SetBitmap(wxBitmap(image));
