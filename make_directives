@@ -33,7 +33,7 @@ install: changelog.txt license-MIT.txt myabcs.desktop myabcs.png pic sound all
 	@install -vd $(DESTDIR)/share/applications
 	@install -vd $(PIXMAPDIR)
 	@install -vd $(BINDIR)
-	@install -vm 0644 changelog.txt $(ABCDIR)
+	@install -vm 0644 CHANGES.txt $(ABCDIR)
 	@install -vm 0644 LICENSE.txt $(ABCDIR)
 	@install -vm 0644 myabcs.png $(ABCDIR)
 	@cp -vr pic $(ABCDIR)
