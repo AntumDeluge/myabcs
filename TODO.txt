@@ -1,6 +1,5 @@
 Priority:
 - Edit wheels white BG in bicycle SVG
-- Change radishes SVG (image is of beets)
 - Change strawberry SVG
 - Fix semi-transparent shading in SVG:
   - electric guitar
@@ -9,6 +8,7 @@ Priority:
   - tomato
 - Report wxSVG render bug when objects grouped multiple times
 - Report wxSVG object order rendering bug (cat.svg)
+- Report Inkscape "Title" meta data loss when converting old SVG
 - Add option to show/hide debug log
 - Add debugging symbols
 - Disable log window if not debug build
