@@ -13,7 +13,6 @@ Priority:
 - Add option to show/hide debug log
 - Add debugging symbols
 - Disable log window if not debug build
-- Find saxophone SVG
 - Replace xylophone instrument with xun
 - Remove shading from watch SVG
 - Check for errors when trying to play non-existent sound file
@@ -32,3 +31,7 @@ Non-priority:
 - PNG & SVG jars are different colors
 - cache images at startup
 - Update README
+- Find/Create missing SVGs:
+  - ribbon
+- Clean up include statements
+- Convert failsafe image to SVG
