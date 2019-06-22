@@ -4,8 +4,8 @@
 <svg
    xmlns:ns5="http://ns.adobe.com/SaveForWeb/1.0/"
    xmlns:ns4="http://ns.adobe.com/Variables/1.0/"
-   xmlns:ns3="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+   xmlns:ns3="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -17,8 +17,8 @@
    ns3:rulerOrigin="0 0"
    ns3:pageBounds="0 792 612 0"
    width="128.00005"
-   height="128.00005"
-   viewBox="0 0 128.00005 128.00005"
+   height="124.602"
+   viewBox="0 0 128.00005 124.602"
    overflow="visible"
    enable-background="new 0 0 319.017 310.569"
    xml:space="preserve"
@@ -725,8 +725,8 @@
      id="namedview265"
      showgrid="false"
      inkscape:zoom="2.1493092"
-     inkscape:cx="10.360058"
-     inkscape:cy="68.874597"
+     inkscape:cx="-74.783578"
+     inkscape:cy="67.175574"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -741,11 +741,11 @@
              rdf:about=""><dc:title>ArtFavor</dc:title></cc:Agent></dc:creator><dc:rights><cc:Agent
              rdf:about="http://web.resource.org/cc/PublicDomain"><dc:title>Public Domain</dc:title></cc:Agent></dc:rights><dc:date>2005/10/03</dc:date><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage">http://purl.org/dc/dcmitype/StillImage</dc:type><cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" /></cc:Work><cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain"><cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" /></cc:Work><cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
          varSetName="binding1"
          locked="none"><ns4:variables /><ns4:sampleDataSets /></ns4:variableSet></ns4:variableSets><ns5:sfw><ns5:slices /><ns5:sliceSourceBounds
          y="420.547"
@@ -754,7 +754,7 @@
          height="310.569"
          bottomLeftOrigin="true" /></ns5:sfw></metadata><g
      id="g1692"
-     transform="matrix(0.40120492,0,0,0.40120492,-0.01069686,1.7001313)"><path
+     transform="matrix(0.40120492,0,0,0.40120492,-0.01069678,0.00110789)"><path
        inkscape:connector-curvature="0"
        style="clip-rule:evenodd;fill:url(#XMLID_1_);fill-rule:evenodd;stroke:#000000;stroke-width:0.21600001;stroke-linejoin:bevel;stroke-miterlimit:2.41420007"
        id="path9"

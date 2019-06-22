@@ -11,9 +11,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="Layer_1"
-   width="128"
-   height="128"
-   viewBox="0 0 128.00001 128"
+   width="127.99995"
+   height="127.683"
+   viewBox="0 0 127.99997 127.683"
    overflow="visible"
    enable-background="new 0 0 187.086 231.379"
    xml:space="preserve"
@@ -42,8 +42,8 @@
      id="namedview15"
      showgrid="false"
      inkscape:zoom="4.0798863"
-     inkscape:cx="12.708248"
-     inkscape:cy="39.512877"
+     inkscape:cx="-32.145965"
+     inkscape:cy="39.354378"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -53,7 +53,7 @@
      fit-margin-right="0"
      fit-margin-bottom="0" /><g
      id="g12"
-     transform="matrix(0.42108964,0.42108964,-0.42108964,0.42108964,71.688341,-22.627428)"><g
+     transform="matrix(0.42108964,0.42108964,-0.42108964,0.42108964,71.688319,-22.785928)"><g
        id="g6"><path
          d="M 156.101,26.232 C 151.824,20.164 147.769,14.14 138.339,9.807 127.017,4.601 111.384,1.383 94.119,1.383 74.895,1.383 57.703,5.376 46.222,11.655 39.881,15.123 36.731,19.507 33.065,23.868 13.663,45.41 1.382,77.113 1.382,112.492 c 0,64.898 41.262,117.506 92.162,117.506 50.899,0 92.161,-52.607 92.161,-117.506 0,-34.101 -11.405,-64.794 -29.604,-86.26 z"
          id="path2"

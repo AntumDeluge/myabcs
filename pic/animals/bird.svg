@@ -10,12 +10,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="128.00011"
-   height="128.00011"
-   viewBox="0 0 33.866695 33.866694"
+   height="89.886002"
+   viewBox="0 0 33.866695 23.782337"
    version="1.1"
    id="svg3846"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="bird-2.svg">
+   sodipodi:docname="bird.svg">
   <title
      id="title6111">Bird</title>
   <defs
@@ -28,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="11.813969"
-     inkscape:cy="25.006627"
+     inkscape:cx="-53.543171"
+     inkscape:cy="5.9495742"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -93,7 +93,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-55.638081,-71.673283)">
+     transform="translate(-55.63808,-76.715462)">
     <g
        id="g6109"
        transform="matrix(0.31016947,0,0,0.31016947,50.061987,59.559629)">

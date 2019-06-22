@@ -11,7 +11,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="128"
+   width="125.73235"
    height="128"
    id="svg2"
    sodipodi:docname="apple.svg"
@@ -25,7 +25,18 @@
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
         <dc:title></dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
@@ -42,8 +53,8 @@
      id="namedview98"
      showgrid="false"
      inkscape:zoom="2.36"
-     inkscape:cx="89.773652"
-     inkscape:cy="63.222956"
+     inkscape:cx="11.097451"
+     inkscape:cy="63.222957"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -467,7 +478,7 @@
   </defs>
   <g
      id="g935"
-     transform="matrix(0.41881807,0,0,0.41881807,-7.5026323,-6.4346418)">
+     transform="matrix(0.41881807,0,0,0.41881807,-8.6364604,-6.4346411)">
     <path
        d="M 100.84271,272.89235 C 79.362165,377.49483 35.883125,391.59016 -4.9811852,389.88503 c -7.8844398,-0.32898 -7.5314698,1.2321 -16.4496798,0.10179 -7.77566,-0.98551 -21.32657,-6.02005 -29.17224,-5.43819 -46.97446,3.48375 -91.992185,-58.48044 -91.992185,-117.48015 0,-66.54593 44.033375,-110.22627 113.132735,-111.82065 95.30491,-2.18227 130.305265,51.09859 130.305265,117.64452 z"
        transform="matrix(1.22567,0,0,1.22567,197.2283,-157.5207)"

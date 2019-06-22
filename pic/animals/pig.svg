@@ -15,9 +15,9 @@
    ns3:viewOrigin="250.1475 726.9678"
    ns3:rulerOrigin="0 0"
    ns3:pageBounds="0 792 612 0"
-   width="128"
+   width="123.35858"
    height="128"
-   viewBox="0 0 128 128"
+   viewBox="0 0 123.35858 128"
    overflow="visible"
    enable-background="new 0 0 238.548 247.552"
    xml:space="preserve"
@@ -40,7 +40,7 @@
      id="namedview345"
      showgrid="false"
      inkscape:zoom="2.6964387"
-     inkscape:cx="26.829838"
+     inkscape:cx="-43.358166"
      inkscape:cy="77.197144"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
@@ -56,11 +56,11 @@
              rdf:about=""><dc:title>ArtFavor</dc:title></cc:Agent></dc:creator><dc:rights><cc:Agent
              rdf:about="http://web.resource.org/cc/PublicDomain"><dc:title>Public Domain</dc:title></cc:Agent></dc:rights><dc:date>2005/10/03</dc:date><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage">http://purl.org/dc/dcmitype/StillImage</dc:type><cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" /></cc:Work><cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain"><cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" /></cc:Work><cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
          varSetName="binding1"
          locked="none"><ns4:variables /><ns4:sampleDataSets /></ns4:variableSet></ns4:variableSets><ns5:sfw><ns5:slices /><ns5:sliceSourceBounds
          y="479.416"
@@ -69,7 +69,7 @@
          height="247.552"
          bottomLeftOrigin="true" /></ns5:sfw></metadata><g
      id="g1990"
-     transform="matrix(0.516983,0,0,0.516983,2.3500715,0.01588561)"><path
+     transform="matrix(0.516983,0,0,0.516983,0.02936184,0.01588558)"><path
        style="clip-rule:evenodd;fill:#f0bc9c;fill-rule:evenodd"
        inkscape:connector-curvature="0"
        id="path4"

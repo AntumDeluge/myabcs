@@ -14,7 +14,7 @@
    version="1.1"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    width="128.00076"
-   height="128.00076"
+   height="72.054001"
    sodipodi:docname="jaguar.svg">
   <title
      id="title3742">Jaguar</title>
@@ -426,8 +426,8 @@
      id="namedview4"
      showgrid="false"
      inkscape:zoom="3.1563563"
-     inkscape:cx="70.862424"
-     inkscape:cy="60.19358"
+     inkscape:cx="12.88418"
+     inkscape:cy="32.2202"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -438,7 +438,7 @@
      fit-margin-bottom="0" />
   <g
      id="g2209"
-     transform="matrix(0.15658421,0,0,0.15658421,-1.6151105e-6,27.973381)">
+     transform="scale(0.15658421)">
     <path
        sodipodi:nodetypes="cssssscccccc"
        id="path11532"

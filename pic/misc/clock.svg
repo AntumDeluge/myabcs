@@ -50,17 +50,17 @@
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
         <cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
         <dc:language>en</dc:language>
       </cc:Work>
       <cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain">
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" />
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" />
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
       </cc:License>
     </rdf:RDF>
   </metadata>
@@ -185,7 +185,7 @@
      borderopacity="1.0"
      id="base"
      inkscape:current-layer="layer1"
-     inkscape:cx="-82.76527"
+     inkscape:cx="-167.77388"
      inkscape:cy="41.275956"
      inkscape:document-units="px"
      inkscape:pageopacity="0.0"

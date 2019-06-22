@@ -4,8 +4,8 @@
 <svg
    xmlns:ns5="http://ns.adobe.com/SaveForWeb/1.0/"
    xmlns:ns4="http://ns.adobe.com/Variables/1.0/"
-   xmlns:ns3="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+   xmlns:ns3="http://ns.adobe.com/AdobeIllustrator/10.0/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -16,9 +16,9 @@
    ns3:viewOrigin="110.6045 747.2271"
    ns3:rulerOrigin="0 0"
    ns3:pageBounds="0 792 612 0"
-   width="128"
+   width="117.45967"
    height="128"
-   viewBox="0 0 128 128"
+   viewBox="0 0 117.45967 128"
    overflow="visible"
    enable-background="new 0 0 378.95 412.963"
    xml:space="preserve"
@@ -2809,8 +2809,8 @@
      id="namedview1167"
      showgrid="false"
      inkscape:zoom="3.2327777"
-     inkscape:cx="37.207273"
-     inkscape:cy="75.33458"
+     inkscape:cx="-24.670558"
+     inkscape:cy="75.334581"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -2838,7 +2838,7 @@
          height="412.963"
          bottomLeftOrigin="true" /></ns5:sfw></metadata><g
      id="g4796"
-     transform="matrix(0.30995638,0,0,0.30995638,5.2703798,-4.9691574e-4)"><path
+     transform="matrix(0.30995638,0,0,0.30995638,2.1489349e-4,-4.9614251e-4)"><path
        style="clip-rule:evenodd;fill-rule:evenodd;stroke:#000000;stroke-width:0.648;stroke-linejoin:bevel;stroke-miterlimit:2.41420007"
        inkscape:connector-curvature="0"
        id="path4"

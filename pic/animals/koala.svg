@@ -15,9 +15,9 @@
    ns3:viewOrigin="209.8315 753.0537"
    ns3:rulerOrigin="0 0"
    ns3:pageBounds="0 792 612 0"
-   width="128"
+   width="118.57176"
    height="128"
-   viewBox="0 0 128 128.00001"
+   viewBox="0 0 118.57176 128.00001"
    overflow="visible"
    enable-background="new 0 0 298.51 322.36"
    xml:space="preserve"
@@ -40,7 +40,7 @@
      id="namedview1349"
      showgrid="false"
      inkscape:zoom="4.1413875"
-     inkscape:cx="84.093781"
+     inkscape:cx="35.191572"
      inkscape:cy="54.778415"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
@@ -56,11 +56,11 @@
              rdf:about=""><dc:title>ArtFavor</dc:title></cc:Agent></dc:creator><dc:rights><cc:Agent
              rdf:about="http://web.resource.org/cc/PublicDomain"><dc:title>Public Domain</dc:title></cc:Agent></dc:rights><dc:date>2005/10/03</dc:date><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage">http://purl.org/dc/dcmitype/StillImage</dc:type><cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" /></cc:Work><cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain"><cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" /><cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" /></cc:Work><cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/"><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" /><cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" /></cc:License></rdf:RDF><ns4:variableSets><ns4:variableSet
          varSetName="binding1"
          locked="none"><ns4:variables /><ns4:sampleDataSets /></ns4:variableSet></ns4:variableSets><ns5:sfw><ns5:slices /><ns5:sliceSourceBounds
          y="430.693"
@@ -69,7 +69,7 @@
          height="322.36"
          bottomLeftOrigin="true" /></ns5:sfw></metadata><g
      id="g5504"
-     transform="matrix(0.3970716,0,0,0.3970716,4.7556623,-4.8800001e-7)"><path
+     transform="matrix(0.3970716,0,0,0.3970716,0.04154239,0)"><path
        style="clip-rule:evenodd;fill:#e6e6df;fill-rule:evenodd"
        inkscape:connector-curvature="0"
        id="path4"

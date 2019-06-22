@@ -12,7 +12,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
    width="128.00049"
-   height="128.00049"
+   height="121.421"
    id="svg2"
    sodipodi:docname="electric_guitar.svg"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
@@ -53,8 +53,8 @@
      id="namedview1061"
      showgrid="false"
      inkscape:zoom="1.6051948"
-     inkscape:cx="135.98122"
-     inkscape:cy="140.38975"
+     inkscape:cx="21.976366"
+     inkscape:cy="137.10001"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -7216,7 +7216,7 @@
      style="display:none"
      id="image5360" />
   <g
-     transform="translate(-633.99082,-286.10193)"
+     transform="translate(-633.99082,-289.39167)"
      style="display:none"
      id="g21142">
     <noimage
@@ -7229,7 +7229,7 @@
   </g>
   <g
      id="g2247"
-     transform="matrix(0.19386555,-0.08505335,0.08505335,0.19386555,-20.08191,61.492322)">
+     transform="matrix(0.19386555,-0.08505335,0.08505335,0.19386555,-20.081909,58.202578)">
     <path
        d="m 9.145929,271.16555 c 0.14523,-0.0985 0.28586,-0.17556 0.4587,-0.21996 0.97824,-0.25134 3.17694,0.95088 4.56402,2.15663 0.5736,0.49862 0.86748,-0.68237 1.27312,1.31409 0.3064,1.50816 -0.1441,0.81639 -0.61195,1.64962 -0.76335,1.35953 -2.16255,3.27169 -3.01988,3.49196 -1.38276,0.35526 -2.86729,-1.31017 -3.47836,-3.68852 -0.53467,-2.08105 -0.20229,-4.0141 0.81435,-4.70382 z"
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:url(#linearGradient4488);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"

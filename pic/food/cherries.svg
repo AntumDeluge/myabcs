@@ -9,8 +9,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="128"
-   height="128"
+   width="127.99957"
+   height="127.499"
    id="svg2"
    sodipodi:docname="cherries.svg"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
@@ -23,7 +23,18 @@
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
         <dc:title></dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
@@ -40,8 +51,8 @@
      id="namedview53"
      showgrid="false"
      inkscape:zoom="3.4766083"
-     inkscape:cx="-16.789628"
-     inkscape:cy="34.815495"
+     inkscape:cx="12.313467"
+     inkscape:cy="34.537716"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -217,7 +228,7 @@
   </defs>
   <g
      id="g880"
-     transform="matrix(2.9949007,0,0,2.9949007,-11.147575,-1.1178319)">
+     transform="matrix(2.9949007,0,0,2.9949007,-11.147789,-1.3683309)">
     <g
        id="cherry1">
       <path

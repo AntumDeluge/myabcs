@@ -11,7 +11,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="128.00047"
-   height="128.00047"
+   height="105.205"
    id="svg13834"
    sodipodi:version="0.32"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
@@ -1733,9 +1733,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0610016"
-     inkscape:cx="-73.614819"
-     inkscape:cy="-5.2454908"
+     inkscape:zoom="3.0009657"
+     inkscape:cx="53.780147"
+     inkscape:cy="34.91904"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showguides="true"
@@ -1790,7 +1790,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-142.1062,-87.943492)">
+     transform="translate(-142.1062,-99.341229)">
     <g
        id="g31543"
        transform="matrix(0.24052154,0,0,0.22499416,110.50298,-30.181722)">

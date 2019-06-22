@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="128"
-   height="128"
+   width="127.99992"
+   height="81.249001"
    id="svg39019"
    sodipodi:version="0.32"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
@@ -47,9 +47,9 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994948"
-     inkscape:cx="188.74701"
-     inkscape:cy="-36.943329"
+     inkscape:zoom="5.5999999"
+     inkscape:cx="83.012409"
+     inkscape:cy="46.501395"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -102,15 +102,24 @@
           </cc:Agent>
         </dc:contributor>
         <cc:license
-           rdf:resource="" />
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
       </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      style="display:none"
-     transform="translate(-261.57711,-119.29886)">
+     transform="translate(-261.57715,-142.67436)">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none"
        id="rect39180"
@@ -123,7 +132,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-304.57223,-190.70761)">
+     transform="translate(-304.57227,-214.08311)">
     <g
        id="g1072"
        transform="matrix(0.19657373,0,0,0.19657373,296.12062,200.04378)">

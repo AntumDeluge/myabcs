@@ -14,8 +14,8 @@
    width="468.03586"
    height="462.03888"
    id="svg602"
-   inkscape:version="0.48.0 r9654"
-   sodipodi:docname="pretzel edited.svg">
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="pretzel.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -25,8 +25,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1024"
-     inkscape:window-height="712"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
      id="namedview63"
      showgrid="false"
      fit-margin-top="0"
@@ -34,10 +34,10 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="0.76163307"
-     inkscape:cx="119.16501"
+     inkscape:cx="-121.10817"
      inkscape:cy="233.11765"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg602" />
   <metadata
@@ -77,22 +77,22 @@
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
         <cc:license
-           rdf:resource="http://web.resource.org/cc/PublicDomain" />
-        <dc:language></dc:language>
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:language />
         <dc:contributor>
           <cc:Agent>
-            <dc:title>Jordan Irwin</dc:title>
+            <dc:title>Jordan Irwin (AntumDeluge)</dc:title>
           </cc:Agent>
         </dc:contributor>
       </cc:Work>
       <cc:License
-         rdf:about="http://web.resource.org/cc/PublicDomain">
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/Reproduction" />
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/Distribution" />
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
         <cc:permits
-           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
       </cc:License>
     </rdf:RDF>
   </metadata>
