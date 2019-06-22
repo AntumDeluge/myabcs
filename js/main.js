@@ -9,7 +9,7 @@ var PROJ_SF = 'https://sourceforge.net/p/myabcs';
 var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
 var DOWNLOADS = PROJ_SF.concat("/files");
 var AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
-var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/changelog.txt';
+var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/CHANGES.txt';
 
 var changesList = '&nbsp;- Changing to a <a href="https://opensource.org/licenses/MIT">MIT license</a>.<br>\
 &nbsp;- <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>\
