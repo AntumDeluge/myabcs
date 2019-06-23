@@ -4,7 +4,6 @@ var VER_MAJ = '0';
 var VER_MIN = '4';
 var VER_REL = '4';
 var FAVICON = 'data/favicon.png';
-var BGIMAGE = 'data/airplane-mask.png';
 var PROJ_SF = 'https://sourceforge.net/p/myabcs';
 var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
 var DOWNLOADS = PROJ_SF.concat("/files");
@@ -60,9 +59,6 @@ window.onload = function() {
 	favicon.setAttribute('rel', 'shortcut icon');
 	favicon.setAttribute('href', FAVICON);
 	head.appendChild(favicon);
-
-	var body = document.querySelector('body');
-	body.setAttribute('background', BGIMAGE);
 
 	setAppInfo();
 
