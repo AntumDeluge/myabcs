@@ -326,6 +326,7 @@ void MainWindow::SetMode(wxCommandEvent& event) {
     bg->Layout();
 }
 
+// FIXME: if sound fails to play, space key release isn't caught
 void MainWindow::OnKey(wxKeyEvent& event) {
     if (!isplaying && cankey && canspace) {
         // Get key that was pressed
