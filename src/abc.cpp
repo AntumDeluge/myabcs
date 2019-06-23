@@ -89,6 +89,9 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
     Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::SetMode), 0, this);
     Connect(ID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnHelp), 0, this);
     Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnAbout), 0, this);
+#ifdef DEBUG
+    Connect(ID_LOG, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnToggleLogWindow), 0, this);
+#endif
 
     // Status bar
     status = new wxStatusBar(this, -1);
