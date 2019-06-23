@@ -13,12 +13,18 @@ LogWindow::LogWindow(wxWindow* parent, wxString title, bool show=true) :
 }
 
 void LogWindow::Show(const bool show) {
+	wxWindow* frame = GetFrame();
+	const bool wasShown = frame->IsShown();
+
 	wxLogWindow::Show(show);
 
-	wxWindow* mainFrame = GetFrame()->GetParent();
-	if (show && !mainFrame->HasFocus()) {
-		// give focus back to main window
-		mainFrame->SetFocus();
+	if (!wasShown && frame->IsShown()) {
+
+		wxWindow* mainFrame = frame->GetParent();
+		if (!mainFrame->HasFocus()) {
+			// give focus back to main window
+			mainFrame->SetFocus();
+		}
 	}
 }
 
