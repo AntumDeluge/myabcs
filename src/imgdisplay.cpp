@@ -38,6 +38,9 @@ void ImageDisplay::SetImageG(wxString filename) {
 
 		// FIXME: can't check if image displayed properly
 		//logMessage(wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
+		if (!loaded) {
+			logMessage(wxString("Loading SVG document failed: ").Append(svg_filename));
+		}
 
 		image = svg->Render(290, 290, NULL, true, true, NULL);
 	} else {
