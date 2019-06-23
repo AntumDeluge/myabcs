@@ -52,6 +52,7 @@ DEFINES= \
 
 FAILSAFE_PNG = include/res/failsafe.png.h
 
+ID_H = include/id.h
 RES_H = include/res.h
 
 LOG_H = include/log.h
@@ -62,7 +63,7 @@ LOG_D = $(LOG_H)
 GNRCABT_H = include/gnrcabt.h
 GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
-GNRCABT_D = $(GNRCABT_H)
+GNRCABT_D = $(GNRCABT_H) $(ID_H)
 
 IMGDISPLAY_H = include/imgdisplay.h
 IMGDISPLAY_C = src/imgdisplay.cpp
@@ -77,7 +78,7 @@ SOUND_D = $(SOUND_H) $(LOG_H)
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(RES_H) $(IMGDISPLAY_H) $(GNRCABT_H) $(SOUND_H)
+ABC_D = $(ABC_H) $(ID_H) $(RES_H) $(IMGDISPLAY_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp

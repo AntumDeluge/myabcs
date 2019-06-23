@@ -9,7 +9,6 @@
 
 const int ID_INFO = wxNewId();
 const int ID_ART = wxNewId();
-const int ID_LOG = wxNewId();
 const int CREDIT_DEVELOPER = 100;
 const int CREDIT_TRANSLATOR = 101;
 const int CREDIT_ARTIST = 102;
