@@ -41,16 +41,18 @@ void SoundPlayer::init() {
 }
 
 void SoundPlayer::load(const wxString filename) {
-	if (filename.IsEmpty()) {
-		logError(_T("Cannot load sound from empty filename"));
-		return;
-	} else if (isLoaded(filename)) {
+	if (isLoaded(filename)) {
 		logMessage(wxString("Not re-loading sound: ").Append(filename));
 		return;
 	}
 
 	// ensure chunk is NULL every time this method is called
 	unload();
+
+	if (filename.IsEmpty()) {
+		logError(_T("Cannot load sound from empty filename"));
+		return;
+	}
 
 	if (!wxFileExists(filename)) {
 		logError(wxString("Cannot load sound, file not found: ").Append(filename));
