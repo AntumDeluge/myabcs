@@ -7,9 +7,7 @@ Priority:
 - Report wxSVG render bug when objects grouped multiple times
 - Report wxSVG object order rendering bug (cat.svg)
 - Report Inkscape "Title" meta data loss when converting old SVG
-- Add option to show/hide debug log
 - Add debugging symbols
-- Disable log window if not debug build
 - Check for errors when trying to play non-existent sound file
 
 Non-priority:

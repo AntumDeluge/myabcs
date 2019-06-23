@@ -12,6 +12,10 @@ LogWindow::LogWindow(wxWindow* parent, wxString title, bool show=true) :
 		wxLogWindow(parent, title, show) {
 }
 
+bool LogWindow::IsShown() {
+	return GetFrame()->IsShown();
+}
+
 void LogWindow::Show(const bool show) {
 	wxWindow* frame = GetFrame();
 	const bool wasShown = frame->IsShown();
@@ -36,7 +40,6 @@ void initLog(wxWindow* parent) {
 
 void logMessage(const wxLogLevel level, const wxString msg) {
 	if (abclog->IsEnabled()) {
-		abclog->Show();
 		wxLogGeneric(level, msg);
 		std::cout << msg << std::endl;
 	}
@@ -48,4 +51,8 @@ void logMessage(const wxString msg) {
 
 void logError(const wxString msg) {
 	logMessage(wxLOG_Error, msg);
+}
+
+void toggleLogWindow() {
+	abclog->Show(!abclog->IsShown());
 }

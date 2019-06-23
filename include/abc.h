@@ -38,6 +38,7 @@ class MainWindow : public wxFrame {
     void PlaySound();
     void OnHelp(wxMenuEvent& event);
     void OnAbout(wxMenuEvent& event);
+    void OnToggleLogWindow(wxMenuEvent& event);
     void EnableAll(wxCommandEvent& event);
     void SetCurSound(wxString wav);
     void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel

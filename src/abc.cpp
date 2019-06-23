@@ -1,4 +1,5 @@
 #include "abc.h"
+#include "log.h"
 #include "sound.h"
 
 #include <stddef.h>
@@ -74,6 +75,10 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
             wxEmptyString, _T("Help"));
     menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage(_T("pic/info.png"))), wxNullBitmap, wxITEM_NORMAL,
             wxEmptyString, _T("About MyABCs"));
+#ifdef DEBUG
+    menu->AddTool(ID_LOG, _T("Log"), wxBitmap(wxImage(_T("pic/settings.png"))), wxNullBitmap, wxITEM_NORMAL,
+    		wxEmptyString, _T("Show/Hide log window"));
+#endif
     menu->AddSeparator();
     menu->AddTool(wxID_EXIT, _T("Exit"), ico_exit, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _T("Quit"));
 
@@ -968,6 +973,10 @@ specific"));
     about->ShowModal();
 
     // CenterOnParent is called in the constructor
+}
+
+void MainWindow::OnToggleLogWindow(wxMenuEvent& event) {
+	toggleLogWindow();
 }
 
 void MainWindow::OnFrameFocus(wxFocusEvent& event) {
