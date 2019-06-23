@@ -29,3 +29,15 @@ Linux (wxGTK):
   - Pressing letter doesn't always work first time after regaining focus
   - Process does not end when closed from taskbar while log window is open
 - Game doesn't work if sound fails to play (space kay release event not caught)
+- Semi-transparency in SVG images doesn't render well:
+  - electric guitar
+  - magnifying glass
+  - necklace
+  - tomato
+
+Bugs to report:
+- wxSVG:
+  - Image doesn't render when objects grouped multiple times
+  - Object order rendering bug (cat.svg)
+- Inkscape:
+  - "Title" meta data loss when converting old SVG

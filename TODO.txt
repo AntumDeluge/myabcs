@@ -1,18 +1,12 @@
 Priority:
-- Fix semi-transparent shading in SVG:
-  - electric guitar
-  - magnifying glass
-  - necklace
-  - tomato
-- Report wxSVG render bug when objects grouped multiple times
-- Report wxSVG object order rendering bug (cat.svg)
-- Report Inkscape "Title" meta data loss when converting old SVG
+- Initialize logging in background before creation of main frame
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
+- Use wxThread class instead of pthreads
+- cache images & audio
 
 Non-priority:
 - Convert audio to OGG
-- Use wxThread class instead of pthreads
 - Fix app icons on Windows
 - Fix/Add UI manifest on Windows
 - Improve loading time of SVG images (ex. quarter.svg loads slow)
@@ -33,3 +27,11 @@ Non-priority:
 - Change strawberry SVG
 - Remove shading from watch SVG
 - Replace xylophone instrument with xun
+- Make "pic" & "sound" sub-directores of "data" or other folder
+
+Fixes & pull-requests:
+- wxWidgets:
+  - Add wxLogWindow methods:
+    - IsShown
+    - HasFocus
+    - SetFocus
