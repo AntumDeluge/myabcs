@@ -44,7 +44,7 @@ void ImageDisplay::SetImageG(wxString filename) {
 		logMessage(wxString("ERROR: Could not load image: ").Append(filename));
 
 		// load embedded failsafe image data
-		wxMemoryInputStream is(failsafe_png, sizeof(failsafe_png)); // convert PNG char data into input stream
+		wxMemoryInputStream is(&failsafe_png_v[0], failsafe_png_v.size()); // convert PNG data into input stream
 		image = wxImage(is, wxBITMAP_TYPE_PNG);
 	}
 
