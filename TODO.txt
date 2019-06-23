@@ -1,6 +1,4 @@
 Priority:
-- Edit wheels white BG in bicycle SVG
-- Change strawberry SVG
 - Fix semi-transparent shading in SVG:
   - electric guitar
   - magnifying glass
@@ -12,8 +10,6 @@ Priority:
 - Add option to show/hide debug log
 - Add debugging symbols
 - Disable log window if not debug build
-- Replace xylophone instrument with xun
-- Remove shading from watch SVG
 - Check for errors when trying to play non-existent sound file
 
 Non-priority:
@@ -34,3 +30,8 @@ Non-priority:
   - ribbon
 - Clean up include statements
 - Convert failsafe image to SVG
+- Use config to determine environment (locatation of data files, etc.)
+- Edit wheels white BG in bicycle SVG
+- Change strawberry SVG
+- Remove shading from watch SVG
+- Replace xylophone instrument with xun
