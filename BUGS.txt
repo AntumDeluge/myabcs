@@ -28,4 +28,4 @@ Linux (wxGTK):
 - Windows:
   - Pressing letter doesn't always work first time after regaining focus
   - Process does not end when closed from taskbar while log window is open
-- Game doesn't work if sound fails to play
+- Game doesn't work if sound fails to play (space kay release event not caught)
