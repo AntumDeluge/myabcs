@@ -6,17 +6,17 @@
 
 bool App::OnInit()
 {
-    MainWindow* frame = new MainWindow(_T(""));
-    frame->Show(true);
-    SetTopWindow(frame);
+	MainWindow* frame = new MainWindow(_T(""));
+	frame->Show(true);
+	SetTopWindow(frame);
 
-    // FIXME: logging is not initialized for MainWindow constructor
-    initLog(frame);
+	// FIXME: logging is not initialized for MainWindow constructor
+	initLog(frame);
 
-    // initialize SDL audio
-    initializeSounds();
+	// initialize SDL audio
+	initializeSounds();
 
-    return true;
+	return true;
 }
 
 

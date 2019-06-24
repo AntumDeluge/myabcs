@@ -5,8 +5,8 @@
 
 class App : public wxApp
 {
-  public:
-    virtual bool OnInit();
+public:
+	virtual bool OnInit();
 };
 
 #endif /* MYABCS_MAIN_H */

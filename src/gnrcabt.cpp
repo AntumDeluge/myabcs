@@ -3,17 +3,17 @@
 
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) : wxDialog(parent, id, title)
 {
-    CenterOnParent();
+	CenterOnParent();
 
-    Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
+	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
 
-    tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
-    p1_info = new wxPanel(tabs, ID_INFO);
-    p2_credits = new wxScrolledWindow(tabs, wxID_ANY);
-    p3_art = new wxPanel(tabs, ID_ART);
-    p4_log = new wxPanel(tabs, ID_CHANGELOG);
-    tabs->AddPage(p1_info, _T("About"));
-    tabs->AddPage(p2_credits, _T("Credits"));
+	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
+	p1_info = new wxPanel(tabs, ID_INFO);
+	p2_credits = new wxScrolledWindow(tabs, wxID_ANY);
+	p3_art = new wxPanel(tabs, ID_ART);
+	p4_log = new wxPanel(tabs, ID_CHANGELOG);
+	tabs->AddPage(p1_info, _T("About"));
+	tabs->AddPage(p2_credits, _T("Credits"));
 
 	iconsize = new wxSize();
 	// FIXME: fonts
@@ -31,10 +31,10 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 			_T("http://myabcs.sourceforge.net/"));
 	appabout = new wxStaticText(p1_info, -1, wxEmptyString);
 
-    wxBoxSizer *namesizer = new wxBoxSizer(wxHORIZONTAL);
-    namesizer->Add(appname);
-    namesizer->AddSpacer(10);
-    namesizer->Add(appver);
+	wxBoxSizer *namesizer = new wxBoxSizer(wxHORIZONTAL);
+	namesizer->Add(appname);
+	namesizer->AddSpacer(10);
+	namesizer->Add(appver);
 
 	infosizer = new wxBoxSizer(wxVERTICAL);
 	infosizer->AddSpacer(10);
@@ -82,152 +82,151 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	p2_credits->SetSizer(creditsizer);
 	p2_credits->Layout();
 
-    // Art
-    artists = new wxListCtrl(p3_art, -1, wxDefaultPosition, wxSize(300,200), wxLC_REPORT|wxNO_BORDER);
+	// Art
+	artists = new wxListCtrl(p3_art, -1, wxDefaultPosition, wxSize(300,200), wxLC_REPORT|wxNO_BORDER);
 
-    wxSize artsize = artists->GetSize();
-    int colwidth = artsize.GetWidth()/3;
+	wxSize artsize = artists->GetSize();
+	int colwidth = artsize.GetWidth()/3;
 
-    artists->InsertColumn(0, _T("Media"));
-    artists->SetColumnWidth(0, colwidth);
-    artists->InsertColumn(1, _T("Artist"));
-    artists->SetColumnWidth(1, colwidth);
-    artists->InsertColumn(2, _T("License"));
-    artists->SetColumnWidth(2, colwidth*2);
+	artists->InsertColumn(0, _T("Media"));
+	artists->SetColumnWidth(0, colwidth);
+	artists->InsertColumn(1, _T("Artist"));
+	artists->SetColumnWidth(1, colwidth);
+	artists->InsertColumn(2, _T("License"));
+	artists->SetColumnWidth(2, colwidth*2);
 
-    wxBoxSizer *artsizer = new wxBoxSizer(wxVERTICAL);
-    artsizer->Add(artists, 1, wxEXPAND);
+	wxBoxSizer *artsizer = new wxBoxSizer(wxVERTICAL);
+	artsizer->Add(artists, 1, wxEXPAND);
 
-    p3_art->SetAutoLayout(true);
-    p3_art->SetSizer(artsizer);
-    p3_art->Layout();
+	p3_art->SetAutoLayout(true);
+	p3_art->SetSizer(artsizer);
+	p3_art->Layout();
 
-    //artists->Connect(wxEVT_COMMAND_LIST_COL_BEGIN_DRAG, wxListEventHandler(GenericAbout::CancelColResize), 0, this);
+	//artists->Connect(wxEVT_COMMAND_LIST_COL_BEGIN_DRAG, wxListEventHandler(GenericAbout::CancelColResize), 0, this);
 
-    // Changelog
-    changelog = new wxRichTextCtrl(p4_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	// Changelog
+	changelog = new wxRichTextCtrl(p4_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 
-    wxBoxSizer *logsizer = new wxBoxSizer(wxVERTICAL);
-    logsizer->Add(changelog, 1, wxEXPAND);
+	wxBoxSizer *logsizer = new wxBoxSizer(wxVERTICAL);
+	logsizer->Add(changelog, 1, wxEXPAND);
 
-    p4_log->SetAutoLayout(true);
-    p4_log->SetSizer(logsizer);
-    p4_log->Layout();
+	p4_log->SetAutoLayout(true);
+	p4_log->SetSizer(logsizer);
+	p4_log->Layout();
 
-    // OK button
-    ok = new wxButton(this, wxID_OK);
+	// OK button
+	ok = new wxButton(this, wxID_OK);
 
-    // Layout
-    sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(tabs, 1, wxEXPAND);
-    sizer->Add(ok, 0, wxALIGN_RIGHT|wxALL, 5);
+	// Layout
+	sizer = new wxBoxSizer(wxVERTICAL);
+	sizer->Add(tabs, 1, wxEXPAND);
+	sizer->Add(ok, 0, wxALIGN_RIGHT|wxALL, 5);
 
-    SetAutoLayout(true);
-    SetSizerAndFit(sizer);
-    Layout();
+	SetAutoLayout(true);
+	SetSizerAndFit(sizer);
+	Layout();
 
-    *iconsize = sizer->GetSize();
-    appicon->SetSize(iconsize->GetWidth()/2, iconsize->GetWidth()/2);
+	*iconsize = sizer->GetSize();
+	appicon->SetSize(iconsize->GetWidth()/2, iconsize->GetWidth()/2);
 }
 
 void GenericAbout::OnShow(wxEvent& event)
 {
-    CenterOnParent();
+	CenterOnParent();
 
-    ok->SetFocus();
+	ok->SetFocus();
 
-    tabs->ChangeSelection(0);
+	tabs->ChangeSelection(0);
 }
 
 void GenericAbout::CancelColResize(wxListEvent& event)
 {
-    event.Veto();
+	event.Veto();
 }
 
 void GenericAbout::SetImage(wxString image)
 {
-    wxImage newicon(image, wxBITMAP_TYPE_ANY);
-    newicon.Rescale(100, 100, wxIMAGE_QUALITY_HIGH);
-    appicon->SetBitmap(newicon);
+	wxImage newicon(image, wxBITMAP_TYPE_ANY);
+	newicon.Rescale(100, 100, wxIMAGE_QUALITY_HIGH);
+	appicon->SetBitmap(newicon);
 
-    p1_info->Layout();
+	p1_info->Layout();
 }
 
 void GenericAbout::SetImage(wxIcon image)
 {
-    wxBitmap bmpicon(image);
-    wxImage newicon(bmpicon.ConvertToImage());
-    newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
-    appicon->SetBitmap(image);
+	wxBitmap bmpicon(image);
+	wxImage newicon(bmpicon.ConvertToImage());
+	newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
+	appicon->SetBitmap(image);
 
-    p1_info->Layout();
+	p1_info->Layout();
 }
 
 void GenericAbout::SetName(wxString name)
 {
-    appname->SetLabel(name);
+	appname->SetLabel(name);
 }
 
 void GenericAbout::SetVersion(wxString version)
 {
-    appver->SetLabel(version);
+	appver->SetLabel(version);
 }
 
 void GenericAbout::SetCopyright(wxString copyright)
 {
-    appcopyright->SetLabel(copyright);
+	appcopyright->SetLabel(copyright);
 }
 
 void GenericAbout::SetAbout(wxString about)
 {
-    appabout->SetLabel(about);
+	appabout->SetLabel(about);
 }
 
 void GenericAbout::AddCredit(wxString name, const int credit_type)
 {
-    if (credit_type == CREDIT_DEVELOPER) devbox->Append(name);
-    else if (credit_type == CREDIT_PACKAGER) packbox->Append(name);
-    else if (credit_type == CREDIT_TRANSLATOR) transbox->Append(name);
-    else if (credit_type == CREDIT_ARTIST) artbox->Append(name);
+	if (credit_type == CREDIT_DEVELOPER) devbox->Append(name);
+	else if (credit_type == CREDIT_PACKAGER) packbox->Append(name);
+	else if (credit_type == CREDIT_TRANSLATOR) transbox->Append(name);
+	else if (credit_type == CREDIT_ARTIST) artbox->Append(name);
 }
 
 /*void GenericAbout::AddCredit(wxArrayString& names, int credit_type);
 {
-    if (credit_type == CREDIT_DEVELOPER) devbox->InsertItems(names);
-    else if (credit_type == CREDIT_PACKAGER) packbox->InsertItems(names);
-    else if (credit_type == CREDIT_TRANSLATOR) transbox->InsertItems(names);
-    else if (credit_type == CREDIT_ARTIST) artbox->InsertItems(names);
+	if (credit_type == CREDIT_DEVELOPER) devbox->InsertItems(names);
+	else if (credit_type == CREDIT_PACKAGER) packbox->InsertItems(names);
+	else if (credit_type == CREDIT_TRANSLATOR) transbox->InsertItems(names);
+	else if (credit_type == CREDIT_ARTIST) artbox->InsertItems(names);
 }*/
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
 {
 	// FIXME: Index error
-    if (tabs->GetPage(2) != p3_art)
-    {
-        tabs->InsertPage(2, p3_art, _T("Art"));
-        SetSizerAndFit(sizer);
-        Layout();
-    }
+	if (tabs->GetPage(2) != p3_art)
+	{
+		tabs->InsertPage(2, p3_art, _T("Art"));
+		SetSizerAndFit(sizer);
+		Layout();
+	}
 
-    int count = artists->GetItemCount();
+	int count = artists->GetItemCount();
 
-    artists->InsertItem(count, image);
-    artists->SetItem(count, 1, name);
-    artists->SetItem(count, 2, license);
+	artists->InsertItem(count, image);
+	artists->SetItem(count, 1, name);
+	artists->SetItem(count, 2, license);
 }
 
 void GenericAbout::SetChangelog(wxString log)
 {
-    changelog->SetValue(log);
-    tabs->AddPage(p4_log, _T("Changelog"));
+	changelog->SetValue(log);
+	tabs->AddPage(p4_log, _T("Changelog"));
 }
 
 gaListBox::gaListBox(wxWindow* parent, wxWindowID id) : wxListBox(parent, id=wxID_ANY)
 {
-    Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(gaListBox::VoidSelect), 0, this);
+	Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(gaListBox::VoidSelect), 0, this);
 }
 
 void gaListBox::VoidSelect(wxMouseEvent& event)
 {
 }
-

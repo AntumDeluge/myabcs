@@ -16,64 +16,64 @@ const int CREDIT_PACKAGER = 103;
 
 class GenericAbout : public wxDialog
 {
-  public:
-    GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
-    void SetImage(wxString image);
-    void SetImage(wxIcon image);
-    void SetName(wxString name);
-    void SetVersion(wxString version);
-    void SetCopyright(wxString copyright);
-    void SetURL(wxString url);
-    void SetAbout(wxString about);
-    void AddCredit(wxString name, int credit_type);
-    //void AddCredit(wxArrayString& names, int credit_type);
-    void AddArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
-    void SetChangelog(wxString log);
-  private:
-    void OnShow(wxEvent& event);
-    wxNotebook *tabs;
-    wxButton *ok;
-    wxPanel *p1_info;
-    wxScrolledWindow *p2_credits;
-    wxPanel *p3_art;
-    wxPanel *p4_log;
+public:
+	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
+	void SetImage(wxString image);
+	void SetImage(wxIcon image);
+	void SetName(wxString name);
+	void SetVersion(wxString version);
+	void SetCopyright(wxString copyright);
+	void SetURL(wxString url);
+	void SetAbout(wxString about);
+	void AddCredit(wxString name, int credit_type);
+	//void AddCredit(wxArrayString& names, int credit_type);
+	void AddArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
+	void SetChangelog(wxString log);
+private:
+	void OnShow(wxEvent& event);
+	wxNotebook *tabs;
+	wxButton *ok;
+	wxPanel *p1_info;
+	wxScrolledWindow *p2_credits;
+	wxPanel *p3_art;
+	wxPanel *p4_log;
 
-    // Info
-    wxStaticBitmap *appicon;
-    wxSize *iconsize;
-    wxStaticText *appname;
-    wxStaticText *appver;
-    wxStaticText *appcopyright;
-    wxHyperlinkCtrl *appurl;
-    wxStaticText *appabout;
+	// Info
+	wxStaticBitmap *appicon;
+	wxSize *iconsize;
+	wxStaticText *appname;
+	wxStaticText *appver;
+	wxStaticText *appcopyright;
+	wxHyperlinkCtrl *appurl;
+	wxStaticText *appabout;
 
-    wxBoxSizer *infosizer;
+	wxBoxSizer *infosizer;
 
-    // Credits
-    wxStaticText *devtext;
-    wxListBox *devbox;
-    wxStaticText *packtext;
-    wxListBox *packbox;
-    wxStaticText *transtext;
-    wxListBox *transbox;
-    wxStaticText *arttext;
-    wxListBox *artbox;
+	// Credits
+	wxStaticText *devtext;
+	wxListBox *devbox;
+	wxStaticText *packtext;
+	wxListBox *packbox;
+	wxStaticText *transtext;
+	wxListBox *transbox;
+	wxStaticText *arttext;
+	wxListBox *artbox;
 
-    // Art
-    wxListCtrl *artists;
-    void CancelColResize(wxListEvent& event);
+	// Art
+	wxListCtrl *artists;
+	void CancelColResize(wxListEvent& event);
 
-    // Changelog
-    wxRichTextCtrl *changelog;
+	// Changelog
+	wxRichTextCtrl *changelog;
 
-    wxBoxSizer *sizer;
+	wxBoxSizer *sizer;
 };
 
 class gaListBox : public wxListBox
 {
-  public:
-    gaListBox(wxWindow* parent, wxWindowID id);
-    void VoidSelect(wxMouseEvent& event);
+public:
+	gaListBox(wxWindow* parent, wxWindowID id);
+	void VoidSelect(wxMouseEvent& event);
 };
 
 #endif /* MYABCS_GNRCABT_H */
