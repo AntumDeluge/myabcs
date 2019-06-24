@@ -1,5 +1,4 @@
 
-var NAME = 'MyABCs';
 var VER_MAJ = '0';
 var VER_MIN = '4';
 var VER_REL = '4';
@@ -52,8 +51,6 @@ setNewsFeed = function() {
 }
 
 window.onload = function() {
-	document.title = NAME;
-
 	let head = document.querySelector('head');
 	let favicon = document.createElement('link');
 	favicon.setAttribute('rel', 'shortcut icon');
