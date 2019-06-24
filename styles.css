@@ -51,3 +51,7 @@ h2.appinfo {
 h5.author:after {
 	content: 'By Jordan Irwin (AntumDeluge)';
 }
+
+h5.redirect:before {
+	content: 'If you are not redirected, click the link below:';
+}
