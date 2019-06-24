@@ -2,7 +2,6 @@
 var VER_MAJ = '0';
 var VER_MIN = '4';
 var VER_REL = '4';
-var FAVICON = 'data/favicon.png';
 var PROJ_SF = 'https://sourceforge.net/p/myabcs';
 var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
 var DOWNLOADS = PROJ_SF.concat("/files");
@@ -51,12 +50,6 @@ setNewsFeed = function() {
 }
 
 window.onload = function() {
-	let head = document.querySelector('head');
-	let favicon = document.createElement('link');
-	favicon.setAttribute('rel', 'shortcut icon');
-	favicon.setAttribute('href', FAVICON);
-	head.appendChild(favicon);
-
 	setAppInfo();
 
 	addMenuItem('menu.project', PROJ_SF, 'SourceForge Project');
