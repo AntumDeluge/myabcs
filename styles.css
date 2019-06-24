@@ -3,6 +3,14 @@ body {
 	background-image: url('data/airplane-mask.png');
 }
 
+center-text, h5.info {
+	text-align: center;
+}
+
+h5.info {
+	font-size: 12pt;
+}
+
 table.menu {
 	margin-left: auto;
 	margin-right: auto;
@@ -40,7 +48,6 @@ h2.appinfo {
 	font-size: 30pt;
 }
 
-h5.author {
-	text-align: center;
-	font-size: 12pt;
+h5.author:after {
+	content: 'By Jordan Irwin (AntumDeluge)';
 }
