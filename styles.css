@@ -8,15 +8,20 @@ table.menu {
 	margin-right: auto;
 }
 
-img.icon {
-	max-width: 128px;
-	height: auto;
-}
-
 img.center {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+img.icon {
+	max-width: 128px;
+	height: auto;
+	content:  url('data/icon.svg');
+}
+
+img.screenshot {
+	content: url('data/screenshot.png');
 }
 
 table.newsfeed {
