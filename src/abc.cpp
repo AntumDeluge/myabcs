@@ -947,7 +947,7 @@ specific"));
 	about->AddArtist(_T("Violin(sound)"), _T("Edit Kov\u00E1cs"), _T("Attribution-ShareAlike 2.0 Germany"));
 	about->AddArtist(_T("Volleyball"), _T("Andrea Bianchini"), _T("Public Domain"));
 	about->AddArtist(_T("Vulture"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Vulture(sound)"), _T("free-sound-effects-bird"), _T("AudioMicro Standard License"));
+	about->AddArtist(_T("Vulture(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain"));
 	about->AddArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
 	about->AddArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
 	about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
