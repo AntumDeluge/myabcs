@@ -3,7 +3,6 @@ Known BUGS:
   - apple (shading artifacts?)
   - cat (missing eye)
   - clock ("shine" out of place)
-  - earth (colors missing)
   - magnifying glass (transparency)
   - onion (strange shading artifacts)
   - pig (horizontal line)
