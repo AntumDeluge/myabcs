@@ -200,14 +200,14 @@ wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 		FLUTE, GUITAR, HARP, IPU, JUG,
 		KAZOO, LUTE, MARACAS, NEY, OBOE, PIANO,
 		QUENA, RECORDER, SAX, TRUMPET, UKULELE,
-		VIOLIN, WHISTLE, XYLOPHONE, YANGQIN, ZURNA
+		VIOLIN, WHISTLE, XUN, YANGQIN, ZURNA
 	};
 	wxString music_name[26] = {
 		_T("ACCORDION"), _T("BAGPIPES"), _T("CLARINET"), _T("DRUMS"), _T("ELECTRIC GUITAR"),
 		_T("FLUTE"), _T("GUITAR"), _T("HARP"), _T("IPU"), _T("JUG"),
 		_T("KAZOO"), _T("LUTE"), _T("MARACAS"), _T("NEY"), _T("OBOE"), _T("PIANO"),
 		_T("QUENA"), _T("RECORDER"), _T("SAXOPHONE"), _T("TRUMPET"), _T("UKULELE"),
-		_T("VIOLIN"), _T("WHISTLE"), _T("XYLOPHONE"), _T("YANGQIN"), _T("ZURNA")
+		_T("VIOLIN"), _T("WHISTLE"), _T("XUN"), _T("YANGQIN"), _T("ZURNA")
 	};
 
 	for (int a = 0; a < 26; a += 1) {
@@ -532,10 +532,10 @@ void MainWindow::PlaySound() {
 			_T("UDON"), _T("UKULELE"), _T("UMBRELLA"), _T("UNAGI"), _T("UNICYCLE"),
 			_T("URCHIN"), _T("VASE"), _T("VEGETABLES"), _T("VIOLIN"), _T("VOLLEYBALL"),
 			_T("VULTURE"), _T("WAGON"), _T("WATCH"), _T("WATERMELON"), _T("WHALE"),
-			_T("WHISTLE"), _T("X-COOKIE"), _T("X-RAY"), _T("XIPHIAS"), _T("XYLOPHONE"),
-			_T("YAK"), _T("YAM"), _T("YANGQIN"), _T("YIN YANG"), _T("YO-YO"),
-			_T("ZEBRA"), _T("ZIP-LINE"), _T("ZIPPER"), _T("ZUCCHINI"), _T("ZURNA"),
-			_T("XUN")
+			_T("WHISTLE"), _T("X-COOKIE"), _T("X-RAY"), _T("XIPHIAS"), _T("XUN"),
+			_T("XYLOPHONE"), _T("YAK"), _T("YAM"), _T("YANGQIN"), _T("YIN YANG"),
+			_T("YO-YO"), _T("ZEBRA"), _T("ZIP-LINE"), _T("ZIPPER"), _T("ZUCCHINI"),
+			_T("ZURNA")
 		},
 
 		{
@@ -658,6 +658,7 @@ void MainWindow::PlaySound() {
 			_T("sound/xcookie.wav"),
 			_T("sound/xray.wav"),
 			_T("sound/xiphias.wav"),
+			_T("sound/xun.wav"),
 			_T("sound/xylophone.wav"),
 			_T("sound/yak.wav"),
 			_T("sound/yam.wav"),
@@ -668,8 +669,7 @@ void MainWindow::PlaySound() {
 			_T("sound/zipline.wav"),
 			_T("sound/zipper.wav"),
 			_T("sound/zucchini.wav"),
-			_T("sound/zurna.wav"),
-			_T("sound/xun.wav")
+			_T("sound/zurna.wav")
 		}
 	};
 	for (int x = 0; x < 131; x += 1) {
@@ -958,7 +958,7 @@ specific"));
 	about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
 	about->AddArtist(_T("Xiphias"), wxEmptyString, _T("Public Domain"));
-	//about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
+	about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0"));
 	about->AddArtist(_T("Yak"), _T("Jordan Irwin"), _T("Public Domain"));
