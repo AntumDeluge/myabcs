@@ -30,6 +30,8 @@ Non-priority:
 - Make "pic" & "sound" sub-directores of "data" or other folder
 - Possible change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
+- Show keyboard for "ABC/find" mode
+- Embed free font
 
 Fixes & pull-requests:
 - wxWidgets:
