@@ -24,7 +24,7 @@ public:
 	void load(const std::string filename);
 	void unload();
 	void play();
-	void play(const wxString filename);
+	void play(wxString filename);
 	void play(const std::string filename);
 	void stop();
 	bool isLoaded(const wxString filename);

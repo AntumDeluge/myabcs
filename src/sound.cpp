@@ -40,7 +40,13 @@ void SoundPlayer::init() {
 	logMessage(_T("Opened audio mixer"));
 }
 
-void SoundPlayer::load(const wxString filename) {
+void SoundPlayer::load(wxString filename) {
+	// Vorbis audio takes priority
+	const wxString ogg_filename = filename.Left(filename.Len() - 3).Append("oga");
+	if (wxFileExists(ogg_filename)) {
+		filename = ogg_filename;
+	}
+
 	if (isLoaded(filename)) {
 		logMessage(wxString("Not re-loading sound: ").Append(filename));
 		return;
