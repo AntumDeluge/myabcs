@@ -4,12 +4,6 @@ all: $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION).";
 	$(CC) $(LINKEROPTS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
 
-debug: CXXFLAGS += -O0 -g -Wall -DDEBUG
-debug: WXFLAGS += --debug=yes
-debug: WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console|'
-debug: LINKEROPTS = -v
-debug: all
-
 cleanstage:
 	@if [ -d "${STAGEDIR}" ]; then \
 		rm -rf "${STAGEDIR}"; \
