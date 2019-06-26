@@ -15,6 +15,7 @@ DESTDIR = $(PREFIX)
 BINDIR = $(DESTDIR)/bin
 INCLDIR = $(DESTDIR)/include
 LIBDIR = $(DESTDIR)/lib
+STAGEDIR = build/stage
 
 
 ### Base directories ###
@@ -45,8 +46,8 @@ EXE = $(PNAME)$(EXE_SUF)
 ABCDIR = $(PREFIX)/share/myabcs
 PIXMAPDIR = $(PREFIX)/share/pixmaps
 DEFINES= \
-    -DPIXMAPDIR="\"$(PIXMAPDIR)\"" \
-    -DABCDIR="\"$(ABCDIR)\""
+	-DPIXMAPDIR="\"$(PIXMAPDIR)\"" \
+	-DABCDIR="\"$(ABCDIR)\""
 
 ### Files & headers ###
 
@@ -86,7 +87,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
 
 OBJECTS = \
-    $(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
 
 F_DATA = \
-    changelog.txt license-MIT.txt myabcs.png
+	changelog.txt license-MIT.txt myabcs.png

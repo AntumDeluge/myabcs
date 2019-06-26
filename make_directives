@@ -10,6 +10,38 @@ debug: WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console
 debug: LINKEROPTS = -v
 debug: all
 
+cleanstage:
+	@if [ -d "${STAGEDIR}" ]; then \
+		rm -rf "${STAGEDIR}"; \
+	fi;
+
+stage: all LICENSE.txt myabcs.png cleanstage
+	@stage_dir="${STAGEDIR}/myabcs"; \
+	mkdir -p "$${stage_dir}/pic" "$${stage_dir}/sound/alpha"; \
+	# main executable; \
+	install -vm 0755 "${EXE}" "$${stage_dir}"; \
+	# image data; \
+	for PNG in $$(find pic/ -maxdepth 1 -type f -name "*.png"); do \
+		install -vm 0644 "$${PNG}" "$${stage_dir}/pic/"; \
+	done; \
+	for DIR in "pic/animals" "pic/food" "pic/misc" "pic/music" "pic/toys"; do \
+		target_dir="$${stage_dir}/$${DIR}"; \
+		mkdir -p "$${target_dir}"; \
+		for IMG in $$(find "$${DIR}" -maxdepth 1 -type f); do \
+			install -vm 0644 "$${IMG}" "$${target_dir}"; \
+		done; \
+	done; \
+	# sound data; \
+	for DIR in "sound" "sound/alpha"; do \
+		target_dir="$${stage_dir}/$${DIR}"; \
+		for SND in $$(find "$${DIR}" -maxdepth 1 -type f); do \
+			install -vm 0644 "$${SND}" "$${target_dir}"; \
+		done; \
+	done; \
+	# doc files; \
+	install -vm 0644 "LICENSE.txt" "$${stage_dir}"; \
+	install -vm 0644 "myabcs.png" "$${stage_dir}/icon.png";
+
 $(LOG_O): $(LOG_C) $(LOG_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(LOG_C)
 
