@@ -28,8 +28,18 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	# sound data; \
 	for DIR in "sound" "sound/alpha"; do \
 		target_dir="$${stage_dir}/$${DIR}"; \
-		for SND in $$(find "$${DIR}" -maxdepth 1 -type f); do \
-			install -vm 0644 "$${SND}" "$${target_dir}"; \
+		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.wav"); do \
+			if test "${VORBIS}"; then \
+				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.wav|\.oga|')"; \
+				echo "'$${SND}' -> '$${target_ogg}'"; \
+				ffmpeg -hide_banner -loglevel panic -y -i "$${SND}" -c:a libvorbis -b:a 96k "$${target_ogg}"; \
+				if test $$? -ne 0; then \
+					echo -e "\nError converting PCM to Vorbis data. Is FFmpeg installed?"; \
+					exit 1; \
+				fi; \
+			else \
+				install -vm 0644 "$${SND}" "$${target_dir}"; \
+			fi; \
 		done; \
 	done; \
 	# doc files; \

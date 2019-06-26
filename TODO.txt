@@ -6,7 +6,6 @@ Priority:
 - cache images & audio
 
 Non-priority:
-- Convert audio to OGG
 - Fix app icons on Windows
 - Fix/Add UI manifest on Windows
 - Improve loading time of SVG images (ex. quarter.svg loads slow)
