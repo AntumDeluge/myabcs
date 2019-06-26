@@ -62,6 +62,7 @@ FAILSAFE_PNG = include/res/failsafe.png.h
 
 ID_H = include/id.h
 RES_H = include/res.h
+RESOURCES_O = resources.o
 
 LOG_H = include/log.h
 LOG_C = src/log.cpp
@@ -95,6 +96,10 @@ MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
 
 OBJECTS = \
 	$(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+
+ifeq ($(OS), Windows_NT)
+	OBJECTS += $(RESOURCES_O)
+endif
 
 F_DATA = \
 	changelog.txt license-MIT.txt myabcs.png
