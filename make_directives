@@ -42,6 +42,20 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	install -vm 0644 "LICENSE.txt" "$${stage_dir}"; \
 	install -vm 0644 "myabcs.png" "$${stage_dir}/icon.png";
 
+pack: stage
+	@cd "${STAGEDIR}"; \
+	rel_name="myabcs-${VERSION}"; \
+	if test "${DEBUG}"; then \
+		rel_name+="-debug"; \
+	fi; \
+	echo -e "\nCreating binary distribution: $${rel_name}\n"; \
+	rel_file="../$${rel_name}.zip"; \
+	if [ -f "$${rel_file}" ]; then \
+		rm -vf "$${rel_file}"; \
+	fi; \
+	zip -r9 "$${rel_file}" ./; \
+	echo -e "\nCreated $${rel_name}.zip binary distribution archive";
+
 $(LOG_O): $(LOG_C) $(LOG_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(LOG_C)
 
