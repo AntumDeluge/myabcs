@@ -49,9 +49,12 @@ int ResourceList::getObjectIndex(wxString alpha) {
 ResourceObject ResourceList::getObject(wxString alpha) {
 	const int idx = getObjectIndex(alpha);
 
+	// FIXME: how to return NULL or negative value to signify failure???
+	/*
 	if (idx < 0) {
-		return NULL;
+		return;
 	}
+	*/
 
 	return objects.at(idx);
 }
