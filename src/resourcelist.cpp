@@ -9,6 +9,14 @@ using namespace std;
 */
 
 
+ResourceList::~ResourceList() {
+	for (unsigned int idx = 0; idx < objects.size(); idx++) {
+		delete objects.at(idx);
+	}
+
+	objects.clear();
+}
+
 /** Removes first instance found */
 bool ResourceList::remove(wxString alpha) {
 	const int idx = getObjectIndex(alpha);
@@ -37,7 +45,7 @@ int ResourceList::getObjectIndex(wxString alpha) {
 	alpha = alpha.Lower();
 
 	for (int idx = 0; objects.size(); idx++) {
-		wxString label = objects.at(idx).getLabel().Lower();
+		wxString label = objects.at(idx)->getLabel().Lower();
 		if (label.StartsWith(alpha)) {
 			return idx;
 		}
@@ -46,7 +54,7 @@ int ResourceList::getObjectIndex(wxString alpha) {
 	return -1;
 }
 
-ResourceObject ResourceList::getObject(wxString alpha) {
+ResourceObject* ResourceList::getObject(wxString alpha) {
 	const int idx = getObjectIndex(alpha);
 
 	// FIXME: how to return NULL or negative value to signify failure???
@@ -57,4 +65,9 @@ ResourceObject ResourceList::getObject(wxString alpha) {
 	*/
 
 	return objects.at(idx);
+}
+
+void ResourceList::removeIndex(int idx) {
+	delete objects.at(idx);
+	objects.erase(objects.begin() + idx);
 }
