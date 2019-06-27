@@ -6,15 +6,6 @@
 #include <wx/sound.h>
 
 
-class SoundFile {
-public:
-	SoundFile(const std::string filename) { file = filename; }
-	std::string toString() { return file; }
-private:
-	std::string file;
-};
-
-
 class SoundPlayer {
 public:
 	SoundPlayer();
@@ -30,8 +21,6 @@ public:
 	bool isLoaded(const wxString filename);
 	bool isReady();
 	bool isPlaying();
-private:
-	//SoundFile* soundFile;
 };
 
 extern SoundPlayer* soundPlayer;
