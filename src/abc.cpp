@@ -600,7 +600,7 @@ void MainWindow::PlaySound() {
 			_T("sound/lion.wav"),
 			_T("sound/lute.wav"),
 			_T("sound/magnet.wav"),
-			_T("sound/mag_glass.wav"),
+			_T("sound/magnifying_glass.wav"),
 			_T("sound/maracas.wav"),
 			_T("sound/mouse.wav"),
 			_T("sound/mushroom.wav"),
