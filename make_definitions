@@ -32,19 +32,21 @@ WXFLAGS = wx-config --cxxflags
 SDLFLAGS = sdl2-config --cflags
 OBJ_SUF = .o
 
-ifdef DEBUG
-	CXXFLAGS += -O0 -g -Wall -DDEBUG
-	WXFLAGS += --debug=yes
-	WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console|'
-	LINKEROPTS = -v
-endif
-
 ### Linking ###
 
 LIBS = -lwxsvg -lSDL2_mixer -lpthread
 WXLIBS = wx-config --libs std,richtext
 SDLLIBS = sdl2-config --libs
 LINKEROPTS = -Wl,--strip-all
+
+### Debugging ###
+
+ifdef DEBUG
+	CXXFLAGS += -O0 -g -Wall -DDEBUG
+	WXFLAGS += --debug=yes
+	WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console|'
+	LINKEROPTS = -v
+endif
 
 ### Installation ###
 
