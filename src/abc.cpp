@@ -615,7 +615,7 @@ void MainWindow::PlaySound() {
 			_T("sound/origami.wav"),
 			_T("sound/owl.wav"),
 			_T("sound/paint.wav"),
-			_T("sound/paper_plane.wav"),
+			_T("sound/paper_airplane.wav"),
 			_T("sound/piano.wav"),
 			_T("sound/pig.wav"),
 			_T("sound/pretzel.wav"),
