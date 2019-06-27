@@ -64,6 +64,7 @@ ResourceList* createCategory(string cat_name) {
 	} else if (cat_name == "toy") {
 		category = c_toy;
 	} else {
+		cat_name = "main";
 		category = c_main;
 	}
 
