@@ -7,6 +7,11 @@
 #include <wxSVG/SVGDocument.h>
 
 
+// directories where image & sound files are stored
+static const wxString dir_images("pic/");
+static const wxString dir_vocals("sound/");
+static const wxString dir_effects("sound/effect/");
+
 // channel for playing audio
 static int channel;
 
@@ -18,29 +23,31 @@ ResourceObject::ResourceObject(ResourceObject& ro)
 */
 
 /** sound is loaded from external file */
-ResourceObject::ResourceObject(wxString label, wxImage img, wxString snd)
-		: objectLabel(label), objectImage(img), objectSound(NULL) {
-	loadSound(snd);
+ResourceObject::ResourceObject(wxString label, wxImage img)
+		: objectLabel(label), objectImage(img) {
+	loadSound(label);
 }
 
-ResourceObject::ResourceObject(wxString label, wxString img, wxString snd)
-		: objectLabel(label), objectSound(NULL) {
-	loadImage(img);
-	loadSound(snd);
+ResourceObject::ResourceObject(wxString label, wxString category)
+		: objectLabel(label) {
+	loadImage(category.Append("/").Append(label));
+	loadSound(label);
 }
 
 ResourceObject::~ResourceObject() {
-	Mix_FreeChunk(objectSound);
-	delete objectSound;
+	Mix_FreeChunk(sndVocal);
+	Mix_FreeChunk(sndEffect);
+	delete sndVocal;
+	delete sndEffect;
 }
 
 bool ResourceObject::playSound() {
-	if (objectSound == NULL) {
+	if (sndVocal == NULL) {
 		logError(_T("Audio not loaded, cannot play sound"));
 		return false;
 	}
 
-	channel = Mix_PlayChannel(-1, objectSound, 0);
+	channel = Mix_PlayChannel(-1, sndVocal, 0);
 	if (channel != 0) {
 		logError(wxString("Playing sound failed: ").Append(Mix_GetError()));
 		return false;
@@ -49,12 +56,24 @@ bool ResourceObject::playSound() {
 	// wait for sound to stop playing
 	while (Mix_Playing(channel) != 0);
 
+	// optional sound effect
+	if (sndEffect != NULL) {
+		channel = Mix_PlayChannel(-1, sndEffect, 0);
+		if (channel != 0) {
+			logError(wxString("Playing sound effect failed: ").Append(Mix_GetError()));
+			// don't return here because sound effect is not essential
+		}
+
+		// wait for sound effect to stop playing
+		while (Mix_Playing(channel) != 0);
+	}
+
 	return true;
 }
 
 void ResourceObject::loadImage(wxString img) {
-	if (!img.StartsWith(_T("pic/"))) {
-		img = wxString("pic/").Append(img);
+	if (!img.StartsWith(dir_images)) {
+		img = wxString(dir_images).Append(img);
 	}
 
 	wxString png_filename, svg_filename;
@@ -97,37 +116,46 @@ void ResourceObject::loadImage(wxString img) {
 }
 
 void ResourceObject::loadSound(wxString snd) {
-	if (!snd.EndsWith(_T(".wav"))) {
-		snd = snd.Append(_T(".wav"));
-	}
-
-	if (!snd.StartsWith(_T("sound/"))) {
-		snd = wxString(_T("sound/")).Append(snd);
-	}
-
-	// Vorbis audio takes priority
-	const wxString ogg_snd = snd.Left(snd.Len() - 3).Append("oga");
-	if (wxFileExists(ogg_snd)) {
-		snd = ogg_snd;
-	}
-
 	if (snd.IsEmpty()) {
 		logError(_T("Cannot load sound from empty filename"));
 		return;
 	}
 
-	if (!wxFileExists(snd)) {
-		logError(wxString("Cannot load sound, file not found: ").Append(snd));
+	if (!snd.EndsWith(_T(".wav"))) {
+		snd = snd.Append(_T(".wav"));
+	}
+
+	wxString vocal = wxString(dir_vocals).Append(snd);
+	wxString effect = wxString(dir_effects).Append(snd);
+
+	const wxString ogg_vocal = vocal.Left(vocal.Len() - 3).Append("oga");
+	const wxString ogg_effect = effect.Left(effect.Len() -3).Append("oga");
+
+	// Vorbis audio takes priority
+	if (wxFileExists(ogg_vocal)) {
+		vocal = ogg_vocal;
+	}
+	if (wxFileExists(ogg_effect)) {
+		effect = ogg_effect;
+	}
+
+	if (!wxFileExists(vocal)) {
+		logError(wxString("Cannot load sound, file not found: ").Append(vocal));
 		return;
 	}
 
-	objectSound = Mix_LoadWAV(snd.c_str());
+	sndVocal = Mix_LoadWAV(vocal.c_str());
 
-	if (objectSound == NULL) {
-		wxString errmsg = wxString("Unable to load sound file \"").Append(snd).Append("\": ").Append(Mix_GetError());
+	if (sndVocal == NULL) {
+		wxString errmsg = wxString("Unable to load sound file \"").Append(vocal).Append("\": ").Append(Mix_GetError());
 		logError(errmsg);
 		return;
 	}
 
-	logMessage(wxString("Loaded sound file: ").Append(snd));
+	// optional sound effect
+	if (wxFileExists(effect)) {
+		sndEffect = Mix_LoadWAV(effect.c_str());
+	}
+
+	logMessage(wxString("Loaded sound file: ").Append(vocal));
 }

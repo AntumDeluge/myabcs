@@ -53,16 +53,16 @@ static const vector<string> c_toy {
 	"zipline",
 };
 
-ResourceList* createCategory(string catName) {
+ResourceList* createCategory(string cat_name) {
 	vector<string> category;
 
-	if (catName == "food") {
+	if (cat_name == "food") {
 		category = c_food;
-	} else if (catName == "animal") {
+	} else if (cat_name == "animal") {
 		category = c_animal;
-	} else if (catName == "music") {
+	} else if (cat_name == "music") {
 		category = c_music;
-	} else if (catName == "toy") {
+	} else if (cat_name == "toy") {
 		category = c_toy;
 	} else {
 		category = c_main;
@@ -73,9 +73,8 @@ ResourceList* createCategory(string catName) {
 
 	for (unsigned int idx = 0; idx < category.size(); idx++) {
 		const wxString label = wxString(category.at(idx));
-		const wxString img = wxString(catName).Append("/").Append(label);
-		const wxString snd = label;
-		resList->add(ResourceObject(label, img, snd));
+		//const wxString img = wxString(catName).Append("/").Append(label);
+		resList->add(ResourceObject(label, cat_name));
 	}
 
 	return resList;

@@ -12,8 +12,8 @@ class ResourceObject {
 public:
 	//ResourceObject() : objectSound(NULL) {};
 	//ResourceObject(ResourceObject& ro);
-	ResourceObject(wxString label, wxImage img, wxString snd);
-	ResourceObject(wxString label, wxString img, wxString snd);
+	ResourceObject(wxString label, wxImage img);
+	ResourceObject(wxString label, wxString category);
 	~ResourceObject();
 	wxString getLabel() { return objectLabel; }
 	wxBitmap getBitmap() { return wxBitmap(objectImage); }
@@ -21,7 +21,8 @@ public:
 private:
 	wxString objectLabel;
 	wxImage objectImage;
-	Mix_Chunk* objectSound;
+	Mix_Chunk* sndVocal;
+	Mix_Chunk* sndEffect;
 
 protected:
 	void loadImage(wxString img);
