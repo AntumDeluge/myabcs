@@ -18,7 +18,7 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	for PNG in $$(find pic/ -maxdepth 1 -type f -name "*.png"); do \
 		install -vm 0644 "$${PNG}" "$${stage_dir}/pic/"; \
 	done; \
-	for DIR in "pic/animals" "pic/food" "pic/misc" "pic/music" "pic/toys"; do \
+	for DIR in $$(find "pic/" -type d); do \
 		target_dir="$${stage_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for IMG in $$(find "$${DIR}" -maxdepth 1 -type f); do \
