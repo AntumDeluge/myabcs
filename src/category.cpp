@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <wx/image.h>
-#include <wx/string.h>
 using namespace std;
 
 
@@ -78,4 +77,8 @@ ResourceList* createCategory(string cat_name) {
 	}
 
 	return resList;
+}
+
+ResourceList* createCategory(wxString cat_name) {
+	return createCategory(string(cat_name.mb_str()));
 }
