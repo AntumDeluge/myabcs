@@ -74,7 +74,7 @@ ResourceList* createCategory(string cat_name) {
 	for (unsigned int idx = 0; idx < category.size(); idx++) {
 		const wxString label = wxString(category.at(idx));
 		//const wxString img = wxString(catName).Append("/").Append(label);
-		resList->add(ResourceObject(label, cat_name));
+		resList->add(new ResourceObject(label, cat_name));
 	}
 
 	return resList;
