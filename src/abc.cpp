@@ -656,7 +656,7 @@ void MainWindow::PlaySound() {
 			_T("sound/whale.wav"),
 			_T("sound/whistle.wav"),
 			_T("sound/xcookie.wav"),
-			_T("sound/xray.wav"),
+			_T("sound/x-ray.wav"),
 			_T("sound/xiphias.wav"),
 			_T("sound/xun.wav"),
 			_T("sound/xylophone.wav"),
