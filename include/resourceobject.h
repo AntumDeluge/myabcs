@@ -10,20 +10,23 @@
 
 class ResourceObject {
 public:
+	//ResourceObject() : objectSound(NULL) {};
+	//ResourceObject(ResourceObject& ro);
 	ResourceObject(wxString label, wxImage img, wxString snd);
 	ResourceObject(wxString label, wxString img, wxString snd);
 	~ResourceObject();
-	const wxString getLabel() { return objectLabel; }
-	const wxBitmap getBitmap() { return wxBitmap(objectImage); }
+	wxString getLabel() { return objectLabel; }
+	wxBitmap getBitmap() { return wxBitmap(objectImage); }
 	bool playSound();
 private:
-	const wxString objectLabel;
-	const wxImage objectImage;
-	const Mix_Chunk* objectSound;
+	wxString objectLabel;
+	wxImage objectImage;
+	Mix_Chunk* objectSound;
 
 protected:
+	void loadImage(wxString img);
 	void loadSound(wxString snd);
 };
 
 
-#endif /* MYABCS_RESOURCE_OBJECT_H *?
+#endif /* MYABCS_RESOURCE_OBJECT_H */

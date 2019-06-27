@@ -73,7 +73,7 @@ RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
 RESOBJ_C = src/$(RESOBJ).cpp
 RESOBJ_O = $(RESOBJ).o
-RESOBJ_D = $(RESOBJ_H) $(LOG_H)
+RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_PNG)
 
 RESLIST = resourcelist
 RESLIST_H = include/$(RESLIST).h
