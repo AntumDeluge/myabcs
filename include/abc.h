@@ -1,14 +1,15 @@
 #ifndef MYABCS_ABC_H
 #define MYABCS_ABC_H
 
+#include "gnrcabt.h"
+#include "imgdisplay.h"
+#include "res.h"
+
 #include <wx/wx.h>
 #include <wx/sound.h>
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <pthread.h>
-#include "res.h"
-#include "gnrcabt.h"
-#include "imgdisplay.h"
 #include <fstream>
 using namespace std;
 
