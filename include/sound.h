@@ -34,7 +34,7 @@ private:
 	//SoundFile* soundFile;
 };
 
-static SoundPlayer* soundPlayer;
+extern SoundPlayer* soundPlayer;
 
 extern void initializeSounds();
 

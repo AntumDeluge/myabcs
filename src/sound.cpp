@@ -5,6 +5,8 @@
 #include "sound.h"
 
 
+SoundPlayer* soundPlayer;
+
 static Mix_Chunk* chunk = NULL;
 static int channel;
 static wxString loadedSound;
