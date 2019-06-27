@@ -81,6 +81,12 @@ RESLIST_C = src/$(RESLIST).cpp
 RESLIST_O = $(RESLIST).o
 RESLIST_D = $(RESLIST_H) $(RESOBJ_H) $(LOG_H)
 
+CATEGORY = category
+CATEGORY_H = include/$(CATEGORY).h
+CATEGORY_C = src/$(CATEGORY).cpp
+CATEGORY_O = $(CATEGORY).o
+CATEGORY_D = $(CATEGORY_H) $(RESLIST_H) $(RESOBJ_H)
+
 GNRCABT_H = include/gnrcabt.h
 GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
@@ -107,7 +113,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
 
 OBJECTS = \
-	$(LOG_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(CATEGORY_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)
