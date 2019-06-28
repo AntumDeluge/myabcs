@@ -6,7 +6,6 @@
 using namespace std;
 
 
-// FIXME: need to use directory prefixes for main group
 static const vector<string> c_main {
 	"airplane",			"bicycle",		"clock",			"dolphin",		"earth",
 	"fire",				"grasshopper",	"hat",				"igloo",		"jar",
@@ -68,13 +67,9 @@ ResourceList* createCategory(string cat_name) {
 		category = c_main;
 	}
 
-	// XXX: Why does this have to be a pointer?
 	ResourceList* resList = new ResourceList();
-
 	for (unsigned int idx = 0; idx < category.size(); idx++) {
-		const wxString label = wxString(category.at(idx));
-		//const wxString img = wxString(catName).Append("/").Append(label);
-		resList->add(new ResourceObject(label, cat_name));
+		resList->add(new ResourceObject(wxString(category.at(idx)), cat_name));
 	}
 
 	return resList;
