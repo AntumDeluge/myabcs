@@ -21,6 +21,7 @@ public:
 	void add(ResourceObject* ro) { objects.push_back(ro); }
 	bool remove(wxString alpha);
 	int getObjectIndex(wxString alpha);
+	int count() { return objects.size(); }
 	ResourceObject* getObject(wxString alpha);
 	void clear();
 private:
