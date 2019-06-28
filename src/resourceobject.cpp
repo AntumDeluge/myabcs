@@ -19,11 +19,17 @@ static int channel;
 /** sound is loaded from external file */
 ResourceObject::ResourceObject(wxString label, wxImage img)
 		: objectLabel(label), objectImage(img) {
+	// replace whitespace in filename with underscore
+	label.Replace(_T(" "), _T("_"));
+
 	loadSound(label);
 }
 
 ResourceObject::ResourceObject(wxString label, wxString category)
 		: objectLabel(label) {
+	// replace whitespace in filename with underscore
+	label.Replace(_T(" "), _T("_"));
+
 	loadImage(category.Append("/").Append(label));
 	loadSound(label);
 }
