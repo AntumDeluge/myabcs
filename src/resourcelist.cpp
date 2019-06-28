@@ -10,11 +10,7 @@ using namespace std;
 
 
 ResourceList::~ResourceList() {
-	for (unsigned int idx = 0; idx < objects.size(); idx++) {
-		delete objects.at(idx);
-	}
-
-	objects.clear();
+	clear();
 }
 
 /** Removes first instance found */
@@ -29,17 +25,6 @@ bool ResourceList::remove(wxString alpha) {
 
 	return getObjectIndex(alpha) < 0;
 }
-
-/** Checks if object identified by alpha exists */
-/*
-bool ResourceList::containsAlpha(wxString alpha) {
-	alpha = alpha.Lower();
-
-	for
-
-	return false;
-}
-*/
 
 int ResourceList::getObjectIndex(wxString alpha) {
 	alpha = alpha.Lower();
@@ -65,6 +50,14 @@ ResourceObject* ResourceList::getObject(wxString alpha) {
 	*/
 
 	return objects.at(idx);
+}
+
+void ResourceList::clear() {
+	for (ResourceObject* ro : objects) {
+		delete ro;
+	}
+
+	objects.clear();
 }
 
 void ResourceList::removeIndex(int idx) {

@@ -20,10 +20,9 @@ public:
 	~ResourceList();
 	void add(ResourceObject* ro) { objects.push_back(ro); }
 	bool remove(wxString alpha);
-	//bool containsAlpha(wxString alpha);
 	int getObjectIndex(wxString alpha);
 	ResourceObject* getObject(wxString alpha);
-	void clear() { objects.clear(); }
+	void clear();
 private:
 	std::vector<ResourceObject*> objects;
 
