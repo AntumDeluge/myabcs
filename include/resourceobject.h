@@ -10,8 +10,6 @@
 
 class ResourceObject {
 public:
-	//ResourceObject() : objectSound(NULL) {};
-	//ResourceObject(ResourceObject& ro);
 	ResourceObject(wxString label, wxImage img);
 	ResourceObject(wxString label, wxString category);
 	~ResourceObject();

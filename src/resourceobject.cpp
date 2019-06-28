@@ -16,12 +16,6 @@ static const wxString dir_effects("sound/effect/");
 static int channel;
 
 
-/** copy constructor */
-/*
-ResourceObject::ResourceObject(ResourceObject& ro)
-		: objectLabel(ro.objectLabel), objectImage(ro.objectImage), objectSound(ro.objectSound) {}
-*/
-
 /** sound is loaded from external file */
 ResourceObject::ResourceObject(wxString label, wxImage img)
 		: objectLabel(label), objectImage(img) {
@@ -35,10 +29,8 @@ ResourceObject::ResourceObject(wxString label, wxString category)
 }
 
 ResourceObject::~ResourceObject() {
-	Mix_FreeChunk(sndVocal);
-	Mix_FreeChunk(sndEffect);
-	delete sndVocal;
-	delete sndEffect;
+	if (sndVocal != NULL) Mix_FreeChunk(sndVocal);
+	if (sndEffect != NULL) Mix_FreeChunk(sndEffect);
 }
 
 bool ResourceObject::playSound() {
