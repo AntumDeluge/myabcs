@@ -51,7 +51,7 @@ private:
 	wxPanel *bg;
 	char key; // Store the key pressed
 	char cur_letter;
-	static wxString cur_sound;
+	static wxString alpha_sound;
 	wxString letter_sounds[2][26]; // wav sound for each letter
 	ImageDisplay *image;
 	wxString images[26];

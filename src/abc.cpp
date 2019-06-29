@@ -10,7 +10,7 @@ using namespace std;
 const int ID_WINDOW = wxNewId();
 const int ID_BG = wxNewId();
 
-wxString MainWindow::cur_sound(wxEmptyString);
+wxString MainWindow::alpha_sound(wxEmptyString);
 
 MainWindow::MainWindow(const wxString& title) :
 		wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
@@ -112,7 +112,7 @@ MainWindow::MainWindow(const wxString& title) :
 	Connect(wxID_ANY, ID_OTHER, wxCommandEventHandler(MainWindow::EnableAll), 0, this);
 
 	// Initialize static current sound variable
-	cur_sound = wxEmptyString;
+	alpha_sound = wxEmptyString;
 
 	// Labels
 	wxString alpha1 = _T("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -363,7 +363,7 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 				} else cur_letter = *getletter.char_str();
 
 				// Set the sound to be played
-				cur_sound = wxString::Format(_T("sound/alpha/%c.wav"), key);
+				alpha_sound = wxString::Format(_T("sound/alpha/%c.wav"), key);
 
 				// For ABC mode make sure that key pressed is same as letter displayed
 				if (menu->GetToolState(ID_ABC)) {
@@ -489,7 +489,7 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
 			image->SetImageG(RIBBON);
 			letter->SetLabel(_T("CONGRATS!"));
 			label->SetLabel(_T("Press \"ENTER\" to Play Again"));
-			cur_sound = CHEER;
+			alpha_sound = CHEER;
 			rc = pthread_create(&thread1, NULL, OtherThread, this);
 		}
 	}
@@ -669,7 +669,7 @@ void MainWindow::PlaySound() {
 	for (int x = 0; x < 131; x += 1) {
 		if (sounds[0][x] == name) {
 			isplaying = true;
-			cur_sound = sounds[1][x];
+			alpha_sound = sounds[1][x];
 			rc = pthread_create(&thread1, NULL, OtherThread, this);
 			//            if (rc)
 			//            {
@@ -696,7 +696,7 @@ void MainWindow::PlaySound() {
 void *MainWindow::SpaceThread(void *arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
-		soundPlayer->load(cur_sound);
+		soundPlayer->load(alpha_sound);
 		soundPlayer->play();
 		wxCommandEvent SpaceEvent(ID_SPACE, wxID_ANY);
 		wxPostEvent(obj, SpaceEvent); // Pass event
@@ -707,7 +707,7 @@ void *MainWindow::SpaceThread(void *arg) {
 void *MainWindow::KeyThread(void *arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
-		soundPlayer->load(cur_sound);
+		soundPlayer->load(alpha_sound);
 		soundPlayer->play();
 		wxCommandEvent KeyEvent(ID_KEY, wxID_ANY);
 		wxPostEvent(obj, KeyEvent);
@@ -720,7 +720,7 @@ void *MainWindow::KeyThread(void *arg) {
 void *MainWindow::OtherThread(void *arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
-		soundPlayer->load(cur_sound);
+		soundPlayer->load(alpha_sound);
 		soundPlayer->play();
 		wxCommandEvent OtherEvent(ID_OTHER, wxID_ANY);
 		wxPostEvent(obj, OtherEvent);
