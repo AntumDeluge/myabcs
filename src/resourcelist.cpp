@@ -2,6 +2,15 @@
 #include "resourcelist.h"
 
 
+void ResourceList::set(ResourceList rl) {
+	// delete previous objects
+	clear();
+
+	for (ResourceObject ro : rl.getObjects()) {
+		objects.push_back(ro);
+	}
+}
+
 /** Removes first instance found */
 bool ResourceList::remove(wxString alpha) {
 	const int idx = getObjectIndex(alpha);

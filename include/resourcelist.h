@@ -14,9 +14,12 @@
  * Resources are identified by the first letter in the wxString name.
  * The list should not contain more than one object representing a
  * single letter.
+ *
+ * TODO: Use std::array or other type immutable size in place of std::vector
  */
 class ResourceList {
 public:
+	void set(ResourceList rl);
 	void add(ResourceObject ro) { objects.push_back(ro); }
 	bool remove(wxString alpha);
 	int getObjectIndex(wxString alpha);
