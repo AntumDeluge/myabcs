@@ -78,9 +78,9 @@ private:
 
 	// Threading
 	//static void *TabThread(void *arg);
-	static void *SpaceThread(void *arg);
-	static void *KeyThread(void *arg);
-	static void *OtherThread(void *arg);
+	static void* SpaceThread(void* arg);
+	static void* KeyThread(void* arg);
+	static void* OtherThread(void* arg);
 	pthread_t thread1;
 	pthread_t thread2;
 	int rc;

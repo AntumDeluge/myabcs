@@ -693,7 +693,7 @@ void MainWindow::PlaySound() {
 	pthread_exit(NULL);
 }*/
 
-void *MainWindow::SpaceThread(void *arg) {
+void* MainWindow::SpaceThread(void* arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
 		soundPlayer->load(alpha_sound);
@@ -704,7 +704,7 @@ void *MainWindow::SpaceThread(void *arg) {
 	pthread_exit(NULL);
 }
 
-void *MainWindow::KeyThread(void *arg) {
+void* MainWindow::KeyThread(void* arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
 		soundPlayer->load(alpha_sound);
@@ -717,7 +717,7 @@ void *MainWindow::KeyThread(void *arg) {
 
 // Thread used for modes other than ABC, and when space is pressed, to play sound
 
-void *MainWindow::OtherThread(void *arg) {
+void* MainWindow::OtherThread(void* arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
 		soundPlayer->load(alpha_sound);
