@@ -51,7 +51,7 @@ static const vector<string> c_toy {
 	"zipline",
 };
 
-ResourceList* createCategory(string cat_name) {
+ResourceList createCategory(string cat_name) {
 	vector<string> category;
 
 	if (cat_name == "food") {
@@ -67,14 +67,14 @@ ResourceList* createCategory(string cat_name) {
 		category = c_main;
 	}
 
-	ResourceList* resList = new ResourceList();
+	ResourceList resList = ResourceList();
 	for (unsigned int idx = 0; idx < category.size(); idx++) {
-		resList->add(new ResourceObject(wxString(category.at(idx)), cat_name));
+		resList.add(ResourceObject(wxString(category.at(idx)), cat_name));
 	}
 
 	return resList;
 }
 
-ResourceList* createCategory(wxString cat_name) {
+ResourceList createCategory(wxString cat_name) {
 	return createCategory(string(cat_name.mb_str()));
 }

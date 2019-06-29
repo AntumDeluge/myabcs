@@ -17,15 +17,14 @@
  */
 class ResourceList {
 public:
-	~ResourceList();
-	void add(ResourceObject* ro) { objects.push_back(ro); }
+	void add(ResourceObject ro) { objects.push_back(ro); }
 	bool remove(wxString alpha);
 	int getObjectIndex(wxString alpha);
 	int count() { return objects.size(); }
-	ResourceObject* getObject(wxString alpha);
+	ResourceObject getObject(wxString alpha);
 	void clear();
 private:
-	std::vector<ResourceObject*> objects;
+	std::vector<ResourceObject> objects;
 
 	void removeIndex(int idx);
 };

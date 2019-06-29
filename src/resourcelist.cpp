@@ -1,17 +1,6 @@
 #include "log.h"
 #include "resourcelist.h"
 
-/*
-#include <fstream>
-#include <wx/filefn.h>
-#include <wx/wfstream.h>
-using namespace std;
-*/
-
-
-ResourceList::~ResourceList() {
-	clear();
-}
 
 /** Removes first instance found */
 bool ResourceList::remove(wxString alpha) {
@@ -30,7 +19,7 @@ int ResourceList::getObjectIndex(wxString alpha) {
 	alpha = alpha.Lower();
 
 	for (int idx = 0; objects.size(); idx++) {
-		wxString label = objects.at(idx)->getLabel().Lower();
+		wxString label = objects.at(idx).getLabel().Lower();
 		if (label.StartsWith(alpha)) {
 			return idx;
 		}
@@ -39,7 +28,7 @@ int ResourceList::getObjectIndex(wxString alpha) {
 	return -1;
 }
 
-ResourceObject* ResourceList::getObject(wxString alpha) {
+ResourceObject ResourceList::getObject(wxString alpha) {
 	const int idx = getObjectIndex(alpha);
 
 	// FIXME: how to return NULL or negative value to signify failure???
@@ -53,14 +42,9 @@ ResourceObject* ResourceList::getObject(wxString alpha) {
 }
 
 void ResourceList::clear() {
-	for (ResourceObject* ro : objects) {
-		delete ro;
-	}
-
 	objects.clear();
 }
 
 void ResourceList::removeIndex(int idx) {
-	delete objects.at(idx);
 	objects.erase(objects.begin() + idx);
 }
