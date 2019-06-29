@@ -12,9 +12,9 @@ const int ID_BG = wxNewId();
 
 wxString MainWindow::cur_sound(wxEmptyString);
 
-MainWindow::MainWindow(const wxString& title)
-: wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
-wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
+MainWindow::MainWindow(const wxString& title) :
+		wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
+				wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 	// Get the executable's directory
 	exedir = new wxString(wxStandardPaths::Get().GetExecutablePath());
 	wxFileName filename(*exedir);
