@@ -25,6 +25,7 @@ public:
 	int getObjectIndex(wxString alpha);
 	int count() { return objects.size(); }
 	ResourceObject getObject(wxString alpha);
+	std::vector<ResourceObject> getObjects() { return objects; }
 	void clear();
 private:
 	std::vector<ResourceObject> objects;
