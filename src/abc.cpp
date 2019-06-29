@@ -35,12 +35,6 @@ MainWindow::MainWindow(const wxString& title) :
 	installdir = exedir;
 #endif
 
-	// Add support for images
-	wxImage::AddHandler(new wxPNGHandler);
-	wxImage::AddHandler(new wxJPEGHandler);
-	wxImage::AddHandler(new wxICOHandler);
-	wxImage::AddHandler(new wxXPMHandler);
-
 	SetIcon(wxIcon(ICON1));
 
 	// Set these two variables to show that play is ready

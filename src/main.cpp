@@ -9,6 +9,12 @@ bool App::OnInit()
 	// initialize SDL audio
 	initializeSounds();
 
+	// initialize image support
+	wxImage::AddHandler(new wxPNGHandler);
+	wxImage::AddHandler(new wxJPEGHandler);
+	wxImage::AddHandler(new wxICOHandler);
+	wxImage::AddHandler(new wxXPMHandler);
+
 	MainWindow* frame = new MainWindow(_T(""));
 	frame->Show(true);
 	SetTopWindow(frame);
