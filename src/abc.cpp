@@ -1,4 +1,5 @@
 #include "abc.h"
+#include "category.h"
 #include "id.h"
 #include "log.h"
 #include "sound.h"
@@ -12,9 +13,16 @@ const int ID_BG = wxNewId();
 
 wxString MainWindow::alpha_sound(wxEmptyString);
 
+static ResourceObject currentResource;
+static ResourceObject winResource;
+
 MainWindow::MainWindow(const wxString& title) :
 		wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
 				wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
+
+	resourceList = ResourceList();
+	winResource = ResourceObject(_T("ribbon"), wxEmptyString);
+
 	// Get the executable's directory
 	exedir = new wxString(wxStandardPaths::Get().GetExecutablePath());
 	wxFileName filename(*exedir);
@@ -275,6 +283,33 @@ MainWindow::MainWindow(const wxString& title) :
 	Center(); // Center the window on the screen
 }
 
+void MainWindow::LoadCategory(wxString cat_name) {
+	// DEBUG:
+	logMessage(wxString("Loading category: ").Append(cat_name));
+
+	if (resourceList.count() != 0) {
+		resourceList.clear();
+	}
+
+	resourceList.set(createCategory(cat_name));
+
+	if (cat_name == "animal") {
+		currentResource = resourceList.getObject("t");
+	} else if (cat_name == "music") {
+		currentResource = resourceList.getObject("g");
+	} else if (cat_name == "food") {
+		currentResource = resourceList.getObject("h");
+	} else if (cat_name == "toy") {
+		currentResource = resourceList.getObject("w");
+	} else {
+		currentResource = resourceList.getObject("a");
+
+		SetTitle(_T("Find the letter on the keyboard"));
+		letter->SetLabel(currentResource.getLabel().Upper()[0]);
+		label->SetLabel(currentResource.getLabel().Upper());
+	}
+}
+
 void MainWindow::SetMode(wxCommandEvent& event) {
 	int id = event.GetId();
 
@@ -287,34 +322,38 @@ void MainWindow::SetMode(wxCommandEvent& event) {
 		}
 
 		if (id == ID_ABC) {
-			SetTitle(_T("Find the letter on the keyboard"));
-			image->SetImageG(images[0]);
-			letter->SetLabel(letters[0]);
-			label->SetLabel(labels[0]);
+			LoadCategory(_T("main"));
 		} else {
 			if (id == ID_ANIMALS) {
+				LoadCategory(_T("animal"));
+
 				SetTitle(_T("Press a Key to See an Animal"));
-				image->SetImageG(TURTLE);
 				letter->SetLabel(_T("Animals"));
 				label->SetLabel(_T(""));
 			} else if (id == ID_MUSIC) {
+				LoadCategory(_T("music"));
+
 				SetTitle(_T("Press a Key to See an Instrument"));
-				image->SetImageG(GUITAR);
 				letter->SetLabel(_T("Music"));
 				label->SetLabel(_T(""));
 			} else if (id == ID_FOOD) {
+				LoadCategory(_T("food"));
+
 				SetTitle(_T("Press a Key to See a Food"));
-				image->SetImageG(HOT_DOG);
 				letter->SetLabel(_T("Food"));
 				label->SetLabel(_T(""));
 			} else if (id == ID_TOYS) {
+				LoadCategory(_T("toy"));
+
 				SetTitle(_T("Press a Key to See a Toy"));
-				image->SetImageG(WAGON);
 				letter->SetLabel(_T("Toys"));
 				label->SetLabel(_T(""));
 			}
 		}
+
+		image->SetBitmap(currentResource.getBitmap());
 	}
+
 	bg->SetFocusIgnoringChildren();
 	bg->Refresh();
 	bg->Layout();
@@ -344,10 +383,8 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 			if (gameend) {
 				gameend = false;
 				soundPlayer->stop();
-				image->SetImageG(images[0]);
-				letter->SetLabel(letters[0]);
-				label->SetLabel(labels[0]);
-
+				// FIXME: don't re-cache objects
+				LoadCategory("main");
 				bg->Layout();
 				bg->Refresh();
 			}
@@ -364,6 +401,8 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 
 				// Set the sound to be played
 				alpha_sound = wxString::Format(_T("sound/alpha/%c.wav"), key);
+
+				currentResource = resourceList.getObject(key);
 
 				// For ABC mode make sure that key pressed is same as letter displayed
 				if (menu->GetToolState(ID_ABC)) {
@@ -479,14 +518,20 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
 		if (cur_letter != 'Z') {
 			for (int a = 0; a < 26; a += 1) {
 				if (letters[a] == key) {
-					image->SetImageG(images[a+1]);
-					letter->SetLabel(letters[a + 1]);
-					label->SetLabel(labels[a + 1]);
+					// FIXME: don't use "letters" list
+					currentResource = resourceList.getObject(letters[a + 1]);
+					wxString new_label = currentResource.getLabel().Upper();
+
+					image->SetBitmap(currentResource.getBitmap());
+					letter->SetLabel(new_label[0]);
+					label->SetLabel(new_label);
 				}
 			}
 		} else if (cur_letter == 'Z') {
 			gameend = true;
-			image->SetImageG(RIBBON);
+			currentResource = winResource;
+
+			image->SetBitmap(currentResource.getBitmap());
 			letter->SetLabel(_T("CONGRATS!"));
 			label->SetLabel(_T("Press \"ENTER\" to Play Again"));
 			alpha_sound = CHEER;

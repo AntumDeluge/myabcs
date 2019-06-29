@@ -4,6 +4,8 @@
 #include "gnrcabt.h"
 #include "imgdisplay.h"
 #include "res.h"
+#include "resourcelist.h"
+#include "resourceobject.h"
 
 #include <wx/wx.h>
 #include <wx/sound.h>
@@ -11,7 +13,6 @@
 #include <wx/filename.h>
 #include <pthread.h>
 #include <fstream>
-using namespace std;
 
 const int ID_EXIT = wxNewId();
 const int ID_ABC = wxNewId();
@@ -29,6 +30,7 @@ const int ID_OTHER = wxNewId(); // Id used in other threads
 class MainWindow : public wxFrame {
 public:
 	MainWindow(const wxString& title);
+	void LoadCategory(wxString cat_name);
 	void SetMode(wxCommandEvent& event);
 	void OnKey(wxKeyEvent& event);
 	void OnTab(); //wxCommandEvent& event);
@@ -69,6 +71,9 @@ private:
 	bool canspace; // Allow playing sounds if one is not currently played
 	bool cantab; // Allow switching modes with tab button
 	bool cankey;
+
+	// cached objects for category
+	ResourceList resourceList;
 
 	// Help Dialog
 	//wxDialog *help;

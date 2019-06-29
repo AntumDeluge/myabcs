@@ -38,8 +38,13 @@ ResourceObject::ResourceObject(wxString label, wxString category)
 	// replace whitespace in filename with underscore
 	label.Replace(_T(" "), _T("_"));
 
-	loadImage(category.Append("/").Append(label));
-	loadSound(label);
+	if (category == wxEmptyString) {
+		loadImage(label);
+		loadSound(_T("cheering"));
+	} else {
+		loadImage(category.Append("/").Append(label));
+		loadSound(label);
+	}
 }
 
 ResourceObject::~ResourceObject() {
