@@ -10,6 +10,8 @@
 
 class ResourceObject {
 public:
+	ResourceObject() {}
+	ResourceObject(const ResourceObject& ro);
 	ResourceObject(wxString label, wxImage img);
 	ResourceObject(wxString label, wxString category);
 	~ResourceObject();

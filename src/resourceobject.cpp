@@ -16,6 +16,14 @@ static const wxString dir_effects("sound/effect/");
 static int channel;
 
 
+/** copy constructor */
+ResourceObject::ResourceObject(const ResourceObject& ro) {
+	objectLabel = ro.objectLabel;
+	objectImage = ro.objectImage;
+	sndVocalString = ro.sndVocalString;
+	sndEffectString = ro.sndEffectString;
+}
+
 /** sound is loaded from external file */
 ResourceObject::ResourceObject(wxString label, wxImage img)
 		: objectLabel(label), objectImage(img) {
