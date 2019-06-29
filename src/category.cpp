@@ -20,7 +20,7 @@ static const vector<string> c_food {
 	"fries",	"grapes",		"hot dog",		"ice cream",	"juice",
 	"ketchup",	"lasagna",		"mushroom",		"noodle",		"olive",
 	"pretzel",	"quiche",		"radishes",		"strawberry",	"tomato",
-	"udon",		"vegetables",	"watermelon",	"x cookie",		"yam",
+	"udon",		"vegetables",	"watermelon",	"x-cookie",		"yam",
 	"zucchini",
 };
 
