@@ -19,8 +19,11 @@ public:
 private:
 	wxString objectLabel;
 	wxImage objectImage;
-	Mix_Chunk* sndVocal;
-	Mix_Chunk* sndEffect;
+	//Mix_Chunk* sndVocal;
+	//Mix_Chunk* sndEffect;
+	// FIXME: not true caching
+	wxString sndVocalString;
+	wxString sndEffectString;
 
 protected:
 	void loadImage(wxString img);

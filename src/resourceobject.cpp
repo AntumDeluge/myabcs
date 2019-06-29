@@ -35,11 +35,16 @@ ResourceObject::ResourceObject(wxString label, wxString category)
 }
 
 ResourceObject::~ResourceObject() {
+	/*
 	if (sndVocal != NULL) Mix_FreeChunk(sndVocal);
 	if (sndEffect != NULL) Mix_FreeChunk(sndEffect);
+	*/
 }
 
 bool ResourceObject::playSound() {
+	// FIXME: should be done in "load" method
+	Mix_Chunk* sndVocal = Mix_LoadWAV(sndVocalString.c_str());
+
 	if (sndVocal == NULL) {
 		logError(_T("Audio not loaded, cannot play sound"));
 		return false;
@@ -54,6 +59,12 @@ bool ResourceObject::playSound() {
 	// wait for sound to stop playing
 	while (Mix_Playing(channel) != 0);
 
+	Mix_Chunk* sndEffect = NULL;
+
+	if (sndEffectString != wxEmptyString) {
+		sndEffect = Mix_LoadWAV(sndEffectString.c_str());
+	}
+
 	// optional sound effect
 	if (sndEffect != NULL) {
 		channel = Mix_PlayChannel(-1, sndEffect, 0);
@@ -64,7 +75,13 @@ bool ResourceObject::playSound() {
 
 		// wait for sound effect to stop playing
 		while (Mix_Playing(channel) != 0);
+
+		logMessage("Freeing sound effect memory ...");
+		Mix_FreeChunk(sndEffect);
 	}
+
+	logMessage("Freeing vocal sound memory ...");
+	Mix_FreeChunk(sndVocal);
 
 	return true;
 }
@@ -142,6 +159,7 @@ void ResourceObject::loadSound(wxString snd) {
 		return;
 	}
 
+	/*
 	sndVocal = Mix_LoadWAV(vocal.c_str());
 
 	if (sndVocal == NULL) {
@@ -153,6 +171,12 @@ void ResourceObject::loadSound(wxString snd) {
 	// optional sound effect
 	if (wxFileExists(effect)) {
 		sndEffect = Mix_LoadWAV(effect.c_str());
+	}
+	*/
+
+	sndVocalString = vocal;
+	if (wxFileExists(effect)) {
+		sndEffectString = effect;
 	}
 
 	logMessage(wxString("Loaded sound file: ").Append(vocal));
