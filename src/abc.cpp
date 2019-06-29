@@ -562,7 +562,7 @@ void MainWindow::PlaySound() {
 			_T("sound/earth.wav"),
 			_T("sound/easel.wav"),
 			_T("sound/egg.wav"),
-			_T("sound/eguitar.wav"),
+			_T("sound/electric_guitar.wav"),
 			_T("sound/elephant.wav"),
 			_T("sound/fire.wav"),
 			_T("sound/flute.wav"),
