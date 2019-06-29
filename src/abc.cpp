@@ -765,8 +765,7 @@ void* MainWindow::KeyThread(void* arg) {
 void* MainWindow::OtherThread(void* arg) {
 	wxEvtHandler *obj = wxDynamicCast(arg, wxEvtHandler);
 	if (obj) {
-		soundPlayer->load(alpha_sound);
-		soundPlayer->play();
+		currentResource.playSound();
 		wxCommandEvent OtherEvent(ID_OTHER, wxID_ANY);
 		wxPostEvent(obj, OtherEvent);
 	}
