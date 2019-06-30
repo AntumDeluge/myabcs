@@ -44,7 +44,6 @@ public:
 	void OnToggleLogWindow(wxMenuEvent& event);
 	void EnableAll(wxCommandEvent& event);
 	void SetCurSound(wxString wav);
-	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 private:
 	wxString *exedir; // Directory where executable is located
 	wxString installdir; // Directory where files should be installed
@@ -89,6 +88,8 @@ private:
 	pthread_t thread1;
 	pthread_t thread2;
 	int rc;
+
+	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 };
 
 #endif /* MYABCS_ABC_H */
