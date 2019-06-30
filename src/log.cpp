@@ -8,9 +8,8 @@
 static LogWindow* abclog;
 
 
-LogWindow::LogWindow(wxWindow* parent, wxString title, bool show=true) :
-		wxLogWindow(parent, title, show) {
-}
+LogWindow::LogWindow(wxWindow* parent, wxString title) :
+		wxLogWindow(parent, title, false) {}
 
 bool LogWindow::IsShown() {
 	return GetFrame()->IsShown();
@@ -34,7 +33,7 @@ void LogWindow::Show(const bool show) {
 
 
 void initLog(wxWindow* parent) {
-	abclog = new LogWindow(parent, _T("MyABCs Debug Log"), false);
+	abclog = new LogWindow(parent, _T("MyABCs Debug Log"));
 	wxLog::SetActiveTarget(abclog);
 }
 
