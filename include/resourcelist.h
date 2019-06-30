@@ -23,9 +23,10 @@ public:
 	void add(ResourceObject ro) { objects.push_back(ro); }
 	bool remove(wxString alpha);
 	int getObjectIndex(wxString alpha);
-	int count() { return objects.size(); }
+	ResourceObject getObject(unsigned int idx);
 	ResourceObject getObject(wxString alpha);
 	std::vector<ResourceObject> getObjects() { return objects; }
+	int count() { return objects.size(); }
 	void clear();
 private:
 	std::vector<ResourceObject> objects;

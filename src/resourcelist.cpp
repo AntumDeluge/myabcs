@@ -37,17 +37,14 @@ int ResourceList::getObjectIndex(wxString alpha) {
 	return -1;
 }
 
-ResourceObject ResourceList::getObject(wxString alpha) {
-	const int idx = getObjectIndex(alpha);
-
-	// FIXME: how to return NULL or negative value to signify failure???
-	/*
-	if (idx < 0) {
-		return;
-	}
-	*/
-
+ResourceObject ResourceList::getObject(unsigned int idx) {
+	// FIXME: failsafe check for index out of range
 	return objects.at(idx);
+}
+
+ResourceObject ResourceList::getObject(wxString alpha) {
+	// FIXME: failsafe check for index out of range
+	return getObject(getObjectIndex(alpha));
 }
 
 void ResourceList::clear() {
