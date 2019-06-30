@@ -52,6 +52,11 @@ ResourceObject ResourceList::getNext(wxString alpha) {
 	return getObject(getObjectIndex(alpha) + 1);
 }
 
+ResourceObject ResourceList::getPrev(wxString alpha) {
+	// FIXME: falsafe check for index out of range
+	return getObject(getObjectIndex(alpha) - 1);
+}
+
 void ResourceList::clear() {
 	objects.clear();
 }
