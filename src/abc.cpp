@@ -1,5 +1,6 @@
 #include "abc.h"
 #include "category.h"
+#include "env.h"
 #include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
