@@ -107,19 +107,19 @@ MainWindow::MainWindow(const wxString& title) :
 	SetStatusBar(status);
 
 	// Background panel
-	bg = new wxPanel(this, ID_BG, wxDefaultPosition, wxDefaultSize, 0 | wxWANTS_CHARS);
-	bg->SetFocus();
+	canvas = new wxPanel(this, ID_BG, wxDefaultPosition, wxDefaultSize, 0 | wxWANTS_CHARS);
+	canvas->SetFocus();
 
-	image = new ImageDisplay(bg, -1, wxNullBitmap);
-	letter = new wxStaticText(bg, -1, _T(""), wxDefaultPosition, wxDefaultSize,
+	image = new ImageDisplay(canvas, -1, wxNullBitmap);
+	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
-	label = new wxStaticText(bg, -1, _T(""));
+	label = new wxStaticText(canvas, -1, _T(""));
 	// FIXME: fonts
 	letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 	label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
-	bg->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKey), NULL, this);
-	bg->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
+	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKey), NULL, this);
+	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
 
 	// Catch events passed by threads
 	//Connect(wxID_ANY, ID_TAB, wxCommandEventHandler(MainWindow::OnTab), 0, this);
@@ -276,9 +276,9 @@ MainWindow::MainWindow(const wxString& title) :
 	sizer->Add(label, 0, wxALIGN_CENTER);
 	sizer->AddSpacer(10);
 
-	bg->SetAutoLayout(true);
-	bg->SetSizer(sizer);
-	bg->Layout();
+	canvas->SetAutoLayout(true);
+	canvas->SetSizer(sizer);
+	canvas->Layout();
 
 	// Start the app with ABC mode
 	wxCommandEvent start(wxEVT_COMMAND_MENU_SELECTED, ID_ABC);
@@ -361,9 +361,9 @@ void MainWindow::SetMode(wxCommandEvent& event) {
 		image->SetBitmap(currentResource.getBitmap());
 	}
 
-	bg->SetFocusIgnoringChildren();
-	bg->Refresh();
-	bg->Layout();
+	canvas->SetFocusIgnoringChildren();
+	canvas->Refresh();
+	canvas->Layout();
 }
 
 // FIXME: if sound fails to play, space key release isn't caught
@@ -392,8 +392,8 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 				soundPlayer->stop();
 				// FIXME: don't re-cache objects
 				LoadCategory("main");
-				bg->Layout();
-				bg->Refresh();
+				canvas->Layout();
+				canvas->Refresh();
 			}
 		} else {
 			if (!gameend) {
@@ -423,8 +423,8 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 								image->SetImageG(images[x-1]);
 								letter->SetLabel(letters[x - 1]);
 								label->SetLabel(labels[x - 1]);
-								bg->Refresh();
-								bg->Layout();
+								canvas->Refresh();
+								canvas->Layout();
 							}
 						}
 					}
@@ -439,8 +439,8 @@ void MainWindow::OnKey(wxKeyEvent& event) {
 					image->SetImageG(images[25]);
 					letter->SetLabel(letters[25]);
 					label->SetLabel(labels[25]);
-					bg->Refresh();
-					bg->Layout();
+					canvas->Refresh();
+					canvas->Layout();
 				}
 			}
 		}
@@ -506,8 +506,8 @@ void MainWindow::GoOther() {
 					letter->SetLabel(letters[a]);
 					label->SetLabel(toys[1][a]);
 				}
-				bg->Layout();
-				bg->Refresh();
+				canvas->Layout();
+				canvas->Refresh();
 			}
 			rc = pthread_create(&thread1, NULL, OtherThread, this);
 		}
@@ -546,8 +546,8 @@ void MainWindow::ChangeLetter(wxCommandEvent& event) {
 		}
 	}
 
-	bg->Layout();
-	bg->Refresh();
+	canvas->Layout();
+	canvas->Refresh();
 	isplaying = false; // Enable pressing keys
 }
 
@@ -1030,5 +1030,5 @@ void MainWindow::OnToggleLogWindow(wxMenuEvent& event) {
 }
 
 void MainWindow::OnFrameFocus(wxFocusEvent& event) {
-	bg->SetFocus();
+	canvas->SetFocus();
 }

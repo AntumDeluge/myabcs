@@ -33,20 +33,22 @@ public:
 	void EnableAll(wxCommandEvent& event);
 	void SetCurSound(wxString wav);
 private:
-	wxString *exedir; // Directory where executable is located
-	wxString installdir; // Directory where files should be installed
+	// main GUI elements
 	wxToolBar *menu;
 	wxStatusBar *status;
-	wxPanel *bg;
+
+	// game UI
+	wxPanel* canvas;
+	ImageDisplay* image;
+	wxStaticText* letter;
+	wxStaticText* label;
+
 	char key; // Store the key pressed
 	char cur_letter;
 	static wxString alpha_sound;
 	wxString letter_sounds[2][26]; // wav sound for each letter
-	ImageDisplay *image;
 	wxString images[26];
-	wxStaticText *letter;
 	wxString letters[26];
-	wxStaticText *label;
 	wxString labels[26];
 	wxString foods[2][26];
 	wxString animals[2][26];
