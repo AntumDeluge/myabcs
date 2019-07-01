@@ -62,6 +62,7 @@ DEFINES= \
 
 FAILSAFE_PNG = include/res/failsafe.png.h
 
+ENV_H = include/env.h
 ID_H = include/id.h
 RES_H = include/res.h
 RESOURCES_O = resources.o
@@ -71,11 +72,16 @@ LOG_C = src/log.cpp
 LOG_O = log.o
 LOG_D = $(LOG_H)
 
+SOUND_H = include/sound.h
+SOUND_C = src/sound.cpp
+SOUND_O = sound.o
+SOUND_D = $(SOUND_H) $(LOG_H)
+
 RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
 RESOBJ_C = src/$(RESOBJ).cpp
 RESOBJ_O = $(RESOBJ).o
-RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_PNG)
+RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_PNG) $(SOUND_H)
 
 RESLIST = resourcelist
 RESLIST_H = include/$(RESLIST).h
@@ -99,15 +105,10 @@ IMGDISPLAY_C = src/imgdisplay.cpp
 IMGDISPLAY_O = imgdisplay.o
 IMGDISPLAY_D = $(IMGDISPLAY_H) $(LOG_H) $(FAILSAFE_PNG)
 
-SOUND_H = include/sound.h
-SOUND_C = src/sound.cpp
-SOUND_O = sound.o
-SOUND_D = $(SOUND_H) $(LOG_H)
-
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(ID_H) $(RES_H) $(IMGDISPLAY_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H)
+ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(IMGDISPLAY_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
