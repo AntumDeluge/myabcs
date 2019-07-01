@@ -2,21 +2,18 @@
 #define MYABCS_SOUND_H
 
 #include <SDL2/SDL_mixer.h>
-#include <string>
-#include <wx/sound.h>
+#include <wx/string.h>
 
 
 class SoundPlayer {
 public:
-	SoundPlayer();
+	SoundPlayer() {};
 	~SoundPlayer();
 	void init();
-	void load(const wxString filename);
-	void load(const std::string filename);
+	void load(wxString filename);
 	void unload();
 	void play();
 	void play(wxString filename);
-	void play(const std::string filename);
 	void stop();
 	bool isLoaded(const wxString filename);
 	bool isReady();

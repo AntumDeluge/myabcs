@@ -1,8 +1,8 @@
-#include <SDL2/SDL.h>
-#include <wx/filefn.h>
-
 #include "log.h"
 #include "sound.h"
+
+#include <SDL2/SDL.h>
+#include <wx/filefn.h>
 
 
 SoundPlayer* soundPlayer;
@@ -12,12 +12,8 @@ static int channel;
 static wxString loadedSound;
 
 // check for sound intializations
-bool initialized = false;
+static bool initialized = false;
 
-
-SoundPlayer::SoundPlayer() {
-	loadedSound = wxEmptyString;
-}
 
 SoundPlayer::~SoundPlayer() {
 	unload();
@@ -80,10 +76,6 @@ void SoundPlayer::load(wxString filename) {
 	logMessage(wxString("Loaded sound file: ").Append(filename));
 }
 
-void SoundPlayer::load(const std::string filename) {
-	return load(wxString(filename));
-}
-
 void SoundPlayer::unload() {
 	Mix_FreeChunk(chunk);
 	chunk = NULL;
@@ -113,20 +105,15 @@ void SoundPlayer::play(const wxString filename) {
 	play();
 }
 
-void SoundPlayer::play(const std::string filename) {
-	load(filename);
-	play();
-}
-
 void SoundPlayer::stop() {
 	if (!isPlaying()) {
 		logMessage(_T("Sound is already stopped"));
 		return;
 	}
 
-	Mix_HaltChannel(channel);
+	logMessage(_T("Stopping sound ..."));
 
-	logMessage(_T("Stopped playing sound"));
+	Mix_HaltChannel(channel);
 }
 
 bool SoundPlayer::isLoaded(const wxString filename) {
