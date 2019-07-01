@@ -9,6 +9,16 @@ using namespace std;
 
 static LogWindow* abclog;
 
+static int err_code = 0;
+static string err_msg = "";
+
+
+/** private: only used in this source */
+void resetError() {
+	err_code = 0;
+	err_msg = "";
+}
+
 
 LogWindow::LogWindow(wxWindow* parent, wxString title) :
 		wxLogWindow(parent, title, false) {}
@@ -54,6 +64,45 @@ void logError(const wxString msg) {
 	logMessage(wxLOG_Error, msg);
 }
 
+/** prints stored error info in log */
+void logCurrentError() {
+	string msg = "";
+
+	if (err_msg != "") {
+		msg = err_msg;
+		if (err_code != 0) {
+			msg += " (error code: " + to_string(err_code) + ")";
+		}
+	} else {
+		if (err_code != 0) {
+			msg = "Error code: " + to_string(err_code);
+		}
+	}
+
+	if (err_msg == "") {
+		logError("Unknown error");
+	} else {
+		logError(wxString(msg));
+	}
+
+	resetError();
+}
+
 void toggleLogWindow() {
 	abclog->Show(!abclog->IsShown());
+}
+
+void setErrorCode(int err) { err_code = err; }
+
+int getErrorCode() { return err_code; }
+
+void setErrorMsg(string msg) { err_msg = msg; }
+
+void setErrorMsg(wxString msg) { setErrorMsg(string(msg)); }
+
+string getErrorMsg() { return err_msg; }
+
+void setError(int err, string msg) {
+	setErrorCode(err);
+	setErrorMsg(msg);
 }
