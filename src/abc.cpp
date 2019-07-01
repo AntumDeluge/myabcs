@@ -129,7 +129,6 @@ MainWindow::MainWindow(const wxString& title) :
 	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
 
 	// Catch events passed by threads
-	//Connect(wxID_ANY, ID_TAB, wxCommandEventHandler(MainWindow::OnTab), 0, this);
 	Connect(wxID_ANY, ID_KEY, wxCommandEventHandler(MainWindow::ChangeLetter), 0, this);
 	Connect(wxID_ANY, ID_OTHER, wxCommandEventHandler(MainWindow::EnableAll), 0, this);
 
@@ -455,9 +454,16 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 	event.Skip();
 }
 
-void MainWindow::OnTab()//wxCommandEvent& event)
-{
-	/* Changes game modes via the "Tab" key */
+void MainWindow::OnKeyUp(wxKeyEvent& event) {
+	// Enables tabbing after the "tab" key is released to prevent cycling too quickly through modes
+	int keycode = event.GetKeyCode();
+	if (keycode == WXK_TAB) cantab = true;
+	else if (keycode == WXK_SPACE) canspace = true;
+	else cankey = true;
+}
+
+void MainWindow::OnTab() {
+	// Changes game modes via the "Tab" key
 	int tools[] = {ID_ABC, ID_FOOD, ID_ANIMALS, ID_MUSIC, ID_TOYS};
 	for (int tool = 4; tool >= 0; tool -= 1) {
 		if (menu->GetToolState(tools[tool])) {
@@ -473,15 +479,6 @@ void MainWindow::OnTab()//wxCommandEvent& event)
 			}
 		}
 	}
-	//cantab = true;
-}
-
-void MainWindow::OnKeyUp(wxKeyEvent& event) {
-	// Enables tabbing after the "tab" key is released to prevent cycling too quickly through modes
-	int keycode = event.GetKeyCode();
-	if (keycode == WXK_TAB) cantab = true;
-	else if (keycode == WXK_SPACE) canspace = true;
-	else cankey = true;
 }
 
 void MainWindow::GoABC() {

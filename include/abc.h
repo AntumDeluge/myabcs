@@ -18,7 +18,6 @@ class MainWindow : public wxFrame {
 public:
 	MainWindow(const wxString& title);
 	void LoadCategory(wxString cat_name);
-	void OnTab(); //wxCommandEvent& event);
 	void GoABC();
 	void GoOther();
 	void ChangeLetter(wxCommandEvent& event);
@@ -51,7 +50,6 @@ private:
 	bool gameend;
 	bool isplaying; // Is sound currently playing
 	bool canspace; // Allow playing sounds if one is not currently played
-	bool cantab; // Allow switching modes with tab button
 	bool cankey;
 
 	// cached objects for category
@@ -79,6 +77,7 @@ private:
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
+	void OnTab();
 
 	void OnHelp(wxMenuEvent& event);
 	void OnAbout(wxMenuEvent& event);
