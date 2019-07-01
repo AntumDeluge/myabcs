@@ -25,7 +25,6 @@ public:
 	void GoOther();
 	void ChangeLetter(wxCommandEvent& event);
 	void PlaySound();
-	void OnToggleLogWindow(wxMenuEvent& event);
 	void EnableAll(wxCommandEvent& event);
 	void SetCurSound(wxString wav);
 private:
@@ -82,6 +81,8 @@ private:
 	void OnHelp(wxMenuEvent& event);
 	void OnAbout(wxMenuEvent& event);
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
+
+	void OnToggleLogWindow(wxMenuEvent& event);
 };
 
 #endif /* MYABCS_ABC_H */
