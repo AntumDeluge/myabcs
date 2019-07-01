@@ -1,8 +1,10 @@
+#include "log.h"
+
 #include <iostream>
 #include <wx/frame.h>
 #include <wx/window.h>
 
-#include "log.h"
+using namespace std;
 
 
 static LogWindow* abclog;
@@ -40,7 +42,7 @@ void initLog(wxWindow* parent) {
 void logMessage(const wxLogLevel level, const wxString msg) {
 	if (abclog->IsEnabled()) {
 		wxLogGeneric(level, msg);
-		std::cout << msg << std::endl;
+		cout << msg << endl;
 	}
 }
 
