@@ -74,6 +74,8 @@ private:
 
 	wxString getCurrentLetter() { return letter->GetLabel(); }
 
+	void ReloadDisplay(bool update);
+	void ReloadDisplay() { return ReloadDisplay(true); }
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);

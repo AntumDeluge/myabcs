@@ -297,6 +297,23 @@ MainWindow::MainWindow(const wxString& title) :
 	Center(); // Center the window on the screen
 }
 
+void MainWindow::ReloadDisplay(bool update) {
+	// DEBUG:
+	logMessage("Reloading display ...");
+
+	image->SetBitmap(currentResource.getBitmap());
+
+	if (update) {
+		wxString l = currentResource.getLabel().Upper();
+		letter->SetLabel(l[0]);
+		label->SetLabel(l);
+	}
+
+	canvas->SetFocusIgnoringChildren();
+	canvas->Refresh();
+	canvas->Layout();
+}
+
 void MainWindow::LoadCategory(wxString cat_name) {
 	// DEBUG:
 	logMessage(wxString("Loading category: ").Append(cat_name));
