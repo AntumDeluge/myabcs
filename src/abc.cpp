@@ -341,6 +341,14 @@ void MainWindow::LoadCategory(wxString cat_name) {
 	}
 }
 
+void MainWindow::SetLetter(wxString alpha) {
+	// DEBUG:
+	logMessage("Changing letter ...");
+
+	currentResource = resourceList.getObject(alpha);
+	ReloadDisplay();
+}
+
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	int id = event.GetId();
 

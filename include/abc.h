@@ -76,6 +76,7 @@ private:
 
 	void ReloadDisplay(bool update);
 	void ReloadDisplay() { return ReloadDisplay(true); }
+	void SetLetter(wxString alpha);
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
