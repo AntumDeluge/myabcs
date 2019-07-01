@@ -21,6 +21,7 @@ Non-priority:
 - Show keyboard for "ABC/find" mode
 - Embed free font
 - Clean up quiche SVG
+- Use monospace font for changelog text
 
 Fixes & pull-requests:
 - wxWidgets:
