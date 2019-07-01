@@ -102,7 +102,7 @@ MainWindow::MainWindow(const wxString& title) :
 	menu->SetBackgroundColour(_T("#84aee6"));
 	menu->Realize();
 
-	Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::SetMode), 0, this);
+	Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::OnSetCategory), 0, this);
 	Connect(ID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnHelp), 0, this);
 	Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnAbout), 0, this);
 #ifdef DEBUG
@@ -289,7 +289,7 @@ MainWindow::MainWindow(const wxString& title) :
 
 	// Start the app with ABC mode
 	wxCommandEvent start(wxEVT_COMMAND_MENU_SELECTED, ID_ABC);
-	SetMode(start);
+	OnSetCategory(start);
 
 	// Redirect focus to main panel
 	Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
@@ -324,7 +324,7 @@ void MainWindow::LoadCategory(wxString cat_name) {
 	}
 }
 
-void MainWindow::SetMode(wxCommandEvent& event) {
+void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	int id = event.GetId();
 
 	if (id == wxID_EXIT) {

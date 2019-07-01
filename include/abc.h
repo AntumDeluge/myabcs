@@ -18,7 +18,6 @@ class MainWindow : public wxFrame {
 public:
 	MainWindow(const wxString& title);
 	void LoadCategory(wxString cat_name);
-	void SetMode(wxCommandEvent& event);
 	void OnKey(wxKeyEvent& event);
 	void OnTab(); //wxCommandEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
@@ -75,6 +74,10 @@ private:
 	pthread_t thread1;
 	pthread_t thread2;
 	int rc;
+
+	// methods
+
+	void OnSetCategory(wxCommandEvent& event);
 
 	void OnHelp(wxMenuEvent& event);
 	void OnAbout(wxMenuEvent& event);
