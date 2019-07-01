@@ -2,6 +2,7 @@
 - Added SDL_mixer support for playing audio
 - Added support for OGG/Vorbis audio
 - Images cached upon changing category
+- Replaced yak image
 
 0.4.5:
 - Added Desktop Entry file for Unix-like systems using an X11 desktop
