@@ -8,6 +8,16 @@
 
 using namespace std;
 
+// icon
+#if !defined(WIN32) && !defined(WIN64)
+#define ICON1 _T("myabcs.png")
+#else
+#define ID_ICON1
+#define ICON1 wxICON(ID_ICON1)
+#endif
+
+
+// initialize static members
 wxString MainWindow::alpha_sound(wxEmptyString);
 
 static ResourceObject currentResource;
