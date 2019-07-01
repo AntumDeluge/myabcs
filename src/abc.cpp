@@ -118,6 +118,9 @@ MainWindow::MainWindow(const wxString& title) :
 	canvas = new wxPanel(this, ID_BG, wxDefaultPosition, wxDefaultSize, 0 | wxWANTS_CHARS);
 	canvas->SetFocus();
 
+	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKeyDown), NULL, this);
+	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
+
 	image = new ImageDisplay(canvas, -1, wxNullBitmap);
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
@@ -125,9 +128,6 @@ MainWindow::MainWindow(const wxString& title) :
 	// FIXME: fonts
 	letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 	label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
-
-	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKeyDown), NULL, this);
-	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
 
 	// Catch events passed by threads
 	Connect(wxID_ANY, ID_KEY, wxCommandEventHandler(MainWindow::ChangeLetter), 0, this);
