@@ -21,6 +21,17 @@ void unloadChunks() {
 }
 
 
+/** checks existence of Vorbis audio file */
+wxString prioritizeVorbis(wxString filename) {
+	const wxString ogg_filename = filename.Left(filename.Len() - 3).Append("oga");
+	if (wxFileExists(ogg_filename)) {
+		filename = ogg_filename;
+	}
+
+	return filename;
+}
+
+
 SoundPlayer::~SoundPlayer() {
 	Mix_FreeChunk(primaryChunk);
 	Mix_CloseAudio();
@@ -54,10 +65,7 @@ void SoundPlayer::load(wxString primary) {
 	}
 
 	// Vorbis audio takes priority
-	const wxString ogg_filename = primary.Left(primary.Len() - 3).Append("oga");
-	if (wxFileExists(ogg_filename)) {
-		primary = ogg_filename;
-	}
+	primary = prioritizeVorbis(primary);
 
 	if (!wxFileExists(primary)) {
 		logError(wxString::Format("Cannot load sound, file not found: %s", primary));
