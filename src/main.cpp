@@ -41,5 +41,8 @@ int main(int argc, char** argv) {
 	wxApp::SetInstance(app);
 	wxEntry(argc, argv);
 
+	// cleanup
+	delete soundPlayer;
+
 	return 0;
 }
