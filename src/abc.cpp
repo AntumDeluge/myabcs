@@ -24,10 +24,16 @@ wxString MainWindow::alpha_sound(wxEmptyString);
 static ResourceObject currentResource;
 static ResourceObject winResource;
 
+
+// checks if a string contains only alphabetic characters
+static bool isAlpha(wxString s) {
+	return wxRegEx(_T("^[A-Za-z]+$")).Matches(s);
+}
+
+
 MainWindow::MainWindow(const wxString& title) :
 		wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
 				wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
-
 	resourceList = ResourceList();
 	winResource = ResourceObject(_T("ribbon"), wxEmptyString);
 
