@@ -388,94 +388,81 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	}
 }
 
-// FIXME: if sound fails to play, space key release isn't caught
+// FIXME: if sound fails to play, space key release isn't caught (still valid?)
 void MainWindow::OnKeyDown(wxKeyEvent& event) {
-	if (!isplaying && cankey && canspace) {
-		// Get key that was pressed
-		int keycode = event.GetKeyCode();
-		key = char(keycode);
+	// DEBUG:
+	logMessage(wxString::Format("%s: Key down ...", cur_category));
 
-		// Catch Tab and Space
-		if (keycode == WXK_TAB) {
-			if (cantab) {
-				// Make sure that game is playable upon switching modes
-				if (gameend) gameend = false;
+	const int key_code = event.GetKeyCode();
 
-				cantab = false;
-				OnTab();
-				//rc = pthread_create(&thread1, NULL, TabThread, this);
-			}
-		} else if (keycode == WXK_SPACE) {
-			canspace = false;
-			PlaySound();
-		} else if (keycode == WXK_RETURN or keycode == WXK_NUMPAD_ENTER) {
-			if (gameend) {
-				gameend = false;
-				soundPlayer->stop();
-				// FIXME: don't re-cache objects
-				LoadCategory("main");
-				canvas->Layout();
-				canvas->Refresh();
-			}
-		} else {
-			if (!gameend) {
-				cankey = false;
-				// Get currently displayed letter to compare with key pressed
-				wxString getletter = letter->GetLabel();
-				if (getletter == _T("Food") or getletter == _T("Animals")
-						or getletter == _T("Music") or getletter == _T("Toys")) {
-					// Choose a random letter to cancel "Food", "Animals" and "Music" as displayed letters
-					cur_letter = 'x';
-				} else cur_letter = *getletter.char_str();
+	// TODO: failsafe check for wxKeyEvent
+	wxChar pressed_key = char(key_code);
+	wxString current_letter = getCurrentLetter();
 
-				// Set the sound to be played
-				alpha_sound = wxString::Format(_T("sound/alpha/%c.wav"), key);
+	if (key_code == WXK_SPACE) {
+		currentResource.playSound();
+	} else if (key_code == WXK_TAB) {
+		OnTab();
+	} else if (cur_category != "main" && isAlpha(pressed_key)) {
+		// DEBUG:
+		logMessage(wxString::Format("Setting letter to: %c", pressed_key));
 
-				currentResource = resourceList.getObject(key);
+		SetLetter(pressed_key);
+	} else { // "main" category
+		if (!game_end) {
+			if (isAlpha(pressed_key)) {
+				if (pressed_key == current_letter) {
+					if (pressed_key == 'Z') {
+						// DEBUG:
+						logMessage("End of game");
 
-				// For ABC mode make sure that key pressed is same as letter displayed
-				if (menu->GetToolState(ID_ABC)) {
-					if (key == cur_letter) {
-						isplaying = true;
-						MainWindow::GoABC();
-					} else if (key == WXK_BACK) {
-						// Move back one letter
-						for (int x = 26; x > 0; x -= 1) {
-							if (cur_letter == letters[x]) {
-								image->SetImageG(images[x-1]);
-								letter->SetLabel(letters[x - 1]);
-								label->SetLabel(labels[x - 1]);
-								canvas->Refresh();
-								canvas->Layout();
-							}
-						}
+						game_end = true;
+
+						currentResource = winResource;
+						letter->SetLabel(_T("CONGRATS!"));
+						label->SetLabel(_T("Press \"ENTER\" to Play Again"));
+						ReloadDisplay(false);
+					} else {
+						IncrementLetter(current_letter);
 					}
 				} else {
-					MainWindow::GoOther();
+					// DEBUG:
+					logMessage("Wrong key pressed");
 				}
+			} else if (key_code == WXK_BACK && current_letter != "A") {
+				// DEBUG:
+				logMessage("Backspacking");
+
+				IncrementLetter(current_letter, false);
 			} else {
-				if (keycode == WXK_BACK) {
-					// Go back to letter "Z"
-					gameend = false;
-					soundPlayer->stop();
-					image->SetImageG(images[25]);
-					letter->SetLabel(letters[25]);
-					label->SetLabel(labels[25]);
-					canvas->Refresh();
-					canvas->Layout();
-				}
+				// DEBUG:
+				logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
+			}
+		} else { // game ended
+			if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
+				// DEBUG:
+				logMessage("Restarting game");
+
+				SetLetter("a");
+				game_end = false;
+			} else if (key_code == WXK_BACK) {
+				// backspace after game end return to letter "Z"
+				SetLetter("Z");
+				game_end = false;
+			} else {
+				// DEBUG:
+				logMessage("Game has ended, press \"Enter\" or change category");
 			}
 		}
 	}
+
 	event.Skip();
 }
 
 void MainWindow::OnKeyUp(wxKeyEvent& event) {
-	// Enables tabbing after the "tab" key is released to prevent cycling too quickly through modes
-	int keycode = event.GetKeyCode();
-	if (keycode == WXK_TAB) cantab = true;
-	else if (keycode == WXK_SPACE) canspace = true;
-	else cankey = true;
+	logMessage(_T("Key up ..."));
+
+	event.Skip();
 }
 
 void MainWindow::OnTab() {
