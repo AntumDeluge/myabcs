@@ -36,6 +36,9 @@ bool App::OnInit() {
 	// FIXME: logging is not initialized for MainWindow constructor
 	initLog(frame);
 
+	// start in "main" category
+	frame->LoadCategory(_T("main"));
+
 	return true;
 }
 

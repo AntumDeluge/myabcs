@@ -122,10 +122,6 @@ MainWindow::MainWindow() :
 	canvas->SetSizer(sizer);
 	canvas->Layout();
 
-	// Start the app with ABC mode
-	wxCommandEvent start(wxEVT_COMMAND_MENU_SELECTED, ID_ABC);
-	OnSetCategory(start);
-
 	// Redirect focus to main panel
 	Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
 
