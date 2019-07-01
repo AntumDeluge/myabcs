@@ -76,6 +76,8 @@ private:
 
 	// methods
 
+	wxString getCurrentLetter() { return letter->GetLabel(); }
+
 	void OnSetCategory(wxCommandEvent& event);
 
 	void OnHelp(wxMenuEvent& event);
