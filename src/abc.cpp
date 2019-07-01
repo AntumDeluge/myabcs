@@ -349,6 +349,15 @@ void MainWindow::SetLetter(wxString alpha) {
 	ReloadDisplay();
 }
 
+void MainWindow::IncrementLetter(wxString alpha, bool advance) {
+	// DEBUG:
+	logMessage("Incrementing letter ...");
+
+	if (advance) currentResource = resourceList.getNext(alpha);
+	else currentResource = resourceList.getPrev(alpha);
+	ReloadDisplay();
+}
+
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	int id = event.GetId();
 
