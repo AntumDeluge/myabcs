@@ -6,6 +6,7 @@
 #include "log.h"
 #include "sound.h"
 
+#include <wx/ffile.h>
 #include <wx/regex.h>
 
 
@@ -385,11 +386,19 @@ void MainWindow::OnAbout(wxMenuEvent& event) {
 	about->AddCredit(_T("Jordan Irwin"), CREDIT_PACKAGER);
 
 	// Changelog
-	wxString CLText(_T(
-			"0.4.5\n\u2022 Add .desktop file for X11 desktop\n\u2022 Replace \
-some images\n\u2022 Changed license to MIT\n\u2022 Made code non-Linux \
-specific"));
-	about->SetChangelog(CLText);
+	// FIXME: concatenating "CHANGES.txt" to dir_root not working
+	//wxString cl_file = wxString::Format("%s/CHANGES.txt", getRootDir());
+	wxString cl_file = _T("CHANGES.txt");
+	wxString cl_text = wxString::Format("Changelog text not found: %s", cl_file);
+
+	if (wxFileExists(cl_file)) {
+		// load text file
+		wxFFile f_open(cl_file, "r");
+		f_open.ReadAll(&cl_text);
+		f_open.Close();
+	}
+
+	about->SetChangelog(cl_text);
 
 	about->AddArtist(_T("ABC Blocks"), _T("Petri Lummemaki "), _T("Public Domain"));
 	about->AddArtist(_T("Accordion"), _T("ArtFavor"), _T("Public Domain"));
