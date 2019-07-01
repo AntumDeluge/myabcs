@@ -12,16 +12,21 @@ SoundPlayer* soundPlayer;
 static bool initialized = false;
 
 static Mix_Chunk* primaryChunk = NULL;
+static Mix_Chunk* auxiliaryChunk = NULL;
 static int channel;
 static wxString primarySound;
+static wxString auxiliarySound;
 
 // thread object
 static pthread_t sound_thread;
 
 
 void unloadChunks() {
+	// XXX: leak?
 	primaryChunk = NULL;
+	auxiliaryChunk = NULL;
 	primarySound.Empty();
+	auxiliarySound.Empty();
 }
 
 
@@ -40,6 +45,18 @@ void* playSoundThread(void* arg) {
 
 	// wait for sound to stop playing
 	while (Mix_Playing(channel) != 0);
+
+	// TODO: short pause between sounds
+	if (auxiliaryChunk != NULL) {
+		channel = Mix_PlayChannel(-1, auxiliaryChunk, 0);
+		if (channel != 0) {
+			logError(wxString::Format("Playing auxiliary sound failed: %s", Mix_GetError()));
+			unloadChunks();
+			return 1;
+		}
+
+		while (Mix_Playing(channel) != 0);
+	}
 
 	pthread_exit(NULL);
 
@@ -62,6 +79,7 @@ wxString prioritizeVorbis(wxString filename) {
 
 SoundPlayer::~SoundPlayer() {
 	Mix_FreeChunk(primaryChunk);
+	Mix_FreeChunk(auxiliaryChunk);
 	Mix_CloseAudio();
 	SDL_Quit();
 }
@@ -83,7 +101,7 @@ void SoundPlayer::init() {
 	logMessage(_T("Opened audio mixer"));
 }
 
-void SoundPlayer::load(wxString primary) {
+void SoundPlayer::load(wxString primary, wxString auxiliary) {
 	// ensure sound chunks are NULL every time this method is called
 	unloadChunks();
 
@@ -94,6 +112,7 @@ void SoundPlayer::load(wxString primary) {
 
 	// Vorbis audio takes priority
 	primary = prioritizeVorbis(primary);
+	auxiliary = prioritizeVorbis(auxiliary);
 
 	if (!wxFileExists(primary)) {
 		logError(wxString::Format("Cannot load sound, file not found: %s", primary));
@@ -111,6 +130,11 @@ void SoundPlayer::load(wxString primary) {
 		return;
 	}
 	primarySound = primary;
+
+	if (wxFileExists(auxiliary)) {
+		auxiliaryChunk = Mix_LoadWAV(auxiliary.c_str());
+		auxiliarySound = auxiliary;
+	}
 
 	logMessage(wxString::Format("Loaded sound file: %s", primarySound));
 }
@@ -138,8 +162,8 @@ void SoundPlayer::play() {
 	}
 }
 
-void SoundPlayer::play(wxString primary) {
-	load(primary);
+void SoundPlayer::play(wxString primary, wxString auxiliary) {
+	load(primary, auxiliary);
 	play();
 }
 

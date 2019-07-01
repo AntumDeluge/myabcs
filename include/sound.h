@@ -10,9 +10,11 @@ public:
 	SoundPlayer() {};
 	~SoundPlayer();
 	void init();
-	void load(wxString primary);
+	void load(wxString primary, wxString auxiliary);
+	void load(wxString primary) { return load(primary, wxEmptyString); }
 	void play();
-	void play(wxString primary);
+	void play(wxString primary, wxString auxiliary);
+	void play(wxString primary) { return play(primary, wxEmptyString); }
 	void stop();
 	bool isLoaded(const wxString filename);
 	bool isReady();
