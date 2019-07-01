@@ -93,6 +93,12 @@ void SoundPlayer::play() {
 		return;
 	}
 
+	// don't play if sound is already playing
+	if (isPlaying()) {
+		logMessage(_T("Audio channel not available"));
+		return;
+	}
+
 	channel = Mix_PlayChannel(-1, primaryChunk, 0);
 	if (channel != 0) {
 		logError(wxString("Playing sound failed: ").Append(Mix_GetError()));
