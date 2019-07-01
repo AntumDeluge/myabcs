@@ -125,7 +125,7 @@ MainWindow::MainWindow(const wxString& title) :
 	letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 	label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
 
-	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKey), NULL, this);
+	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKeyDown), NULL, this);
 	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
 
 	// Catch events passed by threads
@@ -374,7 +374,7 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 }
 
 // FIXME: if sound fails to play, space key release isn't caught
-void MainWindow::OnKey(wxKeyEvent& event) {
+void MainWindow::OnKeyDown(wxKeyEvent& event) {
 	if (!isplaying && cankey && canspace) {
 		// Get key that was pressed
 		int keycode = event.GetKeyCode();
