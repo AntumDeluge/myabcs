@@ -7,6 +7,7 @@
 #include "sound.h"
 
 #include <stddef.h>
+#include <wx/regex.h>
 
 using namespace std;
 
