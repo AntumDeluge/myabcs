@@ -8,9 +8,6 @@
 
 using namespace std;
 
-const int ID_WINDOW = wxNewId();
-const int ID_BG = wxNewId();
-
 wxString MainWindow::alpha_sound(wxEmptyString);
 
 static ResourceObject currentResource;
