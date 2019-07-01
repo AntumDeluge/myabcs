@@ -38,16 +38,8 @@ MainWindow::MainWindow(const wxString& title) :
 	resourceList = ResourceList();
 	winResource = ResourceObject(_T("ribbon"), wxEmptyString);
 
-	// Get the executable's directory
-	exedir = new wxString(wxStandardPaths::Get().GetExecutablePath());
-	wxFileName filename(*exedir);
 	// Get the executable's filename
-	wxString argv0 = filename.GetFullName();
-	// Subtract the filename from the the full pathname
-	unsigned int x;
-	for (x = 0; x < argv0.Length(); x++) {
-		exedir->RemoveLast();
-	}
+	wxString argv0 = wxString(executable);
 
 	// FIXME: Currently uses current working directory to locate data
 	//        rather than looking in the installed directory.
@@ -55,7 +47,7 @@ MainWindow::MainWindow(const wxString& title) :
 	installdir = _T(ABCDIR);
 	installdir.Append(_T("/"));
 #else
-	installdir = exedir;
+	installdir = dir_root;
 #endif
 
 	SetIcon(wxIcon(ICON1));

@@ -35,6 +35,9 @@ private:
 	wxStaticText* letter;
 	wxStaticText* label;
 
+	// directories
+	wxString installdir; // Directory where files should be installed
+
 	char key; // Store the key pressed
 	char cur_letter;
 	static wxString alpha_sound;
