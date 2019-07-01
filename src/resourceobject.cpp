@@ -1,5 +1,6 @@
 #include "log.h"
 #include "resourceobject.h"
+#include "sound.h"
 #include "res/failsafe.png.h"
 
 #include <wx/filefn.h>
@@ -7,13 +8,11 @@
 #include <wxSVG/SVGDocument.h>
 
 
+// TODO: use env.h
 // directories where image & sound files are stored
 static const wxString dir_images("pic/");
 static const wxString dir_vocals("sound/");
 static const wxString dir_effects("sound/effect/");
-
-// channel for playing audio
-static int channel;
 
 
 /** copy constructor */
@@ -55,47 +54,7 @@ ResourceObject::~ResourceObject() {
 }
 
 bool ResourceObject::playSound() {
-	// FIXME: should be done in "load" method
-	Mix_Chunk* sndVocal = Mix_LoadWAV(sndVocalString.c_str());
-
-	if (sndVocal == NULL) {
-		logError(_T("Audio not loaded, cannot play sound"));
-		return false;
-	}
-
-	channel = Mix_PlayChannel(-1, sndVocal, 0);
-	if (channel != 0) {
-		logError(wxString("Playing sound failed: ").Append(Mix_GetError()));
-		return false;
-	}
-
-	// wait for sound to stop playing
-	while (Mix_Playing(channel) != 0);
-
-	Mix_Chunk* sndEffect = NULL;
-
-	if (sndEffectString != wxEmptyString) {
-		sndEffect = Mix_LoadWAV(sndEffectString.c_str());
-	}
-
-	// optional sound effect
-	if (sndEffect != NULL) {
-		channel = Mix_PlayChannel(-1, sndEffect, 0);
-		if (channel != 0) {
-			logError(wxString("Playing sound effect failed: ").Append(Mix_GetError()));
-			// don't return here because sound effect is not essential
-		}
-
-		// wait for sound effect to stop playing
-		while (Mix_Playing(channel) != 0);
-
-		logMessage("Freeing sound effect memory ...");
-		Mix_FreeChunk(sndEffect);
-	}
-
-	logMessage("Freeing vocal sound memory ...");
-	Mix_FreeChunk(sndVocal);
-
+	soundPlayer->play(sndVocalString, sndEffectString);
 	return true;
 }
 
