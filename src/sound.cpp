@@ -147,7 +147,7 @@ bool SoundPlayer::isPlaying() {
 }
 
 
-void initializeSounds() {
+void initSound() {
 	soundPlayer = new SoundPlayer();
 	soundPlayer->init();
 	initialized = true;

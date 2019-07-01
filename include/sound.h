@@ -25,7 +25,7 @@ public:
 
 extern SoundPlayer* soundPlayer;
 
-extern void initializeSounds();
+extern void initSound();
 
 extern bool soundIsInitialized();
 

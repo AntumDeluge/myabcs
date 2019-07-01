@@ -7,7 +7,7 @@
 bool App::OnInit()
 {
 	// initialize SDL audio
-	initializeSounds();
+	initSound();
 
 	// initialize image support
 	wxImage::AddHandler(new wxPNGHandler);
