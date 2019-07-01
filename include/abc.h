@@ -40,6 +40,10 @@ private:
 
 	char key; // Store the key pressed
 	char cur_letter;
+	
+	// game state
+	bool game_end;
+	
 	static wxString alpha_sound;
 	wxString letter_sounds[2][26]; // wav sound for each letter
 	wxString images[26];
@@ -50,7 +54,6 @@ private:
 	wxString musics[2][26];
 	wxString toys[2][26];
 	//    wxButton *play; // Button to play sounds
-	bool gameend;
 	bool isplaying; // Is sound currently playing
 	bool canspace; // Allow playing sounds if one is not currently played
 	bool cankey;

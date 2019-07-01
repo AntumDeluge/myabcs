@@ -315,23 +315,36 @@ void MainWindow::LoadCategory(wxString cat_name) {
 		resourceList.clear();
 	}
 
-	resourceList.set(createCategory(cat_name));
+	cur_category = cat_name;
+	resourceList.set(createCategory(cur_category));
 
-	if (cat_name == "animal") {
+	if (cur_category == "animal") {
+		SetTitle(_T("Press a Key to See an Animal"));
 		currentResource = resourceList.getObject("t");
-	} else if (cat_name == "music") {
+		letter->SetLabel(_T("Animals"));
+	} else if (cur_category == "music") {
+		SetTitle(_T("Press a Key to See an Instrument"));
 		currentResource = resourceList.getObject("g");
-	} else if (cat_name == "food") {
+		letter->SetLabel(_T("Music"));
+	} else if (cur_category == "food") {
+		SetTitle(_T("Press a Key to See a Food"));
 		currentResource = resourceList.getObject("h");
-	} else if (cat_name == "toy") {
+		letter->SetLabel(_T("Food"));
+	} else if (cur_category == "toy") {
+		SetTitle(_T("Press a Key to See a Toy"));
 		currentResource = resourceList.getObject("w");
+		letter->SetLabel(_T("Toys"));
 	} else {
 		currentResource = resourceList.getObject("a");
-
 		SetTitle(_T("Find the letter on the keyboard"));
-		letter->SetLabel(currentResource.getLabel().Upper()[0]);
-		label->SetLabel(currentResource.getLabel().Upper());
+		ReloadDisplay(true);
+
+		return;
 	}
+
+	label->SetLabel(wxEmptyString);
+	ReloadDisplay(false);
+	game_end = false;
 }
 
 void MainWindow::SetLetter(wxString alpha) {
@@ -357,47 +370,22 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	if (id == wxID_EXIT) {
 		Close(true);
 	} else {
-		gameend = false;
 		if (soundIsInitialized()) {
 			soundPlayer->stop();
 		}
 
-		if (id == ID_ABC) {
-			LoadCategory(_T("main"));
+		if (id == ID_ANIMALS) {
+			LoadCategory(_T("animal"));
+		} else if (id == ID_MUSIC) {
+			LoadCategory(_T("music"));
+		} else if (id == ID_FOOD) {
+			LoadCategory(_T("food"));
+		} else if (id == ID_TOYS) {
+			LoadCategory(_T("toy"));
 		} else {
-			if (id == ID_ANIMALS) {
-				LoadCategory(_T("animal"));
-
-				SetTitle(_T("Press a Key to See an Animal"));
-				letter->SetLabel(_T("Animals"));
-				label->SetLabel(_T(""));
-			} else if (id == ID_MUSIC) {
-				LoadCategory(_T("music"));
-
-				SetTitle(_T("Press a Key to See an Instrument"));
-				letter->SetLabel(_T("Music"));
-				label->SetLabel(_T(""));
-			} else if (id == ID_FOOD) {
-				LoadCategory(_T("food"));
-
-				SetTitle(_T("Press a Key to See a Food"));
-				letter->SetLabel(_T("Food"));
-				label->SetLabel(_T(""));
-			} else if (id == ID_TOYS) {
-				LoadCategory(_T("toy"));
-
-				SetTitle(_T("Press a Key to See a Toy"));
-				letter->SetLabel(_T("Toys"));
-				label->SetLabel(_T(""));
-			}
+			LoadCategory(_T("main"));
 		}
-
-		image->SetBitmap(currentResource.getBitmap());
 	}
-
-	canvas->SetFocusIgnoringChildren();
-	canvas->Refresh();
-	canvas->Layout();
 }
 
 // FIXME: if sound fails to play, space key release isn't caught
