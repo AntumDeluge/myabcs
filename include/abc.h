@@ -18,9 +18,7 @@ class MainWindow : public wxFrame {
 public:
 	MainWindow(const wxString& title);
 	void LoadCategory(wxString cat_name);
-	void OnKey(wxKeyEvent& event);
 	void OnTab(); //wxCommandEvent& event);
-	void OnKeyUp(wxKeyEvent& event);
 	void GoABC();
 	void GoOther();
 	void ChangeLetter(wxCommandEvent& event);
@@ -79,6 +77,8 @@ private:
 	wxString getCurrentLetter() { return letter->GetLabel(); }
 
 	void OnSetCategory(wxCommandEvent& event);
+	void OnKey(wxKeyEvent& event);
+	void OnKeyUp(wxKeyEvent& event);
 
 	void OnHelp(wxMenuEvent& event);
 	void OnAbout(wxMenuEvent& event);
