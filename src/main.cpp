@@ -29,7 +29,7 @@ bool App::OnInit() {
 	wxImage::AddHandler(new wxICOHandler);
 	wxImage::AddHandler(new wxXPMHandler);
 
-	MainWindow* frame = new MainWindow(_T(""));
+	MainWindow* frame = new MainWindow();
 	frame->Show(true);
 	SetTopWindow(frame);
 

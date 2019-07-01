@@ -33,8 +33,8 @@ static bool isAlpha(wxString s) {
 }
 
 
-MainWindow::MainWindow(const wxString& title) :
-		wxFrame(NULL, ID_WINDOW, title, wxDefaultPosition, wxSize(400, 550),
+MainWindow::MainWindow() :
+		wxFrame(NULL, ID_WINDOW, wxEmptyString, wxDefaultPosition, wxSize(400, 550),
 				wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 	resourceList = ResourceList();
 	winResource = ResourceObject(_T("ribbon"), wxEmptyString);

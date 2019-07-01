@@ -16,7 +16,7 @@
 
 class MainWindow : public wxFrame {
 public:
-	MainWindow(const wxString& title);
+	MainWindow();
 	void LoadCategory(wxString cat_name);
 	void GoABC();
 	void GoOther();
