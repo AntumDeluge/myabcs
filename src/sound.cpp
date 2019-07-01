@@ -1,6 +1,7 @@
 #include "log.h"
 #include "sound.h"
 
+#include <pthread.h>
 #include <SDL2/SDL.h>
 #include <wx/filefn.h>
 
@@ -14,10 +15,37 @@ static Mix_Chunk* primaryChunk = NULL;
 static int channel;
 static wxString primarySound;
 
+// thread object
+static pthread_t sound_thread;
+
 
 void unloadChunks() {
 	primaryChunk = NULL;
 	primarySound.Empty();
+}
+
+
+// thread for playing sounds
+void* playSoundThread(void* arg) {
+	//sound_thread_active = true;
+
+	channel = Mix_PlayChannel(-1, primaryChunk, 0);
+	if (channel != 0) {
+		logError(wxString::Format("Playing primary sound failed: %s", Mix_GetError()));
+		unloadChunks();
+		return 1;
+	}
+
+	logMessage(wxString("Playing sound ..."));
+
+	// wait for sound to stop playing
+	while (Mix_Playing(channel) != 0);
+
+	pthread_exit(NULL);
+
+	// free up sound chunks
+	unloadChunks();
+	return 0;
 }
 
 
@@ -99,16 +127,15 @@ void SoundPlayer::play() {
 		return;
 	}
 
-	channel = Mix_PlayChannel(-1, primaryChunk, 0);
-	if (channel != 0) {
-		logError(wxString("Playing sound failed: ").Append(Mix_GetError()));
+	// thread function plays the sound
+	int t_ret = pthread_create(&sound_thread, NULL, playSoundThread, NULL);
+	if (t_ret != 0) {
+		setErrorCode(t_ret);
+		setErrorMsg(wxString("Unknown error creating thread"));
+		logCurrentError();
+
 		return;
 	}
-
-	logMessage(wxString("Playing sound ..."));
-
-	// wait for sound to stop playing
-	while (isPlaying());
 }
 
 void SoundPlayer::play(wxString primary) {
@@ -125,6 +152,13 @@ void SoundPlayer::stop() {
 	logMessage(_T("Stopping sound ..."));
 
 	Mix_HaltChannel(channel);
+
+	// XXX: necessary even after Mix_HaltChannel called?
+	int t_ret = pthread_cancel(sound_thread);
+	if (t_ret != 0) {
+		setError(t_ret, "Error cancelling sound thread");
+		logCurrentError();
+	}
 }
 
 bool SoundPlayer::isLoaded(const wxString filename) {
