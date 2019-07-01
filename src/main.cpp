@@ -1,11 +1,21 @@
+#include "env.h"
 #include "main.h"
 #include "abc.h"
 #include "log.h"
 #include "sound.h"
 
+#include <string>
+#include <wx/stdpaths.h>
 
-bool App::OnInit()
-{
+
+bool App::OnInit() {
+	// initialize environment directories
+	initPaths(std::string(wxPathOnly(wxStandardPaths::Get().GetExecutablePath()).mb_str()));
+
+	// DEBUG:
+	logMessage(wxString::Format("Root dir: %s", getRootDir()));
+
+	// TODO: allow initializing sounds without dependency on wxApp
 	// initialize SDL audio
 	initSound();
 
