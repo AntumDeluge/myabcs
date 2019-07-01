@@ -7,16 +7,22 @@
 
 SoundPlayer* soundPlayer;
 
-static Mix_Chunk* chunk = NULL;
-static int channel;
-static wxString loadedSound;
-
 // check for sound intializations
 static bool initialized = false;
 
+static Mix_Chunk* primaryChunk = NULL;
+static int channel;
+static wxString primarySound;
+
+
+void unloadChunks() {
+	primaryChunk = NULL;
+	primarySound.Empty();
+}
+
 
 SoundPlayer::~SoundPlayer() {
-	unload();
+	Mix_FreeChunk(primaryChunk);
 	Mix_CloseAudio();
 	SDL_Quit();
 }
@@ -38,48 +44,42 @@ void SoundPlayer::init() {
 	logMessage(_T("Opened audio mixer"));
 }
 
-void SoundPlayer::load(wxString filename) {
+void SoundPlayer::load(wxString primary) {
+	// ensure sound chunks are NULL every time this method is called
+	unloadChunks();
+
 	// Vorbis audio takes priority
-	const wxString ogg_filename = filename.Left(filename.Len() - 3).Append("oga");
+	const wxString ogg_filename = primary.Left(primary.Len() - 3).Append("oga");
 	if (wxFileExists(ogg_filename)) {
-		filename = ogg_filename;
+		primary = ogg_filename;
 	}
 
-	if (isLoaded(filename)) {
-		logMessage(wxString("Not re-loading sound: ").Append(filename));
+	if (isLoaded(primary)) {
+		logMessage(wxString("Not re-loading sound: ").Append(primary));
 		return;
 	}
 
-	// ensure chunk is NULL every time this method is called
-	unload();
-
-	if (filename.IsEmpty()) {
+	if (primary.IsEmpty()) {
 		logError(_T("Cannot load sound from empty filename"));
 		return;
 	}
 
-	if (!wxFileExists(filename)) {
-		logError(wxString("Cannot load sound, file not found: ").Append(filename));
+	if (!wxFileExists(primary)) {
+		logError(wxString("Cannot load sound, file not found: ").Append(primary));
 		return;
 	}
 
-	chunk = Mix_LoadWAV(filename.c_str());
+	primaryChunk = Mix_LoadWAV(primary.c_str());
 
-	if (chunk == NULL) {
-		wxString errmsg = wxString("Unable to load sound file \"").Append(filename).Append("\": ").Append(Mix_GetError());
+	if (primaryChunk == NULL) {
+		wxString errmsg = wxString("Unable to load sound file \"").Append(primary).Append("\": ").Append(Mix_GetError());
 		logError(errmsg);
 		return;
 	}
 
-	loadedSound = filename;
+	primarySound = primary;
 
-	logMessage(wxString("Loaded sound file: ").Append(filename));
-}
-
-void SoundPlayer::unload() {
-	Mix_FreeChunk(chunk);
-	chunk = NULL;
-	loadedSound.Empty();
+	logMessage(wxString("Loaded sound file: ").Append(primary));
 }
 
 void SoundPlayer::play() {
@@ -88,7 +88,7 @@ void SoundPlayer::play() {
 		return;
 	}
 
-	channel = Mix_PlayChannel(-1, chunk, 0);
+	channel = Mix_PlayChannel(-1, primaryChunk, 0);
 	if (channel != 0) {
 		logError(wxString("Playing sound failed: ").Append(Mix_GetError()));
 		return;
@@ -100,8 +100,8 @@ void SoundPlayer::play() {
 	while (isPlaying());
 }
 
-void SoundPlayer::play(const wxString filename) {
-	load(filename);
+void SoundPlayer::play(const wxString primary) {
+	load(primary);
 	play();
 }
 
@@ -118,15 +118,15 @@ void SoundPlayer::stop() {
 
 bool SoundPlayer::isLoaded(const wxString filename) {
 	// don't allow comparison of empty strings
-	if (!loadedSound) {
+	if (!primarySound) {
 		return false;
 	}
 
-	return filename.IsSameAs(loadedSound) && isReady();
+	return filename.IsSameAs(primarySound) && isReady();
 }
 
 bool SoundPlayer::isReady() {
-	return chunk != NULL;
+	return primaryChunk != NULL;
 }
 
 bool SoundPlayer::isPlaying() {
