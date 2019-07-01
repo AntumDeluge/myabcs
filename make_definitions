@@ -100,15 +100,10 @@ GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
 GNRCABT_D = $(GNRCABT_H) $(ID_H)
 
-IMGDISPLAY_H = include/imgdisplay.h
-IMGDISPLAY_C = src/imgdisplay.cpp
-IMGDISPLAY_O = imgdisplay.o
-IMGDISPLAY_D = $(IMGDISPLAY_H) $(LOG_H) $(FAILSAFE_PNG)
-
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(IMGDISPLAY_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H)
+ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
@@ -116,7 +111,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
 
 OBJECTS = \
-	$(LOG_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(IMGDISPLAY_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)

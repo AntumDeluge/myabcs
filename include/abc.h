@@ -1,7 +1,6 @@
 #ifndef MYABCS_ABC_H
 #define MYABCS_ABC_H
 
-#include "imgdisplay.h"
 #include "resourcelist.h"
 
 #include <wx/frame.h>
@@ -21,7 +20,7 @@ private:
 
 	// game UI
 	wxPanel* canvas;
-	ImageDisplay* image;
+	wxStaticBitmap* image;
 	wxStaticText* letter;
 	wxStaticText* label;
 

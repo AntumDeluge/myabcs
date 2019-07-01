@@ -102,7 +102,7 @@ MainWindow::MainWindow() :
 	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKeyDown), NULL, this);
 	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
 
-	image = new ImageDisplay(canvas, -1, wxNullBitmap);
+	image = new wxStaticBitmap(canvas, -1, wxNullBitmap);
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
 	label = new wxStaticText(canvas, -1, _T(""));
