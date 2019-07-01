@@ -1,5 +1,6 @@
 #include "abc.h"
 #include "category.h"
+#include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
 #include "sound.h"
@@ -1025,10 +1026,10 @@ specific"));
 	// CenterOnParent is called in the constructor
 }
 
-void MainWindow::OnToggleLogWindow(wxMenuEvent& event) {
-	toggleLogWindow();
-}
-
 void MainWindow::OnFrameFocus(wxFocusEvent& event) {
 	canvas->SetFocus();
+}
+
+void MainWindow::OnToggleLogWindow(wxMenuEvent& event) {
+	toggleLogWindow();
 }

@@ -1,7 +1,6 @@
 #ifndef MYABCS_ABC_H
 #define MYABCS_ABC_H
 
-#include "gnrcabt.h"
 #include "imgdisplay.h"
 #include "res.h"
 #include "resourcelist.h"
@@ -27,8 +26,6 @@ public:
 	void GoOther();
 	void ChangeLetter(wxCommandEvent& event);
 	void PlaySound();
-	void OnHelp(wxMenuEvent& event);
-	void OnAbout(wxMenuEvent& event);
 	void OnToggleLogWindow(wxMenuEvent& event);
 	void EnableAll(wxCommandEvent& event);
 	void SetCurSound(wxString wav);
@@ -79,6 +76,8 @@ private:
 	pthread_t thread2;
 	int rc;
 
+	void OnHelp(wxMenuEvent& event);
+	void OnAbout(wxMenuEvent& event);
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 };
 
