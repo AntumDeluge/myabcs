@@ -3,32 +3,24 @@ Priority:
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
 - Use wxThread class instead of pthreads
-- cache images & audio
 
 Non-priority:
-- Improve loading time of SVG images (ex. quarter.svg loads slow)
-  - Possible options:
-    - Try to optimize SVG documents
-    - Cache images at time of setting game mode
-    - Export slow-loading SVGs to PNG
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
-- cache images at startup
 - Update README
 - Find/Create missing SVGs:
   - ribbon
-- Clean up include statements
 - Convert failsafe image to SVG
 - Use config to determine environment (locatation of data files, etc.)
 - Edit wheels white BG in bicycle SVG
 - Change strawberry SVG
 - Remove shading from watch SVG
-- Replace xylophone instrument with xun
 - Make "pic" & "sound" sub-directores of "data" or other folder
-- Possible change to this quiche SVG image: http://www.clker.com/clipart-529648.html
+- Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
 - Show keyboard for "ABC/find" mode
 - Embed free font
+- Clean up quiche SVG
 
 Fixes & pull-requests:
 - wxWidgets:
