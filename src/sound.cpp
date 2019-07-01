@@ -148,6 +148,11 @@ bool SoundPlayer::isPlaying() {
 
 
 void initSound() {
+	if (initialized) {
+		logMessage("Cannot re-initialize sound");
+		return;
+	}
+
 	soundPlayer = new SoundPlayer();
 	soundPlayer->init();
 	initialized = true;
