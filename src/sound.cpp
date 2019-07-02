@@ -78,6 +78,10 @@ wxString prioritizeVorbis(wxString filename) {
 
 
 SoundPlayer::~SoundPlayer() {
+	if (isPlaying()) {
+		stop();
+	}
+
 	Mix_FreeChunk(primaryChunk);
 	Mix_FreeChunk(auxiliaryChunk);
 	Mix_CloseAudio();
