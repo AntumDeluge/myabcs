@@ -61,6 +61,7 @@ DEFINES= \
 ### Files & headers ###
 
 FAILSAFE_PNG = include/res/failsafe.png.h
+MONO_TTF = include/res/PixelOperatorMono.ttf.h
 
 ENV_H = include/env.h
 ID_H = include/id.h
