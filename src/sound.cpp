@@ -61,8 +61,6 @@ void* playSoundThread(void* arg) {
 		while (Mix_Playing(channel) != 0);
 	}
 
-	pthread_exit(NULL);
-
 	// free up sound chunks
 	unloadChunks();
 	thread_is_active = false;
