@@ -5,10 +5,6 @@
 #include <windows.h>
 #endif
 
-// DEBUG:
-#include <iostream>
-using namespace std;
-
 
 /* XXX: need wxWidgets v3.1.1 for wxFont::AddPrivateFont
  *
@@ -29,15 +25,15 @@ void initFonts() {
 	DWORD nFonts;
 	m_fonthandle = AddFontMemResourceEx((PVOID) PixelOperatorMono_ttf, sizeof(PixelOperatorMono_ttf), NULL, &nFonts);
 
-	//font_changelog = wxFont("Pixel Operator Mono");
 	font_changelog = wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL, false, _T("Pixel Operator Mono"), wxFONTENCODING_DEFAULT);
-
+#else
+	// use generic fixed-width font
+	font_changelog = wxFont(8, wxTELETYPE, wxNORMAL, wxNORMAL);
 #endif
 }
 
 void cleanupFonts() {
 #if defined(WIN32) || defined(WIN64)
-	//RemoveFontResource(ttf_pom);
 	RemoveFontMemResourceEx(m_fonthandle);
 #else
 	delete m_fonthandle;
