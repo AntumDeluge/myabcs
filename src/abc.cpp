@@ -306,7 +306,15 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 }
 
 void MainWindow::OnKeyUp(wxKeyEvent& event) {
-	logMessage(_T("Key up ..."));
+	const int key_code = event.GetKeyCode();
+
+	// TODO: failsafe check for wxKeyEvent
+	const wxChar released_key = char(key_code);
+	const wxString current_letter = getCurrentLetter();
+
+	if (released_key == current_letter) {
+		logMessage(wxString::Format("%c key up ...", released_key));
+	}
 
 	event.Skip();
 }
