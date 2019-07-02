@@ -250,7 +250,7 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		// DEBUG:
 		logMessage(wxString::Format("Setting letter to: %c", pressed_key));
 
-		SetLetter(pressed_key);
+		if (pressed_key != current_letter) SetLetter(pressed_key);
 	} else { // "main" category
 		if (!game_end) {
 			if (isAlpha(pressed_key)) {
