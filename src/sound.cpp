@@ -38,7 +38,7 @@ void* playSoundThread(void* arg) {
 	if (channel != 0) {
 		logError(wxString::Format("Playing primary sound failed: %s", Mix_GetError()));
 		unloadChunks();
-		return 1;
+		return (void*) 1;
 	}
 
 	logMessage(wxString("Playing sound ..."));
@@ -52,7 +52,7 @@ void* playSoundThread(void* arg) {
 		if (channel != 0) {
 			logError(wxString::Format("Playing auxiliary sound failed: %s", Mix_GetError()));
 			unloadChunks();
-			return 1;
+			return (void*) 1;
 		}
 
 		while (Mix_Playing(channel) != 0);
@@ -62,7 +62,7 @@ void* playSoundThread(void* arg) {
 
 	// free up sound chunks
 	unloadChunks();
-	return 0;
+	return (void*) 0;
 }
 
 
