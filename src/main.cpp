@@ -1,4 +1,5 @@
 #include "env.h"
+#include "fonts.h"
 #include "main.h"
 #include "abc.h"
 #include "log.h"
@@ -18,6 +19,9 @@ bool App::OnInit() {
 	// DEBUG:
 	logMessage(wxString::Format("Root dir: %s", getRootDir()));
 	logMessage(wxString::Format("Executable: %s", executable));
+
+	// initialize fonts
+	initFonts();
 
 	// TODO: allow initializing sounds without dependency on wxApp
 	// initialize SDL audio
@@ -40,6 +44,12 @@ bool App::OnInit() {
 	frame->LoadCategory(_T("main"));
 
 	return true;
+}
+
+int App::OnExit() {
+	cleanupFonts();
+	// FIXME: proper return code?
+	return 0;
 }
 
 

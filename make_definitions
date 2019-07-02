@@ -73,6 +73,12 @@ LOG_C = src/log.cpp
 LOG_O = log.o
 LOG_D = $(LOG_H)
 
+FONTS = fonts
+FONTS_H = include/$(FONTS).h
+FONTS_C = src/$(FONTS).cpp
+FONTS_O = $(FONTS).o
+FONTS_D = $(FONTS_H) $(MONO_TTF)
+
 SOUND_H = include/sound.h
 SOUND_C = src/sound.cpp
 SOUND_O = sound.o
@@ -109,10 +115,10 @@ ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RE
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
 MAIN_O = main.o
-MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H)
+MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H)
 
 OBJECTS = \
-	$(LOG_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)

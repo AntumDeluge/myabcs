@@ -7,6 +7,7 @@ class App : public wxApp
 {
 public:
 	virtual bool OnInit();
+	virtual int OnExit();
 };
 
 #endif /* MYABCS_MAIN_H */
