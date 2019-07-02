@@ -203,6 +203,10 @@ void MainWindow::IncrementLetter(wxString alpha, bool advance) {
 	ReloadDisplay();
 }
 
+void MainWindow::PlayAlphaSound() {
+	soundPlayer->play(wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
+}
+
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	int id = event.GetId();
 

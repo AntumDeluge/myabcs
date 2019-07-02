@@ -43,6 +43,9 @@ private:
 	void SetLetter(wxString alpha);
 	void IncrementLetter(wxString alpha, bool advance);
 	void IncrementLetter(wxString alpha) { return IncrementLetter(alpha, true); }
+
+	void PlayAlphaSound();
+
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
