@@ -1,5 +1,8 @@
+#include "fonts.h"
 #include "gnrcabt.h"
 #include "id.h"
+#include "log.h"
+
 
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) : wxDialog(parent, id, title)
 {
@@ -106,6 +109,11 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 
 	// Changelog
 	changelog = new wxRichTextCtrl(p4_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	if (font_changelog.IsOk()) {
+		changelog->SetFont(font_changelog);
+	} else {
+		logMessage("Custom changelog font not loaded");
+	}
 
 	wxBoxSizer *logsizer = new wxBoxSizer(wxVERTICAL);
 	logsizer->Add(changelog, 1, wxEXPAND);
