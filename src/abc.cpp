@@ -251,10 +251,13 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		logMessage(wxString::Format("Setting letter to: %c", pressed_key));
 
 		if (pressed_key != current_letter) SetLetter(pressed_key);
+		PlayAlphaSound();
 	} else { // "main" category
 		if (!game_end) {
 			if (isAlpha(pressed_key)) {
 				if (pressed_key == current_letter) {
+					// FIXME: don't update display until after sound is done playing
+					PlayAlphaSound();
 					if (pressed_key == 'Z') {
 						// DEBUG:
 						logMessage("End of game");
