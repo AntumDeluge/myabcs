@@ -19,6 +19,7 @@ static wxString auxiliarySound;
 
 // thread object
 static pthread_t sound_thread;
+bool thread_is_active = false;
 
 
 void unloadChunks() {
@@ -32,12 +33,13 @@ void unloadChunks() {
 
 // thread for playing sounds
 void* playSoundThread(void* arg) {
-	//sound_thread_active = true;
+	thread_is_active = true;
 
 	channel = Mix_PlayChannel(-1, primaryChunk, 0);
 	if (channel != 0) {
 		logError(wxString::Format("Playing primary sound failed: %s", Mix_GetError()));
 		unloadChunks();
+		thread_is_active = false;
 		return (void*) 1;
 	}
 
@@ -52,6 +54,7 @@ void* playSoundThread(void* arg) {
 		if (channel != 0) {
 			logError(wxString::Format("Playing auxiliary sound failed: %s", Mix_GetError()));
 			unloadChunks();
+			thread_is_active = false;
 			return (void*) 1;
 		}
 
@@ -62,6 +65,7 @@ void* playSoundThread(void* arg) {
 
 	// free up sound chunks
 	unloadChunks();
+	thread_is_active = false;
 	return (void*) 0;
 }
 
@@ -186,7 +190,11 @@ void SoundPlayer::stop() {
 	if (t_ret != 0) {
 		setError(t_ret, "Error cancelling sound thread");
 		logCurrentError();
+
+		return;
 	}
+
+	thread_is_active = false;
 }
 
 bool SoundPlayer::isLoaded(const wxString filename) {
@@ -203,7 +211,7 @@ bool SoundPlayer::isReady() {
 }
 
 bool SoundPlayer::isPlaying() {
-	return Mix_Playing(channel) != 0;
+	return thread_is_active;
 }
 
 
