@@ -52,13 +52,13 @@ private:
 	void OnKeyUp(wxKeyEvent& event);
 	void OnTab();
 
-	void OnSoundFinish(wxCommandEvent& event);
+	void OnSoundFinish(wxEvent& event);
 
-	void OnHelp(wxMenuEvent& event);
-	void OnAbout(wxMenuEvent& event);
+	void OnHelp(wxCommandEvent& event);
+	void OnAbout(wxCommandEvent& event);
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 
-	void OnToggleLogWindow(wxMenuEvent& event);
+	void OnToggleLogWindow(wxCommandEvent& event);
 };
 
 #endif /* MYABCS_ABC_H */

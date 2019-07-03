@@ -86,11 +86,11 @@ MainWindow::MainWindow() :
 	menu->SetBackgroundColour(_T("#84aee6"));
 	menu->Realize();
 
-	Connect(wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler(MainWindow::OnSetCategory), 0, this);
-	Connect(ID_HELP, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnHelp), 0, this);
-	Connect(wxID_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnAbout), 0, this);
+	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnSetCategory, this);
+	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnHelp, this, ID_HELP);
+	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnAbout, this, wxID_ABOUT);
 #ifdef DEBUG
-	Connect(ID_LOG, wxEVT_COMMAND_MENU_SELECTED, wxMenuEventHandler(MainWindow::OnToggleLogWindow), 0, this);
+	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnToggleLogWindow, this, ID_LOG);
 #endif
 
 	// Status bar
@@ -101,8 +101,8 @@ MainWindow::MainWindow() :
 	canvas = new wxPanel(this, ID_BG, wxDefaultPosition, wxDefaultSize, 0 | wxWANTS_CHARS);
 	canvas->SetFocus();
 
-	canvas->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MainWindow::OnKeyDown), NULL, this);
-	canvas->Connect(wxEVT_KEY_UP, wxKeyEventHandler(MainWindow::OnKeyUp), NULL, this);
+	canvas->Bind(wxEVT_KEY_DOWN, &MainWindow::OnKeyDown, this);
+	canvas->Bind(wxEVT_KEY_UP, &MainWindow::OnKeyUp, this);
 
 	image = new wxStaticBitmap(canvas, -1, wxNullBitmap);
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
@@ -125,9 +125,9 @@ MainWindow::MainWindow() :
 	canvas->Layout();
 
 	// Redirect focus to main panel
-	Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
+	Bind(wxEVT_SET_FOCUS, &MainWindow::OnFrameFocus, this);
 	// sounds finish playing
-	Connect(EVT_SOUND_FINISH, wxCommandEventHandler(MainWindow::OnSoundFinish), 0, this);
+	Bind(EVT_SOUND_FINISH, &MainWindow::OnSoundFinish, this);
 
 	Center(); // Center the window on the screen
 }
@@ -342,14 +342,14 @@ void MainWindow::OnTab() {
 	}
 }
 
-void MainWindow::OnSoundFinish(wxCommandEvent& event) {
+void MainWindow::OnSoundFinish(wxEvent& event) {
 	// DEBUG:
 	logMessage("SoundFinishEvent");
 }
 
 // Help and About dialogs
 
-void MainWindow::OnHelp(wxMenuEvent& event) {
+void MainWindow::OnHelp(wxCommandEvent& event) {
 	wxDialog *help = new wxDialog(this, -1, _T("Help"), wxDefaultPosition,
 			wxDefaultSize, wxDEFAULT_DIALOG_STYLE);
 
@@ -396,7 +396,7 @@ Sounds:\n\
 	help->CenterOnParent();
 }
 
-void MainWindow::OnAbout(wxMenuEvent& event) {
+void MainWindow::OnAbout(wxCommandEvent& event) {
 	// About Dialog
 	GenericAbout *about = new GenericAbout(this, -1);
 	about->SetIcon(wxIcon(ICON1));
