@@ -7,7 +7,7 @@ SDLLIBS = `sdl2-config --libs` -lSDL2_mixer
 MISC_LIBS = -lpthread
 
 
-all: play_sound sound_test alpha_only
+all: play_sound sound_test alpha_only thread_event
 
 play_sound: play_sound.cpp
 	$(CC) play_sound.cpp $(WXFLAGS) $(WXLIBS) $(SDLFLAGS) $(SDLLIBS) $(MISC_LIBS) -o play_sound
@@ -17,6 +17,9 @@ sound_test: sound_test.cpp
 
 alpha_only: alpha_only.cpp
 	$(CC) alpha_only.cpp $(WXFLAGS) $(WXLIBS) -o alpha_only
+
+thread_event: thread_event.cpp
+	$(CC) thread_event.cpp $(WXFLAGS) $(WXLIBS) $(MISC_LIBS) -o thread_event
 
 clean:
 	rm -f *.exe
