@@ -55,6 +55,7 @@ private:
 	void handleKeyTab();
 	void handleKeySpace();
 	void handleKeyBack();
+	void handleKeyEnter();
 
 	void OnSoundFinish(wxEvent& event);
 

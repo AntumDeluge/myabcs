@@ -246,6 +246,8 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		handleKeySpace();
 	} else if (key_code == WXK_BACK) {
 		handleKeyBack();
+	} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
+		handleKeyEnter();
 	} else if (isAlpha(pressed_key)) {
 		// DEBUG:
 		logMessage(wxString::Format("%s: Key down ...", cur_category));
@@ -285,17 +287,9 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 					// DEBUG:
 					logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
 				}
-			} else { // game ended
-				if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
-					// DEBUG:
-					logMessage("Restarting game");
-
-					SetLetter("a");
-					game_end = false;
-				} else {
-					// DEBUG:
-					logMessage("Game has ended, press \"Enter\" or change category");
-				}
+			} else if (game_end) {
+				// DEBUG:
+				logMessage("Game has ended, press \"Enter\" or change category");
 			}
 		}
 	}
@@ -351,6 +345,16 @@ void MainWindow::handleKeyBack() {
 		} else if (!soundPlayer->isPlaying()) {
 			IncrementLetter(false);
 		}
+	}
+}
+
+void MainWindow::handleKeyEnter() {
+	if (cur_category == "main" && game_end) {
+		// DEBUG:
+		logMessage("Restarting game ...");
+
+		SetLetter("A");
+		game_end = false;
 	}
 }
 
