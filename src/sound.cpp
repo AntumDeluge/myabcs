@@ -44,7 +44,7 @@ static void exitThreadEvent(void* arg) {
 
 		// event to send to main thread
 		wxCommandEvent SoundFinishEvent(EVT_SOUND_FINISH);
-		wxPostEvent(source_window, SoundFinishEvent); // FIXME: event not caught
+		wxPostEvent(source_window, SoundFinishEvent);
 	}
 }
 
