@@ -64,10 +64,15 @@ FAILSAFE_PNG = include/res/failsafe.png.h
 MONO_TTF = include/res/PixelOperatorMono.ttf.h
 
 ENV_H = include/env.h
-EVENT_H = include/event.h
 ID_H = include/id.h
 RES_H = include/res.h
 RESOURCES_O = resources.o
+
+
+EVENT_H = include/event.h
+EVENT_C = src/event.cpp
+EVENT_O = event.o
+EVENT_D = $(EVENT_H)
 
 LOG_H = include/log.h
 LOG_C = src/log.cpp
@@ -119,7 +124,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H)
 
 OBJECTS = \
-	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O) $(EVENT_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)

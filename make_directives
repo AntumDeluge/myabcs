@@ -87,6 +87,9 @@ $(MAIN_O): $(MAIN_C) $(MAIN_D)
 $(FONTS_O): $(FONTS_C) $(FONTS_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINES) -I$(INCLUDE) $(FONTS_C)
 
+$(EVENT_O): $(EVENT_C) $(EVENT_D)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINGS) -I$(INCLUDE) $(EVENT_C)
+
 $(RESOURCES_O): resources.rc
 	windres `$(WXFLAGS) | sed -e 's|-fpermissive||'` resources.rc $(RESOURCES_O)
 

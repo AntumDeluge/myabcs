@@ -4,7 +4,7 @@
 #include <wx/event.h>
 
 
-static const wxEventType EVT_SOUND_FINISH = wxNewEventType();
+extern const wxEventType EVT_SOUND_FINISH;
 
 
 #endif /* MYABCS_EVENT_H */
