@@ -53,8 +53,8 @@ ResourceObject::~ResourceObject() {
 	*/
 }
 
-bool ResourceObject::playSound() {
-	soundPlayer->play(sndVocalString, sndEffectString);
+bool ResourceObject::playSound(wxWindow* source) {
+	soundPlayer->play(source, sndVocalString, sndEffectString);
 	return true;
 }
 

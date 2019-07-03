@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_mixer.h>
 #include <wx/string.h>
+#include <wx/window.h>
 
 
 class SoundPlayer {
@@ -12,9 +13,9 @@ public:
 	void init();
 	void load(wxString primary, wxString auxiliary);
 	void load(wxString primary) { return load(primary, wxEmptyString); }
-	void play();
-	void play(wxString primary, wxString auxiliary);
-	void play(wxString primary) { return play(primary, wxEmptyString); }
+	void play(wxWindow* source);
+	void play(wxWindow* source, wxString primary, wxString auxiliary);
+	void play(wxWindow* source, wxString primary) { return play(source, primary, wxEmptyString); }
 	void stop();
 	bool isLoaded(const wxString filename);
 	bool isReady();

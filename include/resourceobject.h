@@ -6,6 +6,7 @@
 #include <wx/image.h>
 #include <wx/sound.h>
 #include <wx/string.h>
+#include <wx/window.h>
 
 
 class ResourceObject {
@@ -17,7 +18,7 @@ public:
 	~ResourceObject();
 	wxString getLabel() { return objectLabel; }
 	wxBitmap getBitmap() { return wxBitmap(objectImage); }
-	bool playSound();
+	bool playSound(wxWindow* source);
 private:
 	wxString objectLabel;
 	wxImage objectImage;

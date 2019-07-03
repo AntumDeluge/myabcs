@@ -145,7 +145,7 @@ void SoundPlayer::load(wxString primary, wxString auxiliary) {
 	logMessage(wxString::Format("Loaded sound file: %s", primarySound));
 }
 
-void SoundPlayer::play() {
+void SoundPlayer::play(wxWindow* source) {
 	if (!isReady()) {
 		logError(_T("Audio not loaded, cannot play sound"));
 		return;
@@ -158,7 +158,7 @@ void SoundPlayer::play() {
 	}
 
 	// thread function plays the sound
-	int t_ret = pthread_create(&sound_thread, NULL, playSoundThread, NULL);
+	int t_ret = pthread_create(&sound_thread, NULL, playSoundThread, source);
 	if (t_ret != 0) {
 		setErrorCode(t_ret);
 		setErrorMsg(wxString("Unknown error creating thread"));
@@ -168,9 +168,9 @@ void SoundPlayer::play() {
 	}
 }
 
-void SoundPlayer::play(wxString primary, wxString auxiliary) {
+void SoundPlayer::play(wxWindow* source, wxString primary, wxString auxiliary) {
 	load(primary, auxiliary);
-	play();
+	play(source);
 }
 
 void SoundPlayer::stop() {

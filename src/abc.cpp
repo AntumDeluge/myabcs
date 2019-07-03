@@ -204,7 +204,7 @@ void MainWindow::IncrementLetter(wxString alpha, bool advance) {
 }
 
 void MainWindow::PlayAlphaSound() {
-	soundPlayer->play(wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
+	soundPlayer->play(this, wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
 }
 
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
@@ -243,7 +243,7 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 	wxString current_letter = getCurrentLetter();
 
 	if (key_code == WXK_SPACE) {
-		currentResource.playSound();
+		currentResource.playSound(this);
 	} else if (key_code == WXK_TAB) {
 		OnTab();
 	} else if (cur_category != "main" && isAlpha(pressed_key)) {
@@ -313,6 +313,7 @@ void MainWindow::OnKeyUp(wxKeyEvent& event) {
 	const wxString current_letter = getCurrentLetter();
 
 	if (released_key == current_letter) {
+		// DEBUG:
 		logMessage(wxString::Format("%c key up ...", released_key));
 	}
 
