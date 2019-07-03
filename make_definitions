@@ -64,6 +64,7 @@ FAILSAFE_PNG = include/res/failsafe.png.h
 MONO_TTF = include/res/PixelOperatorMono.ttf.h
 
 ENV_H = include/env.h
+EVENT_H = include/event.h
 ID_H = include/id.h
 RES_H = include/res.h
 RESOURCES_O = resources.o
@@ -82,7 +83,7 @@ FONTS_D = $(FONTS_H) $(MONO_TTF)
 SOUND_H = include/sound.h
 SOUND_C = src/sound.cpp
 SOUND_O = sound.o
-SOUND_D = $(SOUND_H) $(LOG_H) $(ID_H)
+SOUND_D = $(SOUND_H) $(LOG_H) $(ID_H) $(EVENT_H)
 
 RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
@@ -110,7 +111,7 @@ GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H)
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H) $(RESLIST_H) $(CATEGORY_H)
+ABC_D = $(ABC_H) $(ENV_H) $(ID_H) $(RES_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H) $(RESLIST_H) $(CATEGORY_H) $(EVENT_H)
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp

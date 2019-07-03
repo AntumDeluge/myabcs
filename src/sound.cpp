@@ -1,3 +1,4 @@
+#include "event.h"
 #include "id.h"
 #include "log.h"
 #include "sound.h"
@@ -43,7 +44,7 @@ static void exitThreadEvent(void* arg) {
 		logMessage("Sending SoundFinishEvent ...");
 
 		// event to send to main thread
-		wxCommandEvent SoundFinishEvent(wxEVT_NULL, ID_SOUNDEND);
+		wxCommandEvent SoundFinishEvent(EVT_SOUND_FINISH, ID_SOUNDEND);
 		wxPostEvent(source_window, SoundFinishEvent); // FIXME: event not caught
 	}
 }

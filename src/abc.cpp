@@ -1,6 +1,7 @@
 #include "abc.h"
 #include "category.h"
 #include "env.h"
+#include "event.h"
 #include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
@@ -126,7 +127,7 @@ MainWindow::MainWindow() :
 	// Redirect focus to main panel
 	Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
 	// sounds finish playing
-	Connect(ID_SOUNDEND, wxEVT_NULL, wxCommandEventHandler(MainWindow::OnSoundFinish), 0, this);
+	Connect(EVT_SOUND_FINISH, wxCommandEventHandler(MainWindow::OnSoundFinish), 0, this);
 
 	Center(); // Center the window on the screen
 }
