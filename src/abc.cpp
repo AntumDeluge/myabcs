@@ -244,6 +244,8 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		handleKeyTab();
 	} else if (key_code == WXK_SPACE) {
 		handleKeySpace();
+	} else if (key_code == WXK_BACK) {
+		handleKeyBack();
 	} else if (isAlpha(pressed_key)) {
 		// DEBUG:
 		logMessage(wxString::Format("%s: Key down ...", cur_category));
@@ -279,11 +281,6 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 						// DEBUG:
 						logMessage("Wrong key pressed");
 					}
-				} else if (key_code == WXK_BACK && current_letter != "A") {
-					// DEBUG:
-					logMessage("Backspacking");
-
-					IncrementLetter(current_letter, false);
 				} else {
 					// DEBUG:
 					logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
@@ -294,10 +291,6 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 					logMessage("Restarting game");
 
 					SetLetter("a");
-					game_end = false;
-				} else if (key_code == WXK_BACK) {
-					// backspace after game end return to letter "Z"
-					SetLetter("Z");
 					game_end = false;
 				} else {
 					// DEBUG:
@@ -347,6 +340,17 @@ void MainWindow::handleKeyTab() {
 void MainWindow::handleKeySpace() {
 	if (!soundPlayer->isPlaying()) {
 		currentResource.playSound(this);
+	}
+}
+
+void MainWindow::handleKeyBack() {
+	if (getCurrentLetter() != "A") {
+		if (game_end) {
+			SetLetter("Z");
+			game_end = false;
+		} else if (!soundPlayer->isPlaying()) {
+			IncrementLetter(false);
+		}
 	}
 }
 
