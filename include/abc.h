@@ -44,6 +44,8 @@ private:
 	void SetLetter(wxString alpha);
 	void IncrementLetter(wxString alpha, bool advance);
 	void IncrementLetter(wxString alpha) { return IncrementLetter(alpha, true); }
+	void IncrementLetter(bool advance) { return IncrementLetter(getCurrentLetter(), advance); }
+	void IncrementLetter() { return IncrementLetter(getCurrentLetter(), true); }
 
 	void PlayAlphaSound();
 
