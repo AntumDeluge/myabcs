@@ -211,15 +211,15 @@ void MainWindow::PlayAlphaSound() {
 }
 
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
-	int id = event.GetId();
+	if (soundIsInitialized()) {
+		soundPlayer->stop();
+	}
+
+	const int id = event.GetId();
 
 	if (id == wxID_EXIT) {
 		Close(true);
 	} else {
-		if (soundIsInitialized()) {
-			soundPlayer->stop();
-		}
-
 		if (id == ID_ANIMALS) {
 			LoadCategory(_T("animal"));
 		} else if (id == ID_MUSIC) {
