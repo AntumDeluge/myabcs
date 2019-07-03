@@ -236,71 +236,73 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 
 // FIXME: if sound fails to play, space key release isn't caught (still valid?)
 void MainWindow::OnKeyDown(wxKeyEvent& event) {
-	// DEBUG:
-	logMessage(wxString::Format("%s: Key down ...", cur_category));
-
-	const int key_code = event.GetKeyCode();
-
 	// TODO: failsafe check for wxKeyEvent
+	const int key_code = event.GetKeyCode();
 	wxChar pressed_key = char(key_code);
-	wxString current_letter = getCurrentLetter();
 
-	if (key_code == WXK_SPACE) {
-		currentResource.playSound(this);
-	} else if (key_code == WXK_TAB) {
-		OnTab();
-	} else if (cur_category != "main" && isAlpha(pressed_key)) {
+	if (key_code == WXK_TAB) {
+		handleKeyTab();
+	} else if (key_code == WXK_SPACE) {
+		handleKeySpace();
+	} else if (isAlpha(pressed_key)) {
 		// DEBUG:
-		logMessage(wxString::Format("Setting letter to: %c", pressed_key));
+		logMessage(wxString::Format("%s: Key down ...", cur_category));
 
-		if (pressed_key != current_letter) SetLetter(pressed_key);
-		PlayAlphaSound();
-	} else { // "main" category
-		if (!game_end) {
-			if (isAlpha(pressed_key)) {
-				if (pressed_key == current_letter) {
-					// FIXME: don't update display until after sound is done playing
-					PlayAlphaSound();
-					if (pressed_key == 'Z') {
-						// DEBUG:
-						logMessage("End of game");
+		wxString current_letter = getCurrentLetter();
 
-						game_end = true;
+		if (cur_category != "main") {
+			// DEBUG:
+			logMessage(wxString::Format("Setting letter to: %c", pressed_key));
 
-						currentResource = winResource;
-						letter->SetLabel(_T("CONGRATS!"));
-						label->SetLabel(_T("Press \"ENTER\" to Play Again"));
-						ReloadDisplay(false);
+			if (pressed_key != current_letter) SetLetter(pressed_key);
+			PlayAlphaSound();
+		} else { // "main" category
+			if (!game_end) {
+				if (isAlpha(pressed_key)) {
+					if (pressed_key == current_letter) {
+						// FIXME: don't update display until after sound is done playing
+						PlayAlphaSound();
+						if (pressed_key == 'Z') {
+							// DEBUG:
+							logMessage("End of game");
+
+							game_end = true;
+
+							currentResource = winResource;
+							letter->SetLabel(_T("CONGRATS!"));
+							label->SetLabel(_T("Press \"ENTER\" to Play Again"));
+							ReloadDisplay(false);
+						} else {
+							IncrementLetter(current_letter);
+						}
 					} else {
-						IncrementLetter(current_letter);
+						// DEBUG:
+						logMessage("Wrong key pressed");
 					}
+				} else if (key_code == WXK_BACK && current_letter != "A") {
+					// DEBUG:
+					logMessage("Backspacking");
+
+					IncrementLetter(current_letter, false);
 				} else {
 					// DEBUG:
-					logMessage("Wrong key pressed");
+					logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
 				}
-			} else if (key_code == WXK_BACK && current_letter != "A") {
-				// DEBUG:
-				logMessage("Backspacking");
+			} else { // game ended
+				if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
+					// DEBUG:
+					logMessage("Restarting game");
 
-				IncrementLetter(current_letter, false);
-			} else {
-				// DEBUG:
-				logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
-			}
-		} else { // game ended
-			if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
-				// DEBUG:
-				logMessage("Restarting game");
-
-				SetLetter("a");
-				game_end = false;
-			} else if (key_code == WXK_BACK) {
-				// backspace after game end return to letter "Z"
-				SetLetter("Z");
-				game_end = false;
-			} else {
-				// DEBUG:
-				logMessage("Game has ended, press \"Enter\" or change category");
+					SetLetter("a");
+					game_end = false;
+				} else if (key_code == WXK_BACK) {
+					// backspace after game end return to letter "Z"
+					SetLetter("Z");
+					game_end = false;
+				} else {
+					// DEBUG:
+					logMessage("Game has ended, press \"Enter\" or change category");
+				}
 			}
 		}
 	}
@@ -339,6 +341,12 @@ void MainWindow::handleKeyTab() {
 				wxPostEvent(this, changemode);
 			}
 		}
+	}
+}
+
+void MainWindow::handleKeySpace() {
+	if (!soundPlayer->isPlaying()) {
+		currentResource.playSound(this);
 	}
 }
 
