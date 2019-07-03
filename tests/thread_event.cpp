@@ -6,6 +6,8 @@
 using namespace std;
 
 
+wxEventType EVT_THREAD_END = wxNewEventType();
+
 const int ID_THREADEND = wxNewId();
 pthread_t thread_id;
 
@@ -43,7 +45,7 @@ MainWindow::MainWindow() :
 
 	button = new wxButton(bg, wxID_ANY, _T("Enter Thread"));
 	button->Connect(wxEVT_BUTTON, wxCommandEventHandler(MainWindow::OnButton), 0, this);
-	Connect(ID_THREADEND, wxEVT_NULL, wxCommandEventHandler(MainWindow::OnThreadFinish), 0, this);
+	Connect(EVT_THREAD_END, wxCommandEventHandler(MainWindow::OnThreadFinish), 0, this);
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	sizer->Add(button, 1, wxEXPAND);
@@ -97,7 +99,7 @@ void* threadIt(void* arg) {
 	// MainWindow instance
 	wxEvtHandler* eh = wxDynamicCast(arg, wxEvtHandler);
 	if (eh) {
-		wxCommandEvent testEvent(wxEVT_NULL, ID_THREADEND);
+		wxCommandEvent testEvent(EVT_THREAD_END, ID_THREADEND);
 		wxPostEvent(eh, testEvent);
 	}
 
