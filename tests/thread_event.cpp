@@ -6,21 +6,10 @@
 using namespace std;
 
 
-wxFrame* mwInstance;
-
-void setMainWindowInstance(wxFrame* f) {
-	mwInstance = f;
-}
-
-wxFrame* getMainWindowInstance() {
-	return mwInstance;
-}
-
-
-
 const int ID_THREADEND = wxNewId();
 pthread_t thread_id;
 
+// prototype thread function
 void* threadIt(void* arg);
 
 
@@ -54,7 +43,7 @@ MainWindow::MainWindow() :
 
 	button = new wxButton(bg, wxID_ANY, _T("Enter Thread"));
 	button->Connect(wxEVT_BUTTON, wxCommandEventHandler(MainWindow::OnButton), 0, this);
-	Connect(wxID_ANY, ID_THREADEND, wxCommandEventHandler(MainWindow::OnThreadFinish), 0, this);
+	Connect(ID_THREADEND, wxEVT_NULL, wxCommandEventHandler(MainWindow::OnThreadFinish), 0, this);
 
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 	sizer->Add(button, 1, wxEXPAND);
@@ -79,7 +68,7 @@ void MainWindow::ChangeColor() {
 void MainWindow::OnButton(wxCommandEvent& event) {
 	cout << "Button pressed\n";
 
-	pthread_create(&thread_id, NULL, threadIt, NULL);
+	pthread_create(&thread_id, NULL, threadIt, this);
 }
 
 void MainWindow::OnThreadFinish(wxCommandEvent& event) {
@@ -90,8 +79,7 @@ void MainWindow::OnThreadFinish(wxCommandEvent& event) {
 
 
 bool App::OnInit() {
-	setMainWindowInstance(new MainWindow());
-	frame = (MainWindow*) getMainWindowInstance();
+	MainWindow* frame = new MainWindow();
 	SetTopWindow(frame);
 	frame->Show();
 
@@ -106,9 +94,12 @@ void* threadIt(void* arg) {
 
 	cout << "Exiting thread ...\n";
 
-	wxCommandEvent testEvent(ID_THREADEND, wxID_ANY);
-	wxPostEvent(getMainWindowInstance(), testEvent);
+	// MainWindow instance
+	wxEvtHandler* eh = wxDynamicCast(arg, wxEvtHandler);
+	if (eh) {
+		wxCommandEvent testEvent(wxEVT_NULL, ID_THREADEND);
+		wxPostEvent(eh, testEvent);
+	}
 
 	return (void*) 0;
 }
-
