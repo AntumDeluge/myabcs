@@ -25,7 +25,5 @@ const int ID_BG = wxNewId();
 static const int ID_CHANGELOG = wxNewId();
 static const int ID_LOG = wxNewId();
 
-static const int ID_SOUNDEND = wxNewId();
-
 
 #endif /* MYABCS_ID_H */

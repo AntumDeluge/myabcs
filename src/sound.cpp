@@ -1,5 +1,4 @@
 #include "event.h"
-#include "id.h"
 #include "log.h"
 #include "sound.h"
 
@@ -38,13 +37,13 @@ static void exitThreadEvent(void* arg) {
 	unloadChunks();
 	thread_is_active = false;
 
-	wxEvtHandler *source_window = wxDynamicCast(arg, wxEvtHandler);
+	wxEvtHandler* source_window = wxDynamicCast(arg, wxEvtHandler);
 	if (source_window) {
 		// DEBUG:
 		logMessage("Sending SoundFinishEvent ...");
 
 		// event to send to main thread
-		wxCommandEvent SoundFinishEvent(EVT_SOUND_FINISH, ID_SOUNDEND);
+		wxCommandEvent SoundFinishEvent(EVT_SOUND_FINISH);
 		wxPostEvent(source_window, SoundFinishEvent); // FIXME: event not caught
 	}
 }
