@@ -3,6 +3,7 @@
 
 #include "resourcelist.h"
 
+#include <wx/event.h>
 #include <wx/frame.h>
 #include <wx/panel.h>
 #include <wx/statbmp.h>
@@ -50,6 +51,8 @@ private:
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
 	void OnTab();
+
+	void OnSoundFinish(wxCommandEvent& event);
 
 	void OnHelp(wxMenuEvent& event);
 	void OnAbout(wxMenuEvent& event);

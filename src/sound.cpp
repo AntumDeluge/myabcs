@@ -1,3 +1,4 @@
+#include "id.h"
 #include "log.h"
 #include "sound.h"
 
@@ -31,6 +32,23 @@ void unloadChunks() {
 }
 
 
+/** cleans up for thread exit */
+static void exitThreadEvent(void* arg) {
+	unloadChunks();
+	thread_is_active = false;
+
+	wxEvtHandler *source_window = wxDynamicCast(arg, wxEvtHandler);
+	if (source_window) {
+		// DEBUG:
+		logMessage("Sending SoundFinishEvent ...");
+
+		// event to send to main thread
+		wxCommandEvent SoundFinishEvent(wxEVT_NULL, ID_SOUNDEND);
+		wxPostEvent(source_window, SoundFinishEvent); // FIXME: event not caught
+	}
+}
+
+
 // thread for playing sounds
 void* playSoundThread(void* arg) {
 	thread_is_active = true;
@@ -38,8 +56,7 @@ void* playSoundThread(void* arg) {
 	channel = Mix_PlayChannel(-1, primaryChunk, 0);
 	if (channel != 0) {
 		logError(wxString::Format("Playing primary sound failed: %s", Mix_GetError()));
-		unloadChunks();
-		thread_is_active = false;
+		exitThreadEvent(arg);
 		return (void*) 1;
 	}
 
@@ -53,17 +70,14 @@ void* playSoundThread(void* arg) {
 		channel = Mix_PlayChannel(-1, auxiliaryChunk, 0);
 		if (channel != 0) {
 			logError(wxString::Format("Playing auxiliary sound failed: %s", Mix_GetError()));
-			unloadChunks();
-			thread_is_active = false;
+			exitThreadEvent(arg);
 			return (void*) 1;
 		}
 
 		while (Mix_Playing(channel) != 0);
 	}
 
-	// free up sound chunks
-	unloadChunks();
-	thread_is_active = false;
+	exitThreadEvent(arg);
 	return (void*) 0;
 }
 

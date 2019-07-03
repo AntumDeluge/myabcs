@@ -125,6 +125,8 @@ MainWindow::MainWindow() :
 
 	// Redirect focus to main panel
 	Connect(wxEVT_SET_FOCUS, wxFocusEventHandler(MainWindow::OnFrameFocus), 0, this);
+	// sounds finish playing
+	Connect(ID_SOUNDEND, wxEVT_NULL, wxCommandEventHandler(MainWindow::OnSoundFinish), 0, this);
 
 	Center(); // Center the window on the screen
 }
@@ -337,6 +339,11 @@ void MainWindow::OnTab() {
 			}
 		}
 	}
+}
+
+void MainWindow::OnSoundFinish(wxCommandEvent& event) {
+	// DEBUG:
+	logMessage("SoundFinishEvent");
 }
 
 // Help and About dialogs

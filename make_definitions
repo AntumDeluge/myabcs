@@ -82,7 +82,7 @@ FONTS_D = $(FONTS_H) $(MONO_TTF)
 SOUND_H = include/sound.h
 SOUND_C = src/sound.cpp
 SOUND_O = sound.o
-SOUND_D = $(SOUND_H) $(LOG_H)
+SOUND_D = $(SOUND_H) $(LOG_H) $(ID_H)
 
 RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
