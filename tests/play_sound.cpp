@@ -10,6 +10,9 @@ using namespace std;
 static Mix_Chunk* chunk = NULL;
 static int channel;
 
+// main window instance
+static wxFrame* frame;
+
 void playSound(const string filename);
 
 class Frame : public wxFrame
@@ -31,7 +34,7 @@ Frame::Frame(wxString title) :
 
 	button->Bind(wxEVT_BUTTON, &Frame::OnButton, this);
 
-    //Connect(wxID_ANY, 1002, wxCommandEventHandler(Frame::OnSoundOver), 0, this);
+	Connect(wxID_ANY, 1002, wxCommandEventHandler(Frame::OnSoundOver), 0, this);
 }
 
 void Frame::OnButton(wxCommandEvent& event) {
@@ -45,34 +48,38 @@ void Frame::OnButton(wxCommandEvent& event) {
 }
 
 void Frame::OnSoundOver(wxCommandEvent& event) {
+	cout << "Sound finished\n";
 }
 
 void* Frame::SoundThread(void* arg) {
-    wxEvtHandler* obj = wxDynamicCast(arg, wxEvtHandler);
-    if (obj) {
-    	playSound("../sound/airplane.wav");
-    	wxCommandEvent SoundOverEvent(1002, wxID_ANY);
-    	wxPostEvent(obj, SoundOverEvent);
-    }
+	//wxEvtHandler* obj = wxDynamicCast(arg, wxEvtHandler);
+	playSound("../sound/airplane.wav");
+	wxCommandEvent SoundOverEvent(1002, wxID_ANY);
+	/*
+	if (obj) {
+		wxPostEvent(obj, SoundOverEvent);
+	}
+	*/
+	wxPostEvent(frame, SoundOverEvent);
 
-    pthread_exit(NULL);
+	return (void*) 0;
 }
 
 class App : public wxApp
 {
-  public:
-    virtual bool OnInit();
+public:
+	virtual bool OnInit();
 };
 
 void playSound(wxCommandEvent& event);
 
 bool App::OnInit() {
-	Frame* frame = new Frame(_T("Test"));
+	frame = new Frame(_T("Test"));
 
-    frame->Show(true);
-    SetTopWindow(frame);
+	frame->Show(true);
+	SetTopWindow(frame);
 
-    return true;
+	return true;
 }
 
 static App* app;
@@ -107,6 +114,8 @@ void playSound(const string filename) {
 	if (channel != 0) {
 		cerr << "Unable to play file: " << Mix_GetError() << endl;
 	}
+
+	cout << "Playing sound: " + filename << "\n";
 
 	while (Mix_Playing(channel) != 0);
 }
