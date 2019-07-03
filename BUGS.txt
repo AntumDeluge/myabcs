@@ -34,6 +34,8 @@ Known BUGS:
   - Process does not end when closed from taskbar while log window is open
 - Game doesn't work if sound fails to play (space kay release event not caught)
 - Pig SVG has white horizontal line
+- "Space" plays sound of currently shown image at start of each category
+- Event is not caught when sound finishes playing
 
 Bugs to report:
 - wxSVG:
