@@ -223,7 +223,7 @@ bool SoundPlayer::isReady() {
 }
 
 bool SoundPlayer::isPlaying() {
-	return thread_is_active;
+	return thread_is_active || (Mix_Playing(channel) != 0);
 }
 
 
