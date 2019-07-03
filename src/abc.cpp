@@ -323,7 +323,7 @@ void MainWindow::OnKeyUp(wxKeyEvent& event) {
 	event.Skip();
 }
 
-void MainWindow::OnTab() {
+void MainWindow::handleKeyTab() {
 	// Changes game modes via the "Tab" key
 	int tools[] = {ID_ABC, ID_FOOD, ID_ANIMALS, ID_MUSIC, ID_TOYS};
 	for (int tool = 4; tool >= 0; tool -= 1) {

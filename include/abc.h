@@ -50,7 +50,7 @@ private:
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
-	void OnTab();
+	void handleKeyTab();
 
 	void OnSoundFinish(wxEvent& event);
 
