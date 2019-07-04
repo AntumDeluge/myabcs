@@ -472,6 +472,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Angelfish"), _T("Jonathon Love"), _T("Public Domain"));
 	about->AddArtist(_T("Apple"), _T("Chrisdesign"), _T("Public Domain"));
 	about->AddArtist(_T("Bagpipes"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98175
+	about->AddArtist(_T("Bagpipes(sound)"), _T("kyles"), _T("CC0/Public Domain")); // https://freesound.org/people/kyles/sounds/453749/
 	about->AddArtist(_T("Balloons"), _T("AJ"), _T("Public Domain"));
 	about->AddArtist(_T("Bananas"), _T("nicubunu"), _T("Public Domain"));
 	about->AddArtist(_T("Bird"), _T("ArtFavor"), _T("Public Domain"));

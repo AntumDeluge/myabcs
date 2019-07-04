@@ -27,7 +27,6 @@ Non-priority:
 - Sounds to be trimmed:
   - fire (maybe)
 - Sounds to add:
-  - bagpipes
   - giraffe
   - ipu
   - koala
