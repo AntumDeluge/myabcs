@@ -115,8 +115,8 @@ void ResourceObject::loadSound(wxString snd) {
 		return;
 	}
 
-	if (!snd.EndsWith(_T(".wav"))) {
-		snd = snd.Append(_T(".wav"));
+	if (!snd.EndsWith(_T(".flac"))) {
+		snd = snd.Append(_T(".flac"));
 	}
 
 	wxString vocal = wxString(dir_vocals).Append(snd);

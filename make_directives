@@ -28,9 +28,9 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	# sound data; \
 	for DIR in "sound" "sound/alpha"; do \
 		target_dir="$${stage_dir}/$${DIR}"; \
-		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.wav"); do \
+		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.flac"); do \
 			if test "${VORBIS}"; then \
-				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.wav|\.oga|')"; \
+				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.flac|\.oga|')"; \
 				echo "'$${SND}' -> '$${target_ogg}'"; \
 				ffmpeg -hide_banner -loglevel panic -y -i "$${SND}" -c:a libvorbis -b:a 96k "$${target_ogg}"; \
 				if test $$? -ne 0; then \
