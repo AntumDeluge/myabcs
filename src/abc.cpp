@@ -485,6 +485,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Clarinet"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Clarinet(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Clock"), _T("Jonathan Dietrich"), _T("Public Domain"));
+	about->AddArtist(_T("Clock(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain"));
 	about->AddArtist(_T("Dog"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Dog(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Doll"), _T("Jordan Irwin"), _T("Public Domain"));
