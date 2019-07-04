@@ -46,7 +46,8 @@ private:
 	void IncrementLetter(wxString alpha) { return IncrementLetter(alpha, true); }
 	void IncrementLetter(bool advance) { return IncrementLetter(getCurrentLetter(), advance); }
 	void IncrementLetter() { return IncrementLetter(getCurrentLetter(), true); }
-	void SetGameEnd();
+	void SetGameEnd(bool play_sound);
+	void SetGameEnd() { return SetGameEnd(true); }
 
 	void PlayAlphaSound();
 

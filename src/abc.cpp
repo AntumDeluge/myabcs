@@ -209,7 +209,7 @@ void MainWindow::IncrementLetter(wxString alpha, bool advance) {
 	ReloadDisplay();
 }
 
-void MainWindow::SetGameEnd() {
+void MainWindow::SetGameEnd(bool play_sound) {
 	// DEBUG:
 	logMessage("End of game");
 
@@ -219,6 +219,7 @@ void MainWindow::SetGameEnd() {
 	letter->SetLabel(_T("CONGRATS!"));
 	label->SetLabel(_T("Press \"ENTER\" to Play Again"));
 	ReloadDisplay(false);
+	if (play_sound) currentResource.playSound(this);
 }
 
 void MainWindow::PlayAlphaSound() {
@@ -323,6 +324,7 @@ void MainWindow::handleKeyBack() {
 
 	if (getCurrentLetter() != "A") {
 		if (game_end) {
+			if (soundPlayer->isPlaying()) soundPlayer->stop();
 			SetLetter("Z");
 			game_end = false;
 		} else if (!soundPlayer->isPlaying()) {
@@ -336,6 +338,7 @@ void MainWindow::handleKeyEnter() {
 		// DEBUG:
 		logMessage("Restarting game ...");
 
+		if (soundPlayer->isPlaying()) soundPlayer->stop();
 		SetLetter("A");
 		game_end = false;
 	}
