@@ -59,7 +59,9 @@ Non-priority:
   - quail
   - raccoon
   - train
-  - whale
+    - http://soundbible.com/tags-train.html)
+  - whale 
+    - https://digitalmedia.fws.gov/digital/collection/audio/id/7)
   - zebra
   - Licensed under Sampling Plus:
     - kazoo (author has relicensed under CC BY, see notes in source code)
