@@ -318,6 +318,9 @@ void MainWindow::handleKeySpace() {
 }
 
 void MainWindow::handleKeyBack() {
+	// ignore backspace key for categories other than "main"
+	if (cur_category != "main") return;
+
 	if (getCurrentLetter() != "A") {
 		if (game_end) {
 			SetLetter("Z");
