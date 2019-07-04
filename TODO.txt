@@ -60,7 +60,6 @@ Non-priority:
   - piano
   - quail
   - raccoon
-  - rooster
   - train
   - whale
   - whistle

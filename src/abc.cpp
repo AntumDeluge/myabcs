@@ -591,7 +591,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Recorder(sound)"), _T("Cailyn"));
 	about->AddArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
 	about->AddArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Rooster(sound)"), wxEmptyString, _T("Public Domain"));
+	about->AddArtist(_T("Rooster(sound)"), _T("poorenglishjuggler"), _T("CC0/Public Domain")); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
 	about->AddArtist(_T("Saxophone"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain")); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
 	about->AddArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98188
