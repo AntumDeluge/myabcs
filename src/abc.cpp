@@ -641,7 +641,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Zebra(sound)"));
 	about->AddArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98185
 	about->AddArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Zipper(sound)"), _T("tmkappelt"), _T("Sampling Plus 1.0")); // https://freesound.org/people/tmkappelt/sounds/85679/ (not sure if correct source)
+	about->AddArtist(_T("Zipper(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16332
 	about->AddArtist(_T("Zucchini"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98173
 	about->AddArtist(_T("Zurna"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98183
 	about->AddArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/cdrk/sounds/18661/

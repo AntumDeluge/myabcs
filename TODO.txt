@@ -74,7 +74,6 @@ Non-priority:
     - pig (author has relicensed under CC BY-NC, see notes in source code)
     - trumpet (author has relicensed under CC BY, see notes in source code)
     - xylophone (author has relicensed under CC0, see notes in source code)
-    - zipper
     - zurna (author has relicensed under CC BY, see notes in source code)
 
 Fixes & pull-requests:
