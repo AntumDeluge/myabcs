@@ -206,6 +206,18 @@ void MainWindow::IncrementLetter(wxString alpha, bool advance) {
 	ReloadDisplay();
 }
 
+void MainWindow::SetGameEnd() {
+	// DEBUG:
+	logMessage("End of game");
+
+	game_end = true;
+
+	currentResource = winResource;
+	letter->SetLabel(_T("CONGRATS!"));
+	label->SetLabel(_T("Press \"ENTER\" to Play Again"));
+	ReloadDisplay(false);
+}
+
 void MainWindow::PlayAlphaSound() {
 	soundPlayer->play(this, wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
 }
