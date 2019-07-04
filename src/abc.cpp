@@ -532,6 +532,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Jaguar(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Jar"), _T("DTRave"), _T("Public Domain"));
 	about->AddArtist(_T("Jug"), _T("Jordan Irwin"), _T("Public Domain"));
+	about->AddArtist(_T("Jug(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16325
 	about->AddArtist(_T("Juice"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Jump Rope"), _T("johnny_automatic"), _T("Public Domain"));
 	about->AddArtist(_T("Kazoo"), _T("Jordan Irwin"), _T("Public Domain"));
