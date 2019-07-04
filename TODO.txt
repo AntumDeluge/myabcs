@@ -62,7 +62,6 @@ Non-priority:
   - raccoon
   - train
   - whale
-  - whistle
   - zebra
   - Licensed under Sampling Plus:
     - kazoo (author has relicensed under CC BY, see notes in source code)
