@@ -99,7 +99,9 @@ void* playSoundThread(void* arg) {
 
 /** checks existence of Vorbis audio file */
 wxString prioritizeVorbis(wxString filename) {
-	const wxString ogg_filename = filename.Left(filename.Len() - 3).Append("oga");
+	// FIXME: need more failsafe way to check filenames
+	// Replaces .flac file exstension with .oga
+	const wxString ogg_filename = filename.Left(filename.Len() - 4).Append("oga");
 	if (wxFileExists(ogg_filename)) {
 		filename = ogg_filename;
 	}

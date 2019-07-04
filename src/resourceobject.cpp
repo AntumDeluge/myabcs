@@ -122,8 +122,9 @@ void ResourceObject::loadSound(wxString snd) {
 	wxString vocal = wxString(dir_vocals).Append(snd);
 	wxString effect = wxString(dir_effects).Append(snd);
 
-	const wxString ogg_vocal = vocal.Left(vocal.Len() - 3).Append("oga");
-	const wxString ogg_effect = effect.Left(effect.Len() -3).Append("oga");
+	// FIXME: need more failsafe way to check filenames
+	const wxString ogg_vocal = vocal.Left(vocal.Len() - 4).Append("oga");
+	const wxString ogg_effect = effect.Left(effect.Len() -4).Append("oga");
 
 	// Vorbis audio takes priority
 	if (wxFileExists(ogg_vocal)) {
