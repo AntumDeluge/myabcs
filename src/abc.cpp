@@ -23,6 +23,9 @@
 static ResourceObject currentResource;
 static ResourceObject winResource;
 
+// determines if letter can be incremented after keypress in "main" mode
+static bool alpha_accepted = false;
+
 
 // checks if a string contains only alphabetic characters
 static bool isAlpha(wxString s) {
@@ -260,49 +263,14 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		handleKeyBack();
 	} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
 		handleKeyEnter();
-	} else if (isAlpha(pressed_key)) {
+	} else if (isAlpha(pressed_key) && !soundPlayer->isPlaying()) {
 		// DEBUG:
-		logMessage(wxString::Format("%s: Key down ...", cur_category));
+		logMessage(wxString::Format("Key down: %c", pressed_key));
 
-		wxString current_letter = getCurrentLetter();
-
-		if (cur_category != "main") {
-			// DEBUG:
-			logMessage(wxString::Format("Setting letter to: %c", pressed_key));
-
-			if (pressed_key != current_letter) SetLetter(pressed_key);
-			PlayAlphaSound();
-		} else { // "main" category
-			if (!game_end) {
-				if (isAlpha(pressed_key)) {
-					if (pressed_key == current_letter) {
-						// FIXME: don't update display until after sound is done playing
-						PlayAlphaSound();
-						if (pressed_key == 'Z') {
-							// DEBUG:
-							logMessage("End of game");
-
-							game_end = true;
-
-							currentResource = winResource;
-							letter->SetLabel(_T("CONGRATS!"));
-							label->SetLabel(_T("Press \"ENTER\" to Play Again"));
-							ReloadDisplay(false);
-						} else {
-							IncrementLetter(current_letter);
-						}
-					} else {
-						// DEBUG:
-						logMessage("Wrong key pressed");
-					}
-				} else {
-					// DEBUG:
-					logMessage(wxString::Format("Key is not alphabetic: %c", pressed_key));
-				}
-			} else if (game_end) {
-				// DEBUG:
-				logMessage("Game has ended, press \"Enter\" or change category");
-			}
+		if (cur_category == "main") {
+			handleKeyAlphaMain(pressed_key);
+		} else {
+			handleKeyAlphaOther(pressed_key);
 		}
 	}
 
@@ -370,9 +338,30 @@ void MainWindow::handleKeyEnter() {
 	}
 }
 
+void MainWindow::handleKeyAlphaMain(wxChar alpha) {
+	if (alpha == getCurrentLetter()) {
+		alpha_accepted = true; // letter will be incremented after sound plays
+		PlayAlphaSound();
+	}
+}
+
+void MainWindow::handleKeyAlphaOther(wxChar alpha) {
+	// don't refresh display if letter does't change
+	if (alpha != getCurrentLetter()) SetLetter(alpha);
+	PlayAlphaSound();
+}
+
 void MainWindow::OnSoundFinish(wxEvent& event) {
-	// DEBUG:
-	logMessage("SoundFinishEvent");
+	if (cur_category == "main") {
+		if (alpha_accepted) {
+			if (getCurrentLetter() == "Z") {
+				SetGameEnd();
+			} else {
+				IncrementLetter();
+			}
+			alpha_accepted = false; // reset accepted keypress state
+		}
+	}
 }
 
 // Help and About dialogs

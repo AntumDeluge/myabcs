@@ -57,6 +57,8 @@ private:
 	void handleKeySpace();
 	void handleKeyBack();
 	void handleKeyEnter();
+	void handleKeyAlphaMain(wxChar alpha);
+	void handleKeyAlphaOther(wxChar alpha);
 
 	void OnSoundFinish(wxEvent& event);
 
