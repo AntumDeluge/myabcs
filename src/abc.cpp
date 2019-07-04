@@ -622,6 +622,6 @@ void MainWindow::OnFrameFocus(wxFocusEvent& event) {
 	canvas->SetFocus();
 }
 
-void MainWindow::OnToggleLogWindow(wxMenuEvent& event) {
+void MainWindow::OnToggleLogWindow(wxCommandEvent& event) {
 	toggleLogWindow();
 }
