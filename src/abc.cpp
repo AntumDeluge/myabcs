@@ -537,6 +537,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Kazoo(sound)"), _T("NoiseCollector"), _T("Sampling Plus 1.0"));
 	about->AddArtist(_T("Ketchup"), _T("Alexandre Norman"), _T("Public Domain"));
 	about->AddArtist(_T("Keyboard"), _T("yeKcim"), _T("Public Domain"));
+	about->AddArtist(_T("Keyboard(sound)"), _T("Trollarch2"), _T("CC0/Public Domain")); // https://freesound.org/people/Trollarch2/sounds/331656/
 	about->AddArtist(_T("Kite"), _T("schoolfreeware"), _T("Public Domain"));
 	about->AddArtist(_T("Koala"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Ladybug"), _T("lalolalo"), _T("Public Domain"));
