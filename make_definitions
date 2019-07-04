@@ -60,7 +60,7 @@ DEFINES= \
 
 ### Files & headers ###
 
-FAILSAFE_PNG = include/res/failsafe.png.h
+FAILSAFE_IMG = include/res/failsafe_img.h
 MONO_TTF = include/res/PixelOperatorMono.ttf.h
 
 ENV_H = include/env.h
@@ -97,7 +97,7 @@ RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
 RESOBJ_C = src/$(RESOBJ).cpp
 RESOBJ_O = $(RESOBJ).o
-RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_PNG) $(SOUND_H)
+RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_IMG) $(SOUND_H)
 
 RESLIST = resourcelist
 RESLIST_H = include/$(RESLIST).h

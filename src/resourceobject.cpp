@@ -1,7 +1,7 @@
 #include "log.h"
 #include "resourceobject.h"
 #include "sound.h"
-#include "res/failsafe.png.h"
+#include "res/failsafe_img.h"
 
 #include <wx/filefn.h>
 #include <wx/mstream.h>
@@ -97,8 +97,15 @@ void ResourceObject::loadImage(wxString img) {
 		logMessage(wxString("ERROR: Could not load image: ").Append(img));
 
 		// load embedded failsafe image data
-		wxMemoryInputStream is(&failsafe_png_v[0], failsafe_png_v.size()); // convert PNG data into input stream
-		objectImage = wxImage(is, wxBITMAP_TYPE_PNG);
+		wxMemoryInputStream is(failsafe_svg, sizeof(failsafe_svg)); // convert SVG data into input stream
+		wxSVGDocument* svg = new wxSVGDocument();
+		bool loaded = svg->Load(is);
+
+		if (!loaded) {
+			logMessage(wxString("Loading SVG document failed: ").Append(svg_filename));
+		}
+
+		objectImage = wxImage(svg->Render(290, 290, NULL, true, true, NULL));
 	}
 }
 
