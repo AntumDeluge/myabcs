@@ -13,9 +13,11 @@ SoundPlayer* soundPlayer;
 static bool initialized = false;
 
 static Mix_Chunk* primaryChunk = NULL;
+static Mix_Chunk* secondaryChunk = NULL;
 static Mix_Chunk* auxiliaryChunk = NULL;
 static int channel;
 static wxString primarySound;
+static wxString secondarySound;
 static wxString auxiliarySound;
 
 // thread object
@@ -26,8 +28,10 @@ bool thread_is_active = false;
 void unloadChunks() {
 	// XXX: leak?
 	primaryChunk = NULL;
+	secondaryChunk = NULL;
 	auxiliaryChunk = NULL;
 	primarySound.Empty();
+	secondarySound.Empty();
 	auxiliarySound.Empty();
 }
 
@@ -66,6 +70,17 @@ void* playSoundThread(void* arg) {
 	while (Mix_Playing(channel) != 0);
 
 	// TODO: short pause between sounds
+	if (secondaryChunk != NULL) {
+		channel = Mix_PlayChannel(-1, secondaryChunk, 0);
+		if (channel != 0) {
+			logError(wxString::Format("Playing secondary sound failed: %s", Mix_GetError()));
+			exitThreadEvent(arg);
+			return (void*) 1;
+		}
+
+		while (Mix_Playing(channel) != 0);
+	}
+
 	if (auxiliaryChunk != NULL) {
 		channel = Mix_PlayChannel(-1, auxiliaryChunk, 0);
 		if (channel != 0) {
@@ -99,6 +114,7 @@ SoundPlayer::~SoundPlayer() {
 	}
 
 	Mix_FreeChunk(primaryChunk);
+	Mix_FreeChunk(secondaryChunk);
 	Mix_FreeChunk(auxiliaryChunk);
 	Mix_CloseAudio();
 	SDL_Quit();
@@ -121,7 +137,7 @@ void SoundPlayer::init() {
 	logMessage(_T("Opened audio mixer"));
 }
 
-void SoundPlayer::load(wxString primary, wxString auxiliary) {
+void SoundPlayer::load(wxString primary, wxString secondary, wxString auxiliary) {
 	// ensure sound chunks are NULL every time this method is called
 	unloadChunks();
 
@@ -132,6 +148,7 @@ void SoundPlayer::load(wxString primary, wxString auxiliary) {
 
 	// Vorbis audio takes priority
 	primary = prioritizeVorbis(primary);
+	secondary = prioritizeVorbis(secondary);
 	auxiliary = prioritizeVorbis(auxiliary);
 
 	if (!wxFileExists(primary)) {
@@ -150,6 +167,11 @@ void SoundPlayer::load(wxString primary, wxString auxiliary) {
 		return;
 	}
 	primarySound = primary;
+
+	if (wxFileExists(secondary)) {
+		secondaryChunk = Mix_LoadWAV(secondary.c_str());
+		secondarySound = secondary;
+	}
 
 	if (wxFileExists(auxiliary)) {
 		auxiliaryChunk = Mix_LoadWAV(auxiliary.c_str());
@@ -182,8 +204,8 @@ void SoundPlayer::play(wxWindow* source) {
 	}
 }
 
-void SoundPlayer::play(wxWindow* source, wxString primary, wxString auxiliary) {
-	load(primary, auxiliary);
+void SoundPlayer::play(wxWindow* source, wxString primary, wxString secondary, wxString auxiliary) {
+	load(primary, secondary, auxiliary);
 	play(source);
 }
 
