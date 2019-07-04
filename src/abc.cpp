@@ -223,7 +223,13 @@ void MainWindow::SetGameEnd(bool play_sound) {
 }
 
 void MainWindow::PlayAlphaSound() {
-	soundPlayer->play(this, wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
+	wxString s_primary = wxString::Format("sound/alpha/%s.wav", getCurrentLetter());
+
+	if (cur_category == "main") {
+		soundPlayer->play(this, s_primary, currentResource.getVocalString(), currentResource.getEffectString());
+	} else {
+		soundPlayer->play(this, s_primary);
+	}
 }
 
 void MainWindow::PlayResourceSound() {
