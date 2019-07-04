@@ -226,6 +226,16 @@ void MainWindow::PlayAlphaSound() {
 	soundPlayer->play(this, wxString::Format("sound/alpha/%s.wav", getCurrentLetter()));
 }
 
+void MainWindow::PlayResourceSound() {
+	wxChar object_letter = currentResource.getLabel().Lower()[0]; // FIXME: need failsafe in case return is empty string
+	wxString current_letter = getCurrentLetter().Lower();
+
+	// don't play sound if on category title
+	if (object_letter == current_letter) {
+		currentResource.playSound(this);
+	}
+}
+
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	if (soundIsInitialized()) {
 		soundPlayer->stop();
@@ -314,7 +324,7 @@ void MainWindow::handleKeyTab() {
 
 void MainWindow::handleKeySpace() {
 	if (!soundPlayer->isPlaying()) {
-		currentResource.playSound(this);
+		PlayResourceSound();
 	}
 }
 

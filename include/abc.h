@@ -50,6 +50,7 @@ private:
 	void SetGameEnd() { return SetGameEnd(true); }
 
 	void PlayAlphaSound();
+	void PlayResourceSound();
 
 	void OnSetCategory(wxCommandEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
