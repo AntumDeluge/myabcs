@@ -624,7 +624,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Watch(sound)"), _T("Nicolas4677"), _T("CC0/Public Domain")); // https://freesound.org/people/Nicolas4677/sounds/446611/
 	about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain"));
+	about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain")); // https://www.freesoundeffects.com/free-track/whale2-466223/ (claims license is "non-commercial", need to check other sources)
 	about->AddArtist(_T("Whistle"), _T("kelan"), _T("Public Domain"));
 	about->AddArtist(_T("Whistle(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98172
