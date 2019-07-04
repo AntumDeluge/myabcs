@@ -596,7 +596,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain")); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
 	about->AddArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98188
 	about->AddArtist(_T("Sheep"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Sheep(sound)"), wxEmptyString, _T("Public Domain"));
+	about->AddArtist(_T("Sheep(sound)"), _T("mikewest"), _T("CC0/Public Domain")); // https://freesound.org/people/mikewest/sounds/414342/
 	about->AddArtist(_T("Star"), _T("Tom Webb"), _T("Public Domain"));
 	about->AddArtist(_T("Strawberry"), _T("baroquon"), _T("Public Domain"));
 	about->AddArtist(_T("Tomato"), _T("Chrisdesign"), _T("Public Domain"));

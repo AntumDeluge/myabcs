@@ -61,7 +61,6 @@ Non-priority:
   - quail
   - raccoon
   - rooster
-  - sheep
   - train
   - whale
   - whistle
