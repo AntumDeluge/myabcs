@@ -581,6 +581,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Quarter"), _T("Paul Sherman"), _T("Public Domain"));
 	about->AddArtist(_T("Quarter(sound)"), _T("greenvwbeetle"), _T("CC0/Public Domain")); // https://freesound.org/people/greenvwbeetle/sounds/423332/
 	about->AddArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98181
+	about->AddArtist(_T("Quena(sound)"), _T("CarlosCarty"), T("CC BY")); // https://freesound.org/people/CarlosCarty/sounds/463711/
 	about->AddArtist(_T("Quiche"), wxEmptyString, _T("Public Domain")); // https://www.wpclipart.com/food/meals/quiche.png.html
 	about->AddArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98189
 	about->AddArtist(_T("Raccoon"), _T("ArtFavor"), _T("Public Domain"));

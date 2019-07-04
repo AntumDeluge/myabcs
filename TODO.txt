@@ -60,7 +60,6 @@ Non-priority:
   - owl
   - piano
   - quail
-  - quena
   - raccoon
   - rooster
   - sheep
