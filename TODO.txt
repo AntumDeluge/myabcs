@@ -34,7 +34,6 @@ Non-priority:
   - lute
   - ney
   - rocking horse
-  - umbrella
   - yak
   - yangqin
 - Sounds to replaced or find source:

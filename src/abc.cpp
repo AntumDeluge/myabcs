@@ -610,6 +610,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Ukulele"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98182
 	about->AddArtist(_T("Ukulele(sound)"), _T("Henry Kailimai"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Ukelele_-_Kailimai%27s_hene_-_Ukepedia.ogg
 	about->AddArtist(_T("Umbrella"), _T("LX"), _T("Public Domain"));
+	about->AddArtist(_T("Umbrella"), _T("j1987"), _T("CC0/Public Domain")); // https://freesound.org/people/j1987/sounds/73028/
 	about->AddArtist(_T("Urchin"), _T("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("Unicycle"), _T("AndrewDressel/Underpants"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Unicycle.svg
 	about->AddArtist(_T("Vase"), _T("J_Alves"), _T("Public Domain"));
