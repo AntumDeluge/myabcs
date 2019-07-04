@@ -2,14 +2,12 @@ Priority:
 - Initialize logging in background before creation of main frame
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
-- Use wxThread class instead of pthreads
+- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 
 Non-priority:
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - Update README
-- Find/Create missing SVGs:
-  - ribbon
 - Convert failsafe image to SVG
 - Use config to determine environment (locatation of data files, etc.)
 - Edit wheels white BG in bicycle SVG
@@ -18,10 +16,10 @@ Non-priority:
 - Make "pic" & "sound" sub-directores of "data" or other folder
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
-- Show keyboard for "ABC/find" mode
+- Show keyboard for "main" category
 - Embed free font
 - Clean up quiche SVG
-- Use monospace font for changelog text
+- Use monospace font for changelog text (partially implemented, works on Windows only)
 
 Fixes & pull-requests:
 - wxWidgets:
