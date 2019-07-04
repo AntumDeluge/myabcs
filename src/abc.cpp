@@ -620,7 +620,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Whistle(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Xiphias"), wxEmptyString, _T("Public Domain"));
+	about->AddArtist(_T("Xiphias"), _("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain"));
 	about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0"));
