@@ -615,6 +615,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Vulture(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain"));
 	about->AddArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
 	about->AddArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
+	about->AddArtist(_T("Watch(sound)"), _T("Nicolas4677"), _T("CC0/Public Domain")); // https://freesound.org/people/Nicolas4677/sounds/446611/
 	about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain"));
