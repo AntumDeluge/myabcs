@@ -513,6 +513,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Glove"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Grapes"), _T("Jean-Victor Balin"), _T("Public Domain"));
 	about->AddArtist(_T("Grasshopper"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->AddArtist(_T("Grasshopper(sound"), _T("straget"), _T("CC0/Public Domain")); // https://freesound.org/people/straget/sounds/401939/
 	about->AddArtist(_T("Guitar"), _T("papapishu"), _T("Public Domain"));
 	about->AddArtist(_T("Harp"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
