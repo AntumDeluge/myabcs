@@ -502,6 +502,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Elephant"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Elephant(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Fire"), _T("Valessio Soares de Brito"), _T("Public Domain"));
+	about->AddArtist(_T("Fire(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain"));
 	about->AddArtist(_T("Flute"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Flute(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Football"), _T("molumen"), _T("Public Domain"));
