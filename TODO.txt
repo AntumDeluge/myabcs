@@ -5,6 +5,7 @@ Priority:
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 
 Non-priority:
+- Add animation for when category is loading
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - Update README
@@ -20,6 +21,47 @@ Non-priority:
 - Embed free font
 - Clean up quiche SVG
 - Use monospace font for changelog text (partially implemented, works on Windows only)
+- Sounds to be trimmed:
+  - fire (maybe)
+- Sounds to add:
+  - bagpipes
+  - giraffe
+  - ipu
+  - koala
+  - lute
+  - ney
+  - umbrella
+  - xun
+  - yak
+  - yangqin
+- Sounds to replace or find source:
+  - accordion
+  - airplane
+  - balloons
+  - chalkboard
+  - cat
+  - clarinet
+  - dog
+  - elephant
+  - flute
+  - harp
+  - jaguar
+  - maracas
+  - mouse
+  - piano
+  - quena
+  - raccoon
+  - rocking horse
+  - whale
+  - whistle
+  - Licensed under Sampling Plus:
+    - kazoo
+    - oboe
+    - pig
+    - trumpet
+    - xylophone
+    - zipper
+    - zurna
 
 Fixes & pull-requests:
 - wxWidgets:
