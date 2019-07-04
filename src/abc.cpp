@@ -640,7 +640,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
 	about->AddArtist(_T("Yo-Yo"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98186
 	about->AddArtist(_T("Zebra"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Zebra(sound)"));
+	about->AddArtist(_T("Zebra(sound)")); // https://www.partnersinrhyme.com/soundfx/safari_sounds/safari_zebra2_wav.shtml (unsure of license)
 	about->AddArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98185
 	about->AddArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Zipper(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16332
