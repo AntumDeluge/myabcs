@@ -519,6 +519,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Hat"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Horn"), _T("Jordan Irwin"), _T("Public Domain"));
+	about->AddArtist(_T("Horn(sound"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16322
 	about->AddArtist(_T("Horse"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Horse(sound)"), wxEmptyString, _T("Public Domain"));
 	about->AddArtist(_T("Hot Dog"), _T("Juliane Krug"), _T("Public Domain"));
