@@ -631,6 +631,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
 	about->AddArtist(_T("Xiphias"), _("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98166
 	about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98276
+	about->AddArtist(_T("Xun(sound") _T("franeknflute"), _T("CC BY")); // https://freesound.org/people/franeknflute/sounds/200419/
 	about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
 	about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0")); // incorrect license of relicensed under CC0: https://freesound.org/people/Tristan/sounds/19459/
 	about->AddArtist(_T("Yak"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98167

@@ -35,7 +35,6 @@ Non-priority:
   - ney
   - rocking horse
   - umbrella
-  - xun
   - yak
   - yangqin
 - Sounds to replaced or find source:
