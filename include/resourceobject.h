@@ -19,6 +19,8 @@ public:
 	wxString getLabel() { return objectLabel; }
 	wxBitmap getBitmap() { return wxBitmap(objectImage); }
 	bool playSound(wxWindow* source);
+	wxString getVocalString() { return sndVocalString; }
+	wxString getEffectString() { return sndEffectString; }
 private:
 	wxString objectLabel;
 	wxImage objectImage;
