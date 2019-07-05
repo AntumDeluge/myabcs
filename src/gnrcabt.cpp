@@ -105,7 +105,6 @@ void GenericAbout::SetImage(wxString image) {
 	appicon->SetBitmap(new_image);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
 void GenericAbout::SetImage(wxImage image) {
@@ -113,7 +112,6 @@ void GenericAbout::SetImage(wxImage image) {
 	appicon->SetBitmap(image);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
 void GenericAbout::SetInfoString(wxString info) {
@@ -122,7 +120,6 @@ void GenericAbout::SetInfoString(wxString info) {
 	infosizer->Add(text, 0, wxALIGN_CENTER);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
 void GenericAbout::SetLink(wxString label, wxString url) {
@@ -130,7 +127,6 @@ void GenericAbout::SetLink(wxString label, wxString url) {
 	infosizer->Add(link, 0, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
 void GenericAbout::SetCopyright(wxString copyright) {
@@ -139,7 +135,6 @@ void GenericAbout::SetCopyright(wxString copyright) {
 	infosizer->Add(text, 0, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
 void GenericAbout::SetAbout(wxString about) {
@@ -147,11 +142,9 @@ void GenericAbout::SetAbout(wxString about) {
 	infosizer->Add(text, 1, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->Layout();
-	this->Fit();
 }
 
-void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
-{
+void GenericAbout::AddArtist(wxString image, wxString name, wxString license) {
 	int count = artists->GetItemCount();
 
 	artists->InsertItem(count, image);
