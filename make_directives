@@ -11,7 +11,7 @@ cleanstage:
 
 stage: all LICENSE.txt myabcs.png cleanstage
 	@stage_dir="${STAGEDIR}/myabcs"; \
-	mkdir -p "$${stage_dir}/pic" "$${stage_dir}/sound/alpha"; \
+	mkdir -p "$${stage_dir}/pic"; \
 	# main executable; \
 	install -vm 0755 "${EXE}" "$${stage_dir}"; \
 	# image data; \
@@ -26,8 +26,9 @@ stage: all LICENSE.txt myabcs.png cleanstage
 		done; \
 	done; \
 	# sound data; \
-	for DIR in "sound" "sound/alpha"; do \
+	for DIR in "sound" "sound/effect" "sound/alpha"; do \
 		target_dir="$${stage_dir}/$${DIR}"; \
+		mkdir -p "$${target_dir}"; \
 		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.flac"); do \
 			if test "${VORBIS}"; then \
 				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.flac|\.oga|')"; \
