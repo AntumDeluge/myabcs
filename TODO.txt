@@ -9,7 +9,6 @@ Priority:
 - Link to art & sound sources
 - Use global function for setting/getting fonts
 - Add font license texts to binary release
-- Define version number in Makefile
 
 Non-priority:
 - Switch to CMake build system

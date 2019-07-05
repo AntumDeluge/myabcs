@@ -1,12 +1,12 @@
 
 ### Project ###
 
-PNAME=myabcs
-PNAME_T=MyABCs
-VER_MAJ=0
-VER_MIN=4
-VER_REL=5
-VERSION=$(VER_MAJ).$(VER_MIN).$(VER_REL)
+PNAME = myabcs
+PNAME_T = MyABCs
+VER_MAJ = 0
+VER_MIN = 4
+VER_REL = 5
+VERSION = $(VER_MAJ).$(VER_MIN).$(VER_REL)
 
 ### Environment ###
 
@@ -54,9 +54,11 @@ EXE_SUF =
 EXE = $(PNAME)$(EXE_SUF)
 ABCDIR = $(PREFIX)/share/myabcs
 PIXMAPDIR = $(PREFIX)/share/pixmaps
-DEFINES= \
-	-DPIXMAPDIR="\"$(PIXMAPDIR)\"" \
-	-DABCDIR="\"$(ABCDIR)\""
+# not sure why quotes need to be escaped here
+DEFINES = \
+	-DPIXMAPDIR=\"$(PIXMAPDIR)\" \
+	-DABCDIR=\"$(ABCDIR)\" \
+	-DVERSION=\"$(VERSION)\"
 
 ### Files & headers ###
 

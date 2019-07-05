@@ -46,8 +46,8 @@ MainWindow::MainWindow() :
 	// FIXME: Currently uses current working directory to locate data
 	//        rather than looking in the installed directory.
 #ifdef ABCDIR
-	installdir = _T(ABCDIR);
-	installdir.Append(_T("/"));
+	installdir = ABCDIR;
+	installdir.Append("/");
 #else
 	installdir = getRootDir();
 #endif
@@ -453,7 +453,13 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->SetIcon(wxIcon(ICON1));
 	about->SetImage(_T("myabcs.png"));
 	about->SetName(_T("MyABCs"));
-	about->SetVersion(_T("0.4.5"));
+
+	wxString version_string = wxEmptyString;
+#ifdef VERSION
+	version_string = VERSION;
+#endif
+	about->SetVersion(version_string);
+
 	about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
 	about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
 
