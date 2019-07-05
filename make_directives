@@ -11,13 +11,10 @@ cleanstage:
 
 stage: all LICENSE.txt myabcs.png cleanstage
 	@stage_dir="${STAGEDIR}/myabcs"; \
-	mkdir -p "$${stage_dir}/pic"; \
+	mkdir -p "$${stage_dir}"; \
 	# main executable; \
 	install -vm 0755 "${EXE}" "$${stage_dir}"; \
 	# image data; \
-	for PNG in $$(find pic/ -maxdepth 1 -type f -name "*.png"); do \
-		install -vm 0644 "$${PNG}" "$${stage_dir}/pic/"; \
-	done; \
 	for DIR in $$(find "pic/" -type d); do \
 		target_dir="$${stage_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
