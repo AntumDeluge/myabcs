@@ -10,6 +10,7 @@
 
 #include <wx/ffile.h>
 #include <wx/regex.h>
+#include <wx/toolbar.h>
 
 
 // icon

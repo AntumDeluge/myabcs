@@ -1,12 +1,21 @@
 #ifndef MYABCS_GNRCABT_H
 #define MYABCS_GNRCABT_H
 
-#include <wx/wx.h>
-#include <wx/notebook.h>
-#include <wx/listctrl.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
 #include <wx/hyperlink.h>
+#include <wx/listbox.h>
+#include <wx/listctrl.h>
+#include <wx/notebook.h>
+#include <wx/panel.h>
 #include <wx/richtext/richtextctrl.h>
+#include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/statbmp.h>
+#include <wx/stattext.h>
 
+
+// FIXME: these should not be defined here
 const int ID_INFO = wxNewId();
 const int ID_ART = wxNewId();
 const int CREDIT_DEVELOPER = 100;
