@@ -5,7 +5,7 @@ PNAME = myabcs
 PNAME_T = MyABCs
 VER_MAJ = 0
 VER_MIN = 4
-VER_REL = 5
+VER_REL = 6
 VERSION = $(VER_MAJ).$(VER_MIN).$(VER_REL)
 
 ### Environment ###
