@@ -61,7 +61,8 @@ DEFINES= \
 ### Files & headers ###
 
 FAILSAFE_IMG = include/res/failsafe_img.h
-MONO_TTF = include/res/PixelOperatorMono.ttf.h
+FONT_MAIN = include/res/sniglet_ttf.h
+FONT_MONO = include/res/PixelOperatorMono.ttf.h
 
 ENV_H = include/env.h
 RESOURCES_O = resources.o
@@ -85,7 +86,7 @@ FONTS = fonts
 FONTS_H = include/$(FONTS).h
 FONTS_C = src/$(FONTS).cpp
 FONTS_O = $(FONTS).o
-FONTS_D = $(FONTS_H) $(MONO_TTF)
+FONTS_D = $(FONTS_H) $(FONT_MAIN) $(FONT_MONO)
 
 SOUND_H = include/sound.h
 SOUND_C = src/sound.cpp

@@ -4,6 +4,8 @@
 #include <wx/font.h>
 
 
+extern wxFont font_large;
+extern wxFont font_small;
 extern wxFont font_changelog;
 
 extern void initFonts();

@@ -1,5 +1,6 @@
 #include "fonts.h"
 #include "res/PixelOperatorMono.ttf.h"
+#include "res/sniglet_ttf.h"
 
 #if defined(WIN32) || defined(WIN64)
 #include <windows.h>
@@ -15,17 +16,23 @@
  */
 
 
+wxFont font_large;
+wxFont font_small;
 wxFont font_changelog;
 
-void* m_fonthandle;
+void* m_main;
+void* m_changelog;
 
 void initFonts() {
 	// FIXME: font resources currently only work on Windows platform
 #if defined(WIN32) || defined(WIN64)
 	DWORD nFonts;
-	m_fonthandle = AddFontMemResourceEx((PVOID) PixelOperatorMono_ttf, sizeof(PixelOperatorMono_ttf), NULL, &nFonts);
+	m_main = AddFontMemResourceEx((PVOID) sniglet_ttf, sizeof(sniglet_ttf), NULL, &nFonts);
+	m_changelog = AddFontMemResourceEx((PVOID) PixelOperatorMono_ttf, sizeof(PixelOperatorMono_ttf), NULL, &nFonts);
 
-	font_changelog = wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL, false, _T("Pixel Operator Mono"), wxFONTENCODING_DEFAULT);
+	font_large = wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, _T("Sniglet"));
+	font_small = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, _T("Sniglet"));
+	font_changelog = wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, _T("Pixel Operator Mono"));
 #else
 	// use generic fixed-width font
 	font_changelog = wxFont(8, wxTELETYPE, wxNORMAL, wxNORMAL);
@@ -34,8 +41,10 @@ void initFonts() {
 
 void cleanupFonts() {
 #if defined(WIN32) || defined(WIN64)
-	RemoveFontMemResourceEx(m_fonthandle);
+	RemoveFontMemResourceEx(m_main);
+	RemoveFontMemResourceEx(m_changelog);
 #else
-	delete m_fonthandle;
+	delete m_main;
+	delete m_changelog;
 #endif
 }
