@@ -18,9 +18,8 @@ Non-priority:
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
 - Show keyboard for "main" category
-- Embed free font
+- Embed free fonts (partially implemented, works on Windows only)
 - Clean up quiche SVG
-- Use monospace font for changelog text (partially implemented, works on Windows only)
 - Images to be replaced or find source:
   - iguana
   - owl
