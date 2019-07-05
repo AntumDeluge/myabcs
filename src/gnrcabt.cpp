@@ -12,7 +12,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 
 	CenterOnParent();
 
-	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
+	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::onShow), 0, this);
 
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
 
@@ -64,13 +64,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	Layout();
 }
 
-void GenericAbout::OnShow(wxEvent& event) {
-	CenterOnParent();
-	ok->SetFocus();
-	tabs->ChangeSelection(0);
-}
-
-void GenericAbout::SetImage(wxString image) {
+void GenericAbout::setImage(wxString image) {
 	wxImage new_image(image);
 	new_image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
 	appicon->SetBitmap(new_image);
@@ -78,14 +72,14 @@ void GenericAbout::SetImage(wxString image) {
 	tab_info->Layout();
 }
 
-void GenericAbout::SetImage(wxImage image) {
+void GenericAbout::setImage(wxImage image) {
 	image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
 	appicon->SetBitmap(image);
 
 	tab_info->Layout();
 }
 
-void GenericAbout::SetInfoString(wxString info) {
+void GenericAbout::setInfoString(wxString info) {
 	wxStaticText* text = new wxStaticText(tab_info, -1, info);
 	text->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 	infosizer->Add(text, 0, wxALIGN_CENTER);
@@ -93,14 +87,14 @@ void GenericAbout::SetInfoString(wxString info) {
 	tab_info->Layout();
 }
 
-void GenericAbout::SetLink(wxString label, wxString url) {
+void GenericAbout::setLink(wxString label, wxString url) {
 	wxHyperlinkCtrl* link = new wxHyperlinkCtrl(tab_info, -1, label, url);
 	infosizer->Add(link, 0, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->Layout();
 }
 
-void GenericAbout::SetCopyright(wxString copyright) {
+void GenericAbout::setCopyright(wxString copyright) {
 	wxStaticText* text = new wxStaticText(tab_info, -1, copyright);
 	text->SetFont(wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 	infosizer->Add(text, 0, wxALIGN_CENTER|wxBOTTOM, 5);
@@ -108,17 +102,30 @@ void GenericAbout::SetCopyright(wxString copyright) {
 	tab_info->Layout();
 }
 
-void GenericAbout::SetAbout(wxString about) {
+void GenericAbout::setAbout(wxString about) {
 	wxStaticText* text = new wxStaticText(tab_info, -1, about);
 	infosizer->Add(text, 1, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->Layout();
 }
 
-void GenericAbout::AddArtist(wxString image, wxString name, wxString license) {
+void GenericAbout::addArtist(wxString image, wxString name, wxString license) {
 	tab_art->add(image, name, wxEmptyString, license, wxEmptyString);
 }
 
-void GenericAbout::SetChangelog(wxString log) {
+void GenericAbout::setChangelog(wxString log) {
 	changelog->SetValue(log);
+}
+
+
+// private methods
+
+/** Shows first tab & centers dialog on main window.
+ *
+ * @param event
+ */
+void GenericAbout::onShow(wxEvent& event) {
+	CenterOnParent();
+	ok->SetFocus();
+	tabs->ChangeSelection(0);
 }

@@ -23,16 +23,15 @@ const int ID_ART = wxNewId();
 class GenericAbout : public wxDialog {
 public:
 	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
-	void SetImage(wxString image);
-	void SetImage(wxImage image);
-	void SetInfoString(wxString info);
-	void SetCopyright(wxString copyright);
-	void SetLink(wxString label, wxString url);
-	void SetAbout(wxString about);
-	void AddArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
-	void SetChangelog(wxString log);
+	void setImage(wxString image);
+	void setImage(wxImage image);
+	void setInfoString(wxString info);
+	void setCopyright(wxString copyright);
+	void setLink(wxString label, wxString url);
+	void setAbout(wxString about);
+	void addArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
+	void setChangelog(wxString log);
 private:
-	void OnShow(wxEvent& event);
 	wxNotebook* tabs;
 	wxButton* ok;
 	wxPanel* tab_info;
@@ -48,6 +47,8 @@ private:
 	wxRichTextCtrl* changelog;
 
 	wxBoxSizer* sizer;
+
+	void onShow(wxEvent& event);
 };
 
 #endif /* MYABCS_GNRCABT_H */

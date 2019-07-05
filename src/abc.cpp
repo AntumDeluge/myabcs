@@ -452,7 +452,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	// About Dialog
 	GenericAbout* about = new GenericAbout(this, -1);
 	about->SetIcon(wxIcon(ICON1));
-	about->SetImage(_T("myabcs.png"));
+	about->setImage(_T("myabcs.png"));
 
 	wxString version_string = wxEmptyString;
 #ifdef VERSION
@@ -466,11 +466,11 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	if (!version_string.IsEmpty()) {
 		info_string.Append(wxString::Format(" %s", version_string));
 	}
-	about->SetInfoString(info_string);
+	about->setInfoString(info_string);
 
-	about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
-	about->SetLink("myabcs.sourceforge.io", "https://myabcs.sourceforge.io/");
-	about->SetAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
+	about->setCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
+	about->setLink("myabcs.sourceforge.io", "https://myabcs.sourceforge.io/");
+	about->setAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
 
 	// Changelog
 	// FIXME: concatenating "CHANGES.txt" to dir_root not working
@@ -485,195 +485,195 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 		f_open.Close();
 	}
 
-	about->SetChangelog(cl_text);
+	about->setChangelog(cl_text);
 
-	about->AddArtist(_T("ABC Blocks"), _T("Petri Lummemaki "), _T("Public Domain"));
-	about->AddArtist(_T("Accordion"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Accordion(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Airplane"), _T("Jarno Vasamaa"), _T("Public Domain"));
-	about->AddArtist(_T("Airplane(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Anklet"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98184
-	about->AddArtist(_T("Angelfish"), _T("Jonathon Love"), _T("Public Domain"));
-	about->AddArtist(_T("Apple"), _T("Chrisdesign"), _T("Public Domain"));
-	about->AddArtist(_T("Bagpipes"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98175
-	about->AddArtist(_T("Bagpipes(sound)"), _T("kyles"), _T("CC0/Public Domain")); // https://freesound.org/people/kyles/sounds/453749/
-	about->AddArtist(_T("Balloons"), _T("AJ"), _T("Public Domain"));
-	about->AddArtist(_T("Bananas"), _T("nicubunu"), _T("Public Domain"));
-	about->AddArtist(_T("Bird"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Bird(sound)"), _T("Jc Guan"), _T("Public Domain")); // http://soundbible.com/340-Bird-Song.html
-	about->AddArtist(_T("Bicycle"), _T("alvolk"), _T("Public Domain"));
-	about->AddArtist(_T("Bicycle(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16320
-	about->AddArtist(_T("Cat"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Cat(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Chalkboard"), _T("J_Alves"), _T("Public Domain"));
-	about->AddArtist(_T("Cherries"), _T("Rocket000"), _T("Public Domain"));
-	about->AddArtist(_T("Clarinet"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Clarinet(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Clock"), _T("Jonathan Dietrich"), _T("Public Domain"));
-	about->AddArtist(_T("Clock(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16323
-	about->AddArtist(_T("Dog"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Dog(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Doll"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98192
-	about->AddArtist(_T("Dolphin"), _T("Andrew Fitzsimon"), _T("Public Domain"));
-	about->AddArtist(_T("Dolphin(sound)"));
-	about->AddArtist(_T("Doughnut"), _T("worms_x"), _T("Public Domain"));
-	about->AddArtist(_T("Drums"), _T("TheresaKnott"), _T("Public Domain"));
-	about->AddArtist(_T("Drums(sound)"), _T("imakepitart"), _T("Public Domain")); // https://commons.wikimedia.org/wiki/File:Drums.ogg (originally from pdsounds.org)
-	about->AddArtist(_T("Earth"), _T("Dan Gerhrads"), _T("Public Domain"));
-	about->AddArtist(_T("Easel"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Egg"), _T("dStulle"), _T("Public Domain"));
-	about->AddArtist(_T("Electric Guitar"), _T("Chrisdesign"), _T("Public Domain"));
-	about->AddArtist(_T("Electric Guitar(sound)"), _T("Mattgirling"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:GuitarRig4.ogg
-	about->AddArtist(_T("Elephant"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Elephant(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Fire"), _T("Valessio Soares de Brito"), _T("Public Domain"));
-	about->AddArtist(_T("Fire(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16327
-	about->AddArtist(_T("Flute"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Flute(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Football"), _T("molumen"), _T("Public Domain"));
-	about->AddArtist(_T("Fries"), _T("Juliane Krug"), _T("Public Domain"));
-	about->AddArtist(_T("Frog"), _T("leland_mcinnes"), _T("Public Domain"));
-	about->AddArtist(_T("Frog(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Giraffe"), _T("Packard Jennings"), _T("Public Domain"));
-	about->AddArtist(_T("Glove"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Grapes"), _T("Jean-Victor Balin"), _T("Public Domain"));
-	about->AddArtist(_T("Grasshopper"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Grasshopper(sound"), _T("straget"), _T("CC0/Public Domain")); // https://freesound.org/people/straget/sounds/401939/
-	about->AddArtist(_T("Guitar"), _T("papapishu"), _T("Public Domain"));
-	about->AddArtist(_T("Guitar(sound)"));
-	about->AddArtist(_T("Harp"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Hat"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Horn"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98191
-	about->AddArtist(_T("Horn(sound"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16322
-	about->AddArtist(_T("Horse"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Horse(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Hot Dog"), _T("Juliane Krug"), _T("Public Domain"));
-	about->AddArtist(_T("Ice Cream"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Ice Skate"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Igloo"), _T("Jose Hevia"), _T("Public Domain"));
-	about->AddArtist(_T("Iguana"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Ipu"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98176
-	about->AddArtist(_T("Jaguar"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98089
-	about->AddArtist(_T("Jaguar(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Jar"), _T("DTRave"), _T("Public Domain"));
-	about->AddArtist(_T("Jug"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98177
-	about->AddArtist(_T("Jug(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16325
-	about->AddArtist(_T("Juice"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Jump Rope"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Kazoo"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98178
-	about->AddArtist(_T("Kazoo(sound)"), _T("NoiseCollector"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/NoiseCollector/sounds/7781/
-	about->AddArtist(_T("Ketchup"), _T("Alexandre Norman"), _T("Public Domain"));
-	about->AddArtist(_T("Keyboard"), _T("yeKcim"), _T("Public Domain"));
-	about->AddArtist(_T("Keyboard(sound)"), _T("Trollarch2"), _T("CC0/Public Domain")); // https://freesound.org/people/Trollarch2/sounds/331656/
-	about->AddArtist(_T("Kite"), _T("schoolfreeware"), _T("Public Domain"));
-	about->AddArtist(_T("Koala"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Ladybug"), _T("lalolalo"), _T("Public Domain"));
-	about->AddArtist(_T("Lasagna"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Lion"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Lion(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Lunchbox"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98190
-	about->AddArtist(_T("Lute"), _T("papapishu"), _T("Public Domain"));
-	about->AddArtist(_T("Magnet"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Magnifying Glass"), _T("TheStructorr"), _T("Public Domain"));
-	about->AddArtist(_T("Maracas"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Maracas(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Mouse"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Mouse(sound)"));
-	about->AddArtist(_T("Mushroom"), _T("Tanguy JACQ"), _T("Public Domain"));
-	about->AddArtist(_T("Necklace"), _T("wsnaccad"), _T("Public Domain"));
-	about->AddArtist(_T("Newspaper"), _T("Aubanel Monnier"), _T("Public Domain"));
-	about->AddArtist(_T("Ney"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98180
-	about->AddArtist(_T("Newt"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98524
-	about->AddArtist(_T("Noodle"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98168
-	about->AddArtist(_T("Oboe"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Oboe(sound)"), _T("acclivity"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/acclivity/sounds/22686/
-	about->AddArtist(_T("Olive"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Onion"), _T("Chrisdesign"), _T("Public Domain"));
-	about->AddArtist(_T("Orca"), _T("Matthew Gates"), _T("Public Domain")); // unused
-	about->AddArtist(_T("Origami"), _T("badaman"), _T("Public Domain"));
-	about->AddArtist(_T("Owl"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Owl(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Paint"), _T("valessiobrito"), _T("Public Domain"));
-	about->AddArtist(_T("Paper Airplane"), _T("nicubunu"), _T("Public Domain"));
-	about->AddArtist(_T("Piano"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Piano(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Pretzel"), _T("Nathan Eady"), _T("Public Domain"));
-	about->AddArtist(_T("Pig"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Pig(sound)"), _T("Robinhood76"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/Robinhood76/sounds/76796/
-	about->AddArtist(_T("Quail"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Quail(sound)"));
-	about->AddArtist(_T("Quarter"), _T("Paul Sherman"), _T("Public Domain"));
-	about->AddArtist(_T("Quarter(sound)"), _T("greenvwbeetle"), _T("CC0/Public Domain")); // https://freesound.org/people/greenvwbeetle/sounds/423332/
-	about->AddArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98181
-	about->AddArtist(_T("Quena(sound)"), _T("CarlosCarty"), _T("CC BY")); // https://freesound.org/people/CarlosCarty/sounds/463711/
-	about->AddArtist(_T("Quiche"), wxEmptyString, _T("Public Domain")); // https://www.wpclipart.com/food/meals/quiche.png.html
-	about->AddArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98189
-	about->AddArtist(_T("Raccoon"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Raccoon(sound)"));
-	about->AddArtist(_T("Radishes"), _T("Francesco Rollandin"), _T("Public Domain"));
-	about->AddArtist(_T("Recorder"), _T("zeimusu"), _T("Public Domain"));
-	about->AddArtist(_T("Recorder(sound)"), _T("Cailyn"));
-	about->AddArtist(_T("Ribbon"), wxEmptyString, _T("CC0/Public Domain")); // https://publicdomainvectors.org/en/free-clipart/Medal-of-achievement-blue-and-red-vector-image/19941.html
-	about->AddArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
-	about->AddArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Rooster(sound)"), _T("poorenglishjuggler"), _T("CC0/Public Domain")); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
-	about->AddArtist(_T("Saxophone"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain")); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
-	about->AddArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98188
-	about->AddArtist(_T("Sheep"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Sheep(sound)"), _T("mikewest"), _T("CC0/Public Domain")); // https://freesound.org/people/mikewest/sounds/414342/
-	about->AddArtist(_T("Star"), _T("Tom Webb"), _T("Public Domain"));
-	about->AddArtist(_T("Strawberry"), _T("baroquon"), _T("Public Domain"));
-	about->AddArtist(_T("Tomato"), _T("Chrisdesign"), _T("Public Domain"));
-	about->AddArtist(_T("Top"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98187
-	about->AddArtist(_T("Train"), _T("Aitor Avila"), _T("Public Domain"));
-	about->AddArtist(_T("Train(sound)"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Trumpet"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Trumpet (sound)"), _T("sorohanro"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/sorohanro/sounds/77706/
-	about->AddArtist(_T("Turtle"), _T("valessiobrito"), _T("Public Domain"));
-	about->AddArtist(_T("Udon"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
-	about->AddArtist(_T("Ukulele"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98182
-	about->AddArtist(_T("Ukulele(sound)"), _T("Henry Kailimai"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Ukelele_-_Kailimai%27s_hene_-_Ukepedia.ogg
-	about->AddArtist(_T("Umbrella"), _T("LX"), _T("Public Domain"));
-	about->AddArtist(_T("Umbrella"), _T("j1987"), _T("CC0/Public Domain")); // https://freesound.org/people/j1987/sounds/73028/
-	about->AddArtist(_T("Urchin"), _T("Jordan Irwin"), _T("Public Domain"));
-	about->AddArtist(_T("Unicycle"), _T("AndrewDressel/Underpants"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Unicycle.svg
-	about->AddArtist(_T("Vase"), _T("J_Alves"), _T("Public Domain"));
-	about->AddArtist(_T("Vegetables"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Violin"), _T("papapishu"), _T("Public Domain"));
-	about->AddArtist(_T("Violin(sound)"), _T("Edit Kov\u00E1cs"), _T("Attribution-ShareAlike 2.0 Germany")); // https://commons.wikimedia.org/wiki/File:Whiskey-youre-the-devil-violin.ogg
-	about->AddArtist(_T("Volleyball"), _T("Andrea Bianchini"), _T("Public Domain"));
-	about->AddArtist(_T("Vulture"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Vulture(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16329
-	about->AddArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
-	about->AddArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
-	about->AddArtist(_T("Watch(sound)"), _T("Nicolas4677"), _T("CC0/Public Domain")); // https://freesound.org/people/Nicolas4677/sounds/446611/
-	about->AddArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
-	about->AddArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain")); // https://www.freesoundeffects.com/free-track/whale2-466223/ (claims license is "non-commercial", need to check other sources)
-	about->AddArtist(_T("Whistle"), _T("kelan"), _T("Public Domain"));
-	about->AddArtist(_T("Whistle(sound)"), _T("pawsound"), _T("CC0/Public Domain")); // https://freesound.org/people/pawsound/sounds/154873/
-	about->AddArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98172
-	about->AddArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Xiphias"), _("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98166
-	about->AddArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98276
-	about->AddArtist(_T("Xun(sound") _T("franeknflute"), _T("CC BY")); // https://freesound.org/people/franeknflute/sounds/200419/
-	about->AddArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
-	about->AddArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0")); // incorrect license of relicensed under CC0: https://freesound.org/people/Tristan/sounds/19459/
-	about->AddArtist(_T("Yak"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98167
-	about->AddArtist(_T("Yam"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Yangqin"), _T("koika/Jordan Irwin"), _T("Attribution-ShareAlike 3.0")); // https://opengameart.org/node/79702
-	about->AddArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
-	about->AddArtist(_T("Yo-Yo"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98186
-	about->AddArtist(_T("Zebra"), _T("johnny_automatic"), _T("Public Domain"));
-	about->AddArtist(_T("Zebra(sound)")); // https://www.partnersinrhyme.com/soundfx/safari_sounds/safari_zebra2_wav.shtml (unsure of license)
-	about->AddArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98185
-	about->AddArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
-	about->AddArtist(_T("Zipper(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16332
-	about->AddArtist(_T("Zucchini"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98173
-	about->AddArtist(_T("Zurna"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98183
-	about->AddArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/cdrk/sounds/18661/
+	about->addArtist(_T("ABC Blocks"), _T("Petri Lummemaki "), _T("Public Domain"));
+	about->addArtist(_T("Accordion"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Accordion(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Airplane"), _T("Jarno Vasamaa"), _T("Public Domain"));
+	about->addArtist(_T("Airplane(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Anklet"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98184
+	about->addArtist(_T("Angelfish"), _T("Jonathon Love"), _T("Public Domain"));
+	about->addArtist(_T("Apple"), _T("Chrisdesign"), _T("Public Domain"));
+	about->addArtist(_T("Bagpipes"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98175
+	about->addArtist(_T("Bagpipes(sound)"), _T("kyles"), _T("CC0/Public Domain")); // https://freesound.org/people/kyles/sounds/453749/
+	about->addArtist(_T("Balloons"), _T("AJ"), _T("Public Domain"));
+	about->addArtist(_T("Bananas"), _T("nicubunu"), _T("Public Domain"));
+	about->addArtist(_T("Bird"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Bird(sound)"), _T("Jc Guan"), _T("Public Domain")); // http://soundbible.com/340-Bird-Song.html
+	about->addArtist(_T("Bicycle"), _T("alvolk"), _T("Public Domain"));
+	about->addArtist(_T("Bicycle(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16320
+	about->addArtist(_T("Cat"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Cat(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Chalkboard"), _T("J_Alves"), _T("Public Domain"));
+	about->addArtist(_T("Cherries"), _T("Rocket000"), _T("Public Domain"));
+	about->addArtist(_T("Clarinet"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Clarinet(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Clock"), _T("Jonathan Dietrich"), _T("Public Domain"));
+	about->addArtist(_T("Clock(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16323
+	about->addArtist(_T("Dog"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Dog(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Doll"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98192
+	about->addArtist(_T("Dolphin"), _T("Andrew Fitzsimon"), _T("Public Domain"));
+	about->addArtist(_T("Dolphin(sound)"));
+	about->addArtist(_T("Doughnut"), _T("worms_x"), _T("Public Domain"));
+	about->addArtist(_T("Drums"), _T("TheresaKnott"), _T("Public Domain"));
+	about->addArtist(_T("Drums(sound)"), _T("imakepitart"), _T("Public Domain")); // https://commons.wikimedia.org/wiki/File:Drums.ogg (originally from pdsounds.org)
+	about->addArtist(_T("Earth"), _T("Dan Gerhrads"), _T("Public Domain"));
+	about->addArtist(_T("Easel"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Egg"), _T("dStulle"), _T("Public Domain"));
+	about->addArtist(_T("Electric Guitar"), _T("Chrisdesign"), _T("Public Domain"));
+	about->addArtist(_T("Electric Guitar(sound)"), _T("Mattgirling"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:GuitarRig4.ogg
+	about->addArtist(_T("Elephant"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Elephant(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Fire"), _T("Valessio Soares de Brito"), _T("Public Domain"));
+	about->addArtist(_T("Fire(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16327
+	about->addArtist(_T("Flute"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Flute(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Football"), _T("molumen"), _T("Public Domain"));
+	about->addArtist(_T("Fries"), _T("Juliane Krug"), _T("Public Domain"));
+	about->addArtist(_T("Frog"), _T("leland_mcinnes"), _T("Public Domain"));
+	about->addArtist(_T("Frog(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Giraffe"), _T("Packard Jennings"), _T("Public Domain"));
+	about->addArtist(_T("Glove"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Grapes"), _T("Jean-Victor Balin"), _T("Public Domain"));
+	about->addArtist(_T("Grasshopper"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Grasshopper(sound"), _T("straget"), _T("CC0/Public Domain")); // https://freesound.org/people/straget/sounds/401939/
+	about->addArtist(_T("Guitar"), _T("papapishu"), _T("Public Domain"));
+	about->addArtist(_T("Guitar(sound)"));
+	about->addArtist(_T("Harp"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Harp(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Hat"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Horn"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98191
+	about->addArtist(_T("Horn(sound"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16322
+	about->addArtist(_T("Horse"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Horse(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Hot Dog"), _T("Juliane Krug"), _T("Public Domain"));
+	about->addArtist(_T("Ice Cream"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Ice Skate"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Igloo"), _T("Jose Hevia"), _T("Public Domain"));
+	about->addArtist(_T("Iguana"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Ipu"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98176
+	about->addArtist(_T("Jaguar"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98089
+	about->addArtist(_T("Jaguar(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Jar"), _T("DTRave"), _T("Public Domain"));
+	about->addArtist(_T("Jug"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98177
+	about->addArtist(_T("Jug(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16325
+	about->addArtist(_T("Juice"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Jump Rope"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Kazoo"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98178
+	about->addArtist(_T("Kazoo(sound)"), _T("NoiseCollector"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/NoiseCollector/sounds/7781/
+	about->addArtist(_T("Ketchup"), _T("Alexandre Norman"), _T("Public Domain"));
+	about->addArtist(_T("Keyboard"), _T("yeKcim"), _T("Public Domain"));
+	about->addArtist(_T("Keyboard(sound)"), _T("Trollarch2"), _T("CC0/Public Domain")); // https://freesound.org/people/Trollarch2/sounds/331656/
+	about->addArtist(_T("Kite"), _T("schoolfreeware"), _T("Public Domain"));
+	about->addArtist(_T("Koala"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Ladybug"), _T("lalolalo"), _T("Public Domain"));
+	about->addArtist(_T("Lasagna"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Lion"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Lion(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Lunchbox"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98190
+	about->addArtist(_T("Lute"), _T("papapishu"), _T("Public Domain"));
+	about->addArtist(_T("Magnet"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Magnifying Glass"), _T("TheStructorr"), _T("Public Domain"));
+	about->addArtist(_T("Maracas"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Maracas(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Mouse"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Mouse(sound)"));
+	about->addArtist(_T("Mushroom"), _T("Tanguy JACQ"), _T("Public Domain"));
+	about->addArtist(_T("Necklace"), _T("wsnaccad"), _T("Public Domain"));
+	about->addArtist(_T("Newspaper"), _T("Aubanel Monnier"), _T("Public Domain"));
+	about->addArtist(_T("Ney"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98180
+	about->addArtist(_T("Newt"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98524
+	about->addArtist(_T("Noodle"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98168
+	about->addArtist(_T("Oboe"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Oboe(sound)"), _T("acclivity"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/acclivity/sounds/22686/
+	about->addArtist(_T("Olive"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Onion"), _T("Chrisdesign"), _T("Public Domain"));
+	about->addArtist(_T("Orca"), _T("Matthew Gates"), _T("Public Domain")); // unused
+	about->addArtist(_T("Origami"), _T("badaman"), _T("Public Domain"));
+	about->addArtist(_T("Owl"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Owl(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Paint"), _T("valessiobrito"), _T("Public Domain"));
+	about->addArtist(_T("Paper Airplane"), _T("nicubunu"), _T("Public Domain"));
+	about->addArtist(_T("Piano"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Piano(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Pretzel"), _T("Nathan Eady"), _T("Public Domain"));
+	about->addArtist(_T("Pig"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Pig(sound)"), _T("Robinhood76"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/Robinhood76/sounds/76796/
+	about->addArtist(_T("Quail"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Quail(sound)"));
+	about->addArtist(_T("Quarter"), _T("Paul Sherman"), _T("Public Domain"));
+	about->addArtist(_T("Quarter(sound)"), _T("greenvwbeetle"), _T("CC0/Public Domain")); // https://freesound.org/people/greenvwbeetle/sounds/423332/
+	about->addArtist(_T("Quena"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98181
+	about->addArtist(_T("Quena(sound)"), _T("CarlosCarty"), _T("CC BY")); // https://freesound.org/people/CarlosCarty/sounds/463711/
+	about->addArtist(_T("Quiche"), wxEmptyString, _T("Public Domain")); // https://www.wpclipart.com/food/meals/quiche.png.html
+	about->addArtist(_T("Quilt"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98189
+	about->addArtist(_T("Raccoon"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Raccoon(sound)"));
+	about->addArtist(_T("Radishes"), _T("Francesco Rollandin"), _T("Public Domain"));
+	about->addArtist(_T("Recorder"), _T("zeimusu"), _T("Public Domain"));
+	about->addArtist(_T("Recorder(sound)"), _T("Cailyn"));
+	about->addArtist(_T("Ribbon"), wxEmptyString, _T("CC0/Public Domain")); // https://publicdomainvectors.org/en/free-clipart/Medal-of-achievement-blue-and-red-vector-image/19941.html
+	about->addArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
+	about->addArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Rooster(sound)"), _T("poorenglishjuggler"), _T("CC0/Public Domain")); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
+	about->addArtist(_T("Saxophone"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Sax(sound)"), _T("Sylenius"), _T("Public Domain")); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
+	about->addArtist(_T("Seesaw"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98188
+	about->addArtist(_T("Sheep"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Sheep(sound)"), _T("mikewest"), _T("CC0/Public Domain")); // https://freesound.org/people/mikewest/sounds/414342/
+	about->addArtist(_T("Star"), _T("Tom Webb"), _T("Public Domain"));
+	about->addArtist(_T("Strawberry"), _T("baroquon"), _T("Public Domain"));
+	about->addArtist(_T("Tomato"), _T("Chrisdesign"), _T("Public Domain"));
+	about->addArtist(_T("Top"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98187
+	about->addArtist(_T("Train"), _T("Aitor Avila"), _T("Public Domain"));
+	about->addArtist(_T("Train(sound)"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Trumpet"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Trumpet (sound)"), _T("sorohanro"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/sorohanro/sounds/77706/
+	about->addArtist(_T("Turtle"), _T("valessiobrito"), _T("Public Domain"));
+	about->addArtist(_T("Udon"), _T("Jordan Irwin (derivative)"), _T("Public Domain"));
+	about->addArtist(_T("Ukulele"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98182
+	about->addArtist(_T("Ukulele(sound)"), _T("Henry Kailimai"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Ukelele_-_Kailimai%27s_hene_-_Ukepedia.ogg
+	about->addArtist(_T("Umbrella"), _T("LX"), _T("Public Domain"));
+	about->addArtist(_T("Umbrella"), _T("j1987"), _T("CC0/Public Domain")); // https://freesound.org/people/j1987/sounds/73028/
+	about->addArtist(_T("Urchin"), _T("Jordan Irwin"), _T("Public Domain"));
+	about->addArtist(_T("Unicycle"), _T("AndrewDressel/Underpants"), _T("Attribution-ShareAlike 3.0")); // https://commons.wikimedia.org/wiki/File:Unicycle.svg
+	about->addArtist(_T("Vase"), _T("J_Alves"), _T("Public Domain"));
+	about->addArtist(_T("Vegetables"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Violin"), _T("papapishu"), _T("Public Domain"));
+	about->addArtist(_T("Violin(sound)"), _T("Edit Kov\u00E1cs"), _T("Attribution-ShareAlike 2.0 Germany")); // https://commons.wikimedia.org/wiki/File:Whiskey-youre-the-devil-violin.ogg
+	about->addArtist(_T("Volleyball"), _T("Andrea Bianchini"), _T("Public Domain"));
+	about->addArtist(_T("Vulture"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Vulture(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16329
+	about->addArtist(_T("Wagon"), _T("Greg"), _T("Public Domain"));
+	about->addArtist(_T("Watch"), _T("webmichl"), _T("Public Domain"));
+	about->addArtist(_T("Watch(sound)"), _T("Nicolas4677"), _T("CC0/Public Domain")); // https://freesound.org/people/Nicolas4677/sounds/446611/
+	about->addArtist(_T("Watermelon"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Whale"), _T("ArtFavor"), _T("Public Domain"));
+	about->addArtist(_T("Whale(sound)"), wxEmptyString, _T("Public Domain")); // https://www.freesoundeffects.com/free-track/whale2-466223/ (claims license is "non-commercial", need to check other sources)
+	about->addArtist(_T("Whistle"), _T("kelan"), _T("Public Domain"));
+	about->addArtist(_T("Whistle(sound)"), _T("pawsound"), _T("CC0/Public Domain")); // https://freesound.org/people/pawsound/sounds/154873/
+	about->addArtist(_T("X Cookie"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98172
+	about->addArtist(_T("X-Ray (Skeleton)"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Xiphias"), _("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98166
+	about->addArtist(_T("Xun"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98276
+	about->addArtist(_T("Xun(sound") _T("franeknflute"), _T("CC BY")); // https://freesound.org/people/franeknflute/sounds/200419/
+	about->addArtist(_T("Xylophone"), _T("Gerald_G"), _T("Public Domain"));
+	about->addArtist(_T("Xylophone(sound)"), _T("Tristan"), _T("Sampling Plus 1.0")); // incorrect license of relicensed under CC0: https://freesound.org/people/Tristan/sounds/19459/
+	about->addArtist(_T("Yak"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98167
+	about->addArtist(_T("Yam"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Yangqin"), _T("koika/Jordan Irwin"), _T("Attribution-ShareAlike 3.0")); // https://opengameart.org/node/79702
+	about->addArtist(_T("Yin Yang"), _T("Stellaris"), _T("Public Domain"));
+	about->addArtist(_T("Yo-Yo"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98186
+	about->addArtist(_T("Zebra"), _T("johnny_automatic"), _T("Public Domain"));
+	about->addArtist(_T("Zebra(sound)")); // https://www.partnersinrhyme.com/soundfx/safari_sounds/safari_zebra2_wav.shtml (unsure of license)
+	about->addArtist(_T("Zipline"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98185
+	about->addArtist(_T("Zipper"), wxEmptyString, _T("Public Domain"));
+	about->addArtist(_T("Zipper(sound)"), _T("Jordan Irwin"), _T("CC0/Public Domain")); // https://opengameart.org/node/16332
+	about->addArtist(_T("Zucchini"), _T("Jordan Irwin (derivative)"), _T("Public Domain")); // https://opengameart.org/node/98173
+	about->addArtist(_T("Zurna"), _T("Jordan Irwin"), _T("Public Domain")); // https://opengameart.org/node/98183
+	about->addArtist(_T("Zurna(sound)"), _T("cdrk"), _T("Sampling Plus 1.0")); // incorrect license or relicensed under CC BY: https://freesound.org/people/cdrk/sounds/18661/
 
 	about->Fit();
 	about->ShowModal();
