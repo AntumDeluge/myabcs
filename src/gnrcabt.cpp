@@ -122,10 +122,3 @@ void GenericAbout::AddArtist(wxString image, wxString name, wxString license) {
 void GenericAbout::SetChangelog(wxString log) {
 	changelog->SetValue(log);
 }
-
-gaListBox::gaListBox(wxWindow* parent, wxWindowID id) :
-		wxListBox(parent, id=wxID_ANY) {
-	Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(gaListBox::VoidSelect), 0, this);
-}
-
-void gaListBox::VoidSelect(wxMouseEvent& event) {}

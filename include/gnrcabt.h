@@ -50,11 +50,4 @@ private:
 	wxBoxSizer* sizer;
 };
 
-// XXX: unused class?
-class gaListBox : public wxListBox {
-public:
-	gaListBox(wxWindow* parent, wxWindowID id);
-	void VoidSelect(wxMouseEvent& event);
-};
-
 #endif /* MYABCS_GNRCABT_H */
