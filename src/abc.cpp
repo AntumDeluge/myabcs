@@ -2,6 +2,7 @@
 #include "category.h"
 #include "env.h"
 #include "event.h"
+#include "fonts.h"
 #include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
@@ -111,9 +112,19 @@ MainWindow::MainWindow() :
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
 	label = new wxStaticText(canvas, -1, _T(""));
-	// FIXME: fonts
-	letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
-	label->SetFont(wxFont(20, wxDEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+
+	// FIXME: custom fonts only work on Windows platform
+	if (font_large.IsOk()) {
+		letter->SetFont(font_large);
+	} else {
+		letter->SetFont(wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+	}
+
+	if (font_small.IsOk()) {
+		label->SetFont(font_small);
+	} else {
+		label->SetFont(wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+	}
 
 	// Layout
 	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
