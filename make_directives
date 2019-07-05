@@ -44,7 +44,7 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	done; \
 	# doc files; \
 	install -vm 0644 "LICENSE.txt" "$${stage_dir}"; \
-	install -vm 0644 "myabcs.png" "$${stage_dir}/icon.png";
+	install -vm 0644 "myabcs.png" "$${stage_dir}";
 
 pack: stage
 	@cd "${STAGEDIR}"; \
