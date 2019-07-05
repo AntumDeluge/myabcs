@@ -32,7 +32,7 @@ stage: all LICENSE.txt myabcs.png cleanstage
 			if test "${VORBIS}"; then \
 				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.flac|\.oga|')"; \
 				echo "'$${SND}' -> '$${target_ogg}'"; \
-				ffmpeg -hide_banner -loglevel panic -y -i "$${SND}" -c:a libvorbis -b:a 96k "$${target_ogg}"; \
+				ffmpeg -hide_banner -loglevel panic -y -i "$${SND}" -c:a libvorbis -b:a 96k -ar 44100 "$${target_ogg}"; \
 				if test $$? -ne 0; then \
 					echo -e "\nError converting PCM to Vorbis data. Is FFmpeg installed?"; \
 					exit 1; \
