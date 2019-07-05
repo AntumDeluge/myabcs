@@ -13,6 +13,8 @@ Priority:
 - Use global variables for directories & file access
 
 Non-priority:
+- Switch to CMake build system
+- Add license boilerplates to source
 - Add animation for when category is loading
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
