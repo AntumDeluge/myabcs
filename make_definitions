@@ -64,7 +64,6 @@ FAILSAFE_IMG = include/res/failsafe_img.h
 FONT_MAIN = include/res/sniglet_ttf.h
 FONT_MONO = include/res/pixeloperatormono_ttf.h
 
-PATHS_H = include/paths.h
 RESOURCES_O = resources.o
 
 ID_H = include/id.h
@@ -82,6 +81,12 @@ LOG_C = src/log.cpp
 LOG_O = log.o
 LOG_D = $(LOG_H)
 
+PATHS = paths
+PATHS_H = include/$(PATHS).h
+PATHS_C = src/$(PATHS).cpp
+PATHS_O = $(PATHS).o
+PATHS_D = $(PATHS_H)
+
 FONTS = fonts
 FONTS_H = include/$(FONTS).h
 FONTS_C = src/$(FONTS).cpp
@@ -97,7 +102,7 @@ RESOBJ= resourceobject
 RESOBJ_H = include/$(RESOBJ).h
 RESOBJ_C = src/$(RESOBJ).cpp
 RESOBJ_O = $(RESOBJ).o
-RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_IMG) $(SOUND_H)
+RESOBJ_D = $(RESOBJ_H) $(LOG_H) $(FAILSAFE_IMG) $(SOUND_H) $(PATHS_H)
 
 RESLIST = resourcelist
 RESLIST_H = include/$(RESLIST).h
@@ -127,7 +132,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H)
 
 OBJECTS = \
-	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(ABC_O) $(MAIN_O) $(EVENT_O) $(ID_O)
+	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(PATHS_O) $(EVENT_O) $(ID_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)

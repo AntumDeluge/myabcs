@@ -1,4 +1,5 @@
 #include "log.h"
+#include "paths.h"
 #include "resourceobject.h"
 #include "sound.h"
 #include "res/failsafe_img.h"
@@ -8,11 +9,41 @@
 #include <wxSVG/SVGDocument.h>
 
 
-// TODO: use env.h
-// directories where image & sound files are stored
-static const wxString dir_images("pic/");
+// TODO: use paths.h
+// directories where sound files are stored
 static const wxString dir_vocals("sound/");
 static const wxString dir_effects("sound/effect/");
+
+// SVG document used for converting to wxImage
+static wxSVGDocument* svgdoc = new wxSVGDocument();
+
+
+wxImage imageFromSVG(wxString filename, unsigned int width, unsigned int height) {
+	// load image data from filename string
+	bool loaded = svgdoc->Load(filename);
+
+	if (!loaded) {
+		logMessage(wxString::Format("Loading SVG from file failed: %s", filename));
+	}
+
+	// XXX: need to clear svgdoc
+
+	return svgdoc->Render(width, height, NULL, true, true, NULL);
+}
+
+wxImage imageFromSVG(unsigned char* data, unsigned int data_size, unsigned int width, unsigned int height) {
+	// load image data from memory
+	wxMemoryInputStream is(data, data_size); // convert SVG data into input stream
+	bool loaded = svgdoc->Load(is);
+
+	if (!loaded) {
+		logMessage("Loading SVG data failed");
+	}
+
+	// XXX: need to clear svgdoc
+
+	return svgdoc->Render(width, height, NULL, true, true, NULL);
+}
 
 
 /** copy constructor */
@@ -37,11 +68,12 @@ ResourceObject::ResourceObject(wxString label, wxString category)
 	// replace whitespace in filename with underscore
 	label.Replace(_T(" "), _T("_"));
 
+	// used for object when "main" game category is completed
 	if (category == wxEmptyString) {
 		loadImage(label);
 		loadSound(_T("cheering"));
 	} else {
-		loadImage(category.Append("/").Append(label));
+		loadImage(wxString::Format("%s/%s", category, label));
 		loadSound(label);
 	}
 }
@@ -59,53 +91,19 @@ bool ResourceObject::playSound(wxWindow* source) {
 }
 
 void ResourceObject::loadImage(wxString img) {
-	if (!img.StartsWith(dir_images)) {
-		img = wxString(dir_images).Append(img);
-	}
+	wxString filename = getImageFile(img);
 
-	wxString png_filename, svg_filename;
-
-	png_filename = img;
-	if (!png_filename.EndsWith(_T(".png"))) {
-		png_filename = png_filename.Append(".png");
-	}
-
-	svg_filename = png_filename;
-	if (!svg_filename.EndsWith(_T(".svg"))) {
-		svg_filename = svg_filename.SubString(0, svg_filename.Len()-4).Append(_T("svg"));
-	}
-
-	// use PNG image by default
-	if (wxFileExists(png_filename)) {
-		// DEBUG:
-		logMessage(wxString("WARNING: Using PNG image: ").Append(png_filename));
-
-		objectImage = wxImage(png_filename, wxBITMAP_TYPE_PNG);
-	} else if (wxFileExists(svg_filename)) {
-		// load SVG data
-		wxSVGDocument* svg = new wxSVGDocument();
-		bool loaded = svg->Load(svg_filename);
-
-		// FIXME: can't check if image displayed properly
-		//logMessage(wxString("SVG loaded: ").Append(std::to_string(svg->IsOk())));
-		if (!loaded) {
-			logMessage(wxString("Loading SVG document failed: ").Append(svg_filename));
-		}
-
-		objectImage = wxImage(svg->Render(290, 290, NULL, true, true, NULL));
-	} else {
-		logMessage(wxString("ERROR: Could not load image: ").Append(img));
+	if (!filename) {
+		logMessage(wxString::Format("ERROR: Could not find compatible image for: %s", img));
 
 		// load embedded failsafe image data
-		wxMemoryInputStream is(failsafe_svg, sizeof(failsafe_svg)); // convert SVG data into input stream
-		wxSVGDocument* svg = new wxSVGDocument();
-		bool loaded = svg->Load(is);
+		objectImage = imageFromSVG((unsigned char*) failsafe_svg, sizeof(failsafe_svg), 290, 290);
+	} else if (filename.EndsWith(".svg") || filename.EndsWith(".SVG")) {
+		objectImage = imageFromSVG(filename, 290, 290);
+	} else {
+		logMessage(wxString::Format("WARNING: Using bitmap image: %s", filename));
 
-		if (!loaded) {
-			logMessage(wxString("Loading SVG document failed: ").Append(svg_filename));
-		}
-
-		objectImage = wxImage(svg->Render(290, 290, NULL, true, true, NULL));
+		objectImage = wxImage(filename);
 	}
 }
 

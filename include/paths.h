@@ -1,25 +1,16 @@
 #ifndef MYABCS_PATHS_H
 #define MYABCS_PATHS_H
 
-#include <string>
+#include <wx/string.h>
+
+// XXX: any benefit to using wxFileName instead of wxString?
 
 
-// FIXME: this should be inaccessible
-static std::string executable;
-static std::string dir_root;
-static std::string dir_pic;
-static std::string dir_snd;
+extern void initPaths(wxString path, wxString exe);
 
-static void initPaths(std::string path, std::string exe) {
-	executable = exe;
-	dir_root = path;
-	dir_pic = dir_root + "/pic";
-	dir_snd = dir_root + "/sound";
-}
+extern wxString getExecutable();
+extern wxString getRootDir();
 
-static std::string getRootDir() {
-	return dir_root;
-}
-
+extern wxString getImageFile(wxString img);
 
 #endif /* MYABCS_PATHS_H */

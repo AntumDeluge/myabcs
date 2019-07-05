@@ -17,8 +17,8 @@ bool App::OnInit() {
 	initPaths(std::string(wxPathOnly(full_path).mb_str()), std::string(wxFileName::FileName(full_path).GetFullName().mb_str()));
 
 	// DEBUG:
-	logMessage(wxString::Format("Root dir: %s", getRootDir()));
-	logMessage(wxString::Format("Executable: %s", executable));
+	logMessage(wxString::Format("Set executable: %s", getExecutable()));
+	logMessage(wxString::Format("Set root dir: %s", getRootDir()));
 
 	// initialize fonts
 	initFonts();

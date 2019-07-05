@@ -41,7 +41,7 @@ MainWindow::MainWindow() :
 	winResource = ResourceObject(_T("ribbon"), wxEmptyString);
 
 	// Get the executable's filename
-	wxString argv0 = wxString(executable);
+	wxString argv0 = getExecutable();
 
 	// FIXME: Currently uses current working directory to locate data
 	//        rather than looking in the installed directory.
@@ -49,7 +49,7 @@ MainWindow::MainWindow() :
 	installdir = _T(ABCDIR);
 	installdir.Append(_T("/"));
 #else
-	installdir = dir_root;
+	installdir = getRootDir();
 #endif
 
 	SetIcon(wxIcon(ICON1));
