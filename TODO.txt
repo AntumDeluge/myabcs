@@ -13,6 +13,7 @@ Priority:
 
 Non-priority:
 - Switch to CMake build system
+- Support MP3 audio (possibly support any audio type playable with SDL_mixer)
 - Add license boilerplates to source
 - Add animation for when category is loading
 - PNG & SVG hats are different colors
