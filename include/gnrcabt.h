@@ -23,8 +23,8 @@ const int CREDIT_TRANSLATOR = 101;
 const int CREDIT_ARTIST = 102;
 const int CREDIT_PACKAGER = 103;
 
-class GenericAbout : public wxDialog
-{
+
+class GenericAbout : public wxDialog {
 public:
 	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
 	void SetImage(wxString image);
@@ -40,46 +40,46 @@ public:
 	void SetChangelog(wxString log);
 private:
 	void OnShow(wxEvent& event);
-	wxNotebook *tabs;
-	wxButton *ok;
-	wxPanel *p1_info;
-	wxScrolledWindow *p2_credits;
-	wxPanel *p3_art;
-	wxPanel *p4_log;
+	wxNotebook* tabs;
+	wxButton* ok;
+	wxPanel* p1_info;
+	wxScrolledWindow* p2_credits;
+	wxPanel* p3_art;
+	wxPanel* p4_log;
 
 	// Info
-	wxStaticBitmap *appicon;
-	wxSize *iconsize;
-	wxStaticText *appname;
-	wxStaticText *appver;
-	wxStaticText *appcopyright;
-	wxHyperlinkCtrl *appurl;
-	wxStaticText *appabout;
+	wxStaticBitmap* appicon;
+	wxSize* iconsize;
+	wxStaticText* appname;
+	wxStaticText* appver;
+	wxStaticText* appcopyright;
+	wxHyperlinkCtrl* appurl;
+	wxStaticText* appabout;
 
-	wxBoxSizer *infosizer;
+	wxBoxSizer* infosizer;
 
 	// Credits
-	wxStaticText *devtext;
-	wxListBox *devbox;
-	wxStaticText *packtext;
-	wxListBox *packbox;
-	wxStaticText *transtext;
-	wxListBox *transbox;
-	wxStaticText *arttext;
-	wxListBox *artbox;
+	wxStaticText* devtext;
+	wxListBox* devbox;
+	wxStaticText* packtext;
+	wxListBox* packbox;
+	wxStaticText* transtext;
+	wxListBox* transbox;
+	wxStaticText* arttext;
+	wxListBox* artbox;
 
 	// Art
-	wxListCtrl *artists;
+	wxListCtrl* artists;
 	void CancelColResize(wxListEvent& event);
 
 	// Changelog
-	wxRichTextCtrl *changelog;
+	wxRichTextCtrl* changelog;
 
-	wxBoxSizer *sizer;
+	wxBoxSizer* sizer;
 };
 
-class gaListBox : public wxListBox
-{
+// XXX: unused class?
+class gaListBox : public wxListBox {
 public:
 	gaListBox(wxWindow* parent, wxWindowID id);
 	void VoidSelect(wxMouseEvent& event);

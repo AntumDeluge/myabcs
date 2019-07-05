@@ -4,8 +4,8 @@
 #include "log.h"
 
 
-GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) : wxDialog(parent, id, title)
-{
+GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
+		wxDialog(parent, id, title) {
 	CenterOnParent();
 
 	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
@@ -230,11 +230,9 @@ void GenericAbout::SetChangelog(wxString log)
 	tabs->AddPage(p4_log, _T("Changelog"));
 }
 
-gaListBox::gaListBox(wxWindow* parent, wxWindowID id) : wxListBox(parent, id=wxID_ANY)
-{
+gaListBox::gaListBox(wxWindow* parent, wxWindowID id) :
+		wxListBox(parent, id=wxID_ANY) {
 	Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(gaListBox::VoidSelect), 0, this);
 }
 
-void gaListBox::VoidSelect(wxMouseEvent& event)
-{
-}
+void gaListBox::VoidSelect(wxMouseEvent& event) {}
