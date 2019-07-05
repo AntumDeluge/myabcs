@@ -3,6 +3,14 @@ Priority:
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
+- Show information about SDL & wxWidgets in about dialog
+- Show font information in about dialog
+- Separate art & sound in about dialog
+- Link to art & sound sources
+- Use global function for setting/getting fonts
+- Make "pic" & "sound" sub-directores of "data" or other folder
+- Add font license texts to binary release
+- Use global variables for directories & file access
 
 Non-priority:
 - Add animation for when category is loading
@@ -14,7 +22,6 @@ Non-priority:
 - Edit wheels white BG in bicycle SVG
 - Change strawberry SVG
 - Remove shading from watch SVG
-- Make "pic" & "sound" sub-directores of "data" or other folder
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
 - Show keyboard for "main" category
