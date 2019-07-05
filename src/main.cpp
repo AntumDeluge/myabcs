@@ -1,8 +1,8 @@
-#include "env.h"
 #include "fonts.h"
 #include "main.h"
 #include "abc.h"
 #include "log.h"
+#include "paths.h"
 #include "sound.h"
 
 #include <string>

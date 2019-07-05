@@ -1,5 +1,5 @@
-#ifndef MYABCS_ENV_H
-#define MYABCS_ENV_H
+#ifndef MYABCS_PATHS_H
+#define MYABCS_PATHS_H
 
 #include <string>
 
@@ -22,4 +22,4 @@ static std::string getRootDir() {
 }
 
 
-#endif /* MYABCS_ENV_H */
+#endif /* MYABCS_PATHS_H */

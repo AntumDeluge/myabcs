@@ -64,7 +64,7 @@ FAILSAFE_IMG = include/res/failsafe_img.h
 FONT_MAIN = include/res/sniglet_ttf.h
 FONT_MONO = include/res/pixeloperatormono_ttf.h
 
-ENV_H = include/env.h
+PATHS_H = include/paths.h
 RESOURCES_O = resources.o
 
 ID_H = include/id.h

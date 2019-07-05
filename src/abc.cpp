@@ -1,11 +1,11 @@
 #include "abc.h"
 #include "category.h"
-#include "env.h"
 #include "event.h"
 #include "fonts.h"
 #include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
+#include "paths.h"
 #include "sound.h"
 
 #include <wx/ffile.h>
