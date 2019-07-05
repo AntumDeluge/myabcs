@@ -59,6 +59,9 @@ DEFINES = \
 	-DPIXMAPDIR=\"$(PIXMAPDIR)\" \
 	-DABCDIR=\"$(ABCDIR)\" \
 	-DVERSION=\"$(VERSION)\"
+ifdef VER_DEV
+	DEFINES += -DVER_DEV=\"$(VER_DEV)\"
+endif
 
 CXXFLAGS += $(DEFINES)
 

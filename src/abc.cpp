@@ -457,6 +457,9 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	wxString version_string = wxEmptyString;
 #ifdef VERSION
 	version_string = VERSION;
+#ifdef VER_DEV
+	version_string.Append("-dev").Append(VER_DEV);
+#endif
 #endif
 	about->SetVersion(version_string);
 
