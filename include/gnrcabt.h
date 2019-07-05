@@ -5,7 +5,7 @@
 
 #include <wx/button.h>
 #include <wx/dialog.h>
-#include <wx/hyperlink.h>
+#include <wx/image.h>
 #include <wx/listbox.h>
 #include <wx/listctrl.h>
 #include <wx/notebook.h>
@@ -14,7 +14,6 @@
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
 #include <wx/statbmp.h>
-#include <wx/stattext.h>
 
 
 // FIXME: these should not be defined here
@@ -26,11 +25,10 @@ class GenericAbout : public wxDialog {
 public:
 	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
 	void SetImage(wxString image);
-	void SetImage(wxIcon image);
-	void SetName(wxString name);
-	void SetVersion(wxString version);
+	void SetImage(wxImage image);
+	void SetInfoString(wxString info);
 	void SetCopyright(wxString copyright);
-	void SetURL(wxString url);
+	void SetLink(wxString label, wxString url);
 	void SetAbout(wxString about);
 	void AddArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void SetChangelog(wxString log);
@@ -44,12 +42,7 @@ private:
 
 	// Info
 	wxStaticBitmap* appicon;
-	wxSize* iconsize;
-	wxStaticText* appname;
-	wxStaticText* appver;
-	wxStaticText* appcopyright;
-	wxHyperlinkCtrl* appurl;
-	wxStaticText* appabout;
+	wxSize iconsize;
 
 	wxBoxSizer* infosizer;
 

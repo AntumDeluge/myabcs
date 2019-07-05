@@ -3,6 +3,9 @@
 #include "id.h"
 #include "log.h"
 
+#include <wx/hyperlink.h>
+#include <wx/stattext.h>
+
 
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
 		wxDialog(parent, id, title) {
@@ -20,35 +23,13 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tab_log = new wxPanel(tabs, ID_CHANGELOG);
 	tabs->AddPage(tab_log, "Changelog");
 
-	iconsize = new wxSize();
-	// FIXME: fonts
-	const wxFont font1(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
-	const wxFont font2(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
-
-	appicon = new wxStaticBitmap(tab_info, -1, wxNullBitmap, wxDefaultPosition, wxSize(100,100));
-	appname = new wxStaticText(tab_info, -1, wxEmptyString);
-	appname->SetFont(font1);
-	appver = new wxStaticText(tab_info, -1, wxEmptyString);
-	appver->SetFont(font1);
-	appcopyright = new wxStaticText(tab_info, -1, wxEmptyString);
-	appcopyright->SetFont(font2);
-	appurl = new wxHyperlinkCtrl(tab_info, -1, _T("myabcs.sourceforge.net"),
-			_T("http://myabcs.sourceforge.net/"));
-	appabout = new wxStaticText(tab_info, -1, wxEmptyString);
-
-	wxBoxSizer* namesizer = new wxBoxSizer(wxHORIZONTAL);
-	namesizer->Add(appname);
-	namesizer->AddSpacer(10);
-	namesizer->Add(appver);
+	iconsize = wxSize(100, 100);
+	appicon = new wxStaticBitmap(tab_info, -1, wxNullBitmap, wxDefaultPosition, iconsize);
 
 	infosizer = new wxBoxSizer(wxVERTICAL);
 	infosizer->AddSpacer(10);
 	infosizer->Add(appicon, 0, wxALIGN_CENTER);
 	infosizer->AddSpacer(10);
-	infosizer->Add(namesizer, 0, wxALIGN_CENTER);
-	infosizer->Add(appcopyright, 0, wxALIGN_CENTER|wxBOTTOM, 5);
-	infosizer->Add(appurl, 0, wxALIGN_CENTER|wxBOTTOM, 5);
-	infosizer->Add(appabout, 1, wxALIGN_CENTER|wxBOTTOM, 5);
 
 	tab_info->SetAutoLayout(true);
 	tab_info->SetSizer(infosizer);
@@ -102,9 +83,6 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	SetAutoLayout(true);
 	SetSizerAndFit(sizer);
 	Layout();
-
-	*iconsize = sizer->GetSize();
-	appicon->SetSize(iconsize->GetWidth()/2, iconsize->GetWidth()/2);
 }
 
 void GenericAbout::OnShow(wxEvent& event)
@@ -121,43 +99,55 @@ void GenericAbout::CancelColResize(wxListEvent& event)
 	event.Veto();
 }
 
-void GenericAbout::SetImage(wxString image)
-{
-	wxImage newicon(image, wxBITMAP_TYPE_ANY);
-	newicon.Rescale(100, 100, wxIMAGE_QUALITY_HIGH);
-	appicon->SetBitmap(newicon);
+void GenericAbout::SetImage(wxString image) {
+	wxImage new_image(image);
+	new_image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
+	appicon->SetBitmap(new_image);
 
 	tab_info->Layout();
+	this->Fit();
 }
 
-void GenericAbout::SetImage(wxIcon image)
-{
-	wxBitmap bmpicon(image);
-	wxImage newicon(bmpicon.ConvertToImage());
-	newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
+void GenericAbout::SetImage(wxImage image) {
+	image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
 	appicon->SetBitmap(image);
 
 	tab_info->Layout();
+	this->Fit();
 }
 
-void GenericAbout::SetName(wxString name)
-{
-	appname->SetLabel(name);
+void GenericAbout::SetInfoString(wxString info) {
+	wxStaticText* text = new wxStaticText(tab_info, -1, info);
+	text->SetFont(wxFont(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+	infosizer->Add(text, 0, wxALIGN_CENTER);
+
+	tab_info->Layout();
+	this->Fit();
 }
 
-void GenericAbout::SetVersion(wxString version)
-{
-	appver->SetLabel(version);
+void GenericAbout::SetLink(wxString label, wxString url) {
+	wxHyperlinkCtrl* link = new wxHyperlinkCtrl(tab_info, -1, label, url);
+	infosizer->Add(link, 0, wxALIGN_CENTER|wxBOTTOM, 5);
+
+	tab_info->Layout();
+	this->Fit();
 }
 
-void GenericAbout::SetCopyright(wxString copyright)
-{
-	appcopyright->SetLabel(copyright);
+void GenericAbout::SetCopyright(wxString copyright) {
+	wxStaticText* text = new wxStaticText(tab_info, -1, copyright);
+	text->SetFont(wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
+	infosizer->Add(text, 0, wxALIGN_CENTER|wxBOTTOM, 5);
+
+	tab_info->Layout();
+	this->Fit();
 }
 
-void GenericAbout::SetAbout(wxString about)
-{
-	appabout->SetLabel(about);
+void GenericAbout::SetAbout(wxString about) {
+	wxStaticText* text = new wxStaticText(tab_info, -1, about);
+	infosizer->Add(text, 1, wxALIGN_CENTER|wxBOTTOM, 5);
+
+	tab_info->Layout();
+	this->Fit();
 }
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license)

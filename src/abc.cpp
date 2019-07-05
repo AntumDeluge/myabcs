@@ -450,10 +450,9 @@ Sounds:\n\
 
 void MainWindow::OnAbout(wxCommandEvent& event) {
 	// About Dialog
-	GenericAbout *about = new GenericAbout(this, -1);
+	GenericAbout* about = new GenericAbout(this, -1);
 	about->SetIcon(wxIcon(ICON1));
 	about->SetImage(_T("myabcs.png"));
-	about->SetName(_T("MyABCs"));
 
 	wxString version_string = wxEmptyString;
 #ifdef VERSION
@@ -462,10 +461,16 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	version_string.Append("-dev").Append(VER_DEV);
 #endif
 #endif
-	about->SetVersion(version_string);
+
+	wxString info_string = "MyABCs";
+	if (!version_string.IsEmpty()) {
+		info_string.Append(wxString::Format(" %s", version_string));
+	}
+	about->SetInfoString(info_string);
 
 	about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
-	about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
+	about->SetLink("myabcs.sourceforge.io", "https://myabcs.sourceforge.io/");
+	about->SetAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
 
 	// Changelog
 	// FIXME: concatenating "CHANGES.txt" to dir_root not working
