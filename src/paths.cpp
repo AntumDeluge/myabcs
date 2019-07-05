@@ -12,6 +12,7 @@ using namespace std;
 
 static wxString executable;
 static wxString dir_root;
+static wxString dir_data;
 static wxString dir_pic;
 static wxString dir_snd;
 
@@ -24,8 +25,9 @@ static const array<wxString, 4> snd_extensions { "oga", "ogg", "flac", "wav", };
 void initPaths(wxString path, wxString exe) {
 	executable = exe;
 	dir_root = path;
-	dir_pic = wxString::Format("%s/pic", dir_root);
-	dir_snd = wxString::Format("%s/sound", dir_root);
+	dir_data = wxString::Format("%s/data", dir_root);
+	dir_pic = wxString::Format("%s/image", dir_data);
+	dir_snd = wxString::Format("%s/audio", dir_data);
 }
 
 wxString getExecutable() { return executable; }

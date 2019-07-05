@@ -54,13 +54,14 @@ MainWindow::MainWindow() :
 
 	SetIcon(wxIcon(ICON1));
 
+	// TODO: embed toolbar images into binary
 	// Tool Bar
-	wxBitmap ico_exit(wxImage(_T("pic/exit.png")));
-	wxBitmap ico_abc(wxImage(_T("pic/abc.png")));
-	wxBitmap ico_anim(wxImage(_T("pic/animals.png")));
-	wxBitmap ico_food(wxImage(_T("pic/food.png")));
-	wxBitmap ico_inst(wxImage(_T("pic/instrument.png")));
-	wxBitmap ico_toys(wxImage(_T("pic/toys.png")));
+	wxBitmap ico_exit(wxImage("data/image/exit.png"));
+	wxBitmap ico_abc(wxImage("data/image/abc.png"));
+	wxBitmap ico_anim(wxImage("data/image/animals.png"));
+	wxBitmap ico_food(wxImage("data/image/food.png"));
+	wxBitmap ico_inst(wxImage("data/image/instrument.png"));
+	wxBitmap ico_toys(wxImage("data/image/toys.png"));
 
 	menu = CreateToolBar();
 
@@ -76,12 +77,12 @@ MainWindow::MainWindow() :
 			_T("Show toys for each letter"));
 
 	menu->AddSeparator();
-	menu->AddTool(ID_HELP, _T("Help"), wxBitmap(wxImage(_T("pic/help.png"))), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(ID_HELP, _T("Help"), wxBitmap(wxImage("data/image/help.png")), wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("Help"));
-	menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage(_T("pic/info.png"))), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage("data/image/info.png")), wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("About MyABCs"));
 #ifdef DEBUG
-	menu->AddTool(ID_LOG, _T("Log"), wxBitmap(wxImage(_T("pic/settings.png"))), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(ID_LOG, _T("Log"), wxBitmap(wxImage("data/image/settings.png")), wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("Show/Hide log window"));
 #endif
 	menu->AddSeparator();

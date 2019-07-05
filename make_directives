@@ -15,7 +15,7 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	# main executable; \
 	install -vm 0755 "${EXE}" "$${stage_dir}"; \
 	# image data; \
-	for DIR in $$(find "pic/" -type d); do \
+	for DIR in $$(find "data/image/" -type d); do \
 		target_dir="$${stage_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for IMG in $$(find "$${DIR}" -maxdepth 1 -type f); do \
@@ -23,7 +23,7 @@ stage: all LICENSE.txt myabcs.png cleanstage
 		done; \
 	done; \
 	# sound data; \
-	for DIR in "sound" "sound/effect" "sound/alpha"; do \
+	for DIR in "data/audio" "data/audio/effect" "data/audio/alpha"; do \
 		target_dir="$${stage_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.flac"); do \

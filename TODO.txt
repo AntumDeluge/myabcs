@@ -8,7 +8,6 @@ Priority:
 - Separate art & sound in about dialog
 - Link to art & sound sources
 - Use global function for setting/getting fonts
-- Make "pic" & "sound" sub-directores of "data" or other folder
 - Add font license texts to binary release
 
 Non-priority:
