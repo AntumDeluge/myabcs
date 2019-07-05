@@ -123,10 +123,16 @@ CATEGORY_C = src/$(CATEGORY).cpp
 CATEGORY_O = $(CATEGORY).o
 CATEGORY_D = $(CATEGORY_H) $(RESLIST_H) $(RESOBJ_H)
 
+CREDPANEL = creditspanel
+CREDPANEL_H = include/$(CREDPANEL).h
+CREDPANEL_C = src/$(CREDPANEL).cpp
+CREDPANEL_O = $(CREDPANEL).o
+CREDPANEL_D = $(CREDPANEL_H)
+
 GNRCABT_H = include/gnrcabt.h
 GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
-GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H)
+GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H) $(CREDPANEL_H)
 
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
@@ -139,7 +145,7 @@ MAIN_O = main.o
 MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H)
 
 OBJECTS = \
-	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(GNRCABT_O) $(SOUND_O) $(PATHS_O) $(EVENT_O) $(ID_O) $(ABC_O) $(MAIN_O)
+	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(CREDPANEL_O) $(GNRCABT_O) $(SOUND_O) $(PATHS_O) $(EVENT_O) $(ID_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
 	OBJECTS += $(RESOURCES_O)

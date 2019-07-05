@@ -1,6 +1,8 @@
 #ifndef MYABCS_GNRCABT_H
 #define MYABCS_GNRCABT_H
 
+#include "creditspanel.h"
+
 #include <wx/button.h>
 #include <wx/dialog.h>
 #include <wx/hyperlink.h>
@@ -44,7 +46,7 @@ private:
 	wxButton* ok;
 	wxPanel* p1_info;
 	wxScrolledWindow* p2_credits;
-	wxPanel* p3_art;
+	CreditsPanel* p3_art;
 	wxPanel* p4_log;
 
 	// Info

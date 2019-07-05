@@ -13,7 +13,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
 	p1_info = new wxPanel(tabs, ID_INFO);
 	p2_credits = new wxScrolledWindow(tabs, wxID_ANY);
-	p3_art = new wxPanel(tabs, ID_ART);
+	p3_art = new CreditsPanel(tabs, ID_ART);
 	p4_log = new wxPanel(tabs, ID_CHANGELOG);
 	tabs->AddPage(p1_info, _T("About"));
 	tabs->AddPage(p2_credits, _T("Credits"));
