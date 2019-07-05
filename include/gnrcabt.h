@@ -7,7 +7,6 @@
 #include <wx/dialog.h>
 #include <wx/image.h>
 #include <wx/listbox.h>
-#include <wx/listctrl.h>
 #include <wx/notebook.h>
 #include <wx/panel.h>
 #include <wx/richtext/richtextctrl.h>
@@ -43,12 +42,7 @@ private:
 	// Info
 	wxStaticBitmap* appicon;
 	wxSize iconsize;
-
 	wxBoxSizer* infosizer;
-
-	// Art
-	wxListCtrl* artists;
-	void CancelColResize(wxListEvent& event);
 
 	// Changelog
 	wxRichTextCtrl* changelog;

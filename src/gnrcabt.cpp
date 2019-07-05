@@ -9,6 +9,7 @@
 
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
 		wxDialog(parent, id, title) {
+
 	CenterOnParent();
 
 	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
@@ -35,28 +36,6 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tab_info->SetSizer(infosizer);
 	tab_info->Layout();
 
-	// Art
-	artists = new wxListCtrl(tab_art, -1, wxDefaultPosition, wxSize(300,200), wxLC_REPORT|wxNO_BORDER);
-
-	wxSize artsize = artists->GetSize();
-	int colwidth = artsize.GetWidth()/3;
-
-	artists->InsertColumn(0, _T("Media"));
-	artists->SetColumnWidth(0, colwidth);
-	artists->InsertColumn(1, _T("Artist"));
-	artists->SetColumnWidth(1, colwidth);
-	artists->InsertColumn(2, _T("License"));
-	artists->SetColumnWidth(2, colwidth*2);
-
-	wxBoxSizer *artsizer = new wxBoxSizer(wxVERTICAL);
-	artsizer->Add(artists, 1, wxEXPAND);
-
-	tab_art->SetAutoLayout(true);
-	tab_art->SetSizer(artsizer);
-	tab_art->Layout();
-
-	//artists->Connect(wxEVT_COMMAND_LIST_COL_BEGIN_DRAG, wxListEventHandler(GenericAbout::CancelColResize), 0, this);
-
 	// Changelog
 	changelog = new wxRichTextCtrl(tab_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 	if (font_changelog.IsOk()) {
@@ -72,7 +51,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tab_log->SetSizer(logsizer);
 	tab_log->Layout();
 
-	// OK button
+	// button to close dialog
 	ok = new wxButton(this, wxID_OK);
 
 	// Layout
@@ -85,18 +64,10 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	Layout();
 }
 
-void GenericAbout::OnShow(wxEvent& event)
-{
+void GenericAbout::OnShow(wxEvent& event) {
 	CenterOnParent();
-
 	ok->SetFocus();
-
 	tabs->ChangeSelection(0);
-}
-
-void GenericAbout::CancelColResize(wxListEvent& event)
-{
-	event.Veto();
 }
 
 void GenericAbout::SetImage(wxString image) {
@@ -145,15 +116,10 @@ void GenericAbout::SetAbout(wxString about) {
 }
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license) {
-	int count = artists->GetItemCount();
-
-	artists->InsertItem(count, image);
-	artists->SetItem(count, 1, name);
-	artists->SetItem(count, 2, license);
+	tab_art->add(image, name, wxEmptyString, license, wxEmptyString);
 }
 
-void GenericAbout::SetChangelog(wxString log)
-{
+void GenericAbout::SetChangelog(wxString log) {
 	changelog->SetValue(log);
 }
 

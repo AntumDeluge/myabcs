@@ -8,15 +8,28 @@
 #ifndef MYABCS_CREDITSPANEL_H_
 #define MYABCS_CREDITSPANEL_H_
 
+#include <wx/listctrl.h>
 #include <wx/scrolwin.h>
+#include <wx/sizer.h>
+#include <wx/string.h>
 #include <wx/window.h>
 
 
-/** Presents a page for credits in the about dialog */
+/** Presents a page for credits in the about dialog
+ *
+ * FIXME: doesn't need to be derived from wxScrolledWindow if using wxListCtrl
+ */
 class CreditsPanel : public wxScrolledWindow {
 public:
 	CreditsPanel(wxWindow* parent);
 	CreditsPanel(wxWindow* parent, int id);
+	void add(wxString name, wxString author, wxString author_url, wxString license, wxString license_url);
+private:
+	wxBoxSizer* main_layout;
+	wxListCtrl* list_items;
+
+	void initList();
+	void cancelColResize(wxListEvent& event);
 };
 
 
