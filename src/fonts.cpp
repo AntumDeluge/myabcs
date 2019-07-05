@@ -1,5 +1,5 @@
 #include "fonts.h"
-#include "res/PixelOperatorMono.ttf.h"
+#include "res/pixeloperatormono_ttf.h"
 #include "res/sniglet_ttf.h"
 
 #if defined(WIN32) || defined(WIN64)
@@ -28,7 +28,7 @@ void initFonts() {
 #if defined(WIN32) || defined(WIN64)
 	DWORD nFonts;
 	m_main = AddFontMemResourceEx((PVOID) sniglet_ttf, sizeof(sniglet_ttf), NULL, &nFonts);
-	m_changelog = AddFontMemResourceEx((PVOID) PixelOperatorMono_ttf, sizeof(PixelOperatorMono_ttf), NULL, &nFonts);
+	m_changelog = AddFontMemResourceEx((PVOID) pixeloperatormono_ttf, sizeof(pixeloperatormono_ttf), NULL, &nFonts);
 
 	font_large = wxFont(45, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, _T("Sniglet"));
 	font_small = wxFont(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, _T("Sniglet"));
