@@ -13,30 +13,28 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
 
 	// TODO: create tabs dynamically
-	p1_info = new wxPanel(tabs, ID_INFO);
-	tabs->AddPage(p1_info, "About");
-	p2_credits = new wxScrolledWindow(tabs, wxID_ANY);
-	tabs->AddPage(p2_credits, "Credits");
-	p3_art = new CreditsPanel(tabs, ID_ART);
-	tabs->AddPage(p3_art, "Art");
-	p4_log = new wxPanel(tabs, ID_CHANGELOG);
-	tabs->AddPage(p4_log, "Changelog");
+	tab_info = new wxPanel(tabs, ID_INFO);
+	tabs->AddPage(tab_info, "About");
+	tab_art = new CreditsPanel(tabs, ID_ART);
+	tabs->AddPage(tab_art, "Art");
+	tab_log = new wxPanel(tabs, ID_CHANGELOG);
+	tabs->AddPage(tab_log, "Changelog");
 
 	iconsize = new wxSize();
 	// FIXME: fonts
 	const wxFont font1(18, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 	const wxFont font2(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
-	appicon = new wxStaticBitmap(p1_info, -1, wxNullBitmap, wxDefaultPosition, wxSize(100,100));
-	appname = new wxStaticText(p1_info, -1, wxEmptyString);
+	appicon = new wxStaticBitmap(tab_info, -1, wxNullBitmap, wxDefaultPosition, wxSize(100,100));
+	appname = new wxStaticText(tab_info, -1, wxEmptyString);
 	appname->SetFont(font1);
-	appver = new wxStaticText(p1_info, -1, wxEmptyString);
+	appver = new wxStaticText(tab_info, -1, wxEmptyString);
 	appver->SetFont(font1);
-	appcopyright = new wxStaticText(p1_info, -1, wxEmptyString);
+	appcopyright = new wxStaticText(tab_info, -1, wxEmptyString);
 	appcopyright->SetFont(font2);
-	appurl = new wxHyperlinkCtrl(p1_info, -1, _T("myabcs.sourceforge.net"),
+	appurl = new wxHyperlinkCtrl(tab_info, -1, _T("myabcs.sourceforge.net"),
 			_T("http://myabcs.sourceforge.net/"));
-	appabout = new wxStaticText(p1_info, -1, wxEmptyString);
+	appabout = new wxStaticText(tab_info, -1, wxEmptyString);
 
 	wxBoxSizer* namesizer = new wxBoxSizer(wxHORIZONTAL);
 	namesizer->Add(appname);
@@ -52,45 +50,12 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	infosizer->Add(appurl, 0, wxALIGN_CENTER|wxBOTTOM, 5);
 	infosizer->Add(appabout, 1, wxALIGN_CENTER|wxBOTTOM, 5);
 
-	p1_info->SetAutoLayout(true);
-	p1_info->SetSizer(infosizer);
-	p1_info->Layout();
-
-	// Credits
-	devtext = new wxStaticText(p2_credits, -1, _T("Developers"));
-	devbox = new gaListBox(p2_credits, -1);
-	packtext = new wxStaticText(p2_credits, -1, _T("Packagers"));
-	packbox = new gaListBox(p2_credits, -1);
-	transtext = new wxStaticText(p2_credits, -1, _T("Translators"));
-	transbox = new gaListBox(p2_credits, -1);
-	arttext = new wxStaticText(p2_credits, -1, _T("Artists"));
-	artbox = new gaListBox(p2_credits, -1);
-
-	wxBoxSizer *devsizer = new wxBoxSizer(wxHORIZONTAL);
-	devsizer->Add(devtext, 1);
-	devsizer->Add(devbox, 2);
-	wxBoxSizer *packsizer = new wxBoxSizer(wxHORIZONTAL);
-	packsizer->Add(packtext, 1);
-	packsizer->Add(packbox, 2);
-	wxBoxSizer *transsizer = new wxBoxSizer(wxHORIZONTAL);
-	transsizer->Add(transtext, 1);
-	transsizer->Add(transbox, 2);
-	wxBoxSizer *artistsizer = new wxBoxSizer(wxHORIZONTAL);
-	artistsizer->Add(arttext, 1);
-	artistsizer->Add(artbox, 2);
-
-	wxBoxSizer *creditsizer = new wxBoxSizer(wxVERTICAL);
-	creditsizer->Add(devsizer, 1, wxEXPAND);
-	creditsizer->Add(packsizer, 1, wxEXPAND);
-	creditsizer->Add(transsizer, 1, wxEXPAND);
-	creditsizer->Add(artistsizer, 1, wxEXPAND);
-
-	p2_credits->SetAutoLayout(true);
-	p2_credits->SetSizer(creditsizer);
-	p2_credits->Layout();
+	tab_info->SetAutoLayout(true);
+	tab_info->SetSizer(infosizer);
+	tab_info->Layout();
 
 	// Art
-	artists = new wxListCtrl(p3_art, -1, wxDefaultPosition, wxSize(300,200), wxLC_REPORT|wxNO_BORDER);
+	artists = new wxListCtrl(tab_art, -1, wxDefaultPosition, wxSize(300,200), wxLC_REPORT|wxNO_BORDER);
 
 	wxSize artsize = artists->GetSize();
 	int colwidth = artsize.GetWidth()/3;
@@ -105,14 +70,14 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	wxBoxSizer *artsizer = new wxBoxSizer(wxVERTICAL);
 	artsizer->Add(artists, 1, wxEXPAND);
 
-	p3_art->SetAutoLayout(true);
-	p3_art->SetSizer(artsizer);
-	p3_art->Layout();
+	tab_art->SetAutoLayout(true);
+	tab_art->SetSizer(artsizer);
+	tab_art->Layout();
 
 	//artists->Connect(wxEVT_COMMAND_LIST_COL_BEGIN_DRAG, wxListEventHandler(GenericAbout::CancelColResize), 0, this);
 
 	// Changelog
-	changelog = new wxRichTextCtrl(p4_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	changelog = new wxRichTextCtrl(tab_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 	if (font_changelog.IsOk()) {
 		changelog->SetFont(font_changelog);
 	} else {
@@ -122,9 +87,9 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	wxBoxSizer *logsizer = new wxBoxSizer(wxVERTICAL);
 	logsizer->Add(changelog, 1, wxEXPAND);
 
-	p4_log->SetAutoLayout(true);
-	p4_log->SetSizer(logsizer);
-	p4_log->Layout();
+	tab_log->SetAutoLayout(true);
+	tab_log->SetSizer(logsizer);
+	tab_log->Layout();
 
 	// OK button
 	ok = new wxButton(this, wxID_OK);
@@ -162,7 +127,7 @@ void GenericAbout::SetImage(wxString image)
 	newicon.Rescale(100, 100, wxIMAGE_QUALITY_HIGH);
 	appicon->SetBitmap(newicon);
 
-	p1_info->Layout();
+	tab_info->Layout();
 }
 
 void GenericAbout::SetImage(wxIcon image)
@@ -172,7 +137,7 @@ void GenericAbout::SetImage(wxIcon image)
 	newicon.Rescale(100,100, wxIMAGE_QUALITY_HIGH);
 	appicon->SetBitmap(image);
 
-	p1_info->Layout();
+	tab_info->Layout();
 }
 
 void GenericAbout::SetName(wxString name)
@@ -194,22 +159,6 @@ void GenericAbout::SetAbout(wxString about)
 {
 	appabout->SetLabel(about);
 }
-
-void GenericAbout::AddCredit(wxString name, const int credit_type)
-{
-	if (credit_type == CREDIT_DEVELOPER) devbox->Append(name);
-	else if (credit_type == CREDIT_PACKAGER) packbox->Append(name);
-	else if (credit_type == CREDIT_TRANSLATOR) transbox->Append(name);
-	else if (credit_type == CREDIT_ARTIST) artbox->Append(name);
-}
-
-/*void GenericAbout::AddCredit(wxArrayString& names, int credit_type);
-{
-	if (credit_type == CREDIT_DEVELOPER) devbox->InsertItems(names);
-	else if (credit_type == CREDIT_PACKAGER) packbox->InsertItems(names);
-	else if (credit_type == CREDIT_TRANSLATOR) transbox->InsertItems(names);
-	else if (credit_type == CREDIT_ARTIST) artbox->InsertItems(names);
-}*/
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
 {

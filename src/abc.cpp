@@ -467,9 +467,6 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->SetCopyright(_T("\u00A9 Jordan Irwin 2010-2019"));
 	about->SetAbout(_T("MyABCs is educational software for young children to learn\nthe English alphabet and get familiar with a keyboard"));
 
-	about->AddCredit(_T("Jordan Irwin"), CREDIT_DEVELOPER);
-	about->AddCredit(_T("Jordan Irwin"), CREDIT_PACKAGER);
-
 	// Changelog
 	// FIXME: concatenating "CHANGES.txt" to dir_root not working
 	//wxString cl_file = wxString::Format("%s/CHANGES.txt", getRootDir());

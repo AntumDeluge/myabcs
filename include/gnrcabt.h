@@ -20,10 +20,6 @@
 // FIXME: these should not be defined here
 const int ID_INFO = wxNewId();
 const int ID_ART = wxNewId();
-const int CREDIT_DEVELOPER = 100;
-const int CREDIT_TRANSLATOR = 101;
-const int CREDIT_ARTIST = 102;
-const int CREDIT_PACKAGER = 103;
 
 
 class GenericAbout : public wxDialog {
@@ -36,18 +32,15 @@ public:
 	void SetCopyright(wxString copyright);
 	void SetURL(wxString url);
 	void SetAbout(wxString about);
-	void AddCredit(wxString name, int credit_type);
-	//void AddCredit(wxArrayString& names, int credit_type);
 	void AddArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void SetChangelog(wxString log);
 private:
 	void OnShow(wxEvent& event);
 	wxNotebook* tabs;
 	wxButton* ok;
-	wxPanel* p1_info;
-	wxScrolledWindow* p2_credits;
-	CreditsPanel* p3_art;
-	wxPanel* p4_log;
+	wxPanel* tab_info;
+	CreditsPanel* tab_art;
+	wxPanel* tab_log;
 
 	// Info
 	wxStaticBitmap* appicon;
@@ -59,16 +52,6 @@ private:
 	wxStaticText* appabout;
 
 	wxBoxSizer* infosizer;
-
-	// Credits
-	wxStaticText* devtext;
-	wxListBox* devbox;
-	wxStaticText* packtext;
-	wxListBox* packbox;
-	wxStaticText* transtext;
-	wxListBox* transbox;
-	wxStaticText* arttext;
-	wxListBox* artbox;
 
 	// Art
 	wxListCtrl* artists;
