@@ -601,6 +601,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->AddArtist(_T("Radishes"), _T("Francesco Rollandin"), _T("Public Domain"));
 	about->AddArtist(_T("Recorder"), _T("zeimusu"), _T("Public Domain"));
 	about->AddArtist(_T("Recorder(sound)"), _T("Cailyn"));
+	about->AddArtist(_T("Ribbon"), wxEmptyString, _T("CC0/Public Domain")); // https://publicdomainvectors.org/en/free-clipart/Medal-of-achievement-blue-and-red-vector-image/19941.html
 	about->AddArtist(_T("Rocking Horse"), _T("Chrisdesign"), _T("Public Domain"));
 	about->AddArtist(_T("Rooster"), _T("ArtFavor"), _T("Public Domain"));
 	about->AddArtist(_T("Rooster(sound)"), _T("poorenglishjuggler"), _T("CC0/Public Domain")); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
