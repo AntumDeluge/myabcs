@@ -11,12 +11,16 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::OnShow), 0, this);
 
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
+
+	// TODO: create tabs dynamically
 	p1_info = new wxPanel(tabs, ID_INFO);
+	tabs->AddPage(p1_info, "About");
 	p2_credits = new wxScrolledWindow(tabs, wxID_ANY);
+	tabs->AddPage(p2_credits, "Credits");
 	p3_art = new CreditsPanel(tabs, ID_ART);
+	tabs->AddPage(p3_art, "Art");
 	p4_log = new wxPanel(tabs, ID_CHANGELOG);
-	tabs->AddPage(p1_info, _T("About"));
-	tabs->AddPage(p2_credits, _T("Credits"));
+	tabs->AddPage(p4_log, "Changelog");
 
 	iconsize = new wxSize();
 	// FIXME: fonts
@@ -34,7 +38,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 			_T("http://myabcs.sourceforge.net/"));
 	appabout = new wxStaticText(p1_info, -1, wxEmptyString);
 
-	wxBoxSizer *namesizer = new wxBoxSizer(wxHORIZONTAL);
+	wxBoxSizer* namesizer = new wxBoxSizer(wxHORIZONTAL);
 	namesizer->Add(appname);
 	namesizer->AddSpacer(10);
 	namesizer->Add(appver);
@@ -209,14 +213,6 @@ void GenericAbout::AddCredit(wxString name, const int credit_type)
 
 void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
 {
-	// FIXME: Index error
-	if (tabs->GetPage(2) != p3_art)
-	{
-		tabs->InsertPage(2, p3_art, _T("Art"));
-		SetSizerAndFit(sizer);
-		Layout();
-	}
-
 	int count = artists->GetItemCount();
 
 	artists->InsertItem(count, image);
@@ -227,7 +223,6 @@ void GenericAbout::AddArtist(wxString image, wxString name, wxString license)
 void GenericAbout::SetChangelog(wxString log)
 {
 	changelog->SetValue(log);
-	tabs->AddPage(p4_log, _T("Changelog"));
 }
 
 gaListBox::gaListBox(wxWindow* parent, wxWindowID id) :
