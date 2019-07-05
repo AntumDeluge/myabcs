@@ -17,7 +17,6 @@ Non-priority:
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - Update README
-- Convert failsafe image to SVG
 - Use config to determine environment (locatation of data files, etc.)
 - Edit wheels white BG in bicycle SVG
 - Change strawberry SVG
