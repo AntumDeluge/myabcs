@@ -13,15 +13,19 @@ using namespace std;
 static wxString executable;
 static wxString dir_root;
 static wxString dir_pic;
+static wxString dir_snd;
 
 /** Supported image formats (in order of preference) */
 static const array<wxString, 2> img_extensions { "png", "svg", };
+/** Support sound formats (in order of preference) */
+static const array<wxString, 3> snd_extensions { "ogg", "flac", "wav", };
 
 
 void initPaths(wxString path, wxString exe) {
 	executable = exe;
 	dir_root = path;
 	dir_pic = wxString::Format("%s/pic", dir_root);
+	dir_snd = wxString::Format("%s/sound", dir_root);
 }
 
 wxString getExecutable() { return executable; }
@@ -45,6 +49,31 @@ wxString getImageFile(wxString img) {
 
 		// check for uppercase extension
 		absolute = wxString::Format("%s.%s", img, ext.Upper());
+		if (wxFileExists(absolute)) {
+			return absolute;
+		}
+	}
+
+	return wxEmptyString;
+}
+
+/** Retrieves a sound file for playing.
+ *
+ * @param snd A path relative to `dir_snd` without extension (e.g. "effect/xun")
+ * @return Absolute path with extension or `wxEmptyString` if no suitable sound is found
+ */
+wxString getSoundFile(wxString snd) {
+	// concatenate sound directory
+	snd = wxString::Format("%s/%s", dir_snd, snd);
+
+	for (wxString ext : snd_extensions) {
+		wxString absolute = wxString::Format("%s.%s", snd, ext);
+		if (wxFileExists(absolute)) {
+			return absolute;
+		}
+
+		// check for uppercase extension
+		absolute = wxString::Format("%s.%s", snd, ext.Upper());
 		if (wxFileExists(absolute)) {
 			return absolute;
 		}

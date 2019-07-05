@@ -12,5 +12,6 @@ extern wxString getExecutable();
 extern wxString getRootDir();
 
 extern wxString getImageFile(wxString img);
+extern wxString getSoundFile(wxString snd);
 
 #endif /* MYABCS_PATHS_H */

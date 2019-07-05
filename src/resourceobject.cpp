@@ -9,11 +9,6 @@
 #include <wxSVG/SVGDocument.h>
 
 
-// TODO: use paths.h
-// directories where sound files are stored
-static const wxString dir_vocals("sound/");
-static const wxString dir_effects("sound/effect/");
-
 // SVG document used for converting to wxImage
 static wxSVGDocument* svgdoc = new wxSVGDocument();
 
@@ -113,49 +108,10 @@ void ResourceObject::loadSound(wxString snd) {
 		return;
 	}
 
-	if (!snd.EndsWith(_T(".flac"))) {
-		snd = snd.Append(_T(".flac"));
-	}
+	// "vocal" sounds are located in root of sound directory
+	sndVocalString = getSoundFile(snd);
+	// "effect" sounds are in sub-directory
+	sndEffectString = getSoundFile(wxString::Format("effect/%s", snd));
 
-	wxString vocal = wxString(dir_vocals).Append(snd);
-	wxString effect = wxString(dir_effects).Append(snd);
-
-	// FIXME: need more failsafe way to check filenames
-	const wxString ogg_vocal = vocal.Left(vocal.Len() - 4).Append("oga");
-	const wxString ogg_effect = effect.Left(effect.Len() -4).Append("oga");
-
-	// Vorbis audio takes priority
-	if (wxFileExists(ogg_vocal)) {
-		vocal = ogg_vocal;
-	}
-	if (wxFileExists(ogg_effect)) {
-		effect = ogg_effect;
-	}
-
-	if (!wxFileExists(vocal)) {
-		logError(wxString("Cannot load sound, file not found: ").Append(vocal));
-		return;
-	}
-
-	/*
-	sndVocal = Mix_LoadWAV(vocal.c_str());
-
-	if (sndVocal == NULL) {
-		wxString errmsg = wxString("Unable to load sound file \"").Append(vocal).Append("\": ").Append(Mix_GetError());
-		logError(errmsg);
-		return;
-	}
-
-	// optional sound effect
-	if (wxFileExists(effect)) {
-		sndEffect = Mix_LoadWAV(effect.c_str());
-	}
-	*/
-
-	sndVocalString = vocal;
-	if (wxFileExists(effect)) {
-		sndEffectString = effect;
-	}
-
-	logMessage(wxString("Loaded sound file: ").Append(vocal));
+	logMessage(wxString::Format("Loaded sound file: %s", sndVocalString));
 }
