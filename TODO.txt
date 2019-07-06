@@ -19,7 +19,6 @@ Non-priority:
 - Resize toolbar images to give slight border
 - Set category items dynamically from image filenames
 - Normalize file & directory paths
-- Add license boilerplates to source
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - Update README
