@@ -142,6 +142,18 @@ void GenericAbout::setChangelog(wxString log) {
 	changelog->SetValue(log);
 }
 
+/**
+ * @override wxDialog::ShowModal
+ * @return
+ */
+int GenericAbout::ShowModal() {
+	Fit();
+
+	// retain width
+	SetSize(GetSize().GetWidth(), 350);
+
+	return wxDialog::ShowModal();
+}
 
 // private methods
 

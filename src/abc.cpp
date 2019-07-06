@@ -676,7 +676,6 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->addComposer("Zipper", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16332
 	about->addComposer("Zurna", "cdrk", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY: https://freesound.org/people/cdrk/sounds/18661/
 
-	about->Fit();
 	about->ShowModal();
 
 	// CenterOnParent is called in the constructor
