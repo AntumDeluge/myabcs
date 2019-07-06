@@ -175,7 +175,7 @@ void MainWindow::ReloadDisplay(bool update) {
 	canvas->Layout();
 }
 
-void MainWindow::LoadCategory(wxString cat_name) {
+void MainWindow::setCategory(wxString cat_name) {
 	// DEBUG:
 	logMessage(wxString("Loading category: ").Append(cat_name));
 
@@ -276,15 +276,15 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 		Close(true);
 	} else {
 		if (id == ID_ANIMALS) {
-			LoadCategory(_T("animal"));
+			setCategory(_T("animal"));
 		} else if (id == ID_MUSIC) {
-			LoadCategory(_T("music"));
+			setCategory(_T("music"));
 		} else if (id == ID_FOOD) {
-			LoadCategory(_T("food"));
+			setCategory(_T("food"));
 		} else if (id == ID_TOYS) {
-			LoadCategory(_T("toy"));
+			setCategory(_T("toy"));
 		} else {
-			LoadCategory(_T("main"));
+			setCategory(_T("main"));
 		}
 	}
 }

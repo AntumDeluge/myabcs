@@ -48,7 +48,7 @@ bool App::OnInit() {
 	initLog(frame);
 
 	// start in "main" category
-	frame->LoadCategory(_T("main"));
+	frame->setCategory(_T("main"));
 
 	return true;
 }

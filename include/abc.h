@@ -22,7 +22,7 @@
 class MainWindow : public wxFrame {
 public:
 	MainWindow();
-	void LoadCategory(wxString cat_name);
+	void setCategory(wxString cat_name);
 private:
 	wxBoxSizer* main_layout;
 
