@@ -47,7 +47,7 @@ MainWindow::MainWindow() :
 		wxFrame(NULL, ID_WINDOW, wxEmptyString, wxDefaultPosition, wxSize(400, 550),
 				wxDEFAULT_FRAME_STYLE &~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) {
 	resourceList = ResourceList();
-	winResource = ResourceObject(_T("ribbon"), wxEmptyString);
+	winResource = ResourceObject("ribbon", wxEmptyString);
 
 	// Get the executable's filename
 	wxString argv0 = getExecutable();
@@ -175,30 +175,30 @@ void MainWindow::ReloadDisplay(bool update) {
 	canvas->Layout();
 }
 
-void MainWindow::setCategory(wxString cat_name) {
+void MainWindow::setCategory(const int id) {
 	// DEBUG:
-	logMessage(wxString("Loading category: ").Append(cat_name));
+	logMessage(wxString("Loading category: ").Append(getCategoryName(id)));
 
 	if (resourceList.count() != 0) {
 		resourceList.clear();
 	}
 
-	cur_category = cat_name;
+	cur_category = id;
 	resourceList.set(createCategory(cur_category));
 
-	if (cur_category == "animal") {
+	if (cur_category == ID_ANIMALS) {
 		SetTitle(_T("Press a Key to See an Animal"));
 		currentResource = resourceList.getObject("t");
 		letter->SetLabel(_T("Animals"));
-	} else if (cur_category == "music") {
+	} else if (cur_category == ID_MUSIC) {
 		SetTitle(_T("Press a Key to See an Instrument"));
 		currentResource = resourceList.getObject("g");
 		letter->SetLabel(_T("Music"));
-	} else if (cur_category == "food") {
+	} else if (cur_category == ID_FOOD) {
 		SetTitle(_T("Press a Key to See a Food"));
 		currentResource = resourceList.getObject("h");
 		letter->SetLabel(_T("Food"));
-	} else if (cur_category == "toy") {
+	} else if (cur_category == ID_TOYS) {
 		SetTitle(_T("Press a Key to See a Toy"));
 		currentResource = resourceList.getObject("w");
 		letter->SetLabel(_T("Toys"));
@@ -248,7 +248,7 @@ void MainWindow::SetGameEnd(bool play_sound) {
 void MainWindow::PlayAlphaSound() {
 	wxString s_primary = getSoundFile(wxString::Format("alpha/%s", getCurrentLetter()));
 
-	if (cur_category == "main") {
+	if (cur_category == ID_ABC) {
 		soundPlayer->play(this, s_primary, currentResource.getVocalString(), currentResource.getEffectString());
 	} else {
 		soundPlayer->play(this, s_primary);
@@ -275,17 +275,7 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	if (id == wxID_EXIT) {
 		Close(true);
 	} else {
-		if (id == ID_ANIMALS) {
-			setCategory(_T("animal"));
-		} else if (id == ID_MUSIC) {
-			setCategory(_T("music"));
-		} else if (id == ID_FOOD) {
-			setCategory(_T("food"));
-		} else if (id == ID_TOYS) {
-			setCategory(_T("toy"));
-		} else {
-			setCategory(_T("main"));
-		}
+		setCategory(id);
 	}
 }
 
@@ -307,7 +297,7 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 		// DEBUG:
 		logMessage(wxString::Format("Key down: %c", pressed_key));
 
-		if (cur_category == "main") {
+		if (cur_category == ID_ABC) {
 			handleKeyAlphaMain(pressed_key);
 		} else {
 			handleKeyAlphaOther(pressed_key);
@@ -359,7 +349,7 @@ void MainWindow::handleKeySpace() {
 
 void MainWindow::handleKeyBack() {
 	// ignore backspace key for categories other than "main"
-	if (cur_category != "main") return;
+	if (cur_category != ID_ABC) return;
 
 	if (getCurrentLetter() != "A") {
 		if (game_end) {
@@ -373,7 +363,7 @@ void MainWindow::handleKeyBack() {
 }
 
 void MainWindow::handleKeyEnter() {
-	if (cur_category == "main" && game_end) {
+	if (cur_category == ID_ABC && game_end) {
 		// DEBUG:
 		logMessage("Restarting game ...");
 
@@ -397,7 +387,7 @@ void MainWindow::handleKeyAlphaOther(wxChar alpha) {
 }
 
 void MainWindow::OnSoundFinish(wxEvent& event) {
-	if (cur_category == "main") {
+	if (cur_category == ID_ABC) {
 		if (alpha_accepted) {
 			if (getCurrentLetter() == "Z") {
 				SetGameEnd();

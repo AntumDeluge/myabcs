@@ -10,13 +10,9 @@
 
 #include "resourcelist.h"
 
-#include <string>
-#include <wx/string.h>
 
-
-extern ResourceList createCategory(std::string cat_name);
-
-extern ResourceList createCategory(wxString cat_name);
+extern wxString getCategoryName(const int id);
+extern ResourceList createCategory(int id);
 
 
 #endif /* MYABCS_CATEGORY_H */

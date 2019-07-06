@@ -121,7 +121,7 @@ CATEGORY = category
 CATEGORY_H = include/$(CATEGORY).h
 CATEGORY_C = src/$(CATEGORY).cpp
 CATEGORY_O = $(CATEGORY).o
-CATEGORY_D = $(CATEGORY_H) $(RESLIST_H) $(RESOBJ_H)
+CATEGORY_D = $(CATEGORY_H) $(RESLIST_H) $(RESOBJ_H) $(ID_H)
 
 CREDPANEL = creditspanel
 CREDPANEL_H = include/$(CREDPANEL).h
@@ -144,7 +144,7 @@ ABC_D = $(ABC_H) $(PATHS_H) $(ID_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H)
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
 MAIN_O = main.o
-MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H)
+MAIN_D = $(MAIN_H) $(LOG_H) $(SOUND_H) $(ABC_H) $(FONTS_H) $(ID_H)
 
 OBJECTS = \
 	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(CREDPANEL_O) $(GNRCABT_O) $(SOUND_O) $(PATHS_O) $(EVENT_O) $(ID_O) $(ABC_O) $(MAIN_O)

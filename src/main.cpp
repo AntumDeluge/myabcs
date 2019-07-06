@@ -6,6 +6,7 @@
  */
 
 #include "fonts.h"
+#include "id.h"
 #include "main.h"
 #include "abc.h"
 #include "log.h"
@@ -48,7 +49,7 @@ bool App::OnInit() {
 	initLog(frame);
 
 	// start in "main" category
-	frame->setCategory(_T("main"));
+	frame->setCategory(ID_ABC);
 
 	return true;
 }

@@ -6,10 +6,12 @@
  */
 
 #include "category.h"
+#include "id.h"
 #include "resourceobject.h"
 
 #include <vector>
 #include <wx/image.h>
+#include <wx/string.h>
 using namespace std;
 
 
@@ -58,30 +60,41 @@ static const vector<string> c_toy {
 	"zipline",
 };
 
-ResourceList createCategory(string cat_name) {
+
+wxString getCategoryName(const int id) {
+	if (id == ID_ANIMALS) {
+		return "animal";
+	} else if (id == ID_MUSIC) {
+		return "music";
+	} else if (id == ID_FOOD) {
+		return "food";
+	} else if (id == ID_TOYS) {
+		return "toy";
+	} else {
+		return "main";
+	}
+}
+
+ResourceList createCategory(int id) {
 	vector<string> category;
 
-	if (cat_name == "food") {
+	if (id == ID_FOOD) {
 		category = c_food;
-	} else if (cat_name == "animal") {
+	} else if (id == ID_ANIMALS) {
 		category = c_animal;
-	} else if (cat_name == "music") {
+	} else if (id == ID_MUSIC) {
 		category = c_music;
-	} else if (cat_name == "toy") {
+	} else if (id == ID_TOYS) {
 		category = c_toy;
 	} else {
-		cat_name = "main";
+		id = ID_ABC;
 		category = c_main;
 	}
 
 	ResourceList resList = ResourceList();
 	for (unsigned int idx = 0; idx < category.size(); idx++) {
-		resList.add(ResourceObject(wxString(category.at(idx)), cat_name));
+		resList.add(ResourceObject(wxString(category.at(idx)), getCategoryName(id)));
 	}
 
 	return resList;
-}
-
-ResourceList createCategory(wxString cat_name) {
-	return createCategory(string(cat_name.mb_str()));
 }
