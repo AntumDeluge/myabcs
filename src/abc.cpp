@@ -275,8 +275,10 @@ void MainWindow::PlayResourceSound() {
 
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	if (loading) {
-		// FIXME: how to veto event so toolbar selection doesn't change
-		event.Skip();
+		// don't change selected toolbar button
+		menu->ToggleTool(cur_category, true);
+		logMessage("Please wait for current category to finish loading");
+		return;
 	}
 
 	if (soundIsInitialized()) {
@@ -370,7 +372,7 @@ void MainWindow::OnKeyUp(wxKeyEvent& event) {
 
 void MainWindow::handleKeyTab() {
 	if (loading) {
-		// XXX: this can be removed if toolbar event is caught & vetoed
+		// not necessary, but prevents extra tool toggle when tab button pressed
 		logMessage("Please wait for current category to finish loading");
 		return;
 	}
@@ -471,6 +473,8 @@ void MainWindow::stopWaitAnimation() {
 	main_layout->Detach(1);
 	main_layout->Insert(1, image, 1, wxALIGN_CENTER);
 	image->Show();
+
+	// no need to call canvas->Layout() here because MainWindow::ReloadDisplay will be called
 }
 
 // Help and About dialogs
