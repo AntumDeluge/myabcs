@@ -132,7 +132,8 @@ CREDPANEL_D = $(CREDPANEL_H)
 GNRCABT_H = include/gnrcabt.h
 GNRCABT_C = src/gnrcabt.cpp
 GNRCABT_O = gnrcabt.o
-GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H) $(CREDPANEL_H) $(RESOBJ_H)
+GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H) $(CREDPANEL_H) $(RESOBJ_H) \
+	include/res/logo_sdl.h include/res/logo_wx.h include/res/logo_wxsvg.h
 
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp

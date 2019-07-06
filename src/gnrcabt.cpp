@@ -3,8 +3,12 @@
 #include "id.h"
 #include "log.h"
 #include "resourceobject.h"
+#include "res/logo_sdl.h"
+#include "res/logo_wx.h"
+#include "res/logo_wxsvg.h"
 
 #include <wx/hyperlink.h>
+#include <wx/mstream.h>
 #include <wx/stattext.h>
 
 
@@ -150,13 +154,14 @@ void GenericAbout::initToolkitInfo() {
 	infosizer->AddSpacer(10);
 
 	// TODO: find SVG logo for wxSVG
-	wxImage tmp_img = wxImage("data/resource/logo/wxsvg.png");
-	tmp_img.Rescale(64, 64, wxIMAGE_QUALITY_HIGH);
+	wxMemoryInputStream is(wxsvg_png, sizeof(wxsvg_png));
+	wxImage wxsvg_img = wxImage(is);
+	wxsvg_img.Rescale(64, 64, wxIMAGE_QUALITY_HIGH);
 
 	// TODO: embed SVG logos or include with release
-	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/wxwidgets.svg", 100, 100)));
-	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/sdl.svg", 100, 100)));
-	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(tmp_img));
+	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxwidgets_svg, sizeof(wxwidgets_svg), 100, 100)));
+	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(sdl_svg, sizeof(sdl_svg), 100, 100)));
+	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(wxsvg_img));
 
 	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
 	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
