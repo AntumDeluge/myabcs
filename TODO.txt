@@ -5,20 +5,21 @@ Priority:
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Show information about SDL & wxWidgets in about dialog
 - Show font information in about dialog
-- Link to art & sound sources
 - Use global function for setting/getting fonts
 - Add font license texts to binary release
+- Update 'install' directive for make command
+- Add animation for when category is loading
 
 Non-priority:
+- Don't reload sounds if already cached
 - Add links to art & sound assets
 - Switch to CMake build system
 - Possibly support any audio type playable with SDL_mixer
 - Embed toolbar images in executable (XPM is good choice)
-- Use embedded image for about dialog (XPM is good choice)
+- Resize toolbar images to give slight border
 - Set category items dynamically from image filenames
 - Normalize file & directory paths
 - Add license boilerplates to source
-- Add animation for when category is loading
 - PNG & SVG hats are different colors
 - PNG & SVG jars are different colors
 - Update README
