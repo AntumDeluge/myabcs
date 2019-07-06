@@ -160,15 +160,10 @@ void GenericAbout::initToolkitInfo() {
 	infosizer->Add(new wxStaticText(tab_info, -1, "Made with:"), 0, wxALIGN_CENTER);
 	infosizer->AddSpacer(10);
 
-	// TODO: find SVG logo for wxSVG
-	wxMemoryInputStream is(wxsvg_png, sizeof(wxsvg_png));
-	wxImage wxsvg_img = wxImage(is);
-	wxsvg_img.Rescale(64, 64, wxIMAGE_QUALITY_HIGH);
-
 	// TODO: embed SVG logos or include with release
 	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxwidgets_svg, sizeof(wxwidgets_svg), 100, 100)));
 	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(sdl_svg, sizeof(sdl_svg), 100, 100)));
-	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(wxsvg_img));
+	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxsvg_svg, sizeof(wxsvg_svg), 100, 100)));
 
 	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
 	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
