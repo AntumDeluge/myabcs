@@ -148,18 +148,28 @@ void GenericAbout::initToolkitInfo() {
 	infosizer->Add(new wxStaticText(tab_info, -1, "Made with:"), 0, wxALIGN_CENTER);
 	infosizer->AddSpacer(10);
 
+	// TODO: find SVG logo for wxSVG
+	wxImage tmp_img = wxImage("data/resource/logo/wxsvg.png");
+	tmp_img.Rescale(64, 64, wxIMAGE_QUALITY_HIGH);
+
 	// TODO: embed SVG logos or include with release
 	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/wxwidgets.svg", 100, 100)));
 	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/sdl.svg", 100, 100)));
+	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(tmp_img));
 
 	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
 	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
+	wxHyperlinkCtrl* wxsvg_link = new wxHyperlinkCtrl(tab_info, -1, "wxSVG", "http://wxsvg.sourceforge.net/");
 
-	wxFlexGridSizer* tk_layout = new wxFlexGridSizer(2, 2, 10, 10);
+	// TODO: Add SDL_mixer information (maybe)
+	wxFlexGridSizer* tk_layout = new wxFlexGridSizer(4, 2, 10, 10);
 	tk_layout->Add(wx_logo, 0, wxALIGN_CENTER);
 	tk_layout->Add(sdl_logo, 0, wxALIGN_CENTER);
 	tk_layout->Add(wx_link, 0, wxALIGN_CENTER);
 	tk_layout->Add(sdl_link, 0, wxALIGN_CENTER);
+	tk_layout->Add(wxsvg_logo, 0, wxALIGN_CENTER);
+	tk_layout->AddStretchSpacer();
+	tk_layout->Add(wxsvg_link, 0, wxALIGN_CENTER);
 
 	infosizer->Add(tk_layout, 0, wxALIGN_CENTER);
 }
