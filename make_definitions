@@ -67,6 +67,7 @@ CXXFLAGS += $(DEFINES)
 
 ### Files & headers ###
 
+IMG_LOGO = include/res/myabcs_img.h
 FAILSAFE_IMG = include/res/failsafe_img.h
 FONT_MAIN = include/res/sniglet_ttf.h
 FONT_MONO = include/res/pixeloperatormono_ttf.h
