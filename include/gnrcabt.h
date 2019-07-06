@@ -15,11 +15,6 @@
 #include <wx/statbmp.h>
 
 
-// FIXME: these should not be defined here
-const int ID_INFO = wxNewId();
-const int ID_ART = wxNewId();
-
-
 class GenericAbout : public wxDialog {
 public:
 	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));

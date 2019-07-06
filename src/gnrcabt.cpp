@@ -7,6 +7,10 @@
 #include <wx/stattext.h>
 
 
+const int ID_INFO = wxNewId();
+const int ID_ART = wxNewId();
+
+
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
 		wxDialog(parent, id, title) {
 
