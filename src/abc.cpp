@@ -7,7 +7,7 @@
 #include "log.h"
 #include "paths.h"
 #include "sound.h"
-#include "res/myabcs_img.h"
+#include "res/logo.h"
 
 #include <wx/ffile.h>
 #include <wx/regex.h>

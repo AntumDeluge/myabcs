@@ -1,5 +1,5 @@
-#ifndef MYABCS_IMG_H
-#define MYABCS_IMG_H
+#ifndef MYABCS_LOGO_H
+#define MYABCS_LOGO_H
 
 static const unsigned char myabcs_svg[] = {
 	0x3c, 0x3f, 0x78, 0x6d, 0x6c, 0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f,
@@ -2515,4 +2515,4 @@ static const unsigned char myabcs_svg[] = {
 	0x0a, 0x3c, 0x2f, 0x73, 0x76, 0x67, 0x3e, 0x0a
 };
 
-#endif /* MYABCS_IMG_H */
+#endif /* MYABCS_LOGO_H */

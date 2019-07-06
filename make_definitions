@@ -67,7 +67,6 @@ CXXFLAGS += $(DEFINES)
 
 ### Files & headers ###
 
-IMG_LOGO = include/res/myabcs_img.h
 FAILSAFE_IMG = include/res/failsafe_img.h
 FONT_MAIN = include/res/sniglet_ttf.h
 FONT_MONO = include/res/pixeloperatormono_ttf.h
@@ -138,7 +137,8 @@ GNRCABT_D = $(GNRCABT_H) $(ID_H) $(FONTS_H) $(LOG_H) $(CREDPANEL_H) $(RESOBJ_H)
 ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
-ABC_D = $(ABC_H) $(IMG_LOGO) $(PATHS_H) $(ID_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H) $(RESLIST_H) $(CATEGORY_H) $(EVENT_H) $(FONTS_H)
+ABC_D = $(ABC_H) $(PATHS_H) $(ID_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H) $(RESLIST_H) $(CATEGORY_H) $(EVENT_H) $(FONTS_H) \
+	include/res/logo.h
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp
