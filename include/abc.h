@@ -61,6 +61,7 @@ private:
 	void PlayResourceSound();
 
 	void OnSetCategory(wxCommandEvent& event);
+	void onCategoryLoaded(wxEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 	void OnKeyUp(wxKeyEvent& event);
 	void handleKeyTab();

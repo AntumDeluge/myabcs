@@ -16,6 +16,7 @@
 #include "sound.h"
 #include "res/logo.h"
 
+#include <pthread.h>
 #include <wx/ffile.h>
 #include <wx/regex.h>
 #include <wx/toolbar.h>
@@ -36,9 +37,29 @@ static ResourceObject winResource;
 // determines if letter can be incremented after keypress in "main" mode
 static bool alpha_accepted = false;
 
+// event to post when category finishes loading
+const wxEventType EVT_CATEGORY_LOADED = wxNewEventType();
+static pthread_t category_thread;
+
 // cached objects for category
 static ResourceList resourceList;
 static int cur_category; // currently loaded category
+static bool loading = false;
+
+
+/** Thread for loading objects used in category */
+void* loadCategoryThread(void* arg) {
+	if (resourceList.count() != 0) {
+		resourceList.clear();
+	}
+	resourceList.set(createCategory(cur_category));
+
+	// notify main thread that category finished loading
+	wxCommandEvent CatLoadedEvent(EVT_CATEGORY_LOADED);
+	wxPostEvent((MainWindow*) arg, CatLoadedEvent);
+
+	return (void*) 1;
+}
 
 
 // checks if a string contains only alphabetic characters
@@ -154,12 +175,14 @@ MainWindow::MainWindow() :
 	canvas->SetSizer(main_layout);
 	canvas->Layout();
 
+	Center(); // Center the window on the screen
+
 	// Redirect focus to main panel
 	Bind(wxEVT_SET_FOCUS, &MainWindow::OnFrameFocus, this);
 	// sounds finish playing
 	Bind(EVT_SOUND_FINISH, &MainWindow::OnSoundFinish, this);
-
-	Center(); // Center the window on the screen
+	// category is finished loading
+	Bind(EVT_CATEGORY_LOADED, &MainWindow::onCategoryLoaded, this);
 }
 
 void MainWindow::ReloadDisplay(bool update) {
@@ -180,43 +203,24 @@ void MainWindow::ReloadDisplay(bool update) {
 }
 
 void MainWindow::setCategory(const int id) {
-	// DEBUG:
-	logMessage(wxString("Loading category: ").Append(getCategoryName(id)));
-
-	if (resourceList.count() != 0) {
-		resourceList.clear();
-	}
-
-	cur_category = id;
-	resourceList.set(createCategory(cur_category));
-
-	if (cur_category == ID_ANIMALS) {
-		SetTitle(_T("Press a Key to See an Animal"));
-		currentResource = resourceList.getObject("t");
-		letter->SetLabel(_T("Animals"));
-	} else if (cur_category == ID_MUSIC) {
-		SetTitle(_T("Press a Key to See an Instrument"));
-		currentResource = resourceList.getObject("g");
-		letter->SetLabel(_T("Music"));
-	} else if (cur_category == ID_FOOD) {
-		SetTitle(_T("Press a Key to See a Food"));
-		currentResource = resourceList.getObject("h");
-		letter->SetLabel(_T("Food"));
-	} else if (cur_category == ID_TOYS) {
-		SetTitle(_T("Press a Key to See a Toy"));
-		currentResource = resourceList.getObject("w");
-		letter->SetLabel(_T("Toys"));
-	} else {
-		currentResource = resourceList.getObject("a");
-		SetTitle(_T("Find the letter on the keyboard"));
-		ReloadDisplay(true);
-
+	if (loading) {
+		logMessage("Please wait for current category to finish loading");
 		return;
 	}
 
-	label->SetLabel(wxEmptyString);
-	ReloadDisplay(false);
-	game_end = false;
+	// DEBUG:
+	logMessage(wxString("Loading category: ").Append(getCategoryName(id)));
+
+	loading = true;
+	cur_category = id;
+	// start background thread to load category objects
+	int t_ret = pthread_create(&category_thread, NULL, loadCategoryThread, this);
+	if (t_ret != 0) {
+		setErrorCode(t_ret);
+		setErrorMsg(wxString("Unknown error creating thread"));
+		logCurrentError();
+	}
+	startWaitAnimation();
 }
 
 void MainWindow::SetLetter(wxString alpha) {
@@ -270,6 +274,11 @@ void MainWindow::PlayResourceSound() {
 }
 
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
+	if (loading) {
+		// FIXME: how to veto event so toolbar selection doesn't change
+		event.Skip();
+	}
+
 	if (soundIsInitialized()) {
 		soundPlayer->stop();
 	}
@@ -281,6 +290,39 @@ void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	} else {
 		setCategory(id);
 	}
+}
+
+void MainWindow::onCategoryLoaded(wxEvent& event) {
+	loading = false;
+	stopWaitAnimation();
+
+	if (cur_category == ID_ANIMALS) {
+		SetTitle("Press a Key to See an Animal");
+		currentResource = resourceList.getObject("t");
+		letter->SetLabel("Animals");
+	} else if (cur_category == ID_MUSIC) {
+		SetTitle("Press a Key to See an Instrument");
+		currentResource = resourceList.getObject("g");
+		letter->SetLabel("Music");
+	} else if (cur_category == ID_FOOD) {
+		SetTitle("Press a Key to See a Food");
+		currentResource = resourceList.getObject("h");
+		letter->SetLabel("Food");
+	} else if (cur_category == ID_TOYS) {
+		SetTitle("Press a Key to See a Toy");
+		currentResource = resourceList.getObject("w");
+		letter->SetLabel("Toys");
+	} else {
+		currentResource = resourceList.getObject("a");
+		SetTitle("Find the letter on the keyboard");
+		ReloadDisplay(true);
+
+		return;
+	}
+
+	label->SetLabel(wxEmptyString);
+	ReloadDisplay(false);
+	game_end = false;
 }
 
 // FIXME: if sound fails to play, space key release isn't caught (still valid?)
@@ -327,6 +369,12 @@ void MainWindow::OnKeyUp(wxKeyEvent& event) {
 }
 
 void MainWindow::handleKeyTab() {
+	if (loading) {
+		// XXX: this can be removed if toolbar event is caught & vetoed
+		logMessage("Please wait for current category to finish loading");
+		return;
+	}
+
 	// Changes game modes via the "Tab" key
 	int tools[] = {ID_ABC, ID_FOOD, ID_ANIMALS, ID_MUSIC, ID_TOYS};
 	for (int tool = 4; tool >= 0; tool -= 1) {
