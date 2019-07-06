@@ -49,7 +49,10 @@ static int cur_category; // currently loaded category
 static bool loading = false;
 
 
-/** Thread for loading objects used in category */
+/** Thread for loading objects used in category
+ *
+ * TODO: running threads need cleaned up when app exits
+ */
 void* loadCategoryThread(void* arg) {
 	if (resourceList.count() != 0) {
 		resourceList.clear();

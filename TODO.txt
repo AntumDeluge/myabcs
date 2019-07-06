@@ -6,6 +6,7 @@ Priority:
 - Add font license texts to binary release
 - Update 'install' directive for make command
 - Do not continuously play sound when key is not released
+- Clean up running threads when app exits
 
 Non-priority:
 - Separate vocal & effect sounds into separate files
