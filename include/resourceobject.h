@@ -12,6 +12,7 @@
 // TODO: move these to a better file for global inclusion
 extern wxImage imageFromSVG(wxString filename, unsigned int width, unsigned int height);
 extern wxImage imageFromSVG(unsigned char* data, unsigned int data_size, unsigned int width, unsigned int height);
+extern wxImage imageFromSVG(const unsigned char* data, unsigned int data_size, unsigned int width, unsigned int height);
 
 
 class ResourceObject {

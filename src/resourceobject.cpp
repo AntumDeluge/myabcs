@@ -65,6 +65,10 @@ wxImage imageFromSVG(unsigned char* data, unsigned int data_size, unsigned int w
 	return img;
 }
 
+wxImage imageFromSVG(const unsigned char* data, unsigned int data_size, unsigned int width, unsigned int height) {
+	return imageFromSVG((unsigned char*) data, data_size, width, height);
+}
+
 
 /** copy constructor */
 ResourceObject::ResourceObject(const ResourceObject& ro) {
