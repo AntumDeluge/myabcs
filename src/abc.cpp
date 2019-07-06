@@ -7,6 +7,7 @@
 #include "log.h"
 #include "paths.h"
 #include "sound.h"
+#include "res/myabcs_img.h"
 
 #include <wx/ffile.h>
 #include <wx/regex.h>
@@ -452,7 +453,8 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	// About Dialog
 	GenericAbout* about = new GenericAbout(this, -1);
 	about->SetIcon(wxIcon(ICON1));
-	about->setImage(_T("myabcs.png"));
+	wxSize image_size = about->getImageSize();
+	about->setImage(imageFromSVG((unsigned char*) myabcs_svg, sizeof(myabcs_svg), image_size.GetWidth(), image_size.GetHeight()), true);
 
 	wxString version_string = wxEmptyString;
 #ifdef VERSION
