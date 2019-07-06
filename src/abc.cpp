@@ -36,6 +36,10 @@ static ResourceObject winResource;
 // determines if letter can be incremented after keypress in "main" mode
 static bool alpha_accepted = false;
 
+// cached objects for category
+static ResourceList resourceList;
+static int cur_category; // currently loaded category
+
 
 // checks if a string contains only alphabetic characters
 static bool isAlpha(wxString s) {

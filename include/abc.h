@@ -41,11 +41,7 @@ private:
 	wxString installdir; // Directory where files should be installed
 
 	// game state
-	wxString cur_category; // currently loaded category
 	bool game_end;
-
-	// cached objects for category
-	ResourceList resourceList;
 
 	// methods
 
