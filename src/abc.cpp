@@ -404,9 +404,11 @@ void MainWindow::startWaitAnimation() {
 	label->SetLabel(wxEmptyString);
 	image->Show(false);
 	main_layout->Detach(1);
-	main_layout->Insert(1, wait_image, 1, wxALIGN_CENTER);
+	main_layout->Insert(1, wait_image, 1, wxALIGN_CENTER); // FIXME: not centered vertically
 	wait_image->Show();
 	wait_image->Play();
+
+	canvas->Layout();
 }
 
 void MainWindow::stopWaitAnimation() {
