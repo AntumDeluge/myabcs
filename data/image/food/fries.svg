@@ -10,7 +10,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="96pt"
+   height="128"
    id="svg6462"
    inkscape:export-filename="/home/Krug/Desktop/openClipImg/svg/png/fastfood2.png"
    inkscape:export-xdpi="72.000000"
@@ -18,7 +18,7 @@
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="fries.svg"
    sodipodi:version="0.32"
-   width="73.21904pt"
+   width="97.625389"
    version="1.1">
   <metadata
      id="metadata2">
@@ -95,8 +95,8 @@
      bordercolor="#666666"
      borderopacity="1.0"
      id="base"
-     inkscape:cx="-96.941276"
-     inkscape:cy="0.066399489"
+     inkscape:cx="-279.94128"
+     inkscape:cy="0.066399681"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:window-height="1025"
@@ -111,7 +111,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     units="px" />
   <g
      id="g1026"
      transform="matrix(0.34757838,0,0,0.34757838,-16.103086,-1.2433494)">

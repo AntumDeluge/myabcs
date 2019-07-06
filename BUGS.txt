@@ -1,9 +1,5 @@
 Known BUGS:
 - SVG render errors:
-  - edges cut off:
-    - fries
-    - grapes
-    - wagon
   - object render order:
     - cat
   - other/mal-rendered objects

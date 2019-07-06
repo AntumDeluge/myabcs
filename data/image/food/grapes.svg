@@ -10,7 +10,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="96pt"
+   height="128"
    id="svg1"
    inkscape:export-filename="P:\tmp\Cliparts Stocker\grape.png"
    inkscape:export-xdpi="72.000000"
@@ -18,7 +18,7 @@
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="grapes.svg"
    sodipodi:version="0.32"
-   width="94.918869pt"
+   width="126.55849"
    version="1.1">
   <metadata
      id="metadata2">
@@ -275,8 +275,8 @@
      bordercolor="#666666"
      borderopacity="1.0"
      id="base"
-     inkscape:cx="109.38251"
-     inkscape:cy="-30.934648"
+     inkscape:cx="-85.502979"
+     inkscape:cy="-30.93465"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:window-height="1025"
@@ -291,7 +291,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     units="px" />
   <g
      id="g6787"
      transform="matrix(0.3353351,0,0,0.3353351,-69.170919,4.2552136)">
