@@ -12,7 +12,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 
 	CenterOnParent();
 
-	Connect(wxEVT_INIT_DIALOG, wxEventHandler(GenericAbout::onShow), 0, this);
+	Bind(wxEVT_INIT_DIALOG, &GenericAbout::onShow, this);
 
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
 
