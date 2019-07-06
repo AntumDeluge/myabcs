@@ -122,6 +122,8 @@ MainWindow::MainWindow() :
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
 	label = new wxStaticText(canvas, -1, _T(""));
+	wait_image = new wxAnimationCtrl(canvas, -1, wxAnimation("data/resource/clock_animation/preview.gif", wxANIMATION_TYPE_GIF));
+	wait_image->Show(false);
 
 	// FIXME: custom fonts only work on Windows platform
 	if (font_large.IsOk()) {
@@ -137,15 +139,15 @@ MainWindow::MainWindow() :
 	}
 
 	// Layout
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->AddSpacer(5);
-	sizer->Add(image, 1, wxALIGN_CENTER);
-	sizer->Add(letter, 0, wxALIGN_CENTER);
-	sizer->Add(label, 0, wxALIGN_CENTER);
-	sizer->AddSpacer(10);
+	main_layout = new wxBoxSizer(wxVERTICAL);
+	main_layout->AddSpacer(5);
+	main_layout->Add(image, 1, wxALIGN_CENTER);
+	main_layout->Add(letter, 0, wxALIGN_CENTER);
+	main_layout->Add(label, 0, wxALIGN_CENTER);
+	main_layout->AddSpacer(10);
 
 	canvas->SetAutoLayout(true);
-	canvas->SetSizer(sizer);
+	canvas->SetSizer(main_layout);
 	canvas->Layout();
 
 	// Redirect focus to main panel
@@ -405,6 +407,26 @@ void MainWindow::OnSoundFinish(wxEvent& event) {
 			alpha_accepted = false; // reset accepted keypress state
 		}
 	}
+}
+
+void MainWindow::startWaitAnimation() {
+	letter->SetLabel("Loading...");
+	label->SetLabel(wxEmptyString);
+	image->Show(false);
+	main_layout->Detach(1);
+	main_layout->Insert(1, wait_image, 1, wxALIGN_CENTER);
+	wait_image->Show();
+	wait_image->Play();
+}
+
+void MainWindow::stopWaitAnimation() {
+	letter->SetLabel(wxEmptyString);
+	label->SetLabel(wxEmptyString);
+	wait_image->Stop();
+	wait_image->Show(false);
+	main_layout->Detach(1);
+	main_layout->Insert(1, image, 1, wxALIGN_CENTER);
+	image->Show();
 }
 
 // Help and About dialogs

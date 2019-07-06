@@ -10,9 +10,11 @@
 
 #include "resourcelist.h"
 
+#include <wx/animate.h>
 #include <wx/event.h>
 #include <wx/frame.h>
 #include <wx/panel.h>
+#include <wx/sizer.h>
 #include <wx/statbmp.h>
 #include <wx/stattext.h>
 
@@ -22,6 +24,8 @@ public:
 	MainWindow();
 	void LoadCategory(wxString cat_name);
 private:
+	wxBoxSizer* main_layout;
+
 	// main GUI elements
 	wxToolBar *menu;
 	wxStatusBar *status;
@@ -31,6 +35,7 @@ private:
 	wxStaticBitmap* image;
 	wxStaticText* letter;
 	wxStaticText* label;
+	wxAnimationCtrl* wait_image; // animation used while category is loading
 
 	// directories
 	wxString installdir; // Directory where files should be installed
@@ -70,6 +75,9 @@ private:
 	void handleKeyAlphaOther(wxChar alpha);
 
 	void OnSoundFinish(wxEvent& event);
+
+	void startWaitAnimation();
+	void stopWaitAnimation();
 
 	void OnHelp(wxCommandEvent& event);
 	void OnAbout(wxCommandEvent& event);
