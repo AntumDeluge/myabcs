@@ -5,7 +5,6 @@ Priority:
 - Show font information in about dialog
 - Add font license texts to binary release
 - Update 'install' directive for make command
-- Add animation for when category is loading
 - Do not continuously play sound when key is not released
 
 Non-priority:
