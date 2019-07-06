@@ -2,15 +2,15 @@ Priority:
 - Initialize logging in background before creation of main frame
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
-- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
-- Show information about SDL & wxWidgets in about dialog
 - Show font information in about dialog
-- Use global function for setting/getting fonts
 - Add font license texts to binary release
 - Update 'install' directive for make command
 - Add animation for when category is loading
+- Do not continuously play sound when key is not released
 
 Non-priority:
+- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
+- Use global function for setting/getting fonts
 - Don't reload sounds if already cached
 - Add links to art & sound assets
 - Switch to CMake build system
