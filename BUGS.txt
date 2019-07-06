@@ -30,7 +30,6 @@ Known BUGS:
   - Process does not end when closed from taskbar while log window is open
 - Game doesn't work if sound fails to play (space kay release event not caught)
 - Wait/Loading animation not centered vertically
-- Error occurs on keypress if category is in loading state
 
 Bugs to report:
 - Inkscape:

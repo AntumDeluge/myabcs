@@ -336,26 +336,28 @@ void MainWindow::onCategoryLoaded(wxEvent& event) {
 
 // FIXME: if sound fails to play, space key release isn't caught (still valid?)
 void MainWindow::OnKeyDown(wxKeyEvent& event) {
-	// TODO: failsafe check for wxKeyEvent
-	const int key_code = event.GetKeyCode();
-	wxChar pressed_key = char(key_code);
+	if (!loading) {
+		// TODO: failsafe check for wxKeyEvent
+		const int key_code = event.GetKeyCode();
+		wxChar pressed_key = char(key_code);
 
-	if (key_code == WXK_TAB) {
-		handleKeyTab();
-	} else if (key_code == WXK_SPACE) {
-		handleKeySpace();
-	} else if (key_code == WXK_BACK) {
-		handleKeyBack();
-	} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
-		handleKeyEnter();
-	} else if (isAlpha(pressed_key) && !soundPlayer->isPlaying()) {
-		// DEBUG:
-		logMessage(wxString::Format("Key down: %c", pressed_key));
+		if (key_code == WXK_TAB) {
+			handleKeyTab();
+		} else if (key_code == WXK_SPACE) {
+			handleKeySpace();
+		} else if (key_code == WXK_BACK) {
+			handleKeyBack();
+		} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
+			handleKeyEnter();
+		} else if (isAlpha(pressed_key) && !soundPlayer->isPlaying()) {
+			// DEBUG:
+			logMessage(wxString::Format("Key down: %c", pressed_key));
 
-		if (cur_category == ID_ABC) {
-			handleKeyAlphaMain(pressed_key);
-		} else {
-			handleKeyAlphaOther(pressed_key);
+			if (cur_category == ID_ABC) {
+				handleKeyAlphaMain(pressed_key);
+			} else {
+				handleKeyAlphaOther(pressed_key);
+			}
 		}
 	}
 
