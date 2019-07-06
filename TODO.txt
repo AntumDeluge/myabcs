@@ -8,7 +8,6 @@ Priority:
 - Link to art & sound sources
 - Use global function for setting/getting fonts
 - Add font license texts to binary release
-- Clean stage dir without errors
 
 Non-priority:
 - Add links to art & sound assets

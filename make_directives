@@ -6,7 +6,8 @@ all: $(OBJECTS)
 
 cleanstage:
 	@if [ -d "${STAGEDIR}" ]; then \
-		rm -rf "${STAGEDIR}"; \
+		find "${STAGEDIR}" -type f -delete; \
+		find "${STAGEDIR}" -type d -empty -delete || echo "WARNING: Cannot delete stage directory"; \
 	fi;
 
 stage: all LICENSE.txt myabcs.png cleanstage
