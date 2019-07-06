@@ -34,7 +34,6 @@ Known BUGS:
 
 Bugs to report:
 - wxSVG:
-  - Image doesn't render when objects grouped multiple times
   - Object order rendering bug (cat.svg)
 - Inkscape:
   - "Title" meta data loss when converting old SVG
