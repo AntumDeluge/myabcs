@@ -12,7 +12,7 @@ Priority:
 Non-priority:
 - Add links to art & sound assets
 - Switch to CMake build system
-- Support MP3 audio (possibly support any audio type playable with SDL_mixer)
+- Possibly support any audio type playable with SDL_mixer
 - Embed toolbar images in executable (XPM is good choice)
 - Use embedded image for about dialog (XPM is good choice)
 - Set category items dynamically from image filenames

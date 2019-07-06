@@ -19,7 +19,7 @@ static wxString dir_snd;
 /** Supported image formats (in order of preference) */
 static const array<wxString, 2> img_extensions { "png", "svg", };
 /** Support sound formats (in order of preference) */
-static const array<wxString, 4> snd_extensions { "oga", "ogg", "flac", "wav", };
+static const array<wxString, 5> snd_extensions { "oga", "ogg", "mp3", "flac", "wav", };
 
 
 void initPaths(wxString path, wxString exe) {
