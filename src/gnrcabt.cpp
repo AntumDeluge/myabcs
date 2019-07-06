@@ -2,6 +2,7 @@
 #include "gnrcabt.h"
 #include "id.h"
 #include "log.h"
+#include "resourceobject.h"
 
 #include <wx/hyperlink.h>
 #include <wx/stattext.h>
@@ -140,6 +141,27 @@ void GenericAbout::addComposer(wxString name, wxString author, wxString license)
 
 void GenericAbout::setChangelog(wxString log) {
 	changelog->SetValue(log);
+}
+
+void GenericAbout::initToolkitInfo() {
+	infosizer->AddSpacer(10);
+	infosizer->Add(new wxStaticText(tab_info, -1, "Made with:"), 0, wxALIGN_CENTER);
+	infosizer->AddSpacer(10);
+
+	// TODO: embed SVG logos or include with release
+	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/wxwidgets.svg", 100, 100)));
+	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG("data/resource/logo/sdl.svg", 100, 100)));
+
+	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
+	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
+
+	wxFlexGridSizer* tk_layout = new wxFlexGridSizer(2, 2, 10, 10);
+	tk_layout->Add(wx_logo, 0, wxALIGN_CENTER);
+	tk_layout->Add(sdl_logo, 0, wxALIGN_CENTER);
+	tk_layout->Add(wx_link, 0, wxALIGN_CENTER);
+	tk_layout->Add(sdl_link, 0, wxALIGN_CENTER);
+
+	infosizer->Add(tk_layout, 0, wxALIGN_CENTER);
 }
 
 /**

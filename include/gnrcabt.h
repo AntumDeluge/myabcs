@@ -27,6 +27,7 @@ public:
 	void addArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void addComposer(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void setChangelog(wxString log);
+	void initToolkitInfo();
 	virtual int ShowModal();
 private:
 	wxNotebook* tabs;
