@@ -73,11 +73,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 }
 
 void GenericAbout::setImage(wxString image) {
-	wxImage new_image(image);
-	new_image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
-	appicon->SetBitmap(new_image);
-
-	tab_info->Layout();
+	return setImage(wxImage(image));
 }
 
 void GenericAbout::setImage(wxImage image) {
