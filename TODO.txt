@@ -5,7 +5,6 @@ Priority:
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Show information about SDL & wxWidgets in about dialog
 - Show font information in about dialog
-- Separate art & sound in about dialog
 - Link to art & sound sources
 - Use global function for setting/getting fonts
 - Add font license texts to binary release

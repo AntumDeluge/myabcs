@@ -25,12 +25,14 @@ public:
 	void setLink(wxString label, wxString url);
 	void setAbout(wxString about);
 	void addArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
+	void addComposer(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void setChangelog(wxString log);
 private:
 	wxNotebook* tabs;
 	wxButton* ok;
 	wxPanel* tab_info;
 	CreditsPanel* tab_art;
+	CreditsPanel* tab_audio;
 	wxPanel* tab_log;
 
 	// Info

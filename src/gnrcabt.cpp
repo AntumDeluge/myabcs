@@ -9,6 +9,7 @@
 
 const int ID_INFO = wxNewId();
 const int ID_ART = wxNewId();
+const int ID_AUDIO = wxNewId();
 
 
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
@@ -25,6 +26,8 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs->AddPage(tab_info, "About");
 	tab_art = new CreditsPanel(tabs, ID_ART);
 	tabs->AddPage(tab_art, "Art");
+	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
+	tabs->AddPage(tab_audio, "Audio");
 	tab_log = new wxPanel(tabs, ID_CHANGELOG);
 	tabs->AddPage(tab_log, "Changelog");
 
@@ -113,8 +116,26 @@ void GenericAbout::setAbout(wxString about) {
 	tab_info->Layout();
 }
 
-void GenericAbout::addArtist(wxString image, wxString name, wxString license) {
-	tab_art->add(image, name, wxEmptyString, license, wxEmptyString);
+/**
+ * TODO: support links
+ *
+ * @param name
+ * @param author
+ * @param license
+ */
+void GenericAbout::addArtist(wxString name, wxString author, wxString license) {
+	tab_art->add(name, author, wxEmptyString, license, wxEmptyString);
+}
+
+/**
+ * TODO: support links
+ *
+ * @param name
+ * @param author
+ * @param license
+ */
+void GenericAbout::addComposer(wxString name, wxString author, wxString license) {
+	tab_audio->add(name, author, wxEmptyString, license, wxEmptyString);
 }
 
 void GenericAbout::setChangelog(wxString log) {
@@ -135,4 +156,5 @@ void GenericAbout::onShow(wxEvent& event) {
 
 	// TODO: bind event to make implicit call
 	tab_art->onShow(event);
+	tab_audio->onShow(event);
 }
