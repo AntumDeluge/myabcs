@@ -33,7 +33,5 @@ Known BUGS:
 - Error occurs on keypress if category is in loading state
 
 Bugs to report:
-- wxSVG:
-  - Object order rendering bug (cat.svg)
 - Inkscape:
   - "Title" meta data loss when converting old SVG
