@@ -139,7 +139,7 @@ ABC_H = include/abc.h
 ABC_C = src/abc.cpp
 ABC_O = abc.o
 ABC_D = $(ABC_H) $(PATHS_H) $(ID_H) $(LOG_H) $(GNRCABT_H) $(SOUND_H) $(RESOBJ_H) $(RESLIST_H) $(CATEGORY_H) $(EVENT_H) $(FONTS_H) \
-	include/res/logo.h
+	include/res/ani_loading.h include/res/logo.h
 
 MAIN_H = include/main.h
 MAIN_C = src/main.cpp

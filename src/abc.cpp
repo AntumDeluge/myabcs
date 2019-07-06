@@ -14,10 +14,12 @@
 #include "log.h"
 #include "paths.h"
 #include "sound.h"
+#include "res/ani_loading.h"
 #include "res/logo.h"
 
 #include <pthread.h>
 #include <wx/ffile.h>
+#include <wx/mstream.h>
 #include <wx/regex.h>
 #include <wx/toolbar.h>
 
@@ -147,7 +149,9 @@ MainWindow::MainWindow() :
 	letter = new wxStaticText(canvas, -1, _T(""), wxDefaultPosition, wxDefaultSize,
 			wxALIGN_CENTRE);
 	label = new wxStaticText(canvas, -1, _T(""));
-	wait_image = new wxAnimationCtrl(canvas, -1, wxAnimation("data/resource/clock_animation/preview.gif", wxANIMATION_TYPE_GIF));
+	wxMemoryInputStream is(loading_gif, sizeof(loading_gif));
+	wait_image = new wxAnimationCtrl(canvas, -1);
+	wait_image->Load(is, wxANIMATION_TYPE_GIF);
 	wait_image->Show(false);
 
 	// FIXME: custom fonts only work on Windows platform
