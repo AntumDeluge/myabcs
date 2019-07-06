@@ -72,12 +72,17 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	Layout();
 }
 
-void GenericAbout::setImage(wxString image) {
-	return setImage(wxImage(image));
+void GenericAbout::setImage(wxString image, bool noresize) {
+	return setImage(wxImage(image), noresize);
 }
 
-void GenericAbout::setImage(wxImage image) {
-	image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
+void GenericAbout::setImage(wxImage image, bool noresize) {
+	if (!noresize) {
+		// DEBUG:
+		logMessage("Resizing logo ...");
+
+		image.Rescale(iconsize.GetWidth(), iconsize.GetHeight(), wxIMAGE_QUALITY_HIGH);
+	}
 	appicon->SetBitmap(image);
 
 	tab_info->Layout();

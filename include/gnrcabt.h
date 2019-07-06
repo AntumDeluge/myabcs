@@ -18,8 +18,8 @@
 class GenericAbout : public wxDialog {
 public:
 	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
-	void setImage(wxString image);
-	void setImage(wxImage image);
+	void setImage(wxString image, bool noresize=false);
+	void setImage(wxImage image, bool noresize=false);
 	wxSize getImageSize() { return iconsize; }
 	void setInfoString(wxString info);
 	void setCopyright(wxString copyright);
