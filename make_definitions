@@ -71,7 +71,7 @@ FAILSAFE_IMG = include/res/failsafe_img.h
 FONT_MAIN = include/res/sniglet_ttf.h
 FONT_MONO = include/res/pixeloperatormono_ttf.h
 
-RESOURCES_O = resources.o
+WINRESOURCES_O = win_resources.o
 
 ID_H = include/id.h
 ID_C = src/id.cpp
@@ -150,7 +150,7 @@ OBJECTS = \
 	$(LOG_O) $(FONTS_O) $(RESOBJ_O) $(RESLIST_O) $(CATEGORY_O) $(CREDPANEL_O) $(GNRCABT_O) $(SOUND_O) $(PATHS_O) $(EVENT_O) $(ID_O) $(ABC_O) $(MAIN_O)
 
 ifeq ($(OS), Windows_NT)
-	OBJECTS += $(RESOURCES_O)
+	OBJECTS += $(WINRESOURCES_O)
 endif
 
 F_DATA = \
