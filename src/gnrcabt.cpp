@@ -22,7 +22,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs = new wxNotebook(this, -1, wxDefaultPosition, wxDefaultSize);
 
 	// TODO: create tabs dynamically
-	tab_info = new wxPanel(tabs, ID_INFO);
+	tab_info = new wxScrolledWindow(tabs, ID_INFO);
 	tabs->AddPage(tab_info, "About");
 	tab_art = new CreditsPanel(tabs, ID_ART);
 	tabs->AddPage(tab_art, "Art");
@@ -147,6 +147,8 @@ void GenericAbout::setChangelog(wxString log) {
  * @return
  */
 int GenericAbout::ShowModal() {
+	// set vertical scrollbar only
+	tab_info->SetScrollbars(0, 20, 0, 50);
 	Fit();
 
 	// retain width
@@ -154,6 +156,7 @@ int GenericAbout::ShowModal() {
 
 	return wxDialog::ShowModal();
 }
+
 
 // private methods
 

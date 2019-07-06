@@ -31,7 +31,7 @@ public:
 private:
 	wxNotebook* tabs;
 	wxButton* ok;
-	wxPanel* tab_info;
+	wxScrolledWindow* tab_info;
 	CreditsPanel* tab_art;
 	CreditsPanel* tab_audio;
 	wxPanel* tab_log;
