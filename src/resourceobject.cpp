@@ -14,30 +14,55 @@ static wxSVGDocument* svgdoc = new wxSVGDocument();
 
 
 wxImage imageFromSVG(wxString filename, unsigned int width, unsigned int height) {
+	// DEBUG:
+	logMessage(wxString::Format("Loading SVG image from file: %s", filename));
+
+	wxImage img = wxImage();
+
+	if (!wxFileExists(filename)) {
+		logMessage(wxString::Format("Cannot load SVG image, file does not exist: %s", filename));
+		return img;
+	}
+
 	// load image data from filename string
 	bool loaded = svgdoc->Load(filename);
 
 	if (!loaded) {
-		logMessage(wxString::Format("Loading SVG from file failed: %s", filename));
+		logMessage(wxString::Format("Loading SVG file failed: %s", filename));
+		return img;
+	}
+
+	img = svgdoc->Render(width, height, NULL, true, true, NULL);
+	if (!img.IsOk()) {
+		logMessage(wxString::Format("Image appears to be invalid: %s", filename));
 	}
 
 	// XXX: need to clear svgdoc
-
-	return svgdoc->Render(width, height, NULL, true, true, NULL);
+	return img;
 }
 
 wxImage imageFromSVG(unsigned char* data, unsigned int data_size, unsigned int width, unsigned int height) {
+	// DEBUG:
+	logMessage("Loading SVG image from memory");
+
+	wxImage img = wxImage();
+
 	// load image data from memory
 	wxMemoryInputStream is(data, data_size); // convert SVG data into input stream
 	bool loaded = svgdoc->Load(is);
 
 	if (!loaded) {
 		logMessage("Loading SVG data failed");
+		return img;
+	}
+
+	img = svgdoc->Render(width, height, NULL, true, true, NULL);
+	if (!img.IsOk()) {
+		logMessage("Image appears to be invalid");
 	}
 
 	// XXX: need to clear svgdoc
-
-	return svgdoc->Render(width, height, NULL, true, true, NULL);
+	return img;
 }
 
 
