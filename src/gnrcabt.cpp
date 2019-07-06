@@ -128,4 +128,7 @@ void GenericAbout::onShow(wxEvent& event) {
 	CenterOnParent();
 	ok->SetFocus();
 	tabs->ChangeSelection(0);
+
+	// TODO: bind event to make implicit call
+	tab_art->onShow(event);
 }

@@ -24,6 +24,7 @@ public:
 	CreditsPanel(wxWindow* parent);
 	CreditsPanel(wxWindow* parent, int id);
 	void add(wxString name, wxString author, wxString author_url, wxString license, wxString license_url);
+	void onShow(wxEvent& event);
 private:
 	wxBoxSizer* main_layout;
 	wxListCtrl* list_items;
