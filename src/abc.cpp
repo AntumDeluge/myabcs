@@ -487,7 +487,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 
 	about->setChangelog(cl_text);
 
-	about->addArtist("ABC Blocks", "Petri Lummemaki ", "Public Domain");
+	about->addArtist("ABC Blocks", "Petri Lummemaki", "Public Domain");
 	about->addArtist("Accordion", "ArtFavor", "Public Domain");
 	about->addArtist("Airplane", "Jarno Vasamaa", "Public Domain");
 	about->addArtist("Anklet", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98184
