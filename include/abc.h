@@ -66,7 +66,7 @@ private:
 	void OnKeyUp(wxKeyEvent& event);
 	void handleKeyTab();
 	void handleKeySpace();
-	void handleKeyBack();
+	void handleKeyArrow(const int key_code);
 	void handleKeyEnter();
 	void handleKeyAlphaMain(wxChar alpha);
 	void handleKeyAlphaOther(wxChar alpha);

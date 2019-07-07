@@ -345,8 +345,8 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 			handleKeyTab();
 		} else if (key_code == WXK_SPACE) {
 			handleKeySpace();
-		} else if (key_code == WXK_BACK) {
-			handleKeyBack();
+		} else if (key_code == WXK_LEFT || key_code == WXK_RIGHT || key_code == WXK_BACK) {
+			handleKeyArrow(key_code);
 		} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
 			handleKeyEnter();
 		} else if (isAlpha(pressed_key) && !soundPlayer->isPlaying()) {
@@ -410,17 +410,25 @@ void MainWindow::handleKeySpace() {
 	}
 }
 
-void MainWindow::handleKeyBack() {
+void MainWindow::handleKeyArrow(const int key_code) {
 	// ignore backspace key for categories other than "main"
 	if (cur_category != ID_ABC) return;
 
-	if (getCurrentLetter() != "A") {
-		if (game_end) {
-			if (soundPlayer->isPlaying()) soundPlayer->stop();
-			SetLetter("Z");
-			game_end = false;
-		} else if (!soundPlayer->isPlaying()) {
-			IncrementLetter(false);
+	if (key_code == WXK_LEFT || key_code == WXK_BACK) {
+		if (getCurrentLetter() != "A") {
+			if (game_end) {
+				if (soundPlayer->isPlaying()) soundPlayer->stop();
+				SetLetter("Z");
+				game_end = false;
+			} else if (!soundPlayer->isPlaying()) {
+				IncrementLetter(false);
+			}
+		}
+	} else {
+		if (getCurrentLetter() != "Z") {
+			if (!soundPlayer->isPlaying()) {
+				IncrementLetter();
+			}
 		}
 	}
 }
