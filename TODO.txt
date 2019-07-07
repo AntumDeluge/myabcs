@@ -21,7 +21,6 @@ Non-priority:
 - PNG & SVG jars are different colors
 - Update README
 - Use config to determine environment (locatation of data files, etc.)
-- Change strawberry SVG
 - Remove shading from watch SVG
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing

@@ -689,7 +689,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->addArtist("Seesaw", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98188
 	about->addArtist("Sheep", "ArtFavor", "Public Domain");
 	about->addArtist("Star", "Tom Webb", "Public Domain");
-	about->addArtist("Strawberry", "baroquon", "Public Domain");
+	about->addArtist("Strawberry", wxEmptyString, "CC0/Public Domain"); // http://www.clker.com/clipart-25176.html (originally hosten on OCAL)
 	about->addArtist("Tomato", "Chrisdesign", "Public Domain");
 	about->addArtist("Top", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98187
 	about->addArtist("Train", "Aitor Avila", "Public Domain");
