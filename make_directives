@@ -10,7 +10,7 @@ cleanstage:
 		find "${STAGEDIR}" -type d -empty -delete || echo "WARNING: Cannot delete stage directory"; \
 	fi;
 
-stage: all LICENSE.txt myabcs.png cleanstage
+stage: all LICENSE.txt cleanstage
 	@stage_dir="${STAGEDIR}/myabcs"; \
 	mkdir -p "$${stage_dir}"; \
 	# main executable; \
@@ -45,7 +45,14 @@ stage: all LICENSE.txt myabcs.png cleanstage
 	done; \
 	# doc files; \
 	install -vm 0644 "LICENSE.txt" "$${stage_dir}"; \
-	install -vm 0644 "CHANGES.txt" "$${stage_dir}";
+	install -vm 0644 "CHANGES.txt" "$${stage_dir}"; \
+	for DIR in $$(find "doc/" -type d); do \
+		target_dir="$${stage_dir}/$${DIR}"; \
+		mkdir -p "$${target_dir}"; \
+		for DOC in $$(find "$${DIR}" -maxdepth 1 -type f); do \
+			install -vm 0644 "$${DOC}" "$${target_dir}"; \
+		done; \
+	done;
 
 pack: stage
 	@cd "${STAGEDIR}"; \

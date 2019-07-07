@@ -3,7 +3,6 @@ Priority:
 - Add debugging symbols
 - Check for errors when trying to play non-existent sound file
 - Show font information in about dialog
-- Add font license texts to binary release
 - Update 'install' directive for make command
 - Clean up running threads when app exits
 
