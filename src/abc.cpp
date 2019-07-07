@@ -694,7 +694,8 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->addArtist("Whale", "ArtFavor", "Public Domain");
 	about->addArtist("Whistle", "kelan", "Public Domain");
 	about->addArtist("X Cookie", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98172
-	about->addArtist("X-Ray (Skeleton)", "johnny_automatic", "Public Domain");
+	// artist: Jordi March i Nogué
+	about->addArtist("X-Ray", _T("Jordi March i Nogu\u00E9"), "CC BY-SA 3.0"); // https://commons.wikimedia.org/wiki/File:X-rays_chest_icon.svg
 	about->addArtist("Xiphias", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98166
 	about->addArtist("Xun", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98276
 	about->addArtist("Xylophone", "Gerald_G", "Public Domain");

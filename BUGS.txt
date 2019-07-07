@@ -21,8 +21,6 @@ Known BUGS:
   - food/
     - udon
     - vegetables
-  - misc/
-    - x_ray
   - music/
     - yangqin
 - Windows:
