@@ -611,7 +611,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->addArtist("Dog", "Gerald_G", "Public Domain");
 	about->addArtist("Doll", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98192
 	about->addArtist("Dolphin", "Andrew Fitzsimon", "Public Domain");
-	about->addArtist("Doughnut", "worms_x", "Public Domain");
+	about->addArtist("Doughnut", "OCAL", "CC0/Public Domain"); // https://openclipart.org/detail/279100
 	about->addArtist("Drums", "TheresaKnott", "Public Domain");
 	about->addArtist("Earth", "Dan Gerhrads", "Public Domain");
 	about->addArtist("Easel", "Gerald_G", "Public Domain");
