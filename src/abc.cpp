@@ -425,7 +425,7 @@ void MainWindow::handleKeyArrow(const int key_code) {
 			}
 		}
 	} else {
-		if (getCurrentLetter() != "Z") {
+		if (!game_end && getCurrentLetter() != "Z") {
 			if (!soundPlayer->isPlaying()) {
 				IncrementLetter();
 			}
