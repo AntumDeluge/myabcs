@@ -8,7 +8,6 @@ Priority:
 - Clean up running threads when app exits
 
 Non-priority:
-- Separate vocal & effect sounds into separate files
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Use global function for setting/getting fonts
 - Don't reload sounds if already cached
