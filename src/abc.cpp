@@ -36,6 +36,8 @@
 static ResourceObject currentResource;
 static ResourceObject winResource;
 
+// stored keypress
+static int key_pressed = -1;
 // determines if letter can be incremented after keypress in "main" mode
 static bool alpha_accepted = false;
 
@@ -336,10 +338,17 @@ void MainWindow::onCategoryLoaded(wxEvent& event) {
 
 // FIXME: if sound fails to play, space key release isn't caught (still valid?)
 void MainWindow::OnKeyDown(wxKeyEvent& event) {
-	if (!loading) {
-		// TODO: failsafe check for wxKeyEvent
+	// TODO: failsafe check for wxKeyEvent
+
+	if (key_pressed != -1) {
+		logMessage(wxString::Format("WARNING: \"%c\" key has not been released", wxChar(key_pressed)));
+	}
+
+	if (!loading && key_pressed == -1) { // -1 means stored keypress has been released
 		const int key_code = event.GetKeyCode();
-		wxChar pressed_key = char(key_code);
+		wxChar key = wxChar(key_code);
+		// store key pressed state
+		key_pressed = key_code;
 
 		if (key_code == WXK_TAB) {
 			handleKeyTab();
@@ -349,14 +358,14 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 			handleKeyArrow(key_code);
 		} else if (key_code == WXK_RETURN || key_code == WXK_NUMPAD_ENTER) {
 			handleKeyEnter();
-		} else if (isAlpha(pressed_key) && !soundPlayer->isPlaying()) {
+		} else if (isAlpha(key) && !soundPlayer->isPlaying()) {
 			// DEBUG:
-			logMessage(wxString::Format("Key down: %c", pressed_key));
+			logMessage(wxString::Format("Key down: %c", key));
 
 			if (cur_category == ID_ABC) {
-				handleKeyAlphaMain(pressed_key);
+				handleKeyAlphaMain(key);
 			} else {
-				handleKeyAlphaOther(pressed_key);
+				handleKeyAlphaOther(key);
 			}
 		}
 	}
@@ -365,15 +374,15 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 }
 
 void MainWindow::OnKeyUp(wxKeyEvent& event) {
+	// TODO: failsafe check for wxKeyEvent
 	const int key_code = event.GetKeyCode();
 
-	// TODO: failsafe check for wxKeyEvent
-	const wxChar released_key = char(key_code);
-	const wxString current_letter = getCurrentLetter();
+	if (key_code == key_pressed) {
+		// reset key pressed state
+		key_pressed = -1;
 
-	if (released_key == current_letter) {
 		// DEBUG:
-		logMessage(wxString::Format("%c key up ...", released_key));
+		logMessage(wxString::Format("%c key up ...", wxChar(key_code)));
 	}
 
 	event.Skip();
