@@ -15,6 +15,7 @@ using namespace std;
 
 
 static LogWindow* abclog;
+static bool initialized = false;
 
 static int err_code = 0;
 static string err_msg = "";
@@ -52,8 +53,11 @@ void LogWindow::Show(const bool show) {
 
 
 void initLog(wxWindow* parent) {
-	abclog = new LogWindow(parent, _T("MyABCs Debug Log"));
-	wxLog::SetActiveTarget(abclog);
+	if (!initialized) {
+		abclog = new LogWindow(parent, _T("MyABCs Debug Log"));
+		wxLog::SetActiveTarget(abclog);
+		initialized = true;
+	}
 }
 
 void logMessage(const wxLogLevel level, const wxString msg) {
