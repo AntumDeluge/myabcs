@@ -46,7 +46,7 @@ wxString getRootDir() { return dir_root; }
  * @param img A path relative to `dir_pic` without extensions (e.g. "main/airplane")
  * @return Absolute path with extension or `wxEmptyString` if no suitable image is found
  */
-wxString getImageFile(wxString img) {
+wxString getImagePath(wxString img) {
 	// concatenate image directory
 	img = wxString::Format("%s/%s", dir_pic, img);
 
@@ -71,7 +71,7 @@ wxString getImageFile(wxString img) {
  * @param snd A path relative to `dir_snd` without extension (e.g. "effect/xun")
  * @return Absolute path with extension or `wxEmptyString` if no suitable sound is found
  */
-wxString getSoundFile(wxString snd) {
+wxString getSoundPath(wxString snd) {
 	// concatenate sound directory
 	snd = wxString::Format("%s/%s", dir_snd, snd);
 

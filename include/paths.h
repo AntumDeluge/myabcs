@@ -18,7 +18,7 @@ extern void initPaths(wxString path, wxString exe);
 extern wxString getExecutable();
 extern wxString getRootDir();
 
-extern wxString getImageFile(wxString img);
-extern wxString getSoundFile(wxString snd);
+extern wxString getImagePath(wxString img);
+extern wxString getSoundPath(wxString snd);
 
 #endif /* MYABCS_PATHS_H */

@@ -122,7 +122,7 @@ bool ResourceObject::playSound(wxWindow* source) {
 }
 
 void ResourceObject::loadImage(wxString img) {
-	wxString filename = getImageFile(img);
+	wxString filename = getImagePath(img);
 
 	if (!filename) {
 		logMessage(wxString::Format("ERROR: Could not find compatible image for: %s", img));
@@ -145,9 +145,9 @@ void ResourceObject::loadSound(wxString snd) {
 	}
 
 	// "vocal" sounds are located in root of sound directory
-	sndVocalString = getSoundFile(snd);
+	sndVocalString = getSoundPath(snd);
 	// "effect" sounds are in sub-directory
-	sndEffectString = getSoundFile(wxString::Format("effect/%s", snd));
+	sndEffectString = getSoundPath(wxString::Format("effect/%s", snd));
 
 	logMessage(wxString::Format("Loaded sound file: %s", sndVocalString));
 }
