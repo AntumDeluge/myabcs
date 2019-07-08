@@ -22,9 +22,13 @@
 #include <wx/statbmp.h>
 
 
+// function to show about dialog
+extern int showAboutDialog(wxWindow* parent);
+
+
 class GenericAbout : public wxDialog {
 public:
-	GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title=_T("About"));
+	GenericAbout(wxWindow* parent, wxWindowID id=wxID_ANY, const wxString& title="About");
 	void setImage(wxString image, bool noresize=false);
 	void setImage(wxImage image, bool noresize=false);
 	wxSize getImageSize() { return iconsize; }
