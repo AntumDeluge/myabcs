@@ -1,23 +1,18 @@
 
+.PHONY: all cleanstage stage install uninstall x11
 
 all: $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION).";
 	$(CC) $(LINKEROPTS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
 
-cleanstage:
-	@if [ -d "${STAGEDIR}" ]; then \
-		find "${STAGEDIR}" -type f -delete; \
-		find "${STAGEDIR}" -type d -empty -delete || echo "WARNING: Cannot delete stage directory"; \
-	fi;
-
-stage: all LICENSE.txt cleanstage
-	@stage_dir="${STAGEDIR}/myabcs"; \
-	mkdir -p "$${stage_dir}"; \
+stage: $(EXE) LICENSE.txt
+	@data_dir="$(DESTDIR)$(DATADIR)/myabcs"; \
+	mkdir -p "$${data_dir}"; \
 	# main executable; \
-	install -vm 0755 "${EXE}" "$${stage_dir}"; \
+	install -vm 0755 "${EXE}" "$${data_dir}"; \
 	# image data; \
 	for DIR in $$(find "data/image/" -type d); do \
-		target_dir="$${stage_dir}/$${DIR}"; \
+		target_dir="$${data_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for IMG in $$(find "$${DIR}" -maxdepth 1 -type f); do \
 			install -vm 0644 "$${IMG}" "$${target_dir}"; \
@@ -25,7 +20,7 @@ stage: all LICENSE.txt cleanstage
 	done; \
 	# sound data; \
 	for DIR in "data/audio" "data/audio/effect" "data/audio/alpha"; do \
-		target_dir="$${stage_dir}/$${DIR}"; \
+		target_dir="$${data_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.flac"); do \
 			if test "${VORBIS}"; then \
@@ -44,19 +39,25 @@ stage: all LICENSE.txt cleanstage
 		done; \
 	done; \
 	# doc files; \
-	install -vm 0644 "LICENSE.txt" "$${stage_dir}"; \
-	install -vm 0644 "CHANGES.txt" "$${stage_dir}"; \
+	install -vm 0644 "LICENSE.txt" "$${data_dir}"; \
+	install -vm 0644 "CHANGES.txt" "$${data_dir}"; \
 	for DIR in $$(find "doc/" -type d); do \
-		target_dir="$${stage_dir}/$${DIR}"; \
+		target_dir="$${data_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for DOC in $$(find "$${DIR}" -maxdepth 1 -type f); do \
 			install -vm 0644 "$${DOC}" "$${target_dir}"; \
 		done; \
-	done;
+	done; \
+	# X11 desktop files \
+	if test "$${OS}" != "Windows_NT"; \
+	then \
+		echo "Installing X11 files ..."; \
+		make install-x11; \
+	fi;
 
 pack: stage
 	@zip_dir="$$(pwd)/build"; \
-	cd "${STAGEDIR}"; \
+	cd "$(DESTDIR)"; \
 	if test "${DEBUG}"; then \
 		rel_name+="-debug"; \
 	fi; \
@@ -110,28 +111,34 @@ $(ID_O): $(ID_C) $(ID_D)
 $(WINRESOURCES_O): win_resources.rc
 	windres `$(WXFLAGS) | sed -e 's|-fpermissive||'` win_resources.rc $(WINRESOURCES_O)
 
-install: changelog.txt license-MIT.txt myabcs.desktop myabcs.png pic sound all
-	@install -vd $(DESTDIR)/share/myabcs
-	@install -vd $(DESTDIR)/share/applications
-	@install -vd $(PIXMAPDIR)
-	@install -vd $(BINDIR)
-	@install -vm 0644 CHANGES.txt $(ABCDIR)
-	@install -vm 0644 LICENSE.txt $(ABCDIR)
-	@install -vm 0644 myabcs.png $(ABCDIR)
-	@cp -vr pic $(ABCDIR)
-	@cp -vr sound $(ABCDIR)
-	@install -v myabcs $(ABCDIR)
-	@install -vm 0644 myabcs.png $(PIXMAPDIR)
-	@install -vm 0644 myabcs.desktop $(DESTDIR)/share/applications
-	@#ln -sf $(ABCDIR)/myabcs $(BINDIR)/myabcs
-	@echo -e "#!/usr/bin/env bash\n\ncd \"$(ABCDIR)\" && ./$(PNAME)" > $(BINDIR)/$(PNAME)
-	@chmod +x $(BINDIR)/$(PNAME)
+install-x11: data/resource/x11/myabcs.desktop data/resource/logo/myabcs.svg
+	@target_dir="$(DESTDIR)$(PREFIX)"; \
+	mkdir -p "$${target_dir}/share/applications" "$${target_dir}/share/pixmaps" "$${target_dir}/bin"; \
+	install -vm 0644 "data/resource/x11/myabcs.desktop" "$${target_dir}/share/applications"; \
+	install -vm 0644 "data/resource/logo/myabcs.svg" "$${target_dir}/share/pixmaps"; \
+	exe="$${target_dir}/bin/myabcs"; \
+	echo "Creating executable: $${exe}"; \
+	echo -e "#!/bin/sh\n\n$(DATADIR)/myabcs/myabcs" > "$${exe}"; \
+	chmod +x "$${exe}";
+
+install: stage
 
 uninstall:
-	unlink $(BINDIR)/myabcs
-	rm -f $(DESTDIR)/share/applications/myabcs.desktop
-	rm -f $(DESTDIR)/share/pixmaps/myabcs.png
-	rm -rf $(ABCDIR)
+	@target_dir="$(DESTDIR)$(PREFIX)"; \
+	if test "$${OS}" != "Windows_NT"; \
+	then \
+		data_dir="$${target_dir}/share/myabcs"; \
+		rm -vf "$${target_dir}/bin/myabcs" "$${target_dir}/share/pixmaps/myabcs.svg" "$${target_dir}/share/applications/myabcs.desktop"; \
+	else \
+		data_dir="$${target_dir}/myabcs"; \
+	fi; \
+	#find "$${data_dir}" -type f -print -delete; \
+	#for FILE in $$(find "$${data_dir}" -type f); \
+	#do \
+	#	echo "$${FILE}"; \
+	#done; \
+	find "$${data_dir}" -type f -exec rm -vf {} \;; \
+	find "$${data_dir}" -type d -empty -delete;
 
 clean:
 	rm -rf *.o *.exe $(EXE) *.core

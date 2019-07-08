@@ -15,12 +15,19 @@ endif
 
 ### Environment ###
 
-PREFIX=/usr/local
-DESTDIR = $(PREFIX)
+ifeq ($(OS), Windows_NT)
+	STAGEDIR = build/stage
+	ifndef DESTDIR
+		DESTDIR = $(STAGEDIR)
+	endif
+else
+	PREFIX := /usr/local
+	DATADIR = $(PREFIX)/share
+endif
+
 BINDIR = $(DESTDIR)/bin
 INCLDIR = $(DESTDIR)/include
 LIBDIR = $(DESTDIR)/lib
-STAGEDIR = build/stage
 
 ### Compiling ###
 
