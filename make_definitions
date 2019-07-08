@@ -98,7 +98,7 @@ PATHS = paths
 PATHS_H = include/$(PATHS).h
 PATHS_C = src/$(PATHS).cpp
 PATHS_O = $(PATHS).o
-PATHS_D = $(PATHS_H)
+PATHS_D = $(PATHS_H) $(LOG_H)
 
 FONTS = fonts
 FONTS_H = include/$(FONTS).h

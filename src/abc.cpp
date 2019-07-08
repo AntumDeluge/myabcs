@@ -252,7 +252,14 @@ void MainWindow::SetGameEnd(bool play_sound) {
 }
 
 void MainWindow::PlayAlphaSound() {
-	wxString s_primary = getSoundPath(wxString::Format("alpha/%s", getCurrentLetter()));
+	wxString basename = wxString::Format("alpha/%s", getCurrentLetter());
+	wxString s_primary = getSoundPath(basename);
+
+	// FIXME: key release event not caught if error occurs (have to press key again & release to continue)
+	if (s_primary.IsEmpty()) {
+		logError(wxString::Format("Sound file not found: %s/%s", getRootDir(), basename));
+		return;
+	}
 
 	if (cur_category == ID_ABC) {
 		soundPlayer->play(this, s_primary, currentResource.getVocalString(), currentResource.getEffectString());

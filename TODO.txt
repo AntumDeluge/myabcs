@@ -1,7 +1,6 @@
 Priority:
 - Initialize logging in background before creation of main frame
 - Add debugging symbols
-- Check for errors when trying to play non-existent sound file
 - Clean up running threads when app exits
 
 Non-priority:

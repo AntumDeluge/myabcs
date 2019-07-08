@@ -26,7 +26,7 @@ Known BUGS:
 - Windows:
   - Pressing letter doesn't always work first time after regaining focus
   - Process does not end when closed from taskbar while log window is open
-- Game doesn't work if sound fails to play (space kay release event not caught)
+- Game doesn't work if sound fails to play (key release event not caught, have to press same key again & release)
 - Wait/Loading animation not centered vertically
 
 Bugs to report:

@@ -5,6 +5,7 @@
  * terms of the MIT/X11 license. See: LICENSE.txt
  */
 
+#include "log.h"
 #include "paths.h"
 
 #include <array>
@@ -63,6 +64,8 @@ wxString getImagePath(wxString img) {
 		}
 	}
 
+	logMessage(wxString::Format("WARNING: No file found for \"%s\", returning empty string", img));
+
 	return wxEmptyString;
 }
 
@@ -87,6 +90,8 @@ wxString getSoundPath(wxString snd) {
 			return absolute;
 		}
 	}
+
+	logMessage(wxString::Format("WARNING: No file found for \"%s\", returning empty string", snd));
 
 	return wxEmptyString;
 }

@@ -20,6 +20,8 @@
 
 
 bool App::OnInit() {
+	// FIXME: logger needs initialized before everything else
+
 	// initialize environment directories
 	wxString full_path = wxStandardPaths::Get().GetExecutablePath();
 	initPaths(std::string(wxPathOnly(full_path).mb_str()), std::string(wxFileName::FileName(full_path).GetFullName().mb_str()));
