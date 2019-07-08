@@ -29,7 +29,12 @@ void resetError() {
 
 
 LogWindow::LogWindow(wxWindow* parent, wxString title) :
-		wxLogWindow(parent, title, false) {}
+		wxLogWindow(parent, title, false) {
+
+	wxFrame* frame = GetFrame();
+	// prevent log window showing in the tas bar
+	frame->SetWindowStyle(frame->GetWindowStyle()|~wxFRAME_NO_TASKBAR);
+}
 
 bool LogWindow::IsShown() {
 	return GetFrame()->IsShown();

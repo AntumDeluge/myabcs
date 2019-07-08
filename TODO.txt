@@ -1,9 +1,9 @@
-Priority:
-- Initialize logging in background before creation of main frame
-- Add debugging symbols
+Priority (required for next release):
 - Clean up running threads when app exits
 
 Non-priority:
+- Initialize logging in background before creation of main frame
+- Add debugging symbols
 - Re-record "xun" vocal sound
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Use global function for setting/getting fonts

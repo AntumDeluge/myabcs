@@ -25,7 +25,6 @@ Known BUGS:
     - yangqin
 - Windows:
   - Pressing letter doesn't always work first time after regaining focus
-  - Process does not end when closed from taskbar while log window is open
 - Wait/Loading animation not centered vertically
 
 Bugs to report:
