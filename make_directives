@@ -55,18 +55,18 @@ stage: all LICENSE.txt cleanstage
 	done;
 
 pack: stage
-	@cd "${STAGEDIR}"; \
-	rel_name="myabcs-${VERSION}"; \
+	@zip_dir="$$(pwd)/build"; \
+	cd "${STAGEDIR}"; \
 	if test "${DEBUG}"; then \
 		rel_name+="-debug"; \
 	fi; \
-	echo -e "\nCreating binary distribution: $${rel_name}\n"; \
-	rel_file="../$${rel_name}.zip"; \
+	echo -e "\nCreating binary distribution: $(REL_NAME)\n"; \
+	rel_file="$${zip_dir}/$(REL_NAME).zip"; \
 	if [ -f "$${rel_file}" ]; then \
 		rm -vf "$${rel_file}"; \
 	fi; \
 	zip -r9 "$${rel_file}" ./; \
-	echo -e "\nCreated $${rel_name}.zip binary distribution archive";
+	echo -e "\nCreated $(REL_NAME).zip binary distribution archive";
 
 $(LOG_O): $(LOG_C) $(LOG_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` -I$(INCLUDE) $(LOG_C)

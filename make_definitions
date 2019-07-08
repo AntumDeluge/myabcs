@@ -7,6 +7,11 @@ VER_MAJ = 0
 VER_MIN = 4
 VER_REL = 6
 VERSION = $(VER_MAJ).$(VER_MIN).$(VER_REL)
+ifdef REL_SUFFIX
+	REL_NAME = "$(PNAME)-$(VERSION)-$(REL_SUFFIX)"
+else
+	REL_NAME = "$(PNAME)-$(VERSION)"
+endif
 
 ### Environment ###
 
