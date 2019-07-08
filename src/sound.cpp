@@ -44,7 +44,7 @@ void unloadChunks() {
 
 
 /** cleans up for thread exit */
-static void exitThreadEvent(void* arg) {
+static void onExitSoundThread(void* arg) {
 	unloadChunks();
 	thread_is_active = false;
 
@@ -67,7 +67,7 @@ void* playSoundThread(void* arg) {
 	channel = Mix_PlayChannel(-1, primaryChunk, 0);
 	if (channel != 0) {
 		logError(wxString::Format("Playing primary sound failed: %s", Mix_GetError()));
-		exitThreadEvent(arg);
+		onExitSoundThread(arg);
 		return (void*) 1;
 	}
 
@@ -81,7 +81,7 @@ void* playSoundThread(void* arg) {
 		channel = Mix_PlayChannel(-1, secondaryChunk, 0);
 		if (channel != 0) {
 			logError(wxString::Format("Playing secondary sound failed: %s", Mix_GetError()));
-			exitThreadEvent(arg);
+			onExitSoundThread(arg);
 			return (void*) 1;
 		}
 
@@ -92,14 +92,14 @@ void* playSoundThread(void* arg) {
 		channel = Mix_PlayChannel(-1, auxiliaryChunk, 0);
 		if (channel != 0) {
 			logError(wxString::Format("Playing auxiliary sound failed: %s", Mix_GetError()));
-			exitThreadEvent(arg);
+			onExitSoundThread(arg);
 			return (void*) 1;
 		}
 
 		while (Mix_Playing(channel) != 0);
 	}
 
-	exitThreadEvent(arg);
+	onExitSoundThread(arg);
 	return (void*) 0;
 }
 
