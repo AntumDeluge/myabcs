@@ -22,12 +22,6 @@ INCLDIR = $(DESTDIR)/include
 LIBDIR = $(DESTDIR)/lib
 STAGEDIR = build/stage
 
-
-### Base directories ###
-
-INCLUDE = include
-DATADIR = data
-
 ### Compiling ###
 
 CC = g++
