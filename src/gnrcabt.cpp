@@ -155,7 +155,7 @@ void GenericAbout::setChangelog(wxString log) {
 	changelog->SetValue(log);
 }
 
-void GenericAbout::initToolkitInfo() {
+void GenericAbout::addToolkitInfo() {
 	infosizer->AddSpacer(10);
 	infosizer->Add(new wxStaticText(tab_info, -1, "Made with:"), 0, wxALIGN_CENTER);
 	infosizer->AddSpacer(10);
