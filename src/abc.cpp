@@ -578,9 +578,7 @@ void MainWindow::OnAbout(wxCommandEvent& event) {
 	about->setAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
 
 	// Changelog
-	// FIXME: concatenating "CHANGES.txt" to dir_root not working
-	//wxString cl_file = wxString::Format("%s/CHANGES.txt", getRootDir());
-	wxString cl_file = _T("CHANGES.txt");
+	wxString cl_file = getRootDir().Append("/CHANGES.txt");
 	wxString cl_text = wxString::Format("Changelog text not found: %s", cl_file);
 
 	if (wxFileExists(cl_file)) {
