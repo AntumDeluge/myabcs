@@ -36,6 +36,7 @@ public:
 	void addComposer(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void setChangelog(wxString log);
 	void addToolkitInfo();
+	void addMiscInfo();
 	virtual int ShowModal();
 private:
 	wxNotebook* tabs;

@@ -181,6 +181,25 @@ void GenericAbout::addToolkitInfo() {
 	infosizer->Add(tk_layout, 0, wxALIGN_CENTER);
 }
 
+void GenericAbout::addMiscInfo() {
+	// TODO: parse Markdown README
+	wxPanel* tab_misc = new wxPanel(tabs);
+
+	wxHyperlinkCtrl* font_main = new wxHyperlinkCtrl(tab_misc, -1, "Sniglet", "https://fontlibrary.org/font/sniglet");
+	wxHyperlinkCtrl* font_mono = new wxHyperlinkCtrl(tab_misc, -1, "Pixel Operator Mono", "https://fontlibrary.org/font/sniglet");
+	font_main->SetFont(wxFont(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Sniglet"));
+	font_mono->SetFont(wxFont(14, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, "Pixel Operator Mono"));
+
+	wxBoxSizer* layout = new wxBoxSizer(wxVERTICAL);
+
+	layout->Add(new wxStaticText(tab_misc, -1, "Fonts used in this software:"), 0, wxALIGN_CENTER|wxTOP, 20);
+	layout->Add(font_main, 0, wxALIGN_CENTER|wxTOP, 10);
+	layout->Add(font_mono, 0, wxALIGN_CENTER|wxTOP, 10);
+
+	tab_misc->SetSizer(layout);
+	tabs->AddPage(tab_misc, "Misc");
+}
+
 /**
  * @override wxDialog::ShowModal
  * @return
