@@ -181,6 +181,8 @@ MainWindow::MainWindow() :
 	Bind(EVT_SOUND_FINISH, &MainWindow::OnSoundFinish, this);
 	// category is finished loading
 	Bind(EVT_CATEGORY_LOADED, &MainWindow::onCategoryLoaded, this);
+	// catch close event to clean up auxiliary threads
+	Bind(wxEVT_CLOSE_WINDOW, &MainWindow::onClose, this);
 }
 
 void MainWindow::ReloadDisplay(bool update) {
@@ -560,4 +562,31 @@ void MainWindow::OnFrameFocus(wxFocusEvent& event) {
 
 void MainWindow::OnToggleLogWindow(wxCommandEvent& event) {
 	toggleLogWindow();
+}
+
+void MainWindow::onClose(wxCloseEvent& event) {
+	// DEBUG:
+	logMessage("Exiting program ...");
+
+	// FIXME: segfault occurs if log messages appear while shutting down
+	endLog();
+
+	// FIXME: appears to be a delay when frame "X" is pressed
+	// clean up sound thread
+	if (soundPlayer->isPlaying()) {
+		soundPlayer->stop();
+	}
+
+	// clean up category loading thread
+	if (loading) {
+		int t_ret = pthread_cancel(category_thread);
+		if (t_ret != 0) {
+			setError(t_ret, "Error cancelling sound thread");
+			logCurrentError();
+		} else {
+			logMessage("Category loading thread exited cleanly");
+		}
+	}
+
+	Destroy();
 }

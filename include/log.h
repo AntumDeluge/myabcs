@@ -38,6 +38,8 @@ extern void logCurrentError();
 
 extern void toggleLogWindow();
 
+extern void endLog();
+
 extern void setErrorCode(int err);
 
 extern int getErrorCode();

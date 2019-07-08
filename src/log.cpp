@@ -108,6 +108,10 @@ void toggleLogWindow() {
 	abclog->Show(!abclog->IsShown());
 }
 
+void endLog() {
+	wxLog::EnableLogging(false);
+}
+
 void setErrorCode(int err) { err_code = err; }
 
 int getErrorCode() { return err_code; }

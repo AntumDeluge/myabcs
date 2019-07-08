@@ -1,5 +1,4 @@
 Priority (required for next release):
-- Clean up running threads when app exits
 
 Non-priority:
 - Initialize logging in background before creation of main frame

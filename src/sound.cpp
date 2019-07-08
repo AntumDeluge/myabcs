@@ -224,8 +224,6 @@ void SoundPlayer::stop() {
 		return;
 	}
 
-	logMessage(_T("Stopping sound ..."));
-
 	Mix_HaltChannel(channel);
 
 	// XXX: necessary even after Mix_HaltChannel called?
@@ -235,6 +233,8 @@ void SoundPlayer::stop() {
 		logCurrentError();
 
 		return;
+	} else {
+		logMessage("Sound thread exited cleanly");
 	}
 
 	thread_is_active = false;

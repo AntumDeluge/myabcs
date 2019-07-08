@@ -81,6 +81,7 @@ private:
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 
 	void OnToggleLogWindow(wxCommandEvent& event);
+	void onClose(wxCloseEvent& event);
 };
 
 #endif /* MYABCS_ABC_H */
