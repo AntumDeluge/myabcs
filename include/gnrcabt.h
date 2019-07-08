@@ -22,6 +22,15 @@
 #include <wx/statbmp.h>
 
 
+// declare icon here so is available to main window & about dialog
+#if !defined(WIN32) && !defined(WIN64)
+extern wxIcon main_icon;
+#define ICON1 main_icon
+#else
+#define ID_ICON1
+#define ICON1 wxICON(ID_ICON1)
+#endif
+
 // function to show about dialog
 extern int showAboutDialog(wxWindow* parent);
 

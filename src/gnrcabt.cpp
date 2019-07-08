@@ -22,6 +22,10 @@
 #include <wx/stattext.h>
 
 
+#if !defined(WIN32) && !defined(WIN64)
+wxIcon ICON1 = wxIcon(myabcs_small_xpm);
+#endif
+
 const int ID_INFO = wxNewId();
 const int ID_ART = wxNewId();
 const int ID_AUDIO = wxNewId();
@@ -245,9 +249,7 @@ static bool initialized = false;
 void initAboutDialog(wxWindow* parent) {
 	about = new GenericAbout(parent);
 
-	// FIXME: this image is no longer included in release
-	//about->SetIcon(wxIcon(ICON1));
-	about->SetIcon(wxIcon("myabcs.png"));
+	about->SetIcon(ICON1);
 	wxSize image_size = about->getImageSize();
 	about->setImage(imageFromSVG((unsigned char*) myabcs_svg, sizeof(myabcs_svg), image_size.GetWidth(), image_size.GetHeight()), true);
 

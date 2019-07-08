@@ -22,16 +22,6 @@
 #include <wx/toolbar.h>
 
 
-// icon
-#if !defined(WIN32) && !defined(WIN64)
-// FIXME: this image is no longer included in release
-#define ICON1 _T("myabcs.png")
-#else
-#define ID_ICON1
-#define ICON1 wxICON(ID_ICON1)
-#endif
-
-
 static ResourceObject currentResource;
 static ResourceObject winResource;
 
