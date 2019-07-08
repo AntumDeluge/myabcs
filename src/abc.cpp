@@ -255,9 +255,11 @@ void MainWindow::PlayAlphaSound() {
 	wxString basename = wxString::Format("alpha/%s", getCurrentLetter());
 	wxString s_primary = getSoundPath(basename);
 
-	// FIXME: key release event not caught if error occurs (have to press key again & release to continue)
 	if (s_primary.IsEmpty()) {
 		logError(wxString::Format("Sound file not found: %s/%s", getRootDir(), basename));
+
+		// need to flush pressed key state because error message prevents main thread from catching key release event
+		key_pressed = -1;
 		return;
 	}
 
