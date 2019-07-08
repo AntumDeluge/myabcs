@@ -1,43 +1,8 @@
 Priority (required for next release):
-
-Non-priority:
-- Initialize logging in background before creation of main frame
-- Add debugging symbols
-- Re-record "xun" vocal sound
-- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
-- Use global function for setting/getting fonts
-- Don't reload sounds if already cached
-- Add links to art & sound assets
-- Switch to CMake build system
-- Possibly support any audio type playable with SDL_mixer
-- Embed toolbar images in executable (XPM is good choice)
-- Resize toolbar images to give slight border
-- Set category items dynamically from image filenames
-- Normalize file & directory paths
-- PNG & SVG jars are different colors
-- Update README
-- Use config to determine environment (locatation of data files, etc.)
-- Remove shading from watch SVG
-- Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
-  - Need to confirm licensing
-- Show keyboard for "main" category
-- Embed free fonts (partially implemented, works on Windows only)
-- Clean up quiche SVG
 - Images to be replaced or find source:
   - iguana
   - owl
-- Sounds to be trimmed:
-  - fire (maybe)
-- Sounds to add:
-  - giraffe
-  - ipu
-  - koala
-  - lute
-  - ney
-  - rocking horse
-  - yak
-  - yangqin
-- Sounds to replaced or find source:
+- Sounds to be replaced or find source:
   - accordion
   - airplane
   - balloons
@@ -72,6 +37,41 @@ Non-priority:
     - trumpet (author has relicensed under CC BY, see notes in source code)
     - xylophone (author has relicensed under CC0, see notes in source code)
     - zurna (author has relicensed under CC BY, see notes in source code)
+
+Non-priority:
+- Make scrolling with left/right arrows in "main" mode only available if debugging enabled
+- Play sound if wrong key pressed in "main" mode
+- Initialize logging in background before creation of main frame
+- Add debugging symbols
+- Re-record "xun" vocal sound
+- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
+- Use global function for setting/getting fonts
+- Don't reload sounds if already cached
+- Add links to art & sound assets
+- Switch to CMake build system
+- Possibly support any audio type playable with SDL_mixer
+- Embed toolbar images in executable (XPM is good choice)
+- Set category items dynamically from image filenames
+- Normalize file & directory paths
+- PNG & SVG jars are different colors
+- Update README
+- Use config to determine environment (locatation of data files, etc.)
+- Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
+  - Need to confirm licensing
+- Show keyboard for "main" category
+- Embed free fonts (partially implemented, works on Windows only)
+- Clean up quiche SVG
+- Sounds to be trimmed:
+  - fire (maybe)
+- Sounds to add:
+  - giraffe
+  - ipu
+  - koala
+  - lute
+  - ney
+  - rocking horse
+  - yak
+  - yangqin
 
 Fixes & pull-requests:
 - wxWidgets:
