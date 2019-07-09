@@ -177,6 +177,7 @@ MainWindow::MainWindow() :
 
 	// Redirect focus to main panel
 	Bind(wxEVT_SET_FOCUS, &MainWindow::OnFrameFocus, this);
+	canvas->Bind(wxEVT_KILL_FOCUS, &MainWindow::onLoseFocus, this);
 	// sounds finish playing
 	Bind(EVT_SOUND_FINISH, &MainWindow::OnSoundFinish, this);
 	// category is finished loading
@@ -560,6 +561,13 @@ void MainWindow::OnFrameFocus(wxFocusEvent& event) {
 	canvas->SetFocus();
 }
 
+void MainWindow::onLoseFocus(wxFocusEvent& event) {
+	// DEBUG:
+	logMessage("Focus lost, flushing pressed key state...");
+
+	key_pressed = -1;
+}
+
 void MainWindow::OnToggleLogWindow(wxCommandEvent& event) {
 	toggleLogWindow();
 }
@@ -587,6 +595,8 @@ void MainWindow::onClose(wxCloseEvent& event) {
 			logMessage("Category loading thread exited cleanly");
 		}
 	}
+
+	// XXX: would it be good to call pthread_join here?
 
 	Destroy();
 }

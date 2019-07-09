@@ -79,6 +79,7 @@ private:
 	void OnHelp(wxCommandEvent& event);
 	void OnAbout(wxCommandEvent& event);
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
+	void onLoseFocus(wxFocusEvent& event);
 
 	void OnToggleLogWindow(wxCommandEvent& event);
 	void onClose(wxCloseEvent& event);
