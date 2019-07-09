@@ -29,6 +29,7 @@
   - jug
   - keyboard
   - lute
+  - ney
   - quarter
   - quena
   - umbrella

@@ -67,7 +67,6 @@ Non-priority:
   - giraffe
   - ipu
   - koala
-  - ney
   - rocking horse
   - yak
   - yangqin
