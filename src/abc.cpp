@@ -331,7 +331,7 @@ void MainWindow::onCategoryLoaded(wxEvent& event) {
 		return;
 	}
 
-	label->SetLabel(wxEmptyString);
+	label->SetLabel("PRESS A KEY ON THE KEYBOARD");
 	ReloadDisplay(false);
 	game_end = false;
 }
