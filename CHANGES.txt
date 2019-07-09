@@ -28,6 +28,7 @@
   - horn
   - jug
   - keyboard
+  - lute
   - quarter
   - quena
   - umbrella

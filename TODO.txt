@@ -67,7 +67,6 @@ Non-priority:
   - giraffe
   - ipu
   - koala
-  - lute
   - ney
   - rocking horse
   - yak
