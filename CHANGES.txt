@@ -1,8 +1,43 @@
 0.4.6:
 - Added SDL_mixer support for playing audio
 - Added support for OGG/Vorbis audio
+- Added support for MP3 audio
 - Images cached upon changing category
-- Replaced yak image
+- Added loading image during caching
+- Added logger for debugging
+- Added failsafe image for cases of image not found
+- Embedded fonts (currently Windows only):
+  - Sniglet for alphabet characters & image names
+  - Pixel Operator Mono for changelog text
+- Added toolkit & font info to about dialog
+- Pressing an alphabet key in "main" mode now plays word pronunciation & effect sounds
+- Separated art & sound credits into individual tabs
+- Replaced instrument "xylophone" with "xun"
+- Replaced images:
+  - doughnut
+  - quarter
+  - ribbon
+  - strawberry
+  - x-ray
+  - yak
+- Added sound effects:
+  - bagpipes
+  - bicycle
+  - clock
+  - fire
+  - horn
+  - jug
+  - keyboard
+  - quarter
+  - quena
+  - umbrella
+  - watch
+- Replaced sound effects:
+  - rooster
+  - sheep
+  - vulture
+  - whistle
+  - zipper
 
 0.4.5:
 - Added Desktop Entry file for Unix-like systems using an X11 desktop
