@@ -13,7 +13,6 @@ Priority (required for next release):
   - mouse
   - owl
   - piano
-  - quail
   - raccoon
   - zebra
 

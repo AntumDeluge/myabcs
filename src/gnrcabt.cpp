@@ -451,7 +451,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Owl", wxEmptyString, "Public Domain");
 	about->addComposer("Piano", wxEmptyString, "Public Domain");
 	about->addComposer("Pig", "Robinhood76", "CC BY-NC"); // https://freesound.org/people/Robinhood76/sounds/76796/
-	about->addComposer("Quail");
+	about->addComposer("Quail", "PrincessGrace", "CC0"); // https://freesound.org/people/PrincessGrace/sounds/329371/
 	about->addComposer("Quarter", "greenvwbeetle", "CC0/Public Domain"); // https://freesound.org/people/greenvwbeetle/sounds/423332/
 	about->addComposer("Quena", "CarlosCarty", "CC BY"); // https://freesound.org/people/CarlosCarty/sounds/463711/
 	about->addComposer("Raccoon");
