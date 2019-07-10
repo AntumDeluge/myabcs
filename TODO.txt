@@ -3,7 +3,6 @@ Priority (required for next release):
   - iguana
   - owl
 - Sounds to be replaced or find source:
-  - accordion
   - balloons
   - cat
   - chalkboard
