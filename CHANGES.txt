@@ -15,6 +15,7 @@
 - Replaced instrument "xylophone" with "xun"
 - Replaced images:
   - doughnut
+  - iguana
   - quarter
   - ribbon
   - strawberry
