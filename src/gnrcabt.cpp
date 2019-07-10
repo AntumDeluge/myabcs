@@ -454,7 +454,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Quail", "PrincessGrace", "CC0"); // https://freesound.org/people/PrincessGrace/sounds/329371/
 	about->addComposer("Quarter", "greenvwbeetle", "CC0/Public Domain"); // https://freesound.org/people/greenvwbeetle/sounds/423332/
 	about->addComposer("Quena", "CarlosCarty", "CC BY"); // https://freesound.org/people/CarlosCarty/sounds/463711/
-	about->addComposer("Raccoon");
+	about->addComposer("Raccoon"); // http://terrierman.com/soundspage.htm
 	about->addComposer("Recorder", "Cailyn");
 	about->addComposer("Rooster", "poorenglishjuggler", "CC0/Public Domain"); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
 	about->addComposer("Saxophone", "Sylenius", "Public Domain"); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
