@@ -12,8 +12,10 @@ Priority (required for next release):
   - piano
   - raccoon
   - zebra
+- Include copies of license texts with binary release
 
 Non-priority:
+- Copy library (dll) dependencies into binary release
 - Make scrolling with left/right arrows in "main" mode only available if debugging enabled
 - Play sound if wrong key pressed in "main" mode
 - Initialize logging in background before creation of main frame
