@@ -34,7 +34,6 @@ Priority (required for next release):
     - kazoo (author has relicensed under CC BY, see notes in source code)
     - oboe (author has relicensed under CC BY-NC, see notes in source code)
     - pig (author has relicensed under CC BY-NC, see notes in source code)
-    - trumpet (author has relicensed under CC BY, see notes in source code)
 
 Non-priority:
 - Make scrolling with left/right arrows in "main" mode only available if debugging enabled

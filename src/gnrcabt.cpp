@@ -460,7 +460,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Saxophone", "Sylenius", "Public Domain"); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
 	about->addComposer("Sheep", "mikewest", "CC0/Public Domain"); // https://freesound.org/people/mikewest/sounds/414342/
 	about->addComposer("Train", wxEmptyString, "Public Domain");
-	about->addComposer("Trumpet ", "sorohanro", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY: https://freesound.org/people/sorohanro/sounds/77706/
+	about->addComposer("Trumpet ", "sorohanro", "CC BY"); // https://freesound.org/people/sorohanro/sounds/77706/
 	about->addComposer("Ukulele", "Henry Kailimai", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:Ukelele_-_Kailimai%27s_hene_-_Ukepedia.ogg
 	about->addComposer("Umbrella", "j1987", "CC0/Public Domain"); // https://freesound.org/people/j1987/sounds/73028/
 	about->addComposer("Violin", _T("Edit Kov\u00E1cs"), "Attribution-ShareAlike 2.0 Germany"); // https://commons.wikimedia.org/wiki/File:Whiskey-youre-the-devil-violin.ogg
