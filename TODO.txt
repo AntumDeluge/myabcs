@@ -38,7 +38,6 @@ Non-priority:
 - Sounds to be trimmed:
   - fire (maybe)
 - Sounds to add:
-  - balloons
   - chalkboard
   - giraffe
   - ipu

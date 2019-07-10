@@ -22,6 +22,7 @@
   - yak
 - Added sound effects:
   - bagpipes
+  - balloons
   - bicycle
   - clock
   - fire

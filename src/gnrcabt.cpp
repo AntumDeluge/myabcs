@@ -422,6 +422,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Accordion", "alphatone", "CC BY"); // https://freesound.org/people/alphatone/sounds/385876/
 	about->addComposer("Airplane", "Manuel Fidalgo (granizo)", "CC BY"); // https://freesound.org/people/granizo/sounds/401157/
 	about->addComposer("Bagpipes", "kyles", "CC0/Public Domain"); // https://freesound.org/people/kyles/sounds/453749/
+	about->addComposer("Balloons", "Gniffelbaf & DNAudio_UK", "CC0"); // https://freesound.org/people/Gniffelbaf/sounds/82119/, https://freesound.org/people/DNAudio_UK/sounds/263809/
 	about->addComposer("Bird", "Jc Guan", "Public Domain"); // http://soundbible.com/340-Bird-Song.html
 	about->addComposer("Bicycle", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16320
 	about->addComposer("Cat", "blimp66", "CC BY"); // https://freesound.org/people/blimp66/sounds/397661/
