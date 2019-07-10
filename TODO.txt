@@ -10,7 +10,6 @@ Priority (required for next release):
   - harp
   - jaguar
   - maracas
-  - mouse
   - piano
   - raccoon
   - zebra

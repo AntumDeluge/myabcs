@@ -43,6 +43,7 @@
   - frog
   - horse
   - lion
+  - mouse
   - owl
   - quail
   - rooster
