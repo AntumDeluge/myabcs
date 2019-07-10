@@ -459,7 +459,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Rooster", "poorenglishjuggler", "CC0/Public Domain"); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
 	about->addComposer("Saxophone", "Sylenius", "Public Domain"); // https://en.wikipedia.org/wiki/File:Reed_phase.ogg
 	about->addComposer("Sheep", "mikewest", "CC0/Public Domain"); // https://freesound.org/people/mikewest/sounds/414342/
-	about->addComposer("Train", wxEmptyString, "Public Domain");
+	about->addComposer("Train", "Daniel Simion", "CC BY"); // http://soundbible.com/2177-Steam-Train-Whistle.html
 	about->addComposer("Trumpet ", "sorohanro", "CC BY"); // https://freesound.org/people/sorohanro/sounds/77706/
 	about->addComposer("Ukulele", "Henry Kailimai", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:Ukelele_-_Kailimai%27s_hene_-_Ukepedia.ogg
 	about->addComposer("Umbrella", "j1987", "CC0/Public Domain"); // https://freesound.org/people/j1987/sounds/73028/

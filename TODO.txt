@@ -22,8 +22,6 @@ Priority (required for next release):
   - piano
   - quail
   - raccoon
-  - train
-    - http://soundbible.com/tags-train.html)
   - whale 
     - https://digitalmedia.fws.gov/digital/collection/audio/id/7)
   - zebra
