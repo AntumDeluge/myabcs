@@ -38,6 +38,7 @@
   - accordion
   - airplane
   - cat
+  - clarinet
   - dog
   - elephant
   - flute
