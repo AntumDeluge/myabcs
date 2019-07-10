@@ -6,7 +6,6 @@ Priority (required for next release):
   - clarinet
   - dolphin
   - flute
-  - frog
   - guitar
   - harp
   - horse
