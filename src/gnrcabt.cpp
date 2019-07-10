@@ -450,7 +450,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Oboe", "acclivity", "CC BY-NC"); // https://freesound.org/people/acclivity/sounds/22686/
 	about->addComposer("Owl", wxEmptyString, "Public Domain");
 	about->addComposer("Piano", wxEmptyString, "Public Domain");
-	about->addComposer("Pig", "Robinhood76", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/Robinhood76/sounds/76796/
+	about->addComposer("Pig", "Robinhood76", "CC BY-NC"); // https://freesound.org/people/Robinhood76/sounds/76796/
 	about->addComposer("Quail");
 	about->addComposer("Quarter", "greenvwbeetle", "CC0/Public Domain"); // https://freesound.org/people/greenvwbeetle/sounds/423332/
 	about->addComposer("Quena", "CarlosCarty", "CC BY"); // https://freesound.org/people/CarlosCarty/sounds/463711/
