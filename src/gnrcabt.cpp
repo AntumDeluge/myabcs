@@ -328,7 +328,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Ice Cream", "Gerald_G", "Public Domain");
 	about->addArtist("Ice Skate", "Francesco Rollandin", "Public Domain");
 	about->addArtist("Igloo", "Jose Hevia", "Public Domain");
-	about->addArtist("Iguana", wxEmptyString, "Public Domain");
+	about->addArtist("Iguana", wxEmptyString, "Public Domain"); // https://www.wpclipart.com/animals/L/lizard/iguana/Iguana_Black.png.html
 	about->addArtist("Ipu", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98176
 	about->addArtist("Jaguar", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98089
 	about->addArtist("Jar", "DTRave", "Public Domain");
