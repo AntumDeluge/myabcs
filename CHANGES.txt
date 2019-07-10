@@ -71,3 +71,26 @@
 - Made code non-linux specific
 - Replaced images: noodle, pretzel, zipper
 - Added support for SVG images using wxSVG
+
+0.4.4:
+- Linux/Gtk fix: art credits sizing
+- Added "Back" option in ABC mode with "Backspace" key
+
+0.4.3:
+- Windows fix: About dialog
+
+0.4.2:
+- Minor fix: yangqin sound doesn't play
+
+0.4.1:
+- Windows fix: linked dll error
+
+0.4.0:
+- Added some new sounds & pictures
+- Created custom about dialog
+- Fixed Bugs:
+  - Pressing keys has no effect after minimizing window (Windows)
+- Holding down keys does not repeat action
+
+0.3.0:
+- Initial Release
