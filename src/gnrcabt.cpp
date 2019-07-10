@@ -472,7 +472,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Xylophone", "Tristan", "Sampling Plus 1.0"); // incorrect license of relicensed under CC0: https://freesound.org/people/Tristan/sounds/19459/
 	about->addComposer("Zebra"); // https://www.partnersinrhyme.com/soundfx/safari_sounds/safari_zebra2_wav.shtml (unsure of license)
 	about->addComposer("Zipper", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16332
-	about->addComposer("Zurna", "cdrk", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY: https://freesound.org/people/cdrk/sounds/18661/
+	about->addComposer("Zurna", "cdrk", "CC BY"); // https://freesound.org/people/cdrk/sounds/18661/
 
 	about->addToolkitInfo();
 	about->addMiscInfo();
