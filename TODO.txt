@@ -8,7 +8,6 @@ Priority (required for next release):
   - flute
   - guitar
   - harp
-  - horse
   - jaguar
   - lion
   - maracas
