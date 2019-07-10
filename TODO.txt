@@ -40,7 +40,6 @@ Non-priority:
 - Sounds to add:
   - giraffe
   - koala
-  - yak
 
 Fixes & pull-requests:
 - wxWidgets:

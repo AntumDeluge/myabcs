@@ -474,6 +474,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Whistle", "pawsound", "CC0/Public Domain"); // https://freesound.org/people/pawsound/sounds/154873/
 	about->addComposer("Xun" "franeknflute", "CC BY"); // https://freesound.org/people/franeknflute/sounds/200419/
 	about->addComposer("Xylophone", "Tristan", "CC0"); // https://freesound.org/people/Tristan/sounds/19459/
+	about->addComposer("Yak", "Jordan Irwin", "CC0"); // https://opengameart.org/node/98682
 	about->addComposer("Yangqin", "matiasromero", "CC0"); // https://freesound.org/people/matiasromero/sounds/22261/
 	about->addComposer("Zebra", "partnersinrhyme.com"); // https://www.partnersinrhyme.com/soundfx/safari_sounds/safari_zebra2_wav.shtml (unsure of license)
 	about->addComposer("Zipper", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16332

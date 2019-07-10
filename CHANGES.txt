@@ -38,6 +38,7 @@
   - rocking horse
   - umbrella
   - watch
+  - yak
   - yangqin
 - Replaced sound effects:
   - accordion
