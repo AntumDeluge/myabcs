@@ -420,7 +420,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Zurna", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98183
 
 	about->addComposer("Accordion", wxEmptyString, "Public Domain");
-	about->addComposer("Airplane", wxEmptyString, "Public Domain");
+	about->addComposer("Airplane", "Manuel Fidalgo (granizo)", "CC BY"); // https://freesound.org/people/granizo/sounds/401157/
 	about->addComposer("Bagpipes", "kyles", "CC0/Public Domain"); // https://freesound.org/people/kyles/sounds/453749/
 	about->addComposer("Bird", "Jc Guan", "Public Domain"); // http://soundbible.com/340-Bird-Song.html
 	about->addComposer("Bicycle", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16320

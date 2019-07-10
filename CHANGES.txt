@@ -35,6 +35,7 @@
   - umbrella
   - watch
 - Replaced sound effects:
+  - airplane
   - rooster
   - sheep
   - vulture
