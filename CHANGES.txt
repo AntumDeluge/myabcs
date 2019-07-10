@@ -42,6 +42,7 @@
   - elephant
   - frog
   - horse
+  - lion
   - rooster
   - sheep
   - train

@@ -9,7 +9,6 @@ Priority (required for next release):
   - guitar
   - harp
   - jaguar
-  - lion
   - maracas
   - mouse
   - owl
