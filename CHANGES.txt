@@ -35,6 +35,7 @@
   - ney
   - quarter
   - quena
+  - rocking horse
   - umbrella
   - watch
   - yangqin

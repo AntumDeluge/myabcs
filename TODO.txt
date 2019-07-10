@@ -40,7 +40,6 @@ Non-priority:
 - Sounds to add:
   - giraffe
   - koala
-  - rocking horse
   - yak
 
 Fixes & pull-requests:
