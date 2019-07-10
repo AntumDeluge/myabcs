@@ -4,7 +4,6 @@ Priority (required for next release):
   - owl
 - Sounds to be replaced or find source:
   - balloons
-  - cat
   - chalkboard
   - clarinet
   - dog
