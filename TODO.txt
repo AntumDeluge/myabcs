@@ -26,7 +26,6 @@ Priority (required for next release):
     - https://digitalmedia.fws.gov/digital/collection/audio/id/7)
   - zebra
   - Licensed under Sampling Plus:
-    - oboe (author has relicensed under CC BY-NC, see notes in source code)
     - pig (author has relicensed under CC BY-NC, see notes in source code)
 
 Non-priority:

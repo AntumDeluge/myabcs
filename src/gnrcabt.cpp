@@ -447,7 +447,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Lion", wxEmptyString, "Public Domain");
 	about->addComposer("Maracas", wxEmptyString, "Public Domain");
 	about->addComposer("Mouse");
-	about->addComposer("Oboe", "acclivity", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/acclivity/sounds/22686/
+	about->addComposer("Oboe", "acclivity", "CC BY-NC"); // https://freesound.org/people/acclivity/sounds/22686/
 	about->addComposer("Owl", wxEmptyString, "Public Domain");
 	about->addComposer("Piano", wxEmptyString, "Public Domain");
 	about->addComposer("Pig", "Robinhood76", "Sampling Plus 1.0"); // incorrect license or relicensed under CC BY-NC: https://freesound.org/people/Robinhood76/sounds/76796/
