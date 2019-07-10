@@ -5,7 +5,6 @@ Priority (required for next release):
 - Sounds to be replaced or find source:
   - clarinet
   - dolphin
-  - elephant
   - flute
   - frog
   - guitar

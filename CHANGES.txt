@@ -39,6 +39,7 @@
   - airplane
   - cat
   - dog
+  - elephant
   - rooster
   - sheep
   - train
