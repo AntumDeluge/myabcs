@@ -49,6 +49,12 @@ WXLIBS = wx-config --libs std,richtext
 SDLLIBS = sdl2-config --libs
 LINKEROPTS = -Wl,--strip-all
 
+ifdef STATIC
+	WXLIBS += --static
+	SDLLIBS = sdl2-config --static-libs
+	LINKEROPTS += -static
+endif
+
 ### Debugging ###
 
 ifdef DEBUG
