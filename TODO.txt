@@ -1,7 +1,6 @@
 Priority (required for next release):
 - Images to be replaced or find source:
   - iguana
-  - owl
 - Sounds to be replaced or find source:
   - guitar
   - jaguar
