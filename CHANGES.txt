@@ -37,6 +37,7 @@
   - quena
   - umbrella
   - watch
+  - yangqin
 - Replaced sound effects:
   - accordion
   - airplane

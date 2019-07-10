@@ -42,7 +42,6 @@ Non-priority:
   - koala
   - rocking horse
   - yak
-  - yangqin
 
 Fixes & pull-requests:
 - wxWidgets:
