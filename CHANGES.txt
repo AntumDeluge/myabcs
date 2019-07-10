@@ -24,6 +24,7 @@
   - bagpipes
   - balloons
   - bicycle
+  - chalkboard
   - clock
   - fire
   - horn
