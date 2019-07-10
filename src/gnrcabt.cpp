@@ -427,7 +427,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Cat", "blimp66", "CC BY"); // https://freesound.org/people/blimp66/sounds/397661/
 	about->addComposer("Clarinet", wxEmptyString, "Public Domain");
 	about->addComposer("Clock", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16323
-	about->addComposer("Dog", wxEmptyString, "Public Domain");
+	about->addComposer("Dog", "ivolipa", "CC0"); // https://freesound.org/people/ivolipa/sounds/328730/
 	about->addComposer("Dolphin");
 	about->addComposer("Drums", "imakepitart", "Public Domain"); // https://commons.wikimedia.org/wiki/File:Drums.ogg (originally from pdsounds.org)
 	about->addComposer("Electric Guitar", "Mattgirling", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:GuitarRig4.ogg

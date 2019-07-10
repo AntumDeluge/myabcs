@@ -38,6 +38,7 @@
   - accordion
   - airplane
   - cat
+  - dog
   - rooster
   - sheep
   - train
