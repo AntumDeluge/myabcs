@@ -9,6 +9,7 @@ Priority (required for next release):
 - Include copies of license texts with binary release
 
 Non-priority:
+- Indent line breaks in changelog
 - Copy library (dll) dependencies into binary release
 - Make scrolling with left/right arrows in "main" mode only available if debugging enabled
 - Play sound if wrong key pressed in "main" mode
