@@ -42,6 +42,7 @@
   - elephant
   - flute
   - frog
+  - harp
   - horse
   - lion
   - mouse
