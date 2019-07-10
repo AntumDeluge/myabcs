@@ -18,8 +18,6 @@ Priority (required for next release):
   - piano
   - quail
   - raccoon
-  - whale 
-    - https://digitalmedia.fws.gov/digital/collection/audio/id/7)
   - zebra
 
 Non-priority:

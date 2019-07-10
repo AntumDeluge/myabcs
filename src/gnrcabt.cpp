@@ -466,7 +466,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Violin", _T("Edit Kov\u00E1cs"), "Attribution-ShareAlike 2.0 Germany"); // https://commons.wikimedia.org/wiki/File:Whiskey-youre-the-devil-violin.ogg
 	about->addComposer("Vulture", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16329
 	about->addComposer("Watch", "Nicolas4677", "CC0/Public Domain"); // https://freesound.org/people/Nicolas4677/sounds/446611/
-	about->addComposer("Whale", wxEmptyString, "Public Domain"); // https://www.freesoundeffects.com/free-track/whale2-466223/ (claims license is "non-commercial", need to check other sources)
+	about->addComposer("Whale", "copyrighy free sound-effect", "CC BY"); // https://www.youtube.com/watch?v=ZYwSxoRAkuQ
 	about->addComposer("Whistle", "pawsound", "CC0/Public Domain"); // https://freesound.org/people/pawsound/sounds/154873/
 	about->addComposer("Xun" "franeknflute", "CC BY"); // https://freesound.org/people/franeknflute/sounds/200419/
 	about->addComposer("Xylophone", "Tristan", "CC0"); // https://freesound.org/people/Tristan/sounds/19459/
