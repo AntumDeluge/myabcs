@@ -39,7 +39,6 @@ Non-priority:
   - fire (maybe)
 - Sounds to add:
   - giraffe
-  - ipu
   - koala
   - rocking horse
   - yak

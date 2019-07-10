@@ -28,6 +28,7 @@
   - clock
   - fire
   - horn
+  - ipu
   - jug
   - keyboard
   - lute
