@@ -40,6 +40,7 @@
   - cat
   - dog
   - elephant
+  - flute
   - frog
   - horse
   - lion
