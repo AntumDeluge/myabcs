@@ -16,6 +16,7 @@
 #include "res/logo_wx.h"
 #include "res/logo_wxsvg.h"
 
+#include <SDL2/SDL_version.h>
 #include <wx/ffile.h>
 #include <wx/hyperlink.h>
 #include <wx/mstream.h>
@@ -167,12 +168,16 @@ void GenericAbout::addToolkitInfo() {
 	infosizer->Add(new wxStaticText(tab_info, -1, "Made with:"), 0, wxALIGN_CENTER);
 	infosizer->AddSpacer(10);
 
+	SDL_version sdl_v;
+	SDL_VERSION(&sdl_v);
+	const wxString SDL_VERSION_STRING = wxString::Format("Simple DirectMedia Layer %d.%d.%d", sdl_v.major, sdl_v.minor, sdl_v.patch);
+
 	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxwidgets_svg, sizeof(wxwidgets_svg), 75, 75)));
 	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(sdl_svg, sizeof(sdl_svg), 75, 75)));
 	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxsvg_svg, sizeof(wxsvg_svg), 75, 75)));
 
-	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
-	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
+	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, wxVERSION_STRING, "https://www.wxwidgets.org/");
+	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, SDL_VERSION_STRING, "https://libsdl.org/");
 	wxHyperlinkCtrl* wxsvg_link = new wxHyperlinkCtrl(tab_info, -1, "wxSVG", "http://wxsvg.sourceforge.net/");
 
 	// TODO: Add SDL_mixer information (maybe)

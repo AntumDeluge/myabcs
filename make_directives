@@ -88,7 +88,7 @@ $(CREDPANEL_O): $(CREDPANEL_C) $(CREDPANEL_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` -Iinclude $(CREDPANEL_C)
 
 $(GNRCABT_O): $(GNRCABT_C) $(GNRCABT_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` -Iinclude $(GNRCABT_C)
+	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` -Iinclude $(GNRCABT_C)
 
 $(SOUND_O): $(SOUND_C) $(SOUND_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` -Iinclude $(SOUND_C)
