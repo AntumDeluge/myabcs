@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <wx/frame.h>
+#include <wx/msgdlg.h>
 #include <wx/window.h>
 
 using namespace std;
@@ -66,6 +67,9 @@ void initLog() {
 
 void logMessage(const wxLogLevel level, const wxString msg) {
 	wxLogGeneric(level, msg);
+	if (level == wxLOG_Error) {
+		wxMessageBox(msg, "Error", wxICON_ERROR);
+	}
 }
 
 void logMessage(const wxString msg) {
