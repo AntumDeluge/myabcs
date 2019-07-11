@@ -8,6 +8,7 @@
 #ifndef MYABCS_ABC_H
 #define MYABCS_ABC_H
 
+#include "log.h"
 #include "resourcelist.h"
 
 #include <wx/animate.h>
@@ -81,7 +82,10 @@ private:
 	void OnFrameFocus(wxFocusEvent& event); // Redirect focus to main panel
 	void onLoseFocus(wxFocusEvent& event);
 
-	void OnToggleLogWindow(wxCommandEvent& event);
+	// logging
+	LogWindow* logWindow;
+	void onToggleLogWindow(wxCommandEvent& event);
+
 	void onClose(wxCloseEvent& event);
 };
 

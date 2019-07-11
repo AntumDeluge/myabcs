@@ -26,7 +26,7 @@ public:
 };
 
 
-extern void initLog(wxWindow* parent);
+extern void initLog();
 
 extern void logMessage(const wxLogLevel level, const wxString msg);
 
@@ -35,8 +35,6 @@ extern void logMessage(const wxString msg);
 extern void logError(const wxString msg);
 
 extern void logCurrentError();
-
-extern void toggleLogWindow();
 
 extern void disableLogging();
 

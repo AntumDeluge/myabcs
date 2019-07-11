@@ -20,7 +20,7 @@
 
 
 bool App::OnInit() {
-	// FIXME: logger needs initialized before everything else
+	initLog();
 
 	// initialize environment directories
 	wxString full_path = wxStandardPaths::Get().GetExecutablePath();
@@ -46,9 +46,6 @@ bool App::OnInit() {
 	MainWindow* frame = new MainWindow();
 	frame->Show(true);
 	SetTopWindow(frame);
-
-	// FIXME: logging is not initialized for MainWindow constructor
-	initLog(frame);
 
 	// start in "main" category
 	frame->setCategory(ID_ABC);

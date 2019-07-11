@@ -13,8 +13,7 @@
 
 using namespace std;
 
-
-static LogWindow* abclog;
+static wxLog* logger;
 static bool initialized = false;
 
 static int err_code = 0;
@@ -57,19 +56,16 @@ void LogWindow::Show(const bool show) {
 }
 
 
-void initLog(wxWindow* parent) {
+void initLog() {
 	if (!initialized) {
-		abclog = new LogWindow(parent, _T("MyABCs Debug Log"));
-		wxLog::SetActiveTarget(abclog);
+		logger = new wxLogStream(&cout);
+		wxLog::SetActiveTarget(logger);
 		initialized = true;
 	}
 }
 
 void logMessage(const wxLogLevel level, const wxString msg) {
-	if (abclog->IsEnabled()) {
-		wxLogGeneric(level, msg);
-		cout << msg << endl;
-	}
+	wxLogGeneric(level, msg);
 }
 
 void logMessage(const wxString msg) {
@@ -102,10 +98,6 @@ void logCurrentError() {
 	}
 
 	resetError();
-}
-
-void toggleLogWindow() {
-	abclog->Show(!abclog->IsShown());
 }
 
 void disableLogging() {

@@ -11,7 +11,6 @@
 #include "fonts.h"
 #include "gnrcabt.h"
 #include "id.h"
-#include "log.h"
 #include "paths.h"
 #include "sound.h"
 #include "res/ani_loading.h"
@@ -124,9 +123,6 @@ MainWindow::MainWindow() :
 	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnSetCategory, this);
 	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnHelp, this, ID_HELP);
 	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnAbout, this, wxID_ABOUT);
-#ifdef DEBUG
-	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::OnToggleLogWindow, this, ID_LOG);
-#endif
 
 	// Status bar
 	status = new wxStatusBar(this, -1);
@@ -184,6 +180,12 @@ MainWindow::MainWindow() :
 	Bind(EVT_CATEGORY_LOADED, &MainWindow::onCategoryLoaded, this);
 	// catch close event to clean up auxiliary threads
 	Bind(wxEVT_CLOSE_WINDOW, &MainWindow::onClose, this);
+
+	// logging
+	logWindow = new LogWindow(this);
+#ifdef DEBUG
+	Bind(wxEVT_COMMAND_TOOL_CLICKED, &MainWindow::onToggleLogWindow, this, ID_LOG);
+#endif
 }
 
 void MainWindow::ReloadDisplay(bool update) {
@@ -568,8 +570,8 @@ void MainWindow::onLoseFocus(wxFocusEvent& event) {
 	key_pressed = -1;
 }
 
-void MainWindow::OnToggleLogWindow(wxCommandEvent& event) {
-	toggleLogWindow();
+void MainWindow::onToggleLogWindow(wxCommandEvent& event) {
+	logWindow->Show(!logWindow->IsShown());
 }
 
 void MainWindow::onClose(wxCloseEvent& event) {
