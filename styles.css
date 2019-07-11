@@ -1,4 +1,9 @@
 
+@font-face {
+	font-family: sniglet;
+	src: url('data/font/Sniglet-Regular.ttf');
+}
+
 body {
 	background-image: url('data/airplane-mask.png');
 }
@@ -35,24 +40,29 @@ img.screenshot {
 table.newsfeed {
 	margin-left: auto;
 	margin-right: auto;
+	font-family: sniglet;
 }
 
 td.menucell {
 	padding: 10px;
 	text-align: center;
+	font-family: sniglet;
 	font-size: 14pt;
 }
 
 h2.appinfo {
 	text-align: center;
+	font-family: sniglet;
 	font-size: 30pt;
 }
 
 h5.author:after {
 	content: 'By Jordan Irwin (AntumDeluge)\ALogo by Petri Lummemaki';
 	white-space: pre;
+	font-family: sniglet;
 }
 
 h5.redirect:before {
 	content: 'If you are not redirected, click the link below:';
+	font-family: sniglet;
 }
