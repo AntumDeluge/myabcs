@@ -49,6 +49,11 @@ WXLIBS = wx-config --libs std,richtext
 SDLLIBS = sdl2-config --libs
 LINKEROPTS = -Wl,--strip-all
 
+ifdef WXVERSION
+	WXFLAGS += --version=$(WXVERSION)
+	WXLIBS += --version=$(WXVERSION)
+endif
+
 ifdef STATIC
 	WXLIBS += --static
 	SDLLIBS = sdl2-config --static-libs
