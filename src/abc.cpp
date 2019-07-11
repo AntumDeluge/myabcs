@@ -577,7 +577,7 @@ void MainWindow::onClose(wxCloseEvent& event) {
 	logMessage("Exiting program ...");
 
 	// FIXME: segfault occurs if log messages appear while shutting down
-	endLog();
+	disableLogging();
 
 	// FIXME: appears to be a delay when frame "X" is pressed
 	// clean up sound thread

@@ -108,7 +108,7 @@ void toggleLogWindow() {
 	abclog->Show(!abclog->IsShown());
 }
 
-void endLog() {
+void disableLogging() {
 	wxLog::EnableLogging(false);
 }
 

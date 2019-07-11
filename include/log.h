@@ -38,7 +38,7 @@ extern void logCurrentError();
 
 extern void toggleLogWindow();
 
-extern void endLog();
+extern void disableLogging();
 
 extern void setErrorCode(int err);
 
