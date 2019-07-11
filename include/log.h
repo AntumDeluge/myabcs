@@ -19,7 +19,7 @@
  */
 class LogWindow: public wxLogWindow {
 public:
-	LogWindow(wxWindow* parent, wxString title);
+	LogWindow(wxWindow* parent, wxString title="MyABCs Debug Log");
 	bool IsShown();
 	void Show(const bool show);
 	void Show() { return Show(true); }
