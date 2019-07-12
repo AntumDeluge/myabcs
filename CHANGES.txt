@@ -51,6 +51,7 @@
   - elephant
   - flute
   - frog
+  - guitar
   - harp
   - horse
   - lion
