@@ -426,7 +426,14 @@ void MainWindow::handleKeyArrow(const int key_code) {
 	// ignore backspace key for categories other than "main"
 	if (cur_category != ID_ABC) return;
 
-	if (key_code == WXK_LEFT || key_code == WXK_BACK) {
+	const bool back = key_code == WXK_LEFT || key_code == WXK_BACK;
+	bool forward = false;
+
+#ifdef DEBUG
+	forward = key_code == WXK_RIGHT;
+#endif
+
+	if (back) {
 		if (getCurrentLetter() != "A") {
 			if (game_end) {
 				if (soundPlayer->isPlaying()) soundPlayer->stop();
@@ -436,7 +443,7 @@ void MainWindow::handleKeyArrow(const int key_code) {
 				IncrementLetter(false);
 			}
 		}
-	} else {
+	} else if (forward) {
 		if (!game_end && getCurrentLetter() != "Z") {
 			if (!soundPlayer->isPlaying()) {
 				IncrementLetter();
