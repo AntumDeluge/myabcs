@@ -23,8 +23,6 @@ Non-priority:
 - Show keyboard for "main" category
 - Embed free fonts (partially implemented, works on Windows only)
 - Clean up quiche SVG
-- Sounds to be trimmed:
-  - fire (maybe)
 - Fix static build (wxSVG not linking statically on Win32)
 
 Fixes & pull-requests:
