@@ -3,7 +3,6 @@ Priority (required for next release):
   - maracas
   - piano
   - raccoon
-  - zebra
 - Include copies of license texts with binary release
 
 Non-priority:

@@ -65,6 +65,7 @@
   - vulture
   - whale
   - whistle
+  - zebra
   - zipper
 
 0.4.5:
