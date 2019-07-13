@@ -457,7 +457,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Mouse", "Jordan Irwin", "CC0"); // https://opengameart.org/node/16331
 	about->addComposer("Oboe", "acclivity", "CC BY-NC"); // https://freesound.org/people/acclivity/sounds/22686/
 	about->addComposer("Owl", "Anthousai", "CC0"); // https://freesound.org/people/Anthousai/sounds/398734/
-	about->addComposer("Piano", wxEmptyString, "Public Domain");
+	about->addComposer("Piano", "Scott Joplin / Tim Starling", "Public Domain"); // https://commons.wikimedia.org/wiki/File:Maple_leaf_rag.ogg
 	about->addComposer("Pig", "Robinhood76", "CC BY-NC"); // https://freesound.org/people/Robinhood76/sounds/76796/
 	about->addComposer("Quail", "PrincessGrace", "CC0"); // https://freesound.org/people/PrincessGrace/sounds/329371/
 	about->addComposer("Quarter", "greenvwbeetle", "CC0/Public Domain"); // https://freesound.org/people/greenvwbeetle/sounds/423332/

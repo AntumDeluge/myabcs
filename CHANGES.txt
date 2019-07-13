@@ -58,6 +58,7 @@
   - lion
   - mouse
   - owl
+  - piano
   - quail
   - rooster
   - sheep

@@ -1,7 +1,6 @@
 Priority (required for next release):
 - Sounds to be replaced or find source:
   - maracas
-  - piano
   - raccoon
 - Include copies of license texts with binary release
 
