@@ -60,6 +60,7 @@
   - owl
   - piano
   - quail
+  - raccoon
   - rooster
   - sheep
   - train

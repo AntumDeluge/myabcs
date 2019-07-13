@@ -1,6 +1,4 @@
 Priority (required for next release):
-- Sounds to be replaced or find source:
-  - raccoon
 - Include copies of license texts with binary release
 
 Non-priority:
