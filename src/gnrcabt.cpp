@@ -448,7 +448,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Horn(sound", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16322
 	about->addComposer("Horse", "GoodListener", "CC BY"); // https://freesound.org/people/GoodListener/sounds/322443/
 	about->addComposer("Ipu", "Stumber", "CC0"); // https://freesound.org/people/Stumber/sounds/207863/
-	about->addComposer("Jaguar", wxEmptyString, "Public Domain");
+	about->addComposer("Jaguar", "About Zoos", "CC BY"); // https://www.youtube.com/watch?v=VJ0RCZXu0v4
 	about->addComposer("Jug", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16325
 	about->addComposer("Kazoo", "NoiseCollector", "CC BY"); // https://freesound.org/people/NoiseCollector/sounds/7781/
 	about->addComposer("Keyboard", "Trollarch2", "CC0/Public Domain"); // https://freesound.org/people/Trollarch2/sounds/331656/

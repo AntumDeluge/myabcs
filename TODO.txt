@@ -1,6 +1,5 @@
 Priority (required for next release):
 - Sounds to be replaced or find source:
-  - jaguar
   - maracas
   - piano
   - raccoon

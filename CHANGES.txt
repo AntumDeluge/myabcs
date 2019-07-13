@@ -54,6 +54,7 @@
   - guitar
   - harp
   - horse
+  - jaguar
   - lion
   - mouse
   - owl
