@@ -435,7 +435,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Clarinet", "Serolillo", "CC BY 2.5"); // https://commons.wikimedia.org/wiki/File:Jazz_Clarinet.ogg
 	about->addComposer("Clock", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16323
 	about->addComposer("Dog", "ivolipa", "CC0"); // https://freesound.org/people/ivolipa/sounds/328730/
-	about->addComposer("Dolphin", "VOA", "Public Domain"); // https://commons.wikimedia.org/wiki/File:Scientists_Try_to_Crack_Dolphins%27_Language.webm
+	about->addComposer("Dolphin", "Nicholas Judy Sound FX Studios", "CC BY"); // https://www.youtube.com/watch?v=_EoRq84vtTo
 	about->addComposer("Drums", "imakepitart", "Public Domain"); // https://commons.wikimedia.org/wiki/File:Drums.ogg (originally from pdsounds.org)
 	about->addComposer("Electric Guitar", "Mattgirling", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:GuitarRig4.ogg
 	about->addComposer("Elephant", "vataaa", "CC0"); // https://freesound.org/people/vataaa/sounds/148873/
