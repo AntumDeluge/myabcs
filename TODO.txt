@@ -30,6 +30,7 @@ Non-priority:
 - Sounds to add:
   - giraffe
   - koala
+- Fix static build (wxSVG not linking statically on Win32)
 
 Fixes & pull-requests:
 - wxWidgets:
