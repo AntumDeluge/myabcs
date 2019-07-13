@@ -1,5 +1,4 @@
 Priority (required for next release):
-- Include copies of license texts with binary release
 
 Non-priority:
 - Indent line breaks in changelog
