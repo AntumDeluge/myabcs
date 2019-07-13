@@ -28,6 +28,7 @@
   - chalkboard
   - clock
   - fire
+  - giraffe
   - horn
   - ipu
   - jug
