@@ -32,6 +32,7 @@
   - ipu
   - jug
   - keyboard
+  - koala
   - lute
   - ney
   - quarter
