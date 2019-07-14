@@ -365,7 +365,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Onion", "Chrisdesign", "Public Domain");
 	about->addArtist("Orca", "Matthew Gates", "Public Domain"); // unused
 	about->addArtist("Origami", "badaman", "Public Domain");
-	about->addArtist("Owl", wxEmptyString, "Public Domain"); // https://www.wpclipart.com/animals/birds/O/owl/owl_3/Eagle_Owl.png.html
+	about->addArtist("Owl", wxEmptyString, "Public Domain"); // https://www.wpclipart.com/animals/birds/O/owl/Owl_4/eagle_owl.png.html
 	about->addArtist("Paint", "valessiobrito", "Public Domain");
 	about->addArtist("Paper Airplane", "nicubunu", "Public Domain");
 	about->addArtist("Piano", "ArtFavor", "Public Domain");
