@@ -533,12 +533,12 @@ void MainWindow::OnHelp(wxCommandEvent& event) {
 	textarea->BeginAlignment(wxTEXT_ALIGNMENT_CENTER);
 	textarea->BeginFontSize(14);
 	textarea->BeginBold();
-	textarea->WriteText("HOW TO PLAY");
+	textarea->WriteText("HOW TO PLAY\n");
 	textarea->EndAllStyles();
 
 	textarea->BeginBold();
 	textarea->BeginUnderline();
-	textarea->WriteText("\n\nSelecting a category:\n");
+	textarea->WriteText("\nSelecting a category:\n");
 	textarea->EndAllStyles();
 	textarea->BeginLeftIndent(50);
 	textarea->WriteText("\
