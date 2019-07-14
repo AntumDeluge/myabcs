@@ -528,27 +528,56 @@ void MainWindow::OnHelp(wxCommandEvent& event) {
 	wxRichTextCtrl *textarea = new wxRichTextCtrl(help, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 	wxButton *ok = new wxButton(help, wxID_OK);
 
-	wxString helptext(_T("How to use:\n\
-Selecting a mode:\n\
-	The four icons on the left side of the toolbar represent the\n\
-	different modes.  Use the \"Tab\" key to toggle between modes,\n\
-	or click on an icon with the mouse.\n\
-\n\
-Alphabet Mode:\n\
-	The first icon on the left is the Alphabet Mode.  Press the\n\
-	letter on the keyboard that is displayed on the screen to\n\
-	cycle through the English alphabet.  Press the \"Backspace\"\n\
-	key to move back one letter.  Finish by finding all the\n\
-	letters, A-Z.\n\
-\n\
-Other Modes:\n\
-	In all other modes, simply press a key on the keyboard to see\n\
-	a letter with a related image and description.\n\
-\n\
-Sounds:\n\
-	Press the spacebar to hear the name of the pictured object."));
+	textarea->Newline();
 
-	textarea->SetValue(helptext);
+	textarea->BeginAlignment(wxTEXT_ALIGNMENT_CENTER);
+	textarea->BeginFontSize(14);
+	textarea->BeginBold();
+	textarea->WriteText("HOW TO PLAY");
+	textarea->EndAllStyles();
+
+	textarea->BeginBold();
+	textarea->BeginUnderline();
+	textarea->WriteText("\n\nSelecting a category:\n");
+	textarea->EndAllStyles();
+	textarea->BeginLeftIndent(50);
+	textarea->WriteText("\
+The four icons on the left side of the toolbar represent the \
+different modes.  Use the \"Tab\" key to toggle between modes, \
+or click on an icon with the mouse.\n");
+	textarea->EndLeftIndent();
+
+	textarea->BeginBold();
+	textarea->BeginUnderline();
+	textarea->WriteText("\nAlphabet:\n");
+	textarea->EndAllStyles();
+	textarea->BeginLeftIndent(50);
+	textarea->WriteText("\
+The first icon on the left is the Alphabet Mode.  Press the \
+letter on the keyboard that is displayed on the screen to \
+cycle through the English alphabet.  Press the \"Backspace\" \
+key to move back one letter.  Finish by finding all the \
+letters, A-Z.\n");
+	textarea->EndLeftIndent();
+
+	textarea->BeginBold();
+	textarea->BeginUnderline();
+	textarea->WriteText("\nOther categories:\n");
+	textarea->EndAllStyles();
+	textarea->BeginLeftIndent(50);
+	textarea->WriteText("\
+In all other modes, simply press a key on the keyboard to see \
+a letter with a related image and description.\n");
+	textarea->EndLeftIndent();
+
+	textarea->BeginBold();
+	textarea->BeginUnderline();
+	textarea->WriteText("\nSounds:\n");
+	textarea->EndAllStyles();
+	textarea->BeginLeftIndent(50);
+	textarea->WriteText("\
+Press the spacebar to hear the name of the pictured object.\n");
+	textarea->EndLeftIndent();
 
 	wxBoxSizer *help_sizer = new wxBoxSizer(wxVERTICAL);
 	help_sizer->Add(textarea, 1, wxEXPAND);
@@ -557,9 +586,8 @@ Sounds:\n\
 	help->SetAutoLayout(true);
 	help->SetSizer(help_sizer);
 	help->Layout();
-	help->ShowModal();
-
 	help->CenterOnParent();
+	help->ShowModal();
 }
 
 void MainWindow::OnAbout(wxCommandEvent& event) {
