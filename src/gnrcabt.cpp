@@ -170,22 +170,25 @@ void GenericAbout::addToolkitInfo() {
 
 	SDL_version sdl_v;
 	SDL_VERSION(&sdl_v);
-	const wxString SDL_VERSION_STRING = wxString::Format("Simple DirectMedia Layer %d.%d.%d", sdl_v.major, sdl_v.minor, sdl_v.patch);
+	const wxString wx_version = wxString::Format("v%s", wxSplit(wxVERSION_STRING, ' ')[1]);
+	const wxString sdl_version = wxString::Format("v%d.%d.%d", sdl_v.major, sdl_v.minor, sdl_v.patch);
 
 	wxStaticBitmap* wx_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxwidgets_svg, sizeof(wxwidgets_svg), 75, 75)));
 	wxStaticBitmap* sdl_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(sdl_svg, sizeof(sdl_svg), 75, 75)));
 	wxStaticBitmap* wxsvg_logo = new wxStaticBitmap(tab_info, -1, wxBitmap(imageFromSVG(wxsvg_svg, sizeof(wxsvg_svg), 75, 75)));
 
-	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, wxVERSION_STRING, "https://www.wxwidgets.org/");
-	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, SDL_VERSION_STRING, "https://libsdl.org/");
+	wxHyperlinkCtrl* wx_link = new wxHyperlinkCtrl(tab_info, -1, "wxWidgets", "https://www.wxwidgets.org/");
+	wxHyperlinkCtrl* sdl_link = new wxHyperlinkCtrl(tab_info, -1, "Simple DirectMedia Layer", "https://libsdl.org/");
 	wxHyperlinkCtrl* wxsvg_link = new wxHyperlinkCtrl(tab_info, -1, "wxSVG", "http://wxsvg.sourceforge.net/");
 
 	// TODO: Add SDL_mixer information (maybe)
-	wxFlexGridSizer* tk_layout = new wxFlexGridSizer(4, 2, 10, 10);
+	wxFlexGridSizer* tk_layout = new wxFlexGridSizer(6, 2, 10, 10);
 	tk_layout->Add(wx_logo, 0, wxALIGN_CENTER);
 	tk_layout->Add(sdl_logo, 0, wxALIGN_CENTER);
 	tk_layout->Add(wx_link, 0, wxALIGN_CENTER);
 	tk_layout->Add(sdl_link, 0, wxALIGN_CENTER);
+	tk_layout->Add(new wxStaticText(tab_info, -1, wx_version), 0, wxALIGN_CENTER);
+	tk_layout->Add(new wxStaticText(tab_info, -1, sdl_version), 0, wxALIGN_CENTER);
 	tk_layout->Add(wxsvg_logo, 0, wxALIGN_CENTER);
 	tk_layout->AddStretchSpacer();
 	tk_layout->Add(wxsvg_link, 0, wxALIGN_CENTER);
