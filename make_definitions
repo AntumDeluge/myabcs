@@ -36,7 +36,7 @@ LIBDIR = $(DESTDIR)/lib
 ### Compiling ###
 
 CC = g++
-CFLAGS = -c
+CFLAGS = -c -std=c++11
 CXXFLAGS = $(CFLAGS)
 WXFLAGS = wx-config --cxxflags
 SDLFLAGS = sdl2-config --cflags
