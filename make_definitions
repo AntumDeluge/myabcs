@@ -44,7 +44,7 @@ OBJ_SUF = .o
 
 ### Linking ###
 
-LIBS = -lwxsvg -lSDL2_mixer -lpthread
+LIBS = -lSDL2_mixer -lpthread
 WXLIBS = wx-config --libs std,richtext
 SDLLIBS = sdl2-config --libs
 LINKEROPTS = -Wl,--strip-all
@@ -55,9 +55,12 @@ ifdef WXVERSION
 endif
 
 ifdef STATIC
+	LIBS += -l:libwxsvg.a
 	WXLIBS += --static
-	SDLLIBS = sdl2-config --static-libs
-	LINKEROPTS += -static
+	#SDLLIBS = sdl2-config --static-libs
+	LINKEROPTS += -static-libgcc -static-libstdc++
+else
+	LIBS += -lwxsvg
 endif
 
 ifdef EXTRA_LIBS
