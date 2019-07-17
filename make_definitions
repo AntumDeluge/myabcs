@@ -60,6 +60,10 @@ ifdef STATIC
 	LINKEROPTS += -static
 endif
 
+ifdef EXTRA_LIBS
+	LIBS += $(EXTRA_LIBS)
+endif
+
 ### Debugging ###
 
 ifdef DEBUG
