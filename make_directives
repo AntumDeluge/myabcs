@@ -109,7 +109,7 @@ $(ID_O): $(ID_C) $(ID_D)
 	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINGS) -Iinclude $(ID_C)
 
 $(WINRESOURCES_O): win_resources.rc
-	windres `$(WXFLAGS) | sed -e 's|-fpermissive||'` win_resources.rc $(WINRESOURCES_O)
+	windres `$(WXFLAGS) | sed -e 's|-fpermissive||' -e 's|-mthreads||'` win_resources.rc $(WINRESOURCES_O)
 
 install-x11: data/resource/x11/myabcs.desktop data/resource/logo/myabcs.svg
 	@target_dir="$(DESTDIR)$(PREFIX)"; \
