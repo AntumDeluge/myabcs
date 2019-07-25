@@ -17,6 +17,35 @@ else
 	REL_NAME = "$(PNAME)-$(VERSION)"
 endif
 
+### Help ###
+t_bold = $(shell tput bold)
+t_normal = $(shell tput sgr0)
+t_green = $(shell tput setaf 2)
+t_hilight = $(t_bold)$(t_green)
+HELP_STRING = "\n\
+Building $(PNAME_T) $(VERSION):\n\
+\n\
+Requirements:\n\
+\tGNU Make\tBSD Make was previously supported but may no\n\t\t\tlonger work.\n\
+\twxWidgets 3.x\thttps://wxwidgets.org/\n\
+\twxSVG\t\thttp://wxsvg.sourceforge.net/\n\
+\tSDL2\t\thttps://libsdl.org/\n\
+\tPThreads\tLinux: Check your package manager for a library\n\t\t\timplementation.\n\t\t\tWindows: If your compiler does not have an\n\t\t\timplementation you can download Pthreads-w32\n\t\t\t( http://sourceware.org/pthreads-win32/ ).\n\
+\n\
+Make targets:\n\
+\thelp\t\tShow this help information.\n\
+\tall (default)\tCompile & link executable.\n\
+\tinstall\t\tInstall or stage files for release.\n\
+\tstage\t\tSame as $(t_hilight)install$(t_normal).\n\
+\tuninstall\tRemove files from system or stage directory.\n\
+\tpack\t\tZip contentns of stage directory into archive\n\t\t\tfor release.\n\
+\n\
+Environment variables:\n\
+\tSTATIC\t\tDefine to create static build (note: SDL\n\t\t\tlibraries are still linked dynamically).\n\
+\tWXVERSION\tUse a version of wxWidgets other than the default.\n\
+\tEXTRA_LIBS\tUse this variable to manually link to libraries\n\t\t\t(example: EXTRA_LIBS=\"-lpng -lz\"). This should only\n\t\t\tbe used if linker errors are encountered.\n\
+\tREL_SUFFIX\tAppends text to filename of release archive when\n\t\t\t$(t_hilight)make pack$(t_normal) is called."
+
 ### Environment ###
 
 ifeq ($(OS), Windows_NT)

@@ -16,7 +16,6 @@ Non-priority:
 - Set category items dynamically from image filenames
 - Normalize file & directory paths
 - PNG & SVG jars are different colors
-- Update README
 - Use config to determine environment (locatation of data files, etc.)
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing

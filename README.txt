@@ -1,89 +1,67 @@
 
-MyABCs 0.4.5
+MyABCs 0.4.6
 
 
-------------------------------------
-Dependencies                        |
-------------------------------------
-wxWidgets 3.x   (https://wxwidgets.org/)
-SDL2            (https://libsdl.org/)
-PThreads        (http://sourceforge.net/projects/mingw)
+ --------------
+| Requirements |
+ --------------
+GNU Make        BSD Make was previously supported but may no
+                longer work.
+wxWidgets 3.x   https://wxwidgets.org/
+wxSVG           http://wxsvg.sourceforge.net/
+SDL2            https://libsdl.org/
+PThreads        Linux: Check your package manager for a library
+                implementation.
+                Windows: If your compiler does not have an
+                implementation you can download Pthreads-w32
+                ( http://sourceware.org/pthreads-win32/ ).
+
+NOTE: I plan to switch to CMake ( https://cmake.org/ ) build generator eventually.
 
 
------------------------------------------------------------------
-Compiling with GNU Make, GNU G++, MSYS/MinGW, BSD Make, & Clang  |
------------------------------------------------------------------
+ ------------------------------------------------------------
+| Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.) |
+ ------------------------------------------------------------
 
-Navigate to the source folder from the command line/terminal
+1) Navigate to the source folder from the command line/terminal.
+2) To compile execute:
+    ‣ make
+3) To install execute:
+    ‣  make install (on Windows this puts all files into "build/stage/myabcs" directory)
+4) To zip files into release archive execute:
+    ‣  make pack
 
+Make targets:
+    help            Show this help information.
+    all (default)   Compile & link executable.
+    install         Install or stage files for release.
+    stage           Same as install.
+    uninstall       Remove files from system or stage directory.
+    pack            Zip contentns of stage directory into archive
+                    for release.
 
-== GNU Make/MSYS/MinGW ==
-
-    ‣ For GNU/Linux or Windows
-      Execute:
-         make
-    ‣ For Windows (executable will have icon)
-      Execute:
-        make -f Makefile-Windows
-
-
-== GNU G++/MinGW ==
-
-    ‣ For GNU/Linux or Windows:
-
-        g++ src/main.cpp src/abc.cpp src/gnrcabt.cpp `wx-config --cxxflags \
-            --libs` -o MyABCs -lpthread
-
-    ‣ For Windows: (executable will have icon)
-
-	    windres resources.rc -o resources.o
-	    g++ src/main.cpp src/abc.cpp src/gnrcabt.cpp resources.o `wx-config \
-            --cxxflags --libs` -o MyABCs -lpthread
-
-== Clang ==
-
-    Clang's syntax is compatible with GCC. Use the instructions above but
-    replace "g++" with "clang++".
-
-Notes for compiling with MinGW:
-To use ready-made Makefiles, make sure that the development libraries for
-wxWidgets and PThreads have been installed to the MinGW directory. Else you
-will have to edit the Makefiles to tell the compiler where the libraries and
-headers are located with the -L and -I flags. For example: If wxWidgets is
-installed to C:\wxWidgets, you will have to add "-LC:/wxWidgets/lib
--IC:/wxWidgets/include" to the lines and change "`wx-config --cxxflags --libs`"
-to "`C:/wxWidgets/bin/wx-config --cxxflags --libs`".
-
-Notes for Debian based linux systems:
-The wxSound module has not worked for me on Debian systems that I have used for
-testing. If this is the case you may want to try compiling wxWidgets yourself,
-or try using the clang++ compiler.
+Environment variables:
+    STATIC          Define to create static build (note: SDL
+                    libraries are still linked dynamically).
+    WXVERSION       Use a version of wxWidgets other than the default.
+    EXTRA_LIBS      Use this variable to manually link to libraries
+                    (example: EXTRA_LIBS="-lpng -lz"). This should only
+                    be used if linker errors are encountered.
+    REL_SUFFIX      Appends text to filename of release archive when
+                    "make pack" is called.
 
 
--------------------------------------
-Compiling with Microsoft Visual C++  |
--------------------------------------
+ -------------------------------------
+| Compiling with Microsoft Visual C++ |
+ -------------------------------------
 
 I don't know
 
 
-----------------------------
-Compiling with Apple Xcode  |
-----------------------------
+ ----------------------------
+| Compiling with Apple Xcode |
+ ----------------------------
 
 I am not familiar with Apple's Xcode environment, but I understand that it
 comes with GNU GCC & possibly Clang. The instructions above should work here as
 well.
-
-
-------------
-Other Notes |
-------------
-
-MyABCs requires being launched from its installation directory. Otherwise it
-will not be able to find resources (images, sounds, etc.). For this reason the
-"make install" command creates a Unix shell script & places it on the systems
-PATH. The script first changes to the MyABCs installation directory then
-launches the actual executable. For manual installation you will either need to
-first change to the installation directory to launch or create a similar script
-for your system.

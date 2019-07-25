@@ -1,4 +1,0 @@
-# MyABCs Makefile for Win32 systems using MinGW.
-# Created by Jordan Irwin.
-
-include GNUMakefile
