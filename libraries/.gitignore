@@ -1,3 +1,7 @@
 # extracted library directories
 SDL2*/
 wx*/
+
+# build directories & progress files
+build-*/
+INSTALL-*
