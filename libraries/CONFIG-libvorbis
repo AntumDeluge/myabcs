@@ -1,3 +1,6 @@
 VER="1.3.6"
-FNAME="${NAME}-${VER}.tar.xz"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
 SOURCE="http://downloads.xiph.org/releases/vorbis/${FNAME}"
+# FIXME: does this get passed to make?
+OGG_LIBS="${INSTALL_PREFIX}/lib/libogg.a"
