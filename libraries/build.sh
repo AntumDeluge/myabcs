@@ -114,7 +114,7 @@ function extract_zip {
 }
 
 # library names in build order
-LIB_NAMES="libogg libvorbis SDL2 SDL2_mixer wxWidgets wxSVG"
+LIB_NAMES="SDL2 libogg libvorbis libflac SDL2_mixer wxWidgets wxSVG"
 
 for NAME in ${LIB_NAMES}; do
 	echo -e "\nProcessing ${NAME} ..."
