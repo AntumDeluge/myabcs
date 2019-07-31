@@ -141,7 +141,7 @@ uninstall:
 	find "$${data_dir}" -type d -empty -delete;
 
 clean:
-	rm -rf *.o *.exe $(EXE) *.core
+	rm -rf *.o *.exe $(EXE) *.core *.dll
 
 help:
 	@echo -e $(HELP_STRING)
