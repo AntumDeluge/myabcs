@@ -127,20 +127,27 @@ for NAME in ${LIB_NAMES}; do
 
 	# unset values imported from configuration
 	VER=
+	DNAME=
 	FNAME=
 	SOURCE=
+	CONFIG_OPTS=
 
 	# import configuration
 	. "${CFG}"
 
 	# check values imported from configuration
-	if test -z ${VER} || test -z ${FNAME} || test -z ${SOURCE}; then
+	if test -z ${VER} || test -z ${DNAME} || test -z ${FNAME} || test -z ${SOURCE}; then
 		echo -e "\nERROR: malformed configuration: ${CFG}"
 		exit 1
 	fi
 
+	# add common config options
+	CONFIG_OPTS="--prefix=${INSTALL_PREFIX} --enable-static=yes --enable-shared=no ${CONFIG_OPTS}"
+	CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
+
 	EXTRACT_DONE=false
 	CONFIG_DONE=false
+	BUILD_DONE=false
 	INSTALL_DONE=false
 
 	LIB_BUILD="${NAME}-${VER}-${BUILD}"
@@ -151,28 +158,87 @@ for NAME in ${LIB_NAMES}; do
 		. "${FILE_LIB_INSTALL}"
 	fi
 
-	PACKAGE="${DIR_LIBS}/${FNAME}"
-	if test -f "${PACKAGE}"; then
-		echo "Found package: ${FNAME}"
+	if ${INSTALL_DONE}; then
+		echo "Using previous install of ${NAME} ${VER}"
 	else
-		download_source "${SOURCE}" "${FNAME}"
-	fi
-
-	if ${EXTRACT_DONE}; then
-		echo "Not re-extracting ${FNAME}"
-	else
-		echo "${FNAME}" | grep -q ".zip$"
-		if test $? -eq 0; then
-			extract_zip "${PACKAGE}"
+		if ${EXTRACT_DONE}; then
+			echo "Not re-extracting ${FNAME}"
 		else
-			extract_tarball "${PACKAGE}"
+			PACKAGE="${DIR_LIBS}/${FNAME}"
+			if test -f "${PACKAGE}"; then
+				echo "Found package: ${FNAME}"
+			else
+				download_source "${SOURCE}" "${FNAME}"
+			fi
+
+			echo "${FNAME}" | grep -q ".zip$"
+			if test $? -eq 0; then
+				extract_zip "${PACKAGE}"
+			else
+				extract_tarball "${PACKAGE}"
+			fi
+
+			if test $? -ne 0; then
+				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
+				exit 1
+			fi
+
+			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 		fi
 
+		if ${BUILD_DONE}; then
+			echo "Not re-building ${NAME} ${VER}"
+		else
+			echo "Building ${NAME} ${VER} ..."
+
+			if test ! -d "${LIB_BUILD}"; then
+				mkdir "${LIB_BUILD}"
+			fi
+
+			cd "${LIB_BUILD}"
+
+			if ${CONFIG_DONE}; then
+				echo "Not re-configuring ${NAME} ${VER}"
+			else
+				echo "Configuring ${NAME} ${VER} ..."
+
+				../${DNAME}/configure ${CONFIG_OPTS}
+
+				if test $? -ne 0; then
+					echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+					exit 1
+				fi
+
+				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
+			fi
+
+			make
+
+			if test $? -ne 0; then
+				echo -e "\nAn error occurred while building ${NAME} ${VER}"
+				exit 1
+			fi
+
+			echo "BUILD_DONE=true" >> "${FILE_LIB_INSTALL}"
+
+			cd "${DIR_LIBS}"
+		fi
+
+		cd "${LIB_BUILD}"
 		if test $? -ne 0; then
-			echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
+			# build directory doesn't exist so we exit to prevent 'make install' from being called
 			exit 1
 		fi
 
-		echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+		make install
+
+		if test $? -ne 0; then
+			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+			exit 1
+		fi
+
+		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
+
+		cd "${DIR_LIBS}"
 	fi
 done
