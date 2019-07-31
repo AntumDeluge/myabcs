@@ -1,19 +1,14 @@
 
 var VER_MAJ = '0';
 var VER_MIN = '4';
-var VER_REL = '4';
+var VER_REL = '6';
 var PROJ_SF = 'https://sourceforge.net/p/myabcs';
 var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
 var DOWNLOADS = PROJ_SF.concat("/files");
 var AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
 var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/CHANGES.txt';
 
-var changesList = '&nbsp;- Changing to a <a href="https://opensource.org/licenses/MIT">MIT license</a>.<br>\
-&nbsp;- <a href="http://libsdl.org">SDL2</a> will be used for rendering audio.<br>\
-&nbsp;- <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">Scalable Vector Graphics (SVG)</a> images will be used as default over <a href="https://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</a>.<br>\
-&nbsp;- <a href="https://sourceforge.net/p/wxsvg">wxSVG</a> will be used for rendering SVG images.<br>\
-&nbsp;- Will be updated for compatibility with <a href="http://wxwidgets.org/">wxWidgets</a> 3.x (support for 2.x will be dropped).<br>\
-&nbsp;- <a href="https://cmake.org/">CMake</a> will be used for building.';
+var changesList = '&nbsp;- <a href="https://cmake.org/">CMake</a> will be used for building.';
 
 setAppInfo = function() {
 	document.getElementsByClassName('appinfo')[0].innerHTML = NAME.concat(' ', VER_MAJ, '.', VER_MIN, '.', VER_REL);
