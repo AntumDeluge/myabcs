@@ -1,28 +1,37 @@
-Priority (required for next release):
+Manditory (required for next release):
+- Replace raccoon sound effect
+- Add links to art & sound assets
+
+Priority:
+- Show keyboard for "main" category
+- Embed free fonts (partially implemented, works on Windows only)
+- Embed toolbar images in executable (XPM is good choice)
+- Don't reload sounds if already cached
+- Play sound if wrong key pressed in "main" mode
+- Re-record "xun" vocal sound
+- PNG & SVG jars are different colors
+- Normalize file & directory paths
+- Set category items dynamically from image filenames
+- Build:
+  - Use CMake to generate Makefiles
+  - Require wxWidgets version >= 3.1 (to support font resources)
+    - Use built-in static version if requirement not met
+  - Only link dynamically to built-in SDL on Windows platform
+    - Check for licensing issues with statically linked SDL/SDL_mixer
+  - Copy library (dll) dependencies into binary release if possible on Windows platform
+  - Use "libraries/build.sh" script to build & link to "built-in" libraries
+  - Download "built-in" libraries from "libraries/build.sh" script
 
 Non-priority:
 - Indent line breaks in changelog
-- Copy library (dll) dependencies into binary release
-- Play sound if wrong key pressed in "main" mode
 - Add debugging symbols
-- Re-record "xun" vocal sound
 - Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Use global function for setting/getting fonts
-- Don't reload sounds if already cached
-- Add links to art & sound assets
-- Switch to CMake build system
 - Possibly support any audio type playable with SDL_mixer
-- Embed toolbar images in executable (XPM is good choice)
-- Set category items dynamically from image filenames
-- Normalize file & directory paths
-- PNG & SVG jars are different colors
 - Use config to determine environment (locatation of data files, etc.)
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
-- Show keyboard for "main" category
-- Embed free fonts (partially implemented, works on Windows only)
 - Clean up quiche SVG
-- Fix static build (wxSVG not linking statically on Win32)
 
 Fixes & pull-requests:
 - wxWidgets:
