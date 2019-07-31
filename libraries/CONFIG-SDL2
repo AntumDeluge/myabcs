@@ -1,3 +1,6 @@
 VER="2.0.10"
-FNAME="${NAME}-${VER}.tar.gz"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
 SOURCE="https://libsdl.org/release/${FNAME}"
+CONFIG_OPTS="--disable-video --disable-render --disable-events --disable-joystick --disable-haptic \
+--disable-sensor --disable-power --disable-filesystem --disable-file --disable-loadso --disable-cpuinfo"
