@@ -5,3 +5,8 @@ wx*/
 # build directories & progress files
 build-*/
 INSTALL-*
+
+# dowloaded archives
+*.tar.*
+*.tar
+*.zip
