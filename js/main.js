@@ -2,11 +2,12 @@
 var VER_MAJ = '0';
 var VER_MIN = '4';
 var VER_REL = '6';
+var VER_STRING = VER_MAJ.concat('.', VER_MIN, '.', VER_REL)
 var PROJ_SF = 'https://sourceforge.net/projects/myabcs';
 var PROJ_GH = 'https://github.com/AntumDeluge/myabcs';
-var DOWNLOADS = PROJ_SF.concat("/files");
+var DOWNLOADS = PROJ_SF.concat("/files/", VER_MAJ, ".", VER_MIN, "/", VER_STRING);
 var AUTHOR_HOME = 'http://antumdeluge.wordpress.com/';
-var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/master/tree/CHANGES.txt';
+var CHANGELOG = 'https://sourceforge.net/p/myabcs/code/ci/v' + VER_STRING + '/tree/CHANGES.txt';
 
 var changesList = '&nbsp;- <a href="https://cmake.org/">CMake</a> will be used for building.';
 
