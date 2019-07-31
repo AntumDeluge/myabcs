@@ -1,0 +1,3 @@
+VER="1.3.6"
+FNAME="${NAME}-${VER}.tar.xz"
+SOURCE="http://downloads.xiph.org/releases/vorbis/${FNAME}"

@@ -1,0 +1,3 @@
+VER="2.0.10"
+FNAME="${NAME}-${VER}.tar.gz"
+SOURCE="https://libsdl.org/release/${FNAME}"

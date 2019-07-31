@@ -1,0 +1,8 @@
+VER="2.0.4"
+FNAME="${NAME}-${VER}"
+if ${OS_WIN}; then
+	FNAME="${FNAME}.zip"
+else
+	FNAME="${FNAME}.tar.gz"
+fi
+SOURCE="https://www.libsdl.org/projects/SDL_mixer/release/${FNAME}"
