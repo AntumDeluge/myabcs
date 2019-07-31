@@ -1,6 +1,8 @@
 # extracted library directories
 SDL2*/
 wx*/
+libogg*/
+libvorbis*/
 
 # build directories & progress files
 build-*/
