@@ -58,11 +58,12 @@ function download_source {
 	local tname=$2
 	if test -z "${tname}"; then
 		${WGET} "${dl}"
+		local ret = $?
 	else
 		${WGET} -O "${FNAME}" "${dl}"
+		local ret = $?
 	fi
 
-	local ret = $?
 	if test ${ret} -ne 0; then
 		echo -e "\nAn error occurred while downloading file: ${dl}"
 		# remove empty file created by wget
@@ -121,14 +122,16 @@ function extract_archive {
 	echo "${archive}" | grep -q ".zip$"
 	if test $? -eq 0; then
 		extract_zip "${archive}"
+		local ret = $?
 	else
 		extract_tarball "${archive}"
+		local ret = $?
 	fi
 
-	local ret = $?
 	cd "${DIR_LIBS}"
 	return ${ret}
 }
+
 
 # library names in build order
 LIB_NAMES="SDL2 libogg libvorbis libflac libmpg123 SDL2_mixer wxWidgets wxSVG"
@@ -198,7 +201,7 @@ for NAME in ${LIB_NAMES}; do
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 		fi
 
-		local DIR_BUILD="build/${LIB_BUILD}"
+		DIR_BUILD="build/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME} ${VER}"
 		else
