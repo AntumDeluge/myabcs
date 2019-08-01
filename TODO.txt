@@ -12,6 +12,7 @@ Priority:
 - PNG & SVG jars are different colors
 - Normalize file & directory paths
 - Set category items dynamically from image filenames
+- Add Debian build instructions
 - Build:
   - Use CMake to generate Makefiles
   - Require wxWidgets version >= 3.1 (to support font resources)
@@ -32,6 +33,7 @@ Non-priority:
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
 - Clean up quiche SVG
+- Finish re-working owl SVG
 
 Fixes & pull-requests:
 - wxWidgets:
