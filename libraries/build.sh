@@ -148,6 +148,7 @@ for NAME in ${LIB_NAMES}; do
 	FNAME=
 	SOURCE=
 	CONFIG_OPTS=
+	EXTRACT_NAME=
 
 	# import configuration
 	. "${CFG}"
@@ -207,6 +208,11 @@ for NAME in ${LIB_NAMES}; do
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
+			fi
+
+			# use standard naming convention
+			if test ! -z "${EXTRACT_NAME}"; then
+				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
 			# apply patches
