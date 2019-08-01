@@ -16,6 +16,7 @@ DIR_LIBS="`dirname $0`"
 cd "${DIR_LIBS}"
 DIR_LIBS="`pwd`" # get full directory path
 DIR_ROOT="`dirname ${DIR_LIBS}`"
+DIR_SRC="${DIR_LIBS}/source"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
 # check for Windows OS & detect MinGW build architecture
@@ -40,6 +41,8 @@ WGET=`which wget`
 WGET_FOUND=$?
 
 function download_source {
+	cd "${DIR_SRC}"
+
 	if test ${WGET_FOUND} -ne 0; then
 		echo -e "\nError in function download_source: 'wget' command not found"
 		exit 1
@@ -69,6 +72,7 @@ function download_source {
 		exit ${ret}
 	fi
 
+	cd "${DIR_LIBS}"
 	return ${ret}
 }
 
@@ -101,6 +105,8 @@ function extract_zip {
 }
 
 function extract_archive {
+	cd "${DIR_SRC}"
+
 	local archive=$1
 	if test -z "${archive}"; then
 		echo -e "\nERROR in function extract_archive: 'archive' argument not given"
@@ -120,6 +126,7 @@ function extract_archive {
 	fi
 
 	local ret = $?
+	cd "${DIR_LIBS}"
 	return ${ret}
 }
 
@@ -174,7 +181,7 @@ for NAME in ${LIB_NAMES}; do
 		if ${EXTRACT_DONE}; then
 			echo "Not re-extracting ${FNAME}"
 		else
-			PACKAGE="${DIR_LIBS}/${FNAME}"
+			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test -f "${PACKAGE}"; then
 				echo "Found package: ${FNAME}"
 			else
@@ -208,8 +215,7 @@ for NAME in ${LIB_NAMES}; do
 			else
 				echo "Configuring ${NAME} ${VER} ..."
 
-				../${DNAME}/configure ${CONFIG_OPTS}
-
+				"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
 				if test $? -ne 0; then
 					echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
 					exit 1
