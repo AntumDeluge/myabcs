@@ -72,6 +72,7 @@ function download_source {
 	return ${ret}
 }
 
+# only call this function from 'extract_archive'
 function extract_tarball {
 	if test ${TAR_FOUND} -ne 0; then
 		echo -e "\nError in function extract_tarball: 'tar' command not found"
@@ -79,21 +80,13 @@ function extract_tarball {
 	fi
 
 	local archive=$1
-	if test -z "${archive}"; then
-		echo -e "\nERROR in function extract_tarball: 'archive' argument not given"
-		exit 1
-	fi
-
-	if test ! -f "${archive}"; then
-		echo -e "\nERROR in function extract_tarball: file does not exist: ${archive}"
-		exit 1
-	fi
 
 	echo "Extracting tarball: ${archive}"
 	${TAR} -xf "${archive}"
 	return $?
 }
 
+# only call this function from 'extract_archive'
 function extract_zip {
 	if test ${UNZIP_FOUND} -ne 0; then
 		echo -e "\nError in function extract_zip: 'unzip' command not found"
@@ -101,19 +94,33 @@ function extract_zip {
 	fi
 
 	local archive=$1
-	if test -z "${archive}"; then
-		echo -e "\nERROR in function extract_zip: 'archive' argument not given"
-		exit 1
-	fi
-
-	if test ! -f "${archive}"; then
-		echo -e "\nERROR in function extract_zip: file does not exist: ${archive}"
-		exit 1
-	fi
 
 	echo "Extracting zip: ${archive}"
 	${UNZIP} -qqo "${archive}"
 	return $?
+}
+
+function extract_archive {
+	local archive=$1
+	if test -z "${archive}"; then
+		echo -e "\nERROR in function extract_archive: 'archive' argument not given"
+		exit 1
+	fi
+
+	if test ! -f "${archive}"; then
+		echo -e "\nERROR in function extract_archive: file does not exist: ${archive}"
+		exit 1
+	fi
+
+	echo "${archive}" | grep -q ".zip$"
+	if test $? -eq 0; then
+		extract_zip "${archive}"
+	else
+		extract_tarball "${archive}"
+	fi
+
+	local ret = $?
+	return ${ret}
 }
 
 # library names in build order
@@ -174,13 +181,8 @@ for NAME in ${LIB_NAMES}; do
 				download_source "${SOURCE}" "${FNAME}"
 			fi
 
-			echo "${FNAME}" | grep -q ".zip$"
-			if test $? -eq 0; then
-				extract_zip "${PACKAGE}"
-			else
-				extract_tarball "${PACKAGE}"
-			fi
-
+			# TODO: add patches
+			extract_archive "${PACKAGE}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
