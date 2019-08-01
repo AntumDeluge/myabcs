@@ -2,3 +2,5 @@ VER="1.5.19"
 DNAME="wxsvg-${VER}"
 FNAME="${DNAME}.tar.bz2"
 SOURCE="https://sourceforge.net/projects/wxsvg/files/wxsvg/${VER}/${FNAME}/download"
+CONFIG_OPTS=" --with-wx-prefix=${INSTALL_PREFIX} --with-wx-exec-prefix=${INSTALL_PREFIX} \
+--with-wx-config=${INSTALL_PREFIX}/bin/wx-config --enable-libav=no"
