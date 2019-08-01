@@ -59,14 +59,17 @@ function download_source {
 		${WGET} -O "${FNAME}" "${dl}"
 	fi
 
-	if test $? -ne 0; then
-		echo -e "\nAn error occurred during download of file: ${dl}"
+	local ret = $?
+	if test ${ret} -ne 0; then
+		echo -e "\nAn error occurred while downloading file: ${dl}"
 		# remove empty file created by wget
 		if test -f "${FNAME}"; then
 			rm "${FNAME}"
 		fi
-		exit 1
+		exit ${ret}
 	fi
+
+	return ${ret}
 }
 
 function extract_tarball {
@@ -186,16 +189,17 @@ for NAME in ${LIB_NAMES}; do
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 		fi
 
+		local DIR_BUILD="build/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME} ${VER}"
 		else
 			echo "Building ${NAME} ${VER} ..."
 
-			if test ! -d "${LIB_BUILD}"; then
-				mkdir "${LIB_BUILD}"
+			if test ! -d "${DIR_BUILD}"; then
+				mkdir -p "${DIR_BUILD}"
 			fi
 
-			cd "${LIB_BUILD}"
+			cd "${DIR_BUILD}"
 
 			if ${CONFIG_DONE}; then
 				echo "Not re-configuring ${NAME} ${VER}"
@@ -213,7 +217,6 @@ for NAME in ${LIB_NAMES}; do
 			fi
 
 			make
-
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while building ${NAME} ${VER}"
 				exit 1
@@ -224,14 +227,13 @@ for NAME in ${LIB_NAMES}; do
 			cd "${DIR_LIBS}"
 		fi
 
-		cd "${LIB_BUILD}"
+		cd "${DIR_BUILD}"
 		if test $? -ne 0; then
 			# build directory doesn't exist so we exit to prevent 'make install' from being called
 			exit 1
 		fi
 
 		make install
-
 		if test $? -ne 0; then
 			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
 			exit 1
