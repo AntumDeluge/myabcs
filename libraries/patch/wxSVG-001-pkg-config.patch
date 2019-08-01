@@ -1,0 +1,10 @@
+--- wxsvg-1.5.19/libwxsvg.pc.in.orig	2019-06-24 19:46:15.000000000 +0000
++++ wxsvg-1.5.19/libwxsvg.pc.in	2019-08-01 16:36:26.652455500 +0000
+@@ -6,6 +6,7 @@
+ Name: libwxsvg
+ Description: C++ library to create, manipulate and render SVG files 
+ Requires:
++Requires.private: cairo
+ Version: @VERSION@
+ Libs: -L${libdir} -lwxsvg
+ Cflags: -I${includedir}
