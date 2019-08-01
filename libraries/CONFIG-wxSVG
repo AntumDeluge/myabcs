@@ -1,3 +1,4 @@
 VER="1.5.19"
-FNAME="wxsvg-${VER}.tar.bz2"
+DNAME="wxsvg-${VER}"
+FNAME="${DNAME}.tar.bz2"
 SOURCE="https://sourceforge.net/projects/wxsvg/files/wxsvg/${VER}/${FNAME}/download"
