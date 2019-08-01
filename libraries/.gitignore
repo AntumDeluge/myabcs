@@ -1,14 +1,7 @@
 # extracted library directories
-SDL2*/
-wx*/
-libogg*/
-libvorbis*/
+source/
 
 # build directories & progress files
-build-*/
+libprefix-*/
+build/
 INSTALL-*
-
-# dowloaded archives
-*.tar.*
-*.tar
-*.zip
