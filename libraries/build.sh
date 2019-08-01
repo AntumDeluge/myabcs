@@ -131,7 +131,7 @@ function extract_archive {
 
 
 # library names in build order
-LIB_NAMES="SDL2 libogg libvorbis libflac libmpg123 SDL2_mixer wxWidgets wxSVG"
+LIB_NAMES="zlib libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 
 for NAME in ${LIB_NAMES}; do
 	echo -e "\nProcessing ${NAME} ..."
@@ -159,8 +159,22 @@ for NAME in ${LIB_NAMES}; do
 	fi
 
 	# add common config options
-	CONFIG_OPTS="--prefix=${INSTALL_PREFIX} --enable-static=yes --enable-shared=no ${CONFIG_OPTS}"
-	CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
+	CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
+	case "${NAME}" in
+		"wxWidgets")
+			CONFIG_OPTS+=" --enable-shared=no"
+			;;
+		"zlib")
+			CONFIG_OPTS+=" --static"
+			;;
+		*)
+			CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
+			;;
+	esac
+
+	if test "${NAME}" != "zlib"; then
+		CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
+	fi
 
 	EXTRACT_DONE=false
 	CONFIG_DONE=false
