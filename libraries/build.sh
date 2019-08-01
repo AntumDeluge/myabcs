@@ -106,8 +106,6 @@ function extract_zip {
 }
 
 function extract_archive {
-	cd "${DIR_SRC}"
-
 	local archive=$1
 	if test -z "${archive}"; then
 		echo -e "\nERROR in function extract_archive: 'archive' argument not given"
@@ -128,7 +126,6 @@ function extract_archive {
 		local ret=$?
 	fi
 
-	cd "${DIR_LIBS}"
 	return ${ret}
 }
 
@@ -191,13 +188,30 @@ for NAME in ${LIB_NAMES}; do
 				download_source "${SOURCE}" "${FNAME}"
 			fi
 
-			# TODO: add patches
+			cd "${DIR_SRC}"
 			extract_archive "${PACKAGE}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
 			fi
 
+			# apply patches
+			cd "${DNAME}"
+			if test -d "../../patch/"; then
+				PATCHES=$(ls "../../patch/" | grep "^${NAME}-.*\.patch")
+			fi
+
+			for PATCH in ${PATCHES}; do
+				echo "Applying patch: ${PATCH}"
+				patch -p1 -i "../../patch/${PATCH}"
+				ret=$?
+				if test ${ret} -ne 0; then
+					echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
+					exit ${ret}
+				fi
+			done
+
+			cd "${DIR_LIBS}"
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 		fi
 
