@@ -58,10 +58,10 @@ function download_source {
 	local tname=$2
 	if test -z "${tname}"; then
 		${WGET} "${dl}"
-		local ret = $?
+		local ret=$?
 	else
 		${WGET} -O "${FNAME}" "${dl}"
-		local ret = $?
+		local ret=$?
 	fi
 
 	if test ${ret} -ne 0; then
@@ -122,10 +122,10 @@ function extract_archive {
 	echo "${archive}" | grep -q ".zip$"
 	if test $? -eq 0; then
 		extract_zip "${archive}"
-		local ret = $?
+		local ret=$?
 	else
 		extract_tarball "${archive}"
-		local ret = $?
+		local ret=$?
 	fi
 
 	cd "${DIR_LIBS}"
