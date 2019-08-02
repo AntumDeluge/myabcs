@@ -153,8 +153,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	CONFIG_OPTS=
 	EXTRACT_NAME=
 	CMD_CONFIG=
-	CMD_BUILD=
-	CMD_INSTALL=
+	CMD_BUILD=(make)
+	CMD_INSTALL=(make install)
 	CPPFLAGS="-I${INSTALL_PREFIX}/include"
 	LDFLAGS="-L${INSTALL_PREFIX}/lib"
 	AUTORECONF=false
@@ -280,7 +280,7 @@ for NAME in ${BUILTIN_LIBS}; do
 						exit 1
 					fi
 				else
-					${CMD_CONFIG}
+					"${CMD_CONFIG[@]}"
 					if test $? -ne 0; then
 						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
 						exit 1
@@ -290,18 +290,10 @@ for NAME in ${BUILTIN_LIBS}; do
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
-			if test -z "${CMD_BUILD}"; then
-				make
-				if test $? -ne 0; then
-					echo -e "\nAn error occurred while building ${NAME} ${VER}"
-					exit 1
-				fi
-			else
-				${CMD_BUILD}
-				if test $? -ne 0; then
-					echo -e "\nAn error occurred while building ${NAME} ${VER}"
-					exit 1
-				fi
+			"${CMD_BUILD[@]}"
+			if test $? -ne 0; then
+				echo -e "\nAn error occurred while building ${NAME} ${VER}"
+				exit 1
 			fi
 
 			echo "BUILD_DONE=true" >> "${FILE_LIB_INSTALL}"
@@ -315,18 +307,10 @@ for NAME in ${BUILTIN_LIBS}; do
 			exit 1
 		fi
 
-		if test -z "${CMD_INSTALL}"; then
-			make install
-			if test $? -ne 0; then
-				echo -e "\nAn error occurred while installing ${NAME} ${VER}"
-				exit 1
-			fi
-		else
-			${CMD_INSTALL}
-			if test $? -ne 0; then
-				echo -e "\nAn error occurred while installing ${NAME} ${VER}"
-				exit 1
-			fi
+		"${CMD_INSTALL[@]}"
+		if test $? -ne 0; then
+			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+			exit 1
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
