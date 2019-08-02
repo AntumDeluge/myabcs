@@ -152,6 +152,9 @@ for NAME in ${LIB_NAMES}; do
 	SOURCE=
 	CONFIG_OPTS=
 	EXTRACT_NAME=
+	CMD_CONFIG=
+	CMD_BUILD=
+	CMD_INSTALL=
 
 	# import configuration
 	. "${CFG}"
@@ -237,37 +240,53 @@ for NAME in ${LIB_NAMES}; do
 			else
 				echo "Configuring ${NAME} ${VER} ..."
 
-				# add common config options
-				CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
-				case "${NAME}" in
-					"wxWidgets")
-						CONFIG_OPTS+=" --enable-shared=no"
-						;;
-					"zlib")
-						CONFIG_OPTS+=" --static"
-						;;
-					*)
-						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
-						;;
-				esac
+				if test -z "${CMD_CONFIG}"; then
+					# add common config options
+					CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
+					case "${NAME}" in
+						"wxWidgets")
+							CONFIG_OPTS+=" --enable-shared=no"
+							;;
+						"zlib")
+							CONFIG_OPTS+=" --static"
+							;;
+						*)
+							CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
+							;;
+					esac
 
-				if test "${NAME}" != "zlib"; then
-					CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
-				fi
+					if test "${NAME}" != "zlib"; then
+						CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
+					fi
 
-				"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
-				if test $? -ne 0; then
-					echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
-					exit 1
+					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+						exit 1
+					fi
+				else
+					${CMD_CONFIG}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+						exit 1
+					fi
 				fi
 
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
-			make
-			if test $? -ne 0; then
-				echo -e "\nAn error occurred while building ${NAME} ${VER}"
-				exit 1
+			if test -z "${CMD_BUILD}"; then
+				make
+				if test $? -ne 0; then
+					echo -e "\nAn error occurred while building ${NAME} ${VER}"
+					exit 1
+				fi
+			else
+				${CMD_BUILD}
+				if test $? -ne 0; then
+					echo -e "\nAn error occurred while building ${NAME} ${VER}"
+					exit 1
+				fi
 			fi
 
 			echo "BUILD_DONE=true" >> "${FILE_LIB_INSTALL}"
@@ -281,10 +300,18 @@ for NAME in ${LIB_NAMES}; do
 			exit 1
 		fi
 
-		make install
-		if test $? -ne 0; then
-			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
-			exit 1
+		if test -z "${CMD_INSTALL}"; then
+			make install
+			if test $? -ne 0; then
+				echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+				exit 1
+			fi
+		else
+			${CMD_INSTALL}
+			if test $? -ne 0; then
+				echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+				exit 1
+			fi
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
