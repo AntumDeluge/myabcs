@@ -281,6 +281,15 @@ for NAME in ${BUILTIN_LIBS}; do
 						exit 1
 					fi
 				else
+					# common values for CMake
+					echo "${CMD_CONFIG[0]}" | grep -q "cmake$"
+					if test $? -eq 0; then
+						if test "${OSTYPE}" == "msys"; then
+							CMD_CONFIG+=(-G "MSYS Makefiles")
+						fi
+						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DBUILD_SHARED_LIBS=OFF -DCMAKE_VERBOSE_MAKEFILE=ON "../../source/${DNAME}")
+					fi
+
 					"${CMD_CONFIG[@]}"
 					if test $? -ne 0; then
 						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
