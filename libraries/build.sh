@@ -155,6 +155,8 @@ for NAME in ${LIB_NAMES}; do
 	CMD_CONFIG=
 	CMD_BUILD=
 	CMD_INSTALL=
+	CPPFLAGS="-I${INSTALL_PREFIX}/include"
+	LDFLAGS="-L${INSTALL_PREFIX}/lib"
 
 	# import configuration
 	. "${CFG}"
@@ -164,6 +166,8 @@ for NAME in ${LIB_NAMES}; do
 		echo -e "\nERROR: malformed configuration: ${CFG}"
 		exit 1
 	fi
+
+	export CPPFLAGS LDFLAGS
 
 	EXTRACT_DONE=false
 	CONFIG_DONE=false
@@ -254,10 +258,6 @@ for NAME in ${LIB_NAMES}; do
 							CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
 							;;
 					esac
-
-					if test "${NAME}" != "zlib"; then
-						CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
-					fi
 
 					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
 					if test $? -ne 0; then
