@@ -205,6 +205,9 @@ for NAME in ${LIB_NAMES}; do
 
 			# use standard naming convention
 			if test ! -z "${EXTRACT_NAME}"; then
+				if test -d "${DNAME}"; then
+					rm -rf "${DNAME}"
+				fi
 				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
