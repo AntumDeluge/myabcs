@@ -1,3 +1,6 @@
+# Depends on:
+#  wxWidgets, cairo, pango, expat, libexif
+
 VER="1.5.19"
 DNAME="wxsvg-${VER}"
 FNAME="${DNAME}.tar.bz2"

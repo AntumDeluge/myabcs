@@ -1,3 +1,6 @@
+# Depends on:
+#  SDL2, libogg, libvorbis, libflac, mpg123
+
 VER="2.0.4"
 DNAME="${NAME}-${VER}"
 if ${OS_WIN}; then

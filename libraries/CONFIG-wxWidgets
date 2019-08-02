@@ -1,3 +1,6 @@
+# Depends on:
+#  zlib
+
 VER="3.1.2"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.bz2"
