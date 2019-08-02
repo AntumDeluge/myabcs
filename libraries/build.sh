@@ -162,24 +162,6 @@ for NAME in ${LIB_NAMES}; do
 		exit 1
 	fi
 
-	# add common config options
-	CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
-	case "${NAME}" in
-		"wxWidgets")
-			CONFIG_OPTS+=" --enable-shared=no"
-			;;
-		"zlib")
-			CONFIG_OPTS+=" --static"
-			;;
-		*)
-			CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
-			;;
-	esac
-
-	if test "${NAME}" != "zlib"; then
-		CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
-	fi
-
 	EXTRACT_DONE=false
 	CONFIG_DONE=false
 	BUILD_DONE=false
@@ -254,6 +236,24 @@ for NAME in ${LIB_NAMES}; do
 				echo "Not re-configuring ${NAME} ${VER}"
 			else
 				echo "Configuring ${NAME} ${VER} ..."
+
+				# add common config options
+				CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
+				case "${NAME}" in
+					"wxWidgets")
+						CONFIG_OPTS+=" --enable-shared=no"
+						;;
+					"zlib")
+						CONFIG_OPTS+=" --static"
+						;;
+					*)
+						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
+						;;
+				esac
+
+				if test "${NAME}" != "zlib"; then
+					CONFIG_OPTS+=" CPPFLAGS=-I${INSTALL_PREFIX}/include LDFLAGS=-L${INSTALL_PREFIX}/lib"
+				fi
 
 				"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
 				if test $? -ne 0; then
