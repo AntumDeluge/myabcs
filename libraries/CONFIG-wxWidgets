@@ -7,7 +7,7 @@ FNAME="${DNAME}.tar.bz2"
 SOURCE="https://github.com/wxWidgets/wxWidgets/releases/download/v${VER}/${FNAME}"
 CONFIG_OPTS=" --disable-gtktest --disable-sdltest --with-libpng=builtin --with-libjpeg=builtin \
 --with-libtiff=builtin --with-libxpm=builtin --with-libiconv=builtin --with-regex=builtin \
---with-liblzma=sys --with-zlib=sys --with-expat=builtin"
+--with-zlib=sys --with-expat=builtin"
 if ${OS_WIN}; then
 	CONFIG_OPTS+=" --with-msw"
 fi
