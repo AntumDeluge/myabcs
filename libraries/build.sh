@@ -157,6 +157,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	CMD_INSTALL=(make install)
 	CPPFLAGS="-I${INSTALL_PREFIX}/include"
 	LDFLAGS="-L${INSTALL_PREFIX}/lib"
+	LIBS=
 	AUTORECONF=false
 
 	# import configuration
@@ -168,7 +169,7 @@ for NAME in ${BUILTIN_LIBS}; do
 		exit 1
 	fi
 
-	export CPPFLAGS LDFLAGS
+	export CPPFLAGS LDFLAGS LIBS
 
 	EXTRACT_DONE=false
 	CONFIG_DONE=false
