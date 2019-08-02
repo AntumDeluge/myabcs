@@ -134,7 +134,7 @@ function extract_archive {
 
 
 # library names in build order
-BUILTIN_LIBS="zlib gettext libiconv libexif libexpat libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
+BUILTIN_LIBS="pkg-config zlib gettext libiconv libexif libexpat libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."

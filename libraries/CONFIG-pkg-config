@@ -1,0 +1,5 @@
+VER="0.29.2"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://pkgconfig.freedesktop.org/releases/${FNAME}"
+#CONFIG_OPTS="--with-internal-glib"
