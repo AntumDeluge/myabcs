@@ -1,0 +1,4 @@
+VER="3.2.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://sourceware.org/pub/libffi/${FNAME}"
