@@ -1,0 +1,8 @@
+# Depends on:
+#  zlib
+
+VER="1.6.37"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://downloads.sourceforge.net/sourceforge/libpng/${FNAME}"
+CONFIG_OPTS="--with-zlib-prefix=${INSTALL_PREFIX}"
