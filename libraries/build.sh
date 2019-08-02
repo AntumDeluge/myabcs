@@ -19,6 +19,9 @@ DIR_ROOT="`dirname ${DIR_LIBS}`"
 DIR_SRC="${DIR_LIBS}/source"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
+# add install prefix to PATH
+export PATH="${INSTALL_PREFIX}/bin:${PATH}"
+
 # check for Windows OS & detect MinGW build architecture
 OS_WIN=false
 case "${OSTYPE}" in
