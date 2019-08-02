@@ -1,0 +1,10 @@
+# Depends on:
+#  libintl (gettext), libiconv
+
+VER="0.6.21"
+VER_LOW="0_6_21"
+DNAME="${NAME}-${VER}"
+FNAME="${NAME}-${VER_LOW}-release.tar.gz"
+SOURCE="https://github.com/libexif/libexif/archive/${FNAME}"
+EXTRACT_NAME="${NAME}-${NAME}-${VER_LOW}-release"
+CONFIG_OPTS="--with-libiconv-prefix=${INSTALL_PREFIX} --with-libintl-prefix=${INSTALL_PREFIX}"
