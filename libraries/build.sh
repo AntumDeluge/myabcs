@@ -157,6 +157,7 @@ for NAME in ${LIB_NAMES}; do
 	CMD_INSTALL=
 	CPPFLAGS="-I${INSTALL_PREFIX}/include"
 	LDFLAGS="-L${INSTALL_PREFIX}/lib"
+	AUTORECONF=false
 
 	# import configuration
 	. "${CFG}"
@@ -207,8 +208,9 @@ for NAME in ${LIB_NAMES}; do
 				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
-			# apply patches
 			cd "${DNAME}"
+
+			# apply patches
 			if test -d "../../patch/"; then
 				PATCHES=$(ls "../../patch/" | grep "^${NAME}-.*\.patch")
 			fi
@@ -222,6 +224,16 @@ for NAME in ${LIB_NAMES}; do
 					exit ${ret}
 				fi
 			done
+
+			if ${AUTORECONF}; then
+				echo "Running autoreconf ..."
+				autoreconf -fiv
+				ret=$?
+				if test ${ret} -ne 0; then
+					echo -e "\nAn error occurred running autoreconf for ${NAME} ${VER}"
+					exit ${ret}
+				fi
+			fi
 
 			cd "${DIR_LIBS}"
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
