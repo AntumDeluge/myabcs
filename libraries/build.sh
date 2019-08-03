@@ -220,13 +220,27 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 
 			for PATCH in ${PATCHES}; do
-				echo "Applying patch: ${PATCH}"
-				patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
-				ret=$?
-				if test ${ret} -ne 0; then
-					echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
-					exit ${ret}
+				if ${OS_WIN}; then
+					P_SYS="win32"
+				else
+					P_SYS="${OSTYPE}"
 				fi
+
+				P_TYPE=$(basename ${PATCH} | sed -e "s|^${NAME}-||" | cut -d"-" -f1)
+				case "${P_TYPE}" in
+					"any"|"all"|"${P_SYS}")
+						echo "Applying patch: ${PATCH}"
+						patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
+						ret=$?
+						if test ${ret} -ne 0; then
+							echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
+							exit ${ret}
+						fi
+						;;
+					*)
+						echo "Ignoring patch for non-${P_SYS} system: ${PATCH}"
+						;;
+					esac
 			done
 
 			if ${AUTORECONF}; then
