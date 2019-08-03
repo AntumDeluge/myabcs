@@ -289,6 +289,9 @@ for NAME in ${BUILTIN_LIBS}; do
 			else
 				echo "Configuring ${NAME} ${VER} ..."
 
+				# remove old cache if CONFIG_DONE == false
+				rm -r ./*
+
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
 					CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
