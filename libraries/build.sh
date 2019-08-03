@@ -277,8 +277,6 @@ for NAME in ${BUILTIN_LIBS}; do
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME} ${VER}"
 		else
-			echo "Building ${NAME} ${VER} ..."
-
 			if test ! -d "${DIR_BUILD}"; then
 				mkdir -p "${DIR_BUILD}"
 			fi
@@ -337,6 +335,8 @@ for NAME in ${BUILTIN_LIBS}; do
 
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
+
+			echo "Building ${NAME} ${VER} ..."
 
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
