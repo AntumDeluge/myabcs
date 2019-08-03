@@ -1,0 +1,4 @@
+VER="0.2.8"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://libspectre.freedesktop.org/releases/${FNAME}"
