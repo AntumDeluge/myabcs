@@ -1,0 +1,9 @@
+# Depends on:
+#  zlib, libjpeg-turbo (libjpeg), xz (liblzma)
+
+VER="4.0.10"
+EXTRACT_NAME="tiff-${VER}"
+DNAME="lib${EXTRACT_NAME}"
+FNAME="${EXTRACT_NAME}.tar.gz"
+SOURCE="https://download.osgeo.org/libtiff/${FNAME}"
+CONFIG_OPTS="--disable-jbig --disable-zstd --disable-webp --disable-cxx"
