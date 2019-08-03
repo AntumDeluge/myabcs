@@ -1,0 +1,11 @@
+# Depends on:
+
+VER="2.5.3"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://www.freedesktop.org/software/harfbuzz/release/${FNAME}"
+CONFIG_OPTS="--with-cairo=no --with-fontconfig=no --with-freetype=no"
+LIBS="-lintl"
+if "${OS_WIN}"; then
+	LIBS+=" -lws2_32 -lole32"
+fi
