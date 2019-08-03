@@ -290,7 +290,8 @@ for NAME in ${BUILTIN_LIBS}; do
 				echo "Configuring ${NAME} ${VER} ..."
 
 				# remove old cache if CONFIG_DONE == false
-				rm -r ./*
+				find ./ -type f -delete
+				find ./ -mindepth 1 -type d -empty -delete
 
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
