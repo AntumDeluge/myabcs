@@ -1,0 +1,8 @@
+# Depends:
+#  libjpeg-turbo (libjpeg), libtiff, zlib
+
+VER="2.9"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://downloads.sourceforge.net/lcms/lcms/${VER}/${FNAME}"
+LIBS="-llzma"
