@@ -344,6 +344,7 @@ for NAME in ${BUILTIN_LIBS}; do
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
+		echo -e "\nFinished processing ${NAME} ${VER}"
 
 		cd "${DIR_LIBS}"
 	fi
