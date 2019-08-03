@@ -287,7 +287,13 @@ for NAME in ${BUILTIN_LIBS}; do
 						if test "${OSTYPE}" == "msys"; then
 							CMD_CONFIG+=(-G "MSYS Makefiles")
 						fi
-						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DBUILD_SHARED_LIBS=OFF -DCMAKE_VERBOSE_MAKEFILE=ON "../../source/${DNAME}")
+						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DBUILD_SHARED_LIBS=OFF -DCMAKE_VERBOSE_MAKEFILE=ON "${DIR_SRC}/${DNAME}")
+					fi
+
+					# common values for meson
+					echo "${CMD_CONFIG[0]}" | grep -q "meson$"
+					if test $? -eq 0; then
+						CMD_CONFIG+=(--prefix=${INSTALL_PREFIX} --buildtype=plain --default-library=static "${DIR_SRC}/${DNAME}")
 					fi
 
 					"${CMD_CONFIG[@]}"
