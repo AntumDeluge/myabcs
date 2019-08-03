@@ -1,0 +1,8 @@
+# Depends on:
+#  zlib, libpng, harfbuzz
+
+VER="2.10.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://download.savannah.gnu.org/releases/freetype/${FNAME}"
+CONFIG_OPTS="--with-zlib=yes --with-bzip2=no --with-png=yes --with-harfbuzz=yes"
