@@ -168,7 +168,6 @@ for NAME in ${BUILTIN_LIBS}; do
 	CPPFLAGS="-I${INSTALL_PREFIX}/include"
 	LDFLAGS="-L${INSTALL_PREFIX}/lib"
 	LIBS=
-	AUTORECONF=false
 
 	# import configuration
 	. "${CFG}"
@@ -256,12 +255,12 @@ for NAME in ${BUILTIN_LIBS}; do
 					esac
 			done
 
-			if ${AUTORECONF}; then
-				echo "Running autoreconf ..."
-				autoreconf -fiv
+			if test ! -z ${PRE_CONF}; then
+				echo "Preparing source ..."
+				"${PRE_CONF[@]}"
 				ret=$?
 				if test ${ret} -ne 0; then
-					echo -e "\nAn error occurred running autoreconf for ${NAME} ${VER}"
+					echo -e "\nAn error occurred preparing source for ${NAME} ${VER}"
 					exit ${ret}
 				fi
 			fi
