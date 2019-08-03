@@ -143,7 +143,7 @@ function extract_archive {
 
 
 # library names in build order
-BUILTIN_LIBS="pkg-config zlib libpng libjpeg-turbo libiconv gettext libffi glib libexif expat \
+BUILTIN_LIBS="pkg-config libiconv gettext zlib libpng xz libjpeg-turbo libffi glib libexif expat \
 harfbuzz freetype fontconfig pcre pixman libspectre poppler" # librsvg cairo pango" # libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 
 for NAME in ${BUILTIN_LIBS}; do
