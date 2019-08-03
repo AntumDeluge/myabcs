@@ -4,6 +4,15 @@
 
 
 BUILD=$1
+EXTRACT_ONLY=false
+if test ! -z $2; then
+	if test "$2" == "extract"; then
+		EXTRACT_ONLY=true
+	else
+		echo -e "\nERROR: Unrecognized argument: $2"
+		exit 1
+	fi
+fi
 
 if test -z "${BUILD}"; then
 	echo -e "\nERROR: please provide \"BUILD\" argument: build.sh BUILD"
@@ -190,6 +199,9 @@ for NAME in ${BUILTIN_LIBS}; do
 	else
 		if ${EXTRACT_DONE}; then
 			echo "Not re-extracting ${FNAME}"
+			if ${EXTRACT_ONLY}; then
+				exit 0
+			fi
 		else
 			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test -f "${PACKAGE}"; then
@@ -256,6 +268,9 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			cd "${DIR_LIBS}"
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+			if ${EXTRACT_ONLY}; then
+				exit 0
+			fi
 		fi
 
 		DIR_BUILD="build/${LIB_BUILD}"
