@@ -1,0 +1,9 @@
+# Depends on:
+#  libiconv, libintl (gettext), expat, freetype
+
+VER="2.13.91"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://www.freedesktop.org/software/fontconfig/release/${FNAME}"
+CONFIG_OPTS="--enable-iconv --disable-docs"
+LIBS="-lharfbuzz"
