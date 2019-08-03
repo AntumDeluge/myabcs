@@ -200,7 +200,7 @@ for NAME in ${BUILTIN_LIBS}; do
 		if ${EXTRACT_DONE}; then
 			echo "Not re-extracting ${FNAME}"
 			if ${EXTRACT_ONLY}; then
-				exit 0
+				continue
 			fi
 		else
 			PACKAGE="${DIR_SRC}/${FNAME}"
@@ -269,7 +269,7 @@ for NAME in ${BUILTIN_LIBS}; do
 			cd "${DIR_LIBS}"
 			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 			if ${EXTRACT_ONLY}; then
-				exit 0
+				continue
 			fi
 		fi
 
