@@ -216,12 +216,12 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			# apply patches
 			if test -d "../../patch/"; then
-				PATCHES=$(ls "../../patch/" | grep "^${NAME}-.*\.patch")
+				PATCHES=$(ls "${DIR_LIBS}/patch/" | grep "^${NAME}-.*\.patch")
 			fi
 
 			for PATCH in ${PATCHES}; do
 				echo "Applying patch: ${PATCH}"
-				patch -p1 -i "../../patch/${PATCH}"
+				patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
 				ret=$?
 				if test ${ret} -ne 0; then
 					echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
