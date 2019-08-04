@@ -1,0 +1,8 @@
+# Depends on:
+#  pkg-config, zlib, lzma, gettext (libintl)
+
+VER="2.9.9"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="http://xmlsoft.org/sources/${FNAME}"
+CONFIG_OPTS="--without-python"
