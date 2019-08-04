@@ -1,0 +1,8 @@
+# Depends on:
+#  libpng, freetype, fontconfig, libspectre, poppler, librsvg, pixman, glib
+
+VER="1.16.0"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://www.cairographics.org/releases/${FNAME}"
+CONFIG_OPTS="--disable-full-testing --disable-valgrind --disable-gobject"
