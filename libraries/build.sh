@@ -54,6 +54,10 @@ esac
 
 TAR=`which tar`
 TAR_FOUND=$?
+if test ! ${TAR_FOUND} -eq 0; then
+	TAR=`which bsdtar`
+	TAR_FOUND=$?
+fi
 UNZIP=`which unzip`
 UNZIP_FOUND=$?
 WGET=`which wget`
