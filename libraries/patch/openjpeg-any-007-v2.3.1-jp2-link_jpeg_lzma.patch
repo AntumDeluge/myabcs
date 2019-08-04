@@ -1,0 +1,11 @@
+diff -ruN openjpeg-2.3.1.orig/src/bin/jp2/CMakeLists.txt openjpeg-2.3.1/src/bin/jp2/CMakeLists.txt
+--- openjpeg-2.3.1.orig/src/bin/jp2/CMakeLists.txt	2019-04-02 12:45:15.000000000 +0000
++++ openjpeg-2.3.1/src/bin/jp2/CMakeLists.txt	2019-08-04 01:02:56.931681500 +0000
+@@ -49,6 +49,7 @@
+   endif()
+   target_link_libraries(${exe} ${OPENJPEG_LIBRARY_NAME}
+     ${PNG_LIBNAME} ${TIFF_LIBNAME} ${LCMS_LIBNAME}
++    jpeg lzma
+     )
+   # To support universal exe:
+   if(ZLIB_FOUND AND APPLE)
