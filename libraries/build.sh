@@ -234,6 +234,12 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 
 			cd "${DIR_SRC}"
+
+			# clean up old files
+			if test -d "${DNAME}"; then
+				rm -rf "${DNAME}"
+			fi
+
 			extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
