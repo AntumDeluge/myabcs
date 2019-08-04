@@ -15,8 +15,10 @@ fi
 
 TARGET_DIR="${LIBS_DIR}/source/${LIB_NAME}"
 if test ! -d "${TARGET_DIR}"; then
-	echo -e "\nERROR: Library directory does not exist: ${TARGET_DIR}"
-	exit 1
+	echo -e "\n: Did not find library directory: ${TARGET_DIR}"
+	echo "Available libraries:"
+	find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||"
+	exit 0
 fi
 
 cd "${TARGET_DIR}"
