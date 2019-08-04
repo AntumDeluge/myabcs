@@ -189,6 +189,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	CPPFLAGS=
 	LDFLAGS=
 	LIBS=
+	PRE_CONF=
 	EXCLUDE_EXTRACT=
 
 	# import configuration
