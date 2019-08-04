@@ -1,0 +1,9 @@
+# Depends on:
+#  pkg-config, zlib, libpng, libtiff, lcms2
+
+VER="2.3.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://github.com/uclouvain/openjpeg/archive/v${VER}.tar.gz"
+CONFIG_OPTS=(-DBUILD_PKGCONFIG_FILES=ON -DBUILD_TESTING=OFF -DBUILD_JPWL=ON -DBUILD_MJ2=ON -DBUILD_JPIP=OFF -DBUILD_JP3D=ON -DBUILD_JAVA=OFF)
+CMD_CONFIG=(cmake ${CONFIG_OPTS})
