@@ -9,8 +9,15 @@ if test ! -z $2; then
 	if test "$2" == "extract"; then
 		EXTRACT_ONLY=true
 	else
-		echo -e "\nERROR: Unrecognized argument: $2"
-		exit 1
+		SINGLE_LIB="$2"
+		if test ! -z $3; then
+			if test "$3" == "extract"; then
+				EXTRACT_ONLY=true
+			else
+				echo -e "\nERROR: Unrecognized argument: $3"
+				exit 1
+			fi
+		fi
 	fi
 fi
 
@@ -142,9 +149,13 @@ function extract_archive {
 }
 
 
-# library names in build order
-BUILTIN_LIBS="pkg-config libiconv gettext zlib libpng xz libjpeg-turbo libtiff lcms2 openjpeg libffi glib libexif expat \
+if test ! -z "${SINGLE_LIB}"; then
+	BUILTIN_LIBS="${SINGLE_LIB}"
+else
+	# library names in build order
+	BUILTIN_LIBS="pkg-config libiconv gettext zlib libpng xz libjpeg-turbo libtiff lcms2 openjpeg libffi glib libexif expat \
 harfbuzz freetype fontconfig pcre pixman libspectre poppler" # librsvg cairo pango" # libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
+fi
 
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
