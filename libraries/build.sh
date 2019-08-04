@@ -108,9 +108,14 @@ function extract_tarball {
 	fi
 
 	local archive=$1
+	local exclude=$2
 
 	echo "Extracting tarball: ${archive}"
-	${TAR} -xf "${archive}"
+	if test -z "${exclude}"; then
+		${TAR} -xf "${archive}"
+	else
+		${TAR} --exclude "${exclude}" -xf "${archive}"
+	fi
 	return $?
 }
 
@@ -130,6 +135,7 @@ function extract_zip {
 
 function extract_archive {
 	local archive=$1
+	local exclude=$2
 	if test -z "${archive}"; then
 		echo -e "\nERROR in function extract_archive: 'archive' argument not given"
 		exit 1
@@ -142,10 +148,10 @@ function extract_archive {
 
 	echo "${archive}" | grep -q ".zip$"
 	if test $? -eq 0; then
-		extract_zip "${archive}"
+		extract_zip "${archive}" "${exclude}"
 		local ret=$?
 	else
-		extract_tarball "${archive}"
+		extract_tarball "${archive}" "${exclude}"
 		local ret=$?
 	fi
 
@@ -183,6 +189,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	CPPFLAGS=
 	LDFLAGS=
 	LIBS=
+	EXCLUDE_EXTRACT=
 
 	# import configuration
 	. "${CFG}"
@@ -227,7 +234,7 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 
 			cd "${DIR_SRC}"
-			extract_archive "${PACKAGE}"
+			extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
