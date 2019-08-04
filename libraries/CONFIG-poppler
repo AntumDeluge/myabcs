@@ -1,0 +1,10 @@
+# Depends on:
+#  pkg-config, glib, cairo, zlib, freetype, libjpeg, libtiff, lcms2, openjpeg
+
+VER="0.79.0"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://poppler.freedesktop.org/${FNAME}"
+CONFIG_OPTS=(-DBUILD_CPP_TESTS=OFF -DBUILD_GTK_TESTS=OFF -DBUILD_QT5_TESTS=OFF -DENABLE_GOBJECT_INTROSPECTION=OFF -DENABLE_LIBCURL=OFF \
+-DENABLE_QT5=OFF -DENABLE_UTILS=OFF -DENABLE_LIBOPENJPEG=none -DENABLE_SPLASH=OFF)
+CMD_CONFIG=(cmake ${CONFIG_OPTS[@]})
