@@ -8,16 +8,9 @@ EXTRACT_ONLY=false
 if test ! -z $2; then
 	if test "$2" == "extract"; then
 		EXTRACT_ONLY=true
+		BUILD_LIBS="${@:3}"
 	else
-		SINGLE_LIB="$2"
-		if test ! -z $3; then
-			if test "$3" == "extract"; then
-				EXTRACT_ONLY=true
-			else
-				echo -e "\nERROR: Unrecognized argument: $3"
-				exit 1
-			fi
-		fi
+		BUILD_LIBS="${@:2}"
 	fi
 fi
 
@@ -162,8 +155,8 @@ function extract_archive {
 }
 
 
-if test ! -z "${SINGLE_LIB}"; then
-	BUILTIN_LIBS="${SINGLE_LIB}"
+if test ! -z "${BUILD_LIBS}"; then
+	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# library names in build order
 	BUILTIN_LIBS="pkg-config libiconv gettext zlib libpng xz libxml2 libjpeg-turbo libtiff lcms2 \
