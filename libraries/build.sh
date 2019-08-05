@@ -64,6 +64,9 @@ WGET=`which wget`
 WGET_FOUND=$?
 
 function download_source {
+	if test ! -d "${DIR_SRC}"; then
+		mkdir -p "${DIR_SRC}"
+	fi
 	cd "${DIR_SRC}"
 
 	if test ${WGET_FOUND} -ne 0; then
