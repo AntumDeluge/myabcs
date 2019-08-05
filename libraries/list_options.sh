@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SCRIPT_NAME="$(basename $0)"
 ROOT_DIR="$(dirname $0)/../"
