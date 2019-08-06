@@ -38,7 +38,7 @@ Make targets:\n\
 \tinstall\t\tInstall or stage files for release.\n\
 \tstage\t\tSame as $(t_hilight)install$(t_normal).\n\
 \tuninstall\tRemove files from system or stage directory.\n\
-\tpack\t\tZip contentns of stage directory into archive\n\t\t\tfor release.\n\
+\tpack\t\tZip contents of stage directory into archive\n\t\t\tfor release.\n\
 \n\
 Environment variables:\n\
 \tSTATIC\t\tDefine to create static build (note: SDL\n\t\t\tlibraries are still linked dynamically).\n\
