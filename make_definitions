@@ -39,25 +39,33 @@ Make targets:\n\
 \tstage\t\tSame as $(t_hilight)install$(t_normal).\n\
 \tuninstall\tRemove files from system or stage directory.\n\
 \tpack\t\tZip contents of stage directory into archive\n\t\t\tfor release.\n\
+\tbuild-libs\tCompile \"built-in\" libraries.\n\
 \n\
 Environment variables:\n\
 \tSTATIC\t\tDefine to create static build (note: SDL\n\t\t\tlibraries are still linked dynamically).\n\
 \tWXVERSION\tUse a version of wxWidgets other than the default.\n\
 \tEXTRA_LIBS\tUse this variable to manually link to libraries\n\t\t\t(example: EXTRA_LIBS=\"-lpng -lz\"). This should only\n\t\t\tbe used if linker errors are encountered.\n\
 \tREL_SUFFIX\tAppends text to filename of release archive when\n\t\t\t$(t_hilight)make pack$(t_normal) is called.\n\
+\tBUILD_LIBS\tOnly build specified built-in libs with $(t_hilight)build-libs$(t_normal) target.\n\
+\tUSE_BUILTIN\tSet to non-zero to link to built-in libs. Only works if\n\
+\t\t\tlibraries previously built with $(t_hilight)build-libs$(t_normal) target called.\n\
 \tWXCONFIG\tUse a custom $(t_hilight)wx-config$(t_normal)\n\
 \tSDLCONFIG\tUse a custom $(t_hilight)sdl2-config$(t_normal)"
 
 ### Environment ###
 
+OS_WIN=0
 ifeq ($(OS), Windows_NT)
+	OS_WIN=1
 	STAGEDIR = build/stage
 	ifndef DESTDIR
 		DESTDIR = $(STAGEDIR)
 	endif
+	BUILD_STRING=$(shell echo "win32-$$(uname -m)")
 else
 	PREFIX := /usr/local
 	DATADIR = $(PREFIX)/share
+	BUILD_STRING=$(shell echo "$$(uname -s | tr A-Z a-z)-$$(uname -m)")
 endif
 
 BINDIR = $(DESTDIR)/bin
@@ -67,6 +75,25 @@ LIBDIR = $(DESTDIR)/lib
 ### Compiling & Linking ###
 
 CPPFLAGS += -Iinclude
+ifdef USE_BUILTIN
+	ifneq ("$(USE_BUILTIN)", "0")
+		CPPFLAGS += -Ilibraries/libprefix-$(BUILD_STRING)/include
+		LDFLAGS += -Llibraries/libprefix-$(BUILD_STRING)/lib
+		ifndef WXCONFIG
+			WXCONFIG = libraries/libprefix-$(BUILD_STRING)/bin/wx-config
+		endif
+		ifndef SDLCONFIG
+			SDLCONFIG = libraries/libprefix-$(BUILD_STRING)/bin/sdl2-config
+		endif
+	endif
+endif
+
+ifndef WXCONFIG
+	WXCONFIG = wx-config
+endif
+ifndef SDLCONFIG
+	SDLCONFIG = sdl2-config
+endif
 
 CC = g++
 CFLAGS = -c -std=c++11

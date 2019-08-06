@@ -121,6 +121,14 @@ install-x11: data/resource/x11/myabcs.desktop data/resource/logo/myabcs.svg
 	echo -e "#!/bin/sh\n\n$(DATADIR)/myabcs/myabcs" > "$${exe}"; \
 	chmod +x "$${exe}";
 
+build-libs:
+	@echo "\nBuilding libs for: $(BUILD_STRING)"; \
+	if test -z "$(BUILD_LIBS)"; then \
+		libraries/build.sh "$(BUILD_STRING)"; \
+	else \
+		libraries/build.sh "$(BUILD_STRING)" $(BUILD_LIBS); \
+	fi;
+
 install: stage
 
 uninstall:
