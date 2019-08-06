@@ -62,7 +62,9 @@ BINDIR = $(DESTDIR)/bin
 INCLDIR = $(DESTDIR)/include
 LIBDIR = $(DESTDIR)/lib
 
-### Compiling ###
+### Compiling & Linking ###
+
+CPPFLAGS += -Iinclude
 
 CC = g++
 CFLAGS = -c -std=c++11
@@ -70,8 +72,6 @@ CXXFLAGS = $(CFLAGS)
 WXFLAGS = wx-config --cxxflags
 SDLFLAGS = sdl2-config --cflags
 OBJ_SUF = .o
-
-### Linking ###
 
 LIBS = -lSDL2_mixer -lpthread
 WXLIBS = wx-config --libs std,richtext
