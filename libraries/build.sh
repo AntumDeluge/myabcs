@@ -266,7 +266,7 @@ for NAME in ${BUILTIN_LIBS}; do
 					P_SYS="${OSTYPE}"
 				fi
 
-				P_TYPE=$(basename ${PATCH} | sed -e "s|^${NAME}-||" | cut -d"-" -f1)
+				P_TYPE=$(basename ${PATCH} | sed -e "s|^${NAME}-||" | cut -d"-" -f2)
 				case "${P_TYPE}" in
 					"any"|"all"|"${P_SYS}")
 						echo "Applying patch: ${PATCH}"
