@@ -1,0 +1,6 @@
+VER="1.3.13"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tgz"
+SOURCE="https://github.com/silnrsi/graphite/releases/download/${VER}/${FNAME}"
+CONFIG_OPTS=(-DGRAPHITE2_COMPARE_RENDERER=ON)
+CMD_CONFIG=(cmake ${CONFIG_OPTS[@]})
