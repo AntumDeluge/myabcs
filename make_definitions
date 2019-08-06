@@ -44,7 +44,9 @@ Environment variables:\n\
 \tSTATIC\t\tDefine to create static build (note: SDL\n\t\t\tlibraries are still linked dynamically).\n\
 \tWXVERSION\tUse a version of wxWidgets other than the default.\n\
 \tEXTRA_LIBS\tUse this variable to manually link to libraries\n\t\t\t(example: EXTRA_LIBS=\"-lpng -lz\"). This should only\n\t\t\tbe used if linker errors are encountered.\n\
-\tREL_SUFFIX\tAppends text to filename of release archive when\n\t\t\t$(t_hilight)make pack$(t_normal) is called."
+\tREL_SUFFIX\tAppends text to filename of release archive when\n\t\t\t$(t_hilight)make pack$(t_normal) is called.\n\
+\tWXCONFIG\tUse a custom $(t_hilight)wx-config$(t_normal)\n\
+\tSDLCONFIG\tUse a custom $(t_hilight)sdl2-config$(t_normal)"
 
 ### Environment ###
 
@@ -69,13 +71,13 @@ CPPFLAGS += -Iinclude
 CC = g++
 CFLAGS = -c -std=c++11
 CXXFLAGS = $(CFLAGS)
-WXFLAGS = wx-config --cxxflags
-SDLFLAGS = sdl2-config --cflags
+WXFLAGS = $(WXCONFIG) --cxxflags
+SDLFLAGS = $(SDLCONFIG) --cflags
 OBJ_SUF = .o
 
 LIBS = -lSDL2_mixer -lpthread
-WXLIBS = wx-config --libs std,richtext
-SDLLIBS = sdl2-config --libs
+WXLIBS = $(WXCONFIG) --libs std,richtext
+SDLLIBS = $(SDLCONFIG) --libs
 LINKEROPTS = -Wl,--strip-all
 
 ifdef WXVERSION
@@ -86,7 +88,7 @@ endif
 ifdef STATIC
 	LIBS += -l:libwxsvg.a
 	WXLIBS += --static
-	#SDLLIBS = sdl2-config --static-libs
+	#SDLLIBS = $(SDLCONFIG) --static-libs
 	LINKEROPTS += -static-libgcc -static-libstdc++
 else
 	LIBS += -lwxsvg
