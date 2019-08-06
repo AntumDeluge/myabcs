@@ -7,18 +7,23 @@ ROOT_DIR="$(pwd)"
 LIBS_DIR="${ROOT_DIR}/libraries"
 cd "${LIBS_DIR}"
 
+function show_available_libs {
+	echo -e "\nAvailable libraries:"
+	find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||"
+}
+
 LIB_NAME=$1
 if test -z "${LIB_NAME}"; then
 	echo -e "\nPlease supply library directory name (usually as <name>-<version>): ${SCRIPT_NAME} <directory>"
+	show_available_libs
 	exit 1
 fi
 
 TARGET_DIR="${LIBS_DIR}/source/${LIB_NAME}"
 if test ! -d "${TARGET_DIR}"; then
-	echo -e "\n: Did not find library directory: ${TARGET_DIR}"
-	echo "Available libraries:"
-	find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||"
-	exit 0
+	echo -e "\nDid not find library directory: ${TARGET_DIR}"
+	show_available_libs
+	exit 1
 fi
 
 cd "${TARGET_DIR}"
