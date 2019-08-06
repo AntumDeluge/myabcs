@@ -1,16 +1,10 @@
 Known BUGS:
 - SVG render errors:
-  - object render order:
-    - cat
   - other/mal-rendered objects
     - clock ("shine")
   - shading/semi-transparency:
     - apple
-    - electric guitar
-    - magnifying glass
     - necklace
-    - onion
-    - tomato
 - Missing SVG
   - animals/
     - owl
