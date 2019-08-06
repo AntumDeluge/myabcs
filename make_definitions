@@ -5,11 +5,11 @@ PNAME = myabcs
 PNAME_T = MyABCs
 VER_MAJ = 0
 VER_MIN = 4
-VER_REL = 6
+VER_REL = 7
 VERSION = $(VER_MAJ).$(VER_MIN).$(VER_REL)
 
 # comment-out for release
-#VER_DEV = 1
+VER_DEV = 1
 
 ifdef REL_SUFFIX
 	REL_NAME = "$(PNAME)-$(VERSION)-$(REL_SUFFIX)"
