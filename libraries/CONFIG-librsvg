@@ -9,4 +9,7 @@ FNAME="${DNAME}.tar.xz"
 SOURCE="https://download.gnome.org/sources/librsvg/${VER%.*}/${FNAME}"
 PRE_CONF=(autoreconf -fiv)
 CONFIG_OPTS="--disable-tools --disable-pixbuf-loader --disable-introspection --disable-installed-tests --disable-always-build-tests"
-LIBS="`pkg-config gio-2.0 --libs --static` -lintl"
+LIBS="`pkg-config gio-2.0 --libs --static`"
+if ${OS_WIN}; then
+	LIBS+=" -lintl"
+fi
