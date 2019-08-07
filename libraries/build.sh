@@ -170,6 +170,9 @@ if test ! -z "${NO_BUILD_LIBS}"; then
 	done
 fi
 
+# verbose make
+export VERBOSE=1
+
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
 
