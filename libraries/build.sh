@@ -164,6 +164,12 @@ lcms2 libffi glib libexif expat graphite2 harfbuzz freetype fontconfig pcre pixm
 poppler librsvg cairo pango libogg libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
 
+if test ! -z "${NO_BUILD_LIBS}"; then
+	for L in ${NO_BUILD_LIBS}; do
+		BUILTIN_LIBS=$(echo "${BUILTIN_LIBS}" | sed -e "s|${L}||g")
+	done
+fi
+
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
 

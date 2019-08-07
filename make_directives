@@ -126,6 +126,7 @@ build-libs:
 	if test -z "$(BUILD_LIBS)"; then \
 		libraries/build.sh "$(BUILD_STRING)"; \
 	else \
+		export NO_BUILD_LIBS; \
 		libraries/build.sh "$(BUILD_STRING)" $(BUILD_LIBS); \
 	fi;
 
