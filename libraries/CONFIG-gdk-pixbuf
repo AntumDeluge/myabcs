@@ -1,0 +1,17 @@
+# Depends on:
+#  glib, libpng, libtiff, libjpeg-turbo (libjpeg)
+
+VER="2.38.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://ftp.acc.umu.se/pub/GNOME/sources/gdk-pixbuf/${VER%.*}/${FNAME}"
+EXCLUDE_EXTRACT="tests/test-images/reftests/tga"
+CONFIG_OPTS=(-Dgir=false -Dman=false -Dinstalled_tests=false -Dbuiltin_loaders=none -Dnative_windows_loaders=true)
+if ${OS_WIN}; then
+	CONFIG_OPTS+=(-Dx11=false)
+fi
+LIBS="`pkg-config glib-2.0 --libs --static` `pkg-config libtiff-4 --libs --static` -liconv -lws2_32"
+LDFLAGS="${LIBS}"
+CMD_CONFIG=(meson ${CONFIG_OPTS[@]})
+CMD_BUILD=(ninja)
+CMD_INSTALL=(ninja install)
