@@ -61,7 +61,16 @@ ifeq ($(OS), Windows_NT)
 	ifndef DESTDIR
 		DESTDIR = $(STAGEDIR)
 	endif
-	BUILD_STRING=$(shell echo "win32-$$(uname -m)")
+	ifeq ($(shell echo $${OSTYPE}), msys)
+		# HACK!
+		ifeq ($(MSYSTEM), MINGW64)
+			BUILD_STRING="win32-x86_64"
+		else
+			BUILD_STRING="win32-i686"
+		endif
+	else
+		BUILD_STRING=$(shell echo "win32-$$(uname -m)")
+	endif
 else
 	PREFIX := /usr/local
 	DATADIR = $(PREFIX)/share
