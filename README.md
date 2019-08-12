@@ -1,6 +1,25 @@
 
-# MyABCs
+# MyABCs Educational Software for Children
 
+![Icon](https://antumdeluge.github.io/myabcs/data/icon.svg)
+
+## Description
+
+MyABCs is a simple alphabet game. It has two modes with multiple categories.
+
+## How to Play
+
+Press one of the icons at the top of the window to select a category.
+
+Categories:
+- Alphabet mode:
+    - Select the ABC blocks icon at the top of the window.
+    - In this mode, the player must press the letter key corresponding to the picture displayed on the screen.
+    - Work your way through the English alphabet to finish the game.
+- All other categories:
+    - Simply press any letter on the keyboard to display an associated image.
+
+While an image is displayed on the screen, press the spacebar to hear the pronunciation of the object & an associated sound effect if available.
 
 ## Building 
 
