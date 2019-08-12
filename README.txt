@@ -31,6 +31,12 @@ NOTE: I plan to switch to CMake ( https://cmake.org/ ) build generator eventuall
 4) To zip files into release archive execute:
     ‣  make pack
 
+If you want to compile & use the "built-in" static libraries, execute the following
+from the source folder:
+
+    ‣ make build-libs
+    ‣ make USE_BUILTIN=1
+
 Make targets:
     help            Show this help information.
     all (default)   Compile & link executable.
@@ -39,6 +45,7 @@ Make targets:
     uninstall       Remove files from system or stage directory.
     pack            Zip contentns of stage directory into archive
                     for release.
+    build-libs      Compile "built-in" libraries.
 
 Environment variables:
     STATIC          Define to create static build (note: SDL
@@ -49,6 +56,11 @@ Environment variables:
                     be used if linker errors are encountered.
     REL_SUFFIX      Appends text to filename of release archive when
                     "make pack" is called.
+    BUILD_LIBS      Only build specified built-in libs with build-libs target.
+    USE_BUILTIN     Set to non-zero to link to built-in libs. Only works if
+                    libraries previously built with build-libs target called.
+    WXCONFIG        Use a custom wx-config
+    SDLCONFIG       Use a custom sdl2-config
 
 
  -------------------------------------
