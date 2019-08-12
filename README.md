@@ -1,43 +1,49 @@
 
-MyABCs 0.4.6
+# MyABCs
 
 
- --------------
-| Requirements |
- --------------
+## Building 
+
+### Requirements
+---
+
+<pre>
 GNU Make        BSD Make was previously supported but may no
                 longer work.
-wxWidgets 3.x   https://wxwidgets.org/
-wxSVG           http://wxsvg.sourceforge.net/
-SDL2            https://libsdl.org/
+wxWidgets 3.x   <a href="https://wxwidgets.org/">https://wxwidgets.org/</a>
+wxSVG           <a href="http://wxsvg.sourceforge.net/">http://wxsvg.sourceforge.net/</a>
+SDL2            <a href="https://libsdl.org/">https://libsdl.org/</a>
 PThreads        Linux: Check your package manager for a library
                 implementation.
                 Windows: If your compiler does not have an
-                implementation you can download Pthreads-w32
-                ( http://sourceware.org/pthreads-win32/ ).
+                implementation you can download <a href="http://sourceware.org/pthreads-win32/">Pthreads-w32</a>.
+</pre>
 
-NOTE: I plan to switch to CMake ( https://cmake.org/ ) build generator eventually.
+**NOTE:** I plan to switch to [CMake](https://cmake.org/) build generator eventually.
 
 
- ------------------------------------------------------------
-| Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.) |
- ------------------------------------------------------------
+### Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.)
+---
 
-1) Navigate to the source folder from the command line/terminal.
-2) To compile execute:
-    ‣ make
-3) To install execute:
-    ‣  make install (on Windows this puts all files into "build/stage/myabcs" directory)
-4) To zip files into release archive execute:
-    ‣  make pack
+1. Navigate to the source folder from the command line/terminal.
+2. To compile execute:
+    - `make`
+3. To install execute:
+    - `make install` (on Windows this puts all files into "build/stage/myabcs" directory)
+4. To zip files into release archive execute:
+    - `make pack`
 
 If you want to compile & use the "built-in" static libraries, execute the following
 from the source folder:
 
-    ‣ make build-libs
-    ‣ make USE_BUILTIN=1
+```sh
+$ make build-libs
+$ make USE_BUILTIN=1
+```
 
-Make targets:
+Make command usage:
+<pre>
+Targets:
     help            Show this help information.
     all (default)   Compile & link executable.
     install         Install or stage files for release.
@@ -61,18 +67,17 @@ Environment variables:
                     libraries previously built with build-libs target called.
     WXCONFIG        Use a custom wx-config
     SDLCONFIG       Use a custom sdl2-config
+</pre>
 
 
- -------------------------------------
-| Compiling with Microsoft Visual C++ |
- -------------------------------------
+### Compiling with Microsoft Visual C++
+---
 
 I don't know
 
 
- ----------------------------
-| Compiling with Apple Xcode |
- ----------------------------
+### Compiling with Apple Xcode
+---
 
 I am not familiar with Apple's Xcode environment, but I understand that it
 comes with GNU GCC & possibly Clang. The instructions above should work here as
