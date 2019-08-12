@@ -1,0 +1,15 @@
+# Depends on:
+#  pkg-config, cairo, glib, harfbuzz, fontconfig, freetype
+
+# Update available: 1.44.1
+
+VER="1.43.0"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://download.gnome.org/sources/pango/${VER%.*}/${FNAME}"
+CONFIG_OPTS=(-Dgir=false)
+LIBS="`pkg-config cairo --libs --static` -lstdc++"
+LDFLAGS="${LIBS}"
+CMD_CONFIG=(meson ${CONFIG_OPTS[@]})
+CMD_BUILD=(ninja)
+CMD_INSTALL=(ninja install)
