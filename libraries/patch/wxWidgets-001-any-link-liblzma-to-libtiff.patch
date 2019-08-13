@@ -1,0 +1,24 @@
+diff -ruN wxWidgets-3.1.2.orig/configure wxWidgets-3.1.2/configure
+--- wxWidgets-3.1.2.orig/configure	2018-12-09 07:40:08.000000000 -0800
++++ wxWidgets-3.1.2/configure	2019-08-12 21:35:32.682749200 -0700
+@@ -23458,7 +23458,7 @@
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-ltiff $TIFF_PREREQ_LINKS $LIBS"
++LIBS="-ltiff $TIFF_PREREQ_LINKS -llzma $LIBS"
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+diff -ruN wxWidgets-3.1.2.orig/configure.in wxWidgets-3.1.2/configure.in
+--- wxWidgets-3.1.2.orig/configure.in	2018-12-09 07:40:08.000000000 -0800
++++ wxWidgets-3.1.2/configure.in	2019-08-12 21:33:27.874505000 -0700
+@@ -2636,7 +2636,7 @@
+                             AC_CHECK_LIB(tiff, TIFFError,
+                                          TIFF_LINK=" -ltiff",
+                                          ,
+-                                         $TIFF_PREREQ_LINKS)
++                                         $TIFF_PREREQ_LINKS -llzma)
+                         ],
+                         [],
+                         [ ]

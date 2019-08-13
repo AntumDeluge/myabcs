@@ -159,7 +159,7 @@ if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# library names in build order
-	BUILTIN_LIBS="glib pkg-config libiconv bzip2 zlib libpng xz libxml2 libjpeg-turbo \
+	BUILTIN_LIBS="glib pkg-config libiconv bzip2 zlib libpng xz libxml2 libjpeg-turbo libtiff \
 lcms2 libffi libexif expat graphite2 harfbuzz freetype pcre pixman poppler libogg libvorbis \
 libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
@@ -294,7 +294,7 @@ for NAME in ${BUILTIN_LIBS}; do
 					*)
 						echo "Ignoring patch for non-${P_SYS} system: ${PATCH}"
 						;;
-					esac
+				esac
 			done
 
 			if test ! -z ${PRE_CONF}; then
