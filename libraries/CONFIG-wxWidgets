@@ -8,6 +8,7 @@ SOURCE="https://github.com/wxWidgets/wxWidgets/releases/download/v${VER}/${FNAME
 CONFIG_OPTS=" --disable-gtktest --disable-sdltest --with-libpng=sys --with-libjpeg=sys \
 --with-libtiff=builtin --with-libxpm=builtin --with-libiconv=sys --with-regex=builtin \
 --with-zlib=sys --with-liblzma=sys --with-expat=sys"
+LIBTYPE_OPTS="--enable-shared=no"
 if ${OS_WIN}; then
 	CONFIG_OPTS+=" --with-msw"
 else

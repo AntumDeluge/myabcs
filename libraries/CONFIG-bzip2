@@ -3,3 +3,4 @@ DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://sourceware.org/pub/bzip2/${FNAME}"
 PRE_CONF=(autoreconf -fiv)
+LIBTYPE_OPTS="--enable-shared=no"

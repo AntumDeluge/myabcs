@@ -201,6 +201,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	LIBS=
 	PRE_CONF=
 	EXCLUDE_EXTRACT=
+	LIBTYPE_OPTS=
 
 	# import configuration
 	. "${CFG}"
@@ -335,17 +336,12 @@ for NAME in ${BUILTIN_LIBS}; do
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
 					CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
-					case "${NAME}" in
-						"wxWidgets")
-							CONFIG_OPTS+=" --enable-shared=no"
-							;;
-						"zlib")
-							CONFIG_OPTS+=" --static"
-							;;
-						*)
-							CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
-							;;
-					esac
+					if test ! -z "${LIBTYPE_OPTS}"; then
+						# override default static/shared options
+						CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
+					else
+						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
+					fi
 
 					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
 					if test $? -ne 0; then
