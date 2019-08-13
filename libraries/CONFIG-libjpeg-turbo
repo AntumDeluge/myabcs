@@ -1,3 +1,6 @@
+# Notes:
+#  - requires nasm to build
+
 VER="2.0.2"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
