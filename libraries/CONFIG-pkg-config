@@ -1,5 +1,13 @@
+# Depends on:
+#  glib
+#
+# Notes:
+#  - configure script utilizes `cmp` command found in diffutils package
+
 VER="0.29.2"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://pkgconfig.freedesktop.org/releases/${FNAME}"
-#CONFIG_OPTS="--with-internal-glib"
+export GLIB_CFLAGS="-I${INSTALL_PREFIX}/include/glib-2.0 -pthread -I${INSTALL_PREFIX}/lib/glib-2.0/include -mms-bitfields"
+export GLIB_LIBS="-lintl -lglib-2.0 -pthread -lws2_32 -lwinmm -lole32 -lshlwapi"
+LIBS="-lintl"

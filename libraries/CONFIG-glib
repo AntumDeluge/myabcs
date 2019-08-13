@@ -1,16 +1,13 @@
 # Depends on:
-#  libintl (gettext), libiconv, zlib, libffi
+#  libintl (gettext)
 
 # Update available (not compatible with current patches): 2.61.2
 
-VER_SHORT="2.60"
-VER="${VER_SHORT}.4"
+VER="2.60.4"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
-SOURCE="https://download.gnome.org/sources/glib/${VER_SHORT}/${FNAME}"
-CONFIG_OPTS="-Dinstalled_tests=false -Dforce_posix_threads=true"
-LIBS="-liconv"
-LDFLAGS+=" ${LIBS}"
+SOURCE="https://download.gnome.org/sources/glib/${VER%.*}/${FNAME}"
+CONFIG_OPTS="-Dinstalled_tests=false -Dforce_posix_threads=true -Dinternal_pcre=true"
 CMD_CONFIG=(meson ${CONFIG_OPTS})
 CMD_BUILD=(ninja)
 CMD_INSTALL=(ninja install)
