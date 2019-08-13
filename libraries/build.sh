@@ -174,7 +174,7 @@ fi
 export VERBOSE=1
 
 if test -z "${CMD_MAKE}"; then
-    CMD_MAKE="make"
+	CMD_MAKE="make"
 fi
 
 for NAME in ${BUILTIN_LIBS}; do
@@ -339,8 +339,8 @@ for NAME in ${BUILTIN_LIBS}; do
 					if test ! -z "${LIBTYPE_OPTS}"; then
 						# override default static/shared options
 						if test "${LIBTYPE_OPTS}" != "N/A"; then
-    						CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
-    					fi
+							CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
+						fi
 					else
 						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
 					fi
