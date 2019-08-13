@@ -338,7 +338,9 @@ for NAME in ${BUILTIN_LIBS}; do
 					CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
 					if test ! -z "${LIBTYPE_OPTS}"; then
 						# override default static/shared options
-						CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
+						if test "${LIBTYPE_OPTS}" != "N/A"; then
+    						CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
+    					fi
 					else
 						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
 					fi
