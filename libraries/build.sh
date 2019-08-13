@@ -173,6 +173,10 @@ fi
 # verbose make
 export VERBOSE=1
 
+if test -z "${CMD_MAKE}"; then
+    CMD_MAKE="make"
+fi
+
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
 
@@ -190,8 +194,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	CONFIG_OPTS=
 	EXTRACT_NAME=
 	CMD_CONFIG=
-	CMD_BUILD=(make)
-	CMD_INSTALL=(make install)
+	CMD_BUILD=(${CMD_MAKE})
+	CMD_INSTALL=(${CMD_MAKE} install)
 	CPPFLAGS=
 	LDFLAGS=
 	LIBS=
