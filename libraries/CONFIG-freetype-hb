@@ -1,0 +1,11 @@
+# this simply re-builds freetype with harfbuzz support
+#
+# Depends on:
+#  zlib, libpng, bzip2, harfbuzz
+
+NAME="freetype"
+# use the same configuration
+. CONFIG-freetype
+
+# add harfbuzz support
+CONFIG_OPTS="--with-zlib=yes --with-bzip2=yes --with-png=yes --with-harfbuzz=yes"
