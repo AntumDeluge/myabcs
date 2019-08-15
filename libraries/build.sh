@@ -240,7 +240,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	fi
 
 	if ${REBUILD} && ! "${EXTRACT_DONE}"; then
-		# don't re-extract package
+		# source should already be extracted from original build
 		EXTRACT_DONE=true
 		echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
 	fi
