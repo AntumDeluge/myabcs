@@ -160,7 +160,7 @@ if test ! -z "${BUILD_LIBS}"; then
 else
 	# library names in build order
 	BUILTIN_LIBS="glib pkg-config libiconv bzip2 zlib libpng xz libxml2 libjpeg-turbo libtiff \
-lcms2 libffi libexif expat graphite2 harfbuzz freetype pcre pixman poppler libogg libvorbis \
+lcms2 libffi libexif expat graphite2 freetype harfbuzz pcre pixman poppler libogg libvorbis \
 libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
 

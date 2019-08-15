@@ -1,4 +1,5 @@
 # Depends on:
+#  freetype
 
 VER="2.5.3"
 DNAME="${NAME}-${VER}"
