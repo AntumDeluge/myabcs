@@ -202,12 +202,22 @@ for NAME in ${BUILTIN_LIBS}; do
 	PRE_CONF=
 	EXCLUDE_EXTRACT=
 	LIBTYPE_OPTS=
+	REBUILD=false
+
+	# backup original name in case of rebuild
+	NAME_ORIG="${NAME}"
 
 	# import configuration
 	. "${CFG}"
 
+	# detect rebuild
+	if test "${NAME_ORIG}" != "${NAME}"; then
+		echo -e "\nDoing re-build of ${NAME} ${VER}"
+		REBUILD=true
+	fi
+
 	# check values imported from configuration
-	if test -z ${VER} || test -z ${DNAME} || test -z ${FNAME} || test -z ${SOURCE}; then
+	if test -z "${VER}" || test -z "${DNAME}" || test -z "${FNAME}" || test -z "${SOURCE}"; then
 		echo -e "\nERROR: malformed configuration: ${CFG}"
 		exit 1
 	fi
@@ -221,16 +231,22 @@ for NAME in ${BUILTIN_LIBS}; do
 	BUILD_DONE=false
 	INSTALL_DONE=false
 
-	LIB_BUILD="${NAME}-${VER}-${BUILD}"
+	LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
+	FILE_LIB_INSTALL="${DIR_LIBS}/INSTALL-${LIB_BUILD}"
 
 	# prevents re-build/re-install
-	FILE_LIB_INSTALL="${DIR_LIBS}/INSTALL-${LIB_BUILD}"
 	if test -f "${FILE_LIB_INSTALL}"; then
 		. "${FILE_LIB_INSTALL}"
 	fi
 
+	if ${REBUILD} && ! "${EXTRACT_DONE}"; then
+		# don't re-extract package
+		EXTRACT_DONE=true
+		echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+	fi
+
 	if ${INSTALL_DONE}; then
-		echo "Using previous install of ${NAME} ${VER}"
+		echo "Using previous install of ${NAME_ORIG} ${VER}"
 	else
 		if ${EXTRACT_DONE}; then
 			echo "Not re-extracting ${FNAME}"
@@ -302,7 +318,7 @@ for NAME in ${BUILTIN_LIBS}; do
 				"${PRE_CONF[@]}"
 				ret=$?
 				if test ${ret} -ne 0; then
-					echo -e "\nAn error occurred preparing source for ${NAME} ${VER}"
+					echo -e "\nAn error occurred preparing source for ${NAME_ORIG} ${VER}"
 					exit ${ret}
 				fi
 			fi
@@ -316,7 +332,7 @@ for NAME in ${BUILTIN_LIBS}; do
 
 		DIR_BUILD="build/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
-			echo "Not re-building ${NAME} ${VER}"
+			echo "Not re-building ${NAME_ORIG} ${VER}"
 		else
 			if test ! -d "${DIR_BUILD}"; then
 				mkdir -p "${DIR_BUILD}"
@@ -325,9 +341,9 @@ for NAME in ${BUILTIN_LIBS}; do
 			cd "${DIR_BUILD}"
 
 			if ${CONFIG_DONE}; then
-				echo "Not re-configuring ${NAME} ${VER}"
+				echo "Not re-configuring ${NAME_ORIG} ${VER}"
 			else
-				echo "Configuring ${NAME} ${VER} ..."
+				echo "Configuring ${NAME_ORIG} ${VER} ..."
 
 				# remove old cache if CONFIG_DONE == false
 				find ./ -type f -delete
@@ -347,7 +363,7 @@ for NAME in ${BUILTIN_LIBS}; do
 
 					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
 					if test $? -ne 0; then
-						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
 						exit 1
 					fi
 				else
@@ -382,7 +398,7 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
-				echo -e "\nAn error occurred while building ${NAME} ${VER}"
+				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
 				exit 1
 			fi
 
@@ -399,12 +415,12 @@ for NAME in ${BUILTIN_LIBS}; do
 
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
-			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
 			exit 1
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
-		echo -e "\nFinished processing ${NAME} ${VER}"
+		echo -e "\nFinished processing ${NAME_ORIG} ${VER}"
 
 		cd "${DIR_LIBS}"
 	fi
