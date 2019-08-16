@@ -7,9 +7,16 @@ ROOT_DIR="$(pwd)"
 LIBS_DIR="${ROOT_DIR}/libraries"
 cd "${LIBS_DIR}"
 
+AVAIL_SRCS=$(find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||")
 function show_available_libs {
-	echo -e "\nAvailable libraries:"
-	find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||"
+	if test ${#AVAIL_SRCS[@]} -eq 0; then
+		echo -e "\nNo available sources to list"
+	else
+		echo -e "\nAvailable libraries:\n\n"
+		for AS in ${AVAIL_SRCS[@]}; do
+			echo "  ${AS}"
+		done
+	fi
 }
 
 LIB_NAME=$1
