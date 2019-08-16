@@ -205,9 +205,13 @@ fi
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
 
-	CFG="${DIR_LIBS}/CONFIG-${NAME}"
+	CFG="${DIR_LIBS}/CONFIG/${NAME}"
 	if test ! -f "${CFG}"; then
-		echo -e "\nERROR: configuration not found: ${CFG}"
+		CFG="${DIR_LIBS}/CONFIG-${NAME}"
+	fi
+
+	if test ! -f "${CFG}"; then
+		echo -e "\nERROR: configuration not found:\n  ${DIR_LIBS}/CONFIG/${NAME}: not found\n  ${CFG}: not found"
 		exit 1
 	fi
 
