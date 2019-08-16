@@ -5,4 +5,4 @@ NAME="freetype"
 . CONFIG-freetype
 
 # add harfbuzz support
-CONFIG_OPTS="--enable-freetype-config --with-zlib=yes --with-bzip2=yes --with-png=yes --with-harfbuzz=yes"
+CONFIG_OPTS="$(echo ${CONFIG_OPTS} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|')"
