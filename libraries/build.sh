@@ -179,6 +179,7 @@ if test ! -z "${BUILD_LIBS}"; then
 else
 	# currently unused
 	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango"
+	OPTIONAL_UTILS="cmake"
 
 	# library names in build order
 	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv libpng xz libxml2 libjpeg-turbo libtiff \

@@ -1,0 +1,14 @@
+# Depends:
+#  pkg-config, libgcc
+# Optional depends:
+#  expat, libcurl, jsoncpp, zlib, bzip2, liblzma (xz), libzstd, libarchive, librhash, libuv, qt
+
+VER="3.15.2"
+DNAME="${NAME}-${VER}"
+if ${OS_WIN}; then
+	FNAME="${DNAME}.zip"
+else
+	FNAME="${DNAME}.tar.gz"
+fi
+SOURCE="https://cmake.org/files/v${VER%.*}/${FNAME}"
+CONFIG_OPTS="--system-expat --system-zlib --system-bzip2 --system-liblzma"
