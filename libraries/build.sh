@@ -178,7 +178,8 @@ if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# currently unused
-	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango"
+	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango \
+ncurses"
 	OPTIONAL_UTILS="cmake diffutils"
 
 	# library names in build order

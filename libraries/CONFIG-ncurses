@@ -1,0 +1,12 @@
+# Optional depends:
+#  pkg-config, libtool, termcap, pthreads
+#
+# Notes:
+#  - newer versions may be available from https://invisible-island.net/ncurses/
+
+VER="6.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="ftp://ftp.gnu.org/gnu/${NAME}/${FNAME}"
+CONFIG_OPTS="--without-manpages --enable-pc-files --without-debug --enable-termcap --enable-widec --with-pthread"
+LIBTYPE_OPTS="--without-shared --with-normal"
