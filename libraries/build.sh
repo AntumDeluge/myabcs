@@ -168,7 +168,7 @@ else
 	INCLUDE_OPTIONAL=false
 fi
 
-OPTIONAL_NO_DEPENDS="gperf libtool nasm"
+OPTIONAL_NO_DEPENDS="gperf libtool nasm pth"
 NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg"
 if ${INCLUDE_OPTIONAL}; then
 	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
