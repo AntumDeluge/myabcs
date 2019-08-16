@@ -162,11 +162,24 @@ function extract_archive {
 	return ${ret}
 }
 
+if test ! -z "${INCLUDE_OPTIONAL}" && test ${INCLUDE_OPTIONAL} -gt 0; then
+	INCLUDE_OPTIONAL=true
+else
+	INCLUDE_OPTIONAL=false
+fi
+
+OPTIONAL_NO_DEPENDS="gperf libtool nasm"
 NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg"
+if ${INCLUDE_OPTIONAL}; then
+	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
+fi
 
 if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
+	# currently unused
+	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango"
+
 	# library names in build order
 	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv libpng xz libxml2 libjpeg-turbo libtiff \
 lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis libflac SDL2 libmpg123 \
