@@ -1,3 +1,8 @@
+# Depends:
+#  pkg-config
+# Optional depends:
+#  zlib, bzip2, libreadline, libedit
+
 VER="8.43"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.bz2"

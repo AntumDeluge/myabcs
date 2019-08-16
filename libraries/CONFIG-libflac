@@ -1,5 +1,9 @@
 # Depends on:
-#  libiconv, libogg
+#  libiconv
+# Optional depends:
+#  libogg
+# Unsure optional depends:
+#  nasm
 
 VER="1.3.2"
 DNAME="flac-${VER}"

@@ -1,5 +1,7 @@
 # Depends on:
-#  libiconv, libintl (gettext), expat, freetype
+#  pkg-config, libintl (gettext), expat | libxml2, freetype
+# Optional depends
+#  libiconv, jsonc/json-c?
 
 VER="2.13.91"
 DNAME="${NAME}-${VER}"

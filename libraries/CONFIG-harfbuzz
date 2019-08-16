@@ -1,5 +1,9 @@
-# Depends on:
-#  freetype
+# Depends:
+#  pkg-config
+# Optional depends:
+#  glib, gobject (glib?), cairo, fontconfig, icu, graphite2, freetype
+# Unsure optional depends:
+#  uniscribe, directwrite
 
 VER="2.5.3"
 DNAME="${NAME}-${VER}"

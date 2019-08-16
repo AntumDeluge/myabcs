@@ -1,5 +1,7 @@
 # Depends on:
 #  libintl (gettext)
+# Unsure depends:
+#  libiconv (depends on self?)
 
 VER="1.16"
 DNAME="${NAME}-${VER}"

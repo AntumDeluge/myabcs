@@ -1,5 +1,7 @@
 # Depends on:
-#  SDL2
+#  pkg-config, SDL2
+# Optional depends:
+#  yasm, jack, pulse, portaudio
 
 VER="1.25.11"
 DNAME="mpg123-${VER}"

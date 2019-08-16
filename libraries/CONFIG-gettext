@@ -1,5 +1,7 @@
 # Depends on:
 #  libiconv
+# Optional depends:
+#  pthreads, pth, ncurses, termcap
 
 VER="0.20.1"
 DNAME="${NAME}-${VER}"

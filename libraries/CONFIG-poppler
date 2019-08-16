@@ -1,5 +1,11 @@
-# Depends on:
-#  pkg-config, glib, cairo, zlib, freetype, libjpeg, libtiff, lcms2, openjpeg
+# Depends:
+#  pkg-config, freetype
+# Optional depends:
+#  lcms | lcms2, libjpeg (libjpeg-turbo), libcurl, openjpeg, qt5, zlib
+# Unsure depends:
+#  glib, cairo, libtiff
+# Unsure optional depends:
+#  gobject (glib)
 
 VER="0.79.0"
 DNAME="${NAME}-${VER}"

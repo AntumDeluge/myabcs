@@ -1,5 +1,7 @@
 # Depends on:
-#  libintl (gettext)
+#  libintl (gettext), libiconv
+# Optional depends
+#  libmount (util-linux), pcre
 
 # Update available (not compatible with current patches): 2.61.2
 

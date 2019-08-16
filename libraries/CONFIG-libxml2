@@ -1,5 +1,9 @@
-# Depends on:
-#  pkg-config, zlib, lzma, gettext (libintl)
+# Depends:
+#  pkg-config, zlib, liblzma (xz)
+# Optional depends:
+#  libiconv, icu, python, readline
+# Unsure depends:
+#  libintl (gettext)
 
 VER="2.9.9"
 DNAME="${NAME}-${VER}"

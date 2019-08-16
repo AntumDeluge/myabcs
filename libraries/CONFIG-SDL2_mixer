@@ -1,5 +1,7 @@
-# Depends on:
-#  SDL2, libogg, libvorbis, libflac, mpg123
+# Depends:
+#  pkg-config, SDL2
+# Optional depends:
+#  libogg, libvorbis, libflac, mpg123, fluidsynth, modplug, mikmod, timidity, mp3mad, libopusfile (libopus)
 
 VER="2.0.4"
 DNAME="${NAME}-${VER}"

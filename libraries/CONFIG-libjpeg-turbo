@@ -1,5 +1,7 @@
-# Notes:
-#  - requires nasm to build
+# Depends:
+#  nasm
+# Optional depends:
+#  java
 
 VER="2.0.2"
 DNAME="${NAME}-${VER}"

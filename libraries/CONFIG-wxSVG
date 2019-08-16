@@ -1,5 +1,7 @@
-# Depends on:
-#  wxWidgets, cairo, pango, expat, libexif
+# Depends:
+#  pkg-config, wxWidgets, cairo, pango, expat, libexif
+# Optional depends:
+#  libav (ffmpeg)
 
 VER="1.5.20"
 DNAME="wxsvg-${VER}"

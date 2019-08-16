@@ -1,8 +1,14 @@
-# Depends on:
-#  zlib, libpng, libjpeg-turbo, libtiff, libiconv, expat, xz (liblzma)
+# Depends:
+#  pkg-config
+# Optional depends:
+#  libtool, qt5, libiconv, zlib, liblzma (xz), expat, libpng, libjpeg (libjpeg-turbo), libtiff, libjbig, libxpm, libmspack, SDL2, cairo
+# Unsure optional depends:
+#  directfb, pangoxft, pangoft2, Xinerama, Xxf86vm, libnotify, webkit
 #
 # Notes:
 #  - libtool required for autoreconf command
+# TODO:
+#  - disable everything not used by MyABCs
 
 VER="3.1.2"
 DNAME="${NAME}-${VER}"

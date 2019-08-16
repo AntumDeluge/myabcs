@@ -1,3 +1,8 @@
+# Optional depends:
+#  fontconfig, freetype, openjpeg, gtk, libiconv, libidn | libidn2, libpaper, cups, libtiff
+# Unsure optional depends:
+#  jbig2
+
 VER="9.27"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"

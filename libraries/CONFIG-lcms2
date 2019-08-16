@@ -1,5 +1,7 @@
 # Depends:
-#  libjpeg-turbo (libjpeg), libtiff, zlib
+#  libjpeg (libjpeg-turbo), libtiff
+# Optional depends:
+#  zlib, pthreads
 
 VER="2.9"
 DNAME="${NAME}-${VER}"

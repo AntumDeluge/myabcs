@@ -1,5 +1,5 @@
-# Depends on:
-#  pkg-config, zlib, libpng, libtiff, lcms2
+# Depends:
+#  pkg-config, zlib, libpng, libtiff, lcms | lcms2
 
 VER="2.3.1"
 DNAME="${NAME}-${VER}"

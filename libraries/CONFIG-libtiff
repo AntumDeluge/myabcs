@@ -1,5 +1,5 @@
-# Depends on:
-#  zlib, libjpeg-turbo (libjpeg), xz (liblzma)
+# Optional depends:
+#  zlib, libjpeg (libjpeg-turbo), jbig, liblzma (xz), libzstd, libwebp
 
 VER="4.0.10"
 EXTRACT_NAME="tiff-${VER}"

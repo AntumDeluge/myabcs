@@ -1,5 +1,9 @@
-# Depends on:
-#  pkg-config, libiconv, gettext (libintl), glib
+# Depends:
+#  pkg-config, rust, gthread (glib?), gmodule (glib?), libiconv, gettext (libintl), fontconfig
+# Optional depends:
+#  gdk-pixbuf, gtk3
+# Unsure depends:
+#  pangoft2 (pango-freetype?)
 
 # Update available: 2.45.8
 

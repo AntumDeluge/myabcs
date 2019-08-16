@@ -1,5 +1,5 @@
-# Depends on:
-#  zlib
+# Depends:
+#  pkg-config, zlib
 
 VER="1.6.37"
 DNAME="${NAME}-${VER}"

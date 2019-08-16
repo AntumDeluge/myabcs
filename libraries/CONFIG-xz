@@ -1,5 +1,7 @@
-# Depends on:
-#  libiconv, gettext (libintl)
+# Depends:
+#  libiconv, libintl (gettext)
+# Unsure optional depends:
+#  pthreads
 
 VER="5.2.4"
 DNAME="${NAME}-${VER}"

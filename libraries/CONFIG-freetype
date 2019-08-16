@@ -1,5 +1,7 @@
 # Depends on:
-#  zlib, libpng, bzip2
+#  pkg-config
+# Optional depends
+#  zlib, libpng, bzip2, harfbuzz
 
 VER="2.10.1"
 DNAME="${NAME}-${VER}"

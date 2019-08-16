@@ -1,5 +1,7 @@
-# Depends on:
-#  libpng
+# Depends:
+#  pkg-config
+# Optional depends:
+#  gtk, libpng
 
 VER="0.38.4"
 DNAME="${NAME}-${VER}"

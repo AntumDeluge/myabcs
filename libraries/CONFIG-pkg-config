@@ -1,8 +1,11 @@
-# Depends on:
+# Depends:
 #  glib
+# Unsure depends:
+#  pkg-config (self?)
 #
 # Notes:
 #  - configure script utilizes `cmp` command found in diffutils package
+#  - can optionally use built-in glib with "--use-internal-glib"
 
 VER="0.29.2"
 DNAME="${NAME}-${VER}"

@@ -1,3 +1,6 @@
+# Depends:
+#  pkg-config, cairo
+
 VER="0.2.8"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
