@@ -19,6 +19,18 @@ function show_available_libs {
 	fi
 }
 
+POSSIBLE_MATCHES=()
+function show_possible_matches {
+	if test ${#POSSIBLE_MATCHES[@]} -eq 0; then
+		echo -e "\nDid not find any possible matches"
+	else
+		echo -e "\nPossible matches:\n\n"
+		for PM in ${POSSIBLE_MATCHES[@]}; do
+			echo "  ${PM}"
+		done
+	fi
+}
+
 function show_lib_options {
 	local target_dir=$1
 	if test -z "${target_dir}"; then
@@ -77,11 +89,32 @@ else
 	FULL_NAME="${LIB_NAME}"
 fi
 
-TARGET_DIR="${LIBS_DIR}/source/${FULL_NAME}"
-if test ! -d "${TARGET_DIR}"; then
+EXACT_MATCH=
+for DIR in ${AVAIL_SRCS}; do
+	if test "${DIR}" == "${FULL_NAME}"; then
+		EXACT_MATCH="${DIR}"
+		break
+	fi
+	IFS='-' read -r -a SRC <<< "${DIR}"
+	# FIXME: use regular exparession
+	if test "${SRC[0]}" == "${LIB_NAME}"; then
+		POSSIBLE_MATCHES+=("${DIR}")
+	fi
+done
+
+if test -z "${EXACT_MATCH}" && test ${#POSSIBLE_MATCHES[@]} -eq 0; then
+	TARGET_DIR="${LIBS_DIR}/source/${FULL_NAME}"
 	echo -e "\nDid not find library directory: ${TARGET_DIR}"
 	show_available_libs
 	exit 1
+elif test -z "${EXACT_MATCH}" && test ${#POSSIBLE_MATCHES[@]} -eq 1; then
+	EXACT_MATCH="${POSSIBLE_MATCHES[0]}"
+	echo -e "\nFound single possible match: ${EXACT_MATCH}"
 fi
 
-show_lib_options "${TARGET_DIR}"
+if test ! -z "${EXACT_MATCH}"; then
+	TARGET_DIR="${LIBS_DIR}/source/${EXACT_MATCH}"
+	show_lib_options "${TARGET_DIR}"
+else
+	show_possible_matches
+fi
