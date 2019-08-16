@@ -67,21 +67,29 @@ function download_source {
 		exit 1
 	fi
 
+	local cmd_dl=(${WGET})
 	local dl=$1
 	if test -z "${dl}"; then
 		echo -e "\nERROR in function download_source: URL not given"
 		exit 1
 	fi
 
-	echo -e "\nDownloading: ${dl}"
+	# check for FTP URL
+# 	grep "^ftp://" <<< "${dl}" > /dev/null 2>&1
+# 	if test $? -eq 0; then
+# 		cmd_dl+=("--no-passive-ftp")
+# 	fi
+
 	local tname=$2
-	if test -z "${tname}"; then
-		${WGET} "${dl}"
-		local ret=$?
-	else
-		${WGET} -O "${FNAME}" "${dl}"
-		local ret=$?
+	if test ! -z "${tname}"; then
+		cmd_dl+=("-O" "${FNAME}")
 	fi
+
+	cmd_dl+=("${dl}")
+
+	echo -e "\nDownloading: ${dl}"
+	"${cmd_dl[@]}"
+	local ret=$?
 
 	if test ${ret} -ne 0; then
 		echo -e "\nAn error occurred while downloading file: ${dl}"
