@@ -438,6 +438,8 @@ for NAME in ${BUILTIN_LIBS}; do
 			exit 1
 		fi
 
+		# TODO: strip executables & shared libs
+
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
 			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
