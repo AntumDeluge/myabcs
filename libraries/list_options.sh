@@ -54,14 +54,30 @@ function show_lib_options {
 	cd "${LIBS_DIR}"
 }
 
-LIB_NAME=$1
+if test ! -z $2; then
+	LIB_NAME=$1
+	LIB_VER=$2
+else
+	IFS='-' read -r -a IN <<< "$1"
+	LIB_NAME=${IN[0]}
+	if test ${#IN[@]} -gt 1; then
+		LIB_VER=${IN[1]}
+	fi
+fi
+
 if test -z "${LIB_NAME}"; then
 	echo -e "\nPlease supply library directory name (usually as <name>-<version>): ${SCRIPT_NAME} <directory>"
 	show_available_libs
 	exit 1
 fi
 
-TARGET_DIR="${LIBS_DIR}/source/${LIB_NAME}"
+if test ! -z "${LIB_VER}"; then
+	FULL_NAME="${LIB_NAME}-${LIB_VER}"
+else
+	FULL_NAME="${LIB_NAME}"
+fi
+
+TARGET_DIR="${LIBS_DIR}/source/${FULL_NAME}"
 if test ! -d "${TARGET_DIR}"; then
 	echo -e "\nDid not find library directory: ${TARGET_DIR}"
 	show_available_libs
