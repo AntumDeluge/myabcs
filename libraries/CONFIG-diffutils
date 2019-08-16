@@ -1,0 +1,7 @@
+# Depends:
+#  libsigsegv, libiconv, libintl (gettext)
+
+VER="3.7"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://ftp.gnu.org/gnu/diffutils/${FNAME}"
