@@ -180,7 +180,8 @@ else
 	# currently unused
 	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango \
 ncurses"
-	OPTIONAL_UTILS="cmake diffutils"
+	OPTIONAL_NO_DEPENDS_UTILS="patch"
+	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils"
 
 	# library names in build order
 	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv libpng xz libxml2 libjpeg-turbo libtiff \
