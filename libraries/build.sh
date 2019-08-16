@@ -162,14 +162,15 @@ function extract_archive {
 	return ${ret}
 }
 
+NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg"
 
 if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# library names in build order
-	BUILTIN_LIBS="glib pkg-config libiconv bzip2 zlib libpng xz libxml2 libjpeg-turbo libtiff \
-lcms2 libffi libexif expat graphite2 freetype harfbuzz freetype-hb pcre pixman poppler libogg \
-libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
+	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv libpng xz libxml2 libjpeg-turbo libtiff \
+lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis libflac SDL2 libmpg123 \
+SDL2_mixer wxWidgets wxSVG"
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then
