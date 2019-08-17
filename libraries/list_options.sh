@@ -7,6 +7,39 @@ ROOT_DIR="$(pwd)"
 LIBS_DIR="${ROOT_DIR}/libraries"
 cd "${LIBS_DIR}"
 
+AVAIL_CONFIGS=$(find "${LIBS_DIR}/" -mindepth 1 -maxdepth 1 -type f -name "CONFIG-*")
+if test -d "${LIBS_DIR}/CONFIG/"; then
+	AVAIL_CONFIGS+=$(find "${LIBS_DIR}/CONFIG/" -mindepth 1 -maxdepth 1 -type f)
+fi
+AVAIL_CONFIGS=$(echo "${AVAIL_CONFIGS}" | sed -e "s|${LIBS_DIR}/CONFIG/||g" -e "s|${LIBS_DIR}/||g" -e 's|^CONFIG-||g')
+
+function show_available_configs {
+	if test ${#AVAIL_CONFIGS[@]} -eq 0; then
+		echo -e "\nNo available configurations to list"
+	else
+		echo -e "\nAvailable configurations:\n\n"
+		for CFG in ${AVAIL_CONFIGS}; do
+			echo "  ${CFG}"
+		done
+	fi
+}
+
+function is_config_available {
+	local cfg=$1
+	if test -z "${cfg}"; then
+		echo -e "\nERROR: lib name not specified in is_config_available function"
+		return 1
+	fi
+
+	for CFG in ${AVAIL_CONFIGS}; do
+		if test "${cfg}" == "${CFG}"; then
+			return 0
+		fi
+	done
+
+	return 1
+}
+
 AVAIL_SRCS=$(find "${LIBS_DIR}/source/" -maxdepth 1 -type d -exec echo  {} \; | sed -e "s|${LIBS_DIR}/source/||")
 function show_available_libs {
 	if test ${#AVAIL_SRCS[@]} -eq 0; then
