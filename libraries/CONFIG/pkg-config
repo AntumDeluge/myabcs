@@ -12,5 +12,9 @@ DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://pkgconfig.freedesktop.org/releases/${FNAME}"
 export GLIB_CFLAGS="-I${INSTALL_PREFIX}/include/glib-2.0 -pthread -I${INSTALL_PREFIX}/lib/glib-2.0/include -mms-bitfields"
-export GLIB_LIBS="-lintl -lglib-2.0 -pthread -lws2_32 -lwinmm -lole32 -lshlwapi"
-LIBS="-lintl"
+export GLIB_LIBS="-lglib-2.0 -pthread"
+if ${OS_WIN}; then
+	GLIB_LIBS+=" -lintl -lws2_32 -lwinmm -lole32 -lshlwapi"
+	LIBS="-lintl"
+fi
+export GLIB_CFLAGS GLIB_LIBS
