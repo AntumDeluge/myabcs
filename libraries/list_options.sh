@@ -122,6 +122,12 @@ else
 	FULL_NAME="${LIB_NAME}"
 fi
 
+FOUND_CONFIG=false
+is_config_available "${LIB_NAME}"
+if test $? -eq 0; then
+	FOUND_CONFIG=true
+fi
+
 EXACT_MATCH=
 for DIR in ${AVAIL_SRCS}; do
 	if test "${DIR}" == "${FULL_NAME}"; then
@@ -136,10 +142,19 @@ for DIR in ${AVAIL_SRCS}; do
 done
 
 if test -z "${EXACT_MATCH}" && test ${#POSSIBLE_MATCHES[@]} -eq 0; then
-	TARGET_DIR="${LIBS_DIR}/source/${FULL_NAME}"
-	echo -e "\nDid not find library directory: ${TARGET_DIR}"
-	show_available_libs
-	exit 1
+	if ! ${FOUND_CONFIG}; then
+		TARGET_DIR="${LIBS_DIR}/source/${FULL_NAME}"
+		echo -e "\nDid not find library directory: ${TARGET_DIR}"
+		show_available_libs
+		exit 1
+	else
+		echo -e "\nFound config for ${LIB_NAME}"
+		cd "${ROOT_DIR}"
+		make build-libs BUILD_LIBS="extract ${LIB_NAME}"
+		cd "${LIBS_DIR}"
+		echo -e "\nNow re-run \`./${SCRIPT_NAME} ${LIB_NAME}\`"
+		exit 0
+	fi
 elif test -z "${EXACT_MATCH}" && test ${#POSSIBLE_MATCHES[@]} -eq 1; then
 	EXACT_MATCH="${POSSIBLE_MATCHES[0]}"
 	echo -e "\nFound single possible match: ${EXACT_MATCH}"
