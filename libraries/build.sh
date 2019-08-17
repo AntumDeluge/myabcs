@@ -277,12 +277,16 @@ for NAME in ${BUILTIN_LIBS}; do
 	if ${INSTALL_DONE}; then
 		echo "Using previous install of ${NAME_ORIG} ${VER}"
 	else
-		if ${EXTRACT_DONE}; then
+		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
 			echo "Not re-extracting ${FNAME}"
 			if ${EXTRACT_ONLY}; then
 				continue
 			fi
 		else
+			if test ! -d "${DIR_SRC}/${DNAME}"; then
+				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
+			fi
+
 			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test -f "${PACKAGE}"; then
 				echo "Found package: ${FNAME}"
