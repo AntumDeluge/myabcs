@@ -357,7 +357,12 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 
 			cd "${DIR_LIBS}"
-			echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+
+			# don't append redundantly to file
+			if ! ${EXTRACT_DONE}; then
+				echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+			fi
+
 			if ${EXTRACT_ONLY}; then
 				continue
 			fi
