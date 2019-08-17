@@ -1,0 +1,14 @@
+# Depends:
+#  pkg-config, libiconv, autoconf, automake
+# Optional depends:
+#  xmkmf, uchardet, awk, ghostscript
+
+# Update available: 1.22.4 (not compatible with current patches)
+
+VER="1.22.3"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
+PRE_CONF=(autoreconf -fvi -I m4)
+CONFIG_OPTS="--with-doc=no"
+LIBTYPE_OPTS="N/A"
