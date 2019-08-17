@@ -417,10 +417,17 @@ for NAME in ${BUILTIN_LIBS}; do
 						CMD_CONFIG+=(--prefix=${INSTALL_PREFIX} --buildtype=plain --default-library=static "${DIR_SRC}/${DNAME}")
 					fi
 
-					"${CMD_CONFIG[@]}"
-					if test $? -ne 0; then
-						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
-						exit 1
+					# this is usually used for source that does not use build generators like GNU Autotools or CMake
+					if test "${CMD_CONFIG[0]}" == "copy"; then
+						for FD in $(find "${DIR_SRC}/${DNAME}" -mindepth 1 -maxdepth 1); do
+							cp -r "${FD}" ./
+						done
+					else
+						"${CMD_CONFIG[@]}"
+						if test $? -ne 0; then
+							echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+							exit 1
+						fi
 					fi
 				fi
 
