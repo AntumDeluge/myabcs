@@ -186,7 +186,7 @@ else
 	# currently unused
 	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf ghostscript librsvg libspectre openjpeg pango \
 ncurses jbigkit"
-	OPTIONAL_NO_DEPENDS_UTILS="patch"
+	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
 	# library names in build order
