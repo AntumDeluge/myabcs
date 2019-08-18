@@ -1,0 +1,11 @@
+--- libXpm-3.5.12/src/XpmI.h.orig	2019-08-18 13:08:59.108108400 -0700
++++ libXpm-3.5.12/src/XpmI.h	2019-08-18 13:09:23.181228600 -0700
+@@ -216,7 +216,7 @@
+ FUNC(xpmHashSlot, xpmHashAtom *, (xpmHashTable *table, char *s));
+ FUNC(xpmHashIntern, int, (xpmHashTable *table, char *tag, void *data));
+ 
+-#define HashAtomData(i) ((void *)(long)i)
++#define HashAtomData(i) ((void *)(intptr_t)i)
+ #define HashColorIndex(slot) ((unsigned long)((*slot)->data))
+ #define USE_HASHTABLE (cpp > 2 && ncolors > 4)
+ 
