@@ -228,6 +228,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	PRE_DOWNLOAD=
 	POST_DOWNLOAD=
 	CMD_EXTRACT=
+	PRE_EXTRACT=
+	POST_EXTRACT=
 	CMD_CONFIG=
 	CMD_BUILD=(${CMD_MAKE})
 	CMD_INSTALL=(${CMD_MAKE} install)
@@ -364,6 +366,16 @@ for NAME in ${BUILTIN_LIBS}; do
 				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
 			fi
 
+			if test ! -z "${PRE_EXTRACT}"; then
+				for pre_cmd in "${PRE_EXTRACT[@]}"; do
+					${pre_cmd}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred during pre-extract command: ${pre_cmd}"
+						exit 1
+					fi
+				done
+			fi
+
 			if test ! -z "${CMD_EXTRACT}"; then
 				"${CMD_EXTRACT[@]}"
 			else
@@ -373,6 +385,16 @@ for NAME in ${BUILTIN_LIBS}; do
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
+			fi
+
+			if test ! -z "${POST_EXTRACT}"; then
+				for post_cmd in "${POST_EXTRACT[@]}"; do
+					${post_cmd}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred during post-extract command: ${post_cmd}"
+						exit 1
+					fi
+				done
 			fi
 
 			# use standard naming convention
