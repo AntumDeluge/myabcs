@@ -335,12 +335,6 @@ for NAME in ${BUILTIN_LIBS}; do
 					download_source "${SOURCE}" "${FNAME}"
 					dl_ret=$?
 				fi
-
-				# clean up old files
-				# TODO: move to "extract" section?
-				if test -d "${DNAME}"; then
-					rm -rf "${DNAME}"
-				fi
 			fi
 
 			if test ${dl_ret} -ne 0; then
@@ -366,6 +360,11 @@ for NAME in ${BUILTIN_LIBS}; do
 		else
 			if test ! -d "${DIR_SRC}/${DNAME}"; then
 				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
+			fi
+
+			# clean up old files
+			if test -d "${DIR_SRC}/${DNAME}"; then
+				rm -rf "${DIR_SRC}/${DNAME}"
 			fi
 
 			if test ! -z "${PRE_EXTRACT}"; then
