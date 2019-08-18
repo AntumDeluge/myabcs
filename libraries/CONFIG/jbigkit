@@ -1,0 +1,11 @@
+# Depends:
+#  libtool, groff
+
+VER="2.1"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://www.cl.cam.ac.uk/~mgk25/${NAME}/download/${FNAME}"
+CMD_CONFIG=("copy")
+CMD_BUILD=(make prefix="${INSTALL_PREFIX}")
+CMD_INSTALL=(${CMD_BUILD[@]} install)
+CPPFLAGS="-I../libjbig"

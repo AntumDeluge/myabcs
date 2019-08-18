@@ -185,7 +185,7 @@ if test ! -z "${BUILD_LIBS}"; then
 else
 	# currently unused
 	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf ghostscript librsvg libspectre openjpeg pango \
-ncurses"
+ncurses jbigkit"
 	OPTIONAL_NO_DEPENDS_UTILS="patch"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
