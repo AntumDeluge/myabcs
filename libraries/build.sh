@@ -240,6 +240,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	EXCLUDE_EXTRACT=
 	LIBTYPE_OPTS=
 	REBUILD=false
+	CRLF_TO_LF=
 
 	# prepare values
 	DOWNLOAD_DONE=false
@@ -401,6 +402,17 @@ for NAME in ${BUILTIN_LIBS}; do
 					${post_cmd}
 					if test $? -ne 0; then
 						echo -e "\nAn error occurred during post-extract command: ${post_cmd}"
+						exit 1
+					fi
+				done
+			fi
+
+			# FIXME: how to do this in POST_EXTRACT?
+			if test ! -z "${CRLF_TO_LF}"; then
+				for F in ${CRLF_TO_LF[@]}; do
+					sed -i -e 's|\r$||g' "${DIR_SRC}/${DNAME}/${F}"
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred while attempting to convert CRLF line endings to LF: ${DIR_SRC}/${DNAME}/${F}"
 						exit 1
 					fi
 				done
