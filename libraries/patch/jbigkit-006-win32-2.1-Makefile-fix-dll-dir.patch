@@ -1,0 +1,11 @@
+--- jbigkit-2.1/Makefile.orig	2019-08-18 07:12:51.053187500 -0700
++++ jbigkit-2.1/Makefile	2019-08-18 07:13:03.474633000 -0700
+@@ -41,7 +41,7 @@
+ install: all
+ 	$(INSTALL) -d $(DESTDIR)$(prefix)/bin
+ 	$(INSTALL) -d $(DESTDIR)$(prefix)/lib
+-	$(INSTALL) -m 644 libjbig/.libs/*.dll $(DESTDIR)$(prefix)/bin
++	$(INSTALL) -m 644 libjbig/*.dll $(DESTDIR)$(prefix)/bin
+ 	$(INSTALL) -m 644 libjbig/.libs/*.a $(DESTDIR)$(prefix)/lib
+ 	$(INSTALL) -m 644 libjbig/*.a $(DESTDIR)$(prefix)/lib
+ 	$(INSTALL) -d $(DESTDIR)$(prefix)/include
