@@ -1,0 +1,8 @@
+VER="6.0.0"
+DNAME="${NAME}-${VER}"
+SOURCE="https://git.code.sf.net/p/mingw-w64/mingw-w64.git"
+CMD_DOWNLOAD=(git clone --branch v${VER} --single-branch --depth 1 "${SOURCE}" "${DNAME}-tmp")
+LIBTYPE_OPTS="--enable-shared --enable-static=no"
+POST_DOWNLOAD=("rm -rf ${DIR_SRC}/${DNAME}" "mv ${DIR_SRC}/${DNAME}-tmp/mingw-w64-libraries/${NAME} ${DIR_SRC}/${DNAME}" "rm -rf ${DNAME}-tmp/")
+# no archive is downloaded to extract
+EXTRACT_DONE=true

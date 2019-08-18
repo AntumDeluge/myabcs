@@ -171,6 +171,10 @@ else
 fi
 
 OPTIONAL_NO_DEPENDS="gperf libtool nasm pth termcap"
+if ${OS_WIN}; then
+	OPTIONAL_NO_DEPENDS+=" winpthreads"
+fi
+
 NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg"
 if ${INCLUDE_OPTIONAL}; then
 	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
