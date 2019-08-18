@@ -4,4 +4,3 @@ source/
 # build directories & progress files
 libprefix-*/
 build/
-INSTALL-*

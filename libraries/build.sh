@@ -259,7 +259,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	INSTALL_DONE=false
 
 	LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
-	FILE_LIB_INSTALL="${DIR_LIBS}/INSTALL-${LIB_BUILD}"
+	FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
 
 	# prevents re-build/re-install
 	if test -f "${FILE_LIB_INSTALL}"; then
