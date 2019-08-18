@@ -1,9 +1,9 @@
 # Optional depends:
-#  zlib, libjpeg (libjpeg-turbo), jbig, liblzma (xz), libzstd, libwebp
+#  zlib, libjpeg (libjpeg-turbo), jbigkit, liblzma (xz), libzstd, libwebp
 
 VER="4.0.10"
 EXTRACT_NAME="tiff-${VER}"
 DNAME="lib${EXTRACT_NAME}"
 FNAME="${EXTRACT_NAME}.tar.gz"
 SOURCE="https://download.osgeo.org/libtiff/${FNAME}"
-CONFIG_OPTS="--disable-jbig --disable-zstd --disable-webp --disable-cxx"
+CONFIG_OPTS="--disable-zstd --disable-webp --disable-cxx"
