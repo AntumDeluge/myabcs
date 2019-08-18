@@ -303,6 +303,10 @@ for NAME in ${BUILTIN_LIBS}; do
 
 	if ${PREPARE_DONE}; then
 		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
+		# FIXME: rename to "PREPARE_ONLY"
+		if ${EXTRACT_ONLY}; then
+			continue
+		fi
 	else
 		cd "${DIR_SRC}"
 		PACKAGE="${DIR_SRC}/${FNAME}"
@@ -333,6 +337,7 @@ for NAME in ${BUILTIN_LIBS}; do
 				fi
 
 				# clean up old files
+				# TODO: move to "extract" section?
 				if test -d "${DNAME}"; then
 					rm -rf "${DNAME}"
 				fi
@@ -358,9 +363,6 @@ for NAME in ${BUILTIN_LIBS}; do
 
 		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
 			echo "Not re-extracting sources for ${NAME_ORIG} ${VER}"
-			if ${EXTRACT_ONLY}; then
-				continue
-			fi
 		else
 			if test ! -d "${DIR_SRC}/${DNAME}"; then
 				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
@@ -446,19 +448,20 @@ for NAME in ${BUILTIN_LIBS}; do
 				fi
 			fi
 
-			cd "${DIR_LIBS}"
-
 			# don't append redundantly to file
 			if ! ${EXTRACT_DONE}; then
 				echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
 			fi
-
-			if ${EXTRACT_ONLY}; then
-				continue
-			fi
 		fi
 
+		cd "${DIR_LIBS}"
 		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
+		echo -e "\nFinished preparing ${NAME_ORIG} ${VER}"
+
+		# FIXME: rename to "PREPARE_ONLY"
+		if ${EXTRACT_ONLY}; then
+			continue
+		fi
 	fi
 
 	if ${INSTALL_DONE}; then
