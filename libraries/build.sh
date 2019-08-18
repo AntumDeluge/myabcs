@@ -269,7 +269,12 @@ for NAME in ${BUILTIN_LIBS}; do
 	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
 	export CPPFLAGS LDFLAGS LIBS
 
+	# prepare values
+	DOWNLOAD_DONE=false
 	EXTRACT_DONE=false
+	PREPARE_DONE=false
+
+	# build values
 	CONFIG_DONE=false
 	BUILD_DONE=false
 	INSTALL_DONE=false
@@ -294,8 +299,8 @@ for NAME in ${BUILTIN_LIBS}; do
 		echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
 	fi
 
-	if ${INSTALL_DONE}; then
-		echo "Using previous install of ${NAME_ORIG} ${VER}"
+	if ${PREPARE_DONE}; then
+		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
 	else
 		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
 			echo "Not re-extracting ${FNAME}"
@@ -417,6 +422,12 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 		fi
 
+		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
+	fi
+
+	if ${INSTALL_DONE}; then
+		echo "Using previous install of ${NAME_ORIG} ${VER}"
+	else
 		DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME_ORIG} ${VER}"
