@@ -224,6 +224,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	SOURCE=
 	CONFIG_OPTS=
 	EXTRACT_NAME=
+	PRE_DOWNLOAD=
+	POST_DOWNLOAD=
 	CMD_CONFIG=
 	CMD_BUILD=(${CMD_MAKE})
 	CMD_INSTALL=(${CMD_MAKE} install)
@@ -297,6 +299,12 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			cd "${DIR_SRC}"
 
+			if test ! -z "${PRE_DOWNLOAD}"; then
+				for pre_cmd in "${PRE_DOWNLOAD[@]}"; do
+					${pre_cmd}
+				done
+			fi
+
 			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test -f "${PACKAGE}"; then
 				echo "Found package: ${FNAME}"
@@ -307,6 +315,12 @@ for NAME in ${BUILTIN_LIBS}; do
 			# clean up old files
 			if test -d "${DNAME}"; then
 				rm -rf "${DNAME}"
+			fi
+
+			if test ! -z "${POST_DOWNLOAD}"; then
+				for post_cmd in "${POST_DOWNLOAD[@]}"; do
+					${post_cmd}
+				done
 			fi
 
 			extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
