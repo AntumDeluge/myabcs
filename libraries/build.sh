@@ -237,6 +237,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	CMD_CONFIG=
 	CMD_BUILD=(${CMD_MAKE})
 	CMD_INSTALL=(${CMD_MAKE} install)
+	PRE_INSTALL=
+	POST_INSTALL=
 	CFLAGS=
 	CXXFLAGS=
 	CPPFLAGS=
@@ -600,10 +602,30 @@ for NAME in ${BUILTIN_LIBS}; do
 
 		# TODO: strip executables & shared libs
 
+		if test ! -z "${PRE_INSTALL}"; then
+			for pre_cmd in "${PRE_INSTALL[@]}"; do
+				${pre_cmd}
+				if test $? -ne 0; then
+					echo -e "\nAn error occurred during pre-install command: ${pre_cmd}"
+					exit 1
+				fi
+			done
+		fi
+
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
 			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
 			exit 1
+		fi
+
+		if test ! -z "${POST_INSTALL}"; then
+			for post_cmd in "${POST_INSTALL[@]}"; do
+				${post_cmd}
+				if test $? -ne 0; then
+					echo -e "\nAn error occurred during post-install command: ${post_cmd}"
+					exit 1
+				fi
+			done
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
