@@ -26,10 +26,14 @@ cd "${DIR_LIBS}"
 DIR_LIBS="`pwd`" # get full directory path
 DIR_ROOT="`dirname ${DIR_LIBS}`"
 DIR_SRC="${DIR_LIBS}/source"
+DIR_BUILD="${DIR_LIBS}/build"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
 if test ! -d "${DIR_SRC}"; then
 	mkdir -p "${DIR_SRC}"
+fi
+if test ! -d "${DIR_BUILD}"; then
+	mkdir -p "${DIR_BUILD}"
 fi
 
 # add install prefix to PATH
@@ -366,15 +370,15 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 		fi
 
-		DIR_BUILD="build/${LIB_BUILD}"
+		DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME_ORIG} ${VER}"
 		else
-			if test ! -d "${DIR_BUILD}"; then
-				mkdir -p "${DIR_BUILD}"
+			if test ! -d "${DIR_LIB_BUILD}"; then
+				mkdir -p "${DIR_LIB_BUILD}"
 			fi
 
-			cd "${DIR_BUILD}"
+			cd "${DIR_LIB_BUILD}"
 
 			if ${CONFIG_DONE}; then
 				echo "Not re-configuring ${NAME_ORIG} ${VER}"
@@ -450,7 +454,7 @@ for NAME in ${BUILTIN_LIBS}; do
 			cd "${DIR_LIBS}"
 		fi
 
-		cd "${DIR_BUILD}"
+		cd "${DIR_LIB_BUILD}"
 		if test $? -ne 0; then
 			# build directory doesn't exist so we exit to prevent 'make install' from being called
 			exit 1
