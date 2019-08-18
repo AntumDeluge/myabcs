@@ -311,6 +311,10 @@ for NAME in ${BUILTIN_LIBS}; do
 			if test ! -z "${PRE_DOWNLOAD}"; then
 				for pre_cmd in "${PRE_DOWNLOAD[@]}"; do
 					${pre_cmd}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred during pre-download command: ${pre_cmd}"
+						exit 1
+					fi
 				done
 			fi
 
@@ -340,6 +344,10 @@ for NAME in ${BUILTIN_LIBS}; do
 			if test ! -z "${POST_DOWNLOAD}"; then
 				for post_cmd in "${POST_DOWNLOAD[@]}"; do
 					${post_cmd}
+					if test $? -ne 0; then
+						echo -e "\nAn error occurred during post-download command: ${post_cmd}"
+						exit 1
+					fi
 				done
 			fi
 
