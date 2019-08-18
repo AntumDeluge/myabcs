@@ -2,7 +2,7 @@
 
 NAME="freetype"
 # use the same configuration
-. CONFIG-freetype
+. "CONFIG/${NAME}"
 
 # add harfbuzz support
 CONFIG_OPTS="$(echo ${CONFIG_OPTS} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|')"
