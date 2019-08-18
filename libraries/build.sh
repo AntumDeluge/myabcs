@@ -388,6 +388,14 @@ for NAME in ${BUILTIN_LIBS}; do
 				exit 1
 			fi
 
+			# use standard naming convention
+			if test ! -z "${EXTRACT_NAME}"; then
+				if test -d "${DNAME}"; then
+					rm -rf "${DNAME}"
+				fi
+				mv "${EXTRACT_NAME}" "${DNAME}"
+			fi
+
 			if test ! -z "${POST_EXTRACT}"; then
 				for post_cmd in "${POST_EXTRACT[@]}"; do
 					${post_cmd}
@@ -396,14 +404,6 @@ for NAME in ${BUILTIN_LIBS}; do
 						exit 1
 					fi
 				done
-			fi
-
-			# use standard naming convention
-			if test ! -z "${EXTRACT_NAME}"; then
-				if test -d "${DNAME}"; then
-					rm -rf "${DNAME}"
-				fi
-				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
 			cd "${DNAME}"
