@@ -239,6 +239,16 @@ for NAME in ${BUILTIN_LIBS}; do
 	LIBTYPE_OPTS=
 	REBUILD=false
 
+	# prepare values
+	DOWNLOAD_DONE=false
+	EXTRACT_DONE=false
+	PREPARE_DONE=false
+
+	# build values
+	CONFIG_DONE=false
+	BUILD_DONE=false
+	INSTALL_DONE=false
+
 	# backup original name in case of rebuild
 	NAME_ORIG="${NAME}"
 
@@ -268,16 +278,6 @@ for NAME in ${BUILTIN_LIBS}; do
 	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
 	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
 	export CPPFLAGS LDFLAGS LIBS
-
-	# prepare values
-	DOWNLOAD_DONE=false
-	EXTRACT_DONE=false
-	PREPARE_DONE=false
-
-	# build values
-	CONFIG_DONE=false
-	BUILD_DONE=false
-	INSTALL_DONE=false
 
 	LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
 	FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
