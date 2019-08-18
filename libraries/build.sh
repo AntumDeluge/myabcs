@@ -293,10 +293,10 @@ for NAME in ${BUILTIN_LIBS}; do
 		. "${FILE_LIB_INSTALL}"
 	fi
 
-	if ${REBUILD} && ! "${EXTRACT_DONE}"; then
-		# source should already be extracted from original build
-		EXTRACT_DONE=true
-		echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
+	if ${REBUILD} && ! ${PREPARE_DONE}; then
+		# source should already be prepared from original build
+		PREPARE_DONE=true
+		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
 	fi
 
 	if ${PREPARE_DONE}; then
