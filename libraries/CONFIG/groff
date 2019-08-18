@@ -12,3 +12,6 @@ SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
 PRE_CONF=(autoreconf -fvi -I m4)
 CONFIG_OPTS="--with-doc=no"
 LIBTYPE_OPTS="N/A"
+# Use fpermissive to avoid error on Windows 64-bit: "cast from 'const char*' to 'long unsigned int' loses precision"
+CFLAGS="-fpermissive"
+CXXFLAGS="${CFLAGS}"
