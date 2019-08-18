@@ -263,6 +263,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	NAME_ORIG="${NAME}"
 
 	# import configuration
+	echo "Using configuration: ${CFG}"
 	. "${CFG}"
 
 	# detect rebuild
