@@ -263,7 +263,13 @@ for NAME in ${BUILTIN_LIBS}; do
 	INSTALL_DONE=false
 
 	LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
+	FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
 	FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
+
+	# prevents re-extract
+	if test -f "${FILE_LIB_PREPARE}"; then
+		. "${FILE_LIB_PREPARE}"
+	fi
 
 	# prevents re-build/re-install
 	if test -f "${FILE_LIB_INSTALL}"; then
@@ -273,7 +279,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	if ${REBUILD} && ! "${EXTRACT_DONE}"; then
 		# source should already be extracted from original build
 		EXTRACT_DONE=true
-		echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+		echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
 	fi
 
 	if ${INSTALL_DONE}; then
@@ -362,7 +368,7 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			# don't append redundantly to file
 			if ! ${EXTRACT_DONE}; then
-				echo "EXTRACT_DONE=true" >> "${FILE_LIB_INSTALL}"
+				echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
 			fi
 
 			if ${EXTRACT_ONLY}; then
