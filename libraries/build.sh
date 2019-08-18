@@ -224,6 +224,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	SOURCE=
 	CONFIG_OPTS=
 	EXTRACT_NAME=
+	CMD_DOWNLOAD=
 	PRE_DOWNLOAD=
 	POST_DOWNLOAD=
 	CMD_CONFIG=
@@ -306,15 +307,27 @@ for NAME in ${BUILTIN_LIBS}; do
 			fi
 
 			PACKAGE="${DIR_SRC}/${FNAME}"
-			if test -f "${PACKAGE}"; then
-				echo "Found package: ${FNAME}"
+			if test ! -z "${CMD_DOWNLOAD}"; then
+				"${CMD_DOWNLOAD[@]}"
+				dl_ret=$?
 			else
-				download_source "${SOURCE}" "${FNAME}"
+				if test -f "${PACKAGE}"; then
+					echo "Found package: ${FNAME}"
+					dl_ret=0
+				else
+					download_source "${SOURCE}" "${FNAME}"
+					dl_ret=$?
+				fi
+
+				# clean up old files
+				if test -d "${DNAME}"; then
+					rm -rf "${DNAME}"
+				fi
 			fi
 
-			# clean up old files
-			if test -d "${DNAME}"; then
-				rm -rf "${DNAME}"
+			if test ${dl_ret} -ne 0; then
+				echo -e "\nAn error occured while downloading ${NAME_ORIG} ${VER}"
+				exit ${dl_ret}
 			fi
 
 			if test ! -z "${POST_DOWNLOAD}"; then
