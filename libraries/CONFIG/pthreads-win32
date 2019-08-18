@@ -1,0 +1,14 @@
+VER="2.9.1"
+NAME_SHORT="pthreads"
+DNAME="${NAME}-${VER}"
+FNAME="${NAME_SHORT}-w32-$(echo ${VER} | sed -e 's|\.|-|g')-release.zip"
+SOURCE="ftp://sourceware.org/pub/${NAME}/${FNAME}"
+EXTRACT_NAME="${NAME_SHORT}.${VER%%.*}"
+# FIXME: how to recursively extract single directory or recursively exclude directories
+CMD_EXTRACT=("${UNZIP}" -qqo "${FNAME}")
+# remove extra extracted directories & files, & convert Windows CRLF to Unix LF
+POST_EXTRACT=("rm -rf Pre-built.${VER%%.*} QueueUserAPCEx/")
+CRLF_TO_LF=(GNUmakefile)
+CMD_CONFIG=(copy)
+CMD_BUILD=(make GCE-inlined)
+CMD_INSTALL=(make install DESTDIR="${INSTALL_PREFIX}")
