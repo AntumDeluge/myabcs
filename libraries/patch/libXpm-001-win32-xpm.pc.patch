@@ -1,0 +1,36 @@
+diff -ruN libXpm-3.5.12.orig/configure.ac libXpm-3.5.12/configure.ac
+--- libXpm-3.5.12.orig/configure.ac	2019-08-18 09:59:49.441734800 -0700
++++ libXpm-3.5.12/configure.ac	2019-08-18 10:06:59.544505800 -0700
+@@ -105,5 +105,6 @@
+                  src/Makefile
+                  sxpm/Makefile
+                  cxpm/Makefile
++                 xpm.pc
+                  xpm-nox.pc])
+ AC_OUTPUT
+diff -ruN libXpm-3.5.12.orig/Makefile.am libXpm-3.5.12/Makefile.am
+--- libXpm-3.5.12.orig/Makefile.am	2019-08-18 09:59:49.372913900 -0700
++++ libXpm-3.5.12/Makefile.am	2019-08-18 10:07:47.936404400 -0700
+@@ -6,7 +6,7 @@
+ ACLOCAL_AMFLAGS = -I m4
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+-pkgconfig_DATA = xpm-nox.pc
++pkgconfig_DATA = xpm.pc xpm-nox.pc
+ 
+ EXTRA_DIST = COPYRIGHT NEWS.old
+ 
+diff -ruN libXpm-3.5.12.orig/xpm.pc.in libXpm-3.5.12/xpm.pc.in
+--- libXpm-3.5.12.orig/xpm.pc.in	1969-12-31 16:00:00.000000000 -0800
++++ libXpm-3.5.12/xpm.pc.in	2019-08-18 10:03:12.816610000 -0700
+@@ -0,0 +1,10 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++
++Name: Xpm
++Description: X Pixmap Library
++Version: @PACKAGE_VERSION@
++Cflags: -I${includedir} -DXPM_NO_X
++Libs: -L${libdir} -lXpm-noX -lgdi32 -luser32
