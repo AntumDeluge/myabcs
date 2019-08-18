@@ -455,14 +455,16 @@ for NAME in ${BUILTIN_LIBS}; do
 				esac
 			done
 
-			if test ! -z ${PRE_CONF}; then
+			if test ! -z "${PRE_CONF}"; then
 				echo "Preparing source ..."
-				"${PRE_CONF[@]}"
-				ret=$?
-				if test ${ret} -ne 0; then
-					echo -e "\nAn error occurred preparing source for ${NAME_ORIG} ${VER}"
-					exit ${ret}
-				fi
+				for pre_cmd in "${PRE_CONF[@]}"; do
+					${pre_cmd}
+					ret=$?
+					if test ${ret} -ne 0; then
+						echo -e "\nAn error occurred during pre-config command: ${pre_cmd}"
+						exit ${ret}
+					fi
+				done
 			fi
 
 			# don't append redundantly to file

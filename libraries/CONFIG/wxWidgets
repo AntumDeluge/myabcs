@@ -24,4 +24,4 @@ else
 	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 	CONFIG_OPTS+=" --disable-mdi"
 fi
-#PRE_CONF=(autoreconf -fiv)
+#PRE_CONF=("autoreconf -fiv")
