@@ -1,0 +1,31 @@
+--- pthreads-win32-2.9.1/GNUmakefile.orig	2019-08-18 04:02:10.586442400 -0700
++++ pthreads-win32-2.9.1/GNUmakefile	2019-08-18 04:02:48.518065500 -0700
+@@ -32,10 +32,11 @@
+ DLL_VER	= 2
+ DLL_VERD= $(DLL_VER)d
+ 
+-DEVROOT	= C:\PTHREADS
++DEVROOT	= $(DESTDIR)
+ 
+-DLLDEST	= $(DEVROOT)\DLL
+-LIBDEST	= $(DEVROOT)\DLL
++DLLDEST	= $(DEVROOT)/bin
++LIBDEST	= $(DEVROOT)/lib
++HDRDEST	= $(DEVROOT)/include
+ 
+ # If Running MsysDTK
+ RM	= rm -f
+@@ -575,6 +576,13 @@
+ 	-$(RM) $(GCED_INLINED_STAMP)
+ 	-$(RM) $(GCD_STATIC_STAMP)
+ 
++install:
++	cp pthread*.dll $(DLLDEST)
++	cp libpthread*.a $(LIBDEST)
++	cp pthread.h $(HDRDEST)
++	cp sched.h $(HDRDEST)
++	cp semaphore.h $(HDRDEST)
++
+ attr.o:		attr.c $(ATTR_SRCS) $(INCL)
+ barrier.o:	barrier.c $(BARRIER_SRCS) $(INCL)
+ cancel.o:	cancel.c $(CANCEL_SRCS) $(INCL)
