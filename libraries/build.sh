@@ -347,7 +347,7 @@ for NAME in ${BUILTIN_LIBS}; do
 		fi
 
 		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
-			echo "Not re-extracting ${FNAME}"
+			echo "Not re-extracting sources for ${NAME_ORIG} ${VER}"
 			if ${EXTRACT_ONLY}; then
 				continue
 			fi
@@ -355,8 +355,6 @@ for NAME in ${BUILTIN_LIBS}; do
 			if test ! -d "${DIR_SRC}/${DNAME}"; then
 				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
 			fi
-
-			cd "${DIR_SRC}"
 
 			if test ! -z "${CMD_EXTRACT}"; then
 				"${CMD_EXTRACT[@]}"
