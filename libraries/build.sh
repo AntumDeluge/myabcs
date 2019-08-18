@@ -190,9 +190,9 @@ ncurses"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
 	# library names in build order
-	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv gettext libpng xz libxml2 libjpeg-turbo \
-libtiff lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis libflac SDL2 \
-libmpg123 SDL2_mixer wxWidgets wxSVG"
+	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv gettext libiconv-intl libpng xz libxml2 \
+libjpeg-turbo libtiff lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis \
+libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then

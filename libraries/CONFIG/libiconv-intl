@@ -1,0 +1,7 @@
+# Re-build of iconv using internal libintl
+#
+# Notes:
+#  - build after gettext (libintl)
+
+NAME="libiconv"
+. CONFIG-${NAME}
