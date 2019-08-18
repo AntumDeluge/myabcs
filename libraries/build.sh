@@ -247,6 +247,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	LIBTYPE_OPTS=
 	REBUILD=false
 	CRLF_TO_LF=
+	PATCH_PRUNE_LEVEL=
 
 	# prepare values
 	DOWNLOAD_DONE=false
@@ -426,8 +427,28 @@ for NAME in ${BUILTIN_LIBS}; do
 
 			cd "${DNAME}"
 
-			# apply patches
-			if test -d "../../patch/"; then
+			# apply external/downloaded patches
+			EXT_PATCH_DIR="${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
+			if test -d "${EXT_PATCH_DIR}"; then
+				if test -z "${PATCH_PRUNE_LEVEL}"; then
+					echo -e "\nERROR: PATCH_PRUNE_LEVEL must be set when applying external patches"
+					exit 1
+				fi
+
+				for PATCH in $(find "${EXT_PATCH_DIR}" -type f -name "*.patch"); do
+					echo "Applying external patch: $(basename ${PATCH})"
+					# XXX: downloaded patches may need a different "prune" level
+					patch -p${PATCH_PRUNE_LEVEL} -i "${PATCH}"
+					ret=$?
+					if test ${ret} -ne 0; then
+						echo -e "\nAn error occurred while trying to apply external patch: $(basename ${PATCH})"
+						exit ${ret}
+					fi
+				done
+			fi
+
+			# apply internal patches
+			if test -d "${DIR_LIBS}/patch/"; then
 				PATCHES=$(ls "${DIR_LIBS}/patch/" | grep "^${NAME}-.*\.patch")
 			fi
 
