@@ -4,4 +4,4 @@
 #  - build after gettext (libintl)
 
 NAME="libiconv"
-. CONFIG-${NAME}
+. "CONFIG/${NAME}"
