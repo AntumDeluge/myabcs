@@ -227,6 +227,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	CMD_DOWNLOAD=
 	PRE_DOWNLOAD=
 	POST_DOWNLOAD=
+	CMD_EXTRACT=
 	CMD_CONFIG=
 	CMD_BUILD=(${CMD_MAKE})
 	CMD_INSTALL=(${CMD_MAKE} install)
@@ -336,7 +337,12 @@ for NAME in ${BUILTIN_LIBS}; do
 				done
 			fi
 
-			extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
+			if test ! -z "${CMD_EXTRACT}"; then
+				"${CMD_EXTRACT[@]}"
+			else
+				extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
+			fi
+
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
 				exit 1
