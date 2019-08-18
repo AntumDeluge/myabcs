@@ -28,6 +28,10 @@ DIR_ROOT="`dirname ${DIR_LIBS}`"
 DIR_SRC="${DIR_LIBS}/source"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
+if test ! -d "${DIR_SRC}"; then
+	mkdir -p "${DIR_SRC}"
+fi
+
 # add install prefix to PATH
 export PATH="${INSTALL_PREFIX}/bin:${PATH}"
 
@@ -57,11 +61,6 @@ WGET=`which wget`
 WGET_FOUND=$?
 
 function download_source {
-	if test ! -d "${DIR_SRC}"; then
-		mkdir -p "${DIR_SRC}"
-	fi
-	cd "${DIR_SRC}"
-
 	if test ${WGET_FOUND} -ne 0; then
 		echo -e "\nError in function download_source: 'wget' command not found"
 		exit 1
@@ -100,7 +99,6 @@ function download_source {
 		exit ${ret}
 	fi
 
-	cd "${DIR_LIBS}"
 	return ${ret}
 }
 
@@ -287,14 +285,14 @@ for NAME in ${BUILTIN_LIBS}; do
 				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
 			fi
 
+			cd "${DIR_SRC}"
+
 			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test -f "${PACKAGE}"; then
 				echo "Found package: ${FNAME}"
 			else
 				download_source "${SOURCE}" "${FNAME}"
 			fi
-
-			cd "${DIR_SRC}"
 
 			# clean up old files
 			if test -d "${DNAME}"; then
