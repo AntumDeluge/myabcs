@@ -302,25 +302,18 @@ for NAME in ${BUILTIN_LIBS}; do
 	if ${PREPARE_DONE}; then
 		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
 	else
-		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
-			echo "Not re-extracting ${FNAME}"
-			if ${EXTRACT_ONLY}; then
-				continue
-			fi
+		cd "${DIR_SRC}"
+		PACKAGE="${DIR_SRC}/${FNAME}"
+
+		if ${DOWNLOAD_DONE}; then
+			echo "Not re-downloading sources for ${NAME_ORIG} ${VER}"
 		else
-			if test ! -d "${DIR_SRC}/${DNAME}"; then
-				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
-			fi
-
-			cd "${DIR_SRC}"
-
 			if test ! -z "${PRE_DOWNLOAD}"; then
 				for pre_cmd in "${PRE_DOWNLOAD[@]}"; do
 					${pre_cmd}
 				done
 			fi
 
-			PACKAGE="${DIR_SRC}/${FNAME}"
 			if test ! -z "${CMD_DOWNLOAD}"; then
 				"${CMD_DOWNLOAD[@]}"
 				dl_ret=$?
@@ -349,6 +342,21 @@ for NAME in ${BUILTIN_LIBS}; do
 					${post_cmd}
 				done
 			fi
+
+			echo "DOWNLOAD_DONE=true" >> "${FILE_LIB_PREPARE}"
+		fi
+
+		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
+			echo "Not re-extracting ${FNAME}"
+			if ${EXTRACT_ONLY}; then
+				continue
+			fi
+		else
+			if test ! -d "${DIR_SRC}/${DNAME}"; then
+				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
+			fi
+
+			cd "${DIR_SRC}"
 
 			if test ! -z "${CMD_EXTRACT}"; then
 				"${CMD_EXTRACT[@]}"
