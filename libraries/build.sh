@@ -184,15 +184,15 @@ if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# currently unused
-	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf gettext ghostscript librsvg libspectre openjpeg pango \
+	OPTIONAL_LIBS="cairo fontconfig gdk-pixbuf ghostscript librsvg libspectre openjpeg pango \
 ncurses"
 	OPTIONAL_NO_DEPENDS_UTILS="patch"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
 	# library names in build order
-	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv libpng xz libxml2 libjpeg-turbo libtiff \
-lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis libflac SDL2 libmpg123 \
-SDL2_mixer wxWidgets wxSVG"
+	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libiconv gettext libpng xz libxml2 libjpeg-turbo \
+libtiff lcms2 libexif freetype harfbuzz freetype-hb pcre pixman poppler libvorbis libflac SDL2 \
+libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then
