@@ -252,9 +252,17 @@ for NAME in ${BUILTIN_LIBS}; do
 	fi
 
 	# check values imported from configuration
-	if test -z "${VER}" || test -z "${DNAME}" || test -z "${FNAME}" || test -z "${SOURCE}"; then
-		echo -e "\nERROR: malformed configuration: ${CFG}"
+	if test -z "${VER}" || test -z "${DNAME}"; then
+		echo -e "\nERROR: malformed configuration, VER & DNAME must be set: ${CFG}"
 		exit 1
+	fi
+
+	# SOURCE & FNAME must be set if not using a custom download command
+	if test -z "${CMD_DOWNLOAD}"; then
+		if test -z "${FNAME}" || test -z "${SOURCE}"; then
+			echo -e "\nERROR: malformed configuration, FNAME & SOURCE must be set: ${CFG}"
+			exit 1
+		fi
 	fi
 
 	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
