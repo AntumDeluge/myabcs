@@ -167,7 +167,7 @@ function extract_archive {
 # TODO: possible optional libs/utils to add
 #	Utils:
 #	Libs:
-#		libarchive, readline, zstd, jsoncpp
+#		readline, zstd, jsoncpp
 #	Utils+Libs:
 #		curl, xcb
 
@@ -191,7 +191,7 @@ if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
 	# currently unused
-	OPTIONAL_LIBS="cairo gdk-pixbuf ghostscript librsvg libspectre pango ncurses"
+	OPTIONAL_LIBS="cairo gdk-pixbuf ghostscript librsvg libspectre pango ncurses libarchive"
 	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
