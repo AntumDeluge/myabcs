@@ -8,4 +8,7 @@ DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://www.freedesktop.org/software/fontconfig/release/${FNAME}"
 CONFIG_OPTS="--enable-iconv --disable-docs"
-LIBS="-lharfbuzz"
+if ${OS_WIN}; then
+	# FIXME: not sure why I have to explicitly link to static harfbuzz
+	LIBS="-l:libharfbuzz.a"
+fi
