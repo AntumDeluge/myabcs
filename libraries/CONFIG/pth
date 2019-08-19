@@ -5,4 +5,4 @@ VER="2.0.7"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="ftp://ftp.gnu.org/gnu/pth/${FNAME}"
-LIBTYPE_OPTS="--enable-shared --enable-static=no"
+LIBTYPE_OPTS=(--enable-shared --enable-static=no)
