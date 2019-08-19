@@ -12,3 +12,4 @@ else
 fi
 SOURCE="https://cmake.org/files/v${VER%.*}/${FNAME}"
 CONFIG_OPTS=(--system-expat --system-zlib --system-bzip2 --system-liblzma)
+LIBTYPE_OPTS="N/A"
