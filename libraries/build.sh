@@ -164,6 +164,13 @@ function extract_archive {
 	return ${ret}
 }
 
+# TODO: possible optional libs/utils to add
+#	Utils:
+#	Libs:
+#		libarchive, readline, zstd, jsoncpp
+#	Utils+Libs:
+#		curl, xcb
+
 if test ! -z "${INCLUDE_OPTIONAL}" && test ${INCLUDE_OPTIONAL} -gt 0; then
 	INCLUDE_OPTIONAL=true
 else
