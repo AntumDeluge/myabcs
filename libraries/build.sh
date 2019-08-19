@@ -554,7 +554,12 @@ for NAME in ${BUILTIN_LIBS}; do
 						fi
 						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_PREFIX_PATH=${INSTALL_PREFIX})
 						CMD_CONFIG+=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF -DENABLE_STATIC=ON -DENABLE_SHARED=OFF)
-						CMD_CONFIG+=(-DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_FIND_LIBRARY_SUFFIXES=".a" "${DIR_SRC}/${DNAME}")
+						CMD_CONFIG+=(-DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_FIND_LIBRARY_SUFFIXES=".a")
+
+						# add config options to config command
+						CMD_CONFIG+=(${CONFIG_OPTS[@]})
+						# add source directory as final argument in config command
+						CMD_CONFIG+=("${DIR_SRC}/${DNAME}")
 					fi
 
 					# common values for meson
