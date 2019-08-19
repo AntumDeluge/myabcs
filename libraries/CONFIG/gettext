@@ -7,4 +7,4 @@ VER="0.20.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://ftp.gnu.org/pub/gnu/gettext/${FNAME}"
-CONFIG_OPTS="--disable-curses --with-included-libxml --with-included-regex --with-included-libunistring --without-xz"
+CONFIG_OPTS=(--disable-curses --with-included-libxml --with-included-regex --with-included-libunistring --without-xz)

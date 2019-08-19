@@ -6,4 +6,4 @@ EXTRACT_NAME="tiff-${VER}"
 DNAME="lib${EXTRACT_NAME}"
 FNAME="${EXTRACT_NAME}.tar.gz"
 SOURCE="https://download.osgeo.org/libtiff/${FNAME}"
-CONFIG_OPTS="--disable-zstd --disable-webp --disable-cxx"
+CONFIG_OPTS=(--disable-zstd --disable-webp --disable-cxx)

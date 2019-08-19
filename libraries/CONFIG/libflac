@@ -9,4 +9,4 @@ VER="1.3.2"
 DNAME="flac-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="http://downloads.xiph.org/releases/flac/${FNAME}"
-CONFIG_OPTS="--disable-doxygen-docs --disable-xmms-plugin --disable-cpplibs --enable-ogg"
+CONFIG_OPTS=(--disable-doxygen-docs --disable-xmms-plugin --disable-cpplibs --enable-ogg)

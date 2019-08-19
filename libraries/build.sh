@@ -530,17 +530,17 @@ for NAME in ${BUILTIN_LIBS}; do
 
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
-					CONFIG_OPTS+=" --prefix=${INSTALL_PREFIX}"
+					CONFIG_OPTS+=(--prefix="${INSTALL_PREFIX}")
 					if test ! -z "${LIBTYPE_OPTS}"; then
 						# override default static/shared options
 						if test "${LIBTYPE_OPTS}" != "N/A"; then
-							CONFIG_OPTS+=" ${LIBTYPE_OPTS}"
+							CONFIG_OPTS+=(${LIBTYPE_OPTS})
 						fi
 					else
-						CONFIG_OPTS+=" --enable-shared=no --enable-static=yes"
+						CONFIG_OPTS+=(--enable-shared=no --enable-static=yes)
 					fi
 
-					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS}
+					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS[@]}
 					if test $? -ne 0; then
 						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
 						exit 1

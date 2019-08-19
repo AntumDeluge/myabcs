@@ -7,7 +7,7 @@ VER="0.38.4"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://www.cairographics.org/releases/${FNAME}"
-CONFIG_OPTS="--enable-libpng"
+CONFIG_OPTS=(--enable-libpng)
 if ${OS_WIN}; then
 	LIBS="-lffi -lintl -lpcre -lole32 -lws2_32"
 fi

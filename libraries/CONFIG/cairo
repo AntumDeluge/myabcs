@@ -1,8 +1,10 @@
 # Depends on:
-#  libpng, freetype, fontconfig, libspectre, poppler, librsvg, pixman, glib
+#  libpng, freetype, librsvg, pixman, glib
+# Optional depends:
+#  xcb, xlib (X11), CoreGraphics, ghostscript, fontconfig, poppler, libspectre
 
 VER="1.16.0"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://www.cairographics.org/releases/${FNAME}"
-CONFIG_OPTS="--disable-full-testing --disable-valgrind --disable-gobject"
+CONFIG_OPTS=(--disable-full-testing --disable-valgrind --disable-gobject)

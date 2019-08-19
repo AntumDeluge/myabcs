@@ -7,5 +7,5 @@ DNAME="${NAME}-${VER}"
 FNAME="${NAME}-${VER_LOW}-release.tar.gz"
 SOURCE="https://github.com/libexif/libexif/archive/${FNAME}"
 EXTRACT_NAME="${NAME}-${NAME}-${VER_LOW}-release"
-CONFIG_OPTS="--disable-docs"
+CONFIG_OPTS=(--disable-docs)
 PRE_CONF=("autoreconf -fiv")

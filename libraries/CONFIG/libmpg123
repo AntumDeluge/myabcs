@@ -8,4 +8,4 @@ DNAME="mpg123-${VER}"
 FNAME="${DNAME}.tar.bz2"
 SOURCE="https://sourceforge.net/projects/mpg123/files/mpg123/${VER}/${FNAME}/download"
 # don't support mpg1/2 audio
-CONFIG_OPTS="--disable-layer1 --disable-layer2"
+CONFIG_OPTS=(--disable-layer1 --disable-layer2)
