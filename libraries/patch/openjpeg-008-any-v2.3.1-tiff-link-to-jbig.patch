@@ -1,0 +1,24 @@
+diff -ruN openjpeg-2.3.1.orig/src/bin/jp2/CMakeLists.txt openjpeg-2.3.1/src/bin/jp2/CMakeLists.txt
+--- openjpeg-2.3.1.orig/src/bin/jp2/CMakeLists.txt	2019-08-19 14:01:27.448966700 -0700
++++ openjpeg-2.3.1/src/bin/jp2/CMakeLists.txt	2019-08-19 14:02:48.919817700 -0700
+@@ -49,7 +49,7 @@
+   endif()
+   target_link_libraries(${exe} ${OPENJPEG_LIBRARY_NAME}
+     ${PNG_LIBNAME} ${TIFF_LIBNAME} ${LCMS_LIBNAME}
+-    jpeg lzma
++    jpeg lzma jbig
+     )
+   # To support universal exe:
+   if(ZLIB_FOUND AND APPLE)
+diff -ruN openjpeg-2.3.1.orig/src/bin/jpwl/CMakeLists.txt openjpeg-2.3.1/src/bin/jpwl/CMakeLists.txt
+--- openjpeg-2.3.1.orig/src/bin/jpwl/CMakeLists.txt	2019-08-19 14:01:27.394113500 -0700
++++ openjpeg-2.3.1/src/bin/jpwl/CMakeLists.txt	2019-08-19 14:03:35.016091800 -0700
+@@ -43,7 +43,7 @@
+   )
+ 
+   target_link_libraries(${jpwl_exe} openjpwl
+-    ${LCMS_LIBNAME} ${PNG_LIBNAME} ${TIFF_LIBNAME})
++    ${LCMS_LIBNAME} ${PNG_LIBNAME} ${TIFF_LIBNAME} jbig)
+ 
+   # To support universal exe:
+   if(ZLIB_FOUND AND APPLE)
