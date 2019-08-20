@@ -1,7 +1,11 @@
 # Depends on:
-#  libiconv
+#  gcc-libs (libgcc, libstdc++?), libiconv
 # Optional depends:
-#  pthreads | pth, ncurses, termcap, bzip2, xz, libxml2, libacl
+#  pthreads | pth, ncurses, termcap, bzip2, xz, expat | libxml2, libacl, libunistring
+
+# FIXME: needs built twice in order to link to internal libintl
+# FIXME: use "internal" libxml2
+# FIXME: enable xz support
 
 VER="0.20.1"
 DNAME="${NAME}-${VER}"
