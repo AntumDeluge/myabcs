@@ -445,6 +445,7 @@ for NAME in ${BUILTIN_LIBS}; do
 					exit 1
 				fi
 
+				# FIXME: need to delete patches for older versions (probably before source download)
 				for PATCH in $(find "${EXT_PATCH_DIR}" -maxdepth 1 -type f); do
 					echo "Applying external patch: $(basename ${PATCH})"
 					# XXX: downloaded patches may need a different "prune" level
