@@ -126,7 +126,7 @@ build-libs:
 		libraries/build.sh "$(BUILD_STRING)"; \
 	else \
     	CMD_MAKE=$(MAKE); \
-    	export CMD_MAKE NO_BUILD_LIBS; \
+    	export CMD_MAKE NO_BUILD_LIBS INCLUDE_OPTIONAL; \
     	libraries/build.sh "$(BUILD_STRING)" $(BUILD_LIBS); \
 	fi;
 
