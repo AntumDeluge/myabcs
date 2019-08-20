@@ -1,20 +1,27 @@
 # Depends:
-#  glib
+#  meson, ninja, glib
 # Optional depends:
-#  libpng, libtiff, libjpeg (libjpeg-turbo), libjasper, libX11
+#  libpng, libtiff, libjpeg (libjpeg-turbo), libjasper, libX11, gobject-introspection
+
+# FIXME: jpeg loader not working (missing dependency?)
 
 VER="2.38.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://ftp.acc.umu.se/pub/GNOME/sources/gdk-pixbuf/${VER%.*}/${FNAME}"
 EXCLUDE_EXTRACT="tests/test-images/reftests/tga"
-CONFIG_OPTS=(-Dgir=false -Dman=false -Dinstalled_tests=false)
+CMD_CONFIG=(meson)
+CMD_BUILD=(ninja)
+CMD_INSTALL=(ninja install)
+
+CONFIG_OPTS=(
+	-Dgir=false
+	-Dman=false
+	-Dinstalled_tests=false
+)
 LIBS="`pkg-config glib-2.0 --libs --static` `pkg-config libtiff-4 --libs --static` -liconv"
 if ${OS_WIN}; then
 	CONFIG_OPTS+=(-Dx11=false)
 	LIBS+=" -lws2_32"
 fi
 LDFLAGS="${LIBS}"
-CMD_CONFIG=(meson ${CONFIG_OPTS[@]})
-CMD_BUILD=(ninja)
-CMD_INSTALL=(ninja install)

@@ -7,9 +7,9 @@ VER="1.43.0"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://download.gnome.org/sources/pango/${VER%.*}/${FNAME}"
+CMD_CONFIG=(meson)
+CMD_BUILD=(ninja)
+CMD_INSTALL=(ninja install)
 CONFIG_OPTS=(-Dgir=false)
 LIBS="`pkg-config cairo --libs --static` -lstdc++"
 LDFLAGS="${LIBS}"
-CMD_CONFIG=(meson ${CONFIG_OPTS[@]})
-CMD_BUILD=(ninja)
-CMD_INSTALL=(ninja install)
