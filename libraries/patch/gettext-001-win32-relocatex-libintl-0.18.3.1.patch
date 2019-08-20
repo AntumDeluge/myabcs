@@ -1,7 +1,118 @@
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/bindtextdom.c gettext-0.20.1/gettext-runtime/intl/bindtextdom.c
---- gettext-0.20.1.orig/gettext-runtime/intl/bindtextdom.c	2019-08-19 21:07:57.434300400 -0700
-+++ gettext-0.20.1/gettext-runtime/intl/bindtextdom.c	2019-08-19 21:11:10.679715000 -0700
-@@ -21,6 +21,7 @@
+From: Erwin Waterlander <waterlan@xs4all.nl>
+Subject: [PATCH] 00-relocatex-libintl-0.18.3.1.patch
+
+The relocatex-libintl patch adds builtin relocation for executables to the
+libintl dll. With this patch the programs are automatically relocatable. There
+is no need anymore to add relocation code to your program when you use this
+libintl DLL.
+
+The patch was ported from the GnuWin32 port of libintl, which has also builtin
+relacation support.
+
+At the moment the relocation support is only active if you compile with MinGW
+for Windows. If you compile for Unix/Linux/Cygwin the functionality is
+unchanged.
+
+See also:
+http://waterlan.home.xs4all.nl/libintl.html
+http://sourceforge.net/tracker/?func=detail&atid=302435&aid=3003879&group_id=2435
+GnuWin32: http://gnuwin32.sourceforge.net/
+
+Great thanks to GnuWin32 maintainer Kees Zeelenberg.
+
+[jes: fixed for 64-bit]
+
+Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+---
+ MINGW-PATCHES/README-relocatex-libintl.txt |  23 ++
+ gettext-runtime/intl/Makefile.in           |   9 +
+ gettext-runtime/intl/bindtextdom.c         |  22 ++
+ gettext-runtime/intl/canonicalize.c        | 343 +++++++++++++++++++++++++++++
+ gettext-runtime/intl/canonicalize.h        |  18 ++
+ gettext-runtime/intl/relocatex.c           | 284 ++++++++++++++++++++++++
+ gettext-runtime/intl/relocatex.h           |  41 ++++
+ 7 files changed, 740 insertions(+)
+ create mode 100644 MINGW-PATCHES/README-relocatex-libintl.txt
+ create mode 100644 gettext-runtime/intl/canonicalize.c
+ create mode 100644 gettext-runtime/intl/canonicalize.h
+ create mode 100644 gettext-runtime/intl/relocatex.c
+ create mode 100644 gettext-runtime/intl/relocatex.h
+
+diff --git a/MINGW-PATCHES/README-relocatex-libintl.txt b/MINGW-PATCHES/README-relocatex-libintl.txt
+new file mode 100644
+index 0000000..06f6a02
+--- /dev/null
++++ b/MINGW-PATCHES/README-relocatex-libintl.txt
+@@ -0,0 +1,23 @@
++The relocatex-libintl patch adds builtin relocation for executables to the
++libintl dll. With this patch the programs are automatically relocatable. There
++is no need anymore to add relocation code to your program when you use this
++libintl DLL.
++
++The patch was ported from the GnuWin32 port of libintl, which has also builtin
++relacation support.
++
++At the moment the relocation support is only active if you compile with MinGW
++for Windows. If you compile for Unix/Linux/Cygwin the functionality is
++unchanged. 
++
++See also:
++http://waterlan.home.xs4all.nl/libintl.html
++http://sourceforge.net/tracker/?func=detail&atid=302435&aid=3003879&group_id=2435
++GnuWin32: http://gnuwin32.sourceforge.net/
++
++Great thanks to GnuWin32 maintainer Kees Zeelenberg.
++
++Erwin Waterlander
++waterlan@xs4all.nl
++http://waterlan.home.xs4all.nl/
++
+diff --git a/gettext-runtime/intl/Makefile.in b/gettext-runtime/intl/Makefile.in
+index 2acfb2e..d6c270b 100644
+--- a/gettext-runtime/intl/Makefile.in
++++ b/gettext-runtime/intl/Makefile.in
+@@ -126,6 +126,7 @@ HEADERS = \
+   localcharset.h \
+   lock.h \
+   relocatable.h \
++  relocatex.h \
+   tsearch.h tsearch.c \
+   verify.h \
+   xsize.h \
+@@ -156,6 +157,8 @@ SOURCES = \
+   threadlib.c \
+   lock.c \
+   relocatable.c \
++  relocatex.c \
++  canonicalize.c \
+   langprefs.c \
+   localename.c \
+   log.c \
+@@ -189,6 +192,8 @@ OBJECTS = \
+   threadlib.$lo \
+   lock.$lo \
+   relocatable.$lo \
++  relocatex.$lo \
++  canonicalize.$lo \
+   langprefs.$lo \
+   localename.$lo \
+   log.$lo \
+@@ -298,6 +303,10 @@ threadlib.lo: $(srcdir)/threadlib.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/threadlib.c
+ lock.lo: $(srcdir)/lock.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/lock.c
++relocatex.lo: $(srcdir)/relocatex.c
++	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/relocatex.c
++canonicalize.lo: $(srcdir)/canonicalize.c
++	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/canonicalize.c
+ relocatable.lo: $(srcdir)/relocatable.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/relocatable.c
+ langprefs.lo: $(srcdir)/langprefs.c
+diff --git a/gettext-runtime/intl/bindtextdom.c b/gettext-runtime/intl/bindtextdom.c
+index 2e7ada4..bd0cddd 100644
+--- a/gettext-runtime/intl/bindtextdom.c
++++ b/gettext-runtime/intl/bindtextdom.c
+@@ -22,6 +22,7 @@
  #include <stddef.h>
  #include <stdlib.h>
  #include <string.h>
@@ -9,7 +120,7 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/bindtextdom.c gettext-0.20.1/
  
  #include "gettextP.h"
  #ifdef _LIBC
-@@ -65,6 +66,12 @@
+@@ -66,6 +67,12 @@ gl_rwlock_define (extern, _nl_state_lock attribute_hidden)
  # define BIND_TEXTDOMAIN_CODESET libintl_bind_textdomain_codeset
  #endif
  
@@ -22,18 +133,20 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/bindtextdom.c gettext-0.20.1/
  /* Specifies the directory name *DIRNAMEP and the output codeset *CODESETP
     to be used for the DOMAINNAME message catalog.
     If *DIRNAMEP or *CODESETP is NULL, the corresponding attribute is not
-@@ -346,11 +353,22 @@
+@@ -318,11 +325,22 @@ set_binding_values (const char *domainname,
          }
      }
  #endif
 -  set_binding_values (domainname, &dirname, NULL);
+-#ifdef __EMX__
+-  dirname = saved_dirname;
+-#endif
+-  return (char *) dirname;
 +  if (!dirname || !access (dirname, R_OK)) {
 +	  set_binding_values (domainname, &dirname, NULL);
- #ifdef __EMX__
--  dirname = saved_dirname;
++#ifdef __EMX__
 +	  dirname = saved_dirname;
- #endif
--  return (char *) dirname;
++#endif
 +	  return (char *) dirname;
 +  } else {
 +	  char *locale_dirname, *installdir = strdup (dirname), *s;
@@ -48,9 +161,11 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/bindtextdom.c gettext-0.20.1/
  }
  
  /* Specify the character encoding in which the messages from the
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.c gettext-0.20.1/gettext-runtime/intl/canonicalize.c
---- gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.c	1969-12-31 16:00:00.000000000 -0800
-+++ gettext-0.20.1/gettext-runtime/intl/canonicalize.c	2019-08-19 21:11:10.689687900 -0700
+diff --git a/gettext-runtime/intl/canonicalize.c b/gettext-runtime/intl/canonicalize.c
+new file mode 100644
+index 0000000..ae2aa93
+--- /dev/null
++++ b/gettext-runtime/intl/canonicalize.c
 @@ -0,0 +1,343 @@
 +/* Return the canonical absolute name of a given file.
 +   Copyright (C) 1996, 1997, 1998, 1999, 2000 Free Software Foundation, Inc.
@@ -395,9 +510,11 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.c gettext-0.20.1
 +{
 +  return canonicalize (name, NULL);
 +}
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.h gettext-0.20.1/gettext-runtime/intl/canonicalize.h
---- gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.h	1969-12-31 16:00:00.000000000 -0800
-+++ gettext-0.20.1/gettext-runtime/intl/canonicalize.h	2019-08-19 21:11:10.703720300 -0700
+diff --git a/gettext-runtime/intl/canonicalize.h b/gettext-runtime/intl/canonicalize.h
+new file mode 100644
+index 0000000..ea707bf
+--- /dev/null
++++ b/gettext-runtime/intl/canonicalize.h
 @@ -0,0 +1,18 @@
 +#ifndef __CANONICALIZE_H__
 +#define __CANONICALIZE_H__ 1
@@ -417,67 +534,11 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/canonicalize.h gettext-0.20.1
 +#endif
 +
 +#endif /* __CANONICALIZE_H__ */
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/Makefile.in gettext-0.20.1/gettext-runtime/intl/Makefile.in
---- gettext-0.20.1.orig/gettext-runtime/intl/Makefile.in	2019-08-19 21:07:57.368866700 -0700
-+++ gettext-0.20.1/gettext-runtime/intl/Makefile.in	2019-08-19 21:42:59.951803300 -0700
-@@ -227,14 +227,14 @@
- 	gettext.c finddomain.c hash-string.c loadmsgcat.c \
- 	localealias.c textdomain.c l10nflist.c explodename.c \
- 	dcigettext.c dcngettext.c dngettext.c ngettext.c plural.y \
--	plural-exp.c localcharset.c threadlib.c lock.c relocatable.c \
-+	plural-exp.c localcharset.c threadlib.c lock.c relocatable.c relocatex.c canonicalize.c \
- 	langprefs.c localename.c localename-table.c log.c printf.c \
- 	setlocale.c version.c xsize.c osdep.c intl-compat.c
- am__objects_1 = bindtextdom.lo dcgettext.lo dgettext.lo gettext.lo \
- 	finddomain.lo hash-string.lo loadmsgcat.lo localealias.lo \
- 	textdomain.lo l10nflist.lo explodename.lo dcigettext.lo \
- 	dcngettext.lo dngettext.lo ngettext.lo plural.lo plural-exp.lo \
--	localcharset.lo threadlib.lo lock.lo relocatable.lo \
-+	localcharset.lo threadlib.lo lock.lo relocatable.lo relocatex.lo canonicalize.lo \
- 	langprefs.lo localename.lo localename-table.lo log.lo \
- 	printf.lo setlocale.lo version.lo xsize.lo osdep.lo \
- 	intl-compat.lo
-@@ -1316,7 +1316,7 @@
- 
- # Miscellaneous files.
- EXTRA_DIST = gmo.h gettextP.h hash-string.h loadinfo.h plural-exp.h \
--	eval-plural.h localcharset.h lock.h relocatable.h flexmember.h \
-+	eval-plural.h localcharset.h lock.h relocatable.h relocatex.h flexmember.h \
- 	localename-table.in.h tsearch.h tsearch.c verify.h xsize.h \
- 	printf-args.h printf-args.c printf-parse.h wprintf-parse.h \
- 	printf-parse.c vasnprintf.h vasnwprintf.h vasnprintf.c \
-@@ -1385,6 +1385,8 @@
-   threadlib.c \
-   lock.c \
-   relocatable.c \
-+  relocatex.c \
-+  canonicalize.c \
-   langprefs.c \
-   localename.c \
-   localename-table.c \
-@@ -1861,6 +1863,10 @@
- 	$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/threadlib.c
- lock.lo: $(srcdir)/lock.c
- 	$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/lock.c
-+relocatex.lo: $(srcdir)/relocatex.c
-+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/relocatex.c
-+canonicalize.lo: $(srcdir)/canonicalize.c
-+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC --mode=compile $(COMPILE) $(srcdir)/canonicalize.c
- relocatable.lo: $(srcdir)/relocatable.c
- 	$(AM_V_CC)$(LTCOMPILE) -c -o $@ $(srcdir)/relocatable.c
- langprefs.lo: $(srcdir)/langprefs.c
-@@ -1904,6 +1910,8 @@
- localcharset.lo:     ../config.h $(srcdir)/localcharset.h
- threadlib.lo:        ../config.h
- lock.lo:             ../config.h $(srcdir)/lock.h
-+relocatex.lo:        ../config.h $(srcdir)/relocatex.h
-+canonicalize.lo:     ../config.h $(srcdir)/canonicalize.h
- relocatable.lo:      ../config.h $(srcdir)/relocatable.h
- langprefs.lo:        ../config.h
- localename.lo:       ../config.h $(srcdir)/gettextP.h libgnuintl.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h $(srcdir)/lock.h $(srcdir)/flexmember.h localename-table.h
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/relocatex.c gettext-0.20.1/gettext-runtime/intl/relocatex.c
---- gettext-0.20.1.orig/gettext-runtime/intl/relocatex.c	1969-12-31 16:00:00.000000000 -0800
-+++ gettext-0.20.1/gettext-runtime/intl/relocatex.c	2019-08-19 21:11:10.713851200 -0700
+diff --git a/gettext-runtime/intl/relocatex.c b/gettext-runtime/intl/relocatex.c
+new file mode 100644
+index 0000000..a2b7438
+--- /dev/null
++++ b/gettext-runtime/intl/relocatex.c
 @@ -0,0 +1,284 @@
 +/* Provide relocatable packages.
 +   Copyright (C) 2003 Free Software Foundation, Inc.
@@ -763,9 +824,11 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/relocatex.c gettext-0.20.1/ge
 +	set_current_prefix (ModuleName);
 +	return curr_prefix;
 +}
-diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/relocatex.h gettext-0.20.1/gettext-runtime/intl/relocatex.h
---- gettext-0.20.1.orig/gettext-runtime/intl/relocatex.h	1969-12-31 16:00:00.000000000 -0800
-+++ gettext-0.20.1/gettext-runtime/intl/relocatex.h	2019-08-19 21:11:10.726848100 -0700
+diff --git a/gettext-runtime/intl/relocatex.h b/gettext-runtime/intl/relocatex.h
+new file mode 100644
+index 0000000..5cc7c51
+--- /dev/null
++++ b/gettext-runtime/intl/relocatex.h
 @@ -0,0 +1,41 @@
 +/* 
 +   Copyright (C) 2006 Free Software Foundation, Inc.
@@ -808,30 +871,6 @@ diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/relocatex.h gettext-0.20.1/ge
 +//#endif /*  __GW32__ */
 +
 +#endif /* __RELOCATE_H__ */
-diff -ruN gettext-0.20.1.orig/MINGW-PATCHES/README-relocatex-libintl.txt gettext-0.20.1/MINGW-PATCHES/README-relocatex-libintl.txt
---- gettext-0.20.1.orig/MINGW-PATCHES/README-relocatex-libintl.txt	1969-12-31 16:00:00.000000000 -0800
-+++ gettext-0.20.1/MINGW-PATCHES/README-relocatex-libintl.txt	2019-08-19 21:11:10.570705800 -0700
-@@ -0,0 +1,23 @@
-+The relocatex-libintl patch adds builtin relocation for executables to the
-+libintl dll. With this patch the programs are automatically relocatable. There
-+is no need anymore to add relocation code to your program when you use this
-+libintl DLL.
-+
-+The patch was ported from the GnuWin32 port of libintl, which has also builtin
-+relacation support.
-+
-+At the moment the relocation support is only active if you compile with MinGW
-+for Windows. If you compile for Unix/Linux/Cygwin the functionality is
-+unchanged. 
-+
-+See also:
-+http://waterlan.home.xs4all.nl/libintl.html
-+http://sourceforge.net/tracker/?func=detail&atid=302435&aid=3003879&group_id=2435
-+GnuWin32: http://gnuwin32.sourceforge.net/
-+
-+Great thanks to GnuWin32 maintainer Kees Zeelenberg.
-+
-+Erwin Waterlander
-+waterlan@xs4all.nl
-+http://waterlan.home.xs4all.nl/
-+
+-- 
+2.7.0.windows.2.1.gab3a2bd
+
