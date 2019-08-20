@@ -445,7 +445,7 @@ for NAME in ${BUILTIN_LIBS}; do
 					exit 1
 				fi
 
-				for PATCH in $(find "${EXT_PATCH_DIR}" -type f); do
+				for PATCH in $(find "${EXT_PATCH_DIR}" -maxdepth 1 -type f); do
 					echo "Applying external patch: $(basename ${PATCH})"
 					# XXX: downloaded patches may need a different "prune" level
 					patch -p${PATCH_PRUNE_LEVEL} -i "${PATCH}"
