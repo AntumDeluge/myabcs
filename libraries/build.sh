@@ -196,9 +196,12 @@ libunistring readline"
 	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
+	# FIXME: having trouble building the following libs/utils
+	#	gettext
+
 	# library names in build order
-	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libXpm libiconv gettext libiconv-intl libpng xz \
-libxml2 libjpeg-turbo jbigkit libtiff lcms2 libexif freetype harfbuzz freetype-hb fontconfig pcre \
+	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libXpm libiconv libiconv-intl libpng xz libxml2 \
+libjpeg-turbo jbigkit libtiff lcms2 libexif freetype harfbuzz freetype-hb fontconfig pcre \
 pixman openjpeg poppler libvorbis libflac SDL2 libmpg123 SDL2_mixer wxWidgets wxSVG"
 fi
 
