@@ -5,4 +5,4 @@ NAME="freetype"
 . "CONFIG/${NAME}"
 
 # add harfbuzz support
-CONFIG_OPTS=($(echo ${CONFIG_OPTS} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|'))
+CONFIG_OPTS=($(echo ${CONFIG_OPTS[@]} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|'))
