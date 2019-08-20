@@ -1,5 +1,5 @@
---- gettext-tools/gnulib-lib/libxml/parser.c.orig	2013-01-18 10:24:37 +0400
-+++ gettext-tools/gnulib-lib/libxml/parser.c	2013-01-18 10:36:35 +0400
+--- a/gettext-tools/gnulib-lib/libxml/parser.c.orig	2013-01-18 10:24:37 +0400
++++ b/gettext-tools/gnulib-lib/libxml/parser.c	2013-01-18 10:36:35 +0400
 @@ -42,6 +42,9 @@
  #include <stdlib.h>
  #include <string.h>
@@ -20,8 +20,8 @@
  #ifdef HAVE_STDLIB_H
  #include <stdlib.h>
  #endif
---- gettext-tools/gnulib-lib/libxml/threads.c.orig	2013-01-18 10:38:24 +0400
-+++ gettext-tools/gnulib-lib/libxml/threads.c	2013-01-18 10:41:11 +0400
+--- a/gettext-tools/gnulib-lib/libxml/threads.c.orig	2013-01-18 10:38:24 +0400
++++ b/gettext-tools/gnulib-lib/libxml/threads.c	2013-01-18 10:41:11 +0400
 @@ -12,15 +12,16 @@
  
  #include <string.h>

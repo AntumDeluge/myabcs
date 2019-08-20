@@ -1,5 +1,5 @@
---- gettext-tools/misc/autopoint.in	2011-09-06 23:40:21 -0400
-+++ gettext-tools/misc/autopoint.in	2011-09-09 11:45:07 -0400
+--- a/gettext-tools/misc/autopoint.in	2011-09-06 23:40:21 -0400
++++ b/gettext-tools/misc/autopoint.in	2011-09-09 11:45:07 -0400
 @@ -100,7 +100,7 @@ func_find_curr_installdir ()
      *) curr_executable=`pwd`/"$curr_executable" ;;
    esac
@@ -107,8 +107,8 @@
    func_destfile "$file"
    if test -n "$destfile"; then
      func_copy_to_destfile ()
---- gettext-tools/misc/gettextize.in	2010-06-06 08:49:57 -0400
-+++ gettext-tools/misc/gettextize.in	2011-09-09 11:37:21 -0400
+--- a/gettext-tools/misc/gettextize.in	2010-06-06 08:49:57 -0400
++++ b/gettext-tools/misc/gettextize.in	2011-09-09 11:37:21 -0400
 @@ -100,7 +100,7 @@ func_find_curr_installdir ()
      *) curr_executable=`pwd`/"$curr_executable" ;;
    esac

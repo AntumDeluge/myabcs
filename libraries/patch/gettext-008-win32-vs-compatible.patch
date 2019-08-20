@@ -1,5 +1,5 @@
---- gettext-runtime/intl/libgnuintl.in.h.old	2015-06-15 10:40:11.594942600 +0200
-+++ gettext-runtime/intl/libgnuintl.in.h	2015-06-15 10:40:50.579345400 +0200
+--- a/gettext-runtime/intl/libgnuintl.in.h.old	2015-06-15 10:40:11.594942600 +0200
++++ b/gettext-runtime/intl/libgnuintl.in.h	2015-06-15 10:40:50.579345400 +0200
 @@ -336,7 +336,7 @@ extern int vfprintf (FILE *, const char
  
  #if !(defined printf && defined _GL_STDIO_H) /* don't override gnulib */
