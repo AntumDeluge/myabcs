@@ -167,7 +167,7 @@ function extract_archive {
 # TODO: possible optional libs/utils to add
 #	Utils:
 #	Libs:
-#		zstd, jsoncpp
+#		zstd, jsoncpp, md4c
 #	Utils+Libs:
 #		curl, xcb
 
