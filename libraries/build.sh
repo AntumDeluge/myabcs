@@ -579,8 +579,6 @@ for NAME in ${BUILTIN_LIBS}; do
 							unset LIBTYPE_OPTS
 						fi
 
-						# FIXME: which lib used these opts?
-						#CMD_CONFIG+=(-DENABLE_STATIC=ON -DENABLE_SHARED=OFF)
 						# add build type to config options
 						if test ! -z "${LIBTYPE_OPTS}"; then
 							CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
