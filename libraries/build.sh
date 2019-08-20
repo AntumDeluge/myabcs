@@ -581,8 +581,9 @@ for NAME in ${BUILTIN_LIBS}; do
 
 						# FIXME: which lib used these opts?
 						#CMD_CONFIG+=(-DENABLE_STATIC=ON -DENABLE_SHARED=OFF)
+						# add build type to config options
 						if test ! -z "${LIBTYPE_OPTS}"; then
-							CMD_CONFIG+=(${LIBTYPE_OPTS[@]})
+							CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
 						fi
 
 						# add config options to config command
