@@ -7,10 +7,13 @@
 # FIXME: use "internal" libxml2
 # FIXME: enable xz support
 
-VER="0.20.1"
+# Update available: 0.20.1 (produces segfaulting executables)
+
+VER="0.19.8.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://ftp.gnu.org/pub/gnu/gettext/${FNAME}"
+LDFLAGS="-DLIBXML_STATIC"
 
 export WANT_AUTOMAKE=latest
 PRE_CONF=(
