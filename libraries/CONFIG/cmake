@@ -1,7 +1,13 @@
 # Depends:
-#  pkg-config, libgcc
+#  pkg-config, gcc-libs (libgcc, libstdc++), expat
 # Optional depends:
-#  expat, libcurl, jsoncpp, zlib, bzip2, liblzma (xz), libzstd, libarchive, librhash, libuv, qt
+#  libcurl, jsoncpp, zlib, bzip2, liblzma (xz), zstd, libarchive, rhash, libuv, qt,
+#  ncurses, emacs
+#
+# Notes:
+#  - system dependencies: gcc-libs (libgcc, libstdc++)
+
+# FIXME: linking to system expat instead of internal
 
 VER="3.15.2"
 DNAME="${NAME}-${VER}"
