@@ -64,6 +64,24 @@ UNZIP_FOUND=$?
 WGET=`which wget`
 WGET_FOUND=$?
 
+# A simple function to test if a variable is an array
+#
+# NOTE: parameter arguments must be enclosed in quotes
+function is_array {
+	# FIXME: this is NOT the best way to do this
+	local count=$#
+	if test -z ${count} -lt 1; then
+		echo -e "\nError in function is_array: requires an argument"
+		exit 1
+	fi
+
+	if test ${count} -gt 1; then
+		return 0
+	fi
+
+	return 1
+}
+
 function download_source {
 	if test ${WGET_FOUND} -ne 0; then
 		echo -e "\nError in function download_source: 'wget' command not found"
