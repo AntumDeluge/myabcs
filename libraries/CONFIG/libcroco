@@ -1,0 +1,13 @@
+# Depends:
+#  pkg-config, glib
+# Optional depends:
+#  gtk-doc
+
+VER="0.6.13"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.xz"
+SOURCE="https://download.gnome.org/sources/${NAME}/${VER%.*}/${FNAME}"
+LIBS="-lintl"
+if ${OS_WIN}; then
+	LIBS+=" -lole32"
+fi

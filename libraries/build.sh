@@ -192,7 +192,7 @@ if test ! -z "${BUILD_LIBS}"; then
 else
 	# currently unused
 	OPTIONAL_LIBS="cairo gdk-pixbuf ghostscript librsvg libspectre pango ncurses libarchive \
-libunistring readline"
+libunistring readline libcroco"
 	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
 	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
 
