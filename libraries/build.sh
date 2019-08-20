@@ -70,10 +70,6 @@ WGET_FOUND=$?
 function is_array {
 	# FIXME: this is NOT the best way to do this
 	local count=$#
-	if test -z ${count} -lt 1; then
-		echo -e "\nError in function is_array: requires an argument"
-		exit 1
-	fi
 
 	if test ${count} -gt 1; then
 		return 0
