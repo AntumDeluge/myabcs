@@ -1,16 +1,25 @@
 # Depends:
 #  pkg-config, freetype
 # Optional depends:
-#  lcms | lcms2, libjpeg (libjpeg-turbo), libcurl, openjpeg, qt5, zlib
-# Unsure depends:
-#  glib, cairo, libtiff
-# Unsure optional depends:
-#  gobject (glib)
+#  lcms | lcms2, libjpeg (libjpeg-turbo), curl, openjpeg, qt5, zlib, cairo, gobject(glib), icu,
+#  libpng, libtiff, nss, poppler-data, pthreads-win32 | winpthreads
+
+# FIXME: possible to use pthreads instead of win32 threads?
 
 VER="0.79.0"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://poppler.freedesktop.org/${FNAME}"
-CONFIG_OPTS=(-DBUILD_CPP_TESTS=OFF -DBUILD_GTK_TESTS=OFF -DBUILD_QT5_TESTS=OFF -DENABLE_GOBJECT_INTROSPECTION=OFF -DENABLE_LIBCURL=OFF \
--DENABLE_QT5=OFF -DENABLE_UTILS=OFF -DENABLE_LIBOPENJPEG=none -DENABLE_SPLASH=OFF)
 CMD_CONFIG=(cmake)
+
+CONFIG_OPTS=(
+	-DBUILD_CPP_TESTS=OFF
+	-DBUILD_GTK_TESTS=OFF
+	-DBUILD_QT5_TESTS=OFF
+	-DENABLE_GOBJECT_INTROSPECTION=OFF
+	-DENABLE_LIBCURL=OFF
+	-DENABLE_QT5=OFF
+	-DENABLE_UTILS=OFF
+	-DENABLE_LIBOPENJPEG=none
+	-DENABLE_SPLASH=OFF
+)
