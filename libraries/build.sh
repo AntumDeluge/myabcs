@@ -567,8 +567,23 @@ for NAME in ${BUILTIN_LIBS}; do
 							CMD_CONFIG+=(-G "MSYS Makefiles")
 						fi
 						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_PREFIX_PATH=${INSTALL_PREFIX})
-						CMD_CONFIG+=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF -DENABLE_STATIC=ON -DENABLE_SHARED=OFF)
 						CMD_CONFIG+=(-DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_FIND_LIBRARY_SUFFIXES=".a")
+
+						if "${LIBTYPE_OPTS}" != "N/A"; then
+							if test -z "${LIBTYPE_OPTS}"; then
+								# defaults
+								LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF)
+							fi
+						else
+							# make sure to LIBTYPE_OPTS is empty if set to "N/A"
+							unset LIBTYPE_OPTS
+						fi
+
+						# FIXME: which lib used these opts?
+						#CMD_CONFIG+=(-DENABLE_STATIC=ON -DENABLE_SHARED=OFF)
+						if test ! -z "${LIBTYPE_OPTS}"; then
+							CMD_CONFIG+=(${LIBTYPE_OPTS[@]})
+						fi
 
 						# add config options to config command
 						CMD_CONFIG+=(${CONFIG_OPTS[@]})
