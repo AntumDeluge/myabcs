@@ -1,0 +1,6 @@
+# rebuild of glib
+
+NAME="glib"
+. "CONFIG/${NAME}"
+
+CONFIG_OPTS=($(echo ${CONFIG_OPTS[@]} | sed -e 's|internal_pcre=true|internal_pcre=false|'))
