@@ -1,0 +1,156 @@
+diff -ruN gettext-0.20.1.orig/gettext-tools/src/Makefile.in gettext-0.20.1/gettext-tools/src/Makefile.in
+--- gettext-0.20.1.orig/gettext-tools/src/Makefile.in	2019-08-19 23:39:23.842232400 -0700
++++ gettext-0.20.1/gettext-tools/src/Makefile.in	2019-08-20 00:01:06.873637000 -0700
+@@ -473,7 +473,15 @@
+ 	libgettextsrc_la-open-catalog.lo libgettextsrc_la-dir-list.lo \
+ 	libgettextsrc_la-str-list.lo
+ am__dirstamp = $(am__leading_dot)dirstamp
+-@WOE32DLL_FALSE@am__objects_2 = libgettextsrc_la-format.lo \
++@WOE32DLL_FALSE@am__objects_3 = libgettextsrc_la-write-catalog.lo \
++@WOE32DLL_FALSE@	libgettextsrc_la-write-po.lo \
++@WOE32DLL_FALSE@	libgettextsrc_la-write-properties.lo \
++@WOE32DLL_FALSE@	libgettextsrc_la-write-stringtable.lo
++@WOE32DLL_TRUE@am__objects_3 = libgettextsrc_la-c++write-catalog.lo \
++@WOE32DLL_TRUE@	libgettextsrc_la-c++write-po.lo \
++@WOE32DLL_TRUE@	libgettextsrc_la-c++write-properties.lo \
++@WOE32DLL_TRUE@	libgettextsrc_la-c++write-stringtable.lo
++@WOE32DLL_FALSE@am__objects_4 = libgettextsrc_la-format.lo \
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-c.lo \
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-sh.lo \
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-python.lo \
+@@ -500,7 +508,7 @@
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-boost.lo \
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-lua.lo \
+ @WOE32DLL_FALSE@	libgettextsrc_la-format-javascript.lo
+-@WOE32DLL_TRUE@am__objects_2 =  \
++@WOE32DLL_TRUE@am__objects_4 =  \
+ @WOE32DLL_TRUE@	../woe32dll/libgettextsrc_la-c++format.lo \
+ @WOE32DLL_TRUE@	libgettextsrc_la-format-c.lo \
+ @WOE32DLL_TRUE@	libgettextsrc_la-format-sh.lo \
+@@ -3047,15 +3055,15 @@
+ libgettextsrc_la-write-catalog.lo: write-catalog.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-write-catalog.lo `test -f 'write-catalog.c' || echo '$(srcdir)/'`write-catalog.c
+ 
++libgettextsrc_la-write-po.lo: write-po.c
++	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-write-po.lo `test -f 'write-po.c' || echo '$(srcdir)/'`write-po.c
++
+ libgettextsrc_la-write-properties.lo: write-properties.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-write-properties.lo `test -f 'write-properties.c' || echo '$(srcdir)/'`write-properties.c
+ 
+ libgettextsrc_la-write-stringtable.lo: write-stringtable.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-write-stringtable.lo `test -f 'write-stringtable.c' || echo '$(srcdir)/'`write-stringtable.c
+ 
+-libgettextsrc_la-write-po.lo: write-po.c
+-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-write-po.lo `test -f 'write-po.c' || echo '$(srcdir)/'`write-po.c
+-
+ libgettextsrc_la-msgl-ascii.lo: msgl-ascii.c
+ 	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libgettextsrc_la-msgl-ascii.lo `test -f 'msgl-ascii.c' || echo '$(srcdir)/'`msgl-ascii.c
+ 
+@@ -3647,6 +3655,66 @@
+ .cc.lo:
+ 	$(AM_V_CXX)$(LTCXXCOMPILE) -c -o $@ $<
+ 
++libgettextsrc_la-c++write-catalog.lo: ../woe32dll/c++write-catalog.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-catalog.lo `test -f '../woe32dll/c++write-catalog.cc' || echo '$(srcdir)/'`../woe32dll/c++write-catalog.cc
++
++libgettextsrc_la-c++write-po.lo: ../woe32dll/c++write-po.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-po.lo `test -f '../woe32dll/c++write-po.cc' || echo '$(srcdir)/'`../woe32dll/c++write-po.cc
++
++libgettextsrc_la-c++write-properties.lo: ../woe32dll/c++write-properties.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-properties.lo `test -f '../woe32dll/c++write-properties.cc' || echo '$(srcdir)/'`../woe32dll/c++write-properties.cc
++
++libgettextsrc_la-c++write-stringtable.lo: ../woe32dll/c++write-stringtable.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-stringtable.lo `test -f '../woe32dll/c++write-stringtable.cc' || echo '$(srcdir)/'`../woe32dll/c++write-stringtable.cc
++
++libgettextsrc_la-c++write-catalog.lo: ../woe32dll/c++write-catalog.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-catalog.lo `test -f '../woe32dll/c++write-catalog.cc' || echo '$(srcdir)/'`../woe32dll/c++write-catalog.cc
++
++libgettextsrc_la-c++write-po.lo: ../woe32dll/c++write-po.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-po.lo `test -f '../woe32dll/c++write-po.cc' || echo '$(srcdir)/'`../woe32dll/c++write-po.cc
++
++libgettextsrc_la-c++write-properties.lo: ../woe32dll/c++write-properties.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-properties.lo `test -f '../woe32dll/c++write-properties.cc' || echo '$(srcdir)/'`../woe32dll/c++write-properties.cc
++
++libgettextsrc_la-c++write-stringtable.lo: ../woe32dll/c++write-stringtable.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-stringtable.lo `test -f '../woe32dll/c++write-stringtable.cc' || echo '$(srcdir)/'`../woe32dll/c++write-stringtable.cc
++
++libgettextsrc_la-c++write-catalog.lo: ../woe32dll/c++write-catalog.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-catalog.lo `test -f '../woe32dll/c++write-catalog.cc' || echo '$(srcdir)/'`../woe32dll/c++write-catalog.cc
++
++libgettextsrc_la-c++write-po.lo: ../woe32dll/c++write-po.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-po.lo `test -f '../woe32dll/c++write-po.cc' || echo '$(srcdir)/'`../woe32dll/c++write-po.cc
++
++libgettextsrc_la-c++write-properties.lo: ../woe32dll/c++write-properties.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-properties.lo `test -f '../woe32dll/c++write-properties.cc' || echo '$(srcdir)/'`../woe32dll/c++write-properties.cc
++
++libgettextsrc_la-c++write-stringtable.lo: ../woe32dll/c++write-stringtable.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-stringtable.lo `test -f '../woe32dll/c++write-stringtable.cc' || echo '$(srcdir)/'`../woe32dll/c++write-stringtable.cc
++
++libgettextsrc_la-c++write-catalog.lo: ../woe32dll/c++write-catalog.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-catalog.lo `test -f '../woe32dll/c++write-catalog.cc' || echo '$(srcdir)/'`../woe32dll/c++write-catalog.cc
++
++libgettextsrc_la-c++write-po.lo: ../woe32dll/c++write-po.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-po.lo `test -f '../woe32dll/c++write-po.cc' || echo '$(srcdir)/'`../woe32dll/c++write-po.cc
++
++libgettextsrc_la-c++write-properties.lo: ../woe32dll/c++write-properties.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-properties.lo `test -f '../woe32dll/c++write-properties.cc' || echo '$(srcdir)/'`../woe32dll/c++write-properties.cc
++
++libgettextsrc_la-c++write-stringtable.lo: ../woe32dll/c++write-stringtable.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-stringtable.lo `test -f '../woe32dll/c++write-stringtable.cc' || echo '$(srcdir)/'`../woe32dll/c++write-stringtable.cc
++
++libgettextsrc_la-c++write-catalog.lo: ../woe32dll/c++write-catalog.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-catalog.lo `test -f '../woe32dll/c++write-catalog.cc' || echo '$(srcdir)/'`../woe32dll/c++write-catalog.cc
++
++libgettextsrc_la-c++write-po.lo: ../woe32dll/c++write-po.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-po.lo `test -f '../woe32dll/c++write-po.cc' || echo '$(srcdir)/'`../woe32dll/c++write-po.cc
++
++libgettextsrc_la-c++write-properties.lo: ../woe32dll/c++write-properties.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-properties.lo `test -f '../woe32dll/c++write-properties.cc' || echo '$(srcdir)/'`../woe32dll/c++write-properties.cc
++
++libgettextsrc_la-c++write-stringtable.lo: ../woe32dll/c++write-stringtable.cc
++	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libgettextsrc_la-c++write-stringtable.lo `test -f '../woe32dll/c++write-stringtable.cc' || echo '$(srcdir)/'`../woe32dll/c++write-stringtable.cc
++
+ ../woe32dll/libgettextsrc_la-c++format.lo: ../woe32dll/c++format.cc
+ 	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgettextsrc_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ../woe32dll/libgettextsrc_la-c++format.lo `test -f '../woe32dll/c++format.cc' || echo '$(srcdir)/'`../woe32dll/c++format.cc
+ 
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++file-ostream.cc gettext-0.20.1/gettext-tools/woe32dll/c++file-ostream.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++file-ostream.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++file-ostream.cc	2019-08-19 23:50:25.258167800 -0700
+@@ -0,0 +1,2 @@
++#include "../gnulib-lib/file-ostream.c"
++
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++html-ostream.cc gettext-0.20.1/gettext-tools/woe32dll/c++html-ostream.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++html-ostream.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++html-ostream.cc	2019-08-19 23:50:25.269139200 -0700
+@@ -0,0 +1 @@
++#include "../gnulib-lib/html-ostream.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++styled-ostream.cc gettext-0.20.1/gettext-tools/woe32dll/c++styled-ostream.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++styled-ostream.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++styled-ostream.cc	2019-08-19 23:50:25.280109500 -0700
+@@ -0,0 +1 @@
++#include "../gnulib-lib/styled-ostream.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++term-ostream.cc gettext-0.20.1/gettext-tools/woe32dll/c++term-ostream.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++term-ostream.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++term-ostream.cc	2019-08-19 23:50:25.291079100 -0700
+@@ -0,0 +1 @@
++#include "../gnulib-lib/term-ostream.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-catalog.cc gettext-0.20.1/gettext-tools/woe32dll/c++write-catalog.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-catalog.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++write-catalog.cc	2019-08-19 23:50:25.301053700 -0700
+@@ -0,0 +1 @@
++#include "../src/write-catalog.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-po.cc gettext-0.20.1/gettext-tools/woe32dll/c++write-po.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-po.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++write-po.cc	2019-08-19 23:50:25.311100200 -0700
+@@ -0,0 +1 @@
++#include "../src/write-po.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-properties.cc gettext-0.20.1/gettext-tools/woe32dll/c++write-properties.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-properties.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++write-properties.cc	2019-08-19 23:50:25.321952800 -0700
+@@ -0,0 +1 @@
++#include "../src/write-properties.c"
+diff -ruN gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-stringtable.cc gettext-0.20.1/gettext-tools/woe32dll/c++write-stringtable.cc
+--- gettext-0.20.1.orig/gettext-tools/woe32dll/c++write-stringtable.cc	1969-12-31 16:00:00.000000000 -0800
++++ gettext-0.20.1/gettext-tools/woe32dll/c++write-stringtable.cc	2019-08-19 23:50:25.331926000 -0700
+@@ -0,0 +1 @@
++#include "../src/write-stringtable.c"

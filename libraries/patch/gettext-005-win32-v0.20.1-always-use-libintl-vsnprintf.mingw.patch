@@ -1,0 +1,12 @@
+diff -ruN gettext-0.20.1.orig/gettext-runtime/intl/printf.c gettext-0.20.1/gettext-runtime/intl/printf.c
+--- gettext-0.20.1.orig/gettext-runtime/intl/printf.c	2019-08-19 22:01:29.440093000 -0700
++++ gettext-0.20.1/gettext-runtime/intl/printf.c	2019-08-19 22:09:57.932501600 -0700
+@@ -218,7 +218,7 @@
+ libintl_vsnprintf (char *resultbuf, size_t length, const char *format, va_list args)
+ {
+ # if !USE_REPLACEMENT_CODE_ALWAYS
+-  if (strchr (format, '$') == NULL)
++  if (0 && (strchr (format, '$') == NULL))
+     return system_vsnprintf (resultbuf, length, format, args);
+   else
+ # endif
