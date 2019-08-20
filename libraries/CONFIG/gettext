@@ -1,7 +1,7 @@
 # Depends on:
 #  gcc-libs (libgcc, libstdc++?), libiconv
 # Optional depends:
-#  pthreads | pth, ncurses, termcap, bzip2, xz, expat | libxml2, libacl, libunistring
+#  pthreads | pth, ncurses, termcap, bzip2, xz, expat | libxml2, libacl, libunistring, libcroco
 
 # FIXME: needs built twice in order to link to internal libintl
 # FIXME: use "internal" libxml2
@@ -22,9 +22,17 @@ PRE_CONF=(
 )
 
 CONFIG_OPTS=(
+	--enable-relocatable
 	--disable-curses
+	--disable-java
+	--disable-native-java
+	--disable-csharp
+	--disable-openmp
 	--with-included-libxml
 	--with-included-regex
 	--with-included-libunistring
 	--without-xz
+	--without-emacs
+	--without-cvs
+	--without-git
 )
