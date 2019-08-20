@@ -7,6 +7,29 @@ ROOT_DIR="$(pwd)"
 LIBS_DIR="${ROOT_DIR}/libraries"
 cd "${LIBS_DIR}"
 
+if test ! -z $2; then
+	LIB_NAME=$1
+	LIB_VER=$2
+else
+	IFS='-' read -r -a IN <<< "$1"
+	LIB_NAME=${IN[0]}
+	if test ${#IN[@]} -gt 1; then
+		LIB_VER=${IN[1]}
+	fi
+fi
+
+if test -z "${LIB_NAME}"; then
+	echo -e "\nPlease supply library directory name (usually as <name>-<version>): ${SCRIPT_NAME} <directory>"
+	show_available_libs
+	exit 1
+fi
+
+if test ! -z "${LIB_VER}"; then
+	FULL_NAME="${LIB_NAME}-${LIB_VER}"
+else
+	FULL_NAME="${LIB_NAME}"
+fi
+
 AVAIL_CONFIGS=$(find "${LIBS_DIR}/" -mindepth 1 -maxdepth 1 -type f -name "CONFIG-*")
 if test -d "${LIBS_DIR}/CONFIG/"; then
 	AVAIL_CONFIGS+=$(find "${LIBS_DIR}/CONFIG/" -mindepth 1 -maxdepth 1 -type f)
@@ -24,15 +47,24 @@ function show_available_configs {
 	fi
 }
 
+FOUND_CONFIG=false
+CONFIG_PATH=
 function is_config_available {
-	local cfg=$1
-	if test -z "${cfg}"; then
+	local libname=$1
+	if test -z "${libname}"; then
 		echo -e "\nERROR: lib name not specified in is_config_available function"
 		return 1
 	fi
 
 	for CFG in ${AVAIL_CONFIGS}; do
-		if test "${cfg}" == "${CFG}"; then
+		if test "${libname}" == "${CFG}"; then
+			# get path to configuration file
+			if test -f "${LIBS_DIR}/CONFIG-${libname}"; then
+				CONFIG_PATH="${LIBS_DIR}/CONFIG-${libname}"
+			else
+				CONFIG_PATH="${LIBS_DIR}/CONFIG/${libname}"
+			fi
+
 			return 0
 		fi
 	done
@@ -70,27 +102,37 @@ function show_lib_options {
 		echo -e "\nERROR: Target directory not specified in show_lib_options function"
 		exit 1
 	fi
-	local lib_name=$(basename "${target_dir}")
+
+	local NAME="${LIB_NAME}"
+	local DIR_SRC="${LIBS_DIR}/source"
+	DIR_CONFIG_ROOT="${target_dir}"
+
+	if ${FOUND_CONFIG}; then
+		# check for custom config root
+		. "${CONFIG_PATH}"
+	fi
+
 	cd "${target_dir}"
-	if test -f "configure"; then
-		echo -e "\n${lib_name}: Found GNU Autotools configure script"
-		./configure --help
-	elif test -f "CMakeLists.txt"; then
-		echo -e "\n${lib_name}: Found CMake configuration"
+
+	if test -f "${DIR_CONFIG_ROOT}/configure"; then
+		echo -e "\n${NAME}: Found GNU Autotools configure script"
+		"${DIR_CONFIG_ROOT}/configure" --help
+	elif test -f "${DIR_CONFIG_ROOT}/CMakeLists.txt"; then
+		echo -e "\n${NAME}: Found CMake configuration"
 		tmp_dir="tmp-0000000001"
 		mkdir "${tmp_dir}"
 		cd "${tmp_dir}"
-		cmake ../ > /dev/null 2>&1
-		cmake -LA ../ | awk '{if(f)print} /-- Cache values/{f=1}'
+		cmake "${DIR_CONFIG_ROOT}" > /dev/null 2>&1
+		cmake -LA "${DIR_CONFIG_ROOT}" | awk '{if(f)print} /-- Cache values/{f=1}'
 		cd ../
 		rm -r "${tmp_dir}"
-	elif test -f "meson.build"; then
-		if test ! -f "meson_options.txt"; then
-			echo -e "\n${lib_name}: ERROR: Found Meson Build configuration, but \"meson_options.txt\" is missing"
+	elif test -f "${DIR_CONFIG_ROOT}/meson.build"; then
+		if test ! -f "${DIR_CONFIG_ROOT}/meson_options.txt"; then
+			echo -e "\n${NAME}: ERROR: Found Meson Build configuration, but \"meson_options.txt\" is missing"
 			exit 1
 		fi
-		echo -e "\n${lib_name}: Found Meson Build configuration"
-		cat "meson_options.txt"
+		echo -e "\n${NAME}: Found Meson Build configuration"
+		cat "${DIR_CONFIG_ROOT}/meson_options.txt"
 	else
 		echo -e "\nERROR: No recognizable configuration found in ${target_dir}"
 		exit 1
@@ -99,30 +141,6 @@ function show_lib_options {
 	cd "${LIBS_DIR}"
 }
 
-if test ! -z $2; then
-	LIB_NAME=$1
-	LIB_VER=$2
-else
-	IFS='-' read -r -a IN <<< "$1"
-	LIB_NAME=${IN[0]}
-	if test ${#IN[@]} -gt 1; then
-		LIB_VER=${IN[1]}
-	fi
-fi
-
-if test -z "${LIB_NAME}"; then
-	echo -e "\nPlease supply library directory name (usually as <name>-<version>): ${SCRIPT_NAME} <directory>"
-	show_available_libs
-	exit 1
-fi
-
-if test ! -z "${LIB_VER}"; then
-	FULL_NAME="${LIB_NAME}-${LIB_VER}"
-else
-	FULL_NAME="${LIB_NAME}"
-fi
-
-FOUND_CONFIG=false
 is_config_available "${LIB_NAME}"
 if test $? -eq 0; then
 	FOUND_CONFIG=true
