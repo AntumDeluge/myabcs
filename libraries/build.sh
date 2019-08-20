@@ -257,6 +257,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	REBUILD=false
 	CRLF_TO_LF=
 	PATCH_PRUNE_LEVEL=
+	DIR_CONFIG_ROOT=
 
 	# prepare values
 	DOWNLOAD_DONE=false
@@ -537,6 +538,10 @@ for NAME in ${BUILTIN_LIBS}; do
 				find ./ -type f -delete
 				find ./ -mindepth 1 -type d -empty -delete
 
+				if test -z "${DIR_CONFIG_ROOT}"; then
+					DIR_CONFIG_ROOT="${DIR_SRC}/${DNAME}"
+				fi
+
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
 					CONFIG_OPTS+=(--prefix="${INSTALL_PREFIX}")
@@ -549,7 +554,7 @@ for NAME in ${BUILTIN_LIBS}; do
 						CONFIG_OPTS+=(--enable-shared=no --enable-static=yes)
 					fi
 
-					"${DIR_SRC}/${DNAME}/configure" ${CONFIG_OPTS[@]}
+					"${DIR_CONFIG_ROOT}/configure" ${CONFIG_OPTS[@]}
 					if test $? -ne 0; then
 						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
 						exit 1
@@ -568,13 +573,13 @@ for NAME in ${BUILTIN_LIBS}; do
 						# add config options to config command
 						CMD_CONFIG+=(${CONFIG_OPTS[@]})
 						# add source directory as final argument in config command
-						CMD_CONFIG+=("${DIR_SRC}/${DNAME}")
+						CMD_CONFIG+=("${DIR_CONFIG_ROOT}")
 					fi
 
 					# common values for meson
 					echo "${CMD_CONFIG[0]}" | grep -q "meson$"
 					if test $? -eq 0; then
-						CMD_CONFIG+=(--prefix=${INSTALL_PREFIX} --buildtype=plain --default-library=static "${DIR_SRC}/${DNAME}")
+						CMD_CONFIG+=(--prefix=${INSTALL_PREFIX} --buildtype=plain --default-library=static "${DIR_CONFIG_ROOT}")
 					fi
 
 					# this is usually used for source that does not use build generators like GNU Autotools or CMake
