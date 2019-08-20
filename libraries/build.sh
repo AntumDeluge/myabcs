@@ -584,16 +584,26 @@ for NAME in ${BUILTIN_LIBS}; do
 							CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
 						fi
 
-						# add config options to config command
-						CMD_CONFIG+=(${CONFIG_OPTS[@]})
-						# add source directory as final argument in config command
-						CMD_CONFIG+=("${DIR_CONFIG_ROOT}")
+						# add config options to config command & source directory as final argument in config command
+						CMD_CONFIG+=(${CONFIG_OPTS[@]} "${DIR_CONFIG_ROOT}")
 					fi
 
 					# common values for meson
 					echo "${CMD_CONFIG[0]}" | grep -q "meson$"
 					if test $? -eq 0; then
-						CMD_CONFIG+=(--prefix=${INSTALL_PREFIX} --buildtype=plain --default-library=static "${DIR_CONFIG_ROOT}")
+						if test "${LIBTYPE_OPTS}" != "N/A"; then
+							if test -z "${LIBTYPE_OPTS}"; then
+								# defaults
+								LIBTYPE_OPTS=(--default-library=static)
+							fi
+						else
+							# make sure to LIBTYPE_OPTS is empty if set to "N/A"
+							unset LIBTYPE_OPTS
+						fi
+
+						# add default options
+						CONFIG_OPTS=(--prefix=${INSTALL_PREFIX} --buildtype=plain ${LIBTYPE_OPTS[@]} ${CONFIG_OPTS[@]})
+						CMD_CONFIG+=(${CONFIG_OPTS[@]} "${DIR_CONFIG_ROOT}")
 					fi
 
 					# this is usually used for source that does not use build generators like GNU Autotools or CMake
