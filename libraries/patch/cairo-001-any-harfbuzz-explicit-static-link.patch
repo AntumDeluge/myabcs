@@ -1,0 +1,24 @@
+diff -ruN cairo-1.16.0.orig/perf/Makefile.in cairo-1.16.0/perf/Makefile.in
+--- cairo-1.16.0.orig/perf/Makefile.in	2019-08-20 23:27:08.602307700 -0700
++++ cairo-1.16.0/perf/Makefile.in	2019-08-21 00:20:31.567185800 -0700
+@@ -581,7 +581,7 @@
+ LIBOBJS = @LIBOBJS@
+ LIBRSVG_CFLAGS = @LIBRSVG_CFLAGS@
+ LIBRSVG_LIBS = @LIBRSVG_LIBS@
+-LIBS = @LIBS@
++LIBS = @LIBS@ -l:libharfbuzz.a
+ LIBSPECTRE_CFLAGS = @LIBSPECTRE_CFLAGS@
+ LIBSPECTRE_LIBS = @LIBSPECTRE_LIBS@
+ LIBTOOL = @LIBTOOL@
+diff -ruN cairo-1.16.0.orig/test/Makefile.in cairo-1.16.0/test/Makefile.in
+--- cairo-1.16.0.orig/test/Makefile.in	2019-08-20 23:27:14.035161200 -0700
++++ cairo-1.16.0/test/Makefile.in	2019-08-20 23:28:21.246187400 -0700
+@@ -1211,7 +1211,7 @@
+ LIBOBJS = @LIBOBJS@
+ LIBRSVG_CFLAGS = @LIBRSVG_CFLAGS@
+ LIBRSVG_LIBS = @LIBRSVG_LIBS@
+-LIBS = @LIBS@
++LIBS = @LIBS@ -l:libharfbuzz.a
+ LIBSPECTRE_CFLAGS = @LIBSPECTRE_CFLAGS@
+ LIBSPECTRE_LIBS = @LIBSPECTRE_LIBS@
+ LIBTOOL = @LIBTOOL@
