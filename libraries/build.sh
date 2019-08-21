@@ -264,11 +264,6 @@ for NAME in ${BUILTIN_LIBS}; do
 	CMD_INSTALL=(${CMD_MAKE} install)
 	PRE_INSTALL=
 	POST_INSTALL=
-	CFLAGS=
-	CXXFLAGS=
-	CPPFLAGS=
-	LDFLAGS=
-	LIBS=
 	PRE_CONF=
 	EXCLUDE_EXTRACT=
 	LIBTYPE_OPTS=
@@ -276,6 +271,8 @@ for NAME in ${BUILTIN_LIBS}; do
 	CRLF_TO_LF=
 	PATCH_PRUNE_LEVEL=
 	DIR_CONFIG_ROOT=
+
+	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
 	# prepare values
 	DOWNLOAD_DONE=false
@@ -312,6 +309,11 @@ for NAME in ${BUILTIN_LIBS}; do
 			echo -e "\nERROR: malformed configuration, FNAME & SOURCE must be set: ${CFG}"
 			exit 1
 		fi
+	fi
+
+	is_array "${LIBS[@]}"
+	if test $? -eq 0; then
+		LIBS="${LIBS[@]}"
 	fi
 
 	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
