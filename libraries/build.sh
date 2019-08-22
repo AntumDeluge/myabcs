@@ -199,7 +199,7 @@ function prepare {
 	# TODO: build dependencies first
 
 	# TODO: change 'post'/'pre' commands to functions
-	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD CRLF_TO_LF
+	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD CRLF_TO_LF DEPENDS
 
 	# FIXME: this should be done in build function?
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
@@ -238,6 +238,17 @@ function prepare {
 			echo -e "\nERROR: malformed configuration, FNAME & SOURCE must be set: ${CFG}"
 			exit 1
 		fi
+	fi
+
+	# build dependencies first
+	if test ! -z "${DEPENDS}"; then
+		echo -e "\nBuilding dependencies for ${NAME_ORIG} ${VER}"
+
+		local dep_name
+		for dep_name in ${DEPENDS[@]}; do
+			prepare "${dep_name}"
+			build "${dep_name}"
+		done
 	fi
 
 	local FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
