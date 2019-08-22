@@ -209,9 +209,9 @@ function prepare {
 
 	local REBUILD=false
 
-	DOWNLOAD_DONE=false
-	EXTRACT_DONE=false
-	PREPARE_DONE=false
+	local DOWNLOAD_DONE=false
+	local EXTRACT_DONE=false
+	local PREPARE_DONE=false
 
 	# backup original name in case of rebuild
 	NAME_ORIG="${NAME}"
@@ -452,9 +452,9 @@ function build {
 		exit 1
 	fi
 
-	CONFIG_DONE=false
-	BUILD_DONE=false
-	INSTALL_DONE=false
+	local CONFIG_DONE=false
+	local BUILD_DONE=false
+	local INSTALL_DONE=false
 
 	is_array "${LIBS[@]}"
 	if test $? -eq 0; then
