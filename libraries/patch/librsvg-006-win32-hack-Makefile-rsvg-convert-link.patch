@@ -1,0 +1,12 @@
+diff -ruN librsvg-2.44.14.orig/Makefile.in librsvg-2.44.14/Makefile.in
+--- librsvg-2.44.14.orig/Makefile.in	2019-08-21 02:19:49.253997700 -0700
++++ librsvg-2.44.14/Makefile.in	2019-08-21 23:57:42.050671100 -0700
+@@ -1104,7 +1104,7 @@
+ 
+ rsvg-convert$(EXEEXT): $(rsvg_convert_OBJECTS) $(rsvg_convert_DEPENDENCIES) $(EXTRA_rsvg_convert_DEPENDENCIES) 
+ 	@rm -f rsvg-convert$(EXEEXT)
+-	$(AM_V_CCLD)$(rsvg_convert_LINK) $(rsvg_convert_OBJECTS) $(rsvg_convert_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(rsvg_convert_LINK) $(rsvg_convert_OBJECTS) $(rsvg_convert_LDADD) $(LIBS) target/release/librsvg_internals.a `pkg-config cairo pangocairo --libs --static` -lcroco-0.6 -lintl -liconv -luserenv
+ 
+ rsvg-view-3$(EXEEXT): $(rsvg_view_3_OBJECTS) $(rsvg_view_3_DEPENDENCIES) $(EXTRA_rsvg_view_3_DEPENDENCIES) 
+ 	@rm -f rsvg-view-3$(EXEEXT)
