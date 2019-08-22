@@ -1,5 +1,5 @@
 # Depends:
-#  pkg-config, glib
+#  pkg-config, glib, libintl (gettext)
 # Optional depends:
 #  gtk-doc
 
