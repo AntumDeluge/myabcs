@@ -1,5 +1,5 @@
 # Depends on:
-#  pkg-config
+#  pkg-config, libintl (gettext)
 # Optional depends
 #  zlib, libpng, bzip2, harfbuzz
 
