@@ -23,12 +23,15 @@ if ${OS_WIN}; then
 
 	unset EPOCH NOX_DNAME NOX_FNAME
 	PATCH_PRUNE_LEVEL=2
-	PRE_CONF=(
-		"libtoolize -v -f -i -c"
-		"cp ${INSTALL_PREFIX}/share/aclocal/xorg-macros.m4 m4/"
-		"autoconf -v -f"
-		"autoheader -v -f"
-		"aclocal --verbose --force --install -I m4 -I ${INSTALL_PREFIX}/share/aclocal"
-		"automake -v -f -a -c")
+
+	pre_cfg() {
+		libtoolize -v -f -i -c
+		cp "${INSTALL_PREFIX}/share/aclocal/xorg-macros.m4" "m4/"
+		autoconf -v -f
+		autoheader -v -f
+		aclocal --verbose --force --install -I "m4" -I "${INSTALL_PREFIX}/share/aclocal"
+		automake -v -f -a -c
+	}
+
 	POST_INSTALL=("cp -v ${INSTALL_PREFIX}/lib/${NAME}-noX.a ${INSTALL_PREFIX}/lib/${NAME}.a")
 fi

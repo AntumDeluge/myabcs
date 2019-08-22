@@ -16,10 +16,10 @@ SOURCE="https://ftp.gnu.org/pub/gnu/gettext/${FNAME}"
 CPPFLAGS="-DLIBXML_STATIC"
 
 export WANT_AUTOMAKE=latest
-PRE_CONF=(
-	"libtoolize --automake --copy --force"
-	"./autogen.sh --skip-gnulib"
-)
+pre_cfg() {
+	libtoolize --automake --copy --force
+	./autogen.sh --skip-gnulib
+}
 
 CONFIG_OPTS=(
 	--enable-relocatable

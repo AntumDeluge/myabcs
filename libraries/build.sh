@@ -206,7 +206,7 @@ function prepare {
 	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
-	unset pre_dl post_dl post_config
+	unset pre_dl post_dl pre_cfg post_cfg
 
 	local REBUILD=false
 
@@ -497,6 +497,12 @@ function build {
 					DIR_CONFIG_ROOT="${DIR_SRC}/${DNAME}"
 				fi
 
+				# pre-configuration operations
+				if test ! -z "$(type -t pre_cfg)" && test "$(type -t pre_cfg)" == "function"; then
+					echo -e "\nRunning pre-config commands"
+					pre_cfg
+				fi
+
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
 					CONFIG_OPTS+=(--prefix="${INSTALL_PREFIX}")
@@ -575,9 +581,10 @@ function build {
 					fi
 				fi
 
-				if test ! -z "$(type -t post_config)" && test "$(type -t post_config)" == "function"; then
+				# post-configuration operations
+				if test ! -z "$(type -t post_cfg)" && test "$(type -t post_cfg)" == "function"; then
 					echo -e "\nRunning post-config commands"
-					post_config
+					post_cfg
 				fi
 
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
