@@ -274,6 +274,9 @@ for NAME in ${BUILTIN_LIBS}; do
 
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
+	# reset functions that can be defined in config files
+	unset post_config
+
 	# prepare values
 	DOWNLOAD_DONE=false
 	EXTRACT_DONE=false
@@ -638,6 +641,11 @@ for NAME in ${BUILTIN_LIBS}; do
 							exit 1
 						fi
 					fi
+				fi
+
+				if test ! -z "$(type -t post_config)" && test "$(type -t post_config)" == "function"; then
+					echo -e "\nRunning post-config commands"
+					post_config
 				fi
 
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
