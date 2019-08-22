@@ -134,7 +134,7 @@ function show_lib_options {
 		echo -e "\n${NAME}: Found Meson Build configuration"
 		cat "${DIR_CONFIG_ROOT}/meson_options.txt"
 	else
-		echo -e "\nERROR: No recognizable configuration found in ${target_dir}"
+		echo -e "\nERROR: No recognizable configuration found\nTry deleting the directory \"${target_dir}\" & run again"
 		exit 1
 	fi
 
