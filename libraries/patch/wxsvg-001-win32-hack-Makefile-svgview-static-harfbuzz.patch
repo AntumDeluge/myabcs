@@ -1,0 +1,12 @@
+diff -ruN wxsvg-1.5.20.orig/svgview/Makefile.in wxsvg-1.5.20/svgview/Makefile.in
+--- wxsvg-1.5.20.orig/svgview/Makefile.in	2019-08-22 04:39:16.229367400 -0700
++++ wxsvg-1.5.20/svgview/Makefile.in	2019-08-22 04:43:07.148634800 -0700
+@@ -411,7 +411,7 @@
+ 
+ svgview$(EXEEXT): $(svgview_OBJECTS) $(svgview_DEPENDENCIES) $(EXTRA_svgview_DEPENDENCIES) 
+ 	@rm -f svgview$(EXEEXT)
+-	$(AM_V_CXXLD)$(CXXLINK) $(svgview_OBJECTS) $(svgview_LDADD) $(LIBS)
++	$(AM_V_CXXLD)$(CXXLINK) $(svgview_OBJECTS) $(svgview_LDADD) $(LIBS) -l:libharfbuzz.a
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
