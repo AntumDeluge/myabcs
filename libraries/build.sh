@@ -199,14 +199,14 @@ function prepare {
 	# TODO: build dependencies first
 
 	# TODO: change 'post'/'pre' commands to functions
-	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD PRE_DOWNLOAD POST_DOWNLOAD PRE_EXTRACT POST_EXTRACT CRLF_TO_LF
+	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD PRE_EXTRACT POST_EXTRACT CRLF_TO_LF
 
 	# FIXME: this should be done in build function?
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
 	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
-	unset post_config
+	unset pre_dl post_dl post_config
 
 	local REBUILD=false
 
@@ -266,14 +266,10 @@ function prepare {
 		if ${DOWNLOAD_DONE}; then
 			echo "Not re-downloading sources for ${NAME_ORIG} ${VER}"
 		else
-			if test ! -z "${PRE_DOWNLOAD}"; then
-				for pre_cmd in "${PRE_DOWNLOAD[@]}"; do
-					${pre_cmd}
-					if test $? -ne 0; then
-						echo -e "\nAn error occurred during pre-download command: ${pre_cmd}"
-						exit 1
-					fi
-				done
+			# pre-download operations
+			if test ! -z "$(type -t pre_dl)" && test "$(type -t pre_dl)" == "function"; then
+				echo -e "\nRunning pre-download commands"
+				pre_dl
 			fi
 
 			if test ! -z "${CMD_DOWNLOAD}"; then
@@ -294,14 +290,10 @@ function prepare {
 				exit ${dl_ret}
 			fi
 
-			if test ! -z "${POST_DOWNLOAD}"; then
-				for post_cmd in "${POST_DOWNLOAD[@]}"; do
-					${post_cmd}
-					if test $? -ne 0; then
-						echo -e "\nAn error occurred during post-download command: ${post_cmd}"
-						exit 1
-					fi
-				done
+			# post-download operations
+			if test ! -z "$(type -t post_dl)" && test "$(type -t post_dl)" == "function"; then
+				echo -e "\nRunning pre-download commands"
+				post_dl
 			fi
 
 			echo "DOWNLOAD_DONE=true" >> "${FILE_LIB_PREPARE}"

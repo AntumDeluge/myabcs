@@ -11,12 +11,16 @@ if ${OS_WIN}; then
 	EPOCH="1"
 	NOX_DNAME="${NAME}-noX-${VER}-${EPOCH}.src"
 	NOX_FNAME="${NAME}-noX-${VER}-${EPOCH}-src.tar.xz"
-	PRE_DOWNLOAD=(
-		"${WGET} -nc http://cygwin.osuosl.org/x86/release/${NAME}-noX/${NOX_FNAME}"
-		"${TAR} --strip=1 -xf ${NOX_FNAME} ${NOX_DNAME}/${FNAME}")
-	POST_DOWNLOAD=(
-		"mkdir -p ${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
-		"${TAR} --strip=1 --wildcards -C ${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER} -xf ${NOX_FNAME} ${NOX_DNAME}/*.patch")
+
+	pre_dl() {
+		"${WGET}" -nc "http://cygwin.osuosl.org/x86/release/${NAME}-noX/${NOX_FNAME}"
+		"${TAR}" --strip=1 -xf "${NOX_FNAME} ${NOX_DNAME}/${FNAME}"
+	}
+	post_dl() {
+		mkdir -p "${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
+		"${TAR}" --strip=1 --wildcards -C "${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}" -xf "${NOX_FNAME} ${NOX_DNAME}/*.patch"
+	}
+
 	unset EPOCH NOX_DNAME NOX_FNAME
 	PATCH_PRUNE_LEVEL=2
 	PRE_CONF=(

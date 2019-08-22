@@ -11,9 +11,10 @@ CONFIG_OPTS=(--disable-install-examples)
 PATCH_VER="001"
 PATCH_DIR="${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
 PATCH_PRUNE_LEVEL=0
-POST_DOWNLOAD=(
-	"mkdir -p ${PATCH_DIR}"
-	"${WGET} -nc -P ${PATCH_DIR} ${URL}/${NAME}-${VER}-patches/${NAME}$(echo ${VER} | sed -s 's|\.||')-${PATCH_VER}"
-)
+
+post_dl() {
+	mkdir -p "${PATCH_DIR}"
+	"${WGET}" -nc -P "${PATCH_DIR}" "${URL}/${NAME}-${VER}-patches/${NAME}$(echo ${VER} | sed -s 's|\.||')-${PATCH_VER}"
+}
 
 unset PATCH_VER PATCH_DIR URL
