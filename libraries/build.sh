@@ -206,7 +206,7 @@ function prepare {
 	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
-	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg
+	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg pre_build post_build
 
 	local REBUILD=false
 
@@ -582,11 +582,23 @@ function build {
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
+			# pre-build operations
+			if test ! -z "$(type -t pre_build)" && test "$(type -t pre_build)" == "function"; then
+				echo -e "\nRunning pre-build commands"
+				pre_build
+			fi
+
 			echo -e "\nBuilding ${NAME} ${VER} ..."
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
 				exit 1
+			fi
+
+			# post-build operations
+			if test ! -z "$(type -t post_build)" && test "$(type -t post_build)" == "function"; then
+				echo -e "\nRunning post-build commands"
+				post_build
 			fi
 
 			echo "BUILD_DONE=true" >> "${FILE_LIB_INSTALL}"
