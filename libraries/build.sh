@@ -199,14 +199,14 @@ function prepare {
 	# TODO: build dependencies first
 
 	# TODO: change 'post'/'pre' commands to functions
-	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD PRE_EXTRACT POST_EXTRACT CRLF_TO_LF
+	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD CRLF_TO_LF
 
 	# FIXME: this should be done in build function?
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
 	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
-	unset pre_dl post_dl pre_cfg post_cfg
+	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg
 
 	local REBUILD=false
 
@@ -311,14 +311,10 @@ function prepare {
 				rm -rf "${DIR_SRC}/${DNAME}"
 			fi
 
-			if test ! -z "${PRE_EXTRACT}"; then
-				for pre_cmd in "${PRE_EXTRACT[@]}"; do
-					${pre_cmd}
-					if test $? -ne 0; then
-						echo -e "\nAn error occurred during pre-extract command: ${pre_cmd}"
-						exit 1
-					fi
-				done
+			# pre-extract operations
+			if test ! -z "$(type -t pre_extract)" && test "$(type -t pre_extract)" == "function"; then
+				echo -e "\nRunning pre-extract commands"
+				pre_extract
 			fi
 
 			if test ! -z "${CMD_EXTRACT}"; then
@@ -340,14 +336,10 @@ function prepare {
 				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
-			if test ! -z "${POST_EXTRACT}"; then
-				for post_cmd in "${POST_EXTRACT[@]}"; do
-					${post_cmd}
-					if test $? -ne 0; then
-						echo -e "\nAn error occurred during post-extract command: ${post_cmd}"
-						exit 1
-					fi
-				done
+			# post-extract operations
+			if test ! -z "$(type -t post_extract)" && test "$(type -t post_extract)" == "function"; then
+				echo -e "\nRunning post-extract commands"
+				post_extract
 			fi
 
 			# FIXME: how to do this in POST_EXTRACT?

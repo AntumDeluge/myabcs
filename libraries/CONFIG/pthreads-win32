@@ -7,8 +7,11 @@ EXTRACT_NAME="${NAME_SHORT}.${VER%%.*}"
 # FIXME: how to recursively extract single directory or recursively exclude directories
 CMD_EXTRACT=("${UNZIP}" -qqo "${FNAME}")
 # remove extra extracted directories & files, & convert Windows CRLF to Unix LF
-POST_EXTRACT=("rm -rf Pre-built.${VER%%.*} QueueUserAPCEx/")
 CRLF_TO_LF=(GNUmakefile)
 CMD_CONFIG=(copy)
 CMD_BUILD=(make GCE-inlined)
 CMD_INSTALL=(make install DESTDIR="${INSTALL_PREFIX}")
+
+post_extract() {
+	rm -rf "Pre-built.${VER%%.*}" "QueueUserAPCEx/"
+}
