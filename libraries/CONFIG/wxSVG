@@ -7,5 +7,10 @@ VER="1.5.20"
 DNAME="wxsvg-${VER}"
 FNAME="${DNAME}.tar.bz2"
 SOURCE="https://downloads.sourceforge.net/sourceforge/wxsvg/wxsvg/${VER}/${FNAME}"
-CONFIG_OPTS=(--with-wx-prefix=${INSTALL_PREFIX} --with-wx-exec-prefix="${INSTALL_PREFIX}" \
---with-wx-config=${INSTALL_PREFIX}/bin/wx-config --enable-libav=no)
+
+CONFIG_OPTS=(
+	--with-wx-prefix="${INSTALL_PREFIX}"
+	--with-wx-exec-prefix="${INSTALL_PREFIX}"
+	--with-wx-config="${INSTALL_PREFIX}/bin/wx-config"
+	--enable-libav=no
+)
