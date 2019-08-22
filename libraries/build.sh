@@ -178,66 +178,17 @@ function extract_archive {
 	return ${ret}
 }
 
-# TODO: possible optional libs/utils to add
-#	Utils:
-#	Libs:
-#		zstd, jsoncpp, md4c, libjasper
-#	Utils+Libs:
-#		curl, xcb
 
-if test ! -z "${INCLUDE_OPTIONAL}" && test ${INCLUDE_OPTIONAL} -gt 0; then
-	INCLUDE_OPTIONAL=true
-else
-	INCLUDE_OPTIONAL=false
-fi
+function prepare {
+	local NAME=$1
+	if test -z "${NAME}"; then
+		echo -e "\nError in prepare function, NAME not set"
+		exit 1
+	fi
 
-OPTIONAL_NO_DEPENDS="libtool nasm pth termcap"
-if ${OS_WIN}; then
-	OPTIONAL_NO_DEPENDS+=" winpthreads"
-fi
-
-NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg xorg-util-macros gperf"
-if ${INCLUDE_OPTIONAL}; then
-	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
-fi
-
-if test ! -z "${BUILD_LIBS}"; then
-	BUILTIN_LIBS="${BUILD_LIBS}"
-else
-	# currently unused
-	OPTIONAL_LIBS="ghostscript libarchive libunistring readline libcroco"
-	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
-	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
-
-	# FIXME: having trouble building the following libs/utils
-	#	gettext, ncurses
-
-	# library names in build order
-	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libXpm libiconv libiconv-intl libpng xz libxml2 \
-libjpeg-turbo jbigkit libtiff lcms2 libexif freetype harfbuzz freetype-hb fontconfig pcre \
-glib-reb pixman openjpeg poppler libvorbis libflac SDL2 libmpg123 SDL2_mixer gdk-pixbuf cairo \
-pango librsvg libspectre wxWidgets wxSVG"
-fi
-
-if test ! -z "${NO_BUILD_LIBS}"; then
-	for L in ${NO_BUILD_LIBS}; do
-		BUILTIN_LIBS=$(echo "${BUILTIN_LIBS}" | sed -e "s|${L}||g")
-	done
-fi
-
-# verbose make
-export VERBOSE=1
-
-if test -z "${CMD_MAKE}"; then
-	CMD_MAKE="make"
-fi
-
-for NAME in ${BUILTIN_LIBS}; do
-	echo -e "\nProcessing ${NAME} ..."
-
-	CFG="${DIR_LIBS}/CONFIG/${NAME}"
+	local CFG="${DIR_LIBS}/CONFIG/${NAME}"
 	if test ! -f "${CFG}"; then
-		CFG="${DIR_LIBS}/CONFIG-${NAME}"
+		local CFG="${DIR_LIBS}/CONFIG-${NAME}"
 	fi
 
 	if test ! -f "${CFG}"; then
@@ -245,46 +196,23 @@ for NAME in ${BUILTIN_LIBS}; do
 		exit 1
 	fi
 
-	# unset values imported from configuration
-	VER=
-	DNAME=
-	FNAME=
-	SOURCE=
-	CONFIG_OPTS=
-	EXTRACT_NAME=
-	CMD_DOWNLOAD=
-	PRE_DOWNLOAD=
-	POST_DOWNLOAD=
-	CMD_EXTRACT=
-	PRE_EXTRACT=
-	POST_EXTRACT=
-	CMD_CONFIG=
-	CMD_BUILD=(${CMD_MAKE})
-	CMD_INSTALL=(${CMD_MAKE} install)
-	PRE_INSTALL=
-	POST_INSTALL=
-	PRE_CONF=
-	EXCLUDE_EXTRACT=
-	LIBTYPE_OPTS=
-	REBUILD=false
-	CRLF_TO_LF=
-	PATCH_PRUNE_LEVEL=
-	DIR_CONFIG_ROOT=
+	# TODO: build dependencies first
 
-	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
+	# TODO: change 'post'/'pre' commands to functions
+	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD PRE_DOWNLOAD POST_DOWNLOAD PRE_EXTRACT POST_EXTRACT CRLF_TO_LF
+
+	# FIXME: this should be done in build function?
+	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
+	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
 	unset post_config
 
-	# prepare values
+	local REBUILD=false
+
 	DOWNLOAD_DONE=false
 	EXTRACT_DONE=false
 	PREPARE_DONE=false
-
-	# build values
-	CONFIG_DONE=false
-	BUILD_DONE=false
-	INSTALL_DONE=false
 
 	# backup original name in case of rebuild
 	NAME_ORIG="${NAME}"
@@ -296,7 +224,7 @@ for NAME in ${BUILTIN_LIBS}; do
 	# detect rebuild
 	if test "${NAME_ORIG}" != "${NAME}"; then
 		echo -e "\nDoing re-build of ${NAME} ${VER}"
-		REBUILD=true
+		local REBUILD=true
 	fi
 
 	# check values imported from configuration
@@ -313,27 +241,10 @@ for NAME in ${BUILTIN_LIBS}; do
 		fi
 	fi
 
-	is_array "${LIBS[@]}"
-	if test $? -eq 0; then
-		LIBS="${LIBS[@]}"
-	fi
+	local FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
 
-	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
-	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
-	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
-
-	LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
-	FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
-	FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
-
-	# prevents re-extract
 	if test -f "${FILE_LIB_PREPARE}"; then
 		. "${FILE_LIB_PREPARE}"
-	fi
-
-	# prevents re-build/re-install
-	if test -f "${FILE_LIB_INSTALL}"; then
-		. "${FILE_LIB_INSTALL}"
 	fi
 
 	if ${REBUILD} && ! ${PREPARE_DONE}; then
@@ -537,11 +448,41 @@ for NAME in ${BUILTIN_LIBS}; do
 			continue
 		fi
 	fi
+}
+
+
+function build {
+	local NAME=$1
+	if test -z "${NAME}"; then
+		echo -e "\nError in build function, NAME not set"
+		exit 1
+	fi
+
+	CONFIG_DONE=false
+	BUILD_DONE=false
+	INSTALL_DONE=false
+
+	is_array "${LIBS[@]}"
+	if test $? -eq 0; then
+		LIBS="${LIBS[@]}"
+	fi
+
+	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
+	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
+	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
+
+	local LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
+	local FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
+
+	# prevents re-build/re-install
+	if test -f "${FILE_LIB_INSTALL}"; then
+		. "${FILE_LIB_INSTALL}"
+	fi
 
 	if ${INSTALL_DONE}; then
 		echo "Using previous install of ${NAME_ORIG} ${VER}"
 	else
-		DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
+		local DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
 			echo "Not re-building ${NAME_ORIG} ${VER}"
 		else
@@ -554,7 +495,7 @@ for NAME in ${BUILTIN_LIBS}; do
 			if ${CONFIG_DONE}; then
 				echo "Not re-configuring ${NAME_ORIG} ${VER}"
 			else
-				echo "Configuring ${NAME_ORIG} ${VER} ..."
+				echo -e "\nConfiguring ${NAME_ORIG} ${VER} ..."
 
 				# remove old cache if CONFIG_DONE == false
 				find ./ -type f -delete
@@ -650,8 +591,7 @@ for NAME in ${BUILTIN_LIBS}; do
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
-			echo "Building ${NAME} ${VER} ..."
-
+			echo -e "\nBuilding ${NAME} ${VER} ..."
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
 				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
@@ -681,6 +621,7 @@ for NAME in ${BUILTIN_LIBS}; do
 			done
 		fi
 
+		echo -e "\nInstalling ${NAME_ORIG} ${VER}"
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
 			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
@@ -702,4 +643,66 @@ for NAME in ${BUILTIN_LIBS}; do
 
 		cd "${DIR_LIBS}"
 	fi
+}
+
+
+# TODO: possible optional libs/utils to add
+#	Utils:
+#	Libs:
+#		zstd, jsoncpp, md4c, libjasper
+#	Utils+Libs:
+#		curl, xcb
+
+if test ! -z "${INCLUDE_OPTIONAL}" && test ${INCLUDE_OPTIONAL} -gt 0; then
+	INCLUDE_OPTIONAL=true
+else
+	INCLUDE_OPTIONAL=false
+fi
+
+OPTIONAL_NO_DEPENDS="libtool nasm pth termcap"
+if ${OS_WIN}; then
+	OPTIONAL_NO_DEPENDS+=" winpthreads"
+fi
+
+NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg xorg-util-macros gperf"
+if ${INCLUDE_OPTIONAL}; then
+	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
+fi
+
+if test ! -z "${BUILD_LIBS}"; then
+	BUILTIN_LIBS="${BUILD_LIBS}"
+else
+	# currently unused
+	OPTIONAL_LIBS="ghostscript libarchive libunistring readline libcroco"
+	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
+	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
+
+	# FIXME: having trouble building the following libs/utils
+	#	gettext, ncurses
+
+	# library names in build order
+	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libXpm libiconv libiconv-intl libpng xz libxml2 \
+libjpeg-turbo jbigkit libtiff lcms2 libexif freetype harfbuzz freetype-hb fontconfig pcre \
+glib-reb pixman openjpeg poppler libvorbis libflac SDL2 libmpg123 SDL2_mixer gdk-pixbuf cairo \
+pango librsvg libspectre wxWidgets wxSVG"
+fi
+
+if test ! -z "${NO_BUILD_LIBS}"; then
+	for L in ${NO_BUILD_LIBS}; do
+		BUILTIN_LIBS=$(echo "${BUILTIN_LIBS}" | sed -e "s|${L}||g")
+	done
+fi
+
+# verbose make
+export VERBOSE=1
+
+if test -z "${CMD_MAKE}"; then
+	CMD_MAKE="make"
+fi
+
+for NAME in ${BUILTIN_LIBS}; do
+	echo -e "\nProcessing ${NAME} ..."
+
+	prepare "${NAME}"
+	build "${NAME}"
 done
