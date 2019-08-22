@@ -33,5 +33,7 @@ if ${OS_WIN}; then
 		automake -v -f -a -c
 	}
 
-	POST_INSTALL=("cp -v ${INSTALL_PREFIX}/lib/${NAME}-noX.a ${INSTALL_PREFIX}/lib/${NAME}.a")
+	post_install() {
+		cp -v "${INSTALL_PREFIX}/lib/${NAME}-noX.a" "${INSTALL_PREFIX}/lib/${NAME}.a"
+	}
 fi

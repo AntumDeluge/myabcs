@@ -203,10 +203,9 @@ function prepare {
 
 	# FIXME: this should be done in build function?
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
-	unset PRE_INSTALL POST_INSTALL
 
 	# reset functions that can be defined in config files
-	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg pre_build post_build
+	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg pre_build post_build pre_install post_install
 
 	local REBUILD=false
 
@@ -614,14 +613,10 @@ function build {
 
 		# TODO: strip executables & shared libs
 
-		if test ! -z "${PRE_INSTALL}"; then
-			for pre_cmd in "${PRE_INSTALL[@]}"; do
-				${pre_cmd}
-				if test $? -ne 0; then
-					echo -e "\nAn error occurred during pre-install command: ${pre_cmd}"
-					exit 1
-				fi
-			done
+		# pre-install operations
+		if test ! -z "$(type -t pre_install)" && test "$(type -t pre_install)" == "function"; then
+			echo -e "\nRunning pre-install commands"
+			pre_install
 		fi
 
 		echo -e "\nInstalling ${NAME_ORIG} ${VER}"
@@ -631,14 +626,10 @@ function build {
 			exit 1
 		fi
 
-		if test ! -z "${POST_INSTALL}"; then
-			for post_cmd in "${POST_INSTALL[@]}"; do
-				${post_cmd}
-				if test $? -ne 0; then
-					echo -e "\nAn error occurred during post-install command: ${post_cmd}"
-					exit 1
-				fi
-			done
+		# post-install operations
+		if test ! -z "$(type -t post_install)" && test "$(type -t post_install)" == "function"; then
+			echo -e "\nRunning post-install commands"
+			post_install
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
