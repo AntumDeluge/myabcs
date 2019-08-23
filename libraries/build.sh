@@ -200,11 +200,23 @@ function prepare {
 
 	# TODO: build dependencies first
 
-	# TODO: change 'post'/'pre' commands to functions
-	unset VER DNAME FNAME SOURCE CMD_DOWNLOAD CRLF_TO_LF DEPENDS
+	# reset main values
+	local DEPENDS
+	unset VER DNAME FNAME EXTRACT_NAME SOURCE
 
-	# FIXME: this should be done in build function?
-	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CMD_CONFIG CONFIG_OPTS DIR_CONFIG_ROOT LIBTYPE_OPTS
+	# reset directories
+	unset DIR_CONFIG_ROOT
+
+	# reset options
+	local PATCH_PRUNE_LEVEL CRLF_TO_LF
+	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CONFIG_OPTS LIBTYPE_OPTS EXCLUDE_EXTRACT
+
+	# reset commands
+	CMD_BUILD=(${CMD_MAKE})
+	CMD_INSTALL=(${CMD_MAKE} install)
+
+	local CMD_DOWNLOAD CMD_EXTRACT
+	unset CMD_CONFIG
 
 	# reset functions that can be defined in config files
 	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg pre_build post_build pre_install post_install
