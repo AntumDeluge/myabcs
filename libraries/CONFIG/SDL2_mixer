@@ -3,6 +3,8 @@
 # Optional depends:
 #  libogg, libvorbis, libflac, mpg123, fluidsynth, modplug, mikmod, timidity, mp3mad, libopusfile (libopus)
 
+DEPENDS=(SDL2)
+
 VER="2.0.4"
 DNAME="${NAME}-${VER}"
 if ${OS_WIN}; then
