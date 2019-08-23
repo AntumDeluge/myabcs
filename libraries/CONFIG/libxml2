@@ -5,6 +5,8 @@
 # Unsure depends:
 #  libintl (gettext)
 
+DEPENDS=(pkg-config zlib)
+
 VER="2.9.9"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
