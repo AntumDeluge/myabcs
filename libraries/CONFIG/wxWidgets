@@ -1,14 +1,16 @@
 # Depends:
 #  pkg-config
 # Optional depends:
-#  libtool, qt5, libiconv, zlib, liblzma (xz), expat, libpng, libjpeg (libjpeg-turbo), libtiff, libjbig, libxpm, libmspack, SDL2, cairo
-# Unsure optional depends:
-#  directfb, pangoxft, pangoft2, Xinerama, Xxf86vm, libnotify, webkit
+#  libtool, qt5, libiconv, zlib, liblzma (xz), expat, libpng, libjpeg (libjpeg-turbo), libtiff,
+#  libjbig, libxpm, libmspack, SDL2, cairo, libsecret, webkit, xtst, libnotify, gnomevfs,
+#  gtkprint, gst, mesagl, glu, gl, sm, directfb, pangoxft, pangoft2, Xinerama, Xxf86vm, xmkmf
 #
 # Notes:
 #  - libtool required for autoreconf command
 # TODO:
 #  - disable everything not used by MyABCs
+
+DEPENDS=(cairo)
 
 VER="3.1.2"
 DNAME="${NAME}-${VER}"
