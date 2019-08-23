@@ -122,11 +122,11 @@ install-x11: data/resource/x11/myabcs.desktop data/resource/logo/myabcs.svg
 	chmod +x "$${exe}";
 
 build-libs:
-	@if test -z "$(BUILD_LIBS)"; then \
+	@CMD_MAKE=$(MAKE); \
+	export CMD_MAKE NO_BUILD_LIBS; \
+	if test -z "$(BUILD_LIBS)"; then \
 		libraries/build.sh "$(BUILD_STRING)"; \
 	else \
-    	CMD_MAKE=$(MAKE); \
-    	export CMD_MAKE NO_BUILD_LIBS; \
     	libraries/build.sh "$(BUILD_STRING)" $(BUILD_LIBS); \
 	fi;
 
