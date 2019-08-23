@@ -1,6 +1,8 @@
 # Optional depends:
 #  pkg-config, jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
 
+DEPENDS(pkg-config)
+
 VER="2.0.10"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
