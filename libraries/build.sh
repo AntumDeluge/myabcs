@@ -182,7 +182,7 @@ function extract_archive {
 
 
 function prepare {
-	local NAME=$1
+	local NAME="$1"
 	if test -z "${NAME}"; then
 		echo -e "\nError in prepare function, NAME not set"
 		exit 1
@@ -216,11 +216,13 @@ function prepare {
 	local PREPARE_DONE=false
 
 	# backup original name in case of rebuild
-	NAME_ORIG="${NAME}"
+	local NAME_ORIG="${NAME}"
 
 	# import configuration
-	echo "Using configuration: ${CFG}"
 	. "${CFG}"
+
+	echo -e "\nPreparing ${NAME_ORIG} ${VER}"
+	echo "Using configuration: ${CFG}"
 
 	# detect rebuild
 	if test "${NAME_ORIG}" != "${NAME}"; then
@@ -249,7 +251,6 @@ function prepare {
 		local dep_name
 		for dep_name in ${DEPENDS[@]}; do
 			prepare "${dep_name}"
-			build "${dep_name}"
 		done
 	fi
 
@@ -297,7 +298,7 @@ function prepare {
 			fi
 
 			if test ${dl_ret} -ne 0; then
-				echo -e "\nAn error occured while downloading ${NAME_ORIG} ${VER}"
+				echo -e "\nAn error occurred while downloading ${NAME_ORIG} ${VER}"
 				exit ${dl_ret}
 			fi
 
@@ -437,16 +438,16 @@ function prepare {
 		cd "${DIR_LIBS}"
 		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
 		echo -e "\nFinished preparing ${NAME_ORIG} ${VER}"
+	fi
 
-		if ${PREPARE_ONLY}; then
-			continue
-		fi
+	if ! ${PREPARE_ONLY}; then
+		build "${NAME_ORIG}"
 	fi
 }
 
 
 function build {
-	local NAME=$1
+	local NAME="$1"
 	if test -z "${NAME}"; then
 		echo -e "\nError in build function, NAME not set"
 		exit 1
@@ -465,7 +466,7 @@ function build {
 	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
 	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
-	local LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
+	local LIB_BUILD="${NAME}-${VER}-${BUILD}"
 	local FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
 
 	# prevents re-build/re-install
@@ -474,11 +475,11 @@ function build {
 	fi
 
 	if ${INSTALL_DONE}; then
-		echo "Using previous install of ${NAME_ORIG} ${VER}"
+		echo "Using previous install of ${NAME} ${VER}"
 	else
 		local DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
-			echo "Not re-building ${NAME_ORIG} ${VER}"
+			echo "Not re-building ${NAME} ${VER}"
 		else
 			if test ! -d "${DIR_LIB_BUILD}"; then
 				mkdir -p "${DIR_LIB_BUILD}"
@@ -487,9 +488,9 @@ function build {
 			cd "${DIR_LIB_BUILD}"
 
 			if ${CONFIG_DONE}; then
-				echo "Not re-configuring ${NAME_ORIG} ${VER}"
+				echo "Not re-configuring ${NAME} ${VER}"
 			else
-				echo -e "\nConfiguring ${NAME_ORIG} ${VER} ..."
+				echo -e "\nConfiguring ${NAME} ${VER} ..."
 
 				# remove old cache if CONFIG_DONE == false
 				find ./ -type f -delete
@@ -519,7 +520,7 @@ function build {
 
 					"${DIR_CONFIG_ROOT}/configure" ${CONFIG_OPTS[@]}
 					if test $? -ne 0; then
-						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
+						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
 						exit 1
 					fi
 				else
@@ -592,16 +593,16 @@ function build {
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
+			echo -e "\nBuilding ${NAME} ${VER} ..."
 			# pre-build operations
 			if test ! -z "$(type -t pre_build)" && test "$(type -t pre_build)" == "function"; then
 				echo -e "\nRunning pre-build commands"
 				pre_build
 			fi
 
-			echo -e "\nBuilding ${NAME} ${VER} ..."
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
-				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
+				echo -e "\nAn error occurred while building ${NAME} ${VER}"
 				exit 1
 			fi
 
@@ -630,10 +631,10 @@ function build {
 			pre_install
 		fi
 
-		echo -e "\nInstalling ${NAME_ORIG} ${VER}"
+		echo -e "\nInstalling ${NAME} ${VER}"
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
-			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
+			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
 			exit 1
 		fi
 
@@ -644,7 +645,7 @@ function build {
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
-		echo -e "\nFinished processing ${NAME_ORIG} ${VER}"
+		echo -e "\nFinished processing ${NAME} ${VER}"
 
 		cd "${DIR_LIBS}"
 	fi
@@ -707,7 +708,5 @@ fi
 
 for NAME in ${BUILTIN_LIBS}; do
 	echo -e "\nProcessing ${NAME} ..."
-
 	prepare "${NAME}"
-	build "${NAME}"
 done
