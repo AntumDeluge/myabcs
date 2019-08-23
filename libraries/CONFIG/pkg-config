@@ -1,3 +1,4 @@
+
 # Depends:
 #  glib
 # Unsure depends:
@@ -7,10 +8,13 @@
 #  - configure script utilizes `cmp` command found in diffutils package
 #  - can optionally use built-in glib with "--use-internal-glib"
 
+DEPENDS=(glib)
+
 VER="0.29.2"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://pkgconfig.freedesktop.org/releases/${FNAME}"
+
 export GLIB_CFLAGS="-I${INSTALL_PREFIX}/include/glib-2.0 -pthread -I${INSTALL_PREFIX}/lib/glib-2.0/include -mms-bitfields"
 export GLIB_LIBS="-lglib-2.0 -pthread"
 if ${OS_WIN}; then
