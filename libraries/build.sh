@@ -257,7 +257,7 @@ function prepare {
 	fi
 
 	# build dependencies first
-	if test ! -z "${DEPENDS}"; then
+	if ! ${PREPARE_ONLY} && test ! -z "${DEPENDS}"; then
 		echo -e "\nBuilding dependencies for ${NAME_ORIG} ${VER}"
 
 		local dep_name
