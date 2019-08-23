@@ -1,6 +1,8 @@
 # Depends:
 #  termcap | ncurses
 
+DEPENDS=(termcap)
+
 VER="8.0"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
