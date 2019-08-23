@@ -4,10 +4,10 @@
 
 
 BUILD=$1
-EXTRACT_ONLY=false
+PREPARE_ONLY=false
 if test ! -z $2; then
 	if test "$2" == "extract"; then
-		EXTRACT_ONLY=true
+		PREPARE_ONLY=true
 		BUILD_LIBS="${@:3}"
 	else
 		BUILD_LIBS="${@:2}"
@@ -19,7 +19,9 @@ if test -z "${BUILD}"; then
 	exit 1
 fi
 
-echo -e "\nBuilding libraries for: ${BUILD}"
+if ! ${PREPARE_ONLY}; then
+	echo -e "\nBuilding libraries for: ${BUILD}"
+fi
 
 DIR_LIBS="`dirname $0`"
 cd "${DIR_LIBS}"
@@ -265,8 +267,7 @@ function prepare {
 
 	if ${PREPARE_DONE}; then
 		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
-		# FIXME: rename to "PREPARE_ONLY"
-		if ${EXTRACT_ONLY}; then
+		if ${PREPARE_ONLY}; then
 			continue
 		fi
 	else
@@ -437,8 +438,7 @@ function prepare {
 		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
 		echo -e "\nFinished preparing ${NAME_ORIG} ${VER}"
 
-		# FIXME: rename to "PREPARE_ONLY"
-		if ${EXTRACT_ONLY}; then
+		if ${PREPARE_ONLY}; then
 			continue
 		fi
 	fi
