@@ -450,7 +450,7 @@ prepare() (
 	fi
 
 	if ! ${PREPARE_ONLY}; then
-		build "${NAME}"
+		build "${NAME_ORIG}"
 		local ret=$?
 		if test ${ret} -ne 0; then
 			return ${ret}
@@ -513,7 +513,7 @@ build() (
 	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
 	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
-	local LIB_BUILD="${NAME}-${VER}-${BUILD}"
+	local LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
 	local FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
 
 	# prevents re-build/re-install
