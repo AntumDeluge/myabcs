@@ -49,8 +49,7 @@ stage: $(EXE) LICENSE.txt
 		done; \
 	done; \
 	# X11 desktop files \
-	if test $(OS_WIN) -gt 0; \
-	then \
+	if ! $(OS_WIN); then \
 		echo "Installing X11 files ..."; \
 		make install-x11; \
 	fi;
@@ -134,8 +133,7 @@ install: stage
 
 uninstall:
 	@target_dir="$(DESTDIR)$(PREFIX)"; \
-	if test $(OS_WIN) -gt 0; \
-	then \
+	if $(OS_WIN); then \
 		data_dir="$${target_dir}/share/myabcs"; \
 		rm -vf "$${target_dir}/bin/myabcs" "$${target_dir}/share/pixmaps/myabcs.svg" "$${target_dir}/share/applications/myabcs.desktop"; \
 	else \

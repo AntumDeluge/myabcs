@@ -54,9 +54,9 @@ Environment variables:\n\
 
 ### Environment ###
 
-OS_WIN=0
+OS_WIN = false
 ifeq ($(OS), Windows_NT)
-	OS_WIN=1
+	OS_WIN = true
 	STAGEDIR = build/stage
 	ifndef DESTDIR
 		DESTDIR = $(STAGEDIR)
