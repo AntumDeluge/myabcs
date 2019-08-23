@@ -1,9 +1,13 @@
 # Depends on:
 #  gettext, libiconv
 # Optional depends
-#  libmount (util-linux), pcre
+#  libmount (util-linux), pcre, pthreads
 
 # Update available (not compatible with current patches): 2.61.2
+
+if ${OS_WIN}; then
+	DEPENDS=(winpthreads)
+fi
 
 VER="2.60.4"
 DNAME="${NAME}-${VER}"
