@@ -269,7 +269,7 @@ function prepare {
 	if ${PREPARE_DONE}; then
 		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
 		if ${PREPARE_ONLY}; then
-			continue
+			return
 		fi
 	else
 		cd "${DIR_SRC}"
