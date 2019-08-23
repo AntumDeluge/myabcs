@@ -718,7 +718,7 @@ if test -z "${CMD_MAKE}"; then
 	CMD_MAKE="make"
 fi
 
-for NAME in ${BUILTIN_LIBS}; do
+for NAME in ${BUILTIN_LIBS[@]}; do
 	echo -e "\nProcessing ${NAME} ..."
 	prepare "${NAME}"
 done
