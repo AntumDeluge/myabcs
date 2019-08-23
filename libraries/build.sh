@@ -181,7 +181,7 @@ function extract_archive {
 }
 
 
-function prepare {
+prepare() (
 	local NAME="$1"
 	if test -z "${NAME}"; then
 		echo -e "\nError in prepare function, NAME not set"
@@ -211,7 +211,7 @@ function prepare {
 	local CMD_DOWNLOAD CMD_EXTRACT
 
 	# reset functions that can be defined in config files
-	local pre_dl post_dl pre_extract post_extract
+	unset pre_dl post_dl pre_extract post_extract
 
 	local REBUILD=false
 
@@ -225,9 +225,6 @@ function prepare {
 
 	# import configuration
 	. "${CFG}"
-
-	echo -e "\nPreparing ${NAME_ORIG} ${VER}"
-	echo "Using configuration: ${CFG}"
 
 	# detect rebuild
 	if test "${NAME_ORIG}" != "${NAME}"; then
@@ -256,8 +253,15 @@ function prepare {
 		local dep_name
 		for dep_name in ${DEPENDS[@]}; do
 			prepare "${dep_name}"
+			local ret=$?
+			if test ${ret} -ne 0; then
+				return ${ret}
+			fi
 		done
 	fi
+
+	echo -e "\nPreparing ${NAME_ORIG} ${VER}"
+	echo "Using configuration: ${CFG}"
 
 	local FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
 
@@ -447,11 +451,15 @@ function prepare {
 
 	if ! ${PREPARE_ONLY}; then
 		build "${NAME}"
+		local ret=$?
+		if test ${ret} -ne 0; then
+			return ${ret}
+		fi
 	fi
-}
+)
 
 
-function build {
+build() (
 	local NAME="$1"
 	if test -z "${NAME}"; then
 		echo -e "\nError in build function, NAME not set"
@@ -483,7 +491,7 @@ function build {
 	local CMD_INSTALL=(${CMD_MAKE} install)
 
 	# reset functions that can be defined in config files
-	local pre_cfg post_cfg pre_build post_build pre_install post_install
+	unset pre_cfg post_cfg pre_build post_build pre_install post_install
 
 	# reset status
 	local CONFIG_DONE=false
@@ -688,7 +696,7 @@ function build {
 
 		cd "${DIR_LIBS}"
 	fi
-}
+)
 
 
 # NOTES:
@@ -726,4 +734,9 @@ fi
 for NAME in ${BUILTIN_LIBS[@]}; do
 	echo -e "\nProcessing ${NAME} ..."
 	prepare "${NAME}"
+	ret=$?
+	if test ${ret} -ne 0; then
+		echo -e "\nExiting with errors"
+		exit ${ret}
+	fi
 done
