@@ -15,4 +15,6 @@ SOURCE="http://xmlsoft.org/sources/${FNAME}"
 CONFIG_OPTS=(
 	--without-python
 	--without-debug
+	--without-lzma
+	--without-iconv
 )
