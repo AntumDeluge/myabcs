@@ -77,6 +77,8 @@ else
 	BUILD_STRING=$(shell echo "$$(uname -s | tr A-Z a-z)-$$(uname -m)")
 endif
 
+LIB_PREFIX="libraries/libprefix-$(BUILD_STRING)"
+
 BINDIR = $(DESTDIR)/bin
 INCLDIR = $(DESTDIR)/include
 LIBDIR = $(DESTDIR)/lib
@@ -86,13 +88,13 @@ LIBDIR = $(DESTDIR)/lib
 CPPFLAGS += -Iinclude
 ifdef USE_BUILTIN
 	ifneq ("$(USE_BUILTIN)", "0")
-		CPPFLAGS += -Ilibraries/libprefix-$(BUILD_STRING)/include
-		LDFLAGS += -Llibraries/libprefix-$(BUILD_STRING)/lib
+		CPPFLAGS += -I$(LIB_PREFIX)/include
+		LDFLAGS += -L$(LIB_PREFIX)/lib
 		ifndef WXCONFIG
-			WXCONFIG = libraries/libprefix-$(BUILD_STRING)/bin/wx-config
+			WXCONFIG = $(LIB_PREFIX)/bin/wx-config
 		endif
 		ifndef SDLCONFIG
-			SDLCONFIG = libraries/libprefix-$(BUILD_STRING)/bin/sdl2-config
+			SDLCONFIG = $(LIB_PREFIX)/bin/sdl2-config
 		endif
 	endif
 endif
