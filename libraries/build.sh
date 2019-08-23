@@ -691,45 +691,23 @@ function build {
 }
 
 
-# TODO: possible optional libs/utils to add
-#	Utils:
-#	Libs:
-#		zstd, jsoncpp, md4c, libjasper
-#	Utils+Libs:
-#		curl, xcb
-
-if test ! -z "${INCLUDE_OPTIONAL}" && test ${INCLUDE_OPTIONAL} -gt 0; then
-	INCLUDE_OPTIONAL=true
-else
-	INCLUDE_OPTIONAL=false
-fi
-
-OPTIONAL_NO_DEPENDS="libtool nasm pth termcap"
-if ${OS_WIN}; then
-	OPTIONAL_NO_DEPENDS+=" winpthreads"
-fi
-
-NO_DEPENDS="zlib bzip2 expat graphite2 libffi libogg xorg-util-macros gperf"
-if ${INCLUDE_OPTIONAL}; then
-	NO_DEPENDS="${OPTIONAL_NO_DEPENDS} ${NO_DEPENDS}"
-fi
+# NOTES:
+#
+# May need to add configs for the following libs/utils
+#	jsoncpp, md4c, libjasper, curl, xcb, rust
+#
+# The following libs/utils have trouble building
+#	gettext, ncurses
+#
+# The following libs/utils have minimal or no dependencies
+#	zlib, bzip2, expat, graphite2, libffi, libogg, xorg-util-macros,
+#	gperf, libtool, nasm, pth, termcap, winpthreads, pthreads-win32
 
 if test ! -z "${BUILD_LIBS}"; then
 	BUILTIN_LIBS="${BUILD_LIBS}"
 else
-	# currently unused
-	OPTIONAL_LIBS="ghostscript libarchive libunistring readline libcroco"
-	OPTIONAL_NO_DEPENDS_UTILS="patch m4"
-	OPTIONAL_UTILS="${OPTIONAL_NO_DEPENDS_UTILS} cmake diffutils groff"
-
-	# FIXME: having trouble building the following libs/utils
-	#	gettext, ncurses
-
-	# library names in build order
-	BUILTIN_LIBS="glib pkg-config ${NO_DEPENDS} libXpm libiconv libiconv-intl libpng xz libxml2 \
-libjpeg-turbo jbigkit libtiff lcms2 libexif freetype harfbuzz freetype-hb fontconfig pcre \
-glib-reb pixman openjpeg poppler libvorbis libflac SDL2 libmpg123 SDL2_mixer gdk-pixbuf cairo \
-pango librsvg libspectre wxWidgets wxSVG"
+	# base libs in build order
+	BUILTIN_LIBS=(SDL2_mixer wxSVG)
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then
