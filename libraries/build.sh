@@ -309,7 +309,7 @@ function prepare {
 
 			# post-download operations
 			if test ! -z "$(type -t post_dl)" && test "$(type -t post_dl)" == "function"; then
-				echo -e "\nRunning pre-download commands"
+				echo -e "\nRunning post-download commands"
 				post_dl
 			fi
 
