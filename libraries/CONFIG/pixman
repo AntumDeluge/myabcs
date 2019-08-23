@@ -1,7 +1,10 @@
+
 # Depends:
 #  pkg-config, libintl (gettext)
 # Optional depends:
 #  gtk, libpng
+
+DEPENDS=(pkg-config)
 
 VER="0.38.4"
 DNAME="${NAME}-${VER}"
