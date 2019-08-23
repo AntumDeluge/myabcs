@@ -198,31 +198,24 @@ function prepare {
 		exit 1
 	fi
 
-	# TODO: build dependencies first
-
 	# reset main values
-	local DEPENDS
-	unset VER DNAME FNAME EXTRACT_NAME SOURCE
+	local VER DNAME FNAME EXTRACT_NAME SOURCE DEPENDS
 
-	# reset directories
-	unset DIR_CONFIG_ROOT
+	# only set this here for use in list_options.sh script
+	local DIR_CONFIG_ROOT
 
 	# reset options
-	local PATCH_PRUNE_LEVEL CRLF_TO_LF
-	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CONFIG_OPTS LIBTYPE_OPTS EXCLUDE_EXTRACT
+	local PATCH_PRUNE_LEVEL CRLF_TO_LF EXCLUDE_EXTRACT
 
 	# reset commands
-	CMD_BUILD=(${CMD_MAKE})
-	CMD_INSTALL=(${CMD_MAKE} install)
-
 	local CMD_DOWNLOAD CMD_EXTRACT
-	unset CMD_CONFIG
 
 	# reset functions that can be defined in config files
-	unset pre_dl post_dl pre_extract post_extract pre_cfg post_cfg pre_build post_build pre_install post_install
+	local pre_dl post_dl pre_extract post_extract
 
 	local REBUILD=false
 
+	# reset status
 	local DOWNLOAD_DONE=false
 	local EXTRACT_DONE=false
 	local PREPARE_DONE=false
@@ -453,7 +446,7 @@ function prepare {
 	fi
 
 	if ! ${PREPARE_ONLY}; then
-		build "${NAME_ORIG}"
+		build "${NAME}"
 	fi
 }
 
@@ -465,9 +458,43 @@ function build {
 		exit 1
 	fi
 
+	local CFG="${DIR_LIBS}/CONFIG/${NAME}"
+	if test ! -f "${CFG}"; then
+		local CFG="${DIR_LIBS}/CONFIG-${NAME}"
+	fi
+
+	if test ! -f "${CFG}"; then
+		echo -e "\nERROR: configuration not found:\n  ${DIR_LIBS}/CONFIG/${NAME}: not found\n  ${CFG}: not found"
+		exit 1
+	fi
+
+	# reset main values
+	local VER DNAME
+
+	# reset directories
+	local DIR_CONFIG_ROOT
+
+	# reset options
+	local CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CONFIG_OPTS LIBTYPE_OPTS
+
+	# reset commands
+	local CMD_CONFIG
+	local CMD_BUILD=(${CMD_MAKE})
+	local CMD_INSTALL=(${CMD_MAKE} install)
+
+	# reset functions that can be defined in config files
+	local pre_cfg post_cfg pre_build post_build pre_install post_install
+
+	# reset status
 	local CONFIG_DONE=false
 	local BUILD_DONE=false
 	local INSTALL_DONE=false
+
+	# backup original name in case of rebuild
+	local NAME_ORIG="${NAME}"
+
+	# import configuration
+	. "${CFG}"
 
 	is_array "${LIBS[@]}"
 	if test $? -eq 0; then
@@ -487,11 +514,11 @@ function build {
 	fi
 
 	if ${INSTALL_DONE}; then
-		echo "Using previous install of ${NAME} ${VER}"
+		echo "Using previous install of ${NAME_ORIG} ${VER}"
 	else
 		local DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
 		if ${BUILD_DONE}; then
-			echo "Not re-building ${NAME} ${VER}"
+			echo "Not re-building ${NAME_ORIG} ${VER}"
 		else
 			if test ! -d "${DIR_LIB_BUILD}"; then
 				mkdir -p "${DIR_LIB_BUILD}"
@@ -500,9 +527,9 @@ function build {
 			cd "${DIR_LIB_BUILD}"
 
 			if ${CONFIG_DONE}; then
-				echo "Not re-configuring ${NAME} ${VER}"
+				echo "Not re-configuring ${NAME_ORIG} ${VER}"
 			else
-				echo -e "\nConfiguring ${NAME} ${VER} ..."
+				echo -e "\nConfiguring ${NAME_ORIG} ${VER} ..."
 
 				# remove old cache if CONFIG_DONE == false
 				find ./ -type f -delete
@@ -532,7 +559,7 @@ function build {
 
 					"${DIR_CONFIG_ROOT}/configure" ${CONFIG_OPTS[@]}
 					if test $? -ne 0; then
-						echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
 						exit 1
 					fi
 				else
@@ -590,7 +617,7 @@ function build {
 					else
 						"${CMD_CONFIG[@]}"
 						if test $? -ne 0; then
-							echo -e "\nAn error occurred while configuring ${NAME} ${VER}"
+							echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
 							exit 1
 						fi
 					fi
@@ -605,7 +632,7 @@ function build {
 				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
 			fi
 
-			echo -e "\nBuilding ${NAME} ${VER} ..."
+			echo -e "\nBuilding ${NAME_ORIG} ${VER} ..."
 			# pre-build operations
 			if test ! -z "$(type -t pre_build)" && test "$(type -t pre_build)" == "function"; then
 				echo -e "\nRunning pre-build commands"
@@ -614,7 +641,7 @@ function build {
 
 			"${CMD_BUILD[@]}"
 			if test $? -ne 0; then
-				echo -e "\nAn error occurred while building ${NAME} ${VER}"
+				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
 				exit 1
 			fi
 
@@ -643,10 +670,10 @@ function build {
 			pre_install
 		fi
 
-		echo -e "\nInstalling ${NAME} ${VER}"
+		echo -e "\nInstalling ${NAME_ORIG} ${VER}"
 		"${CMD_INSTALL[@]}"
 		if test $? -ne 0; then
-			echo -e "\nAn error occurred while installing ${NAME} ${VER}"
+			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
 			exit 1
 		fi
 
@@ -657,7 +684,7 @@ function build {
 		fi
 
 		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
-		echo -e "\nFinished processing ${NAME} ${VER}"
+		echo -e "\nFinished processing ${NAME_ORIG} ${VER}"
 
 		cd "${DIR_LIBS}"
 	fi
