@@ -357,12 +357,6 @@ prepare() (
 				mv "${EXTRACT_NAME}" "${DNAME}"
 			fi
 
-			# post-extract operations
-			if test ! -z "$(type -t post_extract)" && test "$(type -t post_extract)" == "function"; then
-				echo -e "\nRunning post-extract commands"
-				post_extract
-			fi
-
 			# FIXME: how to do this in POST_EXTRACT?
 			if test ! -z "${CRLF_TO_LF}"; then
 				for F in ${CRLF_TO_LF[@]}; do
@@ -426,16 +420,10 @@ prepare() (
 				esac
 			done
 
-			if test ! -z "${PRE_CONF}"; then
-				echo "Preparing source ..."
-				for pre_cmd in "${PRE_CONF[@]}"; do
-					${pre_cmd}
-					ret=$?
-					if test ${ret} -ne 0; then
-						echo -e "\nAn error occurred during pre-config command: ${pre_cmd}"
-						exit ${ret}
-					fi
-				done
+			# post-extract operations
+			if test ! -z "$(type -t post_extract)" && test "$(type -t post_extract)" == "function"; then
+				echo -e "\nRunning post-extract commands"
+				post_extract
 			fi
 
 			# don't append redundantly to file
