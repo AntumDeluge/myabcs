@@ -5,10 +5,10 @@
 #  xcb, xlib (X11), CoreGraphics, ghostscript, fontconfig, poppler, libspectre, pthreads-w32 | winpthreads
 #  gtk-doc, valgrind, qt, gobject
 
-DEPENDS=(pixman)
-#if ${OS_WIN}; then
-#	DEPENDS+=(winpthreads)
-#fi
+DEPENDS=(freetype-reb pixman)
+if ${OS_WIN}; then
+	DEPENDS+=(winpthreads)
+fi
 
 VER="1.16.0"
 DNAME="${NAME}-${VER}"
