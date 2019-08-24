@@ -4,6 +4,6 @@ FNAME="${DNAME}.tar.gz"
 SOURCE="https://sourceware.org/pub/bzip2/${FNAME}"
 LIBTYPE_OPTS=(--enable-shared=no)
 
-pre_cfg() {
+post_extract() {
 	autoreconf -fiv
 }
