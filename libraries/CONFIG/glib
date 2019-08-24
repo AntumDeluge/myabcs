@@ -1,12 +1,16 @@
 # Depends on:
-#  gettext, libiconv
+#  gettext, libiconv, libffi
 # Optional depends
 #  libmount (util-linux), pcre, pthreads
 
 # Update available (not compatible with current patches): 2.61.2
 
+# FIXME:
+#  - linking to libintl (required?)
+
+DEPENDS=(libffi)
 if ${OS_WIN}; then
-	DEPENDS=(winpthreads)
+	DEPENDS+=(winpthreads)
 fi
 
 VER="2.60.4"
