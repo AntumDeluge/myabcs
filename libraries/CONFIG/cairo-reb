@@ -1,0 +1,10 @@
+# rebuild of cairo
+
+# FIXME: not recognizing librsvg
+
+NAME="cairo"
+. "CONFIG/${NAME}"
+
+DEPENDS=(librsvg)
+
+CONFIG_OPTS=($(echo "${CONFIG_OPTS[@]}" | sed -e 's|enable-svg=no|enable-svg=yes|'))

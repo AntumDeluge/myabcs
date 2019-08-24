@@ -20,4 +20,6 @@ CONFIG_OPTS=(
 	--disable-valgrind
 	--disable-gobject
 	--enable-pthread
+	--enable-png=yes
+	--enable-svg=no
 )
