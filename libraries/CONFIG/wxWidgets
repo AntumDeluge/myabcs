@@ -10,7 +10,7 @@
 # TODO:
 #  - disable everything not used by MyABCs
 
-DEPENDS=(cairo)
+DEPENDS=(cairo-reb)
 
 VER="3.1.2"
 DNAME="${NAME}-${VER}"
