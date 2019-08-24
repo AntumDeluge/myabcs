@@ -16,7 +16,7 @@ SOURCE="https://ftp.gnu.org/pub/gnu/gettext/${FNAME}"
 CPPFLAGS="-DLIBXML_STATIC"
 
 export WANT_AUTOMAKE=latest
-pre_cfg() {
+post_extract() {
 	libtoolize --automake --copy --force
 	./autogen.sh --skip-gnulib
 }

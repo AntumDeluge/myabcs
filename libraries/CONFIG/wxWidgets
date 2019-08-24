@@ -38,6 +38,6 @@ else
 fi
 LIBTYPE_OPTS=(--enable-shared=no)
 
-#pre_cfg() {
+#post_extract() {
 #	autoreconf -fiv
 #}

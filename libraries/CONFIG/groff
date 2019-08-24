@@ -15,6 +15,6 @@ LIBTYPE_OPTS="N/A"
 CFLAGS="-fpermissive"
 CXXFLAGS="${CFLAGS}"
 
-pre_cfg() {
+post_extract() {
 	autoreconf -fvi -I m4
 }

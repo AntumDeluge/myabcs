@@ -24,7 +24,7 @@ if ${OS_WIN}; then
 	unset EPOCH NOX_DNAME NOX_FNAME
 	PATCH_PRUNE_LEVEL=2
 
-	pre_cfg() {
+	post_extract() {
 		libtoolize -v -f -i -c
 		cp "${INSTALL_PREFIX}/share/aclocal/xorg-macros.m4" "m4/"
 		autoconf -v -f
