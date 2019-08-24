@@ -3,7 +3,7 @@
 # Optional depends:
 #  libav (ffmpeg)
 
-DEPENDS=(wxWidgets)
+DEPENDS=(libexif wxWidgets)
 
 VER="1.5.20"
 DNAME="wxsvg-${VER}"
