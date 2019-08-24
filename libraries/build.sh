@@ -728,3 +728,12 @@ for NAME in ${BUILTIN_LIBS[@]}; do
 		exit ${ret}
 	fi
 done
+
+# unnecessary directories
+NOUSE_DIRS=("share/doc" "share/man")
+for DIR in ${NOUSE_DIRS[@]}; do
+	if test -d "${INSTALL_PREFIX}/${DIR}"; then
+		echo -e "\nRemoving unused dir: ${DIR}"
+		rm -rf "${INSTALL_PREFIX}/${DIR}"
+	fi
+done
