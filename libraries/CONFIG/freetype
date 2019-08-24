@@ -7,4 +7,11 @@ VER="2.10.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
 SOURCE="https://download.savannah.gnu.org/releases/freetype/${FNAME}"
-CONFIG_OPTS=(--enable-freetype-config --with-zlib=yes --with-bzip2=yes --with-png=yes --with-harfbuzz=no)
+
+CONFIG_OPTS=(
+	--enable-freetype-config
+	--with-zlib=yes
+	--with-bzip2=yes
+	--with-png=yes
+	--with-harfbuzz=no
+)
