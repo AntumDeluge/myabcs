@@ -50,7 +50,12 @@ Environment variables:\n\
 \tUSE_BUILTIN\tSet to non-zero to link to built-in libs. Only works if\n\
 \t\t\tlibraries previously built with $(t_hilight)build-libs$(t_normal) target called.\n\
 \tWXCONFIG\tUse a custom $(t_hilight)wx-config$(t_normal)\n\
-\tSDLCONFIG\tUse a custom $(t_hilight)sdl2-config$(t_normal)"
+\tSDLCONFIG\tUse a custom $(t_hilight)sdl2-config$(t_normal)\n\
+\tAFORMAT=format\tConvert audio to $(t_hilight)format$(t_normal) in $(t_hilight)pack/install$(t_normal) target (requires\n\
+\t\t\t$(t_hilight)ffmpeg$(t_normal)). Leave this value unset to install lossless .flac audio files.\n\
+\t\t\tSupported formats:\n\
+\t\t\t  - vorbis / ogg / oga\n\
+\t\t\t  - mp3"
 
 ### Environment ###
 

@@ -32,13 +32,25 @@ stage: $(EXE) LICENSE.txt
 		target_dir="$${data_dir}/$${DIR}"; \
 		mkdir -p "$${target_dir}"; \
 		for SND in $$(find "$${DIR}" -maxdepth 1 -type f -name "*.flac"); do \
-			if test "${VORBIS}"; then \
-				target_ogg="$${target_dir}/$$(basename $${SND} | sed -e 's|\.flac|\.oga|')"; \
-				echo "'$${SND}' -> '$${target_ogg}'"; \
-				err=$$(ffmpeg -hide_banner -y -i "$${SND}" -c:a libvorbis -b:a 96k -ar 44100 "$${target_ogg}" 2>&1 > /dev/null); \
+			if test ! -z "$(AFORMAT)"; then \
+				if test "$(AFORMAT)" == "vorbis" || test "$(AFORMAT)" == "ogg" || test "$(AFORMAT)" == "oga"; then \
+					audio_codec="libvorbis"; \
+					audio_ext="oga"; \
+					audio_bitrate="96k"; \
+				elif test "$(AFORMAT)" == "mp3"; then \
+					audio_codec="libmp3lame"; \
+					audio_ext="mp3"; \
+					audio_bitrate="128k"; \
+				else \
+					echo "Unknown audio format: $(AFORMAT)"; \
+					exit 1; \
+				fi; \
+				audio_target=$${target_dir}/$$(basename $${SND} | sed -e "s|\.flac|\.$${audio_ext}|"); \
+				echo "'$${SND}' -> '$${audio_target}'"; \
+				err=$$(ffmpeg -hide_banner -y -i "$${SND}" -c:a $${audio_codec} -b:a $${audio_bitrate} -ar 44100 "$${audio_target}" 2>&1 > /dev/null); \
 				err_id=$$?; \
 				if test $${err_id} -ne 0; then \
-					echo -e "\nError converting FLAC to Vorbis data. Is FFmpeg installed?"; \
+					echo -e "\nError converting FLAC to $(AFORMAT) data. Is FFmpeg installed?"; \
 					echo -e "\nCommand output:\n$${err}\n"; \
 					exit $${err_id}; \
 				fi; \
