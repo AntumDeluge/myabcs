@@ -5,6 +5,8 @@
 # Unsure optional depends:
 #  uniscribe, directwrite
 
+DEPENDS=(fontconfig)
+
 VER="2.5.3"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
@@ -12,7 +14,7 @@ SOURCE="https://www.freedesktop.org/software/harfbuzz/release/${FNAME}"
 
 CONFIG_OPTS=(
 	--with-cairo=no
-	--with-fontconfig=no
+	--with-fontconfig=yes
 	--with-freetype=yes
 )
 
