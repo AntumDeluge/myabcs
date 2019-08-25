@@ -15,6 +15,7 @@
 DEPENDS=(cairo-reb)
 
 VER="3.1.2"
+VER_BASE="${VER%.*}"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.bz2"
 SOURCE="https://github.com/wxWidgets/wxWidgets/releases/download/v${VER}/${FNAME}"
@@ -48,3 +49,9 @@ fi
 #post_extract() {
 #	autoreconf -fiv
 #}
+
+if ${OS_WIN}; then
+	post_install() {
+		mv -v "${INSTALL_PREFIX}/bin/wxrc-${VER_BASE}" "${INSTALL_PREFIX}/bin/wxrc-${VER_BASE}.exe"
+	}
+fi
