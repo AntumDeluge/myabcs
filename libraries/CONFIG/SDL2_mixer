@@ -3,7 +3,7 @@
 # Optional depends:
 #  libogg, libvorbis, libflac, mpg123, fluidsynth, modplug, mikmod, timidity, mp3mad, libopusfile (libopus)
 
-DEPENDS=(SDL2)
+DEPENDS=(SDL2 libvorbis libflac libmpg123)
 
 VER="2.0.4"
 DNAME="${NAME}-${VER}"
@@ -24,6 +24,7 @@ CONFIG_OPTS=(
 	--with-sdl-prefix="${INSTALL_PREFIX}"
 	--with-sdl-exec-prefix="${INSTALL_PREFIX}"
 )
+
 if ${OS_WIN}; then
 	# mpg123 needs to link to libshlwapi on Windows
 	CONFIG_OPTS+=(
