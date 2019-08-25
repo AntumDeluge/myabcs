@@ -1,0 +1,8 @@
+
+DEPENDS=(cmake)
+
+VER="0.3.4"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.gz"
+SOURCE="https://github.com/mity/${NAME}/archive/release-${VER}.tar.gz"
+CMD_CONFIG=(cmake)
