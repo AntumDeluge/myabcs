@@ -35,7 +35,10 @@ CONFIG_OPTS=(
 
 if ${OS_WIN}; then
 	CONFIG_OPTS+=(--with-msw)
-	LIBTYPE_OPTS=(--enable-shared=yes)
+	LIBTYPE_OPTS=(
+		--enable-shared=yes
+		--enable-monolithic
+	)
 else
 	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 	CONFIG_OPTS+=(--disable-mdi)
