@@ -246,6 +246,7 @@ prepare() (
 		fi
 	fi
 
+	# FIXME: do this in build function
 	# build dependencies first
 	if ! ${PREPARE_ONLY} && test ! -z "${DEPENDS}"; then
 		echo -e "\nBuilding dependencies for ${NAME_ORIG} ${VER}"
