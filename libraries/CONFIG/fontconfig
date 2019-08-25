@@ -11,7 +11,7 @@ FNAME="${DNAME}.tar.xz"
 SOURCE="https://www.freedesktop.org/software/fontconfig/release/${FNAME}"
 
 CONFIG_OPTS=(
-	--enable-iconv
+	--disable-iconv
 	--disable-docs
 )
 
