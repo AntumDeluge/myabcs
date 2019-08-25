@@ -67,7 +67,7 @@ stage: $(EXE) LICENSE.txt
 		make install-x11; \
 	fi;
 
-pack: stage
+pack:
 	@zip_dir="$$(pwd)/build"; \
 	cd "$(DESTDIR)"; \
 	if test "${DEBUG}"; then \
