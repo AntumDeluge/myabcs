@@ -3,6 +3,8 @@
 # Optional depends
 #  libiconv, jsonc/json-c?
 
+DEPENDS=(freetype gperf libxml2)
+
 VER="2.13.91"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
