@@ -55,8 +55,10 @@ Environment variables:\n\
 ### Environment ###
 
 OS_WIN = false
+EXE_EXT =
 ifeq ($(OS), Windows_NT)
 	OS_WIN = true
+	EXE_EXT = .exe
 	STAGEDIR = build/stage
 	ifndef DESTDIR
 		DESTDIR = $(STAGEDIR)
@@ -147,8 +149,7 @@ endif
 
 ### Installation ###
 
-EXE_SUF =
-EXE = $(PNAME)$(EXE_SUF)
+EXE = $(PNAME)$(EXE_EXT)
 ABCDIR = $(PREFIX)/share/myabcs
 PIXMAPDIR = $(PREFIX)/share/pixmaps
 # not sure why quotes need to be escaped here
