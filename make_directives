@@ -2,8 +2,15 @@
 .PHONY: all cleanstage stage install uninstall x11
 
 all: $(OBJECTS)
-	@echo "Making project $(PNAME) version $(VERSION).";
+	@echo "Making project $(PNAME) version $(VERSION)."
 	$(CC) $(LINKEROPTS) $(LDFLAGS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
+	@if $(OS_WIN) && test ! -z "$(USE_BUILTIN)" && test $(USE_BUILTIN) -ne 0; then \
+		if test -d "$(LIB_PREFIX)/bin"; then \
+			for DLL in $$(find "$(LIB_PREFIX)/bin" -type f -name "*.[dD][lL][lL]"); do \
+				cp -v "$${DLL}" ./; \
+			done; \
+		fi; \
+	fi;
 
 stage: $(EXE) LICENSE.txt
 	@data_dir="$(DESTDIR)$(DATADIR)/myabcs"; \
@@ -49,7 +56,11 @@ stage: $(EXE) LICENSE.txt
 		done; \
 	done; \
 	# X11 desktop files \
-	if ! $(OS_WIN); then \
+	if $(OS_WIN); then \
+		for DLL in $$(find ./ -maxdepth 1 -type f -name "*.[dD][lL][lL]"); do \
+			install -vm 0644 "$${DLL}" "$${data_dir}"; \
+		done; \
+	else \
 		echo "Installing X11 files ..."; \
 		make install-x11; \
 	fi;
