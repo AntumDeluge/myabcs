@@ -22,3 +22,5 @@ if ${OS_WIN}; then
 	LIBS="-lintl"
 fi
 export GLIB_CFLAGS GLIB_LIBS
+
+LIBTYPE_OPTS=("N/A")
