@@ -1,0 +1,12 @@
+# Depends:
+#  pkg-config, python, libiconv, libintl (gettext)
+# Optional depends:
+#  pcre|pcre2, pth|pthreads|winthreads, libpsl, gnutls|openssl, zlib, libunistring, libidn, libunicode,
+#  libuuid, gpgme, metalink
+
+DEPENDS=(pkg-config)
+
+VER="1.20.3"
+DNAME="${NAME}-${VER}"
+FNAME="${DNAME}.tar.lz"
+SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
