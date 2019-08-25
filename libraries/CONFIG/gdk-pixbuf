@@ -5,6 +5,8 @@
 
 # FIXME: jpeg loader not working (missing dependency?)
 
+DEPENDS=(glib libpng)
+
 VER="2.38.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
