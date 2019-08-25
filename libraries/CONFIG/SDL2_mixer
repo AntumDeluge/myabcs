@@ -31,4 +31,9 @@ if ${OS_WIN}; then
 		LIBS="-lshlwapi"
 		EXTRA_LDFLAGS="-lshlwapi"
 	)
+
+	LIBTYPE_OPTS=(
+		--enable-shared=yes
+		--enable-static=no
+	)
 fi
