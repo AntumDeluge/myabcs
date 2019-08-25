@@ -7,3 +7,10 @@ VER="2.0.10"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://libsdl.org/release/${FNAME}"
+
+if ${OS_WIN}; then
+	LIBTYPE_OPTS=(
+		--enable-shared=yes
+		--enable-static=no
+	)
+fi
