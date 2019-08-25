@@ -122,8 +122,8 @@ function show_lib_options {
 		tmp_dir="tmp-0000000001"
 		mkdir "${tmp_dir}"
 		cd "${tmp_dir}"
-		cmake "${DIR_CONFIG_ROOT}" > /dev/null 2>&1
-		cmake -LA "${DIR_CONFIG_ROOT}" | awk '{if(f)print} /-- Cache values/{f=1}'
+		cmake ${CONFIG_OPTS[@]} ${LIBTYPE_OPTS[@]} "${DIR_CONFIG_ROOT}" > /dev/null 2>&1
+		cmake -LA  ${CONFIG_OPTS[@]} ${LIBTYPE_OPTS[@]} "${DIR_CONFIG_ROOT}" | awk '{if(f)print} /-- Cache values/{f=1}'
 		cd ../
 		rm -r "${tmp_dir}"
 	elif test -f "${DIR_CONFIG_ROOT}/meson.build"; then
