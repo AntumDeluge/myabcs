@@ -15,6 +15,7 @@ FNAME="${DNAME}.tar.gz"
 SOURCE="https://www.cairographics.org/releases/${FNAME}"
 
 CONFIG_OPTS=(
+	--disable-gtk
 	--enable-libpng
 )
 
