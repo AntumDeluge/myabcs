@@ -324,12 +324,9 @@ prepare() (
 		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
 			echo "Not re-extracting sources for ${NAME_ORIG} ${VER}"
 		else
-			if test ! -d "${DIR_SRC}/${DNAME}"; then
-				echo "Directory not found, re-extracting: ${DIR_SRC}/${DNAME}"
-			fi
-
 			# clean up old files
 			if test -d "${DIR_SRC}/${DNAME}"; then
+				echo "Removing old source directory: ${DIR_SRC}/${DNAME}"
 				rm -rf "${DIR_SRC}/${DNAME}"
 			fi
 
