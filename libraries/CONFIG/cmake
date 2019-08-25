@@ -7,8 +7,6 @@
 # Notes:
 #  - system dependencies: gcc-libs (libgcc, libstdc++)
 
-# FIXME: linking to system expat instead of internal
-
 VER="3.15.2"
 DNAME="${NAME}-${VER}"
 if ${OS_WIN}; then
@@ -19,10 +17,8 @@ fi
 SOURCE="https://cmake.org/files/v${VER%.*}/${FNAME}"
 
 CONFIG_OPTS=(
-	--system-expat
 	--system-zlib
 	--system-bzip2
-	--system-liblzma
 )
 
 LIBTYPE_OPTS="N/A"
