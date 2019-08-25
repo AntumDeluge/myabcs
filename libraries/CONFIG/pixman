@@ -1,10 +1,13 @@
 
 # Depends:
-#  pkg-config, libintl (gettext)
+#  pkg-config, gcc-libs
 # Optional depends:
 #  gtk, libpng
+#
+# Notes:
+#  - links to libgcc
 
-DEPENDS=(pkg-config)
+DEPENDS=(pkg-config libpng)
 
 VER="0.38.4"
 DNAME="${NAME}-${VER}"
