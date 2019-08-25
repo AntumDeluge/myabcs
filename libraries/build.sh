@@ -727,6 +727,14 @@ for NAME in ${BUILTIN_LIBS[@]}; do
 	fi
 done
 
+# for any packages that install DLLs into lib dir
+if ${OS_WIN}; then
+	mkdir -p "${INSTALL_PREFIX}/bin/"
+	for DLL in $(find "${INSTALL_PREFIX}/lib/" -type f -name "*.[dD][lL][lL]"); do
+		mv -v "${DLL}" "${INSTALL_PREFIX}/bin/"
+	done
+fi
+
 # unnecessary directories
 NOUSE_DIRS=("share/doc" "share/man")
 for DIR in ${NOUSE_DIRS[@]}; do
