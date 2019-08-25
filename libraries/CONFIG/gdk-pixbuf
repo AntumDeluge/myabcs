@@ -20,7 +20,10 @@ CONFIG_OPTS=(
 	-Dgir=false
 	-Dman=false
 	-Dinstalled_tests=false
+	-Dtiff=false
+	-Djpeg=false
 )
+
 LIBS="`pkg-config glib-2.0 --libs --static` `pkg-config libtiff-4 --libs --static` -liconv"
 if ${OS_WIN}; then
 	CONFIG_OPTS+=(-Dx11=false)
