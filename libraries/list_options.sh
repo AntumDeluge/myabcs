@@ -146,6 +146,7 @@ if test $? -eq 0; then
 	FOUND_CONFIG=true
 fi
 
+# FIXME: matching should be case insensitive
 EXACT_MATCH=
 for DIR in ${AVAIL_SRCS}; do
 	if test "${DIR}" == "${FULL_NAME}"; then
