@@ -35,11 +35,12 @@ CONFIG_OPTS=(
 
 if ${OS_WIN}; then
 	CONFIG_OPTS+=(--with-msw)
+	LIBTYPE_OPTS=(--enable-shared=yes)
 else
 	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 	CONFIG_OPTS+=(--disable-mdi)
+	LIBTYPE_OPTS=(--enable-shared=no)
 fi
-LIBTYPE_OPTS=(--enable-shared=no)
 
 #post_extract() {
 #	autoreconf -fiv
