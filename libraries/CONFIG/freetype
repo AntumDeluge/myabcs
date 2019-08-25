@@ -3,6 +3,8 @@
 # Optional depends
 #  zlib, libpng, bzip2, harfbuzz
 
+DEPENDS=(pkg-config libpng bzip2)
+
 VER="2.10.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
