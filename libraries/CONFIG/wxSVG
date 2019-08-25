@@ -16,3 +16,10 @@ CONFIG_OPTS=(
 	--with-wx-config="${INSTALL_PREFIX}/bin/wx-config"
 	--enable-libav=no
 )
+
+if ${OS_WIN}; then
+	LIBTYPE_OPTS=(
+		--enable-shared=yes
+		--enable-static=no
+	)
+fi
