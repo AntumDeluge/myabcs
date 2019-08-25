@@ -1,7 +1,9 @@
 
 .PHONY: all cleanstage stage install uninstall x11
 
-all: $(OBJECTS)
+all: $(EXE)
+
+$(EXE): $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION)."
 	$(CC) $(LINKEROPTS) $(LDFLAGS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
 	@if $(OS_WIN) && test ! -z "$(USE_BUILTIN)" && test $(USE_BUILTIN) -ne 0; then \
