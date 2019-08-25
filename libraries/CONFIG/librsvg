@@ -1,11 +1,12 @@
 # Depends:
-#  pkg-config, rust, gthread (glib?), gmodule (glib?), libiconv, gettext (libintl), fontconfig
+#  pkg-config, rust, gthread (glib?), gmodule (glib?), libiconv, gettext (libintl), fontconfig, gdk-pixbuf,
+#  libcroco
 # Optional depends:
-#  gdk-pixbuf, gtk3
-# Unsure depends:
-#  pangoft2 (pango-freetype?)
+#  gtk3
 
 # Update available: 2.45.8
+
+DEPENDS=(gdk-pixbuf pango libcroco)
 
 VER="2.44.14"
 DNAME="${NAME}-${VER}"
