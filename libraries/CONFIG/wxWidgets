@@ -10,6 +10,8 @@
 # TODO:
 #  - disable everything not used by MyABCs
 
+# FIXME: DLLs are being installed to lib dir
+
 DEPENDS=(cairo-reb)
 
 VER="3.1.2"
