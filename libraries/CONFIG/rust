@@ -1,0 +1,8 @@
+# Depends:
+#  python
+
+VER="1.37.0"
+DNAME="${NAME}-${VER}"
+EXTRACT_NAME="${NAME}c-${VER}-src"
+FNAME="${EXTRACT_NAME}.tar.gz"
+SOURCE="https://static.rust-lang.org/dist/${FNAME}"
