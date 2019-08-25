@@ -735,3 +735,6 @@ for DIR in ${NOUSE_DIRS[@]}; do
 		rm -rf "${INSTALL_PREFIX}/${DIR}"
 	fi
 done
+
+# remove empty directories
+find "${INSTALL_PREFIX}/" -mindepth 1 -type d -empty -delete
