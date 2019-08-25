@@ -4,6 +4,7 @@
 #  libpng, libtiff, libjpeg (libjpeg-turbo), libjasper, libX11, gobject-introspection
 
 # FIXME: jpeg loader not working (missing dependency?)
+# FIXME: linking to libintl (required?)
 
 DEPENDS=(glib libpng)
 
