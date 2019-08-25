@@ -27,10 +27,10 @@ CONFIG_OPTS=(
 
 if ${OS_WIN}; then
 	# mpg123 needs to link to libshlwapi on Windows
-	CONFIG_OPTS+=(
-		LIBS="-lshlwapi"
-		EXTRA_LDFLAGS="-lshlwapi"
-	)
+	#CONFIG_OPTS+=(
+	#	LIBS="-lshlwapi"
+	#	EXTRA_LDFLAGS="-lshlwapi"
+	#)
 
 	LIBTYPE_OPTS=(
 		--enable-shared=yes
