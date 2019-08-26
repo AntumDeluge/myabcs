@@ -490,6 +490,10 @@ build() (
 	# import configuration
 	. "${CFG}"
 
+	is_array "${CPPFLAGS[@]}"
+	if test $? -eq 0; then
+		CPPFLAGS="${CPPFLAGS[@]}"
+	fi
 	is_array "${LIBS[@]}"
 	if test $? -eq 0; then
 		LIBS="${LIBS[@]}"
