@@ -288,6 +288,12 @@ prepare() (
 		if ${DOWNLOAD_DONE}; then
 			echo "Not re-downloading sources for ${NAME_ORIG} ${VER}"
 		else
+			# clean up old files
+			if test -d "${DIR_SRC}/${DNAME}"; then
+				echo "Removing old source directory: ${DIR_SRC}/${DNAME}"
+				rm -rf "${DIR_SRC}/${DNAME}"
+			fi
+
 			# pre-download operations
 			if test ! -z "$(type -t pre_dl)" && test "$(type -t pre_dl)" == "function"; then
 				echo -e "\nRunning pre-download commands"
