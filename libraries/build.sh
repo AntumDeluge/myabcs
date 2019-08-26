@@ -732,7 +732,7 @@ for NAME in ${BUILTIN_LIBS[@]}; do
 done
 
 # for any packages that install DLLs into lib dir
-if ${OS_WIN}; then
+if ${OS_WIN} && test -d "${INSTALL_PREFIX}/lib/"; then
 	mkdir -p "${INSTALL_PREFIX}/bin/"
 	for DLL in $(find "${INSTALL_PREFIX}/lib/" -type f -name "*.[dD][lL][lL]"); do
 		mv -v "${DLL}" "${INSTALL_PREFIX}/bin/"
