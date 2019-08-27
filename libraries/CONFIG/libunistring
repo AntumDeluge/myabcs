@@ -3,6 +3,11 @@
 # Optional depends:
 #  pth | pthreads-win32 | winpthreads
 
+DEPENDS=(libiconv)
+if ${OS_WIN}; then
+	DEPENDS+=(winpthreads)
+fi
+
 VER="0.9.10"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.xz"
