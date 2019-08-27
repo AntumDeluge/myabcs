@@ -1,5 +1,5 @@
 # Depends:
-#  pkg-config, libintl (gettext)
+#  pkg-config, libintl (gettext), gcc-libs (libgcc), pthreads
 # Optional depends:
 #  glib, gobject (glib?), cairo, fontconfig, icu, graphite2, freetype
 # Unsure optional depends:
