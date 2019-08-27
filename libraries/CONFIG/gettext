@@ -36,3 +36,11 @@ CONFIG_OPTS=(
 	--without-cvs
 	--without-git
 )
+
+# linking to static libs on Win32 creates corrupted executables
+if ${OS_WIN}; then
+	LIBTYPE_OPTS=(
+		--enable-static=no
+		--enable-shared=yes
+	)
+fi
