@@ -32,6 +32,7 @@ DIR_BUILD="${DIR_LIBS}/build"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
 STATIC=true
+CLEAN_LIBTOOL=true
 
 if test ! -d "${DIR_SRC}"; then
 	mkdir -p "${DIR_SRC}"
@@ -696,6 +697,14 @@ build() (
 		if test $? -ne 0; then
 			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
 			exit 1
+		fi
+
+		if ${CLEAN_LIBTOOL}; then
+			local lt_files=($(find "${INSTALL_PREFIX}/lib/" -type f -name "*.la"))
+			if test ${#lt_files[@]} -gt 0; then
+				echo "Cleaning libtool files"
+				rm -vf ${lt_files[@]}
+			fi
 		fi
 
 		# post-install operations
