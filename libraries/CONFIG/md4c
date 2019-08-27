@@ -1,8 +1,34 @@
 
 DEPENDS=(cmake)
 
+unset COMMIT_ID REV
+
 VER="0.3.4"
+REV="1"
+COMMIT_ID="ae5ca89"
 DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://github.com/mity/${NAME}/archive/release-${VER}.tar.gz"
+
+if test ! -z "${REV}"; then
+	DNAME+="-${REV}"
+fi
+
+if test -z "${COMMIT_ID}"; then
+	EXTRACT_NAME="${NAME}-release-${VER}"
+	FNAME="${DNAME}.tar.gz"
+	SOURCE="https://github.com/mity/${NAME}/archive/release-${VER}.tar.gz"
+else
+	DNAME+="-${COMMIT_ID}"
+	SOURCE="https://github.com/mity/md4c.git"
+	EXTRACT_DONE=true
+
+	CMD_DOWNLOAD=(git clone --single-branch --depth 1 "${SOURCE}" "${DNAME}")
+	post_dl() {
+		cd "${DNAME}"
+		git reset --hard ${COMMIT_ID}
+		rm -rf .git
+		cd ../
+	}
+fi
+
 CMD_CONFIG=(cmake)
+LIBTYPE_OPTS=(-DBUILD_SHARED_LIBS=OFF)
