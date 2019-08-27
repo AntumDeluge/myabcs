@@ -5,3 +5,5 @@
 
 NAME="libiconv"
 . "CONFIG/${NAME}"
+
+DEPENDS=(gettext)
