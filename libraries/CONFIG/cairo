@@ -1,6 +1,6 @@
 
 # Depends on:
-#  libpng, freetype, librsvg, pixman, glib
+#  libpng, freetype, librsvg, pixman, glib, gcc-libs (libgcc), zlib
 # Optional depends:
 #  xcb, xlib (X11), CoreGraphics, ghostscript, fontconfig, poppler, libspectre, pthreads-w32 | winpthreads
 #  gtk-doc, valgrind, qt, gobject
