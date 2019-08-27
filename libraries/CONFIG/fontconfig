@@ -1,9 +1,9 @@
 # Depends on:
-#  pkg-config, libintl (gettext), expat | libxml2, freetype
+#  pkg-config, libintl (gettext), expat|libxml2, freetype, gcc-libs (libgcc)
 # Optional depends
 #  libiconv, jsonc/json-c?
 
-DEPENDS=(freetype gperf libxml2)
+DEPENDS=(freetype gperf expat)
 
 VER="2.13.91"
 DNAME="${NAME}-${VER}"
