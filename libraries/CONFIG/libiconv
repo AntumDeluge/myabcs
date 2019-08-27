@@ -6,4 +6,4 @@
 VER="1.16"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
-SOURCE="https://ftp.gnu.org/pub/gnu/libiconv/${FNAME}"
+SOURCE="https://ftp.gnu.org/pub/gnu/${NAME}/${FNAME}"
