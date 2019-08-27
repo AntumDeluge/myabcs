@@ -5,7 +5,7 @@
 
 # Update available: 1.44.1
 
-DEPENDS=(freetype-reb cairo)
+DEPENDS=(fribidi cairo)
 
 VER="1.43.0"
 DNAME="${NAME}-${VER}"
