@@ -114,10 +114,25 @@ function show_lib_options {
 
 	cd "${target_dir}"
 
+	local CFG_GNU=false
+	local CFG_CMAKE=false
+	local CFG_MESON=false
+
 	if test -f "${DIR_CONFIG_ROOT}/configure"; then
+		CFG_GNU=true
+	fi
+	if test -f "${DIR_CONFIG_ROOT}/CMakeLists.txt"; then
+		CFG_CMAKE=true
+	fi
+	if test -f "${DIR_CONFIG_ROOT}/meson.build"; then
+		CFG_MESON=true
+	fi
+
+	if ${CFG_GNU}; then
 		echo -e "\n${NAME}: Found GNU Autotools configure script"
 		"${DIR_CONFIG_ROOT}/configure" --help
-	elif test -f "${DIR_CONFIG_ROOT}/CMakeLists.txt"; then
+	fi
+	if ${CFG_CMAKE}; then
 		echo -e "\n${NAME}: Found CMake configuration"
 		tmp_dir="tmp-0000000001"
 		mkdir "${tmp_dir}"
@@ -126,14 +141,17 @@ function show_lib_options {
 		cmake -LA  ${CONFIG_OPTS[@]} ${LIBTYPE_OPTS[@]} "${DIR_CONFIG_ROOT}" | awk '{if(f)print} /-- Cache values/{f=1}'
 		cd ../
 		rm -r "${tmp_dir}"
-	elif test -f "${DIR_CONFIG_ROOT}/meson.build"; then
+	fi
+	if ${CFG_MESON}; then
 		if test ! -f "${DIR_CONFIG_ROOT}/meson_options.txt"; then
 			echo -e "\n${NAME}: ERROR: Found Meson Build configuration, but \"meson_options.txt\" is missing"
 			exit 1
 		fi
 		echo -e "\n${NAME}: Found Meson Build configuration"
 		cat "${DIR_CONFIG_ROOT}/meson_options.txt"
-	else
+	fi
+
+	if test ! ${CFG_GNU} && test ! ${CFG_CMAKE} && test ! ${CFG_MESON}; then
 		echo -e "\nERROR: No recognizable configuration found\nTry deleting the directory \"${target_dir}\" & run again"
 		exit 1
 	fi
