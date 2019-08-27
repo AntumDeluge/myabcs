@@ -31,6 +31,8 @@ DIR_SRC="${DIR_LIBS}/source"
 DIR_BUILD="${DIR_LIBS}/build"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
+STATIC=true
+
 if test ! -d "${DIR_SRC}"; then
 	mkdir -p "${DIR_SRC}"
 fi
@@ -552,14 +554,21 @@ build() (
 				if test -z "${CMD_CONFIG}"; then
 					# add common config options
 					CONFIG_OPTS+=(--prefix="${INSTALL_PREFIX}")
-					if test ! -z "${LIBTYPE_OPTS}"; then
-						# override default static/shared options
-						if test "${LIBTYPE_OPTS}" != "N/A"; then
-							CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
+
+					if test "${LIBTYPE_OPTS}" != "N/A"; then
+						if test -z "${LIBTYPE_OPTS}"; then
+							# use defaults
+							if ${STATIC}; then
+								LIBTYPE_OPTS=(--enable-static=yes --enable-shared=no)
+							else
+								LIBTYPE_OPTS=(--enable-static=no --enable-shared=yes)
+							fi
 						fi
 					else
-						CONFIG_OPTS+=(--enable-shared=no --enable-static=yes)
+						unset LIBTYPE_OPTS
 					fi
+
+					CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
 
 					"${DIR_CONFIG_ROOT}/configure" ${CONFIG_OPTS[@]}
 					if test $? -ne 0; then
@@ -578,11 +587,15 @@ build() (
 
 						if test "${LIBTYPE_OPTS}" != "N/A"; then
 							if test -z "${LIBTYPE_OPTS}"; then
-								# defaults
-								LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF)
+								# use defaults
+								if ${STATIC}; then
+									LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF)
+								else
+									LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=OFF -DBUILD_SHARED_LIBS=ON)
+								fi
 							fi
 						else
-							# make sure to LIBTYPE_OPTS is empty if set to "N/A"
+							# make sure LIBTYPE_OPTS is empty if set to "N/A"
 							unset LIBTYPE_OPTS
 						fi
 
@@ -600,8 +613,12 @@ build() (
 					if test $? -eq 0; then
 						if test "${LIBTYPE_OPTS}" != "N/A"; then
 							if test -z "${LIBTYPE_OPTS}"; then
-								# defaults
-								LIBTYPE_OPTS=(--default-library=static)
+								# use defaults
+								if ${STATIC}; then
+									LIBTYPE_OPTS=(--default-library=static)
+								else
+									LIBTYPE_OPTS=(--default-library=shared)
+								fi
 							fi
 						else
 							# make sure to LIBTYPE_OPTS is empty if set to "N/A"

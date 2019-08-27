@@ -3,4 +3,9 @@ VER="1.2.11"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
 SOURCE="https://zlib.net/current/${FNAME}"
-LIBTYPE_OPTS=(--static)
+
+if ${STATIC}; then
+	LIBTYPE_OPTS=(--static)
+else
+	LIBTYPE_OPTS=("N/A")
+fi
