@@ -1,8 +1,7 @@
 VER="2.2.7"
-VER_LOW="2_2_7"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.bz2"
-SOURCE="https://github.com/libexpat/libexpat/releases/download/R_${VER_LOW}/${FNAME}"
+SOURCE="https://github.com/libexpat/libexpat/releases/download/R_$(echo ${VER} | sed -e 's|\.|_|g')/${FNAME}"
 
 CONFIG_OPTS=(
 	--without-examples
