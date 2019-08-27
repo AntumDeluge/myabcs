@@ -3,4 +3,6 @@
 NAME="glib"
 . "CONFIG/${NAME}"
 
+DEPENDS=(gettext)
+
 CONFIG_OPTS=($(echo ${CONFIG_OPTS[@]} | sed -e 's|internal_pcre=true|internal_pcre=false|'))
