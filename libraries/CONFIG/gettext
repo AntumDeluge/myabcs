@@ -4,10 +4,11 @@
 #  pthreads | pth, ncurses, termcap, bzip2, xz, expat | libxml2, libacl, libunistring, libcroco
 
 # FIXME: needs built twice in order to link to internal libintl
-# FIXME: use "internal" libxml2
 # FIXME: enable xz support
 
 # Update available: 0.20.1 (produces segfaulting executables)
+
+DEPENDS=(glib bzip2 libcroco)
 
 VER="0.19.8.1"
 DNAME="${NAME}-${VER}"
@@ -28,7 +29,6 @@ CONFIG_OPTS=(
 	--disable-native-java
 	--disable-csharp
 	--disable-openmp
-	--with-included-libxml
 	--with-included-regex
 	--with-included-libunistring
 	--without-xz
