@@ -5,7 +5,7 @@
 # Unsure depends:
 #  libintl (gettext)
 
-DEPENDS=(pkg-config zlib)
+DEPENDS=(pkg-config zlib libiconv)
 
 VER="2.9.9"
 DNAME="${NAME}-${VER}"
@@ -16,5 +16,4 @@ CONFIG_OPTS=(
 	--without-python
 	--without-debug
 	--without-lzma
-	--without-iconv
 )
