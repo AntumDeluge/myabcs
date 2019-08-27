@@ -1,6 +1,6 @@
 
 # Depends:
-#  pkg-config, gcc-libs
+#  pkg-config, gcc-libs (libgcc)
 # Optional depends:
 #  gtk, libpng
 #
