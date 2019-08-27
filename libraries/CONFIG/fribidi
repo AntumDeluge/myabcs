@@ -13,10 +13,3 @@ CMD_BUILD=(ninja)
 CMD_INSTALL=(ninja install)
 
 CONFIG_OPTS=(-Ddocs=false)
-
-# DEBUG:
-if ${OS_WIN}; then
-	LIBTYPE_OPTS=(
-		--default-library=static
-	)
-fi
