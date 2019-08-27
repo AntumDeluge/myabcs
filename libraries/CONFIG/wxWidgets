@@ -1,5 +1,5 @@
 # Depends:
-#  pkg-config
+#  pkg-config, gcc-libs (libgcc & libstdc++)
 # Optional depends:
 #  libtool, qt5, libiconv, zlib, liblzma (xz), expat, libpng, libjpeg (libjpeg-turbo), libtiff,
 #  libjbig, libxpm, libmspack, SDL2, cairo, libsecret, webkit, xtst, libnotify, gnomevfs,
@@ -12,7 +12,7 @@
 
 # FIXME: DLLs are being installed to lib dir
 
-DEPENDS=(cairo-reb)
+DEPENDS=(expat cairo-reb)
 
 VER="3.1.2"
 VER_BASE="${VER%.*}"
@@ -31,7 +31,7 @@ CONFIG_OPTS=(
 	--with-regex=builtin
 	--with-zlib=sys
 	--with-liblzma=builtin
-	--with-expat=builtin
+	--with-expat=sys
 )
 
 if ${OS_WIN}; then
