@@ -3,7 +3,7 @@
 # Optional depends:
 #  yasm, jack, pulse, portaudio
 
-DEPENDS=(pkg-config SDL2)
+DEPENDS=(SDL2)
 
 VER="1.25.11"
 DNAME="${NAME}-${VER}"
