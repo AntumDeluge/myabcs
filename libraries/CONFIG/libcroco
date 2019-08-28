@@ -3,7 +3,7 @@
 # Optional depends:
 #  gtk-doc
 
-DEPENDS=(pkg-config libxml2)
+DEPENDS=(libxml2)
 
 VER="0.6.13"
 DNAME="${NAME}-${VER}"
