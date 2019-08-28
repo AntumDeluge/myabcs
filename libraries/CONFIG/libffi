@@ -1,3 +1,5 @@
+# A portable foreign-function interface library
+
 VER="3.2.1"
 DNAME="${NAME}-${VER}"
 FNAME="${DNAME}.tar.gz"
