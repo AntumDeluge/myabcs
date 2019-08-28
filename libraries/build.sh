@@ -43,6 +43,7 @@ fi
 
 # add install prefix to PATH
 export PATH="${INSTALL_PREFIX}/bin:${PATH}"
+export PKG_CONFIG_PATH="${INSTALL_PREFIX}/lib/pkgconfig:${INSTALL_PREFIX}/share/pkgconfig:${PKG_CONFIG_PATH}"
 
 # check for Windows OS & detect MinGW build architecture
 OS_WIN=false
