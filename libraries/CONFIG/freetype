@@ -3,7 +3,7 @@
 # Optional depends
 #  zlib, libpng, bzip2, harfbuzz
 
-depends=(pkg-config libpng bzip2)
+depends=(pkg-config libpng bzip2 gettext)
 
 ver="2.10.1"
 dname="${name}-${ver}"
