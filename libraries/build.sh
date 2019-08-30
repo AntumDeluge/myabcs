@@ -748,7 +748,7 @@ if test ! -z "${build_libs}"; then
 	builtin_libs="${build_libs}"
 else
 	# base libs in build order
-	builtin_libs=(SDL2_mixer wxSVG)
+	builtin_libs=(libiconv-reb freetype-reb cairo-reb SDL2_mixer wxSVG)
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then
