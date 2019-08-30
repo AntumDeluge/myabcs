@@ -3,8 +3,8 @@
 # Unsure optional depends:
 #  pthreads
 
-VER="5.2.4"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://tukaani.org/${NAME}/${FNAME}"
-CONFIG_OPTS=(--disable-xz --disable-xzdec --disable-lzmadec --disable-lzmainfo --disable-lzma-links --disable-scripts --disable-doc)
+ver="5.2.4"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://tukaani.org/${name}/${fname}"
+config_opts=(--disable-xz --disable-xzdec --disable-lzmadec --disable-lzmainfo --disable-lzma-links --disable-scripts --disable-doc)

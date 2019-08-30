@@ -4,9 +4,9 @@
 #  pcre|pcre2, pth|pthreads|winthreads, libpsl, gnutls|openssl, zlib, libunistring, libidn, libunicode,
 #  libuuid, gpgme, metalink
 
-DEPENDS=(pkg-config)
+depends=(pkg-config)
 
-VER="1.20.3"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.lz"
-SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
+ver="1.20.3"
+dname="${name}-${ver}"
+fname="${dname}.tar.lz"
+src="https://ftp.gnu.org/gnu/${name}/${fname}"

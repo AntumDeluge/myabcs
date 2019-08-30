@@ -3,19 +3,19 @@
 # Optional depends
 #  libiconv, jsonc/json-c?
 
-DEPENDS=(freetype gperf expat)
+depends=(freetype gperf expat)
 
-VER="2.13.91"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://www.freedesktop.org/software/fontconfig/release/${FNAME}"
+ver="2.13.91"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://www.freedesktop.org/software/fontconfig/release/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-iconv
 	--disable-docs
 )
 
-if ${OS_WIN}; then
+if ${os_win}; then
 	# FIXME: not sure why I have to explicitly link to static harfbuzz
-	LIBS="-l:libharfbuzz.a"
+	libs="-l:libharfbuzz.a"
 fi

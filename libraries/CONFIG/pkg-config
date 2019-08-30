@@ -7,9 +7,9 @@
 # Notes:
 #  - configure script utilizes `cmp` command found in diffutils package
 
-VER="0.29.2"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://pkgconfig.freedesktop.org/releases/${FNAME}"
+ver="0.29.2"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://pkgconfig.freedesktop.org/releases/${fname}"
 
-CONFIG_OPTS=(--with-internal-glib)
+config_opts=(--with-internal-glib)

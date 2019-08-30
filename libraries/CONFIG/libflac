@@ -3,15 +3,15 @@
 # Optional depends:
 #  libogg, nasm
 
-DEPENDS=(nasm libogg)
+depends=(nasm libogg)
 
-VER="1.3.2"
-DNAME="${NAME}-${VER}"
-EXTRACT_NAME="flac-${VER}"
-FNAME="${EXTRACT_NAME}.tar.xz"
-SOURCE="http://downloads.xiph.org/releases/flac/${FNAME}"
+ver="1.3.2"
+dname="${name}-${ver}"
+extract_name="flac-${ver}"
+fname="${extract_name}.tar.xz"
+src="http://downloads.xiph.org/releases/flac/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-doxygen-docs
 	--disable-xmms-plugin
 	--disable-cpplibs

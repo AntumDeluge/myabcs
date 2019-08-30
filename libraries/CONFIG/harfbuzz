@@ -5,19 +5,19 @@
 # Unsure optional depends:
 #  uniscribe, directwrite
 
-DEPENDS=(fontconfig)
+depends=(fontconfig)
 
-VER="2.5.3"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://www.freedesktop.org/software/harfbuzz/release/${FNAME}"
+ver="2.5.3"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://www.freedesktop.org/software/harfbuzz/release/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--with-cairo=no
 	--with-fontconfig=yes
 	--with-freetype=yes
 )
 
-if "${OS_WIN}"; then
-	LIBS+=" -lintl -lws2_32 -lole32"
+if "${os_win}"; then
+	libs+=" -lintl -lws2_32 -lole32"
 fi

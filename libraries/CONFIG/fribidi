@@ -1,15 +1,15 @@
 # Notes:
 #  - includes build configs for GNU Autotools & Meson
 
-DEPENDS=(pkg-config)
+depends=(pkg-config)
 
-VER="1.0.5"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.bz2"
-SOURCE="https://github.com/${NAME}/${NAME}/releases/download/v${VER}/${FNAME}"
+ver="1.0.5"
+dname="${name}-${ver}"
+fname="${dname}.tar.bz2"
+src="https://github.com/${name}/${name}/releases/download/v${ver}/${fname}"
 
-CMD_CONFIG=(meson)
-CMD_BUILD=(ninja)
-CMD_INSTALL=(ninja install)
+cmd_config=(meson)
+cmd_build=(ninja)
+cmd_install=(ninja install)
 
-CONFIG_OPTS=(-Ddocs=false)
+config_opts=(-Ddocs=false)

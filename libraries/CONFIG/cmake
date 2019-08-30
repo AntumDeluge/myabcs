@@ -7,20 +7,20 @@
 # Notes:
 #  - system dependencies: gcc-libs (libgcc, libstdc++)
 
-DEPENDS=(zlib bzip2)
+depends=(zlib bzip2)
 
-VER="3.15.2"
-DNAME="${NAME}-${VER}"
-if ${OS_WIN}; then
-	FNAME="${DNAME}.zip"
+ver="3.15.2"
+dname="${name}-${ver}"
+if ${os_win}; then
+	fname="${dname}.zip"
 else
-	FNAME="${DNAME}.tar.gz"
+	fname="${dname}.tar.gz"
 fi
-SOURCE="https://cmake.org/files/v${VER%.*}/${FNAME}"
+src="https://cmake.org/files/v${ver%.*}/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--system-zlib
 	--system-bzip2
 )
 
-LIBTYPE_OPTS="N/A"
+libtype_opts="N/A"

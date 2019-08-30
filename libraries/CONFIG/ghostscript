@@ -3,8 +3,8 @@
 # Unsure optional depends:
 #  jbig2
 
-VER="9.27"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs$(echo ${VER} | sed -e 's|\.||g')/${FNAME}"
-CONFIG_OPTS=(--with-system-libtiff)
+ver="9.27"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs$(echo ${ver} | sed -e 's|\.||g')/${fname}"
+config_opts=(--with-system-libtiff)

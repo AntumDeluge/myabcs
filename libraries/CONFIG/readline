@@ -1,22 +1,22 @@
 # Depends:
 #  termcap | ncurses
 
-DEPENDS=(termcap)
+depends=(termcap)
 
-VER="8.0"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-URL="https://ftp.gnu.org/gnu/${NAME}"
-SOURCE="${URL}/${FNAME}"
-CONFIG_OPTS=(--disable-install-examples)
+ver="8.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+url="https://ftp.gnu.org/gnu/${name}"
+src="${url}/${fname}"
+config_opts=(--disable-install-examples)
 
-PATCH_VER="001"
-PATCH_DIR="${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
-PATCH_PRUNE_LEVEL=0
+patch_ver="001"
+patch_dir="${dir_libs}/patch/EXTERNAL-${name}-${ver}"
+patch_prune_level=0
 
 post_dl() {
-	mkdir -p "${PATCH_DIR}"
-	"${WGET}" -nc -P "${PATCH_DIR}" "${URL}/${NAME}-${VER}-patches/${NAME}$(echo ${VER} | sed -s 's|\.||')-${PATCH_VER}"
+	mkdir -p "${patch_dir}"
+	"${cmd_wget}" -nc -P "${patch_dir}" "${url}/${name}-${ver}-patches/${name}$(echo ${ver} | sed -s 's|\.||')-${patch_ver}"
 }
 
-unset PATCH_VER PATCH_DIR URL
+unset patch_ver patch_dir url

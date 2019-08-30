@@ -1,18 +1,18 @@
 
-VER="6.0.0"
-DNAME="${NAME}-${VER}"
-SOURCE="https://git.code.sf.net/p/mingw-w64/mingw-w64.git"
-CMD_DOWNLOAD=(git clone --branch v${VER} --single-branch --depth 1 "${SOURCE}" "${DNAME}-tmp")
+ver="6.0.0"
+dname="${name}-${ver}"
+src="https://git.code.sf.net/p/mingw-w64/mingw-w64.git"
+cmd_download=(git clone --branch v${ver} --single-branch --depth 1 "${src}" "${dname}-tmp")
 
-LIBTYPE_OPTS=(
+libtype_opts=(
 	--enable-shared=yes
 	--enable-static=no
 )
 
 post_dl() {
-	rm -rf "${DIR_SRC}/${DNAME}"
-	mv "${DIR_SRC}/${DNAME}-tmp/mingw-w64-libraries/${NAME}" "${DIR_SRC}/${DNAME}"
-	rm -rf "${DNAME}-tmp/"
+	rm -rf "${dir_src}/${dname}"
+	mv "${dir_src}/${dname}-tmp/mingw-w64-libraries/${name}" "${dir_src}/${dname}"
+	rm -rf "${dname}-tmp/"
 }
 
 # no archive is downloaded to extract

@@ -1,20 +1,21 @@
 # Depends on:
 #  gcc-libs (libgcc, libstdc++?), libiconv
 # Optional depends:
-#  pthreads | pth, ncurses, termcap, bzip2, xz, expat | libxml2, libacl, libunistring, libcroco
+#  pthreads|pth, ncurses, termcap, bzip2, xz, expat|libxml2, libacl, libunistring, libcroco
 
 # FIXME: needs built twice in order to link to internal libintl
 # FIXME: enable xz support
+# FIXME: static linking produces corrupted executables
 
-# Update available: 0.20.1 (produces segfaulting executables)
+# Update available: 0.20.1
 
 DEPENDS=(glib bzip2 libcroco)
 
-VER="0.19.8.1"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.gnu.org/pub/gnu/gettext/${FNAME}"
-CPPFLAGS="-DLIBXML_STATIC"
+ver="0.19.8.1"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.gnu.org/pub/gnu/gettext/${fname}"
+#cppflags="-DLIBXML_STATIC"
 
 export WANT_AUTOMAKE=latest
 post_extract() {
@@ -22,7 +23,7 @@ post_extract() {
 	./autogen.sh --skip-gnulib
 }
 
-CONFIG_OPTS=(
+config_opts=(
 	--enable-relocatable
 	--disable-curses
 	--disable-java
@@ -38,8 +39,8 @@ CONFIG_OPTS=(
 )
 
 # linking to static libs on Win32 creates corrupted executables
-if ${OS_WIN}; then
-	LIBTYPE_OPTS=(
+if ${os_win}; then
+	libtype_opts=(
 		--enable-static=no
 		--enable-shared=yes
 	)

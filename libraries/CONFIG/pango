@@ -5,15 +5,16 @@
 
 # Update available: 1.44.1
 
-DEPENDS=(fribidi cairo)
+depends=(fribidi cairo)
 
-VER="1.43.0"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://download.gnome.org/sources/pango/${VER%.*}/${FNAME}"
-CMD_CONFIG=(meson)
-CMD_BUILD=(ninja)
-CMD_INSTALL=(ninja install)
-CONFIG_OPTS=(-Dgir=false)
-LIBS="`pkg-config cairo --libs --static` -lstdc++"
-LDFLAGS="${LIBS}"
+ver="1.43.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://download.gnome.org/sources/pango/${ver%.*}/${fname}"
+cmd_config=(meson)
+cmd_build=(ninja)
+cmd_install=(ninja install)
+config_opts=(-Dgir=false)
+
+libs="`pkg-config cairo --libs --static` -lstdc++"
+ldflags="${libs}"

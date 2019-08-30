@@ -3,13 +3,15 @@
 # Optional depends:
 #  gtk-doc
 
-DEPENDS=(libxml2)
+depends=(libxml2)
 
-VER="0.6.13"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://download.gnome.org/sources/${NAME}/${VER%.*}/${FNAME}"
-LIBS="-lintl"
-if ${OS_WIN}; then
-	LIBS+=" -lole32"
+ver="0.6.13"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://download.gnome.org/sources/${name}/${ver%.*}/${fname}"
+
+libs="-lintl"
+
+if ${os_win}; then
+	libs+=" -lole32"
 fi

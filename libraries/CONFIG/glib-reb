@@ -1,8 +1,8 @@
 # rebuild of glib
 
-NAME="glib"
-. "CONFIG/${NAME}"
+name="glib"
+. "CONFIG/${name}"
 
-DEPENDS=(gettext)
+depends=(gettext)
 
-CONFIG_OPTS=($(echo ${CONFIG_OPTS[@]} | sed -e 's|internal_pcre=true|internal_pcre=false|'))
+#config_opts=($(echo ${config_opts[@]} | sed -e 's|internal_pcre=true|internal_pcre=false|'))

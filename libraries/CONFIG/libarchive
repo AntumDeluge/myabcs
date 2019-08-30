@@ -4,8 +4,8 @@
 #  libc | libregex | libpcreposix (pcre?), zlib, bzip2, libb2 (BLAKE2?), libiconv, liblz4,
 #  zstd, liblzma (xz), liblzo2, cng, nettle, openssl, libxml2 | expat
 
-VER="3.4.0"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://github.com/${NAME}/${NAME}/releases/download/v${VER}/${FNAME}"
-CONFIG_OPTS=(--disable-bsdtar --disable-bsdcat --disable-bsdcpio --without-xml2)
+ver="3.4.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://github.com/${name}/${name}/releases/download/v${ver}/${fname}"
+config_opts=(--disable-bsdtar --disable-bsdcat --disable-bsdcpio --without-xml2)

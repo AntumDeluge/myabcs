@@ -6,18 +6,18 @@
 # FIXME: jpeg loader not working (missing dependency?)
 # FIXME: linking to libintl (required?)
 
-DEPENDS=(glib libpng)
+depends=(glib libpng)
 
-VER="2.38.1"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.acc.umu.se/pub/GNOME/sources/gdk-pixbuf/${VER%.*}/${FNAME}"
-EXCLUDE_EXTRACT="tests/test-images/reftests/tga"
-CMD_CONFIG=(meson)
-CMD_BUILD=(ninja)
-CMD_INSTALL=(ninja install)
+ver="2.38.1"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.acc.umu.se/pub/GNOME/sources/gdk-pixbuf/${ver%.*}/${fname}"
+exclude_extract="tests/test-images/reftests/tga"
+cmd_config=(meson)
+cmd_build=(ninja)
+cmd_install=(ninja install)
 
-CONFIG_OPTS=(
+config_opts=(
 	-Dgir=false
 	-Dman=false
 	-Dinstalled_tests=false
@@ -25,9 +25,9 @@ CONFIG_OPTS=(
 	-Djpeg=false
 )
 
-LIBS="`pkg-config glib-2.0 libtiff-4 --libs --static` -liconv"
-if ${OS_WIN}; then
-	CONFIG_OPTS+=(-Dx11=false)
-	LIBS+=" -lws2_32"
+libs="`pkg-config glib-2.0 libtiff-4 --libs --static` -liconv"
+if ${os_win}; then
+	config_opts+=(-Dx11=false)
+	libs+=" -lws2_32"
 fi
-LDFLAGS="${LIBS}"
+ldflags="${libs}"

@@ -1,7 +1,7 @@
 
-DEPENDS=(zlib)
+depends=(zlib)
 
-VER="1.6.37"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://downloads.sourceforge.net/sourceforge/libpng/${FNAME}"
+ver="1.6.37"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://downloads.sourceforge.net/sourceforge/libpng/${fname}"

@@ -3,13 +3,13 @@
 # Optional depends:
 #  pth | pthreads-win32 | winpthreads
 
-DEPENDS=(libiconv)
-if ${OS_WIN}; then
-	DEPENDS+=(winpthreads)
+depends=(libiconv)
+if ${os_win}; then
+	depends+=(winpthreads)
 fi
 
-VER="0.9.10"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
-CONFIG_OPTS=(--enable-threads=posix)
+ver="0.9.10"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.gnu.org/gnu/${name}/${fname}"
+config_opts=(--enable-threads=posix)

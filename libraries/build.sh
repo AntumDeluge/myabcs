@@ -3,72 +3,72 @@
 # script to build "built-in" library dependencies
 
 
-BUILD=$1
-PREPARE_ONLY=false
+build_type=$1
+prepare_only=false
 if test ! -z $2; then
 	if test "$2" == "extract"; then
-		PREPARE_ONLY=true
-		BUILD_LIBS="${@:3}"
+		prepare_only=true
+		build_libs="${@:3}"
 	else
-		BUILD_LIBS="${@:2}"
+		build_libs="${@:2}"
 	fi
 fi
 
-if test -z "${BUILD}"; then
-	echo -e "\nERROR: please provide \"BUILD\" argument: build.sh BUILD"
+if test -z "${build_type}"; then
+	echo -e "\nERROR: please provide \"build_type\" argument: build.sh build_type"
 	exit 1
 fi
 
-if ! ${PREPARE_ONLY}; then
-	echo -e "\nBuilding libraries for: ${BUILD}"
+if ! ${prepare_only}; then
+	echo -e "\nBuilding libraries for: ${build_type}"
 fi
 
-DIR_LIBS="`dirname $0`"
-cd "${DIR_LIBS}"
-DIR_LIBS="`pwd`" # get full directory path
-DIR_ROOT="`dirname ${DIR_LIBS}`"
-DIR_SRC="${DIR_LIBS}/source"
-DIR_BUILD="${DIR_LIBS}/build"
-INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
+dir_libs="`dirname $0`"
+cd "${dir_libs}"
+dir_libs="`pwd`" # get full directory path
+dir_root="`dirname ${dir_libs}`"
+dir_src="${dir_libs}/source"
+dir_build="${dir_libs}/build"
+install_prefix="${dir_libs}/libprefix-${build_type}"
 
-STATIC=true
-CLEAN_LIBTOOL=false
+static=true
+clean_libtool=false
 
-if test ! -d "${DIR_SRC}"; then
-	mkdir -p "${DIR_SRC}"
+if test ! -d "${dir_src}"; then
+	mkdir -p "${dir_src}"
 fi
-if test ! -d "${DIR_BUILD}"; then
-	mkdir -p "${DIR_BUILD}"
+if test ! -d "${dir_build}"; then
+	mkdir -p "${dir_build}"
 fi
 
 # add install prefix to PATH
-export PATH="${INSTALL_PREFIX}/bin:${PATH}"
-export PKG_CONFIG_PATH="${INSTALL_PREFIX}/lib/pkgconfig:${INSTALL_PREFIX}/share/pkgconfig:${PKG_CONFIG_PATH}"
+export PATH="${install_prefix}/bin:${PATH}"
+export PKG_CONFIG_PATH="${install_prefix}/lib/pkgconfig:${install_prefix}/share/pkgconfig:${PKG_CONFIG_PATH}"
 
 # check for Windows OS & detect MinGW build architecture
-OS_WIN=false
+os_win=false
 case "${OSTYPE}" in
 	"win32")
-		OS_WIN=true
+		os_win=true
 		;;
 	"msys")
-		OS_WIN=true
+		os_win=true
 		;;
 	"cygwin")
-		OS_WIN=true
+		os_win=true
 		;;
 esac
 
-TAR=`which tar`
-TAR_FOUND=$?
-if test ! ${TAR_FOUND} -eq 0; then
-	TAR=`which bsdtar`
-	TAR_FOUND=$?
+cmd_tar=`which tar`
+tar_found=$?
+if test ! ${tar_found} -eq 0; then
+	cmd_tar=`which bsdtar`
+	tar_found=$?
 fi
-UNZIP=`which unzip`
-UNZIP_FOUND=$?
-WGET=`which wget`
-WGET_FOUND=$?
+cmd_unzip=`which unzip`
+unzip_found=$?
+cmd_wget=`which wget`
+wget_found=$?
 
 # A simple function to test if a variable is an array
 #
@@ -85,12 +85,12 @@ function is_array {
 }
 
 function download_source {
-	if test ${WGET_FOUND} -ne 0; then
+	if test ${wget_found} -ne 0; then
 		echo -e "\nError in function download_source: 'wget' command not found"
 		exit 1
 	fi
 
-	local cmd_dl=(${WGET})
+	local cmd_dl=(${cmd_wget})
 	local dl=$1
 	if test -z "${dl}"; then
 		echo -e "\nERROR in function download_source: URL not given"
@@ -105,7 +105,7 @@ function download_source {
 
 	local tname=$2
 	if test ! -z "${tname}"; then
-		cmd_dl+=("-O" "${FNAME}")
+		cmd_dl+=("-O" "${fname}")
 	fi
 
 	cmd_dl+=("${dl}")
@@ -117,8 +117,8 @@ function download_source {
 	if test ${ret} -ne 0; then
 		echo -e "\nAn error occurred while downloading file: ${dl}"
 		# remove empty file created by wget
-		if test -f "${FNAME}"; then
-			rm "${FNAME}"
+		if test -f "${fname}"; then
+			rm "${fname}"
 		fi
 		exit ${ret}
 	fi
@@ -128,7 +128,7 @@ function download_source {
 
 # only call this function from 'extract_archive'
 function extract_tarball {
-	if test ${TAR_FOUND} -ne 0; then
+	if test ${tar_found} -ne 0; then
 		echo -e "\nError in function extract_tarball: 'tar' command not found"
 		exit 1
 	fi
@@ -138,16 +138,16 @@ function extract_tarball {
 
 	echo "Extracting tarball: ${archive}"
 	if test -z "${exclude}"; then
-		${TAR} -xf "${archive}"
+		${cmd_tar} -xf "${archive}"
 	else
-		${TAR} --exclude "${exclude}" -xf "${archive}"
+		${cmd_tar} --exclude "${exclude}" -xf "${archive}"
 	fi
 	return $?
 }
 
 # only call this function from 'extract_archive'
 function extract_zip {
-	if test ${UNZIP_FOUND} -ne 0; then
+	if test ${unzip_found} -ne 0; then
 		echo -e "\nError in function extract_zip: 'unzip' command not found"
 		exit 1
 	fi
@@ -155,7 +155,7 @@ function extract_zip {
 	local archive=$1
 
 	echo "Extracting zip: ${archive}"
-	${UNZIP} -qqo "${archive}"
+	${cmd_unzip} -qqo "${archive}"
 	return $?
 }
 
@@ -186,38 +186,38 @@ function extract_archive {
 
 
 prepare() (
-	local NAME="$1"
-	if test -z "${NAME}"; then
-		echo -e "\nError in prepare function, NAME not set"
+	local name="$1"
+	if test -z "${name}"; then
+		echo -e "\nError in prepare function, name not set"
 		exit 1
 	fi
 
-	local CFG="${DIR_LIBS}/CONFIG/${NAME}"
-	if test ! -f "${CFG}"; then
-		local CFG="${DIR_LIBS}/CONFIG-${NAME}"
+	local cfg="${dir_libs}/CONFIG/${name}"
+	if test ! -f "${cfg}"; then
+		local cfg="${dir_libs}/CONFIG-${name}"
 	fi
 
-	if test ! -f "${CFG}"; then
-		echo -e "\nERROR: configuration not found:\n  ${DIR_LIBS}/CONFIG/${NAME}: not found\n  ${CFG}: not found"
+	if test ! -f "${cfg}"; then
+		echo -e "\nERROR: configuration not found:\n  ${dir_libs}/CONFIG/${name}: not found\n  ${cfg}: not found"
 		exit 1
 	fi
 
 	# reset main values
-	local VER DNAME FNAME EXTRACT_NAME SOURCE DEPENDS
+	local ver dname fname extract_name src depends
 
 	# only set this here for use in list_options.sh script
-	local DIR_CONFIG_ROOT
+	local dir_config_root
 
 	# reset options
-	local PATCH_PRUNE_LEVEL CRLF_TO_LF EXCLUDE_EXTRACT
+	local patch_prune_level crlf_to_lf exclude_extract
 
 	# reset commands
-	local CMD_DOWNLOAD CMD_EXTRACT
+	local cmd_download cmd_extract
 
 	# reset functions that can be defined in config files
 	unset pre_dl post_dl pre_extract post_extract
 
-	local REBUILD=false
+	local rebuild=false
 
 	# reset status
 	local DOWNLOAD_DONE=false
@@ -225,78 +225,78 @@ prepare() (
 	local PREPARE_DONE=false
 
 	# backup original name in case of rebuild
-	local NAME_ORIG="${NAME}"
+	local name_orig="${name}"
 
 	# import configuration
-	. "${CFG}"
+	. "${cfg}"
 
 	# detect rebuild
-	if test "${NAME_ORIG}" != "${NAME}"; then
-		echo -e "\nDoing re-build of ${NAME} ${VER}"
-		local REBUILD=true
+	if test "${name_orig}" != "${name}"; then
+		echo -e "\nDoing re-build of ${name} ${ver}"
+		local rebuild=true
 	fi
 
 	# check values imported from configuration
-	if test -z "${VER}" || test -z "${DNAME}"; then
-		echo -e "\nERROR: malformed configuration, VER & DNAME must be set: ${CFG}"
+	if test -z "${ver}" || test -z "${dname}"; then
+		echo -e "\nERROR: malformed configuration, ver & dname must be set: ${cfg}"
 		exit 1
 	fi
 
-	# SOURCE & FNAME must be set if not using a custom download command
-	if test -z "${CMD_DOWNLOAD}"; then
-		if test -z "${FNAME}" || test -z "${SOURCE}"; then
-			echo -e "\nERROR: malformed configuration, FNAME & SOURCE must be set: ${CFG}"
+	# src & fname must be set if not using a custom download command
+	if test -z "${cmd_download}"; then
+		if test -z "${fname}" || test -z "${src}"; then
+			echo -e "\nERROR: malformed configuration, fname & src must be set: ${cfg}"
 			exit 1
 		fi
 	fi
 
 	# FIXME: do this in build function
 	# build dependencies first
-	if ! ${PREPARE_ONLY} && test ! -z "${DEPENDS}"; then
-		echo -e "\nBuilding dependencies for ${NAME_ORIG} ${VER}"
+	if ! ${prepare_only} && test ! -z "${depends}"; then
+		echo -e "\nBuilding dependencies for ${name_orig} ${ver}"
 
 		local dep_name
-		for dep_name in ${DEPENDS[@]}; do
+		for dep_name in ${depends[@]}; do
 			prepare "${dep_name}"
 			local ret=$?
 			if test ${ret} -ne 0; then
-				echo -e "\nCould not prepare ${NAME_ORIG} ${VER}"
+				echo -e "\nCould not prepare ${name_orig} ${ver}"
 				return ${ret}
 			fi
 		done
 	fi
 
-	echo -e "\nPreparing ${NAME_ORIG} ${VER}"
-	echo "Using configuration: ${CFG}"
+	echo -e "\nPreparing ${name_orig} ${ver}"
+	echo "Using configuration: ${cfg}"
 
-	local FILE_LIB_PREPARE="${DIR_BUILD}/PREPARE-${NAME_ORIG}-${VER}"
+	local file_lib_prepare="${dir_build}/PREPARE-${name_orig}-${ver}"
 
-	if test -f "${FILE_LIB_PREPARE}"; then
-		. "${FILE_LIB_PREPARE}"
+	if test -f "${file_lib_prepare}"; then
+		. "${file_lib_prepare}"
 	fi
 
-	if ${REBUILD} && ! ${PREPARE_DONE}; then
+	if ${rebuild} && ! ${PREPARE_DONE}; then
 		# source should already be prepared from original build
 		PREPARE_DONE=true
-		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
+		echo "PREPARE_DONE=true" >> "${file_lib_prepare}"
 	fi
 
 	if ${PREPARE_DONE}; then
-		echo "Using previously prepared sources for ${NAME_ORIG} ${VER}"
-		if ${PREPARE_ONLY}; then
+		echo "Using previously prepared sources for ${name_orig} ${ver}"
+		if ${prepare_only}; then
 			return
 		fi
 	else
-		cd "${DIR_SRC}"
-		PACKAGE="${DIR_SRC}/${FNAME}"
+		cd "${dir_src}"
+		package="${dir_src}/${fname}"
 
 		if ${DOWNLOAD_DONE}; then
-			echo "Not re-downloading sources for ${NAME_ORIG} ${VER}"
+			echo "Not re-downloading sources for ${name_orig} ${ver}"
 		else
 			# clean up old files
-			if test -d "${DIR_SRC}/${DNAME}"; then
-				echo "Removing old source directory: ${DIR_SRC}/${DNAME}"
-				rm -rf "${DIR_SRC}/${DNAME}"
+			if test -d "${dir_src}/${dname}"; then
+				echo "Removing old source directory: ${dir_src}/${dname}"
+				rm -rf "${dir_src}/${dname}"
 			fi
 
 			# pre-download operations
@@ -305,21 +305,21 @@ prepare() (
 				pre_dl
 			fi
 
-			if test ! -z "${CMD_DOWNLOAD}"; then
-				"${CMD_DOWNLOAD[@]}"
+			if test ! -z "${cmd_download}"; then
+				"${cmd_download[@]}"
 				dl_ret=$?
 			else
-				if test -f "${PACKAGE}"; then
-					echo "Found package: ${FNAME}"
+				if test -f "${package}"; then
+					echo "Found package: ${fname}"
 					dl_ret=0
 				else
-					download_source "${SOURCE}" "${FNAME}"
+					download_source "${src}" "${fname}"
 					dl_ret=$?
 				fi
 			fi
 
 			if test ${dl_ret} -ne 0; then
-				echo -e "\nAn error occurred while downloading ${NAME_ORIG} ${VER}"
+				echo -e "\nAn error occurred while downloading ${name_orig} ${ver}"
 				exit ${dl_ret}
 			fi
 
@@ -329,16 +329,16 @@ prepare() (
 				post_dl
 			fi
 
-			echo "DOWNLOAD_DONE=true" >> "${FILE_LIB_PREPARE}"
+			echo "DOWNLOAD_DONE=true" >> "${file_lib_prepare}"
 		fi
 
-		if ${EXTRACT_DONE} && test -d "${DIR_SRC}/${DNAME}"; then
-			echo "Not re-extracting sources for ${NAME_ORIG} ${VER}"
+		if ${EXTRACT_DONE} && test -d "${dir_src}/${dname}"; then
+			echo "Not re-extracting sources for ${name_orig} ${ver}"
 		else
 			# clean up old files
-			if test -d "${DIR_SRC}/${DNAME}"; then
-				echo "Removing old source directory: ${DIR_SRC}/${DNAME}"
-				rm -rf "${DIR_SRC}/${DNAME}"
+			if test -d "${dir_src}/${dname}"; then
+				echo "Removing old source directory: ${dir_src}/${dname}"
+				rm -rf "${dir_src}/${dname}"
 			fi
 
 			# pre-extract operations
@@ -347,72 +347,72 @@ prepare() (
 				pre_extract
 			fi
 
-			if test ! -z "${CMD_EXTRACT}"; then
-				"${CMD_EXTRACT[@]}"
+			if test ! -z "${cmd_extract}"; then
+				"${cmd_extract[@]}"
 			else
-				extract_archive "${PACKAGE}" "${EXCLUDE_EXTRACT}"
+				extract_archive "${package}" "${exclude_extract}"
 			fi
 
 			if test $? -ne 0; then
-				echo -e "\nAn error occurred while extracting file: ${PACKAGE}"
+				echo -e "\nAn error occurred while extracting file: ${package}"
 				exit 1
 			fi
 
 			# use standard naming convention
-			if test ! -z "${EXTRACT_NAME}"; then
-				if test -d "${DNAME}"; then
-					rm -rf "${DNAME}"
+			if test ! -z "${extract_name}"; then
+				if test -d "${dname}"; then
+					rm -rf "${dname}"
 				fi
-				mv "${EXTRACT_NAME}" "${DNAME}"
+				mv "${extract_name}" "${dname}"
 			fi
 
 			# FIXME: how to do this in POST_EXTRACT?
-			if test ! -z "${CRLF_TO_LF}"; then
-				for F in ${CRLF_TO_LF[@]}; do
-					sed -i -e 's|\r$||g' "${DIR_SRC}/${DNAME}/${F}"
+			if test ! -z "${crlf_to_lf}"; then
+				for F in ${crlf_to_lf[@]}; do
+					sed -i -e 's|\r$||g' "${dir_src}/${dname}/${F}"
 					if test $? -ne 0; then
-						echo -e "\nAn error occurred while attempting to convert CRLF line endings to LF: ${DIR_SRC}/${DNAME}/${F}"
+						echo -e "\nAn error occurred while attempting to convert CRLF line endings to LF: ${dir_src}/${dname}/${F}"
 						exit 1
 					fi
 				done
 			fi
 
-			cd "${DNAME}"
+			cd "${dname}"
 
 			# apply external/downloaded patches
-			EXT_PATCH_DIR="${DIR_LIBS}/patch/EXTERNAL-${NAME}-${VER}"
-			if test -d "${EXT_PATCH_DIR}"; then
-				if test -z "${PATCH_PRUNE_LEVEL}"; then
-					echo -e "\nERROR: PATCH_PRUNE_LEVEL must be set when applying external patches"
+			ext_patch_dir="${dir_libs}/patch/EXTERNAL-${name}-${ver}"
+			if test -d "${ext_patch_dir}"; then
+				if test -z "${patch_prune_level}"; then
+					echo -e "\nERROR: patch_prune_level must be set when applying external patches"
 					exit 1
 				fi
 
 				# FIXME: need to delete patches for older versions (probably before source download)
-				for PATCH in $(find "${EXT_PATCH_DIR}" -maxdepth 1 -type f); do
-					echo "Applying external patch: $(basename ${PATCH})"
+				for patch in $(find "${ext_patch_dir}" -maxdepth 1 -type f); do
+					echo "Applying external patch: $(basename ${patch})"
 					# XXX: downloaded patches may need a different "prune" level
-					patch -p${PATCH_PRUNE_LEVEL} -i "${PATCH}"
+					patch -p${patch_prune_level} -i "${patch}"
 					ret=$?
 					if test ${ret} -ne 0; then
-						echo -e "\nAn error occurred while trying to apply external patch: $(basename ${PATCH})"
+						echo -e "\nAn error occurred while trying to apply external patch: $(basename ${patch})"
 						exit ${ret}
 					fi
 				done
 			fi
 
 			# apply internal patches
-			if test -d "${DIR_LIBS}/patch/"; then
-				PATCHES=$(ls "${DIR_LIBS}/patch/" | grep "^${NAME}-.*\.patch")
+			if test -d "${dir_libs}/patch/"; then
+				patches=$(ls "${dir_libs}/patch/" | grep "^${name}-.*\.patch")
 			fi
 
-			for PATCH in ${PATCHES}; do
-				if ${OS_WIN}; then
+			for patch in ${patches}; do
+				if ${os_win}; then
 					local this_sys="win32"
 				else
 					local this_sys="${OSTYPE}"
 				fi
 
-				local p_name=$(echo ${PATCH} | sed -e "s|^${NAME}-||" -e 's|\.patch$||')
+				local p_name=$(echo ${patch} | sed -e "s|^${name}-||" -e 's|\.patch$||')
 				local p_sys=$(echo ${p_name} | cut -d"-" -f2)
 				local p_static_only=false
 				if test "$(echo ${p_name} | cut -d"-" -f3)" == "static_only"; then
@@ -421,21 +421,21 @@ prepare() (
 
 				case "${p_sys}" in
 					"any"|"all"|"${this_sys}")
-						if test ${p_static_only} && ! ${STATIC}; then
+						if test ${p_static_only} && ! ${static}; then
 							# FIXME: better method for checking if static patch should be applied?
-							echo "Ignoring static patch for non-static build: ${PATCH}"
+							echo "Ignoring static patch for non-static build: ${patch}"
 						else
-							echo "Applying patch: ${PATCH}"
-							patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
+							echo "Applying patch: ${patch}"
+							patch -p1 -i "${dir_libs}/patch/${patch}"
 							ret=$?
 							if test ${ret} -ne 0; then
-								echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
+								echo -e "\nAn error occurred while trying to apply patch: ${patch}"
 								exit ${ret}
 							fi
 						fi
 						;;
 					*)
-						echo "Ignoring patch for non-${this_sys} system: ${PATCH}"
+						echo "Ignoring patch for non-${this_sys} system: ${patch}"
 						;;
 				esac
 			done
@@ -448,20 +448,20 @@ prepare() (
 
 			# don't append redundantly to file
 			if ! ${EXTRACT_DONE}; then
-				echo "EXTRACT_DONE=true" >> "${FILE_LIB_PREPARE}"
+				echo "EXTRACT_DONE=true" >> "${file_lib_prepare}"
 			fi
 		fi
 
-		cd "${DIR_LIBS}"
-		echo "PREPARE_DONE=true" >> "${FILE_LIB_PREPARE}"
-		echo -e "\nFinished preparing ${NAME_ORIG} ${VER}"
+		cd "${dir_libs}"
+		echo "PREPARE_DONE=true" >> "${file_lib_prepare}"
+		echo -e "\nFinished preparing ${name_orig} ${ver}"
 	fi
 
-	if ! ${PREPARE_ONLY}; then
-		build "${NAME_ORIG}"
+	if ! ${prepare_only}; then
+		build "${name_orig}"
 		local ret=$?
 		if test ${ret} -ne 0; then
-			echo -e "\nCould not build ${NAME_ORIG} ${VER}"
+			echo -e "\nCould not build ${name_orig} ${ver}"
 			return ${ret}
 		fi
 	fi
@@ -469,35 +469,36 @@ prepare() (
 
 
 build() (
-	local NAME="$1"
-	if test -z "${NAME}"; then
-		echo -e "\nError in build function, NAME not set"
+	local name="$1"
+	if test -z "${name}"; then
+		echo -e "\nError in build function, name not set"
 		exit 1
 	fi
 
-	local CFG="${DIR_LIBS}/CONFIG/${NAME}"
-	if test ! -f "${CFG}"; then
-		local CFG="${DIR_LIBS}/CONFIG-${NAME}"
+	local cfg="${dir_libs}/CONFIG/${name}"
+	if test ! -f "${cfg}"; then
+		local cfg="${dir_libs}/CONFIG-${name}"
 	fi
 
-	if test ! -f "${CFG}"; then
-		echo -e "\nERROR: configuration not found:\n  ${DIR_LIBS}/CONFIG/${NAME}: not found\n  ${CFG}: not found"
+	if test ! -f "${cfg}"; then
+		echo -e "\nERROR: configuration not found:\n  ${dir_libs}/CONFIG/${name}: not found\n  ${cfg}: not found"
 		exit 1
 	fi
 
 	# reset main values
-	local VER DNAME
+	local ver dname
 
 	# reset directories
-	local DIR_CONFIG_ROOT
+	local dir_config_root
 
-	# reset options
-	local CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS CONFIG_OPTS LIBTYPE_OPTS
+	# reset options (NOTE: exported env variables can NEVER be set to array)
+	local cc cxx cflags cxxflags cppflags ldflags libs
+	local config_opts libtype_opts
 
 	# reset commands
-	local CMD_CONFIG
-	local CMD_BUILD=(${CMD_MAKE})
-	local CMD_INSTALL=(${CMD_MAKE} install)
+	local cmd_config
+	local cmd_build=(${CMD_MAKE})
+	local cmd_install=(${CMD_MAKE} install)
 
 	# reset functions that can be defined in config files
 	unset pre_cfg post_cfg pre_build post_build pre_install post_install
@@ -508,52 +509,54 @@ build() (
 	local INSTALL_DONE=false
 
 	# backup original name in case of rebuild
-	local NAME_ORIG="${NAME}"
+	local name_orig="${name}"
 
 	# import configuration
-	. "${CFG}"
+	. "${cfg}"
 
-	is_array "${LIBS[@]}"
+	is_array "${libs[@]}"
 	if test $? -eq 0; then
-		LIBS="${LIBS[@]}"
+		LIBS="${libs[@]}"
+	else
+		LIBS="${libs}"
 	fi
 
-	CPPFLAGS="${CPPFLAGS[@]} -I${INSTALL_PREFIX}/include"
-	LDFLAGS="${LDFLAGS[@]} -L${INSTALL_PREFIX}/lib"
+	CPPFLAGS="${cppflags[@]} -I${install_prefix}/include"
+	LDFLAGS="${ldflags[@]} -L${install_prefix}/lib"
 	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
-	local LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
-	local FILE_LIB_INSTALL="${DIR_BUILD}/INSTALL-${LIB_BUILD}"
+	local lib_build="${name_orig}-${ver}-${build_type}"
+	local file_lib_install="${dir_build}/INSTALL-${lib_build}"
 
 	# prevents re-build/re-install
-	if test -f "${FILE_LIB_INSTALL}"; then
-		. "${FILE_LIB_INSTALL}"
+	if test -f "${file_lib_install}"; then
+		. "${file_lib_install}"
 	fi
 
 	if ${INSTALL_DONE}; then
-		echo "Using previous install of ${NAME_ORIG} ${VER}"
+		echo "Using previous install of ${name_orig} ${ver}"
 	else
-		local DIR_LIB_BUILD="${DIR_BUILD}/${LIB_BUILD}"
+		local dir_lib_build="${dir_build}/${lib_build}"
 		if ${BUILD_DONE}; then
-			echo "Not re-building ${NAME_ORIG} ${VER}"
+			echo "Not re-building ${name_orig} ${ver}"
 		else
-			if test ! -d "${DIR_LIB_BUILD}"; then
-				mkdir -p "${DIR_LIB_BUILD}"
+			if test ! -d "${dir_lib_build}"; then
+				mkdir -p "${dir_lib_build}"
 			fi
 
-			cd "${DIR_LIB_BUILD}"
+			cd "${dir_lib_build}"
 
 			if ${CONFIG_DONE}; then
-				echo "Not re-configuring ${NAME_ORIG} ${VER}"
+				echo "Not re-configuring ${name_orig} ${ver}"
 			else
-				echo -e "\nConfiguring ${NAME_ORIG} ${VER} ..."
+				echo -e "\nConfiguring ${name_orig} ${ver} ..."
 
 				# remove old cache if CONFIG_DONE == false
 				find ./ -type f -delete
 				find ./ -mindepth 1 -type d -empty -delete
 
-				if test -z "${DIR_CONFIG_ROOT}"; then
-					DIR_CONFIG_ROOT="${DIR_SRC}/${DNAME}"
+				if test -z "${dir_config_root}"; then
+					dir_config_root="${dir_src}/${dname}"
 				fi
 
 				# pre-configuration operations
@@ -562,94 +565,94 @@ build() (
 					pre_cfg
 				fi
 
-				if test -z "${CMD_CONFIG}"; then
+				if test -z "${cmd_config}"; then
 					# add common config options
-					CONFIG_OPTS+=(--prefix="${INSTALL_PREFIX}")
+					config_opts+=(--prefix="${install_prefix}")
 
-					if test "${LIBTYPE_OPTS}" != "N/A"; then
-						if test -z "${LIBTYPE_OPTS}"; then
+					if test "${libtype_opts}" != "N/A"; then
+						if test -z "${libtype_opts}"; then
 							# use defaults
-							if ${STATIC}; then
-								LIBTYPE_OPTS=(--enable-static=yes --enable-shared=no)
+							if ${static}; then
+								libtype_opts=(--enable-static=yes --enable-shared=no)
 							else
-								LIBTYPE_OPTS=(--enable-static=no --enable-shared=yes)
+								libtype_opts=(--enable-static=no --enable-shared=yes)
 							fi
 						fi
 					else
-						unset LIBTYPE_OPTS
+						unset libtype_opts
 					fi
 
-					CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
+					config_opts+=(${libtype_opts[@]})
 
-					"${DIR_CONFIG_ROOT}/configure" ${CONFIG_OPTS[@]}
+					"${dir_config_root}/configure" ${config_opts[@]}
 					if test $? -ne 0; then
-						echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
+						echo -e "\nAn error occurred while configuring ${name_orig} ${ver}"
 						exit 1
 					fi
 				else
 					# common values for CMake
-					echo "${CMD_CONFIG[0]}" | grep -q "cmake$"
+					echo "${cmd_config[0]}" | grep -q "cmake$"
 					if test $? -eq 0; then
 						if test "${OSTYPE}" == "msys"; then
-							CMD_CONFIG+=(-G "MSYS Makefiles")
+							cmd_config+=(-G "MSYS Makefiles")
 						fi
-						CMD_CONFIG+=(-DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_PREFIX_PATH=${INSTALL_PREFIX})
-						CMD_CONFIG+=(-DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_FIND_LIBRARY_SUFFIXES=".a")
+						cmd_config+=(-DCMAKE_INSTALL_PREFIX=${install_prefix} -DCMAKE_PREFIX_PATH=${install_prefix})
+						cmd_config+=(-DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_FIND_LIBRARY_SUFFIXES=".a")
 
-						if test "${LIBTYPE_OPTS}" != "N/A"; then
-							if test -z "${LIBTYPE_OPTS}"; then
+						if test "${libtype_opts}" != "N/A"; then
+							if test -z "${libtype_opts}"; then
 								# use defaults
-								if ${STATIC}; then
-									LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF)
+								if ${static}; then
+									libtype_opts=(-DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=OFF)
 								else
-									LIBTYPE_OPTS=(-DBUILD_STATIC_LIBS=OFF -DBUILD_SHARED_LIBS=ON)
+									libtype_opts=(-DBUILD_STATIC_LIBS=OFF -DBUILD_SHARED_LIBS=ON)
 								fi
 							fi
 						else
-							# make sure LIBTYPE_OPTS is empty if set to "N/A"
-							unset LIBTYPE_OPTS
+							# make sure libtype_opts is empty if set to "N/A"
+							unset libtype_opts
 						fi
 
 						# add build type to config options
-						if test ! -z "${LIBTYPE_OPTS}"; then
-							CONFIG_OPTS+=(${LIBTYPE_OPTS[@]})
+						if test ! -z "${libtype_opts}"; then
+							config_opts+=(${libtype_opts[@]})
 						fi
 
 						# add config options to config command & source directory as final argument in config command
-						CMD_CONFIG+=(${CONFIG_OPTS[@]} "${DIR_CONFIG_ROOT}")
+						cmd_config+=(${config_opts[@]} "${dir_config_root}")
 					fi
 
 					# common values for meson
-					echo "${CMD_CONFIG[0]}" | grep -q "meson$"
+					echo "${cmd_config[0]}" | grep -q "meson$"
 					if test $? -eq 0; then
-						if test "${LIBTYPE_OPTS}" != "N/A"; then
-							if test -z "${LIBTYPE_OPTS}"; then
+						if test "${libtype_opts}" != "N/A"; then
+							if test -z "${libtype_opts}"; then
 								# use defaults
-								if ${STATIC}; then
-									LIBTYPE_OPTS=(--default-library=static)
+								if ${static}; then
+									libtype_opts=(--default-library=static)
 								else
-									LIBTYPE_OPTS=(--default-library=shared)
+									libtype_opts=(--default-library=shared)
 								fi
 							fi
 						else
-							# make sure to LIBTYPE_OPTS is empty if set to "N/A"
-							unset LIBTYPE_OPTS
+							# make sure to libtype_opts is empty if set to "N/A"
+							unset libtype_opts
 						fi
 
 						# add default options
-						CONFIG_OPTS=(--prefix=${INSTALL_PREFIX} --buildtype=plain ${LIBTYPE_OPTS[@]} ${CONFIG_OPTS[@]})
-						CMD_CONFIG+=(${CONFIG_OPTS[@]} "${DIR_CONFIG_ROOT}")
+						config_opts=(--prefix=${install_prefix} --buildtype=plain ${libtype_opts[@]} ${config_opts[@]})
+						cmd_config+=(${config_opts[@]} "${dir_config_root}")
 					fi
 
 					# this is usually used for source that does not use build generators like GNU Autotools or CMake
-					if test "${CMD_CONFIG[0]}" == "copy"; then
-						for FD in $(find "${DIR_SRC}/${DNAME}" -mindepth 1 -maxdepth 1); do
+					if test "${cmd_config[0]}" == "copy"; then
+						for FD in $(find "${dir_src}/${dname}" -mindepth 1 -maxdepth 1); do
 							cp -r "${FD}" ./
 						done
 					else
-						"${CMD_CONFIG[@]}"
+						"${cmd_config[@]}"
 						if test $? -ne 0; then
-							echo -e "\nAn error occurred while configuring ${NAME_ORIG} ${VER}"
+							echo -e "\nAn error occurred while configuring ${name_orig} ${ver}"
 							exit 1
 						fi
 					fi
@@ -661,19 +664,19 @@ build() (
 					post_cfg
 				fi
 
-				echo "CONFIG_DONE=true" >> "${FILE_LIB_INSTALL}"
+				echo "CONFIG_DONE=true" >> "${file_lib_install}"
 			fi
 
-			echo -e "\nBuilding ${NAME_ORIG} ${VER} ..."
+			echo -e "\nBuilding ${name_orig} ${ver} ..."
 			# pre-build operations
 			if test ! -z "$(type -t pre_build)" && test "$(type -t pre_build)" == "function"; then
 				echo -e "\nRunning pre-build commands"
 				pre_build
 			fi
 
-			"${CMD_BUILD[@]}"
+			"${cmd_build[@]}"
 			if test $? -ne 0; then
-				echo -e "\nAn error occurred while building ${NAME_ORIG} ${VER}"
+				echo -e "\nAn error occurred while building ${name_orig} ${ver}"
 				exit 1
 			fi
 
@@ -683,12 +686,12 @@ build() (
 				post_build
 			fi
 
-			echo "BUILD_DONE=true" >> "${FILE_LIB_INSTALL}"
+			echo "BUILD_DONE=true" >> "${file_lib_install}"
 
-			cd "${DIR_LIBS}"
+			cd "${dir_libs}"
 		fi
 
-		cd "${DIR_LIB_BUILD}"
+		cd "${dir_lib_build}"
 		if test $? -ne 0; then
 			# build directory doesn't exist so we exit to prevent 'make install' from being called
 			exit 1
@@ -702,15 +705,15 @@ build() (
 			pre_install
 		fi
 
-		echo -e "\nInstalling ${NAME_ORIG} ${VER}"
-		"${CMD_INSTALL[@]}"
+		echo -e "\nInstalling ${name_orig} ${ver}"
+		"${cmd_install[@]}"
 		if test $? -ne 0; then
-			echo -e "\nAn error occurred while installing ${NAME_ORIG} ${VER}"
+			echo -e "\nAn error occurred while installing ${name_orig} ${ver}"
 			exit 1
 		fi
 
-		if ${CLEAN_LIBTOOL}; then
-			local lt_files=($(find "${INSTALL_PREFIX}/lib/" -type f -name "*.la"))
+		if ${clean_libtool}; then
+			local lt_files=($(find "${install_prefix}/lib/" -type f -name "*.la"))
 			if test ${#lt_files[@]} -gt 0; then
 				echo "Cleaning libtool files"
 				rm -vf ${lt_files[@]}
@@ -723,10 +726,10 @@ build() (
 			post_install
 		fi
 
-		echo "INSTALL_DONE=true" >> "${FILE_LIB_INSTALL}"
-		echo -e "\nFinished processing ${NAME_ORIG} ${VER}"
+		echo "INSTALL_DONE=true" >> "${file_lib_install}"
+		echo -e "\nFinished processing ${name_orig} ${ver}"
 
-		cd "${DIR_LIBS}"
+		cd "${dir_libs}"
 	fi
 )
 
@@ -743,16 +746,16 @@ build() (
 #	zlib, bzip2, expat, graphite2, libffi, libogg, xorg-util-macros,
 #	gperf, libtool, nasm, pth, termcap, winpthreads, pthreads-win32
 
-if test ! -z "${BUILD_LIBS}"; then
-	BUILTIN_LIBS="${BUILD_LIBS}"
+if test ! -z "${build_libs}"; then
+	builtin_libs="${build_libs}"
 else
 	# base libs in build order
-	BUILTIN_LIBS=(SDL2_mixer wxSVG)
+	builtin_libs=(SDL2_mixer wxSVG)
 fi
 
 if test ! -z "${NO_BUILD_LIBS}"; then
 	for L in ${NO_BUILD_LIBS}; do
-		BUILTIN_LIBS=$(echo "${BUILTIN_LIBS}" | sed -e "s|${L}||g")
+		builtin_libs=$(echo "${builtin_libs}" | sed -e "s|${L}||g")
 	done
 fi
 
@@ -763,9 +766,9 @@ if test -z "${CMD_MAKE}"; then
 	CMD_MAKE="make"
 fi
 
-for NAME in ${BUILTIN_LIBS[@]}; do
-	echo -e "\nProcessing ${NAME} ..."
-	prepare "${NAME}"
+for name in ${builtin_libs[@]}; do
+	echo -e "\nProcessing ${name} ..."
+	prepare "${name}"
 	ret=$?
 	if test ${ret} -ne 0; then
 		echo -e "\nExiting with errors"
@@ -774,21 +777,21 @@ for NAME in ${BUILTIN_LIBS[@]}; do
 done
 
 # for any packages that install DLLs into lib dir
-if ${OS_WIN} && test -d "${INSTALL_PREFIX}/lib/"; then
-	mkdir -p "${INSTALL_PREFIX}/bin/"
-	for DLL in $(find "${INSTALL_PREFIX}/lib/" -type f -name "*.[dD][lL][lL]"); do
-		mv -v "${DLL}" "${INSTALL_PREFIX}/bin/"
+if ${os_win} && test -d "${install_prefix}/lib/"; then
+	mkdir -p "${install_prefix}/bin/"
+	for dll in $(find "${install_prefix}/lib/" -type f -name "*.[dD][lL][lL]"); do
+		mv -v "${dll}" "${install_prefix}/bin/"
 	done
 fi
 
 # unnecessary directories
-NOUSE_DIRS=("share/doc" "share/man")
-for DIR in ${NOUSE_DIRS[@]}; do
-	if test -d "${INSTALL_PREFIX}/${DIR}"; then
-		echo -e "\nRemoving unused dir: ${DIR}"
-		rm -rf "${INSTALL_PREFIX}/${DIR}"
+nouse_dirs=("share/doc" "share/man")
+for dir in ${nouse_dirs[@]}; do
+	if test -d "${install_prefix}/${dir}"; then
+		echo -e "\nRemoving unused dir: ${dir}"
+		rm -rf "${install_prefix}/${dir}"
 	fi
 done
 
 # remove empty directories
-find "${INSTALL_PREFIX}/" -mindepth 1 -type d -empty -delete
+find "${install_prefix}/" -mindepth 1 -type d -empty -delete

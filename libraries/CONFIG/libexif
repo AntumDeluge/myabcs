@@ -3,16 +3,16 @@
 # Optional depends:
 #  libiconv
 
-DEPENDS=(libiconv-reb)
+depends=(libiconv-reb)
 
-VER="0.6.21"
-VER_LOW="0_6_21"
-DNAME="${NAME}-${VER}"
-FNAME="${NAME}-${VER_LOW}-release.tar.gz"
-SOURCE="https://github.com/libexif/libexif/archive/${FNAME}"
-EXTRACT_NAME="${NAME}-${NAME}-${VER_LOW}-release"
+ver="0.6.21"
+ver_low="0_6_21"
+dname="${name}-${ver}"
+fname="${name}-${ver_low}-release.tar.gz"
+src="https://github.com/libexif/libexif/archive/${fname}"
+extract_name="${name}-${name}-${ver_low}-release"
 
-CONFIG_OPTS=(--disable-docs)
+config_opts=(--disable-docs)
 
 post_extract() {
 	autoreconf -fiv

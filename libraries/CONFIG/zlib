@@ -1,11 +1,11 @@
 
-VER="1.2.11"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://zlib.net/current/${FNAME}"
+ver="1.2.11"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://zlib.net/current/${fname}"
 
-if ${STATIC}; then
-	LIBTYPE_OPTS=(--static)
+if ${static}; then
+	libtype_opts=(--static)
 else
-	LIBTYPE_OPTS=("N/A")
+	libtype_opts=("N/A")
 fi

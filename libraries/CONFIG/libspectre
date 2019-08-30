@@ -1,7 +1,7 @@
 # Depends:
 #  pkg-config, cairo
 
-VER="0.2.8"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://libspectre.freedesktop.org/releases/${FNAME}"
+ver="0.2.8"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://libspectre.freedesktop.org/releases/${fname}"

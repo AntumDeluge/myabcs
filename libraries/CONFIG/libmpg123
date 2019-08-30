@@ -3,16 +3,16 @@
 # Optional depends:
 #  yasm, jack, pulse, portaudio
 
-DEPENDS=(SDL2)
+depends=(SDL2)
 
-VER="1.25.11"
-DNAME="${NAME}-${VER}"
-EXTRACT_NAME="mpg123-${VER}"
-FNAME="${EXTRACT_NAME}.tar.bz2"
-SOURCE="https://sourceforge.net/projects/mpg123/files/mpg123/${VER}/${FNAME}/download"
+ver="1.25.11"
+dname="${name}-${ver}"
+extract_name="mpg123-${ver}"
+fname="${extract_name}.tar.bz2"
+src="https://sourceforge.net/projects/mpg123/files/mpg123/${ver}/${fname}/download"
 
 # don't support mpg1/2 audio
-CONFIG_OPTS=(
+config_opts=(
 	--disable-layer1
 	--disable-layer2
 )

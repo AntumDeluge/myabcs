@@ -1,8 +1,8 @@
 # Notes:
 #  - can optionally build a "pthreads" library
 
-VER="2.0.7"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="ftp://ftp.gnu.org/gnu/pth/${FNAME}"
-LIBTYPE_OPTS=(--enable-shared --enable-static=no)
+ver="2.0.7"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="ftp://ftp.gnu.org/gnu/pth/${fname}"
+libtype_opts=(--enable-shared --enable-static=no)

@@ -3,36 +3,36 @@
 # Optional depends:
 #  libogg, libvorbis, libflac, mpg123, fluidsynth, modplug, mikmod, timidity, mp3mad, libopusfile (libopus)
 
-DEPENDS=(SDL2 libvorbis libflac libmpg123)
+depends=(SDL2 libvorbis libflac libmpg123)
 
-VER="2.0.4"
-DNAME="${NAME}-${VER}"
-if ${OS_WIN}; then
-	FNAME="${DNAME}.zip"
+ver="2.0.4"
+dname="${name}-${ver}"
+if ${os_win}; then
+	fname="${dname}.zip"
 else
-	FNAME="${DNAME}.tar.gz"
+	fname="${dname}.tar.gz"
 fi
-SOURCE="https://www.libsdl.org/projects/SDL_mixer/release/${FNAME}"
+src="https://www.libsdl.org/projects/SDL_mixer/release/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-music-mod
 	--disable-music-midi
 	--disable-music-opus
 	--disable-music-ogg-shared
 	--disable-music-flac-shared
 	--disable-music-mp3-mpg123-shared
-	--with-sdl-prefix="${INSTALL_PREFIX}"
-	--with-sdl-exec-prefix="${INSTALL_PREFIX}"
+	--with-sdl-prefix="${install_prefix}"
+	--with-sdl-exec-prefix="${install_prefix}"
 )
 
-if ${OS_WIN}; then
+if ${os_win}; then
 	# mpg123 needs to link to libshlwapi on Windows
-	#CONFIG_OPTS+=(
-	#	LIBS="-lshlwapi"
+	#config_opts+=(
+	#	libs="-lshlwapi"
 	#	EXTRA_LDFLAGS="-lshlwapi"
 	#)
 
-	LIBTYPE_OPTS=(
+	libtype_opts=(
 		--enable-shared=yes
 		--enable-static=no
 	)

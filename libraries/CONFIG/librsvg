@@ -6,14 +6,14 @@
 
 # Update available: 2.45.8
 
-DEPENDS=(gdk-pixbuf pango libcroco)
+depends=(gdk-pixbuf pango libcroco)
 
-VER="2.44.14"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://download.gnome.org/sources/librsvg/${VER%.*}/${FNAME}"
+ver="2.44.14"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://download.gnome.org/sources/librsvg/${ver%.*}/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-tools
 	--disable-pixbuf-loader
 	--disable-introspection
@@ -21,9 +21,9 @@ CONFIG_OPTS=(
 	--disable-always-build-tests
 )
 
-LIBS="`pkg-config gio-2.0 --libs --static`"
-if ${OS_WIN}; then
-	LIBS+=" -lintl"
+libs="`pkg-config gio-2.0 --libs --static`"
+if ${os_win}; then
+	libs+=" -lintl"
 fi
 
 post_extract() {

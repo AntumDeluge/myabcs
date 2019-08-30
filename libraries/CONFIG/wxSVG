@@ -3,22 +3,22 @@
 # Optional depends:
 #  libav (ffmpeg)
 
-DEPENDS=(libexif wxWidgets)
+depends=(libexif wxWidgets)
 
-VER="1.5.20"
-DNAME="wxsvg-${VER}"
-FNAME="${DNAME}.tar.bz2"
-SOURCE="https://downloads.sourceforge.net/sourceforge/wxsvg/wxsvg/${VER}/${FNAME}"
+ver="1.5.20"
+dname="wxsvg-${ver}"
+fname="${dname}.tar.bz2"
+src="https://downloads.sourceforge.net/sourceforge/wxsvg/wxsvg/${ver}/${fname}"
 
-CONFIG_OPTS=(
-	--with-wx-prefix="${INSTALL_PREFIX}"
-	--with-wx-exec-prefix="${INSTALL_PREFIX}"
-	--with-wx-config="${INSTALL_PREFIX}/bin/wx-config"
+config_opts=(
+	--with-wx-prefix="${install_prefix}"
+	--with-wx-exec-prefix="${install_prefix}"
+	--with-wx-config="${install_prefix}/bin/wx-config"
 	--enable-libav=no
 )
 
-if ${OS_WIN}; then
-	LIBTYPE_OPTS=(
+if ${os_win}; then
+	libtype_opts=(
 		--enable-shared=yes
 		--enable-static=no
 	)

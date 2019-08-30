@@ -1,5 +1,6 @@
-VER="2.14.02"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://www.nasm.us/pub/nasm/releasebuilds/${VER}/${FNAME}"
-LIBTYPE_OPTS="N/A"
+
+ver="2.14.02"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://www.nasm.us/pub/nasm/releasebuilds/${ver}/${fname}"
+libtype_opts="N/A"

@@ -1,6 +1,6 @@
 # A portable foreign-function interface library
 
-VER="3.2.1"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://sourceware.org/pub/libffi/${FNAME}"
+ver="3.2.1"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://sourceware.org/pub/libffi/${fname}"

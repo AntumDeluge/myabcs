@@ -1,15 +1,15 @@
 # Optional depends:
 #  pkg-config, jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
 
-DEPENDS=(pkg-config)
+depends=(pkg-config)
 
-VER="2.0.10"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://libsdl.org/release/${FNAME}"
+ver="2.0.10"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://libsdl.org/release/${fname}"
 
-if ${OS_WIN}; then
-	LIBTYPE_OPTS=(
+if ${os_win}; then
+	libtype_opts=(
 		--enable-shared=yes
 		--enable-static=no
 	)

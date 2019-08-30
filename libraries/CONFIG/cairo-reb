@@ -2,9 +2,9 @@
 
 # FIXME: not recognizing librsvg
 
-NAME="cairo"
-. "CONFIG/${NAME}"
+name="cairo"
+. "CONFIG/${name}"
 
-DEPENDS=(librsvg)
+depends=(librsvg)
 
-CONFIG_OPTS=($(echo "${CONFIG_OPTS[@]}" | sed -e 's|enable-svg=no|enable-svg=yes|'))
+config_opts=($(echo "${config_opts[@]}" | sed -e 's|enable-svg=no|enable-svg=yes|'))

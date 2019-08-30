@@ -1,9 +1,9 @@
 # Depends:
 #  pkg-config, libogg
 
-DEPENDS=(pkg-config libogg)
+depends=(pkg-config libogg)
 
-VER="1.3.6"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="http://downloads.xiph.org/releases/vorbis/${FNAME}"
+ver="1.3.6"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="http://downloads.xiph.org/releases/vorbis/${fname}"

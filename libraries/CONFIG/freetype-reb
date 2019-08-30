@@ -1,10 +1,10 @@
 # this simply re-builds freetype with harfbuzz support
 
-NAME="freetype"
+name="freetype"
 # use the same configuration
-. "CONFIG/${NAME}"
+. "CONFIG/${name}"
 
-DEPENDS=(harfbuzz)
+depends=(harfbuzz)
 
 # add harfbuzz support
-CONFIG_OPTS=($(echo ${CONFIG_OPTS[@]} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|'))
+config_opts=($(echo ${config_opts[@]} | sed -e 's|with-harfbuzz=no|with-harfbuzz=yes|'))

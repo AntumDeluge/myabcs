@@ -3,8 +3,8 @@
 # Optional depends:
 #  zlib, pthreads
 
-VER="2.9"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://downloads.sourceforge.net/lcms/lcms/${VER}/${FNAME}"
-LIBS="`pkg-config libtiff-4 --libs --static`"
+ver="2.9"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://downloads.sourceforge.net/lcms/lcms/${ver}/${fname}"
+libs="`pkg-config libtiff-4 --libs --static`"

@@ -3,14 +3,14 @@
 # Optional depends
 #  zlib, libpng, bzip2, harfbuzz
 
-DEPENDS=(pkg-config libpng bzip2)
+depends=(pkg-config libpng bzip2)
 
-VER="2.10.1"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://download.savannah.gnu.org/releases/freetype/${FNAME}"
+ver="2.10.1"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://download.savannah.gnu.org/releases/freetype/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--enable-freetype-config
 	--with-zlib=yes
 	--with-bzip2=yes

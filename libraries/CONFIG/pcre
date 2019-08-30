@@ -3,8 +3,8 @@
 # Optional depends:
 #  zlib, bzip2, libreadline, libedit
 
-VER="8.43"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.bz2"
-SOURCE="https://ftp.pcre.org/pub/pcre/${FNAME}"
-CONFIG_OPTS=(--enable-utf --enable-unicode-properties --enable-pcre8 --enable-pcre16 --enable-pcre32 --enable-newline-is-lf --enable-pcregrep-libz --enable-pcregrep-libbz2)
+ver="8.43"
+dname="${name}-${ver}"
+fname="${dname}.tar.bz2"
+src="https://ftp.pcre.org/pub/pcre/${fname}"
+config_opts=(--enable-utf --enable-unicode-properties --enable-pcre8 --enable-pcre16 --enable-pcre32 --enable-newline-is-lf --enable-pcregrep-libz --enable-pcregrep-libbz2)

@@ -12,15 +12,15 @@
 
 # FIXME: DLLs are being installed to lib dir
 
-DEPENDS=(expat cairo-reb)
+depends=(expat cairo-reb)
 
-VER="3.1.2"
-VER_BASE="${VER%.*}"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.bz2"
-SOURCE="https://github.com/wxWidgets/wxWidgets/releases/download/v${VER}/${FNAME}"
+ver="3.1.2"
+ver_base="${ver%.*}"
+dname="${name}-${ver}"
+fname="${dname}.tar.bz2"
+src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-gtktest
 	--disable-sdltest
 	--with-libpng=sys
@@ -34,24 +34,24 @@ CONFIG_OPTS=(
 	--with-expat=sys
 )
 
-if ${OS_WIN}; then
-	CONFIG_OPTS+=(--with-msw)
-	LIBTYPE_OPTS=(
+if ${os_win}; then
+	config_opts+=(--with-msw)
+	libtype_opts=(
 		--enable-shared=yes
 		--enable-monolithic
 	)
 else
 	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
-	CONFIG_OPTS+=(--disable-mdi)
-	LIBTYPE_OPTS=(--enable-shared=no)
+	config_opts+=(--disable-mdi)
+	libtype_opts=(--enable-shared=no)
 fi
 
 #post_extract() {
 #	autoreconf -fiv
 #}
 
-if ${OS_WIN}; then
+if ${os_win}; then
 	post_install() {
-		mv -v "${INSTALL_PREFIX}/bin/wxrc-${VER_BASE}" "${INSTALL_PREFIX}/bin/wxrc-${VER_BASE}.exe"
+		mv -v "${install_prefix}/bin/wxrc-${ver_base}" "${install_prefix}/bin/wxrc-${ver_base}.exe"
 	}
 fi

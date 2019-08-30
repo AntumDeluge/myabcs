@@ -5,14 +5,14 @@
 # Unsure depends:
 #  libintl (gettext)
 
-DEPENDS=(pkg-config zlib libiconv)
+depends=(pkg-config zlib libiconv)
 
-VER="2.9.9"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="http://xmlsoft.org/sources/${FNAME}"
+ver="2.9.9"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="http://xmlsoft.org/sources/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--without-python
 	--without-debug
 	--without-lzma

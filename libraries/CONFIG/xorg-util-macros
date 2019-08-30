@@ -1,6 +1,7 @@
-VER="1.19.2"
-DNAME="${NAME}-${VER}"
-EXTRACT_NAME="util-macros-${VER}"
-FNAME="${EXTRACT_NAME}.tar.bz2"
-SOURCE="https://www.x.org/releases/individual/util/${FNAME}"
-LIBTYPE_OPTS="N/A"
+
+ver="1.19.2"
+dname="${name}-${ver}"
+extract_name="util-macros-${ver}"
+fname="${extract_name}.tar.bz2"
+src="https://www.x.org/releases/individual/util/${fname}"
+libtype_opts="N/A"

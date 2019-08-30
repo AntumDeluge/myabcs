@@ -1,9 +1,10 @@
-VER="2.2.7"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.bz2"
-SOURCE="https://github.com/libexpat/libexpat/releases/download/R_$(echo ${VER} | sed -e 's|\.|_|g')/${FNAME}"
 
-CONFIG_OPTS=(
+ver="2.2.7"
+dname="${name}-${ver}"
+fname="${dname}.tar.bz2"
+src="https://github.com/libexpat/libexpat/releases/download/R_$(echo ${ver} | sed -e 's|\.|_|g')/${fname}"
+
+config_opts=(
 	--without-examples
 	--without-tests
 	--without-docbook

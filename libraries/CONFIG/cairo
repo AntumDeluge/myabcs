@@ -1,21 +1,20 @@
-
 # Depends on:
 #  libpng, freetype, librsvg, pixman, glib, gcc-libs (libgcc), zlib
 # Optional depends:
 #  xcb, xlib (X11), CoreGraphics, ghostscript, fontconfig, poppler, libspectre, pthreads-w32 | winpthreads
 #  gtk-doc, valgrind, qt, gobject
 
-DEPENDS=(freetype pixman)
-if ${OS_WIN}; then
-	DEPENDS+=(winpthreads)
+depends=(freetype pixman)
+if ${os_win}; then
+	depends+=(winpthreads)
 fi
 
-VER="1.16.0"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://www.cairographics.org/releases/${FNAME}"
+ver="1.16.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://www.cairographics.org/releases/${fname}"
 
-CONFIG_OPTS=(
+config_opts=(
 	--disable-full-testing
 	--disable-valgrind
 	--disable-gobject

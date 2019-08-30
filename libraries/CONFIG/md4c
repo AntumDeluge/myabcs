@@ -1,34 +1,34 @@
 
-DEPENDS=(cmake)
+depends=(cmake)
 
-unset COMMIT_ID REV
+unset commit_id rev
 
-VER="0.3.4"
-REV="1"
-COMMIT_ID="ae5ca89"
-DNAME="${NAME}-${VER}"
+ver="0.3.4"
+rev="1"
+commit_id="ae5ca89"
+dname="${name}-${ver}"
 
-if test ! -z "${REV}"; then
-	DNAME+="-${REV}"
+if test ! -z "${rev}"; then
+	dname+="-${rev}"
 fi
 
-if test -z "${COMMIT_ID}"; then
-	EXTRACT_NAME="${NAME}-release-${VER}"
-	FNAME="${DNAME}.tar.gz"
-	SOURCE="https://github.com/mity/${NAME}/archive/release-${VER}.tar.gz"
+if test -z "${commit_id}"; then
+	extract_name="${name}-release-${ver}"
+	fname="${dname}.tar.gz"
+	src="https://github.com/mity/${name}/archive/release-${ver}.tar.gz"
 else
-	DNAME+="-${COMMIT_ID}"
-	SOURCE="https://github.com/mity/md4c.git"
+	dname+="-${commit_id}"
+	src="https://github.com/mity/md4c.git"
 	EXTRACT_DONE=true
 
-	CMD_DOWNLOAD=(git clone --single-branch --depth 1 "${SOURCE}" "${DNAME}")
+	cmd_download=(git clone --single-branch --depth 1 "${src}" "${dname}")
 	post_dl() {
-		cd "${DNAME}"
-		git reset --hard ${COMMIT_ID}
+		cd "${dname}"
+		git reset --hard ${commit_id}
 		rm -rf .git
 		cd ../
 	}
 fi
 
-CMD_CONFIG=(cmake)
-LIBTYPE_OPTS=(-DBUILD_SHARED_LIBS=OFF)
+cmd_config=(cmake)
+libtype_opts=(-DBUILD_SHARED_LIBS=OFF)

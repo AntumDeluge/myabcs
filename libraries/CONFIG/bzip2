@@ -1,15 +1,16 @@
-VER="1.0.8"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://sourceware.org/pub/bzip2/${FNAME}"
 
-if ${STATIC}; then
-	LIBTYPE_OPTS=(--enable-shared=no)
+ver="1.0.8"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://sourceware.org/pub/bzip2/${fname}"
+
+if ${static}; then
+	libtype_opts=(--enable-shared=no)
 else
-	LIBTYPE_OPTS=(--enable-shared=yes)
+	libtype_opts=(--enable-shared=yes)
 
 	post_install() {
-		rm -vf "${INSTALL_PREFIX}/lib/libbz2.a"
+		rm -vf "${install_prefix}/lib/libbz2.a"
 	}
 fi
 

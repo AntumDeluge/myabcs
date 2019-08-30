@@ -6,13 +6,13 @@
 
 # FIXME: possible to use pthreads instead of win32 threads?
 
-VER="0.79.0"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://poppler.freedesktop.org/${FNAME}"
-CMD_CONFIG=(cmake)
+ver="0.79.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://poppler.freedesktop.org/${fname}"
+cmd_config=(cmake)
 
-CONFIG_OPTS=(
+config_opts=(
 	-DBUILD_CPP_TESTS=OFF
 	-DBUILD_GTK_TESTS=OFF
 	-DBUILD_QT5_TESTS=OFF

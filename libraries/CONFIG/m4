@@ -1,8 +1,8 @@
 # Optional depends:
 #  pth, libsigsegv
 
-VER="1.4.18"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
-LIBTYPE_OPTS="N/A"
+ver="1.4.18"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.gnu.org/gnu/${name}/${fname}"
+libtype_opts="N/A"

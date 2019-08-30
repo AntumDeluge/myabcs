@@ -1,17 +1,18 @@
-VER="2.9.1"
-NAME_SHORT="pthreads"
-DNAME="${NAME}-${VER}"
-FNAME="${NAME_SHORT}-w32-$(echo ${VER} | sed -e 's|\.|-|g')-release.zip"
-SOURCE="ftp://sourceware.org/pub/${NAME}/${FNAME}"
-EXTRACT_NAME="${NAME_SHORT}.${VER%%.*}"
+
+ver="2.9.1"
+name_short="pthreads"
+dname="${name}-${ver}"
+fname="${name_short}-w32-$(echo ${ver} | sed -e 's|\.|-|g')-release.zip"
+src="ftp://sourceware.org/pub/${name}/${fname}"
+extract_name="${name_short}.${ver%%.*}"
 # FIXME: how to recursively extract single directory or recursively exclude directories
-CMD_EXTRACT=("${UNZIP}" -qqo "${FNAME}")
+cmd_extract=("${cmd_unzip}" -qqo "${fname}")
 # remove extra extracted directories & files, & convert Windows CRLF to Unix LF
-CRLF_TO_LF=(GNUmakefile)
-CMD_CONFIG=(copy)
-CMD_BUILD=(make GCE-inlined)
-CMD_INSTALL=(make install DESTDIR="${INSTALL_PREFIX}")
+crlf_to_lf=(GNUmakefile)
+cmd_config=(copy)
+cmd_build=(make GCE-inlined)
+cmd_install=(make install DESTDIR="${install_prefix}")
 
 post_extract() {
-	rm -rf "Pre-built.${VER%%.*}" "QueueUserAPCEx/"
+	rm -rf "Pre-built.${ver%%.*}" "QueueUserAPCEx/"
 }

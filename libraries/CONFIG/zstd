@@ -1,29 +1,29 @@
 # Optional depends:
 #  liblz4, liblzma (xz), zlib
 
-DEPENDS=(zlib)
+depends=(zlib)
 
-VER="1.4.3"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.zst"
-SOURCE="https://github.com/facebook/${NAME}/releases/download/v${VER}/${FNAME}"
-CMD_CONFIG=(cmake)
-DIR_CONFIG_ROOT="${DIR_SRC}/${DNAME}/build/cmake"
+ver="1.4.3"
+dname="${name}-${ver}"
+fname="${dname}.tar.zst"
+src="https://github.com/facebook/${name}/releases/download/v${ver}/${fname}"
+cmd_config=(cmake)
+dir_config_root="${dir_src}/${dname}/build/cmake"
 
-CONFIG_OPTS=(
+config_opts=(
 	-DZSTD_ZLIB_SUPPORT=ON
 	-DZSTD_LZMA_SUPPORT=OFF
 )
 
-if ${STATIC}; then
-	CONFIG_OPTS+=(-DZSTD_USE_STATIC_RUNTIME=ON)
-	LIBTYPE_OPTS=(
+if ${static}; then
+	config_opts+=(-DZSTD_USE_STATIC_RUNTIME=ON)
+	libtype_opts=(
 		-DZSTD_BUILD_STATIC=ON
 		-DZSTD_BUILD_SHARED=OFF
 	)
 else
-	CONFIG_OPTS+=(-DZSTD_USE_STATIC_RUNTIME=OFF)
-	LIBTYPE_OPTS=(
+	config_opts+=(-DZSTD_USE_STATIC_RUNTIME=OFF)
+	libtype_opts=(
 		-DZSTD_BUILD_STATIC=OFF
 		-DZSTD_BUILD_SHARED=ON
 	)

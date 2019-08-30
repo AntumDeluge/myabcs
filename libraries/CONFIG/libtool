@@ -1,7 +1,7 @@
 # Provides:
 #  libltdl
 
-VER="2.4.6"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.gnu.org/pub/gnu/libtool/${FNAME}"
+ver="2.4.6"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.gnu.org/pub/gnu/libtool/${fname}"

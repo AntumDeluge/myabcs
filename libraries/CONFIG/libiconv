@@ -3,7 +3,7 @@
 # Unsure depends:
 #  libiconv (depends on self?)
 
-VER="1.16"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.gz"
-SOURCE="https://ftp.gnu.org/pub/gnu/${NAME}/${FNAME}"
+ver="1.16"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://ftp.gnu.org/pub/gnu/${name}/${fname}"

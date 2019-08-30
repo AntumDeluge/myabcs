@@ -3,9 +3,9 @@
 # Optional depends:
 #  gzip, bzip2, lzip, lzop, xz, zstd
 
-DEPENDS=(gzip bzip2 lzip lzop, xz, zstd)
+depends=(gzip bzip2 lzip lzop, xz, zstd)
 
-VER="1.32"
-DNAME="${NAME}-${VER}"
-FNAME="${DNAME}.tar.xz"
-SOURCE="https://ftp.gnu.org/gnu/${NAME}/${FNAME}"
+ver="1.32"
+dname="${name}-${ver}"
+fname="${dname}.tar.xz"
+src="https://ftp.gnu.org/gnu/${name}/${fname}"
