@@ -514,16 +514,14 @@ build() (
 	# import configuration
 	. "${cfg}"
 
-	is_array "${libs[@]}"
-	if test $? -eq 0; then
-		LIBS="${libs[@]}"
-	else
-		LIBS="${libs}"
-	fi
-
+	CC="${cc[@]}"
+	CXX="${cxx[@]}"
+	CFLAGS="${cflags[@]}"
+	CXXFLAGS="${cxxflags[@]}"
 	CPPFLAGS="${cppflags[@]} -I${install_prefix}/include"
 	LDFLAGS="${ldflags[@]} -L${install_prefix}/lib"
-	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
+	LIBS="${libs[@]}"
+	export CC CXX CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
 	local lib_build="${name_orig}-${ver}-${build_type}"
 	local file_lib_install="${dir_build}/INSTALL-${lib_build}"
