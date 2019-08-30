@@ -12,4 +12,7 @@ dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 src="https://pkgconfig.freedesktop.org/releases/${fname}"
 
-config_opts=(--with-internal-glib)
+config_opts=(
+	--with-internal-glib
+	--with-libiconv
+)
