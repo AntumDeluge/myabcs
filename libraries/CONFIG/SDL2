@@ -1,7 +1,12 @@
+# Depends:
+#  pkg-config
 # Optional depends:
-#  pkg-config, jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
+#  jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
 
 depends=(pkg-config)
+if ${os_win}; then
+	depends+=(winpthreads)
+fi
 
 ver="2.0.10"
 dname="${name}-${ver}"
