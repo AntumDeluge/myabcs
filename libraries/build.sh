@@ -777,7 +777,7 @@ done
 # for any packages that install DLLs into lib dir
 if ${os_win} && test -d "${install_prefix}/lib/"; then
 	mkdir -p "${install_prefix}/bin/"
-	for dll in $(find "${install_prefix}/lib/" -type f -name "*.[dD][lL][lL]"); do
+	for dll in $(find "${install_prefix}/lib/" -mindepth 1 -maxdepth 1 -type f -name "*.[dD][lL][lL]"); do
 		mv -v "${dll}" "${install_prefix}/bin/"
 	done
 fi
