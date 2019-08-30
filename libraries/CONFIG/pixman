@@ -18,7 +18,3 @@ config_opts=(
 	--disable-gtk
 	--enable-libpng
 )
-
-if ${os_win}; then
-	libs="-lffi -lintl -lpcre -lole32 -lws2_32"
-fi
