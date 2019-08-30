@@ -644,9 +644,12 @@ build() (
 
 					# this is usually used for source that does not use build generators like GNU Autotools or CMake
 					if test "${cmd_config[0]}" == "copy"; then
+						local ifs_orig=${IFS}
+						IFS=$'\n'
 						for FD in $(find "${dir_src}/${dname}" -mindepth 1 -maxdepth 1); do
 							cp -r "${FD}" ./
 						done
+						IFS=${ifs_orig}
 					else
 						"${cmd_config[@]}"
 						if test $? -ne 0; then
