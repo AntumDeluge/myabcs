@@ -30,9 +30,11 @@ post_extract() {
 	autoreconf -fiv
 }
 
-post_cfg() {
-	# pass static rust package to linker
-	sed -i "s/^deplibs_check_method=.*/deplibs_check_method=\"pass_all\"/g" libtool
-	# add missing crt libs (ws2_32 and userenv) to LIBRSVG_LIBS
-	sed -i "s/^LIBRSVG_LIBS = .*/& -lws2_32 -luserenv/g" Makefile
+if ${os_win}; then
+	post_cfg() {
+		# pass static rust package to linker
+		sed -i "s/^deplibs_check_method=.*/deplibs_check_method=\"pass_all\"/g" libtool
+		# add missing crt libs (ws2_32 and userenv) to LIBRSVG_LIBS
+		sed -i "s/^LIBRSVG_LIBS = .*/& -lws2_32 -luserenv/g" Makefile
+	}
 }
