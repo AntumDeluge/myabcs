@@ -14,8 +14,3 @@ config_opts=(
 	--disable-iconv
 	--disable-docs
 )
-
-if ${os_win}; then
-	# FIXME: not sure why I have to explicitly link to static harfbuzz
-	libs="-l:libharfbuzz.a"
-fi
