@@ -415,7 +415,7 @@ prepare() (
 				local p_name=$(echo ${PATCH} | sed -e "s|^${NAME}-||" -e 's|\.patch$||')
 				local p_sys=$(echo ${p_name} | cut -d"-" -f2)
 				local p_static_only=false
-				if test "$(echo ${p_name} | cut -d"-" -f3)" == "static"; then
+				if test "$(echo ${p_name} | cut -d"-" -f3)" == "static_only"; then
 					p_static_only=true
 				fi
 
