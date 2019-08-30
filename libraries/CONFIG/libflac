@@ -3,7 +3,10 @@
 # Optional depends:
 #  libogg, nasm
 
-depends=(nasm libogg)
+depends=(nasm)
+if ! ${static}; then
+	depends+=(libogg)
+fi
 
 ver="1.3.2"
 dname="${name}-${ver}"
@@ -17,6 +20,10 @@ config_opts=(
 	--disable-cpplibs
 	--enable-ogg
 )
+
+if ${static}; then
+	config_opts=($(echo "${config_opts[@]}" | sed -e 's|enable-ogg|disable-ogg|g'))
+fi
 
 if ${os_win}; then
 	# FLAC only works if using shared DLL
