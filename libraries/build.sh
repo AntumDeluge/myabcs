@@ -32,7 +32,7 @@ DIR_BUILD="${DIR_LIBS}/build"
 INSTALL_PREFIX="${DIR_LIBS}/libprefix-${BUILD}"
 
 STATIC=true
-CLEAN_LIBTOOL=true
+CLEAN_LIBTOOL=false
 
 if test ! -d "${DIR_SRC}"; then
 	mkdir -p "${DIR_SRC}"
