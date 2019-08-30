@@ -10,8 +10,6 @@ dname="${name}-${ver}"
 fname="${dname}.tar.xz"
 src="https://download.gnome.org/sources/${name}/${ver%.*}/${fname}"
 
-libs="-lintl"
-
-if ${os_win}; then
-	libs+=" -lole32"
+if ${static}; then
+	libs+=($(pkg-config glib-2.0 --libs-only-l --libs-only-other --static) -lintl)
 fi
