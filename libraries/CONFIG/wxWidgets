@@ -10,9 +10,9 @@
 # TODO:
 #  - disable everything not used by MyABCs
 
-# FIXME: DLLs are being installed to lib dir
+# NOTE: DLLs are installed to lib dir
 
-depends=(expat cairo-reb)
+depends=(expat cairo)
 
 ver="3.1.2"
 ver_base="${ver%.*}"
