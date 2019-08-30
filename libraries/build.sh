@@ -406,24 +406,35 @@ prepare() (
 
 			for PATCH in ${PATCHES}; do
 				if ${OS_WIN}; then
-					P_SYS="win32"
+					local this_sys="win32"
 				else
-					P_SYS="${OSTYPE}"
+					local this_sys="${OSTYPE}"
 				fi
 
-				P_TYPE=$(basename ${PATCH} | sed -e "s|^${NAME}-||" | cut -d"-" -f2)
-				case "${P_TYPE}" in
-					"any"|"all"|"${P_SYS}")
-						echo "Applying patch: ${PATCH}"
-						patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
-						ret=$?
-						if test ${ret} -ne 0; then
-							echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
-							exit ${ret}
+				local p_name=$(echo ${PATCH} | sed -e "s|^${NAME}-||" -e 's|\.patch$||')
+				local p_sys=$(echo ${p_name} | cut -d"-" -f2)
+				local p_static_only=false
+				if test "$(echo ${p_name} | cut -d"-" -f3)" == "static"; then
+					p_static_only=true
+				fi
+
+				case "${p_sys}" in
+					"any"|"all"|"${this_sys}")
+						if test ${p_static_only} && ! ${STATIC}; then
+							# FIXME: better method for checking if static patch should be applied?
+							echo "Ignoring static patch for non-static build: ${PATCH}"
+						else
+							echo "Applying patch: ${PATCH}"
+							patch -p1 -i "${DIR_LIBS}/patch/${PATCH}"
+							ret=$?
+							if test ${ret} -ne 0; then
+								echo -e "\nAn error occurred while trying to apply patch: ${PATCH}"
+								exit ${ret}
+							fi
 						fi
 						;;
 					*)
-						echo "Ignoring patch for non-${P_SYS} system: ${PATCH}"
+						echo "Ignoring patch for non-${this_sys} system: ${PATCH}"
 						;;
 				esac
 			done
