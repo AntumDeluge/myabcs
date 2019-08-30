@@ -25,9 +25,6 @@ config_opts=(
 	-Djpeg=false
 )
 
-libs="`pkg-config glib-2.0 libtiff-4 --libs --static` -liconv"
 if ${os_win}; then
 	config_opts+=(-Dx11=false)
-	libs+=" -lws2_32"
 fi
-ldflags="${libs}"
