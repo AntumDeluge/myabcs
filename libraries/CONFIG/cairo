@@ -5,7 +5,7 @@
 #  xcb, xlib (X11), CoreGraphics, ghostscript, fontconfig, poppler, libspectre, pthreads-w32 | winpthreads
 #  gtk-doc, valgrind, qt, gobject
 
-DEPENDS=(freetype-reb pixman)
+DEPENDS=(freetype pixman)
 if ${OS_WIN}; then
 	DEPENDS+=(winpthreads)
 fi
