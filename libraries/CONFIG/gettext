@@ -51,4 +51,7 @@ if ${os_win}; then
 		--enable-static=no
 		--enable-shared=yes
 	)
+
+	cflags+=(-O2)
+	cxxflags+=(-O2)
 fi
