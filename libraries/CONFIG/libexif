@@ -3,7 +3,7 @@
 # Optional depends:
 #  libiconv
 
-depends=(libiconv-reb)
+depends=(libiconv)
 
 ver="0.6.21"
 ver_low="0_6_21"
