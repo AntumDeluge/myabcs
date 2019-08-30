@@ -3,11 +3,9 @@
 # Optional depends:
 #  harfbuzz, fontconfig, freetype
 
-# Update available: 1.44.1
-
 depends=(fribidi cairo)
 
-ver="1.43.0"
+ver="1.44.5"
 dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 #src="https://download.gnome.org/sources/pango/${ver%.*}/${fname}"
@@ -15,7 +13,21 @@ src="https://github.com/GNOME/${name}/archive/${ver}.tar.gz"
 cmd_config=(meson)
 cmd_build=(ninja)
 cmd_install=(ninja install)
-config_opts=(-Dgir=false)
 
-libs="`pkg-config cairo --libs --static` -lstdc++"
-ldflags="${libs}"
+config_opts=(
+	-Dgtk_doc=false
+	-Dintrospection=false
+	-Dinstall-tests=false
+	-Duse_fontconfig=true
+)
+
+# from README.win32
+if ${os_win}; then
+	#cc="gcc -mtune=pentium3"
+	cflags+="-O"
+fi
+
+if ${static}; then
+	libs+=(`pkg-config fontconfig pixman-1 --libs --static`)
+	ldflags+=(${libs[@]})
+fi
