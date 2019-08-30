@@ -18,6 +18,9 @@ config_opts=(
 	--with-freetype=yes
 )
 
-if "${os_win}"; then
-	libs+=" -lintl -lws2_32 -lole32"
+if ${static}; then
+	libs+=(-lintl)
+	if ${os_win}; then
+		libs+=(-lole32)
+	fi
 fi
