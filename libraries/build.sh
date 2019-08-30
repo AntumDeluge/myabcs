@@ -513,17 +513,13 @@ build() (
 	# import configuration
 	. "${CFG}"
 
-	is_array "${CPPFLAGS[@]}"
-	if test $? -eq 0; then
-		CPPFLAGS="${CPPFLAGS[@]}"
-	fi
 	is_array "${LIBS[@]}"
 	if test $? -eq 0; then
 		LIBS="${LIBS[@]}"
 	fi
 
-	CPPFLAGS="${CPPFLAGS} -I${INSTALL_PREFIX}/include"
-	LDFLAGS="${LDFLAGS} -L${INSTALL_PREFIX}/lib"
+	CPPFLAGS="${CPPFLAGS[@]} -I${INSTALL_PREFIX}/include"
+	LDFLAGS="${LDFLAGS[@]} -L${INSTALL_PREFIX}/lib"
 	export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS LIBS
 
 	local LIB_BUILD="${NAME_ORIG}-${VER}-${BUILD}"
