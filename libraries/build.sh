@@ -260,6 +260,7 @@ prepare() (
 			prepare "${dep_name}"
 			local ret=$?
 			if test ${ret} -ne 0; then
+				echo -e "\nCould not prepare ${NAME_ORIG} ${VER}"
 				return ${ret}
 			fi
 		done
@@ -460,6 +461,7 @@ prepare() (
 		build "${NAME_ORIG}"
 		local ret=$?
 		if test ${ret} -ne 0; then
+			echo -e "\nCould not build ${NAME_ORIG} ${VER}"
 			return ${ret}
 		fi
 	fi
