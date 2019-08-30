@@ -12,7 +12,7 @@
 
 # NOTE: DLLs are installed to lib dir
 
-depends=(expat cairo)
+depends=(pkg-config expat cairo)
 
 ver="3.1.2"
 ver_base="${ver%.*}"
