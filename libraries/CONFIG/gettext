@@ -9,7 +9,7 @@
 
 # Update available: 0.20.1
 
-DEPENDS=(glib bzip2 libcroco)
+depends=(bzip2)
 
 ver="0.19.8.1"
 dname="${name}-${ver}"
@@ -30,8 +30,12 @@ config_opts=(
 	--disable-native-java
 	--disable-csharp
 	--disable-openmp
-	--with-included-regex
+	--with-included-gettext
+	--with-included-glib
+	--with-included-libcroco
 	--with-included-libunistring
+	--with-included-libxml
+	--with-included-regex
 	--without-xz
 	--without-emacs
 	--without-cvs
