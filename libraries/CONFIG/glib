@@ -8,7 +8,7 @@
 # FIXME:
 #  - linking to libintl (required?)
 
-depends=(libffi)
+depends=(libffi gettext)
 if ${os_win}; then
 	depends+=(winpthreads)
 fi
