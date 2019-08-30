@@ -1,0 +1,11 @@
+ver="0.51.2"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://github.com/mesonbuild/${name}/releases/download/${ver}/${fname}"
+
+cmd_config=(copy)
+cmd_build=(python3 setup.py build)
+cmd_install=(python3 setup.py install)
+if ! ${os_win}; then
+	cmd_install+=(--prefix ~/.local)
+fi
