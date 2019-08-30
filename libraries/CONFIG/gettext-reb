@@ -1,0 +1,8 @@
+# rebuild of gettext to link to local glib
+
+name="gettext"
+. "CONFIG/${name}"
+
+depends=(glib libcroco)
+
+config_opts=($(echo "${config_opts[@]}" | sed -e 's|--with-included-gettext||g' -e 's|--with-included-glib||g' -e 's|--with-included-libcroco||g' -e 's|--with-included-libxml||g'))
