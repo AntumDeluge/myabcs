@@ -7,3 +7,9 @@ ver="1.16"
 dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 src="https://ftp.gnu.org/pub/gnu/${name}/${fname}"
+
+if ${static}; then
+	post_install() {
+		rm -vf "${install_prefix}/lib/libiconv.la" "${install_prefix}/lib/libcharset.la"
+	}
+fi
