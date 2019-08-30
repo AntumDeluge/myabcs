@@ -1,0 +1,12 @@
+diff -ruN SDL2_mixer-2.0.4.orig/configure SDL2_mixer-2.0.4/configure
+--- SDL2_mixer-2.0.4.orig/configure	2019-08-27 03:35:13.715429200 -0700
++++ SDL2_mixer-2.0.4/configure	2019-08-27 03:37:11.998616900 -0700
+@@ -12643,7 +12643,7 @@
+   $as_echo_n "(cached) " >&6
+ else
+   ac_check_lib_save_LIBS=$LIBS
+-LIBS="-lmpg123  $LIBS"
++LIBS="-lmpg123 -lshlwapi $LIBS"
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
