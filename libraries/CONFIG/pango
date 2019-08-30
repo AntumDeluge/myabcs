@@ -9,8 +9,9 @@ depends=(fribidi cairo)
 
 ver="1.43.0"
 dname="${name}-${ver}"
-fname="${dname}.tar.xz"
-src="https://download.gnome.org/sources/pango/${ver%.*}/${fname}"
+fname="${dname}.tar.gz"
+#src="https://download.gnome.org/sources/pango/${ver%.*}/${fname}"
+src="https://github.com/GNOME/${name}/archive/${ver}.tar.gz"
 cmd_config=(meson)
 cmd_build=(ninja)
 cmd_install=(ninja install)
