@@ -9,7 +9,10 @@
 
 # Update available: 0.20.1
 
-depends=(bzip2)
+depends=(bzip2 libiconv)
+if ${os_win}; then
+	depends+=(winpthreads)
+fi
 
 ver="0.19.8.1"
 dname="${name}-${ver}"
