@@ -69,6 +69,7 @@ else()
 endif()
 
 # TODO: copy license & other data files
+# FIXME: target executable is deleted of add_custom_command execution fails
 
 # copy images
 add_custom_command(
@@ -78,6 +79,7 @@ add_custom_command(
 )
 
 set(VALID_AFMTS flac vorbis oga ogg mp3)
+file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 
 # audio output format
 find_program(FFMPEG ffmpeg)
@@ -101,14 +103,30 @@ else()
 		)
 	else()
 		if("${AFORMAT}" STREQUAL "vorbis" OR "${AFORMAT}" STREQUAL "oga" OR "${AFORMAT}" STREQUAL "ogg")
-			# TODO: set values for converting to vorbis audio
+			set(ACODEC libvorbis)
+			set(AEXT oga)
+			set(ABITRATE 96k)
 		elseif("${AFORMAT}" STREQUAL "mp3")
-			# TODO: set values for converting to mp3 audio
+			set(ACODEC libmp3lame)
+			set(AEXT mp3)
+			set(ABITRATE 128k)
 		else()
 			message(FATAL_ERROR "Unrecognized audio format (AFORMAT): ${AFORMAT}\nValid formats: ${VALID_AFMTS}")
 		endif()
 
-		# TODO: set FFmpeg command to convert audio
+		# FIXME: automatically detect subdirs to create
+		file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
+		file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
+
+		foreach(FLAC ${RESOURCES_FLAC})
+			string(REPLACE "${CMAKE_SOURCE_DIR}/" "" FLAC "${FLAC}")
+			string(REPLACE ".flac" "" FLAC "${FLAC}")
+			add_custom_command(
+				TARGET ${EXECUTABLE} POST_BUILD
+				COMMAND ${FFMPEG} -y -hide_banner -i "${CMAKE_SOURCE_DIR}/${FLAC}.flac" -c:a ${ACODEC} -b:a ${ABITRATE} -ar 44100 "${CMAKE_BINARY_DIR}/${FLAC}.${AEXT}"
+				COMMENT "Converting audio: ${FLAC}"
+			)
+		endforeach()
 	endif()
 endif()
 
