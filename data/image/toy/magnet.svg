@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="116.082"
+   height="128"
    id="Layer_1"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
    sodipodi:docname="magnet.svg"
@@ -17,8 +17,8 @@
    space="preserve"
    style="overflow:visible"
    version="1.1"
-   viewBox="0 0 128.00044 116.082"
-   width="128.00044">
+   viewBox="0 0 125.97309 128"
+   width="125.97308">
   <title
      id="title831">Calamita</title>
   <metadata
@@ -75,15 +75,15 @@
      borderopacity="1.0"
      id="base"
      inkscape:current-layer="Layer_1"
-     inkscape:cx="18.387954"
-     inkscape:cy="86.630313"
+     inkscape:cx="72.667618"
+     inkscape:cy="81.595048"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:window-height="1025"
      inkscape:window-width="1920"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:zoom="4.2161494"
+     inkscape:zoom="2.9812678"
      pagecolor="#ffffff"
      showgrid="false"
      inkscape:window-maximized="1"
@@ -93,7 +93,7 @@
      fit-margin-bottom="0" />
   <g
      id="g3"
-     transform="matrix(0.9613071,0,0,0.9613071,0.00143553,9.6360224e-6)">
+     transform="matrix(0.9460813,0,0,1.0600034,0.0014128,1.0625342e-5)">
     <radialGradient
        cx="39.756302"
        cy="24.221201"
