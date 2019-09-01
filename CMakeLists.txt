@@ -67,3 +67,12 @@ if(USE_BUILTIN)
 else()
 	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
 endif()
+
+# TODO: copy license & other data files
+
+# copy images
+add_custom_command(
+	TARGET ${EXECUTABLE} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/image" "${CMAKE_BINARY_DIR}/data/image"
+	COMMENT "Copying image data"
+)
