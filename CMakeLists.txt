@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 2.6.2)
 project(MyABCs)
-set(PROJECT_VERSION "0.4.7")
+set(PROJECT_VERSION 0.4.7)
+set(PROJECT_VERSION_DEV 1)
 set(PROJECT_HOMEPAGE_URL "https://antumdeluge.github.io/myabcs")
 
-set(CMAKE_CXX_FLAGS -DVERSION="\\"${PROJECT_VERSION}\\"")
+add_compile_definitions(VERSION="${PROJECT_VERSION}")
+if(${PROJECT_VERSION_DEV} GREATER 0)
+	add_compile_definitions(VER_DEV="${PROJECT_VERSION_DEV}")
+endif()
 
 if(WIN32)
 	set(PLATFORM "win32")
