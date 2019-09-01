@@ -147,9 +147,14 @@ if(WIN32 AND USE_BUILTIN)
 	)
 endif()
 
-add_custom_target(stage
+add_custom_target(clean-stage
 	# FIXME: need platform independent method to delete directory
 	COMMAND rm -rf "${CMAKE_BINARY_DIR}/stage"
+	COMMENT "Cleaning stage directory"
+)
+
+add_custom_target(stage
+	DEPENDS clean-stage
 	COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/stage/myabcs"
 	COMMAND ${CMAKE_COMMAND} -E copy "${EXECUTABLE}${EXE_SUFFIX}" "${CMAKE_BINARY_DIR}/stage/myabcs"
 	# FIXME: need to copy files with .DLL suffix as well
