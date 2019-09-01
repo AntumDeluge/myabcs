@@ -150,4 +150,8 @@ add_custom_target(stage
 	# FIXME: need to copy files with .DLL suffix as well
 	COMMAND ${CMAKE_COMMAND} -E copy "*.dll" "${CMAKE_BINARY_DIR}/stage/myabcs"
 	COMMAND ${CMAKE_COMMAND} -E copy_directory "data" "${CMAKE_BINARY_DIR}/stage/myabcs/data"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/doc" "${CMAKE_BINARY_DIR}/stage/myabcs/doc"
+	COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/CHANGES.txt" "${CMAKE_BINARY_DIR}/stage/myabcs"
+	COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/LICENSE.txt" "${CMAKE_BINARY_DIR}/stage/myabcs"
+	COMMENT "Staging files"
 )
