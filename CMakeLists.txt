@@ -94,7 +94,7 @@ file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 # audio output format
 find_program(FFMPEG ffmpeg)
 if(NOT FFMPEG)
-	message("FFmpeg not found")
+	message(WARNING "FFmpeg not found: converting audio not supported")
 	add_custom_command(
 		TARGET ${EXECUTABLE} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/audio" "${CMAKE_BINARY_DIR}/data/audio"
