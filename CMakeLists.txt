@@ -81,6 +81,13 @@ endif()
 # TODO: copy license & other data files
 # FIXME: target executable is deleted of add_custom_command execution fails
 
+# clean data directory before build
+# FIXME: should be done in build
+file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/data")
+# FIXME: automatically detect subdirs to create
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
+
 # copy images
 add_custom_command(
 	TARGET ${EXECUTABLE} POST_BUILD
@@ -90,10 +97,6 @@ add_custom_command(
 
 set(VALID_AFMTS flac vorbis oga ogg mp3 pcm wav)
 file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
-
-# FIXME: automatically detect subdirs to create
-file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
-file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
 
 # audio output format
 find_program(FFMPEG ffmpeg)
