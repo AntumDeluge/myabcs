@@ -111,3 +111,12 @@ else()
 		# TODO: set FFmpeg command to convert audio
 	endif()
 endif()
+
+if(WIN32 AND USE_BUILTIN)
+	file(GLOB RESOURCES_DLL "${BUILTIN_LIBPREFIX}/bin/*.dll")
+	add_custom_command(
+		TARGET ${EXECUTABLE} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy ${RESOURCES_DLL} "${CMAKE_BINARY_DIR}"
+		COMMENT "Copying DLLs"
+	)
+endif()
