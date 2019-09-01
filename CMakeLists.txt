@@ -47,7 +47,11 @@ endif(USE_BUILTIN)
 include(FindPkgConfig)
 
 # wxWidgets & wxSVG
+set(WX_REQUIRED_VER 3.1)
 find_package(wxWidgets COMPONENTS core base REQUIRED)
+if(wxWidgets_VERSION_STRING LESS WX_REQUIRED_VER)
+	message(FATAL_ERROR "Build requires at least wxWidgets version ${WX_REQUIRED_VER}, found ${wxWidgets_VERSION_STRING}")
+endif()
 include("${wxWidgets_USE_FILE}")
 pkg_search_module(WXSVG REQUIRED libwxsvg)
 

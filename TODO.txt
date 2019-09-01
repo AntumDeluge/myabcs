@@ -14,8 +14,8 @@ Priority:
 - Set category items dynamically from image filenames
 - Add Debian build instructions
 - Build:
-  - Require wxWidgets version >= 3.1 (to support font resources)
-    - Use built-in static version if requirement not met
+  - Force use of built-in wx if min version requirement not met
+    or display message about USE_BUILTIN option
 
 Non-priority:
 - Indent line breaks in changelog
