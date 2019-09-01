@@ -76,3 +76,38 @@ add_custom_command(
 	COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/image" "${CMAKE_BINARY_DIR}/data/image"
 	COMMENT "Copying image data"
 )
+
+set(VALID_AFMTS flac vorbis oga ogg mp3)
+
+# audio output format
+find_program(FFMPEG ffmpeg)
+if(NOT FFMPEG)
+	message("FFmpeg not found")
+	add_custom_command(
+		TARGET ${EXECUTABLE} POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/audio" "${CMAKE_BINARY_DIR}/data/audio"
+		COMMENT "Copying audio data"
+	)
+else()
+	message("Found FFmpeg")
+	# default to OGG/Vorbis
+	set(AFORMAT "vorbis" CACHE STRING "Audio format")
+	if("${AFORMAT}" STREQUAL "flac")
+		# same as if ffmpeg not found
+		add_custom_command(
+			TARGET ${EXECUTABLE} POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/audio" "${CMAKE_BINARY_DIR}/data/audio"
+			COMMENT "Copying audio data"
+		)
+	else()
+		if("${AFORMAT}" STREQUAL "vorbis" OR "${AFORMAT}" STREQUAL "oga" OR "${AFORMAT}" STREQUAL "ogg")
+			# TODO: set values for converting to vorbis audio
+		elseif("${AFORMAT}" STREQUAL "mp3")
+			# TODO: set values for converting to mp3 audio
+		else()
+			message(FATAL_ERROR "Unrecognized audio format (AFORMAT): ${AFORMAT}\nValid formats: ${VALID_AFMTS}")
+		endif()
+
+		# TODO: set FFmpeg command to convert audio
+	endif()
+endif()
