@@ -133,7 +133,7 @@ else()
 			string(REPLACE ".flac" "" FLAC "${FLAC}")
 			add_custom_command(
 				TARGET ${EXECUTABLE} POST_BUILD
-				COMMAND ${FFMPEG} -y -hide_banner -i "${CMAKE_SOURCE_DIR}/${FLAC}.flac" -c:a ${ACODEC} -b:a ${ABITRATE} -ar 44100 "${CMAKE_BINARY_DIR}/${FLAC}.${AEXT}"
+				COMMAND ${FFMPEG} -y -hide_banner -loglevel warning -i "${CMAKE_SOURCE_DIR}/${FLAC}.flac" -c:a ${ACODEC} -b:a ${ABITRATE} -ar 44100 "${CMAKE_BINARY_DIR}/${FLAC}.${AEXT}"
 				COMMENT "Converting audio: ${FLAC}"
 			)
 		endforeach()
