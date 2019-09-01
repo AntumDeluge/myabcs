@@ -442,6 +442,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Drums", "imakepitart", "Public Domain"); // https://commons.wikimedia.org/wiki/File:Drums.ogg (originally from pdsounds.org)
 	about->addComposer("Electric Guitar", "Mattgirling", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:GuitarRig4.ogg
 	about->addComposer("Elephant", "vataaa", "CC0"); // https://freesound.org/people/vataaa/sounds/148873/
+	about->addComposer("err", "reelworldstudio", "CC0"); // https://freesound.org/people/reelworldstudio/sounds/161122/
 	about->addComposer("Fire", "Jordan Irwin", "CC0/Public Domain"); // https://opengameart.org/node/16327
 	about->addComposer("Flute", "juskiddink", "CC BY"); // https://freesound.org/people/juskiddink/sounds/65510/
 	about->addComposer("Frog", "kayceemixer", "CC0"); // https://freesound.org/people/kayceemixer/sounds/251495/
