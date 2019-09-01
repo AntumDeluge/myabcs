@@ -1,6 +1,7 @@
 Manditory (required for next release):
 - Replace raccoon sound effect
 - Add links to art & sound assets
+- Add "install" target for CMake
 
 Priority:
 - Show keyboard for "main" category
@@ -13,14 +14,8 @@ Priority:
 - Set category items dynamically from image filenames
 - Add Debian build instructions
 - Build:
-  - Use CMake to generate Makefiles
   - Require wxWidgets version >= 3.1 (to support font resources)
     - Use built-in static version if requirement not met
-  - Only link dynamically to built-in SDL on Windows platform
-    - Check for licensing issues with statically linked SDL/SDL_mixer
-  - Copy library (dll) dependencies into binary release if possible on Windows platform
-  - Use "libraries/build.sh" script to build & link to "built-in" libraries
-  - Download "built-in" libraries from "libraries/build.sh" script
 
 Non-priority:
 - Indent line breaks in changelog
