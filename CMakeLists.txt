@@ -60,6 +60,9 @@ if(WIN32)
 endif()
 
 set(EXECUTABLE "myabcs")
+if(WIN32)
+	set(EXECUTABLE "${EXECUTABLE}.exe")
+endif()
 add_executable(${EXECUTABLE} ${FILES_C})
 
 if(USE_BUILTIN)
@@ -138,3 +141,13 @@ if(WIN32 AND USE_BUILTIN)
 		COMMENT "Copying DLLs"
 	)
 endif()
+
+add_custom_target(stage
+	# FIXME: need platform independent method to delete directory
+	COMMAND rm -rf "${CMAKE_BINARY_DIR}/stage"
+	COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/stage/myabcs"
+	COMMAND ${CMAKE_COMMAND} -E copy "${EXECUTABLE}" "${CMAKE_BINARY_DIR}/stage/myabcs"
+	# FIXME: need to copy files with .DLL suffix as well
+	COMMAND ${CMAKE_COMMAND} -E copy "*.dll" "${CMAKE_BINARY_DIR}/stage/myabcs"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory "data" "${CMAKE_BINARY_DIR}/stage/myabcs/data"
+)
