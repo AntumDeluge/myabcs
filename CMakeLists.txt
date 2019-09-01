@@ -88,8 +88,12 @@ add_custom_command(
 	COMMENT "Copying image data"
 )
 
-set(VALID_AFMTS flac vorbis oga ogg mp3)
+set(VALID_AFMTS flac vorbis oga ogg mp3 pcm wav)
 file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
+
+# FIXME: automatically detect subdirs to create
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
 
 # audio output format
 find_program(FFMPEG ffmpeg)
@@ -115,25 +119,26 @@ else()
 		if("${AFORMAT}" STREQUAL "vorbis" OR "${AFORMAT}" STREQUAL "oga" OR "${AFORMAT}" STREQUAL "ogg")
 			set(ACODEC libvorbis)
 			set(AEXT oga)
+			set(AB -b:a)
 			set(ABITRATE 96k)
 		elseif("${AFORMAT}" STREQUAL "mp3")
 			set(ACODEC libmp3lame)
 			set(AEXT mp3)
+			set(AB -b:a)
 			set(ABITRATE 128k)
+		elseif("${AFORMAT}" STREQUAL "pcm" OR "${AFORMAT}" STREQUAL "wav")
+			set(ACODEC pcm_s16le)
+			set(AEXT wav)
 		else()
 			message(FATAL_ERROR "Unrecognized audio format (AFORMAT): ${AFORMAT}\nValid formats: ${VALID_AFMTS}")
 		endif()
-
-		# FIXME: automatically detect subdirs to create
-		file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
-		file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
 
 		foreach(FLAC ${RESOURCES_FLAC})
 			string(REPLACE "${CMAKE_SOURCE_DIR}/" "" FLAC "${FLAC}")
 			string(REPLACE ".flac" "" FLAC "${FLAC}")
 			add_custom_command(
 				TARGET ${EXECUTABLE} POST_BUILD
-				COMMAND ${FFMPEG} -y -hide_banner -loglevel warning -i "${CMAKE_SOURCE_DIR}/${FLAC}.flac" -c:a ${ACODEC} -b:a ${ABITRATE} -ar 44100 "${CMAKE_BINARY_DIR}/${FLAC}.${AEXT}"
+				COMMAND ${FFMPEG} -y -hide_banner -loglevel warning -i "${CMAKE_SOURCE_DIR}/${FLAC}.flac" -c:a ${ACODEC} ${AB} ${ABITRATE} -ar 44100 "${CMAKE_BINARY_DIR}/${FLAC}.${AEXT}"
 				COMMENT "Converting audio: ${FLAC}"
 			)
 		endforeach()
