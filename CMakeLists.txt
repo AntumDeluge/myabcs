@@ -64,10 +64,11 @@ if(WIN32)
 endif()
 
 set(EXECUTABLE "myabcs")
-if(WIN32)
-	set(EXECUTABLE "${EXECUTABLE}.exe")
-endif()
 add_executable(${EXECUTABLE} ${FILES_C})
+# FIXME: way to use/copy without explicit declaration of suffix???
+if(WIN32)
+	set(EXE_SUFFIX ".exe")
+endif()
 
 if(USE_BUILTIN)
 	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_STATIC_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
@@ -150,7 +151,7 @@ add_custom_target(stage
 	# FIXME: need platform independent method to delete directory
 	COMMAND rm -rf "${CMAKE_BINARY_DIR}/stage"
 	COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/stage/myabcs"
-	COMMAND ${CMAKE_COMMAND} -E copy "${EXECUTABLE}" "${CMAKE_BINARY_DIR}/stage/myabcs"
+	COMMAND ${CMAKE_COMMAND} -E copy "${EXECUTABLE}${EXE_SUFFIX}" "${CMAKE_BINARY_DIR}/stage/myabcs"
 	# FIXME: need to copy files with .DLL suffix as well
 	COMMAND ${CMAKE_COMMAND} -E copy "*.dll" "${CMAKE_BINARY_DIR}/stage/myabcs"
 	COMMAND ${CMAKE_COMMAND} -E copy_directory "data" "${CMAKE_BINARY_DIR}/stage/myabcs/data"
