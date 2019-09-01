@@ -12,6 +12,10 @@ $(EXE): $(OBJECTS)
 				cp -v "$${DLL}" ./; \
 			done; \
 		fi; \
+		unused_dll=($$(find ./ -maxdepth 1 -type f \( -name "wx*_gl_*.[dD][lL][lL]" -o -name "libgettext*.[dD][lL][lL]" -o -name "libasprintf*.[dD][lL][lL]" \))); \
+		for DLL in $${unused_dll[@]}; do \
+			rm -vf "$${DLL}"; \
+		done; \
 	fi;
 
 stage: $(EXE) LICENSE.txt
