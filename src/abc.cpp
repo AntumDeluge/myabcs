@@ -38,6 +38,8 @@ static ResourceList resourceList;
 static int cur_category; // currently loaded category
 static bool loading = false;
 
+static wxString snd_err;
+
 
 /** Thread for loading objects used in category
  *
@@ -171,6 +173,12 @@ MainWindow::MainWindow() :
 
 	Center(); // Center the window on the screen
 
+	// sound played when wrong key pressed
+	snd_err = getSoundPath("err");
+	if (snd_err.IsEmpty()) {
+		logMessage("\"err\" sound not found. No audio will play for wrong keypresses.");
+	}
+
 	// Redirect focus to main panel
 	Bind(wxEVT_SET_FOCUS, &MainWindow::OnFrameFocus, this);
 	canvas->Bind(wxEVT_KILL_FOCUS, &MainWindow::onLoseFocus, this);
@@ -285,6 +293,12 @@ void MainWindow::PlayResourceSound() {
 	}
 }
 
+void MainWindow::playErrorSound() {
+	if (!game_end && !snd_err.IsEmpty()) {
+		soundPlayer->play(this, snd_err);
+	}
+}
+
 void MainWindow::OnSetCategory(wxCommandEvent& event) {
 	if (loading) {
 		// don't change selected toolbar button
@@ -370,6 +384,8 @@ void MainWindow::OnKeyDown(wxKeyEvent& event) {
 			} else {
 				handleKeyAlphaOther(key);
 			}
+		} else {
+			playErrorSound();
 		}
 	}
 
@@ -422,9 +438,17 @@ void MainWindow::handleKeySpace() {
 	}
 }
 
+/**
+ * FIXME: pressing arrow keys before alpha sound finishes bypasses sound effect
+ *
+ * @param key_code
+ */
 void MainWindow::handleKeyArrow(const int key_code) {
-	// ignore backspace key for categories other than "main"
-	if (cur_category != ID_ABC) return;
+	// ignore backspace & arrow keys for categories other than "main"
+	if (cur_category != ID_ABC) {
+		playErrorSound();
+		return;
+	}
 
 	const bool back = key_code == WXK_LEFT || key_code == WXK_BACK;
 	bool forward = false;
@@ -439,17 +463,22 @@ void MainWindow::handleKeyArrow(const int key_code) {
 				if (soundPlayer->isPlaying()) soundPlayer->stop();
 				SetLetter("Z");
 				game_end = false;
+				return;
 			} else if (!soundPlayer->isPlaying()) {
 				IncrementLetter(false);
+				return;
 			}
 		}
 	} else if (forward) {
 		if (!game_end && getCurrentLetter() != "Z") {
 			if (!soundPlayer->isPlaying()) {
 				IncrementLetter();
+				return;
 			}
 		}
 	}
+
+	playErrorSound();
 }
 
 void MainWindow::handleKeyEnter() {
@@ -467,6 +496,8 @@ void MainWindow::handleKeyAlphaMain(wxChar alpha) {
 	if (alpha == getCurrentLetter()) {
 		alpha_accepted = true; // letter will be incremented after sound plays
 		PlayAlphaSound();
+	} else {
+		playErrorSound();
 	}
 }
 

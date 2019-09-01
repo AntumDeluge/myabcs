@@ -60,6 +60,7 @@ private:
 
 	void PlayAlphaSound();
 	void PlayResourceSound();
+	void playErrorSound();
 
 	void OnSetCategory(wxCommandEvent& event);
 	void onCategoryLoaded(wxEvent& event);

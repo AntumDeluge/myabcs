@@ -7,7 +7,6 @@ Priority:
 - Embed free fonts (partially implemented, works on Windows only)
 - Embed toolbar images in executable (XPM is good choice)
 - Don't reload sounds if already cached
-- Play sound if wrong key pressed in "main" mode
 - Re-record "xun" vocal sound
 - PNG & SVG jars are different colors
 - Normalize file & directory paths
