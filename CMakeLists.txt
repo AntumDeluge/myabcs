@@ -1,8 +1,6 @@
-cmake_minimum_required(VERSION 2.6.2)
-project(MyABCs)
-set(PROJECT_VERSION 0.4.7)
+cmake_minimum_required(VERSION 3.12.4)
+project(MyABCs VERSION 0.4.7 HOMEPAGE_URL "https://antumdeluge.github.io/myabcs")
 set(PROJECT_VERSION_DEV 1)
-set(PROJECT_HOMEPAGE_URL "https://antumdeluge.github.io/myabcs")
 
 add_compile_definitions(VERSION="${PROJECT_VERSION}")
 if(${PROJECT_VERSION_DEV} GREATER 0)
