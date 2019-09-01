@@ -1,5 +1,6 @@
 0.4.7:
 - Error sound plays if wrong key or non-alphabetic key is pressed
+- Support for building with CMake
 
 0.4.6:
 - Added SDL_mixer support for playing audio
