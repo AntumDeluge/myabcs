@@ -1,3 +1,6 @@
+0.4.7:
+- Error sound plays if wrong key or non-alphabetic key is pressed
+
 0.4.6:
 - Added SDL_mixer support for playing audio
 - Added support for OGG/Vorbis audio
