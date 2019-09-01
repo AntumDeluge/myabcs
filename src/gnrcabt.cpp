@@ -483,7 +483,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Watch", "Nicolas4677", "CC0/Public Domain"); // https://freesound.org/people/Nicolas4677/sounds/446611/
 	about->addComposer("Whale", "copyrighy free sound-effect", "CC BY"); // https://www.youtube.com/watch?v=ZYwSxoRAkuQ
 	about->addComposer("Whistle", "pawsound", "CC0/Public Domain"); // https://freesound.org/people/pawsound/sounds/154873/
-	about->addComposer("Xun" "franeknflute", "CC BY"); // https://freesound.org/people/franeknflute/sounds/200419/
+	about->addComposer("Xun", "franeknflute", "CC BY"); // https://freesound.org/people/franeknflute/sounds/200419/
 	about->addComposer("Xylophone", "Tristan", "CC0"); // https://freesound.org/people/Tristan/sounds/19459/
 	about->addComposer("Yak", "Jordan Irwin", "CC0"); // https://opengameart.org/node/98682
 	about->addComposer("Yangqin", "matiasromero", "CC0"); // https://freesound.org/people/matiasromero/sounds/22261/
