@@ -157,3 +157,18 @@ add_custom_target(stage
 	COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/LICENSE.txt" "${CMAKE_BINARY_DIR}/stage/myabcs"
 	COMMENT "Staging files"
 )
+
+if(WIN32 AND "${ARCH}" STREQUAL "i686")
+	set(REL_SUFFIX "win32")
+elseif(WIN32 AND "${ARCH}" STREQUAL "x86_64")
+	set(REL_SUFFIX "win64")
+else()
+	set(REL_SUFFIX "${PLATFORM}-${ARCH}")
+endif()
+
+add_custom_target(package
+	${CMAKE_COMMAND} -E tar "cfv" "../${PROJECT_NAME}-${PROJECT_VERSION}-${REL_SUFFIX}.zip" --format=zip "${CMAKE_BINARY_DIR}/stage/myabcs"
+	DEPENDS stage
+	WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stage"
+	COMMENT "Creating release package: ${PROJECT_NAME} ${PROJECT_VERSION}"
+)
