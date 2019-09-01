@@ -24,3 +24,15 @@ string(STRIP "${ARCH}" ARCH)
 
 set(BUILD_STRING "${PLATFORM}-${ARCH}")
 set(BUILTIN_LIBPREFIX "${CMAKE_SOURCE_DIR}/libraries/libprefix-${BUILD_STRING}" CACHE STRING "Prefix to built-in libraries")
+
+set(USE_BUILTIN OFF CACHE BOOL "Prioritize built-in libs over system ones")
+
+# FIXME: should use PROJECT_SOURCE_DIR over CMAKE_SOURCE_DIR???
+include_directories("${CMAKE_SOURCE_DIR}/include")
+if(USE_BUILTIN)
+	include_directories("${BUILTIN_LIBPREFIX}/include")
+	link_directories("${BUILTIN_LIBPREFIX}/lib")
+	set(ENV{PATH} "${BUILTIN_LIBPREFIX}/bin;$ENV{PATH}")
+	set(ENV{PKG_CONFIG_PATH} "${BUILTIN_LIBPREFIX}/lib/pkgconfig;${BUILTIN_LIBPREFIX}/share/pkgconfig;$ENV{PKG_CONFIG_PATH}")
+	set(CMAKE_PREFIX_PATH "${BUILTIN_LIBPREFIX}")
+endif(USE_BUILTIN)
