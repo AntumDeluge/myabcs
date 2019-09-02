@@ -113,6 +113,7 @@ add_custom_command(
 )
 
 set(VALID_AFMTS copy flac vorbis oga ogg mp3 pcm wav)
+set(AFMT_LIST copy vorbis mp3 pcm) # used for drop-down list in CMake GUI
 file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 
 # audio output format
@@ -128,8 +129,8 @@ if(NOT FFMPEG)
 else()
 	message("Found FFmpeg")
 	# default to OGG/Vorbis
-	set(AUDIO_FORMAT "vorbis" CACHE STRING "Audio format (set to 'copy' or 'flac' to skip converting)")
-	set_property(CACHE AUDIO_FORMAT PROPERTY STRINGS ${VALID_AFMTS})
+	set(AUDIO_FORMAT "vorbis" CACHE STRING "Audio format (set to 'copy' to keep uncompressed FLAC audio files)")
+	set_property(CACHE AUDIO_FORMAT PROPERTY STRINGS ${AFMT_LIST})
 	if(AUDIO_FORMAT STREQUAL "copy" OR AUDIO_FORMAT STREQUAL "flac")
 		# same as if ffmpeg not found
 		add_custom_command(
