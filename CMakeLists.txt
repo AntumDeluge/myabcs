@@ -7,6 +7,15 @@ if(${PROJECT_VERSION_DEV} GREATER 0)
 	add_compile_definitions(VER_DEV="${PROJECT_VERSION_DEV}")
 endif()
 
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE "Release")
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	message("Debugging enabled")
+	add_compile_definitions(DEBUG=1)
+endif()
+
 if(WIN32)
 	set(PLATFORM "win32")
 	# FIXME: need to detect arch for systems other than MinGW/MSYS/Cygwin
