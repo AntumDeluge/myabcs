@@ -16,6 +16,9 @@ Priority:
 - Build:
   - Force use of built-in wx if min version requirement not met
     or display message about USE_BUILTIN option
+- Touch up SVGs:
+  - owl
+  - yangqin
 
 Non-priority:
 - Indent line breaks in changelog
