@@ -6,8 +6,6 @@ Known BUGS:
     - apple
     - necklace
 - Missing SVG
-  - food/
-    - vegetables
   - music/
     - yangqin
 - Wait/Loading animation not centered vertically
