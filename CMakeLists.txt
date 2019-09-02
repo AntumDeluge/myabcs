@@ -91,15 +91,18 @@ else()
 	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
 endif()
 
-# TODO: copy license & other data files
 # FIXME: target executable is deleted of add_custom_command execution fails
 
 # clean data directory before build
-# FIXME: should be done in build
-file(REMOVE_RECURSE "${CMAKE_BINARY_DIR}/data")
-# FIXME: automatically detect subdirs to create
-file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/alpha")
-file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/data/audio/effect")
+add_custom_command(
+	TARGET ${EXECUTABLE} PRE_BUILD
+	# FIXME: need platform-independent method
+	COMMAND rm -rf "${CMAKE_BINARY_DIR}/data"
+	# FIXME: automatically detect subdirs to create
+	COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/data/audio/alpha"
+	COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/data/audio/effect"
+	COMMENT "Preparing data directory"
+)
 
 # copy images
 add_custom_command(
@@ -289,7 +292,6 @@ install(
 	DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications"
 )
 
-# FIXME: data files are deleted from bin dir in uninstall target
 add_custom_target(uninstall
 	# FIXME: need platform-independent method for removing files & directories
 	COMMAND rm -vf
