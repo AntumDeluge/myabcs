@@ -99,7 +99,7 @@ add_custom_command(
 	COMMENT "Copying image data"
 )
 
-set(VALID_AFMTS flac vorbis oga ogg mp3 pcm wav)
+set(VALID_AFMTS copy flac vorbis oga ogg mp3 pcm wav)
 file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 
 # audio output format
@@ -108,6 +108,7 @@ if(NOT FFMPEG)
 	message(WARNING "FFmpeg not found: converting audio not supported")
 	add_custom_command(
 		TARGET ${EXECUTABLE} POST_BUILD
+		# FIXME: should only copy .flac files
 		COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/audio" "${CMAKE_BINARY_DIR}/data/audio"
 		COMMENT "Copying audio data"
 	)
@@ -115,10 +116,11 @@ else()
 	message("Found FFmpeg")
 	# default to OGG/Vorbis
 	set(AFORMAT "vorbis" CACHE STRING "Audio format")
-	if("${AFORMAT}" STREQUAL "flac")
+	if("${AFORMAT}" STREQUAL "copy" OR "${AFORMAT}" STREQUAL "flac")
 		# same as if ffmpeg not found
 		add_custom_command(
 			TARGET ${EXECUTABLE} POST_BUILD
+			# FIXME: should only copy .flac files
 			COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/data/audio" "${CMAKE_BINARY_DIR}/data/audio"
 			COMMENT "Copying audio data"
 		)
