@@ -401,7 +401,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Urchin", "Jordan Irwin", "Public Domain");
 	about->addArtist("Unicycle", "AndrewDressel/Underpants", "Attribution-ShareAlike 3.0"); // https://commons.wikimedia.org/wiki/File:Unicycle.svg
 	about->addArtist("Vase", "J_Alves", "Public Domain");
-	about->addArtist("Vegetables", "johnny_automatic", "Public Domain");
+	about->addArtist("Vegetables", "Paul Sherman", "CC0"); // https://www.wpclipart.com/food/vegetables/vegetable_basket.png.html
 	about->addArtist("Violin", "papapishu", "Public Domain");
 	about->addArtist("Volleyball", "Andrea Bianchini", "Public Domain");
 	about->addArtist("Vulture", "ArtFavor", "Public Domain");
