@@ -300,3 +300,11 @@ add_custom_target(uninstall
 		"${CMAKE_INSTALL_PREFIX}/bin/myabcs"
 	COMMAND rm -vrf "${CMAKE_INSTALL_PREFIX}/share/myabcs"
 )
+
+# cleanup
+add_custom_target(distclean
+	COMMAND ${CMAKE_MAKE_PROGRAM} clean
+	# FIXME: need platform-independent & case-insensitive method
+	COMMAND rm -vf "*.dll"
+	COMMAND rm -vrf "${CMAKE_BINARY_DIR}/data"
+)
