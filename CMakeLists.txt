@@ -244,3 +244,57 @@ add_custom_target(package
 	WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stage"
 	COMMENT "Creating release package: ${PROJECT_NAME} ${PROJECT_VERSION}"
 )
+
+# installation
+set(DIR_BIN "${CMAKE_INSTALL_PREFIX}/bin")
+set(DIR_DATA "${CMAKE_INSTALL_PREFIX}/share/myabcs")
+
+install(
+	TARGETS ${EXECUTABLE}
+	RUNTIME DESTINATION "${DIR_DATA}"
+)
+install(
+	DIRECTORY "${CMAKE_BINARY_DIR}/data" "${CMAKE_SOURCE_DIR}/doc"
+	DESTINATION "${DIR_DATA}"
+)
+install(
+	FILES "${CMAKE_SOURCE_DIR}/CHANGES.txt" "${CMAKE_SOURCE_DIR}/LICENSE.txt"
+	DESTINATION "${DIR_DATA}"
+)
+
+# platform-dependent files installation
+
+if(WIN32)
+	# Windows DLLs
+	# FIXME: use case-insensitive method
+	file(GLOB DLLS "${CMAKE_BINARY_DIR}/*.dll")
+	install(
+		FILES ${DLLS}
+		DESTINATION "${DIR_DATA}"
+	)
+endif()
+
+# X11 files
+install(
+	FILES "${CMAKE_BINARY_DIR}/x11/myabcs"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+)
+install(
+	FILES "${CMAKE_BINARY_DIR}/x11/myabcs.svg"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pixmaps"
+)
+install(
+	FILES "${CMAKE_BINARY_DIR}/x11/myabcs.desktop"
+	DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications"
+)
+
+# FIXME: data files are deleted from bin dir in uninstall target
+add_custom_target(uninstall
+	# FIXME: need platform-independent method for removing files & directories
+	COMMAND rm -vf
+		"${CMAKE_INSTALL_PREFIX}/share/applications/myabcs.desktop"
+		"${CMAKE_INSTALL_PREFIX}/share/pixmaps/myabcs.svg"
+		"${CMAKE_INSTALL_PREFIX}/bin/myabcs"
+	COMMAND rm -vrf "${CMAKE_INSTALL_PREFIX}/share/myabcs"
+)
