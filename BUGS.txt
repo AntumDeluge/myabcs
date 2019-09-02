@@ -4,6 +4,7 @@ Known BUGS:
     - clock ("shine")
   - shading/semi-transparency:
     - apple
+    - jar
     - necklace
 - Wait/Loading animation not centered vertically
 - Appears to be a delay when frame is closed from native "X" while sound is playing

@@ -21,6 +21,8 @@
    inkscape:export-filename="/home/david/Inkscape Files/Misc/DMRSoul.png"
    inkscape:export-xdpi="140"
    inkscape:export-ydpi="140">
+  <title
+     id="title1089">Jar</title>
   <defs
      id="defs4">
     <linearGradient
@@ -75,7 +77,7 @@
     <linearGradient
        id="linearGradient3024">
       <stop
-         style="stop-color:#999999;stop-opacity:1"
+         style="stop-color:#dbdbdb;stop-opacity:1"
          offset="0"
          id="stop3026" />
       <stop
@@ -1626,7 +1628,7 @@
        y2="366.98453"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       gradientTransform="matrix(0.4701845,0,0,0.4701845,126.5927,210.34462)" />
+       gradientTransform="matrix(0.33463508,0,0,0.33463508,-75.852152,-33.715731)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient6468"
@@ -1660,8 +1662,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="86.432303"
-     inkscape:cy="31.021891"
+     inkscape:cx="120.58784"
+     inkscape:cy="34.917813"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      width="130px"
@@ -1684,7 +1686,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title>Jar</dc:title>
         <cc:license
            rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
       </cc:Work>
@@ -1700,45 +1702,40 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="matrix(0.71171014,0,0,0.71171014,-165.94946,-183.42013)"
+     transform="translate(-2.2171411e-6,4.3698788e-6)"
      style="display:inline"
-     id="g1226">
-    <g
-       id="g1192-1"
-       style="display:inline"
-       transform="translate(-5.2495651e-5,1.0249565e-4)">
-      <path
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#999999;fill-opacity:0.16393445;fill-rule:evenodd;stroke:#000000;stroke-width:1.86675501;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"
-         d="m 293.08297,274.89532 c -31.35519,0 -56.92079,11.21197 -57.94848,25.19191 h -0.0311 v 0.87299 109.62295 c 0,14.38438 25.97307,26.04931 57.97963,26.04931 32.00656,0 57.97962,-11.66493 57.97963,-26.04931 v -109.62295 -0.87299 h -0.0311 c -1.02723,-13.98013 -26.59298,-25.19191 -57.94848,-25.19191 z"
-         id="path3022-6"
-         sodipodi:nodetypes="cccccsccccc"
-         inkscape:export-filename="/home/david/Inkscape Files/Wiki/Monaco/g3036.png"
-         inkscape:export-xdpi="21.731876"
-         inkscape:export-ydpi="21.731876"
-         inkscape:connector-curvature="0" />
-      <path
-         sodipodi:nodetypes="ccc"
-         id="path3924-0"
-         d="m 351.0626,409.40516 c -9.05445,-14.98718 -36.6974,-15.86229 -57.97963,-16.84614 -31.35519,0 -56.92079,7.28831 -57.94848,16.37595"
-         style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:0.16393445;fill-rule:evenodd;stroke:#000000;stroke-width:1.86675501;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:0.24637679;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"
-         inkscape:export-filename="/home/david/Inkscape Files/Wiki/Monaco/g3036.png"
-         inkscape:export-xdpi="21.731876"
-         inkscape:export-ydpi="21.731876"
-         inkscape:connector-curvature="0" />
-    </g>
+     id="g1109">
     <path
        inkscape:connector-curvature="0"
        inkscape:export-ydpi="21.731876"
        inkscape:export-xdpi="21.731876"
        inkscape:export-filename="/home/david/Inkscape Files/Wiki/Monaco/g3036.png"
-       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:0.43406593;fill:url(#linearGradient3032);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.86675501;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"
-       d="m 292.08297,274.89532 c -31.35519,0 -56.92079,11.21197 -57.94848,25.19191 h -0.0311 v 0.87299 109.62295 c 0,14.38438 25.97307,26.04931 57.97963,26.04931 32.00656,0 57.97962,-11.66493 57.97963,-26.04931 v -109.62295 -0.87299 h -0.0311 c -1.02723,-13.98013 -26.59298,-25.19191 -57.94848,-25.19191 z"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:none;fill-opacity:0.16393445;fill-rule:evenodd;stroke:#000000;stroke-width:1.32858849;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:0.24637679;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"
+       d="M 83.905312,107.95774 C 77.461168,97.291216 57.787401,96.668391 42.640622,95.968175 c -22.315807,0 -40.5111038,5.187165 -41.2425212,11.654925"
+       id="path3924-0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="21.731876"
+       inkscape:export-xdpi="21.731876"
+       inkscape:export-filename="/home/david/Inkscape Files/Wiki/Monaco/g3036.png"
+       sodipodi:nodetypes="cccccsccccc"
+       id="path3022-6"
+       d="m 42.640622,12.225727 c -22.315807,0 -40.5111038,7.979672 -41.2425212,17.929337 h -0.022134 v 0.621316 78.01977 c 0,10.2375 18.4852972,18.53955 41.2646902,18.53955 22.779393,0 41.264684,-8.30205 41.264691,-18.53955 V 30.77638 30.155064 h -0.02213 C 83.152124,20.205264 64.95672,12.225727 42.640693,12.225727 Z"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:0.16393445;fill-rule:evenodd;stroke:#000000;stroke-width:1.32858849;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="21.731876"
+       inkscape:export-xdpi="21.731876"
+       inkscape:export-filename="/home/david/Inkscape Files/Wiki/Monaco/g3036.png"
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:0.43406593;fill:url(#linearGradient3032);fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.32858849;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;enable-background:accumulate"
+       d="m 41.928951,12.225657 c -22.315806,0 -40.5111029,7.979672 -41.24252034,17.929337 h -0.0221342 v 0.621316 78.01977 c 0,10.2375 18.48529754,18.53955 41.26469054,18.53955 22.779393,0 41.264684,-8.30205 41.264691,-18.53955 V 30.77631 30.154994 h -0.02214 C 82.440453,20.205194 64.24505,12.225657 41.929023,12.225657 Z"
        id="path3017"
        sodipodi:nodetypes="cccccsccccc" />
     <g
        id="g1091-5"
        style="display:inline"
-       transform="translate(4.9665585e-5,-4.9966559e-4)">
+       transform="matrix(0.71171014,0,0,0.71171014,-165.94942,-183.42049)">
       <path
          style="display:inline;fill:url(#linearGradient1178);fill-opacity:1;stroke:#000000;stroke-width:1.75731933;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          d="m 346.46553,278.06946 c -40.84796,-2.29013 -60.26748,-4.04451 -106.38876,0 v 9.73474 c -0.002,0.0608 0,0.12013 0,0.1811 0,10.75227 23.83108,19.46951 53.19438,19.4695 29.3633,0 53.19439,-8.71724 53.19438,-19.4695 0,-0.061 0.002,-0.12027 0,-0.1811 z"
