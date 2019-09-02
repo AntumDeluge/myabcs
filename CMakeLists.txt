@@ -8,7 +8,8 @@ if(${PROJECT_VERSION_DEV} GREATER 0)
 endif()
 
 if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE "Release")
+	# default build is Release
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type. Options are: Release & Debug" FORCE)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -52,7 +53,6 @@ if(USE_BUILTIN)
 	set(CMAKE_PREFIX_PATH "${BUILTIN_LIBPREFIX}")
 endif(USE_BUILTIN)
 
-# FIXME: exe in BUILTIN_LIBPREFIX/bin should be priority
 include(FindPkgConfig)
 
 # wxWidgets & wxSVG
