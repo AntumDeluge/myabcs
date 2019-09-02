@@ -177,20 +177,17 @@ if(WIN32 AND USE_BUILTIN)
 		COMMENT "Copying DLLs"
 	)
 	# unused DLLs
-	# FIXME: doesn't work (list needs to be generated during TARGET build)
-	# FIXME: use case-insensitive method
-	file(GLOB UNUSED_DLL "wx*_gl_*.dll") # "libasprintf*.dll" "libgettext*.dll")
-	# DEBUG:
-	message("Unused DLLs: ${UNUSED_DLL}")
 	add_custom_command(
 		TARGET ${EXECUTABLE} POST_BUILD
-		COMMAND rm -vf ${UNUSED_DLL}
+		# FIXME: need platform-independent & case-insensitive method
+		COMMAND rm -vf "wx*_gl_*.dll" "libasprintf*.dll" "libgettext*.dll"
 		COMMENT "Deleting unused DLLs"
 	)
 endif()
 
 # platform-dependent files preparation
 
+# TODO: do this in build target
 # X11
 file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/x11")
 set(SH_CONTENTS "#!/bin/sh\n\n\"${CMAKE_INSTALL_PREFIX}/share/myabcs/myabcs\"\n")
