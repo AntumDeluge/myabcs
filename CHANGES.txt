@@ -2,6 +2,7 @@
 - Error sound plays if wrong key or non-alphabetic key is pressed
 - Support for building with CMake
 - Replaced images:
+  - ice cream
   - rooster
   - vegetables
 - Images converted to SVG:

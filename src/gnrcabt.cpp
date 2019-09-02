@@ -333,7 +333,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Horn", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98191
 	about->addArtist("Horse", "ArtFavor", "Public Domain");
 	about->addArtist("Hot Dog", "Juliane Krug", "Public Domain");
-	about->addArtist("Ice Cream", "Gerald_G", "Public Domain");
+	about->addArtist("Ice Cream", "Paul Sherman", "CC0"); // https://www.wpclipart.com/food/desserts_snacks/ice_cream/sundea/ice_cream_sundae.png.html
 	about->addArtist("Ice Skate", "Francesco Rollandin", "Public Domain");
 	about->addArtist("Igloo", "Jose Hevia", "Public Domain");
 	about->addArtist("Iguana", wxEmptyString, "Public Domain"); // https://www.wpclipart.com/animals/L/lizard/iguana/iguana.png.html
