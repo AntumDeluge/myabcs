@@ -6,8 +6,6 @@ Known BUGS:
     - apple
     - necklace
 - Missing SVG
-  - animals/
-    - owl
   - food/
     - udon
     - vegetables
