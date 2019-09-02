@@ -384,7 +384,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addArtist("Recorder", "zeimusu", "Public Domain");
 	about->addArtist("Ribbon", wxEmptyString, "CC0/Public Domain"); // https://publicdomainvectors.org/en/free-clipart/Medal-of-achievement-blue-and-red-vector-image/19941.html
 	about->addArtist("Rocking Horse", "Chrisdesign", "Public Domain");
-	about->addArtist("Rooster", "ArtFavor", "Public Domain");
+	about->addArtist("Rooster", "andinuryadin", "CC0"); // https://openclipart.org/detail/175282/ayam-jantan | https://commons.wikimedia.org/wiki/File:Rooster_by_andinuryadin.svg
 	about->addArtist("Saxophone", "ArtFavor", "Public Domain");
 	about->addArtist("Seesaw", "Jordan Irwin", "Public Domain"); // https://opengameart.org/node/98188
 	about->addArtist("Sheep", "ArtFavor", "Public Domain");

@@ -8,7 +8,6 @@ Known BUGS:
 - Missing SVG
   - animals/
     - owl
-    - rooster
   - food/
     - udon
     - vegetables
