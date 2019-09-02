@@ -170,7 +170,46 @@ if(WIN32 AND USE_BUILTIN)
 		COMMAND ${CMAKE_COMMAND} -E copy ${RESOURCES_DLL} "${CMAKE_BINARY_DIR}"
 		COMMENT "Copying DLLs"
 	)
+	# unused DLLs
+	# FIXME: doesn't work (list needs to be generated during TARGET build)
+	# FIXME: use case-insensitive method
+	file(GLOB UNUSED_DLL "wx*_gl_*.dll") # "libasprintf*.dll" "libgettext*.dll")
+	# DEBUG:
+	message("Unused DLLs: ${UNUSED_DLL}")
+	add_custom_command(
+		TARGET ${EXECUTABLE} POST_BUILD
+		COMMAND rm -vf ${UNUSED_DLL}
+		COMMENT "Deleting unused DLLs"
+	)
 endif()
+
+# platform-dependent files preparation
+
+# X11
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/x11")
+set(SH_CONTENTS "#!/bin/sh\n\n\"${CMAKE_INSTALL_PREFIX}/share/myabcs/myabcs\"\n")
+file(WRITE "${CMAKE_BINARY_DIR}/x11/myabcs" "${SH_CONTENTS}")
+# use Unix LF line endings in shell scripts
+configure_file(
+	"${CMAKE_BINARY_DIR}/x11/myabcs" "${CMAKE_BINARY_DIR}/x11/myabcs"
+	NEWLINE_STYLE LF
+)
+# set executable bit
+file(
+	COPY "${CMAKE_BINARY_DIR}/x11/myabcs"
+	DESTINATION "${CMAKE_BINARY_DIR}/x11"
+	# XXX: what is the difference between FILE_PERMISSIONS & PERMISSIONS
+	FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+)
+file(
+	COPY "${CMAKE_SOURCE_DIR}/data/resource/logo/myabcs_single_block.svg"
+	DESTINATION "${CMAKE_BINARY_DIR}/x11"
+)
+file(RENAME "${CMAKE_BINARY_DIR}/x11/myabcs_single_block.svg" "${CMAKE_BINARY_DIR}/x11/myabcs.svg")
+file(
+	COPY "${CMAKE_SOURCE_DIR}/data/resource/x11/myabcs.desktop"
+	DESTINATION "${CMAKE_BINARY_DIR}/x11"
+)
 
 add_custom_target(clean-stage
 	# FIXME: need platform independent method to delete directory
