@@ -5,9 +5,6 @@ Known BUGS:
   - shading/semi-transparency:
     - apple
     - necklace
-- Missing SVG
-  - music/
-    - yangqin
 - Wait/Loading animation not centered vertically
 - Appears to be a delay when frame is closed from native "X" while sound is playing
 

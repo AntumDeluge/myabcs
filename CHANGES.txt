@@ -7,6 +7,7 @@
 - Images converted to SVG:
   - owl
   - udon
+  - yangqin
 
 0.4.6:
 - Added SDL_mixer support for playing audio
