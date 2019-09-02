@@ -9,7 +9,8 @@ endif()
 
 if(NOT CMAKE_BUILD_TYPE)
 	# default build is Release
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type. Options are: Release & Debug" FORCE)
+	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type" FORCE)
+	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Release Debug)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -127,7 +128,8 @@ if(NOT FFMPEG)
 else()
 	message("Found FFmpeg")
 	# default to OGG/Vorbis
-	set(AFORMAT "vorbis" CACHE STRING "Audio format")
+	set(AFORMAT "vorbis" CACHE STRING "Audio format (set to 'copy' or 'flac' to skip converting)")
+	set_property(CACHE AFORMAT PROPERTY STRINGS ${VALID_AFMTS})
 	if("${AFORMAT}" STREQUAL "copy" OR "${AFORMAT}" STREQUAL "flac")
 		# same as if ffmpeg not found
 		add_custom_command(
