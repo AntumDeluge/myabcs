@@ -1,7 +1,7 @@
 
 # MyABCs Educational Software for Children
 
-![Icon](https://antumdeluge.github.io/myabcs/data/icon.svg)
+<img src="https://antumdeluge.github.io/myabcs/data/icon.svg" style="display:block;margin-left:auto;margin-right:auto;" />
 
 ## Description
 
@@ -27,21 +27,95 @@ While an image is displayed on the screen, press the spacebar to hear the pronun
 ---
 
 <pre>
-GNU Make        BSD Make was previously supported but may no
-                longer work.
-wxWidgets 3.x   <a href="https://wxwidgets.org/">https://wxwidgets.org/</a>
+CMake           <a href="https://cmake.org/">https://cmake.org/</a>
+wxWidgets 3.1+  <a href="https://wxwidgets.org/">https://wxwidgets.org/</a>
 wxSVG           <a href="http://wxsvg.sourceforge.net/">http://wxsvg.sourceforge.net/</a>
 SDL2            <a href="https://libsdl.org/">https://libsdl.org/</a>
+SDL2_mixer      <a href="https://www.libsdl.org/projects/SDL_mixer/">https://www.libsdl.org/projects/SDL_mixer/</a>
 PThreads        Linux: Check your package manager for a library
-                implementation.
+                  implementation.
                 Windows: If your compiler does not have an
-                implementation you can download <a href="http://sourceware.org/pthreads-win32/">Pthreads-w32</a>.
+                  implementation you can download <a href="http://sourceware.org/pthreads-win32/">Pthreads-w32</a>.
+                  The <a href="https://www.msys2.org/">MSYS2</a> & <a href="http://mingw-w64.org/doku.php">MinGW-w64</a> projects also supply a
+                  more-actively developed version known as
+                  <i>winpthreads</i>.
 </pre>
 
-**NOTE:** I plan to switch to [CMake](https://cmake.org/) build generator eventually.
+
+### Using CMake (recommended)
+
+#### Command line
+
+Create an empty directory where you would like build files to be generated. Navigate to that directory from a command line/terminal. For default settings invoke the following command (**NOTE:** The *&lt;path_to_source&gt;* argument should be the location of the MyABCs source directory):
+
+```sh
+cmake <path_to_source>
+```
+
+If you need to manually set the Makefile generator, execute `cmake --help` to see which generators are available. Then use the `-G` switch to set the generator. For example, if you are on Windows using the [MSYS2/MinGW-w64 environment](https://www.msys2.org/), then you may want to do the following:
+
+```sh
+cmake -G "MSYS Makefile" <path_to_source>
+```
+
+**Customizing settings:**
+
+The following are the main values that can be defined using the `-D` switch:
+
+- ***CMAKE_BUILD_TYPE***
+  - Determines if the MyABCs executable is built with debugging symbols.
+  - options: Release, Debug
+  - default: Release
+- ***CMAKE_INSTALL_PREFIX***
+  - The directory under which the application's files will be installed.
+- ***AUDIO_FORMAT***
+  - The output audio file format.
+  - Requires [FFmpeg](https://ffmpeg.org/)
+  - options:
+    - ***copy*** *(default if FFmpeg not available)*: keep uncompressed [FLAC](https://xiph.org/flac/) (no conversion done)
+	- ***vorbis*** *(default)*: convert to [Vorbis/OGG](https://xiph.org/vorbis/) (recommended)
+	- ***mp3***: convert to [MPEG Audio Layer III (MP3)](https://en.wikipedia.org/wiki/MP3)
+	- ***pcm***: convert to uncompressed [PCM/WAV](https://en.wikipedia.org/wiki/WAV)
+- ***USE_BUILTIN***
+  - Set to ***ON*** to prioritize using "built-in" libraries.
+  - default: ***OFF***
+- ***BUILTIN_LIBPREFIX***
+  - Defines the root directory under which the "built-in" libraries are stored.
+  - Automatically detected.
+
+Example:
+
+```sh
+cmake -G "GNU Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr/local \
+	-DAUDIO_FORMAT=vorbis -DUSE_BUILTIN=ON ../
+```
+
+Once the build files have been generated using the previous command, the app can be built with appropriate "make" command. The aformentioned generates makefiles for the GNU make system (***NOTE:*** *on some systems, such as [FreeBSD](https://www.freebsd.org/), the GNU make executable may be `gmake`*). So to build the app, execute the following:
+
+```sh
+make
+```
+
+Then it can be installed to the system using:
+
+```sh
+make install
+```
+
+If you do not want to install the app's files to the system, you can package the app in a .zip archive with the following command:
+
+```sh
+make package
+```
+
+#### GUI
+
+CMake also offers a GUI frontend for generating the Makefiles. For more information, see [this page](https://cmake.org/runningcmake/).
+
+<img src="https://cmake.org/wp-content/uploads/2018/10/cmake-gui.png" style="display:block;margin-left:auto;margin-right:auto;" />
 
 
-### Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.)
+### Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.) (DEPRECATED)
 ---
 
 1. Navigate to the source folder from the command line/terminal.
