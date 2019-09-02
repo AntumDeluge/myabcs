@@ -63,6 +63,10 @@ if(wxWidgets_VERSION_STRING LESS WX_REQUIRED_VER)
 	message(FATAL_ERROR "Build requires at least wxWidgets version ${WX_REQUIRED_VER}, found ${wxWidgets_VERSION_STRING}")
 endif()
 include("${wxWidgets_USE_FILE}")
+if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+	# redirect stdout to console
+	string(REPLACE "subsystem,windows" "subsystem,console" wxWidgets_LIBRARIES "${wxWidgets_LIBRARIES}")
+endif()
 pkg_search_module(WXSVG REQUIRED libwxsvg)
 
 # SDL2 & SDL2_mixer
