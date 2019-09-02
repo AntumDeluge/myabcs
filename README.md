@@ -21,7 +21,7 @@ Categories:
 
 While an image is displayed on the screen, press the spacebar to hear the pronunciation of the object & an associated sound effect if available.
 
-## Building 
+## Building
 
 ### Requirements
 ---
@@ -79,6 +79,7 @@ The following are the main values that can be defined using the `-D` switch:
 - ***USE_BUILTIN***
   - Set to ***ON*** to prioritize using "built-in" libraries.
   - default: ***OFF***
+  - see section *[Building Internal Libraries](#building-internal-libraries)*
 - ***BUILTIN_LIBPREFIX***
   - Defines the root directory under which the "built-in" libraries are stored.
   - Automatically detected.
@@ -175,3 +176,36 @@ I don't know
 I am not familiar with Apple's Xcode environment, but I understand that it
 comes with GNU GCC & possibly Clang. The instructions above should work here as
 well.
+
+## Building Internal Libraries
+
+The source includes a [shell script](https://en.wikipedia.org/wiki/Shell_script) for compiling internal libraries. From the top-level of the source directory, it is invoked like this:
+
+```sh
+./libraries/build.sh <build_string>
+```
+
+The `&lt;build_string&gt;` parameter symbolizes the platform on which the app/libraries are being built. This parameter is set automatically if invoked from the Makefile with the `make` command (functionality may be removed in future versions):
+
+```sh
+make build-libs
+```
+
+You can also specify which libraries to build using the `BUILD_LIBS` variable:
+
+```sh
+BUILD_LIBS="wxWidgets wxSVG SDL2 SDL2_mixer" ./libraries/build.sh <build_string>
+# or
+make build-libs BUILD_LIBS="wxWidgets wxSVG SDL2 SDL2_mixer"
+```
+
+If the `BUILD_LIBS` variable is not used, the script will build the wxWidgets, wxSVG, SDL2, SDL2_mixer libraries & any required dependencies.
+
+The script will attempt to download the sources for each library, compile, & install them under the directory `libraries/libprefix-<build_string>`. Compiling against & linking to these libraries will take priority when building with one of the following methods.
+
+- CMake: `cmake -DUSE_BUILTIN=ON`
+- generic GNU Makefile: `make USE_BUILTIN=1`
+
+For configuration & build settings of individual libraries, see the [libraries/CONFIG directory](libraries/CONFIG).
+
+***NOTE:*** *In the future, the shell script may be replaced with another type of script for multi-platform use*
