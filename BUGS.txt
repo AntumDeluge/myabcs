@@ -7,7 +7,6 @@ Known BUGS:
     - necklace
 - Missing SVG
   - food/
-    - udon
     - vegetables
   - music/
     - yangqin

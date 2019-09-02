@@ -1,6 +1,11 @@
 0.4.7:
 - Error sound plays if wrong key or non-alphabetic key is pressed
 - Support for building with CMake
+- Replaced images:
+  - rooster
+- Images converted to SVG:
+  - owl
+  - udon
 
 0.4.6:
 - Added SDL_mixer support for playing audio
