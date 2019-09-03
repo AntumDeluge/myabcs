@@ -1,7 +1,7 @@
 Manditory (required for next release):
 - Replace raccoon sound effect
 - Add links to art & sound assets
-- Add "install" target for CMake
+- Show license text in about dialog
 
 Priority:
 - Show keyboard for "main" category
