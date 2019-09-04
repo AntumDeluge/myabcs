@@ -19,6 +19,8 @@ Priority:
   - owl
   - quiche
   - yangqin
+- Build "built-in" libraries via CMake when USE_BUILTIN enabled
+- Change library build dependencies for non-Windows systems
 
 Non-priority:
 - Indent line breaks in changelog
