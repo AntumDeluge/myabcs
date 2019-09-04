@@ -54,26 +54,75 @@ if(USE_BUILTIN)
 	set(CMAKE_PREFIX_PATH "${BUILTIN_LIBPREFIX}")
 endif(USE_BUILTIN)
 
+set(LIB_BUILD_SCRIPT "${CMAKE_SOURCE_DIR}/libraries/build.sh")
+
 include(FindPkgConfig)
 
-# wxWidgets & wxSVG
+# wxWidgets
 set(WX_REQUIRED_VER 3.1)
-find_package(wxWidgets COMPONENTS core base REQUIRED)
-if(wxWidgets_VERSION_STRING LESS WX_REQUIRED_VER)
-	message(FATAL_ERROR "Build requires at least wxWidgets version ${WX_REQUIRED_VER}, found ${wxWidgets_VERSION_STRING}")
+find_package(wxWidgets COMPONENTS core base)
+if(NOT wxWidgets_VERSION_STRING)
+	if(USE_BUILTIN)
+		message("\nBuilding wxWidgets, this could take a while")
+		# FIXME: this will fail if there is whitespace in LIB_BUILD_SCRIPT
+		execute_process(COMMAND bash -c "${LIB_BUILD_SCRIPT} ${BUILD_STRING} wxWidgets")
+		find_package(wxWidgets COMPONENTS core base REQUIRED)
+	else()
+		message(FATAL_ERROR "Please install wxWidgets (https://www.wxwidgets.org/) version ${WX_REQUIRED_VER} or enable USE_BUILTIN")
+	endif()
+elseif(wxWidgets_VERSION_STRING LESS WX_REQUIRED_VER)
+	message(FATAL_ERROR "Build requires at least wxWidgets version ${WX_REQUIRED_VER}, found ${wxWidgets_VERSION_STRING}\nAlternatively, you can enable USE_BUILTIN")
 endif()
 include("${wxWidgets_USE_FILE}")
 if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 	# redirect stdout to console
 	string(REPLACE "subsystem,windows" "subsystem,console" wxWidgets_LIBRARIES "${wxWidgets_LIBRARIES}")
 endif()
-pkg_search_module(WXSVG REQUIRED libwxsvg)
 
-# SDL2 & SDL2_mixer
-find_package(SDL2 REQUIRED)
-# TODO: use pkg-config as failsafe
-#pkg_search_module(SDL2 REQUIRED sdl2)
-pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
+# wxSVG
+pkg_search_module(WXSVG libwxsvg)
+if(NOT WXSVG_VERSION)
+	if(USE_BUILTIN)
+		message("\nBuilding wxSVG, this could take a while")
+		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" wxSVG)
+		pkg_search_module(WXSVG REQUIRED libwxsvg)
+	else()
+		message(FATAL_ERROR "Please install wxSVG (http://wxsvg.sf.net/) or enable USE_BUILTIN")
+	endif()
+endif()
+
+# SDL2
+#find_package(SDL2)
+# prefer pkg-config because it sets SDL2_VERSION
+pkg_search_module(SDL2 sdl2)
+if(NOT SDL2_VERSION)
+	if(USE_BUILTIN)
+		message("\nBuilding SDL2, this could take a while")
+		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2)
+		pkg_search_module(SDL2 REQUIRED sdl2)
+	else()
+		message(FATAL_ERROR "Please install SDL2 (https://libsdl.org/) or enable USE_BUILTIN")
+	endif()
+endif()
+
+# SDL2_mixer
+pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
+if(NOT SDL2MIXER_VERSION)
+	if(USE_BUILTIN)
+		message("\nBuilding SDL2_mixer, this could take a while")
+		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2_mixer)
+		pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
+	else()
+		message(FATAL_ERROR "Please install SDL2_mixer (https://libsdl.org/projects/SDL_mixer/) or enable USE_BUILTIN")
+	endif()
+endif()
+
+message("\nSatisfied dependencies:")
+message("wxWidgets version:\t${wxWidgets_VERSION_STRING}")
+# TODO: define macro to set for WXSVG_VERSION to display in about dialog
+message("wxSVG version:\t\t${WXSVG_VERSION}")
+message("SDL2 version:\t${SDL2_VERSION}")
+message("SDL2_mixer version:\t${SDL2MIXER_VERSION}\n")
 
 include_directories("${SDL2_INCLUDE_DIRS}" "${SDL2MIXER_INCLUDE_DIRS}")
 
@@ -123,7 +172,7 @@ file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 # audio output format
 find_program(FFMPEG ffmpeg)
 if(NOT FFMPEG)
-	message(WARNING "FFmpeg not found: converting audio not supported")
+	message(WARNING "FFmpeg not found: converting audio not supported\n")
 	add_custom_command(
 		TARGET ${EXECUTABLE} POST_BUILD
 		# FIXME: should only copy .flac files
@@ -131,7 +180,7 @@ if(NOT FFMPEG)
 		COMMENT "Copying audio data"
 	)
 else()
-	message("Found FFmpeg")
+	message("Found FFmpeg\n")
 	# default to OGG/Vorbis
 	set(AUDIO_FORMAT "vorbis" CACHE STRING "Audio format (set to 'copy' to keep uncompressed FLAC audio files)")
 	set_property(CACHE AUDIO_FORMAT PROPERTY STRINGS ${AFMT_LIST})
