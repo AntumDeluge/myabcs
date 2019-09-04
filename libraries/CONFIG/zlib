@@ -4,23 +4,23 @@ dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 src="https://zlib.net/current/${fname}"
 
-if ${os_win}; then
-	if ${static}; then
-		libtype_opts=(--static)
-	else
-		libtype_opts=("N/A")
-	fi
-else
-	cmd_config=(cmake)
+cmd_config=(cmake)
 
-	if ${static}; then
+libtype_opts=("N/A")
+
+if ${static}; then
+	if ${os_win}; then
+		post_install() {
+			rm -vf "${install_prefix}/lib/libz.dll.a"
+		}
+	else
 		post_install() {
 			find "${install_prefix}/lib/" -type l -name "libz.so*" -print -delete
 			find "${install_prefix}/lib/" -type f -name "libz.so*" -print -delete
 		}
-	else
-		post_install() {
-			rm -vf "${install_prefix}/lib/libz.a"
-		}
 	fi
+else
+	post_install() {
+		rm -vf "${install_prefix}/lib/libz.a"
+	}
 fi
