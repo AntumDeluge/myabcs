@@ -3,7 +3,7 @@ Manditory (required for next release):
 - Add links to art & sound assets
 
 Priority:
-- Show keyboard for "main" category
+- Show alphabet for click/press/touch support
 - Embed free fonts (partially implemented, works on Windows only)
 - Embed toolbar images in executable (XPM is good choice)
 - Don't reload sounds if already cached
@@ -17,6 +17,7 @@ Priority:
     or display message about USE_BUILTIN option
 - Touch up SVGs:
   - owl
+  - quiche
   - yangqin
 
 Non-priority:
@@ -28,7 +29,6 @@ Non-priority:
 - Use config to determine environment (locatation of data files, etc.)
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
-- Clean up quiche SVG
 - Finish re-working owl SVG
 
 Fixes & pull-requests:
