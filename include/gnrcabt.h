@@ -34,13 +34,17 @@ extern wxIcon main_icon;
 // function to show about dialog
 extern int showAboutDialog(wxWindow* parent);
 
+
 class ABTTextDisplay : public wxPanel {
 public:
-	ABTTextDisplay(wxWindow* parent, wxWindowID id=wxID_ANY);
+	ABTTextDisplay(wxWindow* parent, wxWindowID id=wxID_ANY, wxString label=wxEmptyString);
 	void setText(const wxString text) { text_area->SetValue(text); }
+	void loadFile(const wxString filename);
 private:
+	wxString label;
 	wxRichTextCtrl* text_area;
 };
+
 
 class GenericAbout : public wxDialog {
 public:

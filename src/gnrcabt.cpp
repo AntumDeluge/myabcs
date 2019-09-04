@@ -32,8 +32,10 @@ const int ID_ART = wxNewId();
 const int ID_AUDIO = wxNewId();
 
 
-ABTTextDisplay::ABTTextDisplay(wxWindow* parent, wxWindowID id) :
+ABTTextDisplay::ABTTextDisplay(wxWindow* parent, wxWindowID id, wxString label) :
 		wxPanel(parent, id) {
+	this->label = label;
+
 	text_area = new wxRichTextCtrl(this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
 	if (font_changelog.IsOk()) {
 		text_area->SetFont(font_changelog);
@@ -47,6 +49,19 @@ ABTTextDisplay::ABTTextDisplay(wxWindow* parent, wxWindowID id) :
 	SetAutoLayout(true);
 	SetSizer(layout);
 	Layout();
+}
+
+void ABTTextDisplay::loadFile(const wxString filename) {
+	wxString text = wxString::Format("%s text not found: %s", label, filename);
+
+	if (wxFileExists(filename)) {
+		// load & read text file
+		wxFFile f_open(filename, "r");
+		f_open.ReadAll(&text);
+		f_open.Close();
+	}
+
+	setText(text);
 }
 
 
@@ -66,7 +81,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs->AddPage(tab_art, "Art");
 	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
 	tabs->AddPage(tab_audio, "Audio");
-	tab_log = new ABTTextDisplay(tabs, ID_CHANGELOG);
+	tab_log = new ABTTextDisplay(tabs, ID_CHANGELOG, "Changelog");
 	tabs->AddPage(tab_log, "Changelog");
 
 	iconsize = wxSize(100, 100);
@@ -162,8 +177,8 @@ void GenericAbout::addComposer(wxString name, wxString author, wxString license)
 	tab_audio->add(name, author, wxEmptyString, license, wxEmptyString);
 }
 
-void GenericAbout::setChangelog(wxString log) {
-	tab_log->setText(log);
+void GenericAbout::setChangelog(wxString filename) {
+	tab_log->loadFile(filename);
 }
 
 void GenericAbout::addToolkitInfo() {
@@ -282,18 +297,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->setLink("myabcs.sourceforge.io", "https://myabcs.sourceforge.io/");
 	about->setAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
 
-	// Changelog
-	wxString cl_file = getRootDir().Append("/CHANGES.txt");
-	wxString cl_text = wxString::Format("Changelog text not found: %s", cl_file);
-
-	if (wxFileExists(cl_file)) {
-		// load text file
-		wxFFile f_open(cl_file, "r");
-		f_open.ReadAll(&cl_text);
-		f_open.Close();
-	}
-
-	about->setChangelog(cl_text);
+	about->setChangelog(getRootDir().Append("/CHANGES.txt"));
 
 	about->addArtist("ABC Blocks", "Petri Lummemaki", "Public Domain");
 	about->addArtist("Accordion", "ArtFavor", "Public Domain");
