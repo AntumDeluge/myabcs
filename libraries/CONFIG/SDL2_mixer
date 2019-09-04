@@ -24,8 +24,6 @@ config_opts=(
 	--disable-music-ogg-shared
 	--disable-music-flac-shared
 	--disable-music-mp3-mpg123-shared
-	--with-sdl-prefix="${install_prefix}"
-	--with-sdl-exec-prefix="${install_prefix}"
 )
 
 if ${os_win}; then
