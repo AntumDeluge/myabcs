@@ -27,7 +27,6 @@ fi
 
 if ${os_win}; then
 	# FLAC only works if using shared DLL
-	# FIXME: DLL not building
 	libtype_opts+=(
 		--enable-static=no
 		--enable-shared=yes

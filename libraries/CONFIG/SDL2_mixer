@@ -3,7 +3,10 @@
 # Optional depends:
 #  libogg, libvorbis, libflac, mpg123, fluidsynth, modplug, mikmod, timidity, mp3mad, libopusfile (libopus)
 
-depends=(SDL2 libvorbis libflac libmpg123)
+depends=(SDL2)
+if ${os_win}; then
+	depends+=(libvorbis libflac libmpg123)
+fi
 
 ver="2.0.4"
 dname="${name}-${ver}"

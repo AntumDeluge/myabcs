@@ -12,7 +12,11 @@
 
 # NOTE: DLLs are installed to lib dir
 
-depends=(expat libiconv-reb freetype-reb cairo-reb)
+if ${os_win}; then
+	depends=(expat libiconv-reb freetype-reb cairo-reb)
+else
+	depends=(pkg-config)
+fi
 
 ver="3.1.2"
 ver_base="${ver%.*}"
@@ -24,18 +28,20 @@ config_opts=(
 	--disable-gtktest
 	--disable-sdltest
 	--with-libpng=sys
-	--with-libjpeg=builtin
-	--with-libtiff=builtin
-	--with-libxpm=builtin
-	--with-libiconv=builtin
-	--with-regex=builtin
 	--with-zlib=sys
-	--with-liblzma=builtin
 	--with-expat=sys
 )
 
 if ${os_win}; then
-	config_opts+=(--with-msw)
+	config_opts+=(
+		--with-msw
+		--with-libjpeg=builtin
+		--with-libtiff=builtin
+		--with-libxpm=builtin
+		--with-libiconv=builtin
+		--with-regex=builtin
+		--with-liblzma=builtin
+	)
 	libtype_opts=(
 		--enable-shared=yes
 		--enable-monolithic
@@ -43,7 +49,15 @@ if ${os_win}; then
 	ldflags+=(-static-libgcc -static-libstdc++)
 else
 	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
-	config_opts+=(--disable-mdi)
+	config_opts+=(
+		--disable-mdi
+		--with-libjpeg=sys
+		--with-libtiff=sys
+		--with-libxpm=sys
+		--with-libiconv=sys
+		--with-regex=sys
+		--with-liblzma=sys
+	)
 	libtype_opts=(--enable-shared=no)
 fi
 

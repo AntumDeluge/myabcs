@@ -3,7 +3,10 @@
 # Optional depends:
 #  libav (ffmpeg)
 
-depends=(libexif pango wxWidgets)
+if ${os_win}; then
+	depends=(libexif pango)
+fi
+depends+=(wxWidgets)
 
 ver="1.5.20"
 dname="wxsvg-${ver}"
