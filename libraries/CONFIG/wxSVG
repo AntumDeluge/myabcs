@@ -13,12 +13,7 @@ dname="wxsvg-${ver}"
 fname="${dname}.tar.bz2"
 src="https://downloads.sourceforge.net/sourceforge/wxsvg/wxsvg/${ver}/${fname}"
 
-config_opts=(
-	--with-wx-prefix="${install_prefix}"
-	--with-wx-exec-prefix="${install_prefix}"
-	--with-wx-config="${install_prefix}/bin/wx-config"
-	--enable-libav=no
-)
+config_opts=(--enable-libav=no)
 
 # FIXME: DLL not building
 if ${os_win}; then
