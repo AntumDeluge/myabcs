@@ -29,6 +29,7 @@ extern const int ID_WINDOW;
 extern const int ID_BG;
 
 
+extern const int ID_LICENSE;
 extern const int ID_CHANGELOG;
 extern const int ID_LOG;
 

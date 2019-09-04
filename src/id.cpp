@@ -24,5 +24,6 @@ const int ID_OTHER = wxNewId(); // Id used in other threads
 const int ID_WINDOW = wxNewId();
 const int ID_BG = wxNewId();
 
+const int ID_LICENSE = wxNewId();
 const int ID_CHANGELOG = wxNewId();
 const int ID_LOG = wxNewId();

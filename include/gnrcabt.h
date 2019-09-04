@@ -58,6 +58,7 @@ public:
 	void setAbout(wxString about);
 	void addArtist(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
 	void addComposer(wxString image=wxEmptyString, wxString name=wxEmptyString, wxString license=wxEmptyString);
+	void setLicense(wxString lic);
 	void setChangelog(wxString log);
 	void addToolkitInfo();
 	void addMiscInfo();
@@ -68,6 +69,7 @@ private:
 	wxScrolledWindow* tab_info;
 	CreditsPanel* tab_art;
 	CreditsPanel* tab_audio;
+	ABTTextDisplay* tab_lic;
 	ABTTextDisplay* tab_log;
 
 	// Info

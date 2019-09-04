@@ -81,6 +81,8 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs->AddPage(tab_art, "Art");
 	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
 	tabs->AddPage(tab_audio, "Audio");
+	tab_lic = new ABTTextDisplay(tabs, ID_LICENSE, "License");
+	tabs->AddPage(tab_lic, "License");
 	tab_log = new ABTTextDisplay(tabs, ID_CHANGELOG, "Changelog");
 	tabs->AddPage(tab_log, "Changelog");
 
@@ -175,6 +177,10 @@ void GenericAbout::addArtist(wxString name, wxString author, wxString license) {
  */
 void GenericAbout::addComposer(wxString name, wxString author, wxString license) {
 	tab_audio->add(name, author, wxEmptyString, license, wxEmptyString);
+}
+
+void GenericAbout::setLicense(wxString filename) {
+	tab_lic->loadFile(filename);
 }
 
 void GenericAbout::setChangelog(wxString filename) {
@@ -297,6 +303,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->setLink("myabcs.sourceforge.io", "https://myabcs.sourceforge.io/");
 	about->setAbout("MyABCs is educational software for young children to learn \nthe English alphabet and get familiar with a keyboard");
 
+	about->setLicense(getRootDir().Append("/LICENSE.txt"));
 	about->setChangelog(getRootDir().Append("/CHANGES.txt"));
 
 	about->addArtist("ABC Blocks", "Petri Lummemaki", "Public Domain");
