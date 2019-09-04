@@ -1,7 +1,6 @@
 Manditory (required for next release):
 - Replace raccoon sound effect
 - Add links to art & sound assets
-- Format license text to look nicer in about dialog
 
 Priority:
 - Show keyboard for "main" category

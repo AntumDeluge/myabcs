@@ -51,6 +51,24 @@ ABTTextDisplay::ABTTextDisplay(wxWindow* parent, wxWindowID id, wxString label) 
 	Layout();
 }
 
+void ABTTextDisplay::setText(wxString text) {
+	if (label == "License") {
+		// FIXME: will not work for lines that are meant to be single-spaced
+		wxArrayString text_array = wxSplit(text, '\n');
+		text = wxEmptyString;
+		for (size_t idx = 0; idx < text_array.GetCount(); idx++) {
+			wxString line = text_array[idx];
+			// FIXME: lines with whitespace only will not be considered empty
+			if (line == wxEmptyString) {
+				line = "\n\n";
+			}
+			text.Append(line);
+		}
+	}
+
+	text_area->SetValue(text);
+}
+
 void ABTTextDisplay::loadFile(const wxString filename) {
 	wxString text = wxString::Format("%s text not found: %s", label, filename);
 

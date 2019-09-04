@@ -38,7 +38,7 @@ extern int showAboutDialog(wxWindow* parent);
 class ABTTextDisplay : public wxPanel {
 public:
 	ABTTextDisplay(wxWindow* parent, wxWindowID id=wxID_ANY, wxString label=wxEmptyString);
-	void setText(const wxString text) { text_area->SetValue(text); }
+	void setText(wxString text);
 	void loadFile(const wxString filename);
 private:
 	wxString label;
