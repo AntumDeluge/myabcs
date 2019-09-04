@@ -5,7 +5,7 @@
 # Unsure optional depends:
 #  uniscribe, directwrite
 
-depends=(fontconfig)
+depends=(glib fontconfig)
 
 ver="2.5.3"
 dname="${name}-${ver}"
