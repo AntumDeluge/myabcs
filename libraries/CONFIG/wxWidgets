@@ -12,7 +12,7 @@
 
 # NOTE: DLLs are installed to lib dir
 
-depends=(pkg-config expat cairo)
+depends=(expat libiconv-reb freetype-reb cairo-reb)
 
 ver="3.1.2"
 ver_base="${ver%.*}"
