@@ -34,6 +34,13 @@ extern wxIcon main_icon;
 // function to show about dialog
 extern int showAboutDialog(wxWindow* parent);
 
+class ABTTextDisplay : public wxPanel {
+public:
+	ABTTextDisplay(wxWindow* parent, wxWindowID id=wxID_ANY);
+	void setText(const wxString text) { text_area->SetValue(text); }
+private:
+	wxRichTextCtrl* text_area;
+};
 
 class GenericAbout : public wxDialog {
 public:
@@ -57,7 +64,7 @@ private:
 	wxScrolledWindow* tab_info;
 	CreditsPanel* tab_art;
 	CreditsPanel* tab_audio;
-	wxPanel* tab_log;
+	ABTTextDisplay* tab_log;
 
 	// Info
 	wxStaticBitmap* appicon;

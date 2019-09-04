@@ -32,6 +32,24 @@ const int ID_ART = wxNewId();
 const int ID_AUDIO = wxNewId();
 
 
+ABTTextDisplay::ABTTextDisplay(wxWindow* parent, wxWindowID id) :
+		wxPanel(parent, id) {
+	text_area = new wxRichTextCtrl(this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
+	if (font_changelog.IsOk()) {
+		text_area->SetFont(font_changelog);
+	} else {
+		logMessage("Custom monospace font not loaded");
+	}
+
+	wxBoxSizer *layout = new wxBoxSizer(wxVERTICAL);
+	layout->Add(text_area, 1, wxEXPAND);
+
+	SetAutoLayout(true);
+	SetSizer(layout);
+	Layout();
+}
+
+
 GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& title) :
 		wxDialog(parent, id, title) {
 
@@ -48,7 +66,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tabs->AddPage(tab_art, "Art");
 	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
 	tabs->AddPage(tab_audio, "Audio");
-	tab_log = new wxPanel(tabs, ID_CHANGELOG);
+	tab_log = new ABTTextDisplay(tabs, ID_CHANGELOG);
 	tabs->AddPage(tab_log, "Changelog");
 
 	iconsize = wxSize(100, 100);
@@ -62,21 +80,6 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	tab_info->SetAutoLayout(true);
 	tab_info->SetSizer(infosizer);
 	tab_info->Layout();
-
-	// Changelog
-	changelog = new wxRichTextCtrl(tab_log, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxRE_READONLY);
-	if (font_changelog.IsOk()) {
-		changelog->SetFont(font_changelog);
-	} else {
-		logMessage("Custom changelog font not loaded");
-	}
-
-	wxBoxSizer *logsizer = new wxBoxSizer(wxVERTICAL);
-	logsizer->Add(changelog, 1, wxEXPAND);
-
-	tab_log->SetAutoLayout(true);
-	tab_log->SetSizer(logsizer);
-	tab_log->Layout();
 
 	// button to close dialog
 	ok = new wxButton(this, wxID_OK);
@@ -160,7 +163,7 @@ void GenericAbout::addComposer(wxString name, wxString author, wxString license)
 }
 
 void GenericAbout::setChangelog(wxString log) {
-	changelog->SetValue(log);
+	tab_log->setText(log);
 }
 
 void GenericAbout::addToolkitInfo() {
