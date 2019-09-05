@@ -237,7 +237,7 @@ void GenericAbout::addToolkitInfo() {
 	tk_layout->AddStretchSpacer();
 
 #ifdef WXSVG_VERSION
-	tk_layout->Add(new wxStaticText(tab_info, -1, WXSVG_VERSION), 0, wxALIGN_CENTER);
+	tk_layout->Add(new wxStaticText(tab_info, -1, wxString::Format("v%s", WXSVG_VERSION)), 0, wxALIGN_CENTER);
 #endif
 
 	infosizer->Add(tk_layout, 0, wxALIGN_CENTER);
