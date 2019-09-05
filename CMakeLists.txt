@@ -90,6 +90,7 @@ if(NOT WXSVG_VERSION)
 		message(FATAL_ERROR "Please install wxSVG (http://wxsvg.sf.net/) or enable USE_BUILTIN")
 	endif()
 endif()
+add_compile_definitions(WXSVG_VERSION="${WXSVG_VERSION}")
 
 # SDL2
 #find_package(SDL2)

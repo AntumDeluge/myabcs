@@ -234,6 +234,11 @@ void GenericAbout::addToolkitInfo() {
 	tk_layout->Add(wxsvg_logo, 0, wxALIGN_CENTER);
 	tk_layout->AddStretchSpacer();
 	tk_layout->Add(wxsvg_link, 0, wxALIGN_CENTER);
+	tk_layout->AddStretchSpacer();
+
+#ifdef WXSVG_VERSION
+	tk_layout->Add(new wxStaticText(tab_info, -1, WXSVG_VERSION), 0, wxALIGN_CENTER);
+#endif
 
 	infosizer->Add(tk_layout, 0, wxALIGN_CENTER);
 }
