@@ -95,14 +95,14 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 	// TODO: create tabs dynamically
 	tab_info = new wxScrolledWindow(tabs, ID_INFO);
 	tabs->AddPage(tab_info, "About");
-	tab_art = new CreditsPanel(tabs, ID_ART);
-	tabs->AddPage(tab_art, "Art");
-	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
-	tabs->AddPage(tab_audio, "Audio");
 	tab_lic = new ABTTextDisplay(tabs, ID_LICENSE, "License");
 	tabs->AddPage(tab_lic, "License");
 	tab_log = new ABTTextDisplay(tabs, ID_CHANGELOG, "Changelog");
 	tabs->AddPage(tab_log, "Changelog");
+	tab_art = new CreditsPanel(tabs, ID_ART);
+	tabs->AddPage(tab_art, "Art");
+	tab_audio = new CreditsPanel(tabs, ID_AUDIO);
+	tabs->AddPage(tab_audio, "Audio");
 
 	iconsize = wxSize(100, 100);
 	appicon = new wxStaticBitmap(tab_info, -1, wxNullBitmap, wxDefaultPosition, iconsize);

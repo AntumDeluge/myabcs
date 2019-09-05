@@ -67,10 +67,10 @@ private:
 	wxNotebook* tabs;
 	wxButton* ok;
 	wxScrolledWindow* tab_info;
-	CreditsPanel* tab_art;
-	CreditsPanel* tab_audio;
 	ABTTextDisplay* tab_lic;
 	ABTTextDisplay* tab_log;
+	CreditsPanel* tab_art;
+	CreditsPanel* tab_audio;
 
 	// Info
 	wxStaticBitmap* appicon;
