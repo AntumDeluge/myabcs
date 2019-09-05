@@ -58,6 +58,32 @@ set(LIB_BUILD_SCRIPT "${CMAKE_SOURCE_DIR}/libraries/build.sh")
 
 include(FindPkgConfig)
 
+# SDL2
+#find_package(SDL2)
+# prefer pkg-config because it sets SDL2_VERSION
+pkg_search_module(SDL2 sdl2)
+if(NOT SDL2_VERSION)
+	if(USE_BUILTIN)
+		message("\nBuilding SDL2, this could take a while")
+		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2)
+		pkg_search_module(SDL2 REQUIRED sdl2)
+	else()
+		message(FATAL_ERROR "Please install SDL2 (https://libsdl.org/) or enable USE_BUILTIN")
+	endif()
+endif()
+
+# SDL2_mixer
+pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
+if(NOT SDL2MIXER_VERSION)
+	if(USE_BUILTIN)
+		message("\nBuilding SDL2_mixer, this could take a while")
+		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2_mixer)
+		pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
+	else()
+		message(FATAL_ERROR "Please install SDL2_mixer (https://libsdl.org/projects/SDL_mixer/) or enable USE_BUILTIN")
+	endif()
+endif()
+
 # wxWidgets
 set(WX_REQUIRED_VER 3.1)
 find_package(wxWidgets COMPONENTS core base)
@@ -91,32 +117,6 @@ if(NOT WXSVG_VERSION)
 	endif()
 endif()
 add_compile_definitions(WXSVG_VERSION="${WXSVG_VERSION}")
-
-# SDL2
-#find_package(SDL2)
-# prefer pkg-config because it sets SDL2_VERSION
-pkg_search_module(SDL2 sdl2)
-if(NOT SDL2_VERSION)
-	if(USE_BUILTIN)
-		message("\nBuilding SDL2, this could take a while")
-		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2)
-		pkg_search_module(SDL2 REQUIRED sdl2)
-	else()
-		message(FATAL_ERROR "Please install SDL2 (https://libsdl.org/) or enable USE_BUILTIN")
-	endif()
-endif()
-
-# SDL2_mixer
-pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
-if(NOT SDL2MIXER_VERSION)
-	if(USE_BUILTIN)
-		message("\nBuilding SDL2_mixer, this could take a while")
-		execute_process(COMMAND "${LIB_BUILD_SCRIPT}" "${BUILD_STRING}" SDL2_mixer)
-		pkg_search_module(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
-	else()
-		message(FATAL_ERROR "Please install SDL2_mixer (https://libsdl.org/projects/SDL_mixer/) or enable USE_BUILTIN")
-	endif()
-endif()
 
 message("\nSatisfied dependencies:")
 message("wxWidgets version:\t${wxWidgets_VERSION_STRING}")
