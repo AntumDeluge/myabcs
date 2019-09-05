@@ -12,9 +12,6 @@ Priority:
 - Normalize file & directory paths
 - Set category items dynamically from image filenames
 - Add Debian build instructions
-- Build:
-  - Force use of built-in wx if min version requirement not met
-    or display message about USE_BUILTIN option
 - Touch up SVGs:
   - owl
   - quiche
@@ -31,7 +28,9 @@ Non-priority:
 - Use config to determine environment (locatation of data files, etc.)
 - Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
   - Need to confirm licensing
-- Finish re-working owl SVG
+- Allow users to override default & create custom categories in home directory
+- Show settings button in no-debug builds
+  - Use drop-down menu
 
 Fixes & pull-requests:
 - wxWidgets:
