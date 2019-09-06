@@ -28,6 +28,7 @@ While an image is displayed on the screen, press the spacebar to hear the pronun
 
 <pre>
 CMake           <a href="https://cmake.org/">https://cmake.org/</a>
+pkg-config      <a href="https://www.freedesktop.org/wiki/Software/pkg-config/">https://www.freedesktop.org/wiki/Software/pkg-config/</a>
 wxWidgets 3.1+  <a href="https://wxwidgets.org/">https://wxwidgets.org/</a>
 wxSVG           <a href="http://wxsvg.sourceforge.net/">http://wxsvg.sourceforge.net/</a>
 SDL2            <a href="https://libsdl.org/">https://libsdl.org/</a>
