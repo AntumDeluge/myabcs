@@ -1,0 +1,97 @@
+diff -ruN librsvg-2.44.14.orig/Makefile.am librsvg-2.44.14/Makefile.am
+--- librsvg-2.44.14.orig/Makefile.am	2019-09-05 20:25:31.472744000 -0700
++++ librsvg-2.44.14/Makefile.am	2019-09-05 20:31:39.240789800 -0700
+@@ -5,7 +5,7 @@
+ 
+ lib_LTLIBRARIES = librsvg-@RSVG_API_MAJOR_VERSION@.la
+ 
+-bin_PROGRAMS = rsvg-convert
++bin_PROGRAMS =
+ if HAVE_GTK_3
+ bin_PROGRAMS += rsvg-view-3
+ endif
+@@ -201,7 +201,7 @@
+ 	$(headers)			\
+ 	librsvg/librsvg-features.h
+ 
+-dist_man_MANS = rsvg-convert.1
++dist_man_MANS =
+ 
+ rsvg_convert_SOURCES =			\
+ 	rsvg-convert.c			\
+@@ -347,7 +347,7 @@
+ 
+ # ------------------- MSVC Build Items ----------------
+ 
+-MSVCPROJS = rsvg rsvg-convert
++MSVCPROJS = rsvg
+ 
+ rsvg_FILES = $(librsvg_@RSVG_API_MAJOR_VERSION@_la_SOURCES)
+ rsvg_EXCLUDES = dummy
+@@ -363,8 +363,7 @@
+ 
+ # autotools: Why must we do this instead of dist-hook?
+ MSVCPROJ_GENERATED = \
+-	$(top_builddir)/win32/vs12/rsvg.vcxproj		\
+-	$(top_builddir)/win32/vs12/rsvg-convert.vcxproj
++	$(top_builddir)/win32/vs12/rsvg.vcxproj
+ 
+ if HAVE_INTROSPECTION
+ 
+diff -ruN librsvg-2.44.14.orig/Makefile.in librsvg-2.44.14/Makefile.in
+--- librsvg-2.44.14.orig/Makefile.in	2019-09-05 20:25:31.032893000 -0700
++++ librsvg-2.44.14/Makefile.in	2019-09-05 20:28:47.033536700 -0700
+@@ -193,7 +193,7 @@
+ 	"$(DESTDIR)$(girdir)" "$(DESTDIR)$(typelibsdir)" \
+ 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(vapidir)" \
+ 	"$(DESTDIR)$(librsvgincdir)"
+-PROGRAMS = $(bin_PROGRAMS)
++PROGRAMS =
+ am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
+ am__vpath_adj = case $$p in \
+     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
+@@ -991,7 +991,7 @@
+ 	cd $(top_builddir) && $(SHELL) ./config.status $@
+ librsvg-${RSVG_API_VERSION}-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/librsvg-uninstalled.pc.in
+ 	cd $(top_builddir) && $(SHELL) ./config.status $@
+-install-binPROGRAMS: $(bin_PROGRAMS)
++install-binPROGRAMS:
+ 	@$(NORMAL_INSTALL)
+ 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+ 	if test -n "$$list"; then \
+@@ -1732,7 +1732,7 @@
+ 	$(MAKE) $(AM_MAKEFLAGS) check-local
+ check: $(BUILT_SOURCES)
+ 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
+-all-am: Makefile $(PROGRAMS) $(LTLIBRARIES) $(MANS) $(DATA) $(HEADERS) \
++all-am: Makefile $(LTLIBRARIES) $(MANS) $(DATA) $(HEADERS) \
+ 		config.h
+ install-binPROGRAMS: install-libLTLIBRARIES
+ 
+@@ -1778,7 +1778,7 @@
+ 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+ clean: clean-recursive
+ 
+-clean-am: clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
++clean-am: clean-generic clean-libLTLIBRARIES \
+ 	clean-libtool clean-local mostlyclean-am
+ 
+ distclean: distclean-recursive
+@@ -1817,7 +1817,7 @@
+ 
+ install-dvi-am:
+ 
+-install-exec-am: install-binPROGRAMS install-libLTLIBRARIES
++install-exec-am: install-libLTLIBRARIES
+ 
+ install-html: install-html-recursive
+ 
+@@ -1868,7 +1868,7 @@
+ 
+ ps-am:
+ 
+-uninstall-am: uninstall-binPROGRAMS uninstall-dist_docDATA \
++uninstall-am: uninstall-dist_docDATA \
+ 	uninstall-libLTLIBRARIES uninstall-librsvgincHEADERS \
+ 	uninstall-man uninstall-nodist_girDATA \
+ 	uninstall-nodist_typelibsDATA uninstall-pkgconfigDATA \
