@@ -71,20 +71,20 @@ ifeq ($(OS), Windows_NT)
 	ifeq ($(shell echo $${OSTYPE}), msys)
 		# HACK!
 		ifeq ($(MSYSTEM), MINGW64)
-			BUILD_STRING="win32-x86_64"
+			BUILD_STRING = win32-x86_64
 		else
-			BUILD_STRING="win32-i686"
+			BUILD_STRING = win32-i686
 		endif
 	else
-		BUILD_STRING=$(shell echo "win32-$$(uname -m)")
+		BUILD_STRING = $(shell echo "win32-$$(uname -m)")
 	endif
 else
 	PREFIX := /usr/local
 	DATADIR = $(PREFIX)/share
-	BUILD_STRING=$(shell echo "$$(uname -s | tr A-Z a-z)-$$(uname -m)")
+	BUILD_STRING = $(shell echo "$$(uname -s | tr A-Z a-z)-$$(uname -m)")
 endif
 
-LIB_PREFIX="libraries/libprefix-$(BUILD_STRING)"
+LIB_PREFIX = libraries/libprefix-$(BUILD_STRING)
 
 BINDIR = $(DESTDIR)/bin
 INCLDIR = $(DESTDIR)/include
@@ -104,6 +104,8 @@ ifdef USE_BUILTIN
 			SDLCONFIG = $(LIB_PREFIX)/bin/sdl2-config
 		endif
 	endif
+
+	export PATH := $(LIB_PREFIX)/bin:$(shell printenv PATH)
 endif
 
 ifndef WXCONFIG
@@ -116,44 +118,53 @@ endif
 CC = g++
 CFLAGS = -c -std=c++11
 CXXFLAGS = $(CFLAGS)
-WXFLAGS = $(WXCONFIG) --cxxflags
-SDLFLAGS = $(SDLCONFIG) --cflags
 OBJ_SUF = .o
 
-LIBS = -lSDL2_mixer -lpthread
-WXLIBS = $(WXCONFIG) --libs std,richtext
-SDLLIBS = $(SDLCONFIG) --libs
 LINKEROPTS = -Wl,--strip-all
+
+### Toolkits ###
+
+WXFLAGS = $(WXCONFIG) --cxxflags
+SVGFLAGS = pkg-config libwxsvg --cflags
+SDLFLAGS = $(SDLCONFIG) --cflags
+MIXFLAGS = pkg-config SDL2_mixer --cflags
+
+ifdef STATIC
+	WXLIBS = $(WXCONFIG) --libs std,richtext --static
+	SVGLIBS = pkg-config libwxsvg --libs --static
+	SDLLIBS = $(SDLCONFIG) --libs --static
+	MIXLIBS = pkg-config SDL2_mixer --libs --static
+	LINKEROPTS += -static-libgcc -static-libstdc++
+else
+	WXLIBS = $(WXCONFIG) --libs std,richtext
+	SVGLIBS = pkg-config libwxsvg --libs
+	SDLLIBS = $(SDLCONFIG) --libs
+	MIXLIBS = pkg-config SDL2_mixer --libs
+endif
 
 ifdef WXVERSION
 	WXFLAGS += --version=$(WXVERSION)
 	WXLIBS += --version=$(WXVERSION)
 endif
 
-ifdef STATIC
-	LIBS += -l:libwxsvg.a
-	WXLIBS += --static
-	#SDLLIBS = $(SDLCONFIG) --static-libs
-	#LINKEROPTS += -static-libgcc -static-libstdc++
-else
-	LIBS += -lwxsvg
-endif
+#ifeq ($(OS_WIN), true)
+#	LINKEROPTS += -static-libgcc -static-libstdc++
+#endif
 
-ifeq ($(OS_WIN), true)
-	LINKEROPTS += -static-libgcc -static-libstdc++
-endif
-
-ifdef EXTRA_LIBS
-	LIBS += $(EXTRA_LIBS)
-endif
-
-### Debugging ###
-
+# Debugging
 ifdef DEBUG
 	CXXFLAGS += -O0 -g -Wall -DDEBUG
 	WXFLAGS += --debug=yes
 	WXLIBS += --debug=yes | sed -e 's|--subsystem,windows|--subsystem,console|'
 	LINKEROPTS += -v
+endif
+
+WXFLAGS := `$(shell echo $(WXFLAGS))` `$(SVGFLAGS)`
+SDLFLAGS := `$(shell echo $(SDLFLAGS))` `$(MIXERFLAGS)`
+LIBS = `$(WXLIBS)` `$(SVGLIBS)` `$(SDLLIBS)` `$(MIXLIBS)` -lpthread
+
+ifdef EXTRA_LIBS
+	LIBS += $(EXTRA_LIBS)
 endif
 
 ### Installation ###

@@ -5,7 +5,7 @@ all: $(EXE)
 
 $(EXE): $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION)."
-	$(CC) $(LINKEROPTS) $(LDFLAGS) $(OBJECTS) -o $(EXE) `$(WXLIBS)` `$(SDLLIBS)` $(LIBS)
+	$(CC) $(LINKEROPTS) $(LDFLAGS) $(OBJECTS) -o $(EXE) $(LIBS)
 	@if $(OS_WIN) && test ! -z "$(USE_BUILTIN)" && test $(USE_BUILTIN) -ne 0; then \
 		if test -d "$(LIB_PREFIX)/bin"; then \
 			for DLL in $$(find "$(LIB_PREFIX)/bin" -type f -name "*.[dD][lL][lL]"); do \
@@ -98,46 +98,46 @@ pack:
 	echo -e "\nCreated $(REL_NAME).zip binary distribution archive";
 
 $(LOG_O): $(LOG_C) $(LOG_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(LOG_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(LOG_C)
 
 $(PATHS_O): $(PATHS_C) $(PATHS_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(PATHS_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(PATHS_C)
 
 $(RESOBJ_O): $(RESOBJ_C) $(RESOBJ_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` $(CPPFLAGS) $(RESOBJ_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(SDLFLAGS) $(CPPFLAGS) $(RESOBJ_C)
 
 $(RESLIST_O): $(RESLIST_C) $(RESLIST_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(RESLIST_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(RESLIST_C)
 
 $(CATEGORY_O): $(CATEGORY_C) $(CATEGORY_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(CATEGORY_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(CATEGORY_C)
 
 $(CREDPANEL_O): $(CREDPANEL_C) $(CREDPANEL_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(CREDPANEL_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(CREDPANEL_C)
 
 $(GNRCABT_O): $(GNRCABT_C) $(GNRCABT_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` $(CPPFLAGS) $(GNRCABT_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(SDLFLAGS) $(CPPFLAGS) $(GNRCABT_C)
 
 $(SOUND_O): $(SOUND_C) $(SOUND_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` `$(SDLFLAGS)` $(CPPFLAGS) $(SOUND_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(SDLFLAGS) $(CPPFLAGS) $(SOUND_C)
 
 $(ABC_O): $(ABC_C) $(ABC_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(ABC_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(ABC_C)
 
 $(MAIN_O): $(MAIN_C) $(MAIN_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(MAIN_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(MAIN_C)
 
 $(FONTS_O): $(FONTS_C) $(FONTS_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(CPPFLAGS) $(FONTS_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(CPPFLAGS) $(FONTS_C)
 
 $(EVENT_O): $(EVENT_C) $(EVENT_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINGS) $(CPPFLAGS) $(EVENT_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINGS) $(CPPFLAGS) $(EVENT_C)
 
 $(ID_O): $(ID_C) $(ID_D)
-	$(CC) $(CXXFLAGS) `$(WXFLAGS)` $(DEFINGS) $(CPPFLAGS) $(ID_C)
+	$(CC) $(CXXFLAGS) $(WXFLAGS) $(DEFINGS) $(CPPFLAGS) $(ID_C)
 
 $(WINRESOURCES_O): win_resources.rc
-	windres `$(WXFLAGS) | sed -e 's|-fpermissive||' -e 's|-mthreads||'` win_resources.rc $(WINRESOURCES_O)
+	windres $$(wx-config --cxxflags | sed -e 's|-mthreads||') win_resources.rc $(WINRESOURCES_O)
 
 install-x11: data/resource/x11/myabcs.desktop data/resource/logo/myabcs.svg
 	@target_dir="$(DESTDIR)$(PREFIX)"; \
