@@ -2,9 +2,6 @@
 #  pkg-config
 # Optional depends:
 #  jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
-#
-# TODO:
-#  - disable everything not used by MyABCs
 
 depends=(pkg-config)
 if ${os_win}; then
@@ -17,6 +14,16 @@ fname="${dname}.tar.gz"
 src="https://libsdl.org/release/${fname}"
 
 cmd_config=(cmake)
+
+# disable everything not used by MyABCs
+# FIXME: can't disable video, joystick, haptic, sensor, power, nor threads
+config_opts=(
+	-DSDL_ATOMIC=OFF
+	-DSDL_EVENTS=OFF
+	-DSDL_FILE=OFF
+	-DSDL_FILESYSTEM=OFF
+	-DSDL_TIMERS=OFF
+)
 
 if ${os_win} || ! ${static}; then
 	libtype_opts=(
