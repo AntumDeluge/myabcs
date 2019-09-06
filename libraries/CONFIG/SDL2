@@ -2,6 +2,9 @@
 #  pkg-config
 # Optional depends:
 #  jack, pulseaudio, libsamplerate, libudev, pthreads, alsa, esd, fusionsound, rpi directfb, libdrm, libusb, IBUS, FCITX
+#
+# TODO:
+#  - disable everything not used by MyABCs
 
 depends=(pkg-config)
 if ${os_win}; then
@@ -13,9 +16,16 @@ dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 src="https://libsdl.org/release/${fname}"
 
-if ${os_win}; then
+cmd_config=(cmake)
+
+if ${os_win} || ! ${static}; then
 	libtype_opts=(
-		--enable-shared=yes
-		--enable-static=no
+		-DSDL_STATIC=OFF
+		-DSDL_SHARED=ON
+	)
+else
+	libtype_opts=(
+		-DSDL_STATIC=ON
+		-DSDL_SHARED=OFF
 	)
 fi
