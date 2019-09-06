@@ -5,12 +5,11 @@
 #  libjbig, libxpm, libmspack, SDL2, cairo, libsecret, webkit, xtst, libnotify, gnomevfs,
 #  gtkprint, gst, mesagl, glu, gl, sm, directfb, pangoxft, pangoft2, Xinerama, Xxf86vm, xmkmf
 #
+# TODO: use CMake to build
+#
 # Notes:
 #  - libtool required for autoreconf command
-# TODO:
-#  - disable everything not used by MyABCs
-
-# NOTE: DLLs are installed to lib dir
+#  - DLLs are installed to lib dir
 
 if ${os_win}; then
 	depends=(expat libiconv-reb freetype-reb cairo-reb)
@@ -48,9 +47,8 @@ if ${os_win}; then
 	)
 	ldflags+=(-static-libgcc -static-libstdc++)
 else
-	# getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 	config_opts+=(
-		--disable-mdi
+		--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 		--with-libjpeg=sys
 		--with-libtiff=sys
 		--with-libxpm=sys
@@ -58,7 +56,11 @@ else
 		--with-regex=sys
 		--with-liblzma=sys
 	)
-	libtype_opts=(--enable-shared=no)
+	if ${static}; then
+		libtype_opts=(--enable-shared=no)
+	else
+		libtype_opts=(--enable-shared)
+	fi
 fi
 
 #post_extract() {
