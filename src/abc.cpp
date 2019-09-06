@@ -162,6 +162,7 @@ MainWindow::MainWindow() :
 	// Layout
 	main_layout = new wxBoxSizer(wxVERTICAL);
 	main_layout->AddSpacer(5);
+	main_layout->Add(wait_image, 1, wxALIGN_CENTER); // FIXME: not centered vertically
 	main_layout->Add(image, 1, wxALIGN_CENTER);
 	main_layout->Add(letter, 0, wxALIGN_CENTER);
 	main_layout->Add(label, 0, wxALIGN_CENTER);
@@ -524,8 +525,6 @@ void MainWindow::startWaitAnimation() {
 	letter->SetLabel("Loading...");
 	label->SetLabel(wxEmptyString);
 	image->Show(false);
-	main_layout->Detach(1);
-	main_layout->Insert(1, wait_image, 1, wxALIGN_CENTER); // FIXME: not centered vertically
 	wait_image->Show();
 	wait_image->Play();
 
@@ -537,8 +536,6 @@ void MainWindow::stopWaitAnimation() {
 	label->SetLabel(wxEmptyString);
 	wait_image->Stop();
 	wait_image->Show(false);
-	main_layout->Detach(1);
-	main_layout->Insert(1, image, 1, wxALIGN_CENTER);
 	image->Show();
 
 	// no need to call canvas->Layout() here because MainWindow::ReloadDisplay will be called
