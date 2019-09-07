@@ -11,6 +11,11 @@
 #  - libtool required for autoreconf command
 #  - DLLs are installed to lib dir
 
+# Bugs to report:
+#  - GNU Autotools build:
+#    - '--disable/enable-metafiles' does not work
+#    - wxrc-<ver> executable not suffixed with .exe on Windows
+
 if ${os_win}; then
 	depends=(expat libiconv-reb freetype-reb cairo-reb)
 else
