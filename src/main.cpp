@@ -40,8 +40,11 @@ bool App::OnInit() {
 	// initialize image support
 	wxImage::AddHandler(new wxPNGHandler);
 	wxImage::AddHandler(new wxJPEGHandler);
+#ifdef WIN32
 	wxImage::AddHandler(new wxICOHandler);
+#else
 	wxImage::AddHandler(new wxXPMHandler);
+#endif
 
 	MainWindow* frame = new MainWindow();
 	frame->Show(true);

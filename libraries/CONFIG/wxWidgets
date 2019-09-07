@@ -81,6 +81,9 @@ if ! ${use_cmake}; then
 			--disable-mshtmlhelp
 			--disable-ownerdrawn
 			--disable-wxdib
+			# graphics types support
+			--disable-xpm
+			--enable-ico_cur
 			# libraries/dependencies
 			--with-libjpeg=builtin
 			--with-libtiff=builtin
@@ -106,6 +109,10 @@ if ! ${use_cmake}; then
 			--disable-dynlib
 			--with-libjpeg=sys
 			--with-libtiff=sys
+			# graphics types support
+			--enable-xpm
+			--disable-ico_cur
+			# libraries/dependencies
 			--with-libxpm=sys
 			--with-libiconv=sys
 			--with-regex=sys
@@ -129,6 +136,9 @@ else
 			-DwxUSE_MS_HTML_HELP=OFF
 			-DwxUSE_OWNER_DRAWN=OFF
 			-DwxUSE_WXDIB=OFF
+			# graphics types support
+			-DwxUSE_XPM=OFF
+			-DwxUSE_ICO_CUR=ON
 			# libraries/dependencies
 			-DwxUSE_LIBJPEG=builtin
 			-DwxUSE_LIBTIFF=builtin
@@ -145,6 +155,10 @@ else
 	else
 		config_opts+=(
 			-DwxUSE_MDI=OFF # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
+			# graphics types support
+			-DwxUSE_XPM=ON
+			-DwxUSE_ICO_CUR=OFF
+			# libraries/dependencies
 			-DwxUSE_LIBJPEG=sys
 			-DwxUSE_LIBTIFF=sys
 			-DwxUSE_REGEX=sys
