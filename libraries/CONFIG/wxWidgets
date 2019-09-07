@@ -43,6 +43,7 @@ gnu_opts=(
 	--disable-gtktest
 	--disable-sdltest
 	--with-libpng=sys
+	--without-libjpeg
 	--with-zlib=sys
 	--with-expat=sys
 )
@@ -60,6 +61,7 @@ cmake_opts=(
 	-DwxUSE_MOUSEWHEEL=OFF
 	# libraries/dependencies
 	-DwxUSE_LIBPNG=sys
+	-DwxUSE_LIBJPEG=OFF
 	-DwxUSE_ZLIB=sys
 	-DwxUSE_EXPAT=sys
 )

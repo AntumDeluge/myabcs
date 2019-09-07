@@ -39,7 +39,6 @@ bool App::OnInit() {
 
 	// initialize image support
 	wxImage::AddHandler(new wxPNGHandler);
-	wxImage::AddHandler(new wxJPEGHandler);
 #ifdef WIN32
 	wxImage::AddHandler(new wxICOHandler);
 #else
