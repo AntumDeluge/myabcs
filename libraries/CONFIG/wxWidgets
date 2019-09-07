@@ -89,7 +89,6 @@ if ! ${use_cmake}; then
 			--disable-xpm
 			--enable-ico_cur
 			# libraries/dependencies
-			--with-libjpeg=builtin
 			--with-libxpm=builtin
 			--with-libiconv=builtin
 			--with-regex=builtin
@@ -110,7 +109,6 @@ if ! ${use_cmake}; then
 			--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 			--disable-detect_sm
 			--disable-dynlib
-			--with-libjpeg=sys
 			# graphics types support
 			--enable-xpm
 			--disable-ico_cur
@@ -142,8 +140,6 @@ else
 			-DwxUSE_XPM=OFF
 			-DwxUSE_ICO_CUR=ON
 			# libraries/dependencies
-			-DwxUSE_LIBJPEG=builtin
-			# libxpm setting???
 			# libiconv setting???
 			-DwxUSE_REGEX=builtin
 			# liblzma setting???
@@ -160,7 +156,6 @@ else
 			-DwxUSE_XPM=ON
 			-DwxUSE_ICO_CUR=OFF
 			# libraries/dependencies
-			-DwxUSE_LIBJPEG=sys
 			-DwxUSE_REGEX=sys
 		)
 		if ${static}; then
