@@ -61,6 +61,8 @@ cmake_opts=(
 	# user input
 	-DwxUSE_JOYSTICK=OFF
 	-DwxUSE_MOUSEWHEEL=OFF
+	# graphics rendering
+	-DwxUSE_CAIRO=ON
 	# libraries/dependencies
 	-DwxUSE_LIBPNG=sys
 	-DwxUSE_LIBJPEG=OFF
