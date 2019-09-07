@@ -15,9 +15,23 @@ src="https://libsdl.org/release/${fname}"
 
 cmd_config=(cmake)
 
-# disable everything not used by MyABCs
+use_cmake=false
+if test "${cmd_config[0]}" == "cmake"; then
+	use_cmake=true
+fi
+
+# TODO: disable everything not used by MyABCs
+
+gnu_opts=(
+	--disable-atomic
+	--disable-events
+	--disable-file
+	--disable-filesystem
+	--disable-timers
+)
+
 # FIXME: can't disable video, joystick, haptic, sensor, power, nor threads
-config_opts=(
+cmake_opts=(
 	-DSDL_ATOMIC=OFF
 	-DSDL_EVENTS=OFF
 	-DSDL_FILE=OFF
@@ -25,14 +39,31 @@ config_opts=(
 	-DSDL_TIMERS=OFF
 )
 
-if ${os_win} || ! ${static}; then
-	libtype_opts=(
-		-DSDL_STATIC=OFF
-		-DSDL_SHARED=ON
-	)
+if ! ${use_cmake}; then
+	# using GNU autotools
+	config_opts=(${gnu_opts[@]})
+
+	if ${os_win}; then
+		libtype_opts=(
+			--disable-static
+			--enable-shared
+		)
+	fi
 else
-	libtype_opts=(
-		-DSDL_STATIC=ON
-		-DSDL_SHARED=OFF
-	)
+	# using CMake
+	config_opts=(${cmake_opts[@]})
+
+	if ${os_win} || ! ${static}; then
+		libtype_opts=(
+			-DSDL_STATIC=OFF
+			-DSDL_SHARED=ON
+		)
+	else
+		libtype_opts=(
+			-DSDL_STATIC=ON
+			-DSDL_SHARED=OFF
+		)
+	fi
 fi
+
+unset use_cmake gnu_opts cmake_opts
