@@ -23,7 +23,9 @@ dname="${name}-${ver}"
 fname="${dname}.tar.bz2"
 src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 
-config_opts=(
+#cmd_config=(cmake)
+
+gnu_opts=(
 	--disable-gtktest
 	--disable-sdltest
 	--with-libpng=sys
@@ -31,35 +33,90 @@ config_opts=(
 	--with-expat=sys
 )
 
-if ${os_win}; then
-	config_opts+=(
-		--with-msw
-		--with-libjpeg=builtin
-		--with-libtiff=builtin
-		--with-libxpm=builtin
-		--with-libiconv=builtin
-		--with-regex=builtin
-		--with-liblzma=builtin
-	)
-	libtype_opts=(
-		--enable-shared=yes
-		--enable-monolithic
-	)
-	ldflags+=(-static-libgcc -static-libstdc++)
-else
-	config_opts+=(
-		--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
-		--with-libjpeg=sys
-		--with-libtiff=sys
-		--with-libxpm=sys
-		--with-libiconv=sys
-		--with-regex=sys
-		--with-liblzma=sys
-	)
-	if ${static}; then
-		libtype_opts=(--enable-shared=no)
+cmake_opts=(
+	# no options for GTK & SDL tests???
+	-DwxBUILD_COMPATIBILITY=3.0
+	-DwxUSE_LIBPNG=sys
+	-DwxUSE_ZLIB=sys
+	-DwxUSE_EXPAT=sys
+)
+
+use_cmake=false
+if test "${cmd_config[0]}" == "cmake"; then
+	use_cmake=true
+fi
+
+if ! ${use_cmake}; then
+	# using GNU autotools
+	config_opts=(${gnu_opts[@]})
+
+	if ${os_win}; then
+		config_opts+=(
+			--with-msw
+			--with-libjpeg=builtin
+			--with-libtiff=builtin
+			--with-libxpm=builtin
+			--with-libiconv=builtin
+			--with-regex=builtin
+			--with-liblzma=builtin
+		)
+		libtype_opts=(
+			--enable-shared=yes
+			--enable-monolithic
+		)
+		ldflags+=(-static-libgcc -static-libstdc++)
+
+		# wxrc-<ver> executable not suffixed with .exe
+		post_install() {
+			mv -v "${install_prefix}/bin/wxrc-${ver_base}" "${install_prefix}/bin/wxrc-${ver_base}.exe"
+		}
 	else
-		libtype_opts=(--enable-shared)
+		config_opts+=(
+			--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
+			--with-libjpeg=sys
+			--with-libtiff=sys
+			--with-libxpm=sys
+			--with-libiconv=sys
+			--with-regex=sys
+			--with-liblzma=sys
+		)
+		if ${static}; then
+			libtype_opts=(--enable-shared=no)
+		else
+			libtype_opts=(--enable-shared)
+		fi
+	fi
+else
+	# using CMake
+	config_opts=(${cmake_opts[@]})
+
+	if ${os_win}; then
+		config_opts+=(
+			-DwxBUILD_TOOLKIT=msw
+			-DwxUSE_LIBJPEG=builtin
+			-DwxUSE_LIBTIFF=builtin
+			# libxpm setting???
+			# libiconv setting???
+			-DwxUSE_REGEX=builtin
+			# liblzma setting???
+		)
+		libtype_opts=(
+			-DwxBUILD_SHARED=ON
+			-DwxBUILD_MONOLITHIC=ON
+		)
+		# FIXME: how to link statically to libgcc & libstdc++???
+	else
+		config_opts+=(
+			-DwxUSE_MDI=OFF # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
+			-DwxUSE_LIBJPEG=sys
+			-DwxUSE_LIBTIFF=sys
+			-DwxUSE_REGEX=sys
+		)
+		if ${static}; then
+			libtype_opts=(-DwxBUILD_SHARED=OFF)
+		else
+			libtype_opts=(-DwxBUILD_SHARED=ON)
+		fi
 	fi
 fi
 
@@ -67,8 +124,4 @@ fi
 #	autoreconf -fiv
 #}
 
-if ${os_win}; then
-	post_install() {
-		mv -v "${install_prefix}/bin/wxrc-${ver_base}" "${install_prefix}/bin/wxrc-${ver_base}.exe"
-	}
-fi
+unset use_cmake gnu_opts cmake_opts
