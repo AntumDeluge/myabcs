@@ -87,11 +87,11 @@ if ! ${use_cmake}; then
 			--disable-mshtmlhelp
 			--disable-ownerdrawn
 			--disable-wxdib
-			# graphics types support
+			# types support
 			--disable-xpm
 			--enable-ico_cur
 			# libraries/dependencies
-			--with-libxpm=builtin
+			--without-libxpm
 			--with-libiconv=builtin
 			--with-regex=builtin
 			--with-liblzma=builtin
@@ -111,7 +111,7 @@ if ! ${use_cmake}; then
 			--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 			--disable-detect_sm
 			--disable-dynlib
-			# graphics types support
+			# types support
 			--enable-xpm
 			--disable-ico_cur
 			# libraries/dependencies
@@ -138,7 +138,7 @@ else
 			-DwxUSE_MS_HTML_HELP=OFF
 			-DwxUSE_OWNER_DRAWN=OFF
 			-DwxUSE_WXDIB=OFF
-			# graphics types support
+			# types support
 			-DwxUSE_XPM=OFF
 			-DwxUSE_ICO_CUR=ON
 			# libraries/dependencies
@@ -153,7 +153,7 @@ else
 	else
 		config_opts+=(
 			-DwxUSE_MDI=OFF # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
-			# graphics types support
+			# types support
 			-DwxUSE_XPM=ON
 			-DwxUSE_ICO_CUR=OFF
 			# libraries/dependencies
