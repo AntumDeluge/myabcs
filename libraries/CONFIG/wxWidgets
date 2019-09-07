@@ -44,6 +44,7 @@ gnu_opts=(
 	--disable-sdltest
 	--with-libpng=sys
 	--without-libjpeg
+	--without-libtiff
 	--with-zlib=sys
 	--with-expat=sys
 )
@@ -62,6 +63,7 @@ cmake_opts=(
 	# libraries/dependencies
 	-DwxUSE_LIBPNG=sys
 	-DwxUSE_LIBJPEG=OFF
+	-DwxUSE_LIBTIFF=OFF
 	-DwxUSE_ZLIB=sys
 	-DwxUSE_EXPAT=sys
 )
@@ -88,7 +90,6 @@ if ! ${use_cmake}; then
 			--enable-ico_cur
 			# libraries/dependencies
 			--with-libjpeg=builtin
-			--with-libtiff=builtin
 			--with-libxpm=builtin
 			--with-libiconv=builtin
 			--with-regex=builtin
@@ -110,7 +111,6 @@ if ! ${use_cmake}; then
 			--disable-detect_sm
 			--disable-dynlib
 			--with-libjpeg=sys
-			--with-libtiff=sys
 			# graphics types support
 			--enable-xpm
 			--disable-ico_cur
@@ -143,7 +143,6 @@ else
 			-DwxUSE_ICO_CUR=ON
 			# libraries/dependencies
 			-DwxUSE_LIBJPEG=builtin
-			-DwxUSE_LIBTIFF=builtin
 			# libxpm setting???
 			# libiconv setting???
 			-DwxUSE_REGEX=builtin
@@ -162,7 +161,6 @@ else
 			-DwxUSE_ICO_CUR=OFF
 			# libraries/dependencies
 			-DwxUSE_LIBJPEG=sys
-			-DwxUSE_LIBTIFF=sys
 			-DwxUSE_REGEX=sys
 		)
 		if ${static}; then
