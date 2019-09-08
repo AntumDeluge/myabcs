@@ -31,6 +31,9 @@ src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 #cmd_config=(cmake)
 
 gnu_opts=(
+	# localization
+	--disable-intl
+	--disable-xlocale
 	--disable-apple_ieee
 	--disable-debugreport
 	--disable-dialupman
@@ -51,8 +54,11 @@ gnu_opts=(
 )
 
 cmake_opts=(
-	# no options for GTK & SDL tests???
 	-DwxBUILD_COMPATIBILITY=3.0
+	# localization
+	-DwxUSE_INTL=OFF
+	-DwxUSE_XLOCALE=OFF
+	# no options for GTK & SDL tests???
 	-DwxUSE_APPLE_IEEE=OFF
 	-DwxUSE_DEBUGREPORT=OFF
 	-DwxUSE_DIALUP_MANAGER=OFF
