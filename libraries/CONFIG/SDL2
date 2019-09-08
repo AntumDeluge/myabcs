@@ -22,6 +22,8 @@ fi
 
 # TODO: disable everything not used by MyABCs
 
+# FIXME: can't disable video, joystick, haptic, sensor, power, nor threads
+
 gnu_opts=(
 	--disable-atomic
 	--disable-events
@@ -30,7 +32,6 @@ gnu_opts=(
 	--disable-timers
 )
 
-# FIXME: can't disable video, joystick, haptic, sensor, power, nor threads
 cmake_opts=(
 	-DSDL_ATOMIC=OFF
 	-DSDL_EVENTS=OFF
