@@ -96,7 +96,6 @@ if ! ${use_cmake}; then
 			--without-libxpm
 			--with-libiconv=builtin
 			--with-regex=builtin
-			--with-liblzma=builtin
 		)
 		libtype_opts=(
 			--enable-shared=yes
@@ -120,7 +119,6 @@ if ! ${use_cmake}; then
 			--with-libxpm=sys
 			--with-libiconv=sys
 			--with-regex=sys
-			--with-liblzma=sys
 		)
 		if ${static}; then
 			libtype_opts=(--enable-shared=no)
