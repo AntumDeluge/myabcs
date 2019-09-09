@@ -5,7 +5,6 @@ Manditory (required for next release):
 Priority:
 - Show alphabet for click/press/touch support
 - Embed free fonts (partially implemented, works on Windows only)
-- Embed toolbar images in executable (XPM is good choice)
 - Don't reload sounds if already cached
 - Re-record "xun" vocal sound
 - PNG & SVG jars are different colors

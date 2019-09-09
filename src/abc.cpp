@@ -14,6 +14,7 @@
 #include "paths.h"
 #include "sound.h"
 #include "res/ani_loading.h"
+#include "res/tbicon.h"
 
 #include <pthread.h>
 #include <wx/mstream.h>
@@ -85,14 +86,28 @@ MainWindow::MainWindow() :
 
 	SetIcon(wxIcon(ICON1));
 
-	// TODO: embed toolbar images into binary
 	// Tool Bar
-	wxBitmap ico_exit(wxImage("data/image/exit.png"));
-	wxBitmap ico_abc(wxImage("data/image/abc.png"));
-	wxBitmap ico_anim(wxImage("data/image/animals.png"));
-	wxBitmap ico_food(wxImage("data/image/food.png"));
-	wxBitmap ico_inst(wxImage("data/image/instrument.png"));
-	wxBitmap ico_toys(wxImage("data/image/toys.png"));
+	wxMemoryInputStream tb_abc(tbicon_abc_png, sizeof(tbicon_abc_png));
+	wxMemoryInputStream tb_animal(tbicon_animals_png, sizeof(tbicon_animals_png));
+	wxMemoryInputStream tb_food(tbicon_food_png, sizeof(tbicon_food_png));
+	wxMemoryInputStream tb_instrument(tbicon_instrument_png, sizeof(tbicon_instrument_png));
+	wxMemoryInputStream tb_toy(tbicon_toys_png, sizeof(tbicon_toys_png));
+
+	wxBitmap ico_abc(wxImage(tb_abc, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_anim(wxImage(tb_animal, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_food(wxImage(tb_food, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_inst(wxImage(tb_instrument, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_toys(wxImage(tb_toy, wxBITMAP_TYPE_PNG));
+
+	wxMemoryInputStream tb_help(tbicon_help_png, sizeof(tbicon_help_png));
+	wxMemoryInputStream tb_info(tbicon_info_png, sizeof(tbicon_info_png));
+	wxMemoryInputStream tb_settings(tbicon_settings_png, sizeof(tbicon_settings_png));
+	wxMemoryInputStream tb_exit(tbicon_exit_png, sizeof(tbicon_exit_png));
+
+	wxBitmap ico_help(wxImage(tb_help, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_info(wxImage(tb_info, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_settings(wxImage(tb_settings, wxBITMAP_TYPE_PNG));
+	wxBitmap ico_exit(wxImage(tb_exit, wxBITMAP_TYPE_PNG));
 
 	menu = CreateToolBar();
 
@@ -108,16 +123,17 @@ MainWindow::MainWindow() :
 			_T("Show toys for each letter"));
 
 	menu->AddSeparator();
-	menu->AddTool(ID_HELP, _T("Help"), wxBitmap(wxImage("data/image/help.png")), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(ID_HELP, _T("Help"), ico_help, wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("Help"));
-	menu->AddTool(wxID_ABOUT, _T("About"), wxBitmap(wxImage("data/image/info.png")), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(wxID_ABOUT, _T("About"), ico_info, wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("About MyABCs"));
 #ifdef DEBUG
-	menu->AddTool(ID_LOG, _T("Log"), wxBitmap(wxImage("data/image/settings.png")), wxNullBitmap, wxITEM_NORMAL,
+	menu->AddTool(ID_LOG, _T("Log"), ico_settings, wxNullBitmap, wxITEM_NORMAL,
 			wxEmptyString, _T("Show/Hide log window"));
 #endif
 	menu->AddSeparator();
-	menu->AddTool(wxID_EXIT, _T("Exit"), ico_exit, wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _T("Quit"));
+	menu->AddTool(wxID_EXIT, _T("Exit"), ico_exit, wxNullBitmap, wxITEM_NORMAL,
+			wxEmptyString, _T("Quit"));
 
 	menu->SetBackgroundColour(_T("#84aee6"));
 	menu->Realize();
