@@ -94,7 +94,6 @@ if ! ${use_cmake}; then
 			--disable-iniconf
 			--disable-mshtmlhelp
 			--disable-ownerdrawn
-			--disable-wxdib
 			# types support
 			--disable-xpm
 			--enable-ico_cur
@@ -143,7 +142,6 @@ else
 			-DwxUSE_INICONF=OFF
 			-DwxUSE_MS_HTML_HELP=OFF
 			-DwxUSE_OWNER_DRAWN=OFF
-			-DwxUSE_WXDIB=OFF
 			# types support
 			-DwxUSE_XPM=OFF
 			-DwxUSE_ICO_CUR=ON
