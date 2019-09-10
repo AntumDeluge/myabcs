@@ -42,6 +42,14 @@ gnu_opts=(
 	# user input
 	--disable-joystick
 	--disable-mousewheel
+	# types support
+	--disable-pcx
+	--disable-tga
+	--disable-iff
+	--disable-pnm
+	--disable-arcstream
+	--disable-tarstream
+	--disable-zipstream
 	# libraries/dependencies
 	--disable-gtktest
 	--disable-sdltest
@@ -69,6 +77,14 @@ cmake_opts=(
 	-DwxUSE_MOUSEWHEEL=OFF
 	# graphics rendering
 	-DwxUSE_CAIRO=ON
+	# types support
+	-DwxUSE_PCX=OFF
+	-DwxUSE_TGA=OFF
+	-DwxUSE_IFF=OFF
+	-DwxUSE_PNM=OFF
+	-DwxUSE_ARCHIVE_STREAMS=OFF
+	-DwxUSE_TARSTREAM=OFF
+	-DwxUSE_ZIPSTREAM=OFF
 	# libraries/dependencies
 	-DwxUSE_LIBPNG=sys
 	-DwxUSE_LIBJPEG=OFF
