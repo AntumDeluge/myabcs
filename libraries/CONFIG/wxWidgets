@@ -31,6 +31,7 @@ src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 #cmd_config=(cmake)
 
 gnu_opts=(
+	--without-subdirs
 	# localization
 	--disable-intl
 	--disable-xlocale
@@ -59,6 +60,62 @@ gnu_opts=(
 	--with-zlib=sys
 	--without-liblzma
 	--with-expat=sys
+	# misc
+	--disable-graphics_ctx
+	--disable-artstd
+	--disable-arttango
+	--disable-svg
+	--disable-postscript
+	--disable-printarch
+	--disable-mediactrl
+	--disable-mdi
+	--disable-xrc
+	--disable-aui
+	--disable-config
+	#--disable-dataobj # maybe for non-Windows?
+	--disable-any
+	#--disable-dynlib # maybe for non-Windows?
+	--disable-dynamicloader
+	--disable-mimetype
+	--disable-secretstore
+	--disable-propgrid
+	--disable-ribbon
+	--disable-dnd
+	--without-opengl
+	--disable-splash
+	--disable-hotkey
+	--disable-miniframe
+	--disable-busyinfo
+	--disable-dragimage
+	--disable-accessibility
+	--disable-uiactionsim
+	--disable-palette
+	--disable-validators
+	--disable-splines
+	--disable-wizarddlg
+	--disable-progressdlg
+	--disable-tipdlg
+	#--disable-textdlg # required by "richtextstyledlg" (not sure how to disable)
+	--disable-numberdlg
+	--disable-finddlg
+	--disable-choicedlg
+	--disable-aboutdlg
+	--disable-sash
+	--disable-htmlhelp
+	--disable-docview
+	--disable-help
+	--disable-richmsgdlg # not sure how to disable
+	#--disable-coldlg # required by "richtextformatdlg" (not sure how to disable)
+	--disable-colourpicker # requires wxColourDialog
+	--disable-dirdlg
+	--disable-dirpicker # requires wxDirDialog
+	--disable-filedlg
+	--disable-filepicker # requires wxFileDialog
+	--disable-fontdlg
+	--disable-fontpicker # requires wxFontDialog
+	#--disable-msgdlg # required by wxLogWindow
+	--disable-filectrl # requires wxMessageDialog
+	--disable-logdialog # requires wxDialog
 )
 
 cmake_opts=(
@@ -92,6 +149,58 @@ cmake_opts=(
 	-DwxUSE_ZLIB=sys
 	-DwxUSE_LIBLZMA=OFF
 	-DwxUSE_EXPAT=sys
+	# misc
+	-DwxUSE_GRAPHICS_CONTEXT=OFF
+	-DwxUSE_ARTPROVIDER_STD=OFF
+	-DwxUSE_ARTPROVIDER_TANGO=OFF
+	-DwxUSE_SVG=OFF
+	-DwxUSE_POSTSCRIPT=OFF
+	-DwxUSE_PRINTING_ARCHITECTURE=OFF
+	-DwxUSE_MEDIACTRL=OFF
+	-DwxUSE_MDI=OFF
+	-DwxUSE_XRC=OFF
+	-DwxUSE_AUI=OFF
+	-DwxUSE_CONFIG=OFF
+	-DwxUSE_ANY=OFF
+	-DwxUSE_DYNAMIC_LOADER=OFF
+	-DwxUSE_MIMETYPE=OFF
+	-DwxUSE_SECRETSTORE=OFF
+	-DwxUSE_PROPGRID=OFF
+	-DwxUSE_RIBBON=OFF
+	-DwxUSE_DRAG_AND_DROP=OFF
+	-DwxUSE_OPENGL=OFF
+	-DwxUSE_SPLASH=OFF
+	-DwxUSE_HOTKEY=OFF
+	-DwxUSE_MINIFRAME=OFF
+	-DwxUSE_BUSYINFO=OFF
+	-DwxUSE_DRAGIMAGE=OFF
+	-DwxUSE_ACCESSIBILITY=OFF
+	-DwxUSE_UIACTIONSIMULATOR=OFF
+	-DwxUSE_PALETTE=OFF
+	-DwxUSE_VALIDATORS=OFF
+	-DwxUSE_SPLINES=OFF
+	-DwxUSE_WIZARDDLG=OFF
+	-DwxUSE_PROGRESSDLG=OFF
+	-DwxUSE_TIPWINDOW=OFF # same as "--disable-tipdlg"???
+	#-DwxUSE_TEXTDLG=OFF # required by "richtextstyledlg" (not sure how to disable)
+	-DwxUSE_NUMBERDLG=OFF
+	-DwxUSE_FINDREPLDLG=OFF # same as "--disable-finddlg"???
+	-DwxUSE_CHOICEDLG=OFF
+	-DwxUSE_ABOUTDLG=OFF
+	-DwxUSE_SASH=OFF
+	-DwxUSE_HELP=OFF # no equivalent for "--disable-htmlhelp"???
+	-DwxUSE_RICHMSGDLG=OFF
+	#-DwxUSE_COLOURDLG=OFF # required by "richtextformatdlg" (not sure how to disable)
+	#-DwxUSE_COLOURPICKERCTRL=OFF # requires wxColourDialog
+	-DwxUSE_DIRDLG=OFF
+	-DwxUSE_DIRPICKERCTRL=OFF # requires wxDirDialog
+	-DwxUSE_FILEDLG=OFF
+	-DwxUSE_FILEPICKERCTRL=OFF # requires wxFileDialog
+	-DwxUSE_FONTDLG=OFF
+	-DwxUSE_FONTPICKERCTRL=OFF # requires wxFontDialog
+	#-DwxUSE_MSGDLG=OFF # required by wxLogWindow
+	-DwxUSE_FILECTRL=OFF # requires wxMessageDialog
+	-DwxUSE_LOG_DIALOG=OFF # requires wxDialog
 )
 
 use_cmake=false
@@ -130,7 +239,6 @@ if ! ${use_cmake}; then
 		}
 	else
 		config_opts+=(
-			--disable-mdi # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 			--disable-detect_sm
 			--disable-dynlib
 			# types support
@@ -172,7 +280,6 @@ else
 		# FIXME: how to link statically to libgcc & libstdc++???
 	else
 		config_opts+=(
-			-DwxUSE_MDI=OFF # getting linker errors on Linux/Gtk: undefined reference to `vtable for wxMDIClientWindow'
 			# types support
 			-DwxUSE_XPM=ON
 			-DwxUSE_ICO_CUR=OFF
