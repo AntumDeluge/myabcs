@@ -5,8 +5,6 @@
 #  libjbig, libxpm, libmspack, SDL2, cairo, libsecret, webkit, xtst, libnotify, gnomevfs,
 #  gtkprint, gst, mesagl, glu, gl, sm, directfb, pangoxft, pangoft2, Xinerama, Xxf86vm, xmkmf
 #
-# TODO: use CMake to build
-#
 # Notes:
 #  - libtool required for autoreconf command
 #  - DLLs are installed to lib dir
@@ -33,21 +31,30 @@ src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 gnu_opts=(
 	--disable-aboutdlg
 	--disable-accessibility
+	--disable-actindicator
+	--disable-addremovectrl
 	--disable-any
 	--disable-apple_ieee
 	--disable-arcstream
 	--disable-artstd
 	--disable-arttango
 	--disable-aui
+	--disable-bannerwindow
+	--disable-bmpcombobox # requires wxComboBox
 	--disable-busyinfo
+	#--disable-calendar # requires wxSpinButton, wxComboBox
 	--disable-choicedlg
 	#--disable-coldlg # required by "richtextformatdlg" (not sure how to disable)
 	--disable-colourpicker # requires wxColourDialog
+	#--disable-combobox
+	#--disable-comboctrl
 	--disable-config
 	#--disable-dataobj # maybe for non-Windows?
+	#--disable-datepick
 	--disable-debugreport
 	--disable-dirdlg
 	--disable-dirpicker # requires wxDirDialog
+	--disable-display
 	--disable-dialupman
 	--disable-dnd
 	--disable-docview
@@ -60,6 +67,7 @@ gnu_opts=(
 	--disable-finddlg
 	--disable-fontdlg
 	--disable-fontpicker # requires wxFontDialog
+	--disable-gauge
 	--disable-graphics_ctx
 	--disable-gtktest
 	--disable-help
@@ -76,21 +84,30 @@ gnu_opts=(
 	--disable-mousewheel
 	#--disable-msgdlg # required by wxLogWindow
 	--disable-numberdlg
+	--disable-odcombobox # requires wxComboBox
 	--disable-palette
 	--disable-pcx
 	--disable-pnm
 	--disable-postscript
 	--disable-printarch
+	--disable-privatefonts
 	--disable-progressdlg
 	--disable-propgrid
+	--disable-radiobox
+	#--disable-radiobtn
+	--disable-rearrangectrl
 	--disable-ribbon
 	--disable-richmsgdlg # not sure how to disable
 	--disable-sash
 	--disable-sdltest
 	--disable-secretstore
+	--disable-slider
 	--disable-sound
+	#--disable-spinbtn
+	#--disable-spinctrl
 	--disable-splash
 	--disable-splines
+	--disable-splitter
 	--disable-svg
 	--disable-tarstream
 	#--disable-textdlg # required by "richtextstyledlg" (not sure how to disable)
@@ -98,6 +115,7 @@ gnu_opts=(
 	--disable-tipdlg
 	--disable-validators
 	--disable-uiactionsim
+	--disable-webview
 	--disable-wizarddlg
 	--disable-xlocale
 	--disable-xrc
@@ -116,22 +134,31 @@ cmake_opts=(
 	-DwxBUILD_COMPATIBILITY=3.0
 	-DwxUSE_ABOUTDLG=OFF
 	-DwxUSE_ACCESSIBILITY=OFF
+	-DwxUSE_ACTIVITYINDICATOR=OFF
+	-DwxUSE_ADDREMOVECTRL=OFF
 	-DwxUSE_ANY=OFF
 	-DwxUSE_APPLE_IEEE=OFF
 	-DwxUSE_ARCHIVE_STREAMS=OFF
 	-DwxUSE_ARTPROVIDER_STD=OFF
 	-DwxUSE_ARTPROVIDER_TANGO=OFF
 	-DwxUSE_AUI=OFF
+	-DwxUSE_BANNERWINDOW=OFF
+	-DwxUSE_BITMAPCOMBOBOX=OFF # requires wxComboBox
 	-DwxUSE_BUSYINFO=OFF
 	-DwxUSE_CAIRO=ON
+	#-DwxUSE_CALENDARCTRL=OFF # requires wxSpinButton, wxComboBox
+	#-DwxUSE_COMBOBOX=OFF
+	#-DwxUSE_COMBOCTRL=OFF
 	-DwxUSE_CHOICEDLG=OFF
 	#-DwxUSE_COLOURDLG=OFF # required by "richtextformatdlg" (not sure how to disable)
 	#-DwxUSE_COLOURPICKERCTRL=OFF # requires wxColourDialog
 	-DwxUSE_CONFIG=OFF
+	#-DwxUSE_DATEPICKCTRL=OFF
 	-DwxUSE_DEBUGREPORT=OFF
 	-DwxUSE_DIALUP_MANAGER=OFF
 	-DwxUSE_DIRDLG=OFF
 	-DwxUSE_DIRPICKERCTRL=OFF # requires wxDirDialog
+	-DwxUSE_DISPLAY=OFF
 	-DwxUSE_DRAG_AND_DROP=OFF
 	-DwxUSE_DRAGIMAGE=OFF
 	-DwxUSE_DYNAMIC_LOADER=OFF
@@ -142,6 +169,7 @@ cmake_opts=(
 	-DwxUSE_FINDREPLDLG=OFF # same as "--disable-finddlg"???
 	-DwxUSE_FONTDLG=OFF
 	-DwxUSE_FONTPICKERCTRL=OFF # requires wxFontDialog
+	-DwxUSE_GAUGE=OFF
 	-DwxUSE_GRAPHICS_CONTEXT=OFF
 	-DwxUSE_HELP=OFF # no equivalent for "--disable-htmlhelp"???
 	-DwxUSE_HOTKEY=OFF
@@ -160,21 +188,30 @@ cmake_opts=(
 	-DwxUSE_MINIFRAME=OFF
 	#-DwxUSE_MSGDLG=OFF # required by wxLogWindow
 	-DwxUSE_NUMBERDLG=OFF
+	-DwxUSE_ODCOMBOBOX=OFF # requires wxComboBox
 	-DwxUSE_OPENGL=OFF
 	-DwxUSE_PALETTE=OFF
 	-DwxUSE_PCX=OFF
 	-DwxUSE_PNM=OFF
 	-DwxUSE_POSTSCRIPT=OFF
 	-DwxUSE_PRINTING_ARCHITECTURE=OFF
+	-DwxUSE_PRIVATE_FONTS=OFF
 	-DwxUSE_PROGRESSDLG=OFF
 	-DwxUSE_PROPGRID=OFF
+	-DwxUSE_RADIOBOX=OFF
+	#-DwxUSE_RADIOBTN=OFF
+	-DwxUSE_REARRANGECTRL=OFF
 	-DwxUSE_RIBBON=OFF
 	-DwxUSE_RICHMSGDLG=OFF
 	-DwxUSE_SASH=OFF
 	-DwxUSE_SECRETSTORE=OFF
+	-DwxUSE_SLIDER=OFF
 	-DwxUSE_SOUND=OFF
+	#-DwxUSE_SPINBTN=OFF
+	#-DwxUSE_SPINCTRL=OFF
 	-DwxUSE_SPLASH=OFF
 	-DwxUSE_SPLINES=OFF
+	-DwxUSE_SPLITTER=OFF
 	-DwxUSE_SVG=OFF
 	-DwxUSE_TARSTREAM=OFF
 	#-DwxUSE_TEXTDLG=OFF # required by "richtextstyledlg" (not sure how to disable)
@@ -182,6 +219,7 @@ cmake_opts=(
 	-DwxUSE_TIPWINDOW=OFF # same as "--disable-tipdlg"???
 	-DwxUSE_UIACTIONSIMULATOR=OFF
 	-DwxUSE_VALIDATORS=OFF
+	-DwxUSE_WEBVIEW=OFF
 	-DwxUSE_WIZARDDLG=OFF
 	-DwxUSE_XLOCALE=OFF
 	-DwxUSE_XRC=OFF
@@ -211,6 +249,9 @@ if ! ${use_cmake}; then
 			--with-libiconv=builtin
 			--with-regex=builtin
 			--without-libxpm
+			--disable-dccache
+			--disable-ps-in-msw
+			--disable-ownerdrawn
 		)
 		libtype_opts=(
 			--enable-shared=yes
@@ -226,6 +267,9 @@ if ! ${use_cmake}; then
 		if ${desktop_x11}; then
 			config_opts+=(--with-gtk=3)
 		fi
+
+		# FIXME: check for OS X
+		#--disable-webkit
 
 		config_opts+=(
 			--enable-xpm
