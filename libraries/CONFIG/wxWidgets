@@ -81,7 +81,6 @@ gnu_opts=(
 	--disable-mediactrl
 	--disable-mimetype
 	--disable-miniframe
-	--disable-mousewheel
 	#--disable-msgdlg # required by wxLogWindow
 	--disable-numberdlg
 	--disable-odcombobox # requires wxComboBox
@@ -181,7 +180,6 @@ cmake_opts=(
 	-DwxUSE_LIBPNG=sys
 	-DwxUSE_LIBTIFF=OFF
 	-DwxUSE_LOG_DIALOG=OFF # requires wxDialog
-	-DwxUSE_MOUSEWHEEL=OFF
 	-DwxUSE_MEDIACTRL=OFF
 	-DwxUSE_MDI=OFF
 	-DwxUSE_MIMETYPE=OFF
