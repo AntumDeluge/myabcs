@@ -31,176 +31,162 @@ src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 #cmd_config=(cmake)
 
 gnu_opts=(
-	--without-subdirs
-	# localization
-	--disable-intl
-	--disable-xlocale
+	--disable-aboutdlg
+	--disable-accessibility
+	--disable-any
 	--disable-apple_ieee
-	--disable-debugreport
-	--disable-dialupman
-	# audio
-	--disable-sound
-	# user input
-	--disable-joystick
-	--disable-mousewheel
-	# types support
-	--disable-pcx
-	--disable-tga
-	--disable-iff
-	--disable-pnm
 	--disable-arcstream
-	--disable-tarstream
-	--disable-zipstream
-	# libraries/dependencies
-	--disable-gtktest
-	--disable-sdltest
-	--with-libpng=sys
-	--without-libjpeg
-	--without-libtiff
-	--with-zlib=sys
-	--without-liblzma
-	--with-expat=sys
-	# misc
-	--disable-graphics_ctx
 	--disable-artstd
 	--disable-arttango
-	--disable-svg
-	--disable-postscript
-	--disable-printarch
-	--disable-mediactrl
-	--disable-mdi
-	--disable-xrc
 	--disable-aui
-	--disable-config
-	#--disable-dataobj # maybe for non-Windows?
-	--disable-any
-	#--disable-dynlib # maybe for non-Windows?
-	--disable-dynamicloader
-	--disable-mimetype
-	--disable-secretstore
-	--disable-propgrid
-	--disable-ribbon
-	--disable-dnd
-	--without-opengl
-	--disable-splash
-	--disable-hotkey
-	--disable-miniframe
 	--disable-busyinfo
-	--disable-dragimage
-	--disable-accessibility
-	--disable-uiactionsim
-	--disable-palette
-	--disable-validators
-	--disable-splines
-	--disable-wizarddlg
-	--disable-progressdlg
-	--disable-tipdlg
-	#--disable-textdlg # required by "richtextstyledlg" (not sure how to disable)
-	--disable-numberdlg
-	--disable-finddlg
 	--disable-choicedlg
-	--disable-aboutdlg
-	--disable-sash
-	--disable-htmlhelp
-	--disable-docview
-	--disable-help
-	--disable-richmsgdlg # not sure how to disable
 	#--disable-coldlg # required by "richtextformatdlg" (not sure how to disable)
 	--disable-colourpicker # requires wxColourDialog
+	--disable-config
+	#--disable-dataobj # maybe for non-Windows?
+	--disable-debugreport
 	--disable-dirdlg
 	--disable-dirpicker # requires wxDirDialog
+	--disable-dialupman
+	--disable-dnd
+	--disable-docview
+	--disable-dragimage
+	#--disable-dynlib # maybe for non-Windows?
+	--disable-dynamicloader
+	--disable-filectrl # requires wxMessageDialog
 	--disable-filedlg
 	--disable-filepicker # requires wxFileDialog
+	--disable-finddlg
 	--disable-fontdlg
 	--disable-fontpicker # requires wxFontDialog
-	#--disable-msgdlg # required by wxLogWindow
-	--disable-filectrl # requires wxMessageDialog
+	--disable-graphics_ctx
+	--disable-gtktest
+	--disable-help
+	--disable-hotkey
+	--disable-htmlhelp
+	--disable-iff
+	--disable-intl
+	--disable-joystick
 	--disable-logdialog # requires wxDialog
+	--disable-mdi
+	--disable-mediactrl
+	--disable-mimetype
+	--disable-miniframe
+	--disable-mousewheel
+	#--disable-msgdlg # required by wxLogWindow
+	--disable-numberdlg
+	--disable-palette
+	--disable-pcx
+	--disable-pnm
+	--disable-postscript
+	--disable-printarch
+	--disable-progressdlg
+	--disable-propgrid
+	--disable-ribbon
+	--disable-richmsgdlg # not sure how to disable
+	--disable-sash
+	--disable-sdltest
+	--disable-secretstore
+	--disable-sound
+	--disable-splash
+	--disable-splines
+	--disable-svg
+	--disable-tarstream
+	#--disable-textdlg # required by "richtextstyledlg" (not sure how to disable)
+	--disable-tga
+	--disable-tipdlg
+	--disable-validators
+	--disable-uiactionsim
+	--disable-wizarddlg
+	--disable-xlocale
+	--disable-xrc
+	--disable-zipstream
+	--with-expat=sys
+	--with-libpng=sys
+	--with-zlib=sys
+	--without-libjpeg
+	--without-liblzma
+	--without-libtiff
+	--without-opengl
+	--without-subdirs
 )
 
 cmake_opts=(
 	-DwxBUILD_COMPATIBILITY=3.0
-	# localization
-	-DwxUSE_INTL=OFF
-	-DwxUSE_XLOCALE=OFF
-	# no options for GTK & SDL tests???
+	-DwxUSE_ABOUTDLG=OFF
+	-DwxUSE_ACCESSIBILITY=OFF
+	-DwxUSE_ANY=OFF
 	-DwxUSE_APPLE_IEEE=OFF
-	-DwxUSE_DEBUGREPORT=OFF
-	-DwxUSE_DIALUP_MANAGER=OFF
-	# audio
-	-DwxUSE_SOUND=OFF
-	# user input
-	-DwxUSE_JOYSTICK=OFF
-	-DwxUSE_MOUSEWHEEL=OFF
-	# graphics rendering
-	-DwxUSE_CAIRO=ON
-	# types support
-	-DwxUSE_PCX=OFF
-	-DwxUSE_TGA=OFF
-	-DwxUSE_IFF=OFF
-	-DwxUSE_PNM=OFF
 	-DwxUSE_ARCHIVE_STREAMS=OFF
-	-DwxUSE_TARSTREAM=OFF
-	-DwxUSE_ZIPSTREAM=OFF
-	# libraries/dependencies
-	-DwxUSE_LIBPNG=sys
-	-DwxUSE_LIBJPEG=OFF
-	-DwxUSE_LIBTIFF=OFF
-	-DwxUSE_ZLIB=sys
-	-DwxUSE_LIBLZMA=OFF
-	-DwxUSE_EXPAT=sys
-	# misc
-	-DwxUSE_GRAPHICS_CONTEXT=OFF
 	-DwxUSE_ARTPROVIDER_STD=OFF
 	-DwxUSE_ARTPROVIDER_TANGO=OFF
-	-DwxUSE_SVG=OFF
-	-DwxUSE_POSTSCRIPT=OFF
-	-DwxUSE_PRINTING_ARCHITECTURE=OFF
-	-DwxUSE_MEDIACTRL=OFF
-	-DwxUSE_MDI=OFF
-	-DwxUSE_XRC=OFF
 	-DwxUSE_AUI=OFF
-	-DwxUSE_CONFIG=OFF
-	-DwxUSE_ANY=OFF
-	-DwxUSE_DYNAMIC_LOADER=OFF
-	-DwxUSE_MIMETYPE=OFF
-	-DwxUSE_SECRETSTORE=OFF
-	-DwxUSE_PROPGRID=OFF
-	-DwxUSE_RIBBON=OFF
-	-DwxUSE_DRAG_AND_DROP=OFF
-	-DwxUSE_OPENGL=OFF
-	-DwxUSE_SPLASH=OFF
-	-DwxUSE_HOTKEY=OFF
-	-DwxUSE_MINIFRAME=OFF
 	-DwxUSE_BUSYINFO=OFF
-	-DwxUSE_DRAGIMAGE=OFF
-	-DwxUSE_ACCESSIBILITY=OFF
-	-DwxUSE_UIACTIONSIMULATOR=OFF
-	-DwxUSE_PALETTE=OFF
-	-DwxUSE_VALIDATORS=OFF
-	-DwxUSE_SPLINES=OFF
-	-DwxUSE_WIZARDDLG=OFF
-	-DwxUSE_PROGRESSDLG=OFF
-	-DwxUSE_TIPWINDOW=OFF # same as "--disable-tipdlg"???
-	#-DwxUSE_TEXTDLG=OFF # required by "richtextstyledlg" (not sure how to disable)
-	-DwxUSE_NUMBERDLG=OFF
-	-DwxUSE_FINDREPLDLG=OFF # same as "--disable-finddlg"???
+	-DwxUSE_CAIRO=ON
 	-DwxUSE_CHOICEDLG=OFF
-	-DwxUSE_ABOUTDLG=OFF
-	-DwxUSE_SASH=OFF
-	-DwxUSE_HELP=OFF # no equivalent for "--disable-htmlhelp"???
-	-DwxUSE_RICHMSGDLG=OFF
 	#-DwxUSE_COLOURDLG=OFF # required by "richtextformatdlg" (not sure how to disable)
 	#-DwxUSE_COLOURPICKERCTRL=OFF # requires wxColourDialog
+	-DwxUSE_CONFIG=OFF
+	-DwxUSE_DEBUGREPORT=OFF
+	-DwxUSE_DIALUP_MANAGER=OFF
 	-DwxUSE_DIRDLG=OFF
 	-DwxUSE_DIRPICKERCTRL=OFF # requires wxDirDialog
+	-DwxUSE_DRAG_AND_DROP=OFF
+	-DwxUSE_DRAGIMAGE=OFF
+	-DwxUSE_DYNAMIC_LOADER=OFF
+	-DwxUSE_EXPAT=sys
+	-DwxUSE_FILECTRL=OFF # requires wxMessageDialog
 	-DwxUSE_FILEDLG=OFF
 	-DwxUSE_FILEPICKERCTRL=OFF # requires wxFileDialog
+	-DwxUSE_FINDREPLDLG=OFF # same as "--disable-finddlg"???
 	-DwxUSE_FONTDLG=OFF
 	-DwxUSE_FONTPICKERCTRL=OFF # requires wxFontDialog
-	#-DwxUSE_MSGDLG=OFF # required by wxLogWindow
-	-DwxUSE_FILECTRL=OFF # requires wxMessageDialog
+	-DwxUSE_GRAPHICS_CONTEXT=OFF
+	-DwxUSE_HELP=OFF # no equivalent for "--disable-htmlhelp"???
+	-DwxUSE_HOTKEY=OFF
+	-DwxUSE_IFF=OFF
+	-DwxUSE_INTL=OFF
+	-DwxUSE_JOYSTICK=OFF
+	-DwxUSE_LIBJPEG=OFF
+	-DwxUSE_LIBLZMA=OFF
+	-DwxUSE_LIBPNG=sys
+	-DwxUSE_LIBTIFF=OFF
 	-DwxUSE_LOG_DIALOG=OFF # requires wxDialog
+	-DwxUSE_MOUSEWHEEL=OFF
+	-DwxUSE_MEDIACTRL=OFF
+	-DwxUSE_MDI=OFF
+	-DwxUSE_MIMETYPE=OFF
+	-DwxUSE_MINIFRAME=OFF
+	#-DwxUSE_MSGDLG=OFF # required by wxLogWindow
+	-DwxUSE_NUMBERDLG=OFF
+	-DwxUSE_OPENGL=OFF
+	-DwxUSE_PALETTE=OFF
+	-DwxUSE_PCX=OFF
+	-DwxUSE_PNM=OFF
+	-DwxUSE_POSTSCRIPT=OFF
+	-DwxUSE_PRINTING_ARCHITECTURE=OFF
+	-DwxUSE_PROGRESSDLG=OFF
+	-DwxUSE_PROPGRID=OFF
+	-DwxUSE_RIBBON=OFF
+	-DwxUSE_RICHMSGDLG=OFF
+	-DwxUSE_SASH=OFF
+	-DwxUSE_SECRETSTORE=OFF
+	-DwxUSE_SOUND=OFF
+	-DwxUSE_SPLASH=OFF
+	-DwxUSE_SPLINES=OFF
+	-DwxUSE_SVG=OFF
+	-DwxUSE_TARSTREAM=OFF
+	#-DwxUSE_TEXTDLG=OFF # required by "richtextstyledlg" (not sure how to disable)
+	-DwxUSE_TGA=OFF
+	-DwxUSE_TIPWINDOW=OFF # same as "--disable-tipdlg"???
+	-DwxUSE_UIACTIONSIMULATOR=OFF
+	-DwxUSE_VALIDATORS=OFF
+	-DwxUSE_WIZARDDLG=OFF
+	-DwxUSE_XLOCALE=OFF
+	-DwxUSE_XRC=OFF
+	-DwxUSE_ZIPSTREAM=OFF
+	-DwxUSE_ZLIB=sys
 )
 
 use_cmake=false
@@ -215,17 +201,16 @@ if ! ${use_cmake}; then
 	if ${os_win}; then
 		config_opts+=(
 			--with-msw
+
+			--enable-ico_cur
 			--disable-dbghelp
 			--disable-iniconf
 			--disable-mshtmlhelp
 			--disable-ownerdrawn
-			# types support
 			--disable-xpm
-			--enable-ico_cur
-			# libraries/dependencies
-			--without-libxpm
 			--with-libiconv=builtin
 			--with-regex=builtin
+			--without-libxpm
 		)
 		libtype_opts=(
 			--enable-shared=yes
@@ -243,14 +228,12 @@ if ! ${use_cmake}; then
 		fi
 
 		config_opts+=(
+			--enable-xpm
 			--disable-detect_sm
 			--disable-dynlib
-			# types support
-			--enable-xpm
 			--disable-ico_cur
-			# libraries/dependencies
-			--with-libxpm=sys
 			--with-libiconv=sys
+			--with-libxpm=sys
 			--with-regex=sys
 		)
 		if ${static}; then
@@ -266,16 +249,15 @@ else
 	if ${os_win}; then
 		config_opts+=(
 			-DwxBUILD_TOOLKIT=msw
+
+			# libiconv setting???
 			-DwxUSE_DBGHELP=OFF
+			-DwxUSE_ICO_CUR=ON
 			-DwxUSE_INICONF=OFF
 			-DwxUSE_MS_HTML_HELP=OFF
 			-DwxUSE_OWNER_DRAWN=OFF
-			# types support
-			-DwxUSE_XPM=OFF
-			-DwxUSE_ICO_CUR=ON
-			# libraries/dependencies
-			# libiconv setting???
 			-DwxUSE_REGEX=builtin
+			-DwxUSE_XPM=OFF
 		)
 		libtype_opts=(
 			-DwxBUILD_SHARED=ON
@@ -288,11 +270,9 @@ else
 		fi
 
 		config_opts+=(
-			# types support
-			-DwxUSE_XPM=ON
 			-DwxUSE_ICO_CUR=OFF
-			# libraries/dependencies
 			-DwxUSE_REGEX=sys
+			-DwxUSE_XPM=ON
 		)
 		if ${static}; then
 			libtype_opts=(-DwxBUILD_SHARED=OFF)
