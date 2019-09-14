@@ -1,0 +1,14 @@
+diff -ruN wxsvg-1.5.20.orig/Makefile.am wxsvg-1.5.20/Makefile.am
+--- wxsvg-1.5.20.orig/Makefile.am	2019-09-13 14:35:57.293959700 -0700
++++ wxsvg-1.5.20/Makefile.am	2019-09-13 15:08:28.271393300 -0700
+@@ -1,9 +1,6 @@
+-SUBDIRS = src svgview include
++SUBDIRS = src include
+ ACLOCAL_AMFLAGS = -I m4
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libwxsvg.pc
+ EXTRA_DIST     = libwxsvg.pc.in
+-
+-run: all
+-	$(MAKE) -C svgview run

@@ -22,3 +22,7 @@ if ${os_win}; then
 		--enable-static=no
 	)
 fi
+
+post_extract() {
+	autoreconf -fiv
+}
