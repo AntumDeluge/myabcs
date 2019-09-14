@@ -234,6 +234,8 @@ if(WIN32 AND USE_BUILTIN)
 	add_custom_command(
 		TARGET ${EXECUTABLE} POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy ${RESOURCES_DLL} "${CMAKE_BINARY_DIR}"
+		# FIXME: this should be done when libraries are built
+		COMMAND strip ${RESOURCES_DLL}
 		COMMENT "Copying DLLs"
 	)
 	# unused DLLs
