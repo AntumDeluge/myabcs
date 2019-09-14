@@ -59,6 +59,14 @@ case "${OSTYPE}" in
 		;;
 esac
 
+# check for X11 desktop
+desktop_x11=false
+# TODO: test if this works on Linux/X11 machine
+xset q &>/dev/null
+if test $? -eq 0; then
+	desktop_x11=true
+fi
+
 cmd_tar=`which tar`
 tar_found=$?
 if test ! ${tar_found} -eq 0; then
