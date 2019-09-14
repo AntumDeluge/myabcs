@@ -265,8 +265,9 @@ if ! ${use_cmake}; then
 			config_opts+=(--with-gtk=3)
 		fi
 
-		# FIXME: check for OS X
-		#--disable-webkit
+		if ${os_apple}; then
+			--disable-webkit # use wxWebKitCtrl (Mac-only, use wxWebView instead)
+		fi
 
 		config_opts+=(
 			--enable-xpm
@@ -308,6 +309,10 @@ else
 	else
 		if ${desktop_x11}; then
 			config_opts+=(-DwxBUILD_TOOLKIT=gtk3)
+		fi
+
+		if ${os_apple}; then
+			-DwxUSE_WEBKIT=OFF # use wxWebKitCtrl (Mac-only, use wxWebView instead)
 		fi
 
 		config_opts+=(
