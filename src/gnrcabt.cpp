@@ -130,7 +130,7 @@ GenericAbout::GenericAbout(wxWindow* parent, wxWindowID id, const wxString& titl
 }
 
 void GenericAbout::setImage(wxString image, bool noresize) {
-	return setImage(wxImage(image), noresize);
+	setImage(wxImage(image), noresize);
 }
 
 void GenericAbout::setImage(wxImage image, bool noresize) {
