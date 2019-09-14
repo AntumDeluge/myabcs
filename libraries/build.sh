@@ -67,6 +67,13 @@ if test $? -eq 0; then
 	desktop_x11=true
 fi
 
+# check for Apple/OS X OS
+# TODO: test if this works on OS X machine
+os_apple=false
+if test "$OSTYPE" == "darwin"*; then
+	os_apple=true
+fi
+
 cmd_tar=`which tar`
 tar_found=$?
 if test ! ${tar_found} -eq 0; then
