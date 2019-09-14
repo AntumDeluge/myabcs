@@ -238,6 +238,10 @@ if ! ${use_cmake}; then
 			mv -v "${install_prefix}/bin/wxrc-${ver_base}" "${install_prefix}/bin/wxrc-${ver_base}.exe"
 		}
 	else
+		if ${desktop_x11}; then
+			config_opts+=(--with-gtk=3)
+		fi
+
 		config_opts+=(
 			--disable-detect_sm
 			--disable-dynlib
@@ -279,6 +283,10 @@ else
 		)
 		# FIXME: how to link statically to libgcc & libstdc++???
 	else
+		if ${desktop_x11}; then
+			config_opts+=(-DwxBUILD_TOOLKIT=gtk3)
+		fi
+
 		config_opts+=(
 			# types support
 			-DwxUSE_XPM=ON
