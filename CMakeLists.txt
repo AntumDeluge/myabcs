@@ -7,11 +7,13 @@ if(${PROJECT_VERSION_DEV} GREATER 0)
 	add_compile_definitions(VER_DEV="${PROJECT_VERSION_DEV}")
 endif()
 
-if(NOT CMAKE_BUILD_TYPE)
+if(DEBUG)
+	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose build type" FORCE)
+else()
 	# default build is Release
 	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type" FORCE)
-	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Release Debug)
 endif()
+set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Release Debug)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 	message("Debugging enabled")
