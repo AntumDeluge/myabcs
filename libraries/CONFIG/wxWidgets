@@ -33,7 +33,7 @@ if test "${cmd_config[0]}" == "cmake"; then
 	use_cmake=true
 fi
 
-gnu_opts=(
+opts_gnu=(
 	--disable-aboutdlg
 	--disable-accessibility
 	--disable-actindicator
@@ -134,7 +134,7 @@ gnu_opts=(
 	--without-subdirs
 )
 
-cmake_opts=(
+opts_cmake=(
 	-DwxUSE_ABOUTDLG=OFF
 	-DwxUSE_ACCESSIBILITY=OFF
 	-DwxUSE_ACTIVITYINDICATOR=OFF
@@ -231,7 +231,7 @@ cmake_opts=(
 
 if ! ${use_cmake}; then
 	# using GNU autotools
-	config_opts=(${gnu_opts[@]})
+	config_opts=(${opts_gnu[@]})
 
 	if ${os_win}; then
 		config_opts+=(
@@ -286,7 +286,7 @@ if ! ${use_cmake}; then
 	fi
 else
 	# using CMake
-	config_opts=(${cmake_opts[@]})
+	config_opts=(${opts_cmake[@]})
 
 	if ${os_win}; then
 		config_opts+=(
@@ -328,8 +328,4 @@ else
 	fi
 fi
 
-#post_extract() {
-#	autoreconf -fiv
-#}
-
-unset use_cmake gnu_opts cmake_opts
+unset use_cmake opts_gnu opts_cmake
