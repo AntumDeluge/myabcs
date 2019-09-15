@@ -6,7 +6,7 @@ all: $(EXE)
 $(EXE): $(OBJECTS)
 	@echo "Making project $(PNAME) version $(VERSION)."
 	$(CC) $(LINKEROPTS) $(LDFLAGS) $(OBJECTS) -o $(EXE) $(LIBS)
-	@if $(OS_WIN) && test ! -z "$(USE_BUILTIN)" && test $(USE_BUILTIN) -ne 0; then \
+	@if $(OS_WIN) && test ! -z "$(USE_BUNDLED)" && test $(USE_BUNDLED) -ne 0; then \
 		if test -d "$(LIB_PREFIX)/bin"; then \
 			for DLL in $$(find "$(LIB_PREFIX)/bin" -type f -name "*.[dD][lL][lL]"); do \
 				cp -v "$${DLL}" ./; \

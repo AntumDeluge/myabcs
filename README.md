@@ -77,19 +77,19 @@ The following are the main values that can be defined using the `-D` switch:
 	- ***vorbis*** *(default)*: convert to [Vorbis/OGG](https://xiph.org/vorbis/) (recommended)
 	- ***mp3***: convert to [MPEG Audio Layer III (MP3)](https://en.wikipedia.org/wiki/MP3)
 	- ***pcm***: convert to uncompressed [PCM/WAV](https://en.wikipedia.org/wiki/WAV)
-- ***USE_BUILTIN***
-  - Set to ***ON*** to prioritize using "built-in" libraries.
+- ***USE_BUNDLED***
+  - Set to ***ON*** to prioritize using bundled libraries.
   - default: ***OFF***
   - see section *[Building Internal Libraries](#building-internal-libraries)*
-- ***BUILTIN_LIBPREFIX***
-  - Defines the root directory under which the "built-in" libraries are stored.
+- ***BUNDLED_LIBPREFIX***
+  - Defines the root directory under which the bundled libraries are stored.
   - Automatically detected.
 
 Example:
 
 ```sh
 cmake -G "GNU Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr/local \
-	-DAUDIO_FORMAT=vorbis -DUSE_BUILTIN=ON ../
+	-DAUDIO_FORMAT=vorbis -DUSE_BUNDLED=ON ../
 ```
 
 Once the build files have been generated using the previous command, the app can be built with appropriate "make" command. The aformentioned generates makefiles for the GNU make system (***NOTE:*** *on some systems, such as [FreeBSD](https://www.freebsd.org/), the GNU make executable may be `gmake`*). So to build the app, execute the following:
@@ -128,12 +128,12 @@ CMake also offers a GUI frontend for generating the Makefiles. For more informat
 4. To zip files into release archive execute:
     - `make pack`
 
-If you want to compile & use the "built-in" static libraries, execute the following
+If you want to compile & use the bundled static libraries, execute the following
 from the source folder:
 
 ```sh
 $ make build-libs
-$ make USE_BUILTIN=1
+$ make USE_BUNDLED=1
 ```
 
 Make command usage:
@@ -146,7 +146,7 @@ Targets:
     uninstall       Remove files from system or stage directory.
     pack            Zip contentns of stage directory into archive
                     for release.
-    build-libs      Compile "built-in" libraries.
+    build-libs      Compile bundled libraries.
 
 Environment variables:
     STATIC          Define to create static build (note: SDL
@@ -157,8 +157,8 @@ Environment variables:
                     be used if linker errors are encountered.
     REL_SUFFIX      Appends text to filename of release archive when
                     "make pack" is called.
-    BUILD_LIBS      Only build specified built-in libs with build-libs target.
-    USE_BUILTIN     Set to non-zero to link to built-in libs. Only works if
+    BUILD_LIBS      Only build specified bundled libs with build-libs target.
+    USE_BUNDLED     Set to non-zero to link to bundled libs. Only works if
                     libraries previously built with build-libs target called.
     WXCONFIG        Use a custom wx-config
     SDLCONFIG       Use a custom sdl2-config
@@ -204,8 +204,8 @@ If the `BUILD_LIBS` variable is not used, the script will build the wxWidgets, w
 
 The script will attempt to download the sources for each library, compile, & install them under the directory `libraries/libprefix-<build_string>`. Compiling against & linking to these libraries will take priority when building with one of the following methods.
 
-- CMake: `cmake -DUSE_BUILTIN=ON`
-- generic GNU Makefile: `make USE_BUILTIN=1`
+- CMake: `cmake -DUSE_BUNDLED=ON`
+- generic GNU Makefile: `make USE_BUNDLED=1`
 
 For configuration & build settings of individual libraries, see the [libraries/CONFIG directory](libraries/CONFIG).
 

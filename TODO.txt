@@ -15,7 +15,7 @@ Priority:
   - owl
   - quiche
   - yangqin
-- Build "built-in" libraries via CMake when USE_BUILTIN enabled
+- Build bundled libraries via CMake when USE_BUNDLED enabled
 - Change library build dependencies for non-Windows systems
 
 Non-priority:
