@@ -1,0 +1,12 @@
+# Command line parser for C++
+
+ver="2.2.0"
+dname="${name}-${ver}"
+fname="${dname}.tar.gz"
+src="https://github.com/jarro2783/${name}/archive/v${ver}.tar.gz"
+
+cmd_config=(cmake)
+
+config_opts=(
+	-DCXXOPTS_BUILD_EXAMPLES=OFF
+)
