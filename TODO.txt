@@ -21,15 +21,18 @@ Priority:
 Non-priority:
 - Indent line breaks in changelog
 - Add debugging symbols
-- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
 - Use global function for setting/getting fonts
-- Possibly support any audio type playable with SDL_mixer
 - Use config to determine environment (locatation of data files, etc.)
-- Possibly change to this quiche SVG image: http://www.clker.com/clipart-529648.html
-  - Need to confirm licensing
 - Allow users to override default & create custom categories in home directory
 - Show settings button in no-debug builds
   - Use drop-down menu
+- Use drop-down menu for all categories
+
+Tentative:
+- Use wxThread or std::thread (c++11) class instead of pthreads (maybe)
+- Change to this quiche SVG image: http://www.clker.com/clipart-529648.html
+  - Need to confirm licensing
+- Use wxFileConfig class to read configuration from plain text
 
 Fixes & pull-requests:
 - wxWidgets:
