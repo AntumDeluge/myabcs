@@ -28,6 +28,11 @@ src="https://github.com/wxWidgets/wxWidgets/releases/download/v${ver}/${fname}"
 
 #cmd_config=(cmake)
 
+use_cmake=false
+if test "${cmd_config[0]}" == "cmake"; then
+	use_cmake=true
+fi
+
 gnu_opts=(
 	--disable-aboutdlg
 	--disable-accessibility
@@ -223,11 +228,6 @@ cmake_opts=(
 	-DwxUSE_ZIPSTREAM=OFF
 	-DwxUSE_ZLIB=sys
 )
-
-use_cmake=false
-if test "${cmd_config[0]}" == "cmake"; then
-	use_cmake=true
-fi
 
 if ! ${use_cmake}; then
 	# using GNU autotools
