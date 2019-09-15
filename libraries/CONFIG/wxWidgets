@@ -229,27 +229,62 @@ opts_cmake=(
 	-DwxUSE_ZLIB=sys
 )
 
+unix_opts_gnu=(
+	# toolkit
+	--with-gtk=3 # toolkit options on Linux/Unix: gtk[=VERSION], motif, qt
+)
+unix_opts_cmake(
+	# toolkit
+	-DwxBUILD_TOOLKIT=gtk3 # toolkit options on Linux/Unix: gtk2 gtk3 motif qt
+)
+
+msw_opts_gnu=(
+	# toolkit
+	--with-msw # toolkit options on Windows: msw, gtk[=VERSION], qt
+
+	--disable-accessibility
+	--disable-dbghelp
+	--disable-iniconf
+	--disable-mshtmlhelp
+	--disable-ownerdrawn
+	--disable-xpm
+	--with-libiconv=builtin
+	--with-regex=builtin
+	--without-libxpm
+)
+msw_opts_cmake(
+	# toolkit
+	-DwxBUILD_TOOLKIT=msw # toolkit options on Windows: msw, gtk2, gtk3, qt
+
+	-DwxUSE_ACCESSIBILITY=OFF
+	-DwxUSE_DBGHELP=OFF
+	-DwxUSE_INICONF=OFF
+	-DwxUSE_MS_HTML_HELP=OFF
+	-DwxUSE_OWNER_DRAWN=OFF
+	-DwxUSE_REGEX=builtin
+	-DwxUSE_XPM=OFF
+	# libiconv setting???
+)
+
+apple_opts_gnu(
+	# toolkit
+	--with-osx_cocoa # toolkit options on Apple/OS X: osx_cocoa | cocoa, gtk[=VERSION], qt
+
+	--disable-webkit # use wxWebView instead of wxWebKitCtrl
+)
+apple_opts_cmake(
+	# toolkit
+	-DwxBUILD_TOOLKIT=osx_cocoa # toolkit options on Apple/OS X: osx_cocoa, osx | mac, gtk2, gtk3, qt
+
+	-DwxUSE_WEBKIT=OFF # use wxWebView instead of wxWebKitCtrl
+)
+
 if ! ${use_cmake}; then
 	# using GNU autotools
 	config_opts=(${opts_gnu[@]})
 
 	if ${os_win}; then
-		config_opts+=(
-			--with-msw
-
-			--enable-ico_cur
-			--disable-dbghelp
-			--disable-iniconf
-			--disable-mshtmlhelp
-			--disable-ownerdrawn
-			--disable-xpm
-			--with-libiconv=builtin
-			--with-regex=builtin
-			--without-libxpm
-			--disable-dccache
-			--disable-ps-in-msw
-			--disable-ownerdrawn
-		)
+		config_opts+=(${msw_opts_gnu[@]})
 		libtype_opts=(
 			--enable-shared=yes
 			--enable-monolithic
@@ -262,11 +297,11 @@ if ! ${use_cmake}; then
 		}
 	else
 		if ${desktop_x11}; then
-			config_opts+=(--with-gtk=3)
+			config_opts+=(${unix_opts_gnu[@]})
 		fi
 
 		if ${os_apple}; then
-			--disable-webkit # use wxWebKitCtrl (Mac-only, use wxWebView instead)
+			config_opts+=(${apple_opts_gnu[@]})
 		fi
 
 		config_opts+=(
@@ -289,18 +324,7 @@ else
 	config_opts=(${opts_cmake[@]})
 
 	if ${os_win}; then
-		config_opts+=(
-			-DwxBUILD_TOOLKIT=msw
-
-			# libiconv setting???
-			-DwxUSE_DBGHELP=OFF
-			-DwxUSE_ICO_CUR=ON
-			-DwxUSE_INICONF=OFF
-			-DwxUSE_MS_HTML_HELP=OFF
-			-DwxUSE_OWNER_DRAWN=OFF
-			-DwxUSE_REGEX=builtin
-			-DwxUSE_XPM=OFF
-		)
+		config_opts+=(${msw_opts_cmake[@]})
 		libtype_opts=(
 			-DwxBUILD_SHARED=ON
 			-DwxBUILD_MONOLITHIC=ON
@@ -308,11 +332,11 @@ else
 		# FIXME: how to link statically to libgcc & libstdc++???
 	else
 		if ${desktop_x11}; then
-			config_opts+=(-DwxBUILD_TOOLKIT=gtk3)
+			config_opts+=(${unix_opts_cmake[@]})
 		fi
 
 		if ${os_apple}; then
-			-DwxUSE_WEBKIT=OFF # use wxWebKitCtrl (Mac-only, use wxWebView instead)
+			config_opts+=(${apple_opts_cmake[@]})
 		fi
 
 		config_opts+=(
@@ -328,4 +352,4 @@ else
 	fi
 fi
 
-unset use_cmake opts_gnu opts_cmake
+unset use_cmake opts_gnu opts_cmake msw_opts_gnu msw_opts_cmake gtk_opts_gnu gtk_opts_cmake apple_opts_gnu apple_opts_cmake
