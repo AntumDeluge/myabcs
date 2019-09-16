@@ -233,7 +233,7 @@ unix_opts_gnu=(
 	# toolkit
 	--with-gtk=3 # toolkit options on Linux/Unix: gtk[=VERSION], motif, qt
 )
-unix_opts_cmake(
+unix_opts_cmake=(
 	# toolkit
 	-DwxBUILD_TOOLKIT=gtk3 # toolkit options on Linux/Unix: gtk2 gtk3 motif qt
 )
@@ -252,7 +252,7 @@ msw_opts_gnu=(
 	--with-regex=builtin
 	--without-libxpm
 )
-msw_opts_cmake(
+msw_opts_cmake=(
 	# toolkit
 	-DwxBUILD_TOOLKIT=msw # toolkit options on Windows: msw, gtk2, gtk3, qt
 
@@ -266,18 +266,19 @@ msw_opts_cmake(
 	# libiconv setting???
 )
 
-apple_opts_gnu(
+apple_opts_gnu=(
 	# toolkit
 	--with-osx_cocoa # toolkit options on Apple/OS X: osx_cocoa | cocoa, gtk[=VERSION], qt
 
 	--disable-webkit # use wxWebView instead of wxWebKitCtrl
 )
-apple_opts_cmake(
+apple_opts_cmake=(
 	# toolkit
 	-DwxBUILD_TOOLKIT=osx_cocoa # toolkit options on Apple/OS X: osx_cocoa, osx | mac, gtk2, gtk3, qt
 
 	-DwxUSE_WEBKIT=OFF # use wxWebView instead of wxWebKitCtrl
 )
+
 
 if ! ${use_cmake}; then
 	# using GNU autotools
