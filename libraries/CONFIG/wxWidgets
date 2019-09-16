@@ -35,12 +35,11 @@ fi
 
 opts_gnu=(
 	--disable-aboutdlg
-	--disable-accessibility
 	--disable-actindicator
 	--disable-addremovectrl
 	--disable-any
 	--disable-apple_ieee
-	--disable-arcstream
+	--disable-arcstream # wxArchive
 	--disable-artstd
 	--disable-arttango
 	--disable-aui
@@ -48,14 +47,22 @@ opts_gnu=(
 	--disable-bmpcombobox # requires wxComboBox
 	--disable-busyinfo
 	#--disable-calendar # requires wxSpinButton, wxComboBox
+	#--disable-choice
 	--disable-choicedlg
+	--disable-cmdline
 	#--disable-coldlg # required by "richtextformatdlg" (not sure how to disable)
 	--disable-colourpicker # requires wxColourDialog
 	#--disable-combobox
 	#--disable-comboctrl
+	--disable-compat28
+	--disable-compat30
 	--disable-config
 	#--disable-dataobj # maybe for non-Windows?
 	#--disable-datepick
+	--disable-debug
+	--disable-debug_flag
+	--disable-debug_info
+	--disable-debug_gdb
 	--disable-debugreport
 	--disable-dirdlg
 	--disable-dirpicker # requires wxDirDialog
@@ -68,7 +75,14 @@ opts_gnu=(
 	--disable-dynamicloader
 	--disable-filectrl # requires wxMessageDialog
 	--disable-filedlg
+	--disable-filehistory
 	--disable-filepicker # requires wxFileDialog
+	--disable-fs_archive
+	--disable-fs_inet
+	--disable-fs_zip
+	--disable-fsvolume
+	--disable-fswatcher
+	#--disable-file # wxFile
 	--disable-finddlg
 	--disable-fontdlg
 	--disable-fontpicker # requires wxFontDialog
@@ -80,8 +94,10 @@ opts_gnu=(
 	--disable-htmlhelp
 	--disable-iff
 	--disable-intl
+	--disable-ipv6
 	--disable-joystick
 	--disable-logdialog # requires wxDialog
+	#--disable-longlong # wxLongLong
 	--disable-mdi
 	--disable-mediactrl
 	--disable-mimetype
@@ -106,19 +122,24 @@ opts_gnu=(
 	--disable-sdltest
 	--disable-secretstore
 	--disable-slider
+	--disable-snglinst
 	--disable-sound
 	#--disable-spinbtn
 	#--disable-spinctrl
 	--disable-splash
 	--disable-splines
 	--disable-splitter
+	#--disable-stopwatch # wxStopWatch
 	--disable-svg
+	--disable-sysoptions
 	--disable-tarstream
 	#--disable-textdlg # required by "richtextstyledlg" (not sure how to disable)
 	--disable-tga
-	--disable-tipdlg
-	--disable-validators
+	#--disable-timer # wxTimer
+	--disable-tipwindow # wxTipWindow
 	--disable-uiactionsim
+	--disable-validators
+	#--disable-variant # wxVariant
 	--disable-webview
 	--disable-wizarddlg
 	--disable-xlocale
@@ -132,11 +153,28 @@ opts_gnu=(
 	--without-libtiff
 	--without-opengl
 	--without-subdirs
+
+	# URL-related classes
+	--disable-url # wxURL
+	--disable-protocol # wxProtocol
+	--disable-protocol-file # FILE support in wxProtocol
+	--disable-protocol-ftp # FTP support in wxProtocol
+	--disable-protocol-http # HTTP support in wxProtocol
+
+	# optional "big" GUI features
+	--disable-docview # use document view architecture
+	--disable-mdidoc # use docview architecture with MDI
+
+	# common dialogs
+	--disable-tipdlg
 )
 
 opts_cmake=(
+	-DwxBUILD_COMPATIBILITY=
+	# Didnt' find equivalent options for --disable-debug_flag, --disable-debug_info, --disable-debug_gdb, --disable-ftp
+	#	--disable-http, --disable-fileproto
+	-DwxBUILD_DEBUG_LEVEL=0
 	-DwxUSE_ABOUTDLG=OFF
-	-DwxUSE_ACCESSIBILITY=OFF
 	-DwxUSE_ACTIVITYINDICATOR=OFF
 	-DwxUSE_ADDREMOVECTRL=OFF
 	-DwxUSE_ANY=OFF
@@ -150,9 +188,11 @@ opts_cmake=(
 	-DwxUSE_BUSYINFO=OFF
 	-DwxUSE_CAIRO=ON
 	#-DwxUSE_CALENDARCTRL=OFF # requires wxSpinButton, wxComboBox
+	#-DwxUSE_CHOICE=OFF
+	-DwxUSE_CHOICEDLG=OFF
+	-DwxUSE_CMDLINE_PARSER=OFF
 	#-DwxUSE_COMBOBOX=OFF
 	#-DwxUSE_COMBOCTRL=OFF
-	-DwxUSE_CHOICEDLG=OFF
 	#-DwxUSE_COLOURDLG=OFF # required by "richtextformatdlg" (not sure how to disable)
 	#-DwxUSE_COLOURPICKERCTRL=OFF # requires wxColourDialog
 	-DwxUSE_CONFIG=OFF
@@ -166,24 +206,34 @@ opts_cmake=(
 	-DwxUSE_DRAGIMAGE=OFF
 	-DwxUSE_DYNAMIC_LOADER=OFF
 	-DwxUSE_EXPAT=sys
+	#-DwxUSE_FILE=OFF # wxFile
+	-DwxUSE_FILE_HISTORY=OFF
 	-DwxUSE_FILECTRL=OFF # requires wxMessageDialog
 	-DwxUSE_FILEDLG=OFF
 	-DwxUSE_FILEPICKERCTRL=OFF # requires wxFileDialog
 	-DwxUSE_FINDREPLDLG=OFF # same as "--disable-finddlg"???
 	-DwxUSE_FONTDLG=OFF
 	-DwxUSE_FONTPICKERCTRL=OFF # requires wxFontDialog
+	-DwxUSE_FS_ARCHIVE=OFF
+	-DwxUSE_FS_INET=OFF
+	-DwxUSE_FS_ZIP=OFF
+	-DwxUSE_FSVOLUME=OFF
+	-DwxUSE_FSWATCHER=OFF
 	-DwxUSE_GAUGE=OFF
 	-DwxUSE_GRAPHICS_CONTEXT=OFF
-	-DwxUSE_HELP=OFF # no equivalent for "--disable-htmlhelp"???
+	-DwxUSE_HELP=OFF
+	-DwxUSE_WXHTML_HELP=OFF
 	-DwxUSE_HOTKEY=OFF
 	-DwxUSE_IFF=OFF
 	-DwxUSE_INTL=OFF
+	-DwxUSE_IPV6=OFF
 	-DwxUSE_JOYSTICK=OFF
 	-DwxUSE_LIBJPEG=OFF
 	-DwxUSE_LIBLZMA=OFF
 	-DwxUSE_LIBPNG=sys
 	-DwxUSE_LIBTIFF=OFF
 	-DwxUSE_LOG_DIALOG=OFF # requires wxDialog
+	#-DwxUSE_LONGLONG=OFF # wxLongLong
 	-DwxUSE_MEDIACTRL=OFF
 	-DwxUSE_MDI=OFF
 	-DwxUSE_MIMETYPE=OFF
@@ -208,25 +258,46 @@ opts_cmake=(
 	-DwxUSE_SASH=OFF
 	-DwxUSE_SECRETSTORE=OFF
 	-DwxUSE_SLIDER=OFF
+	-DwxUSE_SNGLINST_CHECKER=OFF
 	-DwxUSE_SOUND=OFF
 	#-DwxUSE_SPINBTN=OFF
 	#-DwxUSE_SPINCTRL=OFF
 	-DwxUSE_SPLASH=OFF
 	-DwxUSE_SPLINES=OFF
 	-DwxUSE_SPLITTER=OFF
+	#-DwxUSE_STOPWATCH=OFF # wxStopWatch
 	-DwxUSE_SVG=OFF
+	-DwxUSE_SYSTEM_OPTIONS=OFF
 	-DwxUSE_TARSTREAM=OFF
 	#-DwxUSE_TEXTDLG=OFF # required by "richtextstyledlg" (not sure how to disable)
 	-DwxUSE_TGA=OFF
-	-DwxUSE_TIPWINDOW=OFF # same as "--disable-tipdlg"???
+	#-DwxUSE_TIMER=OFF # wxTimer
+	-DwxUSE_TIPWINDOW=OFF # wxTipWindow
 	-DwxUSE_UIACTIONSIMULATOR=OFF
 	-DwxUSE_VALIDATORS=OFF
+	#-DwxUSE_VARIANT=OFF # wxVariant
 	-DwxUSE_WEBVIEW=OFF
 	-DwxUSE_WIZARDDLG=OFF
 	-DwxUSE_XLOCALE=OFF
 	-DwxUSE_XRC=OFF
 	-DwxUSE_ZIPSTREAM=OFF
 	-DwxUSE_ZLIB=sys
+
+	# wxUSE_LIBICONV setting only available on non-Windows
+
+	# URL-related classes
+	-DwxUSE_URL=OFF # wxURL
+	-DwxUSE_PROTOCOL=OFF # wxProtocol
+	-DwxUSE_PROTOCOL_FILE=OFF # FILE support in wxProtocol
+	-DwxUSE_PROTOCOL_FTP # FTP support in wxProtocol
+	-DwxUSE_PROTOCOL_HTTP # HTTP support in wxProtocol
+
+	# optional "big" GUI features
+	-DwxUSE_DOC_VIEW_ARCHITECTURE=OFF # use document view architecture
+	-DwxUSE_MDI_ARCHITECTURE=OFF # use docview architecture with MDI
+
+	# common dialogs
+	-DwxUSE_STARTUP_TIPS=OFF # same as '--disable-tipdlg'
 )
 
 unix_opts_gnu=(
