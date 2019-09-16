@@ -201,6 +201,8 @@ function extract_archive {
 
 
 prepare() (
+	set -e
+
 	local name="$1"
 	if test -z "${name}"; then
 		echo -e "\nError in prepare function, name not set"
@@ -484,6 +486,8 @@ prepare() (
 
 
 build() (
+	set -e
+
 	local name="$1"
 	if test -z "${name}"; then
 		echo -e "\nError in build function, name not set"
