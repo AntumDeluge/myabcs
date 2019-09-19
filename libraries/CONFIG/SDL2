@@ -13,7 +13,7 @@ dname="${name}-${ver}"
 fname="${dname}.tar.gz"
 src="https://libsdl.org/release/${fname}"
 
-cmd_config=(cmake)
+#cmd_config=(cmake)
 
 use_cmake=false
 if test "${cmd_config[0]}" == "cmake"; then
