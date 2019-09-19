@@ -170,7 +170,7 @@ opts_gnu=(
 )
 
 opts_cmake=(
-	-DwxBUILD_COMPATIBILITY=
+	-DwxBUILD_COMPATIBILITY=3.1
 	# Didnt' find equivalent options for --disable-debug_flag, --disable-debug_info, --disable-debug_gdb, --disable-ftp
 	#	--disable-http, --disable-fileproto
 	-DwxBUILD_DEBUG_LEVEL=0
@@ -289,8 +289,8 @@ opts_cmake=(
 	-DwxUSE_URL=OFF # wxURL
 	-DwxUSE_PROTOCOL=OFF # wxProtocol
 	-DwxUSE_PROTOCOL_FILE=OFF # FILE support in wxProtocol
-	-DwxUSE_PROTOCOL_FTP # FTP support in wxProtocol
-	-DwxUSE_PROTOCOL_HTTP # HTTP support in wxProtocol
+	-DwxUSE_PROTOCOL_FTP=OFF # FTP support in wxProtocol
+	-DwxUSE_PROTOCOL_HTTP=OFF # HTTP support in wxProtocol
 
 	# optional "big" GUI features
 	-DwxUSE_DOC_VIEW_ARCHITECTURE=OFF # use document view architecture
