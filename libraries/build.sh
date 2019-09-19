@@ -201,8 +201,6 @@ function extract_archive {
 
 
 prepare() (
-	set -e
-
 	local name="$1"
 	if test -z "${name}"; then
 		echo -e "\nError in prepare function, name not set"
@@ -246,6 +244,11 @@ prepare() (
 
 	# import configuration
 	. "${cfg}"
+	cfg_ret=$?
+	if test ${cfg_ret} -ne 0; then
+		echo -e "\nErrors exist in ${name} config"
+		exit ${cfg_ret}
+	fi
 
 	# detect rebuild
 	if test "${name_orig}" != "${name}"; then
@@ -486,8 +489,6 @@ prepare() (
 
 
 build() (
-	set -e
-
 	local name="$1"
 	if test -z "${name}"; then
 		echo -e "\nError in build function, name not set"
@@ -532,6 +533,11 @@ build() (
 
 	# import configuration
 	. "${cfg}"
+	cfg_ret=$?
+	if test ${cfg_ret} -ne 0; then
+		echo -e "\nErrors exist in ${name} config"
+		exit ${cfg_ret}
+	fi
 
 	CC="${cc[@]}"
 	CXX="${cxx[@]}"
