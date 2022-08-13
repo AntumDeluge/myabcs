@@ -1,5 +1,4 @@
 Manditory (required for next release):
-- Replace raccoon sound effect
 - Add links to art & sound assets
 
 Priority:

@@ -505,7 +505,7 @@ void initAboutDialog(wxWindow* parent) {
 	about->addComposer("Quail", "PrincessGrace", "CC0"); // https://freesound.org/people/PrincessGrace/sounds/329371/
 	about->addComposer("Quarter", "greenvwbeetle", "CC0/Public Domain"); // https://freesound.org/people/greenvwbeetle/sounds/423332/
 	about->addComposer("Quena", "CarlosCarty", "CC BY"); // https://freesound.org/people/CarlosCarty/sounds/463711/
-	about->addComposer("Raccoon", "Bob H", "CC BY"); // https://www.youtube.com/watch?v=gmFFv-rXLeU
+	about->addComposer("Raccoon", "jnargus", "CC BY"); // https://www.youtube.com/watch?v=BGjFP1CP7E0
 	about->addComposer("Recorder", "Cailyn");
 	about->addComposer("Rocking Horse", "stevelalonde", "CC BY"); // https://freesound.org/people/stevelalonde/sounds/80476/
 	about->addComposer("Rooster", "poorenglishjuggler", "CC0/Public Domain"); // https://freesound.org/people/poorenglishjuggler/sounds/269496/
