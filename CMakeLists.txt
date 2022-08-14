@@ -92,14 +92,14 @@ if(NOT SDL2MIXER_VERSION)
 endif()
 
 # wxWidgets
-find_package(wxWidgets COMPONENTS core base)
 set(WX_MIN_VER 3.1)
+find_package(wxWidgets COMPONENTS core base richtext)
 if(NOT wxWidgets_VERSION_STRING)
 	if(USE_BUNDLED)
 		message("\nBuilding wxWidgets, this could take a while")
 		# FIXME: this will fail if there is whitespace in LIB_BUILD_SCRIPT
 		execute_process(COMMAND bash -c "${LIB_BUILD_SCRIPT} ${BUILD_STRING} wxWidgets")
-		find_package(wxWidgets COMPONENTS core base REQUIRED)
+		find_package(wxWidgets COMPONENTS core base richtext REQUIRED)
 	else()
 		message(FATAL_ERROR "Please install wxWidgets (https://www.wxwidgets.org/) version ${WX_MIN_VER} or newer or enable USE_BUNDLED")
 	endif()
