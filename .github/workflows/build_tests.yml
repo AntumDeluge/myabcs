@@ -1,0 +1,28 @@
+
+name: Build Tests
+
+on:
+  # push:
+    # branches: [ master ]
+    # paths:
+      # - 'include/**.h'
+      # - 'src/**.cpp'
+      # - 'CMakeLists.txt'
+      # - 'cmake/**.cmake'
+  # pull_request:
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup build environment
+        run: sudo apt install g++ cmake ffmpeg
+
+      - name: Test build
+        run: |
+          cmake -DUSE_BUNDLED=ON ./
+          cmake --build ./
