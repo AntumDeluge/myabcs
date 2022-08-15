@@ -126,6 +126,13 @@ if(NOT WXSVG_VERSION)
 endif()
 add_compile_definitions(WXSVG_VERSION="${WXSVG_VERSION}")
 
+# threading library
+set(THREADS_PREFER_PTHREAD_FLAG "ON")
+find_package(Threads REQUIRED)
+if(NOT CMAKE_USE_PTHREADS_INIT)
+	message(FATAL_ERROR "Required Posix threads library not found")
+endif()
+
 message("\nSatisfied dependencies:")
 message("wxWidgets version:\t${wxWidgets_VERSION_STRING}")
 # TODO: define macro to set for WXSVG_VERSION to display in about dialog
@@ -161,9 +168,9 @@ else()
 endif()
 
 if(USE_BUNDLED)
-	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_STATIC_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_STATIC_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES} Threads::Threads)
 else()
-	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
+	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES} Threads::Threads)
 endif()
 
 # FIXME: target executable is deleted if add_custom_command execution fails
