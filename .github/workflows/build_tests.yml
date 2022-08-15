@@ -2,14 +2,14 @@
 name: Build Tests
 
 on:
-  # push:
-    # branches: [ master ]
-    # paths:
-      # - 'include/**.h'
-      # - 'src/**.cpp'
-      # - 'CMakeLists.txt'
-      # - 'cmake/**.cmake'
-  # pull_request:
+  push:
+    branches: [ master ]
+    paths:
+      - 'include/**.h'
+      - 'src/**.cpp'
+      - 'CMakeLists.txt'
+      - 'cmake/**.cmake'
+  pull_request:
   workflow_dispatch:
 
 jobs:
