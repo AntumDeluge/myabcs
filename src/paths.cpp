@@ -12,9 +12,6 @@
 #include <wx/filefn.h> // wxFileExists
 #include <wx/list.h>
 
-// DEBUG:
-#include <iostream>
-
 using namespace std;
 
 
