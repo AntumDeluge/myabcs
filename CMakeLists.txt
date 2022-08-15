@@ -133,13 +133,6 @@ if(NOT CMAKE_USE_PTHREADS_INIT)
 	message(FATAL_ERROR "Required Posix threads library not found")
 endif()
 
-message("\nSatisfied dependencies:")
-message("wxWidgets version:\t${wxWidgets_VERSION_STRING}")
-# TODO: define macro to set for WXSVG_VERSION to display in about dialog
-message("wxSVG version:\t\t${WXSVG_VERSION}")
-message("SDL2 version:\t\t${SDL2_VERSION}")
-message("SDL2_mixer version:\t${SDL2MIXER_VERSION}\n")
-
 include_directories("${SDL2_INCLUDE_DIRS}" "${SDL2MIXER_INCLUDE_DIRS}")
 
 # retrieve source files
@@ -208,7 +201,6 @@ if(NOT FFMPEG)
 		COMMENT "Copying audio data"
 	)
 else()
-	message("Found FFmpeg\n")
 	# default to OGG/Vorbis
 	set(AUDIO_FORMAT "vorbis" CACHE STRING "Audio format (set to 'copy' to keep uncompressed FLAC audio files)")
 	set_property(CACHE AUDIO_FORMAT PROPERTY STRINGS ${AFMT_LIST})
@@ -377,3 +369,6 @@ add_custom_target(distclean
 	COMMAND rm -vf "*.dll"
 	COMMAND rm -vrf "${CMAKE_BINARY_DIR}/data"
 )
+
+# print configuration info
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/print_config.cmake")
