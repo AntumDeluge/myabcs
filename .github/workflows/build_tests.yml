@@ -31,7 +31,28 @@ jobs:
             g++ cmake \
             libwxgtk3.1-gtk3-dev \
             libsdl2-mixer-dev \
-            ffmpeg
+            ffmpeg libavcodec-dev libavformat-dev libavutil-dev libswscale-dev \
+            libexif-dev \
+            libexpat1-dev \
+            libpango1.0-dev \
+            libcairo2-dev \
+            autotools-dev \
+            automake \
+            autoconf \
+            libtool
+
+      # the PPA includes wxSVG but pkg-config cannot find the libraries
+      - name: Build wxSVG
+        run: |
+          mkdir wxsvg_build && cd wxsvg_build
+          wget -O wxsvg-1.5.23.tar.bz2 \
+            https://sourceforge.net/projects/wxsvg/files/wxsvg/1.5.23/wxsvg-1.5.23.tar.bz2/download
+          tar -xjf wxsvg-1.5.23.tar.bz2
+          cd wxsvg-1.5.23
+          echo -e "\nBuilding wxSVG for wxWidgets $(wx-config --version)\n"
+          autoreconf -fiv
+          ./configure --enable-shared --disable-static
+          sudo make install
 
       - name: Test build
         run: |
