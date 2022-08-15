@@ -33,7 +33,11 @@ static const array<wxString, 5> snd_extensions { "oga", "ogg", "mp3", "flac", "w
 void initPaths(wxString path, wxString exe) {
 	executable = exe;
 	dir_root = path;
+#if defined(DATAROOT)
+	dir_data = wxString::Format("%s/data", DATAROOT);
+#else
 	dir_data = wxString::Format("%s/data", dir_root);
+#endif
 	dir_pic = wxString::Format("%s/image", dir_data);
 	dir_snd = wxString::Format("%s/audio", dir_data);
 }

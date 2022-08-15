@@ -148,13 +148,25 @@ if(WIN32)
 	set(EXE_SUFFIX ".exe")
 endif()
 
+# app is portable by default
+set(PORTABLE "ON" CACHE BOOL "App searches for data files in path relative to executable")
+if(PORTABLE)
+	# ensure data root not set
+	unset(DATAROOT CACHE)
+	remove_definitions(-DDATAROOT)
+else()
+	# root directory where app will search for data files
+	set(DATAROOT "${CMAKE_INSTALL_PREFIX}/share/myabcs" CACHE PATH "Root directory where app will search for data files")
+	add_compile_definitions(DATAROOT="${DATAROOT}")
+endif()
+
 if(USE_BUNDLED)
 	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_STATIC_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
 else()
 	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES})
 endif()
 
-# FIXME: target executable is deleted of add_custom_command execution fails
+# FIXME: target executable is deleted if add_custom_command execution fails
 
 # clean data directory before build
 add_custom_command(
@@ -251,23 +263,8 @@ endif()
 
 # platform-dependent files preparation
 
-# TODO: do this in build target
 # X11
 file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/x11")
-set(SH_CONTENTS "#!/bin/sh\n\n\"${CMAKE_INSTALL_PREFIX}/share/myabcs/myabcs\"\n")
-file(WRITE "${CMAKE_BINARY_DIR}/x11/myabcs" "${SH_CONTENTS}")
-# use Unix LF line endings in shell scripts
-configure_file(
-	"${CMAKE_BINARY_DIR}/x11/myabcs" "${CMAKE_BINARY_DIR}/x11/myabcs"
-	NEWLINE_STYLE LF
-)
-# set executable bit
-file(
-	COPY "${CMAKE_BINARY_DIR}/x11/myabcs"
-	DESTINATION "${CMAKE_BINARY_DIR}/x11"
-	# XXX: what is the difference between FILE_PERMISSIONS & PERMISSIONS
-	FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
-)
 file(
 	COPY "${CMAKE_SOURCE_DIR}/data/resource/logo/myabcs_single_block.svg"
 	DESTINATION "${CMAKE_BINARY_DIR}/x11"
@@ -312,13 +309,18 @@ add_custom_target(package
 	COMMENT "Creating release package: ${PROJECT_NAME} ${PROJECT_VERSION}"
 )
 
-# installation
-set(DIR_BIN "${CMAKE_INSTALL_PREFIX}/bin")
-set(DIR_DATA "${CMAKE_INSTALL_PREFIX}/share/myabcs")
+# regular installation
+if(PORTABLE)
+	set(DIR_BIN "${CMAKE_INSTALL_PREFIX}/myabcs")
+	set(DIR_DATA "${CMAKE_INSTALL_PREFIX}/myabcs")
+else()
+	set(DIR_BIN "${CMAKE_INSTALL_PREFIX}/bin")
+	set(DIR_DATA "${CMAKE_INSTALL_PREFIX}/share/myabcs")
+endif()
 
 install(
 	TARGETS ${EXECUTABLE}
-	RUNTIME DESTINATION "${DIR_DATA}"
+	RUNTIME DESTINATION "${DIR_BIN}"
 )
 install(
 	DIRECTORY "${CMAKE_BINARY_DIR}/data" "${CMAKE_SOURCE_DIR}/doc"
@@ -341,27 +343,23 @@ if(WIN32)
 	)
 endif()
 
-# X11 files
-install(
-	FILES "${CMAKE_BINARY_DIR}/x11/myabcs"
-	DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
-	PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
-)
-install(
-	FILES "${CMAKE_BINARY_DIR}/x11/myabcs.svg"
-	DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pixmaps"
-)
-install(
-	FILES "${CMAKE_BINARY_DIR}/x11/myabcs.desktop"
-	DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications"
-)
+if(NOT PORTABLE)
+	install(
+		FILES "${CMAKE_BINARY_DIR}/x11/myabcs.svg"
+		DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pixmaps"
+	)
+	install(
+		FILES "${CMAKE_BINARY_DIR}/x11/myabcs.desktop"
+		DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications"
+	)
+endif()
 
 add_custom_target(uninstall
 	# FIXME: need platform-independent method for removing files & directories
 	COMMAND rm -vf
 		"${CMAKE_INSTALL_PREFIX}/share/applications/myabcs.desktop"
 		"${CMAKE_INSTALL_PREFIX}/share/pixmaps/myabcs.svg"
-		"${CMAKE_INSTALL_PREFIX}/bin/myabcs"
+		"${CMAKE_INSTALL_PREFIX}/bin/${EXECUTABLE}"
 	COMMAND rm -vrf "${CMAKE_INSTALL_PREFIX}/share/myabcs"
 )
 
