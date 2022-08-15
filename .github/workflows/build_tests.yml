@@ -19,10 +19,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # version 3.1 not available in default Ubuntu repos
+      - name: Add wx 3.1 repo
+        run: |
+          sudo add-apt-repository ppa:leamas-alec/wxwidgets
+          sudo apt update
+
       - name: Setup build environment
-        run: sudo apt install g++ cmake ffmpeg
+        run: |
+          sudo apt install \
+            g++ cmake \
+            libwxgtk3.1-gtk3-dev \
+            libsdl2-mixer-dev \
+            ffmpeg
 
       - name: Test build
         run: |
-          cmake -DUSE_BUNDLED=ON ./
+          mkdir build && cd build
+          cmake ../
           cmake --build ./
