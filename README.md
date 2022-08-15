@@ -13,18 +13,17 @@ Press one of the icons at the top of the window to select a category.
 
 Categories:
 - Alphabet mode:
-    - Select the ABC blocks icon at the top of the window.
-    - In this mode, the player must press the letter key corresponding to the picture displayed on the screen.
-    - Work your way through the English alphabet to finish the game.
+  - Select the ABC blocks icon at the top of the window.
+  - In this mode, the player must press the letter key corresponding to the picture displayed on the screen.
+  - Work your way through the English alphabet to finish the game.
 - All other categories:
-    - Simply press any letter on the keyboard to display an associated image.
+  - Simply press any letter on the keyboard to display an associated image.
 
 While an image is displayed on the screen, press the spacebar to hear the pronunciation of the object & an associated sound effect if available.
 
 ## Building
 
 ### Requirements
----
 
 <pre>
 CMake           <a href="https://cmake.org/">https://cmake.org/</a>
@@ -43,71 +42,85 @@ PThreads        Linux: Check your package manager for a library
 </pre>
 
 
-### Using CMake (recommended)
+### Building with CMake (recommended)
+---
 
-#### Command line
+See [CMake Manual](https://cmake.org/cmake/help/latest/manual/cmake.1.html) for in-depth details on how to use CMake from the command line.
 
-Create an empty directory where you would like build files to be generated. Navigate to that directory from a command line/terminal. For default settings invoke the following command (**NOTE:** The *&lt;path_to_source&gt;* argument should be the location of the MyABCs source directory):
+#### Basic Usage
 
-```sh
-cmake <path_to_source>
-```
+To configure with default options execute: `cmake path/to/source`
 
-If you need to manually set the Makefile generator, execute `cmake --help` to see which generators are available. Then use the `-G` switch to set the generator. For example, if you are on Windows using the [MSYS2/MinGW-w64 environment](https://www.msys2.org/), then you may want to do the following:
+After configuration is complete run any of the following:
 
-```sh
-cmake -G "MSYS Makefile" <path_to_source>
-```
+- `cmake --build ./` (compile)
+- `cmake --build ./ --target install` or `cmake --install` (compile & install)
 
-**Customizing settings:**
+#### Options
 
-The following are the main values that can be defined using the `-D` switch:
+*To get a detailed list of available CMake configuration options run `cmake -LA path/to/source`.*
 
-- ***CMAKE_BUILD_TYPE***
+The following are the main options that can be configured using the `-D` switch:
+
+- *CMAKE_BUILD_TYPE*
   - Determines if the MyABCs executable is built with debugging symbols.
-  - options: Release, Debug
-  - default: Release
-- ***CMAKE_INSTALL_PREFIX***
+  - type: string
+  - options: *Release*, *Debug*
+  - default: *Release*
+- *CMAKE_INSTALL_PREFIX*
   - The directory under which the application's files will be installed.
-- ***AUDIO_FORMAT***
-  - The output audio file format.
+  - type: path
+- *PORTABLE*
+  - Builds app for portability.
+  - type: bool
+  - default: *ON*
+- *DATAROOT*
+  - Directory where app will search data files. Only available when `PORTABLE=OFF`.
+  - type: path
+  - default: *CMAKE_INSTALL_PREFIX/share/myabc*
+- *AUDIO_FORMAT*
+  - Audio files format.
   - Requires [FFmpeg](https://ffmpeg.org/)
+  - type: string
   - options:
-    - ***copy*** *(default if FFmpeg not available)*: keep uncompressed [FLAC](https://xiph.org/flac/) (no conversion done)
-	- ***vorbis*** *(default)*: convert to [Vorbis/OGG](https://xiph.org/vorbis/) (recommended)
-	- ***mp3***: convert to [MPEG Audio Layer III (MP3)](https://en.wikipedia.org/wiki/MP3)
-	- ***pcm***: convert to uncompressed [PCM/WAV](https://en.wikipedia.org/wiki/WAV)
-- ***USE_BUNDLED***
-  - Set to ***ON*** to prioritize using bundled libraries.
-  - default: ***OFF***
+    - *copy*:   keep uncompressed [FLAC](https://xiph.org/flac/) (no conversion done)
+    - *vorbis*: convert to [Vorbis/OGG](https://xiph.org/vorbis/) (recommended)
+    - *mp3*:    convert to [MPEG Audio Layer III (MP3)](https://en.wikipedia.org/wiki/MP3)
+    - *pcm*:    convert to uncompressed [PCM/WAV](https://en.wikipedia.org/wiki/WAV)
+  - default: *vorbis* if FFmpeg is available, *copy* otherwise
+- *USE_BUNDLED*
+  - Build using bundled libraries instead of those found on system.
+  - type: bool
+  - default: *OFF*
   - see section *[Building Internal Libraries](#building-internal-libraries)*
-- ***BUNDLED_LIBPREFIX***
+- *BUNDLED_LIBPREFIX*
   - Defines the root directory under which the bundled libraries are stored.
   - Automatically detected.
 
-Example:
+#### Examples
+
+Portable configuration using MP3 audio:
 
 ```sh
-cmake -G "GNU Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr/local \
-	-DAUDIO_FORMAT=vorbis -DUSE_BUNDLED=ON ../
+cmake -DAUDIO_FORMAT=mp3 -DCMAKE_INSTALL_PREFIX="$(pwd)/install" path/to/source
 ```
 
-Once the build files have been generated using the previous command, the app can be built with appropriate "make" command. The aformentioned generates makefiles for the GNU make system (***NOTE:*** *on some systems, such as [FreeBSD](https://www.freebsd.org/), the GNU make executable may be `gmake`*). So to build the app, execute the following:
+Portable configuration using non-system libraries:
 
 ```sh
-make
+cmake -DUSE_BUNDLED=ON -DCMAKE_INSTALL_PREFIX="$(pwd)/install" path/to/source
 ```
 
-Then it can be installed to the system using:
+Non-portable configuration:
 
 ```sh
-make install
+cmake -DPORTABLE=OFF path/to/source
 ```
 
-If you do not want to install the app's files to the system, you can package the app in a .zip archive with the following command:
+Non-portable configuration with a custom data directory:
 
 ```sh
-make package
+cmake -DPORTABLE=OFF -DDATAROOT="/home/username/myabcs" path/to/source
 ```
 
 #### GUI
@@ -117,7 +130,7 @@ CMake also offers a GUI frontend for generating the Makefiles. For more informat
 <img src="https://cmake.org/wp-content/uploads/2018/10/cmake-gui.png" style="display:block;margin-left:auto;margin-right:auto;" />
 
 
-### Compiling with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.) (DEPRECATED)
+### Building with GNU Make (GNU G++, Clang, MSYS/MinGW, etc.) (DEPRECATED)
 ---
 
 1. Navigate to the source folder from the command line/terminal.
@@ -165,13 +178,13 @@ Environment variables:
 </pre>
 
 
-### Compiling with Microsoft Visual C++
+### Building with Microsoft Visual C++
 ---
 
 I don't know
 
 
-### Compiling with Apple Xcode
+### Building with Apple Xcode
 ---
 
 I am not familiar with Apple's Xcode environment, but I understand that it
