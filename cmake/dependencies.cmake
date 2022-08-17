@@ -41,6 +41,9 @@ if(STATIC)
 	set(wxWidgets_USE_STATIC ON CACHE BOOL "Overridden by 'STATIC'" FORCE)
 endif()
 
+mark_as_advanced(FORCE wxWidgets_USE_DEBUG)
+mark_as_advanced(FORCE wxWidgets_USE_STATIC)
+
 # wxWidgets
 set(WX_MIN_VER 3.1)
 find_package(wxWidgets COMPONENTS core base richtext)
