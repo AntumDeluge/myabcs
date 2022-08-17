@@ -29,6 +29,18 @@ if(NOT SDL2MIXER_VERSION)
 	endif()
 endif()
 
+# follow DEBUG option
+set(wxWidgets_USE_DEBUG OFF CACHE BOOL "Overridden by 'CMAKE_BUILD_TYPE'" FORCE)
+if(DEBUG)
+	set(wxWidgets_USE_DEBUG ON CACHE BOOL "Overridden by 'CMAKE_BUILD_TYPE'" FORCE)
+endif()
+
+# follow STATIC option
+set(wxWidgets_USE_STATIC OFF CACHE BOOL "Overridden by 'STATIC'" FORCE)
+if(STATIC)
+	set(wxWidgets_USE_STATIC ON CACHE BOOL "Overridden by 'STATIC'" FORCE)
+endif()
+
 # wxWidgets
 set(WX_MIN_VER 3.1)
 find_package(wxWidgets COMPONENTS core base richtext)
