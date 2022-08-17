@@ -23,3 +23,7 @@ set(STATIC OFF CACHE BOOL "Link statically to libgcc & libstdc++")
 if(STATIC)
 	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 endif()
+
+# supported audio formats
+set(VALID_AFMTS copy flac vorbis oga ogg mp3 pcm wav)
+set(AFMT_LIST copy vorbis mp3 pcm) # used for drop-down list in CMake GUI

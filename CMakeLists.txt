@@ -98,12 +98,9 @@ add_custom_command(
 	COMMENT "Copying image data"
 )
 
-set(VALID_AFMTS copy flac vorbis oga ogg mp3 pcm wav)
-set(AFMT_LIST copy vorbis mp3 pcm) # used for drop-down list in CMake GUI
 file(GLOB_RECURSE RESOURCES_FLAC "${CMAKE_SOURCE_DIR}/data/audio/*.flac")
 
 # audio output format
-find_program(FFMPEG ffmpeg)
 if(NOT FFMPEG)
 	message(WARNING "FFmpeg not found: converting audio not supported\n")
 	add_custom_command(

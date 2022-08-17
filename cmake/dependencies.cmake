@@ -87,3 +87,6 @@ if(NOT CMAKE_USE_PTHREADS_INIT)
 endif()
 
 include_directories("${SDL2_INCLUDE_DIRS}" "${SDL2MIXER_INCLUDE_DIRS}")
+
+# FFmpeg is used for conveting default flac audio files to other formats
+find_program(FFMPEG ffmpeg)
