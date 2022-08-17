@@ -12,6 +12,8 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Release Debug)
 # strip binary for release builds
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 
+set(CMAKE_CXX_STANDARD 11 CACHE STRING "C++ standard")
+
 # app is portable by default
 set(PORTABLE ON CACHE BOOL "App searches for data files in path relative to executable")
 
