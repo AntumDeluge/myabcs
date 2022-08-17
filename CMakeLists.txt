@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.12.4)
 project(MyABCs VERSION 0.4.7 HOMEPAGE_URL "https://antumdeluge.github.io/myabcs")
 set(PROJECT_VERSION_DEV 1)
 
+message("")
+message(STATUS "Configuring ${PROJECT_NAME} ${PROJECT_VERSION}")
+
 add_compile_definitions(VERSION="${PROJECT_VERSION}")
 if(${PROJECT_VERSION_DEV} GREATER 0)
 	add_compile_definitions(VER_DEV="${PROJECT_VERSION_DEV}")
