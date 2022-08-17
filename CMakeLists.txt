@@ -7,6 +7,8 @@ if(${PROJECT_VERSION_DEV} GREATER 0)
 	add_compile_definitions(VER_DEV="${PROJECT_VERSION_DEV}")
 endif()
 
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
+
 if(DEBUG)
 	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose build type" FORCE)
 else()
@@ -46,8 +48,6 @@ string(STRIP "${ARCH}" ARCH)
 
 set(BUILD_STRING "${PLATFORM}-${ARCH}")
 set(BUNDLED_LIBPREFIX "${CMAKE_SOURCE_DIR}/libraries/libprefix-${BUILD_STRING}" CACHE STRING "Prefix to bundled libraries")
-
-set(USE_BUNDLED OFF CACHE BOOL "Prioritize bundled libs over system ones")
 
 # FIXME: should use PROJECT_SOURCE_DIR over CMAKE_SOURCE_DIR???
 include_directories("${CMAKE_SOURCE_DIR}/include")
@@ -143,13 +143,10 @@ endif()
 
 set(EXECUTABLE "myabcs")
 add_executable(${EXECUTABLE} ${FILES_C})
-# FIXME: way to use/copy without explicit declaration of suffix???
 if(WIN32)
 	set(EXE_SUFFIX ".exe")
 endif()
 
-# app is portable by default
-set(PORTABLE "ON" CACHE BOOL "App searches for data files in path relative to executable")
 if(PORTABLE)
 	# ensure data root not set
 	unset(DATAROOT CACHE)
