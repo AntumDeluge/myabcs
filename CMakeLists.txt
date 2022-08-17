@@ -9,22 +9,6 @@ endif()
 
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake")
 
-if(DEBUG)
-	set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose build type" FORCE)
-else()
-	# default build is Release
-	set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose build type" FORCE)
-endif()
-set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS Release Debug)
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	message("Debugging enabled")
-	add_compile_definitions(DEBUG=1)
-endif()
-
-# strip binary for release builds
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
-
 if(WIN32)
 	set(PLATFORM "win32")
 	# FIXME: need to detect arch for systems other than MinGW/MSYS/Cygwin
