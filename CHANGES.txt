@@ -1,4 +1,4 @@
-0.4.7:
+next:
 - Error sound plays if wrong key or non-alphabetic key is pressed
 - Support for building with CMake
 - Replaced images:
