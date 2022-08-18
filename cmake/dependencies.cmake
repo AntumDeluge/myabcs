@@ -1,7 +1,9 @@
 
 include(FindPkgConfig)
 
-# SDL2
+
+# *** START: SDL2 *** #
+
 #find_package(SDL2)
 # prefer pkg-config because it sets SDL2_VERSION
 pkg_search_module(SDL2 sdl2)
@@ -16,7 +18,11 @@ if(NOT SDL2_VERSION)
 	endif()
 endif()
 
-# SDL2_mixer
+# *** END: SDL2 *** #
+
+
+# *** START: SDL2_mixer *** #
+
 pkg_search_module(SDL2MIXER SDL2_mixer>=2.0.0)
 if(NOT SDL2MIXER_VERSION)
 	if(USE_BUNDLED)
@@ -28,6 +34,11 @@ if(NOT SDL2MIXER_VERSION)
 		message(FATAL_ERROR "Please install SDL2_mixer (https://libsdl.org/projects/SDL_mixer/) or enable USE_BUNDLED")
 	endif()
 endif()
+
+# *** END: SDL2_mixer *** #
+
+
+# *** START: wxWidgets *** #
 
 # follow DEBUG option
 set(wxWidgets_USE_DEBUG OFF CACHE BOOL "Overridden by 'CMAKE_BUILD_TYPE'" FORCE)
@@ -44,7 +55,6 @@ endif()
 mark_as_advanced(FORCE wxWidgets_USE_DEBUG)
 mark_as_advanced(FORCE wxWidgets_USE_STATIC)
 
-# wxWidgets
 set(WX_MIN_VER 3.1)
 find_package(wxWidgets COMPONENTS core base richtext)
 if(NOT wxWidgets_VERSION_STRING)
@@ -65,7 +75,11 @@ if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 	string(REPLACE "subsystem,windows" "subsystem,console" wxWidgets_LIBRARIES "${wxWidgets_LIBRARIES}")
 endif()
 
-# wxSVG
+# *** END: wxWidgets *** #
+
+
+# *** START: wxSVG *** #
+
 pkg_search_module(WXSVG libwxsvg)
 if(NOT WXSVG_VERSION)
 	if(USE_BUNDLED)
@@ -79,12 +93,19 @@ if(NOT WXSVG_VERSION)
 endif()
 add_compile_definitions(WXSVG_VERSION="${WXSVG_VERSION}")
 
-# threading library
+# *** END: wxSVG *** #
+
+
+# *** START: pthreads *** #
+
 set(THREADS_PREFER_PTHREAD_FLAG "ON")
 find_package(Threads REQUIRED)
 if(NOT CMAKE_USE_PTHREADS_INIT)
 	message(FATAL_ERROR "Required Posix threads library not found")
 endif()
+
+# *** END: pthreads *** #
+
 
 include_directories("${SDL2_INCLUDE_DIRS}" "${SDL2MIXER_INCLUDE_DIRS}")
 
