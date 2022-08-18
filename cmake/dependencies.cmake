@@ -18,6 +18,12 @@ if(NOT SDL2_VERSION)
 	endif()
 endif()
 
+if(STATIC)
+	list(APPEND LIBS ${SDL2_STATIC_LIBRARIES})
+else()
+	list(APPEND LIBS ${SDL2_LIBRARIES})
+endif()
+
 # *** END: SDL2 *** #
 
 
@@ -33,6 +39,12 @@ if(NOT SDL2MIXER_VERSION)
 	else()
 		message(FATAL_ERROR "Please install SDL2_mixer (https://libsdl.org/projects/SDL_mixer/) or enable USE_BUNDLED")
 	endif()
+endif()
+
+if(STATIC)
+	list(APPEND LIBS ${SDL2MIXER_STATIC_LIBRARIES})
+else()
+	list(APPEND LIBS ${SDL2MIXER_LIBRARIES})
 endif()
 
 # *** END: SDL2_mixer *** #
@@ -75,6 +87,8 @@ if(WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 	string(REPLACE "subsystem,windows" "subsystem,console" wxWidgets_LIBRARIES "${wxWidgets_LIBRARIES}")
 endif()
 
+list(APPEND LIBS ${wxWidgets_LIBRARIES})
+
 # *** END: wxWidgets *** #
 
 
@@ -93,6 +107,12 @@ if(NOT WXSVG_VERSION)
 endif()
 add_compile_definitions(WXSVG_VERSION="${WXSVG_VERSION}")
 
+if(STATIC)
+	list(APPEND LIBS ${WXSVG_STATIC_LIBRARIES})
+else()
+	list(APPEND LIBS ${WXSVG_LIBRARIES})
+endif()
+
 # *** END: wxSVG *** #
 
 
@@ -106,8 +126,6 @@ endif()
 
 # *** END: pthreads *** #
 
-
-include_directories("${SDL2_INCLUDE_DIRS}" "${SDL2MIXER_INCLUDE_DIRS}")
 
 # FFmpeg is used for conveting default flac audio files to other formats
 find_program(FFMPEG ffmpeg)

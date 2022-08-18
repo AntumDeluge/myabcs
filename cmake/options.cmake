@@ -21,6 +21,8 @@ set(USE_BUNDLED OFF CACHE BOOL "Prioritize bundled libs over system ones")
 
 set(STATIC OFF CACHE BOOL "Link statically to library dependencies")
 if(STATIC)
+	# XXX: static linking to many packages is broken on MSYS2/MinGW-w64
+	# set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++ -static")
 	set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 endif()
 

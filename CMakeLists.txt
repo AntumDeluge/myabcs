@@ -72,11 +72,7 @@ else()
 	add_compile_definitions(DATAROOT="${DATAROOT}")
 endif()
 
-if(USE_BUNDLED)
-	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_STATIC_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES} Threads::Threads)
-else()
-	target_link_libraries(${EXECUTABLE} ${wxWidgets_LIBRARIES} ${WXSVG_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2MIXER_LIBRARIES} Threads::Threads)
-endif()
+target_link_libraries(${EXECUTABLE} ${LIBS} Threads::Threads)
 
 # FIXME: target executable is deleted if add_custom_command execution fails
 
