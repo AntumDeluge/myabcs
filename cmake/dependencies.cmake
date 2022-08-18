@@ -68,7 +68,7 @@ mark_as_advanced(FORCE wxWidgets_USE_DEBUG)
 mark_as_advanced(FORCE wxWidgets_USE_STATIC)
 
 set(WX_MIN_VER 3.1)
-find_package(wxWidgets COMPONENTS core base richtext)
+find_package(wxWidgets COMPONENTS core base richtext html xml)
 if(NOT wxWidgets_VERSION_STRING)
 	if(USE_BUNDLED)
 		message("\nBuilding wxWidgets, this could take a while")
